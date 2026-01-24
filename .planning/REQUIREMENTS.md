@@ -211,31 +211,132 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
+Phase assignments from ROADMAP.md (7 phases).
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-* | Phase 1 | Pending |
-| AUTH-* | Phase 1 | Pending |
-| PWA-* | Phase 2-3 | Pending |
-| SPRT-* | Phase 2 | Pending |
-| DTAIL-* | Phase 3 | Pending |
-| BOARD-* | Phase 3 | Pending |
-| OPEN-* | Phase 4 | Pending |
-| GAME-* | Phase 5 | Pending |
-| CSV-* | Phase 5 | Pending |
-| NOTE-* | Phase 5 | Pending |
-| SRCH-* | Phase 4 | Pending |
-| ADMN-* | Phase 6 | Pending |
-| DATA-* | Phase 2 | Pending |
-| UI-* | All | Pending |
-| TEST-* | All | Pending |
+| INFRA-01 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-02 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-03 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-04 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-05 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-06 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-07 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-08 | Phase 1: Foundation & Authentication | Pending |
+| INFRA-09 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-01 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-02 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-03 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-04 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-05 | Phase 1: Foundation & Authentication | Pending |
+| AUTH-06 | Phase 1: Foundation & Authentication | Pending |
+| SPRT-01 | Phase 2: Spirit Library | Pending |
+| SPRT-02 | Phase 2: Spirit Library | Pending |
+| SPRT-03 | Phase 2: Spirit Library | Pending |
+| SPRT-04 | Phase 2: Spirit Library | Pending |
+| SPRT-05 | Phase 2: Spirit Library | Pending |
+| DATA-01 | Phase 2: Spirit Library | Pending |
+| DATA-02 | Phase 2: Spirit Library | Pending |
+| DATA-03 | Phase 2: Spirit Library | Pending |
+| DATA-04 | Phase 2: Spirit Library | Pending |
+| DATA-05 | Phase 2: Spirit Library | Pending |
+| DTAIL-01 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-02 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-03 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-04 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-05 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-06 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-07 | Phase 3: Spirit Detail & Board | Pending |
+| DTAIL-08 | Phase 3: Spirit Detail & Board | Pending |
+| BOARD-01 | Phase 3: Spirit Detail & Board | Pending |
+| BOARD-02 | Phase 3: Spirit Detail & Board | Pending |
+| BOARD-03 | Phase 3: Spirit Detail & Board | Pending |
+| BOARD-04 | Phase 3: Spirit Detail & Board | Pending |
+| BOARD-05 | Phase 3: Spirit Detail & Board | Pending |
+| PWA-01 | Phase 4: PWA & Offline | Pending |
+| PWA-02 | Phase 4: PWA & Offline | Pending |
+| PWA-03 | Phase 4: PWA & Offline | Pending |
+| PWA-04 | Phase 4: PWA & Offline | Pending |
+| PWA-05 | Phase 4: PWA & Offline | Pending |
+| PWA-06 | Phase 4: PWA & Offline | Pending |
+| PWA-07 | Phase 4: PWA & Offline | Pending |
+| OPEN-01 | Phase 5: Opening Scrubber | Pending |
+| OPEN-02 | Phase 5: Opening Scrubber | Pending |
+| OPEN-03 | Phase 5: Opening Scrubber | Pending |
+| OPEN-04 | Phase 5: Opening Scrubber | Pending |
+| OPEN-05 | Phase 5: Opening Scrubber | Pending |
+| OPEN-06 | Phase 5: Opening Scrubber | Pending |
+| OPEN-07 | Phase 5: Opening Scrubber | Pending |
+| OPEN-08 | Phase 5: Opening Scrubber | Pending |
+| OPEN-09 | Phase 5: Opening Scrubber | Pending |
+| OPEN-10 | Phase 5: Opening Scrubber | Pending |
+| OPEN-11 | Phase 5: Opening Scrubber | Pending |
+| OPEN-12 | Phase 5: Opening Scrubber | Pending |
+| OPEN-13 | Phase 5: Opening Scrubber | Pending |
+| SRCH-01 | Phase 5: Opening Scrubber | Pending |
+| SRCH-02 | Phase 5: Opening Scrubber | Pending |
+| SRCH-03 | Phase 5: Opening Scrubber | Pending |
+| GAME-01 | Phase 6: User Data | Pending |
+| GAME-02 | Phase 6: User Data | Pending |
+| GAME-03 | Phase 6: User Data | Pending |
+| GAME-04 | Phase 6: User Data | Pending |
+| GAME-05 | Phase 6: User Data | Pending |
+| GAME-06 | Phase 6: User Data | Pending |
+| GAME-07 | Phase 6: User Data | Pending |
+| GAME-08 | Phase 6: User Data | Pending |
+| GAME-09 | Phase 6: User Data | Pending |
+| GAME-10 | Phase 6: User Data | Pending |
+| GAME-11 | Phase 6: User Data | Pending |
+| GAME-12 | Phase 6: User Data | Pending |
+| GAME-13 | Phase 6: User Data | Pending |
+| CSV-01 | Phase 6: User Data | Pending |
+| CSV-02 | Phase 6: User Data | Pending |
+| CSV-03 | Phase 6: User Data | Pending |
+| CSV-04 | Phase 6: User Data | Pending |
+| CSV-05 | Phase 6: User Data | Pending |
+| CSV-06 | Phase 6: User Data | Pending |
+| CSV-07 | Phase 6: User Data | Pending |
+| NOTE-01 | Phase 6: User Data | Pending |
+| NOTE-02 | Phase 6: User Data | Pending |
+| NOTE-03 | Phase 6: User Data | Pending |
+| NOTE-04 | Phase 6: User Data | Pending |
+| NOTE-05 | Phase 6: User Data | Pending |
+| NOTE-06 | Phase 6: User Data | Pending |
+| NOTE-07 | Phase 6: User Data | Pending |
+| NOTE-08 | Phase 6: User Data | Pending |
+| ADMN-01 | Phase 7: Admin Tools | Pending |
+| ADMN-02 | Phase 7: Admin Tools | Pending |
+| ADMN-03 | Phase 7: Admin Tools | Pending |
+| ADMN-04 | Phase 7: Admin Tools | Pending |
+| ADMN-05 | Phase 7: Admin Tools | Pending |
+| ADMN-06 | Phase 7: Admin Tools | Pending |
+| ADMN-07 | Phase 7: Admin Tools | Pending |
+| ADMN-08 | Phase 7: Admin Tools | Pending |
+| ADMN-09 | Phase 7: Admin Tools | Pending |
+| UI-01 | Cross-cutting (all phases) | Pending |
+| UI-02 | Cross-cutting (all phases) | Pending |
+| UI-03 | Cross-cutting (all phases) | Pending |
+| UI-04 | Cross-cutting (all phases) | Pending |
+| UI-05 | Cross-cutting (all phases) | Pending |
+| UI-06 | Cross-cutting (all phases) | Pending |
+| UI-07 | Cross-cutting (all phases) | Pending |
+| UI-08 | Cross-cutting (all phases) | Pending |
+| UI-09 | Cross-cutting (all phases) | Pending |
+| UI-10 | Cross-cutting (all phases) | Pending |
+| TEST-01 | Phase 2: Spirit Library | Pending |
+| TEST-02 | Phase 3: Spirit Detail & Board | Pending |
+| TEST-03 | Phase 3: Spirit Detail & Board | Pending |
+| TEST-04 | Phase 5: Opening Scrubber | Pending |
+| TEST-05 | Phase 6: User Data | Pending |
+| TEST-06 | Phase 6: User Data | Pending |
+| TEST-07 | Phase 4: PWA & Offline | Pending |
+| TEST-08 | Phase 4: PWA & Offline | Pending |
 
 **Coverage:**
 - v1 requirements: 89 total
 - Mapped to phases: 89
-- Unmapped: 0 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2025-01-24*
-*Last updated: 2025-01-24 after initial definition*
+*Last updated: 2025-01-25 after roadmap creation*
