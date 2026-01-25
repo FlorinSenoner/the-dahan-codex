@@ -99,58 +99,59 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
 
       {/* Spirit info */}
       <div className="flex-1 min-w-0">
-        <h3
-          className={cn(
-            "font-headline font-semibold text-foreground truncate",
-            isAspect ? "text-base" : "text-lg",
-          )}
-          style={{
-            viewTransitionName: isAspect
-              ? undefined
-              : `spirit-name-${spirit.slug}`,
-          }}
-        >
-          {displayName}
-        </h3>
+        {/* Name row with complexity indicator */}
+        <div className="flex items-center gap-2">
+          <h3
+            className={cn(
+              "font-headline font-semibold text-foreground truncate",
+              isAspect ? "text-base" : "text-lg",
+            )}
+            style={{
+              viewTransitionName: isAspect
+                ? undefined
+                : `spirit-name-${spirit.slug}`,
+            }}
+          >
+            {displayName}
+          </h3>
+
+          {/* Complexity badge for base spirits, modifier icon for aspects */}
+          {isAspect && spirit.complexityModifier ? (
+            <span
+              className={cn(
+                "flex-shrink-0",
+                modifierConfig[spirit.complexityModifier]?.color,
+              )}
+              title={modifierConfig[spirit.complexityModifier]?.label}
+            >
+              {(() => {
+                const config = modifierConfig[spirit.complexityModifier];
+                if (!config) return null;
+                const Icon = config.icon;
+                return (
+                  <>
+                    <Icon className="h-4 w-4" />
+                    <span className="sr-only">{config.label}</span>
+                  </>
+                );
+              })()}
+            </span>
+          ) : !isAspect ? (
+            <Badge
+              variant="outline"
+              className={cn(
+                "flex-shrink-0 text-xs",
+                complexityColors[spirit.complexity] || "",
+              )}
+            >
+              {spirit.complexity}
+            </Badge>
+          ) : null}
+        </div>
 
         <p className="text-sm text-muted-foreground line-clamp-2 mt-0.5">
           {spirit.summary}
         </p>
-
-        {/* Complexity badge for base spirits, modifier for aspects */}
-        {isAspect && spirit.complexityModifier ? (
-          <div
-            className="mt-2 flex items-center gap-1"
-            title={modifierConfig[spirit.complexityModifier]?.label}
-          >
-            {(() => {
-              const config = modifierConfig[spirit.complexityModifier];
-              if (!config) return null;
-              const Icon = config.icon;
-              return (
-                <span
-                  className={cn(
-                    "flex items-center gap-1 text-xs",
-                    config.color,
-                  )}
-                >
-                  <Icon className="h-4 w-4" />
-                  <span className="sr-only">{config.label}</span>
-                </span>
-              );
-            })()}
-          </div>
-        ) : !isAspect ? (
-          <Badge
-            variant="outline"
-            className={cn(
-              "mt-2 text-xs",
-              complexityColors[spirit.complexity] || "",
-            )}
-          >
-            {spirit.complexity}
-          </Badge>
-        ) : null}
       </div>
     </Link>
   );
