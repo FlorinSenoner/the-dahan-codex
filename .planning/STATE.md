@@ -10,18 +10,18 @@ spirit openings **Current focus:** Phase 2.1 - Spirit Library Polish (UAT fixes)
 ## Current Position
 
 Phase: 2.1 (Spirit Library Polish) - IN PROGRESS
-Plan: 6 of 6 in current phase
+Plan: 4 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 02.1-06-PLAN.md (Aspect Title & Description)
+Last activity: 2026-01-25 - Completed 02.1-04-PLAN.md (Accessibility and Polish)
 
-Progress: [█████████░] ~85%
+Progress: [█████████░] ~90%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 17
-- Average duration: 7.5 min
+- Total plans completed: 18
+- Average duration: 7.2 min
 - Total execution time: 2.1 hours
 
 **By Phase:**
@@ -30,11 +30,11 @@ Progress: [█████████░] ~85%
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
-| 02.1  | 3     | 21 min | 7.0 min  |
+| 02.1  | 4     | 24 min | 6.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 2 min, 4 min, 16 min, 1 min
+- Last 5 plans: 2 min, 4 min, 16 min, 1 min, 3 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -85,6 +85,8 @@ affecting current work:
 - Downloaded images as PNG from wiki instead of converting to WebP
 - Spirit images stored locally in public/spirits/
 - Aspect title display: aspect name as h1, "Aspect of [Base]" as subtitle
+- Complexity modifier icons use element colors (harder=fire, easier=plant, same=muted)
+- Filter pills show element-specific colors when selected
 
 ### Pending Todos
 
@@ -169,12 +171,12 @@ Phase 2.1 (Spirit Library Polish) in progress:
 - [x] 02.1-01: Schema and Seed Data Update
 - [x] 02.1-02: Spirit Images
 - [x] 02.1-03: Filter Fixes
-- [ ] 02.1-04: Accessibility and Polish
+- [x] 02.1-04: Accessibility and Polish
 - [x] 02.1-05: View Transitions
 - [x] 02.1-06: Aspect Title & Description
 
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02.1-06-PLAN.md (Aspect Title & Description)
-Resume file: .planning/phases/02.1-spirit-library-polish/02.1-06-SUMMARY.md
+Stopped at: Completed 02.1-04-PLAN.md (Accessibility and Polish)
+Resume file: .planning/phases/02.1-spirit-library-polish/02.1-04-SUMMARY.md
