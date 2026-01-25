@@ -1,0 +1,8 @@
+node_modules
+dist
+.vinxi
+.output
+.wrangler
+convex/_generated
+.claude
+pnpm-lock.yaml

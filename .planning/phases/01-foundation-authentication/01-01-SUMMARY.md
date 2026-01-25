@@ -48,7 +48,8 @@ key-files:
     - ".gitignore"
 
 key-decisions:
-  - "Used vite dev instead of vinxi - TanStack Start 1.140.5 works directly with Vite 7"
+  - "Used vite dev instead of vinxi - TanStack Start 1.140.5 works directly with
+    Vite 7"
   - "Upgraded to Vite 7 - required peer dependency for TanStack Start 1.140.5"
   - "Server entry exports { fetch } object - required by TanStack Start plugin"
   - "StartClient takes no props - uses internal hydrateStart()"
@@ -67,7 +68,8 @@ completed: 2026-01-25
 
 # Phase 1 Plan 01: Project Scaffold Summary
 
-**TanStack Start 1.140.5 with Vite 7, biome linting, lefthook pre-commit hooks, and mise Node.js 22 toolchain**
+**TanStack Start 1.140.5 with Vite 7, biome linting, lefthook pre-commit hooks,
+and mise Node.js 22 toolchain**
 
 ## Performance
 
@@ -88,7 +90,8 @@ completed: 2026-01-25
 
 Each task was committed atomically:
 
-1. **Task 1: Initialize TanStack Start project with dependencies** - `5c45d21` (feat)
+1. **Task 1: Initialize TanStack Start project with dependencies** - `5c45d21`
+   (feat)
 2. **Task 2: Configure development toolchain** - `20eee2e` (chore)
 3. **Task 3: Create TanStack Start application scaffold** - `83727da` (feat)
 
@@ -109,21 +112,29 @@ Each task was committed atomically:
 
 ## Decisions Made
 
-1. **Used Vite 7 instead of Vite 6** - TanStack Start 1.140.5 has peer dependency on vite>=7.0.0. Upgraded to meet requirement.
+1. **Used Vite 7 instead of Vite 6** - TanStack Start 1.140.5 has peer
+   dependency on vite>=7.0.0. Upgraded to meet requirement.
 
-2. **Used vite dev instead of vinxi** - Discovered that TanStack Start 1.140.5 works directly with Vite's native environment API. Vinxi was not properly integrating with TanStack Start's plugin.
+2. **Used vite dev instead of vinxi** - Discovered that TanStack Start 1.140.5
+   works directly with Vite's native environment API. Vinxi was not properly
+   integrating with TanStack Start's plugin.
 
-3. **Server exports { fetch } object** - TanStack Start's dev server plugin expects `serverEntry.default.fetch` to be a function. Updated server.tsx accordingly.
+3. **Server exports { fetch } object** - TanStack Start's dev server plugin
+   expects `serverEntry.default.fetch` to be a function. Updated server.tsx
+   accordingly.
 
-4. **StartClient takes no props** - The component uses internal `hydrateStart()` to get the router from virtual modules. Removed router prop.
+4. **StartClient takes no props** - The component uses internal `hydrateStart()`
+   to get the router from virtual modules. Removed router prop.
 
-5. **Added routeTree.gen.ts to biome ignore** - Auto-generated file with different code style that shouldn't be formatted.
+5. **Added routeTree.gen.ts to biome ignore** - Auto-generated file with
+   different code style that shouldn't be formatted.
 
 ## Deviations from Plan
 
 ### Auto-fixed Issues
 
 **1. [Rule 3 - Blocking] Added .claude to biome ignore**
+
 - **Found during:** Task 2
 - **Issue:** Biome was checking .claude/hooks files which have different style
 - **Fix:** Added .claude to ignore list in biome.json
@@ -131,6 +142,7 @@ Each task was committed atomically:
 - **Committed in:** 20eee2e (Task 2)
 
 **2. [Rule 3 - Blocking] Upgraded Vite to v7**
+
 - **Found during:** Task 3
 - **Issue:** TanStack Start 1.140.5 requires vite>=7.0.0 peer dependency
 - **Fix:** Changed vite from ^6 to ^7 in package.json
@@ -138,36 +150,48 @@ Each task was committed atomically:
 - **Committed in:** 83727da (Task 3)
 
 **3. [Rule 3 - Blocking] Switched from vinxi to vite**
+
 - **Found during:** Task 3
-- **Issue:** Vinxi wasn't properly integrating with TanStack Start plugin, routes returned 404
+- **Issue:** Vinxi wasn't properly integrating with TanStack Start plugin,
+  routes returned 404
 - **Fix:** Changed npm scripts to use vite dev/build/preview instead of vinxi
 - **Files modified:** package.json
 - **Committed in:** 83727da (Task 3)
 
 **4. [Rule 1 - Bug] Fixed server.tsx export format**
+
 - **Found during:** Task 3
-- **Issue:** Server wasn't exporting { fetch } object, causing "fetch is not a function" error
+- **Issue:** Server wasn't exporting { fetch } object, causing "fetch is not a
+  function" error
 - **Fix:** Changed export to `export default { fetch: handler }`
 - **Files modified:** app/server.tsx
 - **Committed in:** 83727da (Task 3)
 
 **5. [Rule 1 - Bug] Fixed client.tsx StartClient props**
+
 - **Found during:** Task 3
-- **Issue:** StartClient doesn't accept router prop, was causing TypeScript error
+- **Issue:** StartClient doesn't accept router prop, was causing TypeScript
+  error
 - **Fix:** Removed router prop from StartClient
 - **Files modified:** app/client.tsx
 - **Committed in:** 83727da (Task 3)
 
 ---
 
-**Total deviations:** 5 auto-fixed (2 bugs, 3 blocking)
-**Impact on plan:** All fixes were necessary for the application to work. Vite upgrade and vinxi removal were significant changes but were required due to TanStack Start 1.140.5 compatibility.
+**Total deviations:** 5 auto-fixed (2 bugs, 3 blocking) **Impact on plan:** All
+fixes were necessary for the application to work. Vite upgrade and vinxi removal
+were significant changes but were required due to TanStack Start 1.140.5
+compatibility.
 
 ## Issues Encountered
 
-- **TanStack Start + Vinxi incompatibility:** Vinxi wasn't properly setting up Vite environments for TanStack Start. Switched to using Vite directly.
-- **Server entry format:** Documentation wasn't clear on server.tsx export format. Discovered through error messages that it needs `{ fetch }` object.
-- **Port 5173 instead of 3000:** Vite dev server defaults to 5173. This is different from the plan's localhost:3000 expectation but functionally equivalent.
+- **TanStack Start + Vinxi incompatibility:** Vinxi wasn't properly setting up
+  Vite environments for TanStack Start. Switched to using Vite directly.
+- **Server entry format:** Documentation wasn't clear on server.tsx export
+  format. Discovered through error messages that it needs `{ fetch }` object.
+- **Port 5173 instead of 3000:** Vite dev server defaults to 5173. This is
+  different from the plan's localhost:3000 expectation but functionally
+  equivalent.
 
 ## User Setup Required
 
@@ -176,15 +200,18 @@ None - no external service configuration required.
 ## Next Phase Readiness
 
 **Ready for next plans:**
+
 - Project scaffold complete and verified
 - Development workflow established (dev, lint, typecheck)
 - Pre-commit hooks enforcing code quality
 
 **Notes for future plans:**
+
 - Use vite dev/build instead of vinxi
 - Server port is 5173 (Vite default)
-- TanStack Start version pinned to 1.140.5 for Cloudflare compatibility (per RESEARCH.md)
+- TanStack Start version pinned to 1.140.5 for Cloudflare compatibility (per
+  RESEARCH.md)
 
 ---
-*Phase: 01-foundation-authentication*
-*Completed: 2026-01-25*
+
+_Phase: 01-foundation-authentication_ _Completed: 2026-01-25_
