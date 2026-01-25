@@ -35,7 +35,7 @@ interface FilterSheetProps {
 }
 
 export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
-  const navigate = useNavigate({ from: "/spirits" });
+  const navigate = useNavigate({ from: "/spirits/" });
   const [open, setOpen] = useState(false);
 
   // Local state for pending filter changes
