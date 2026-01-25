@@ -10,7 +10,7 @@ spirit openings **Current focus:** Phase 1 Complete - Ready for Phase 2
 ## Current Position
 
 Phase: 1 of 7 (Foundation & Authentication) - COMPLETE Plan: 6 of 6 in current
-phase Status: Phase 1 complete Last activity: 2026-01-25 - Completed quick task 002: fix deprecated afterSignOutUrl property
+phase Status: Phase 1 complete Last activity: 2026-01-25 - Completed quick task 004: improve deployment workflow
 
 Progress: [██████░░░░] ~29%
 
@@ -76,6 +76,7 @@ None yet.
 | 001 | Add knip and dependabot for git workflows | 2026-01-25 | 04652f7 | [001-add-knip-and-dependabot-for-git-workflow](./quick/001-add-knip-and-dependabot-for-git-workflow/) |
 | 002 | Fix deprecated afterSignOutUrl property | 2026-01-25 | e1c7a8c | [002-fix-deprecated-aftersignouturl-property-](./quick/002-fix-deprecated-aftersignouturl-property-/) |
 | 003 | Wire Clerk routing env vars | 2026-01-25 | b00528b | [003-wire-clerk-routing-env-vars](./quick/003-wire-clerk-routing-env-vars/) |
+| 004 | Improve deployment workflow | 2026-01-25 | 23c1c3e | [004-improve-deployment-workflow](./quick/004-improve-deployment-workflow/) |
 
 ### Blockers/Concerns
 
@@ -87,11 +88,12 @@ None yet.
 
 - Placeholder icons need replacement with branded artwork (low priority)
 
-**From Plan 01-06:**
+**From Plan 01-06 (updated by quick-004):**
 
-- GitHub Secrets must be configured for CI to pass (VITE_CONVEX_URL,
-  VITE_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLOUDFLARE_API_TOKEN,
-  CLOUDFLARE_ACCOUNT_ID)
+- GitHub configuration required for CI/CD:
+  - **Secrets:** CONVEX_DEPLOY_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
+  - **Variables:** VITE_CONVEX_URL, VITE_CLERK_PUBLISHABLE_KEY
+- See `.planning/quick/004-improve-deployment-workflow/004-SUMMARY.md` for setup guide
 
 **From Plan 01-04:**
 
@@ -111,5 +113,5 @@ Phase 1 (Foundation & Authentication) is now complete with:
 
 ## Session Continuity
 
-Last session: 2026-01-25 Stopped at: Completed quick task 003: wire Clerk routing env vars
+Last session: 2026-01-25 Stopped at: Completed quick task 004: improve deployment workflow
 Resume file: None
