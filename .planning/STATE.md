@@ -78,6 +78,7 @@ None yet.
 | 002 | Fix deprecated afterSignOutUrl property | 2026-01-25 | e1c7a8c | [002-fix-deprecated-aftersignouturl-property-](./quick/002-fix-deprecated-aftersignouturl-property-/) |
 | 003 | Wire Clerk routing env vars | 2026-01-25 | b00528b | [003-wire-clerk-routing-env-vars](./quick/003-wire-clerk-routing-env-vars/) |
 | 004 | Improve deployment workflow | 2026-01-25 | 23c1c3e | [004-improve-deployment-workflow](./quick/004-improve-deployment-workflow/) |
+| 005 | Fix Clerk sign-in e2e test selector | 2026-01-25 | 8a054ec | [005-fix-clerk-sign-in-e2e-test-selector](./quick/005-fix-clerk-sign-in-e2e-test-selector/) |
 
 ### Blockers/Concerns
 
@@ -115,5 +116,5 @@ Phase 1 (Foundation & Authentication) is now complete with:
 
 ## Session Continuity
 
-Last session: 2026-01-25 Stopped at: Completed 01-07-PLAN.md (SW registration timing fix)
+Last session: 2026-01-25 Stopped at: Completed quick-005 (Fix Clerk sign-in e2e test selector)
 Resume file: None
