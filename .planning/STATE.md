@@ -10,30 +10,30 @@ spirit openings **Current focus:** Phase 2 - Spirit Library
 ## Current Position
 
 Phase: 2 of 7 (Spirit Library)
-Plan: 1 of 5 in current phase
+Plan: 3 of 5 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 02-01-PLAN.md (Tailwind + shadcn/ui Setup)
+Last activity: 2026-01-25 - Completed 02-03-PLAN.md (Spirit List UI)
 
-Progress: [████████░░] ~35%
+Progress: [████████░░] ~40%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 8
-- Average duration: 10.4 min
-- Total execution time: 1.48 hours
+- Total plans completed: 11
+- Average duration: 8.5 min
+- Total execution time: 1.55 hours
 
 **By Phase:**
 
 | Phase | Plans | Total  | Avg/Plan |
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
-| 02    | 1     | 8 min  | 8 min    |
+| 02    | 4     | 12 min | 3 min    |
 
 **Recent Trend:**
 
-- Last 5 plans: 7 min, 8 min, 10 min, 1 min, 8 min
+- Last 5 plans: 8 min, 2 min, 2 min, 2 min, 2 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -72,6 +72,9 @@ affecting current work:
 - Dark mode by default for Spirit Island aesthetic
 - oklch color space for theme colors
 - UI components as knip entry points for library pattern
+- Zod for URL search param validation in TanStack Router
+- View transition names: spirit-image-{slug} and spirit-name-{slug}
+- Aspect URLs: /spirits/{base-slug}?aspect={aspect-name}
 
 ### Pending Todos
 
@@ -127,13 +130,13 @@ Phase 1 (Foundation & Authentication) is now complete with:
 Phase 2 (Spirit Library) in progress:
 
 - [x] 02-01: Tailwind + shadcn/ui Setup (design system foundation)
-- [ ] 02-02: Spirit Schema and Seed Data
-- [ ] 02-03: Spirit List UI
+- [x] 02-02: Spirit Schema and Seed Data
+- [x] 02-03: Spirit List UI
 - [ ] 02-04: Spirit Detail Page
 - [ ] 02-05: Filter and Search
 
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02-01-PLAN.md (Tailwind + shadcn/ui Setup)
+Stopped at: Completed 02-03-PLAN.md (Spirit List UI)
 Resume file: None
