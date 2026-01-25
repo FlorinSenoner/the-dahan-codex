@@ -13,7 +13,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@clerk/tanstack-start": "^0.11.5",
@@ -33,6 +35,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9",
     "@cloudflare/vite-plugin": "^1.21.2",
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^25.0.10",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "lefthook": "^1",
