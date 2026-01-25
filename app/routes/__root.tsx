@@ -55,7 +55,10 @@ function RootLayout() {
   }
 
   return (
-    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+      afterSignOutUrl="/"
+    >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <Outlet />
       </ConvexProviderWithClerk>
