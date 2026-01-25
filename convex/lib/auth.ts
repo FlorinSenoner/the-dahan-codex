@@ -1,0 +1,46 @@
+import type { MutationCtx, QueryCtx } from "../_generated/server";
+
+/**
+ * Get the current user's identity from Convex auth
+ * Returns null if not authenticated
+ */
+export async function getIdentity(ctx: QueryCtx | MutationCtx) {
+  return await ctx.auth.getUserIdentity();
+}
+
+/**
+ * Require authentication - throws if not authenticated
+ */
+export async function requireAuth(ctx: QueryCtx | MutationCtx) {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    throw new Error("Not authenticated");
+  }
+  return identity;
+}
+
+/**
+ * Check if the current user has admin role
+ * Admin claim comes from Clerk JWT template: user.public_metadata.isAdmin
+ */
+export async function isAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    return false;
+  }
+  // The isAdmin claim is set in Clerk JWT template from user.public_metadata.isAdmin
+  // biome-ignore lint/suspicious/noExplicitAny: Convex identity type doesn't include custom claims
+  return (identity as any).isAdmin === true;
+}
+
+/**
+ * Require admin role - throws if not admin
+ */
+export async function requireAdmin(ctx: QueryCtx | MutationCtx) {
+  const identity = await requireAuth(ctx);
+  const admin = await isAdmin(ctx);
+  if (!admin) {
+    throw new Error("Admin access required");
+  }
+  return identity;
+}
