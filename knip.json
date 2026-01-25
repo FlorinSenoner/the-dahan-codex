@@ -29,7 +29,6 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss",
-    "lucide-react"
+    "tailwindcss"
   ]
 }
