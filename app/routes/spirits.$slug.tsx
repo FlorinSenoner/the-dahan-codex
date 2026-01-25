@@ -185,9 +185,16 @@ function SpiritDetailPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-muted-foreground text-center max-w-md mx-auto mb-6">
+        <p className="text-muted-foreground text-center max-w-md mx-auto mb-4">
           {spirit.summary}
         </p>
+
+        {/* Detailed description (if available) */}
+        {spirit.description && (
+          <p className="text-foreground/80 text-center max-w-lg mx-auto mb-6 text-sm leading-relaxed">
+            {spirit.description}
+          </p>
+        )}
 
         {/* Elements */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
