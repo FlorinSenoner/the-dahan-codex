@@ -11,7 +11,7 @@ function ProfilePage() {
       <h1>Profile</h1>
       <p>This is a protected page. You are signed in.</p>
       <div style={{ marginTop: "1rem" }}>
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
       </div>
     </div>
   );
