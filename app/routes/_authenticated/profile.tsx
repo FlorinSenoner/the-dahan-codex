@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/tanstack-react-start";
+import { UserButton } from "@clerk/clerk-react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/profile")({

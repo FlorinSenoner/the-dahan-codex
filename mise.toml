@@ -4,7 +4,7 @@ pnpm = "10.25.0"
 
 [env]
 _.path = ["{{config_root}}/node_modules/.bin"]
-CLERK_PUBLISHABLE_KEY = "REDACTED_CLERK_KEY"
+VITE_CLERK_PUBLISHABLE_KEY = "REDACTED_CLERK_KEY"
 
 [settings]
 experimental = true

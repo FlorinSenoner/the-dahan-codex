@@ -1,22 +1,28 @@
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
-import { getAuthData } from "../lib/auth";
+import { useAuth } from "@clerk/clerk-react";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/_authenticated")({
-  beforeLoad: async () => {
-    const auth = await getAuthData();
-
-    if (!auth.userId) {
-      throw redirect({
-        to: "/sign-in/$",
-        params: { _splat: "" },
-      });
-    }
-
-    return { userId: auth.userId };
-  },
   component: AuthenticatedLayout,
 });
 
 function AuthenticatedLayout() {
+  const { isLoaded, isSignedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      navigate({ to: "/sign-in/$", params: { _splat: "" } });
+    }
+  }, [isLoaded, isSignedIn, navigate]);
+
+  if (!isLoaded) {
+    return <div style={{ padding: "2rem" }}>Loading...</div>;
+  }
+
+  if (!isSignedIn) {
+    return <div style={{ padding: "2rem" }}>Redirecting to sign in...</div>;
+  }
+
   return <Outlet />;
 }
