@@ -1,0 +1,75 @@
+import { existsSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { generateSW } from "workbox-build";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const rootDir = join(__dirname, "..");
+
+async function buildServiceWorker() {
+  const outputDir = join(rootDir, "dist", "client");
+
+  // Ensure output directory exists
+  if (!existsSync(outputDir)) {
+    console.log("Output directory does not exist, creating...");
+    mkdirSync(outputDir, { recursive: true });
+  }
+
+  console.log("Generating service worker...");
+
+  try {
+    const { count, size, warnings } = await generateSW({
+      swDest: join(outputDir, "sw.js"),
+      globDirectory: outputDir,
+      globPatterns: ["**/*.{js,css,html,png,svg,ico,webp,woff,woff2,json}"],
+      globIgnores: ["**/node_modules/**", "sw.js", "workbox-*.js"],
+      // IMPORTANT: skipWaiting false to prevent broken state during updates
+      skipWaiting: false,
+      clientsClaim: false,
+      // Runtime caching for API calls
+      runtimeCaching: [
+        {
+          // Cache Convex API responses (read-only data)
+          urlPattern: /^https:\/\/.*\.convex\.cloud/,
+          handler: "NetworkFirst",
+          options: {
+            cacheName: "convex-api-cache",
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 24, // 24 hours
+              maxEntries: 100,
+            },
+            networkTimeoutSeconds: 10,
+          },
+        },
+        {
+          // Cache external images
+          urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/,
+          handler: "CacheFirst",
+          options: {
+            cacheName: "image-cache",
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              maxEntries: 200,
+            },
+          },
+        },
+      ],
+    });
+
+    console.log("Generated service worker");
+    console.log(`  Precached ${count} files (${(size / 1024).toFixed(1)} KB)`);
+
+    if (warnings.length > 0) {
+      console.log("Warnings:");
+      for (const warning of warnings) {
+        console.log(`  - ${warning}`);
+      }
+    }
+  } catch (error) {
+    console.error("Failed to generate service worker:", error);
+    process.exit(1);
+  }
+}
+
+buildServiceWorker();
