@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 1 of 7 (Foundation & Authentication)
-Plan: 4 of 6 in current phase
+Plan: 5 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 01-04-PLAN.md (Clerk Authentication)
+Last activity: 2026-01-25 - Completed 01-05-PLAN.md (PWA Service Worker)
 
-Progress: [████░░░░░░] ~20%
+Progress: [█████░░░░░] ~24%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 16 min
-- Total execution time: 1.03 hours
+- Total plans completed: 5
+- Average duration: 14 min
+- Total execution time: 1.17 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 4 | 62 min | 15.5 min |
+| 01 | 5 | 70 min | 14 min |
 
 **Recent Trend:**
-- Last 5 plans: 45 min, 5 min, 5 min, 7 min
-- Trend: Improving
+- Last 5 plans: 45 min, 5 min, 5 min, 7 min, 8 min
+- Trend: Stable (fast execution)
 
 *Updated after each plan completion*
 
@@ -55,6 +55,9 @@ Recent decisions affecting current work:
 - Use useConvexAuth() hook for auth state sync instead of Clerk's useAuth()
 - Admin role via Clerk JWT custom claim: user.public_metadata.isAdmin
 - ClerkProvider > ConvexProviderWithClerk > QueryClientProvider hierarchy
+- Manual Workbox generation via scripts/generate-sw.ts (vite-plugin-pwa incompatible with Vite 7)
+- skipWaiting: false for service worker updates (prevents broken state during user sessions)
+- Service worker registration in root layout useEffect
 
 ### Pending Todos
 
@@ -63,10 +66,13 @@ None yet.
 ### Blockers/Concerns
 
 **From Research:**
-- PWA service worker generation requires manual Workbox (vite-plugin-pwa incompatible)
+- PWA service worker generation requires manual Workbox (vite-plugin-pwa incompatible) - IMPLEMENTED
 - Cloudflare Workers needs pinned TanStack Start version (1.140.5) - CONFIRMED WORKING
 - SSR auth tokens need explicit handling in route beforeLoad - IMPLEMENTED
 - iOS PWA testing needed (cache purging behavior)
+
+**From Plan 01-05:**
+- Placeholder icons need replacement with branded artwork (low priority)
 
 **From Plan 01-01:**
 - Vite dev server port is 5173, not 3000 (may need to configure for consistency)
@@ -80,5 +86,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 01-04-PLAN.md
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None
