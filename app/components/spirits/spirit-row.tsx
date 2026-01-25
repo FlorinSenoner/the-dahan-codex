@@ -29,7 +29,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
     <Link
       to={href}
       className={cn(
-        "flex items-center gap-4 p-4",
+        "flex items-center gap-4 p-4 cursor-pointer",
         "active:bg-muted/50 transition-colors duration-150",
         isAspect && "pl-8 bg-muted/10", // Indent aspects
       )}

@@ -62,7 +62,9 @@ function SpiritDetailPage() {
           <Button
             variant="ghost"
             size="icon"
+            className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() => navigate({ to: "/spirits" })}
+            aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
@@ -88,7 +90,9 @@ function SpiritDetailPage() {
           <Button
             variant="ghost"
             size="icon"
+            className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() => navigate({ to: "/spirits" })}
+            aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
@@ -100,7 +104,10 @@ function SpiritDetailPage() {
           <p className="text-muted-foreground mb-4">
             The spirit "{slug}" doesn't exist.
           </p>
-          <Link to="/spirits" className="text-primary hover:underline">
+          <Link
+            to="/spirits"
+            className="text-primary hover:underline cursor-pointer"
+          >
             Back to Spirits
           </Link>
         </div>
@@ -122,7 +129,9 @@ function SpiritDetailPage() {
           <Button
             variant="ghost"
             size="icon"
+            className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() => navigate({ to: "/spirits" })}
+            aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
