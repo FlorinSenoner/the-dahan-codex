@@ -23,7 +23,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Authentication** - TanStack Start, Convex, Clerk,
       PWA generation, Cloudflare deployment validated
-- [ ] **Phase 2: Spirit Library** - Browsable spirit list with reference data
+- [x] **Phase 2: Spirit Library** - Browsable spirit list with reference data
       and basic navigation
 - [ ] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
@@ -82,12 +82,12 @@ must be TRUE):
 
 Plans:
 
-- [ ] 02-01-PLAN.md — Design system setup (Tailwind v4 + shadcn/ui + Spirit Island theme)
-- [ ] 02-02-PLAN.md — Convex spirit schema and seed data
-- [ ] 02-03-PLAN.md — Spirit list route and components
-- [ ] 02-04-PLAN.md — Filter system with bottom sheet
-- [ ] 02-05-PLAN.md — Spirit detail route with View Transitions
-- [ ] 02-06-PLAN.md — Bottom navigation, credits page, and E2E tests
+- [x] 02-01-PLAN.md — Design system setup (Tailwind v4 + shadcn/ui + Spirit Island theme)
+- [x] 02-02-PLAN.md — Convex spirit schema and seed data
+- [x] 02-03-PLAN.md — Spirit list route and components
+- [x] 02-04-PLAN.md — Filter system with bottom sheet
+- [x] 02-05-PLAN.md — Spirit detail route with View Transitions
+- [x] 02-06-PLAN.md — Bottom navigation, credits page, and E2E tests
 
 ### Phase 3: Spirit Detail & Board
 
@@ -209,8 +209,8 @@ development:
 | Phase                          | Plans Complete | Status   | Completed  |
 | ------------------------------ | -------------- | -------- | ---------- |
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
-| 2. Spirit Library              | 0/6            | Planned  | -          |
-| 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
+| 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
+| 3. Spirit Detail & Board       | 0/TBD          | Planned  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
