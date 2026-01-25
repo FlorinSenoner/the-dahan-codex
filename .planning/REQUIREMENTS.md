@@ -246,16 +246,16 @@ Phase assignments from ROADMAP.md (7 phases).
 | AUTH-04     | Phase 1: Foundation & Authentication | Complete |
 | AUTH-05     | Phase 1: Foundation & Authentication | Complete |
 | AUTH-06     | Phase 1: Foundation & Authentication | Complete |
-| SPRT-01     | Phase 2: Spirit Library              | Pending |
-| SPRT-02     | Phase 2: Spirit Library              | Pending |
-| SPRT-03     | Phase 2: Spirit Library              | Pending |
-| SPRT-04     | Phase 2: Spirit Library              | Pending |
-| SPRT-05     | Phase 2: Spirit Library              | Pending |
+| SPRT-01     | Phase 2: Spirit Library              | Complete |
+| SPRT-02     | Phase 2: Spirit Library              | Complete |
+| SPRT-03     | Phase 2: Spirit Library              | Complete |
+| SPRT-04     | Phase 2: Spirit Library              | Complete |
+| SPRT-05     | Phase 2: Spirit Library              | Complete |
 | DATA-01     | Phase 2: Spirit Library              | Pending |
 | DATA-02     | Phase 2: Spirit Library              | Pending |
-| DATA-03     | Phase 2: Spirit Library              | Pending |
-| DATA-04     | Phase 2: Spirit Library              | Pending |
-| DATA-05     | Phase 2: Spirit Library              | Pending |
+| DATA-03     | Phase 2: Spirit Library              | Complete |
+| DATA-04     | Phase 2: Spirit Library              | Complete |
+| DATA-05     | Phase 2: Spirit Library              | Complete |
 | DTAIL-01    | Phase 3: Spirit Detail & Board       | Pending |
 | DTAIL-02    | Phase 3: Spirit Detail & Board       | Pending |
 | DTAIL-03    | Phase 3: Spirit Detail & Board       | Pending |
@@ -339,7 +339,7 @@ Phase assignments from ROADMAP.md (7 phases).
 | UI-08       | Cross-cutting (all phases)           | Pending |
 | UI-09       | Cross-cutting (all phases)           | Pending |
 | UI-10       | Cross-cutting (all phases)           | Pending |
-| TEST-01     | Phase 2: Spirit Library              | Pending |
+| TEST-01     | Phase 2: Spirit Library              | Complete |
 | TEST-02     | Phase 3: Spirit Detail & Board       | Pending |
 | TEST-03     | Phase 3: Spirit Detail & Board       | Pending |
 | TEST-04     | Phase 5: Opening Scrubber            | Pending |
