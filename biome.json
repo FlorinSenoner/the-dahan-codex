@@ -21,7 +21,9 @@
       "!**/convex/_generated",
       "!**/.claude",
       "!**/app/routeTree.gen.ts",
-      "!**/*.timestamp_*.js"
+      "!**/*.timestamp_*.js",
+      "!**/playwright-report",
+      "!**/.tanstack"
     ]
   }
 }
