@@ -5,35 +5,35 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 1 Complete - Ready for Phase 2
+spirit openings **Current focus:** Phase 2 - Spirit Library
 
 ## Current Position
 
 Phase: 2 of 7 (Spirit Library)
-Plan: 2 of 5 in current phase
+Plan: 1 of 5 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 02-02-PLAN.md (Spirit Schema and Seed Data)
+Last activity: 2026-01-25 - Completed 02-01-PLAN.md (Tailwind + shadcn/ui Setup)
 
-Progress: [████████░░] ~40%
+Progress: [████████░░] ~35%
 
 ## Performance Metrics
 
 **Velocity:**
 
 - Total plans completed: 8
-- Average duration: 10.8 min
-- Total execution time: 1.43 hours
+- Average duration: 10.4 min
+- Total execution time: 1.48 hours
 
 **By Phase:**
 
 | Phase | Plans | Total  | Avg/Plan |
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
-| 02    | 1     | 5 min  | 5 min    |
+| 02    | 1     | 8 min  | 8 min    |
 
 **Recent Trend:**
 
-- Last 5 plans: 7 min, 8 min, 10 min, 1 min, 5 min
+- Last 5 plans: 7 min, 8 min, 10 min, 1 min, 8 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -68,9 +68,10 @@ affecting current work:
 - Check document.readyState before adding load listeners (hydration-safe pattern)
 - Playwright with Chromium-only for smoke tests (faster CI)
 - Deploy job gated on CI success and main branch push
-- Aspects stored as separate spirit documents with baseSpirit reference
-- listSpirits returns flat array with isAspect flag for UI grouping
-- getSpiritBySlug uses optional aspect param for aspect lookup
+- Tailwind v4 CSS-first configuration (no tailwind.config.js)
+- Dark mode by default for Spirit Island aesthetic
+- oklch color space for theme colors
+- UI components as knip entry points for library pattern
 
 ### Pending Todos
 
@@ -121,8 +122,18 @@ Phase 1 (Foundation & Authentication) is now complete with:
 - Playwright smoke tests
 - UAT gaps addressed (01-07: SW registration timing fix)
 
+## Phase 2 Progress
+
+Phase 2 (Spirit Library) in progress:
+
+- [x] 02-01: Tailwind + shadcn/ui Setup (design system foundation)
+- [ ] 02-02: Spirit Schema and Seed Data
+- [ ] 02-03: Spirit List UI
+- [ ] 02-04: Spirit Detail Page
+- [ ] 02-05: Filter and Search
+
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02-02-PLAN.md (Spirit Schema and Seed Data)
+Stopped at: Completed 02-01-PLAN.md (Tailwind + shadcn/ui Setup)
 Resume file: None
