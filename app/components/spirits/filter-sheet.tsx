@@ -26,6 +26,70 @@ const ELEMENT_OPTIONS = [
   "Animal",
 ] as const;
 
+// Element color mapping for filter pills
+const elementColors: Record<string, { selected: string; unselected: string }> =
+  {
+    Sun: {
+      selected: "bg-element-sun/30 text-element-sun border-element-sun/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Moon: {
+      selected: "bg-element-moon/30 text-element-moon border-element-moon/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Fire: {
+      selected: "bg-element-fire/30 text-element-fire border-element-fire/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Air: {
+      selected: "bg-element-air/30 text-element-air border-element-air/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Water: {
+      selected:
+        "bg-element-water/30 text-element-water border-element-water/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Earth: {
+      selected:
+        "bg-element-earth/30 text-element-earth border-element-earth/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Plant: {
+      selected:
+        "bg-element-plant/30 text-element-plant border-element-plant/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+    Animal: {
+      selected:
+        "bg-element-animal/30 text-element-animal border-element-animal/50",
+      unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+    },
+  };
+
+// Complexity color mapping for filter pills
+const complexityColors: Record<
+  string,
+  { selected: string; unselected: string }
+> = {
+  Low: {
+    selected: "bg-element-plant/30 text-element-plant border-element-plant/50",
+    unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+  },
+  Moderate: {
+    selected: "bg-element-sun/30 text-element-sun border-element-sun/50",
+    unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+  },
+  High: {
+    selected: "bg-element-fire/30 text-element-fire border-element-fire/50",
+    unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+  },
+  "Very High": {
+    selected: "bg-destructive/30 text-destructive border-destructive/50",
+    unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+  },
+};
+
 interface FilterSheetProps {
   currentFilters: {
     complexity?: string[];
@@ -134,6 +198,8 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
                   label={option}
                   selected={pendingComplexity.includes(option)}
                   onClick={() => toggleComplexity(option)}
+                  selectedClass={complexityColors[option].selected}
+                  unselectedClass={complexityColors[option].unselected}
                 />
               ))}
             </div>
@@ -154,6 +220,8 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
                   label={option}
                   selected={pendingElements.includes(option)}
                   onClick={() => toggleElement(option)}
+                  selectedClass={elementColors[option].selected}
+                  unselectedClass={elementColors[option].unselected}
                 />
               ))}
             </div>
@@ -183,10 +251,14 @@ function FilterPill({
   label,
   selected,
   onClick,
+  selectedClass,
+  unselectedClass,
 }: {
   label: string;
   selected: boolean;
   onClick: () => void;
+  selectedClass?: string;
+  unselectedClass?: string;
 }) {
   return (
     <button
@@ -196,8 +268,9 @@ function FilterPill({
         "min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer",
         "border",
         selected
-          ? "bg-primary text-primary-foreground border-primary"
-          : "bg-muted/30 text-foreground border-border hover:bg-muted/50",
+          ? selectedClass || "bg-primary text-primary-foreground border-primary"
+          : unselectedClass ||
+              "bg-muted/30 text-foreground border-border hover:bg-muted/50",
       )}
     >
       {label}
