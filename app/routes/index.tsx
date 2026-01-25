@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/tanstack-start";
+import { UserButton } from "@clerk/tanstack-react-start";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";

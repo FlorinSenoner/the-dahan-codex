@@ -1,4 +1,4 @@
-import { ClerkProvider, useAuth } from "@clerk/tanstack-start";
+import { ClerkProvider, useAuth } from "@clerk/tanstack-react-start";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
