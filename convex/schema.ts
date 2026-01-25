@@ -32,6 +32,12 @@ export default defineSchema({
     // For aspects: link to base spirit
     baseSpirit: v.optional(v.id("spirits")),
     aspectName: v.optional(v.string()), // "Sunshine", "Travel", etc.
+    // Aspect complexity modifier relative to base spirit (for display arrows)
+    complexityModifier: v.optional(
+      v.union(v.literal("easier"), v.literal("same"), v.literal("harder")),
+    ),
+    // Detailed playstyle description for detail page
+    description: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
     .index("by_expansion", ["expansionId"])
