@@ -1,7 +1,7 @@
 # Requirements: The Dahan Codex
 
-**Defined:** 2025-01-24
-**Core Value:** The Opening Scrubber — graphical, scrubbable visualization of spirit openings
+**Defined:** 2025-01-24 **Core Value:** The Opening Scrubber — graphical,
+scrubbable visualization of spirit openings
 
 ## v1 Requirements
 
@@ -11,8 +11,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **INFRA-01**: TanStack Start project with file-based routing
 - [ ] **INFRA-02**: Convex backend connected with real-time subscriptions
-- [ ] **INFRA-03**: Manual Workbox PWA setup (service worker generation validated in CI)
-- [ ] **INFRA-04**: Cloudflare Workers deployment (pinned TanStack Start version)
+- [ ] **INFRA-03**: Manual Workbox PWA setup (service worker generation
+      validated in CI)
+- [ ] **INFRA-04**: Cloudflare Workers deployment (pinned TanStack Start
+      version)
 - [ ] **INFRA-05**: Biome formatting/linting configured
 - [ ] **INFRA-06**: mise toolchain management configured
 - [ ] **INFRA-07**: Pre-commit hooks running Biome checks
@@ -33,8 +35,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **PWA-01**: App is installable (add to home screen)
 - [ ] **PWA-02**: App works offline in read-only mode
 - [ ] **PWA-03**: In-app update banner when new version available
-- [ ] **PWA-04**: Reference data (spirits, adversaries, scenarios) precached for offline
-- [ ] **PWA-05**: User data (games, notes) cached from Convex for offline viewing
+- [ ] **PWA-04**: Reference data (spirits, adversaries, scenarios) precached for
+      offline
+- [ ] **PWA-05**: User data (games, notes) cached from Convex for offline
+      viewing
 - [ ] **PWA-06**: Offline indicator shown only when disconnected
 - [ ] **PWA-07**: User-prompted update flow (no automatic skipWaiting)
 
@@ -54,14 +58,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **DTAIL-04**: Overview shows complexity label
 - [ ] **DTAIL-05**: Overview shows strengths (3-6 bullets)
 - [ ] **DTAIL-06**: Overview shows weaknesses (3-6 bullets)
-- [ ] **DTAIL-07**: Radar chart displays power ratings (Offense, Control, Fear, Defense, Utility)
+- [ ] **DTAIL-07**: Radar chart displays power ratings (Offense, Control, Fear,
+      Defense, Utility)
 - [ ] **DTAIL-08**: Links to wiki page, FAQ, and external resources
 
 ### Spirit Board Visualization
 
 - [ ] **BOARD-01**: Growth panel displays all growth options for variant
 - [ ] **BOARD-02**: Presence tracks display as discrete slots
-- [ ] **BOARD-03**: Each presence slot shows what it grants (energy, card plays, elements, reclaim, etc.)
+- [ ] **BOARD-03**: Each presence slot shows what it grants (energy, card plays,
+      elements, reclaim, etc.)
 - [ ] **BOARD-04**: Innate powers display with element thresholds
 - [ ] **BOARD-05**: Special rules display (e.g., River's "Massive Flooding")
 
@@ -72,14 +78,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **OPEN-03**: Scrubbing to a turn shows exact board state at that turn
 - [ ] **OPEN-04**: Growth panel highlights chosen growth option(s) per turn
 - [ ] **OPEN-05**: Presence tracks update to show state at selected turn
-- [ ] **OPEN-06**: Cards played shown with full card preview (load from sick.oberien.de)
+- [ ] **OPEN-06**: Cards played shown with full card preview (load from
+      sick.oberien.de)
 - [ ] **OPEN-07**: Card preview opens in in-app browser/modal
 - [ ] **OPEN-08**: Step forward/back buttons navigate turns one at a time
 - [ ] **OPEN-09**: Play/animate mode auto-advances through turns
 - [ ] **OPEN-10**: Per-turn notes shown as expandable section
 - [ ] **OPEN-11**: Strategy accordion for long-form text (collapsed by default)
 - [ ] **OPEN-12**: Strategy text includes source links (wiki, reddit, FAQ)
-- [ ] **OPEN-13**: Animated transitions between turns (respect prefers-reduced-motion)
+- [ ] **OPEN-13**: Animated transitions between turns (respect
+      prefers-reduced-motion)
 
 ### Game Tracker
 
@@ -101,7 +109,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **CSV-01**: Export games to CSV (Excel-friendly format)
 - [ ] **CSV-02**: CSV uses fixed columns: spirit1-spirit6 (empty if unused)
-- [ ] **CSV-03**: CSV includes all game fields (date, result, scenario, adversary, score, notes)
+- [ ] **CSV-03**: CSV includes all game fields (date, result, scenario,
+      adversary, score, notes)
 - [ ] **CSV-04**: Import games from CSV
 - [ ] **CSV-05**: Import validates known spirit/adversary/scenario names
 - [ ] **CSV-06**: Import allows unknown/custom names
@@ -109,18 +118,21 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Notes
 
-- [ ] **NOTE-01**: Create notes with rich-text editor (bold, italic, headers, lists, links)
+- [ ] **NOTE-01**: Create notes with rich-text editor (bold, italic, headers,
+      lists, links)
 - [ ] **NOTE-02**: Attach notes to spirits
 - [ ] **NOTE-03**: Attach notes to openings
 - [ ] **NOTE-04**: Attach notes to games
 - [ ] **NOTE-05**: Notes list view shows all user notes
-- [ ] **NOTE-06**: Backlinks displayed on spirit/opening/game pages ("X notes mention this")
+- [ ] **NOTE-06**: Backlinks displayed on spirit/opening/game pages ("X notes
+      mention this")
 - [ ] **NOTE-07**: Edit existing notes
 - [ ] **NOTE-08**: Delete notes (with confirmation)
 
 ### Search
 
-- [ ] **SRCH-01**: Global client-side search across spirits, openings, games, notes
+- [ ] **SRCH-01**: Global client-side search across spirits, openings, games,
+      notes
 - [ ] **SRCH-02**: Search works offline (searches cached data)
 - [ ] **SRCH-03**: Search results grouped by type
 
@@ -140,16 +152,19 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **DATA-01**: All official adversaries with levels
 - [ ] **DATA-02**: All official scenarios with difficulty
-- [ ] **DATA-03**: Expansion metadata (which box each spirit/adversary/scenario belongs to)
+- [ ] **DATA-03**: Expansion metadata (which box each spirit/adversary/scenario
+      belongs to)
 - [ ] **DATA-04**: Credits/attribution page with all external data sources
-- [ ] **DATA-05**: Legal disclaimer ("Not affiliated with Greater Than Games, LLC")
+- [ ] **DATA-05**: Legal disclaimer ("Not affiliated with Greater Than Games,
+      LLC")
 
 ### UI/UX
 
 - [ ] **UI-01**: Mobile-first responsive design
 - [ ] **UI-02**: Dark theme as default
 - [ ] **UI-03**: Light theme toggle in Settings
-- [ ] **UI-04**: Hybrid styling (modern UI with Spirit Island color/icon accents)
+- [ ] **UI-04**: Hybrid styling (modern UI with Spirit Island color/icon
+      accents)
 - [ ] **UI-05**: Bottom tabs always visible (Spirits / Games / Notes / Settings)
 - [ ] **UI-06**: Shareable URLs for spirits, variants, openings
 - [ ] **UI-07**: Touch-optimized targets
@@ -160,7 +175,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Testing
 
 - [ ] **TEST-01**: Playwright E2E: spirit list renders
-- [ ] **TEST-02**: Playwright E2E: spirit detail displays overview and radar chart
+- [ ] **TEST-02**: Playwright E2E: spirit detail displays overview and radar
+      chart
 - [ ] **TEST-03**: Playwright E2E: variant switching changes content
 - [ ] **TEST-04**: Playwright E2E: opening scrubber navigation works
 - [ ] **TEST-05**: Playwright E2E: game creation and listing
@@ -198,145 +214,147 @@ Deferred to future release. Tracked but not in current roadmap.
 
 Explicitly excluded. Documented to prevent scope creep.
 
-| Feature | Reason |
-|---------|--------|
-| Real-time multiplayer sync | Massive complexity, connectivity issues at game tables |
-| Game AI / automation | Competes with official Handelabra digital app |
-| Card image hosting (v1) | Load from external source first, bundle in v2 |
-| Spirit synergy recommendations | Requires community data integration |
-| Multiple languages (i18n) | English only for v1 |
-| Board-relative presence placement | Track slots only, not island positions |
-| Growth option validation | Trust opening authors, display-only |
-| Visual regression tests | Functional E2E sufficient for v1 |
+| Feature                           | Reason                                                 |
+| --------------------------------- | ------------------------------------------------------ |
+| Real-time multiplayer sync        | Massive complexity, connectivity issues at game tables |
+| Game AI / automation              | Competes with official Handelabra digital app          |
+| Card image hosting (v1)           | Load from external source first, bundle in v2          |
+| Spirit synergy recommendations    | Requires community data integration                    |
+| Multiple languages (i18n)         | English only for v1                                    |
+| Board-relative presence placement | Track slots only, not island positions                 |
+| Growth option validation          | Trust opening authors, display-only                    |
+| Visual regression tests           | Functional E2E sufficient for v1                       |
 
 ## Traceability
 
 Phase assignments from ROADMAP.md (7 phases).
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| INFRA-01 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-02 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-03 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-04 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-05 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-06 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-07 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-08 | Phase 1: Foundation & Authentication | Pending |
-| INFRA-09 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-01 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-02 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-03 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-04 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-05 | Phase 1: Foundation & Authentication | Pending |
-| AUTH-06 | Phase 1: Foundation & Authentication | Pending |
-| SPRT-01 | Phase 2: Spirit Library | Pending |
-| SPRT-02 | Phase 2: Spirit Library | Pending |
-| SPRT-03 | Phase 2: Spirit Library | Pending |
-| SPRT-04 | Phase 2: Spirit Library | Pending |
-| SPRT-05 | Phase 2: Spirit Library | Pending |
-| DATA-01 | Phase 2: Spirit Library | Pending |
-| DATA-02 | Phase 2: Spirit Library | Pending |
-| DATA-03 | Phase 2: Spirit Library | Pending |
-| DATA-04 | Phase 2: Spirit Library | Pending |
-| DATA-05 | Phase 2: Spirit Library | Pending |
-| DTAIL-01 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-02 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-03 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-04 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-05 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-06 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-07 | Phase 3: Spirit Detail & Board | Pending |
-| DTAIL-08 | Phase 3: Spirit Detail & Board | Pending |
-| BOARD-01 | Phase 3: Spirit Detail & Board | Pending |
-| BOARD-02 | Phase 3: Spirit Detail & Board | Pending |
-| BOARD-03 | Phase 3: Spirit Detail & Board | Pending |
-| BOARD-04 | Phase 3: Spirit Detail & Board | Pending |
-| BOARD-05 | Phase 3: Spirit Detail & Board | Pending |
-| PWA-01 | Phase 4: PWA & Offline | Pending |
-| PWA-02 | Phase 4: PWA & Offline | Pending |
-| PWA-03 | Phase 4: PWA & Offline | Pending |
-| PWA-04 | Phase 4: PWA & Offline | Pending |
-| PWA-05 | Phase 4: PWA & Offline | Pending |
-| PWA-06 | Phase 4: PWA & Offline | Pending |
-| PWA-07 | Phase 4: PWA & Offline | Pending |
-| OPEN-01 | Phase 5: Opening Scrubber | Pending |
-| OPEN-02 | Phase 5: Opening Scrubber | Pending |
-| OPEN-03 | Phase 5: Opening Scrubber | Pending |
-| OPEN-04 | Phase 5: Opening Scrubber | Pending |
-| OPEN-05 | Phase 5: Opening Scrubber | Pending |
-| OPEN-06 | Phase 5: Opening Scrubber | Pending |
-| OPEN-07 | Phase 5: Opening Scrubber | Pending |
-| OPEN-08 | Phase 5: Opening Scrubber | Pending |
-| OPEN-09 | Phase 5: Opening Scrubber | Pending |
-| OPEN-10 | Phase 5: Opening Scrubber | Pending |
-| OPEN-11 | Phase 5: Opening Scrubber | Pending |
-| OPEN-12 | Phase 5: Opening Scrubber | Pending |
-| OPEN-13 | Phase 5: Opening Scrubber | Pending |
-| SRCH-01 | Phase 5: Opening Scrubber | Pending |
-| SRCH-02 | Phase 5: Opening Scrubber | Pending |
-| SRCH-03 | Phase 5: Opening Scrubber | Pending |
-| GAME-01 | Phase 6: User Data | Pending |
-| GAME-02 | Phase 6: User Data | Pending |
-| GAME-03 | Phase 6: User Data | Pending |
-| GAME-04 | Phase 6: User Data | Pending |
-| GAME-05 | Phase 6: User Data | Pending |
-| GAME-06 | Phase 6: User Data | Pending |
-| GAME-07 | Phase 6: User Data | Pending |
-| GAME-08 | Phase 6: User Data | Pending |
-| GAME-09 | Phase 6: User Data | Pending |
-| GAME-10 | Phase 6: User Data | Pending |
-| GAME-11 | Phase 6: User Data | Pending |
-| GAME-12 | Phase 6: User Data | Pending |
-| GAME-13 | Phase 6: User Data | Pending |
-| CSV-01 | Phase 6: User Data | Pending |
-| CSV-02 | Phase 6: User Data | Pending |
-| CSV-03 | Phase 6: User Data | Pending |
-| CSV-04 | Phase 6: User Data | Pending |
-| CSV-05 | Phase 6: User Data | Pending |
-| CSV-06 | Phase 6: User Data | Pending |
-| CSV-07 | Phase 6: User Data | Pending |
-| NOTE-01 | Phase 6: User Data | Pending |
-| NOTE-02 | Phase 6: User Data | Pending |
-| NOTE-03 | Phase 6: User Data | Pending |
-| NOTE-04 | Phase 6: User Data | Pending |
-| NOTE-05 | Phase 6: User Data | Pending |
-| NOTE-06 | Phase 6: User Data | Pending |
-| NOTE-07 | Phase 6: User Data | Pending |
-| NOTE-08 | Phase 6: User Data | Pending |
-| ADMN-01 | Phase 7: Admin Tools | Pending |
-| ADMN-02 | Phase 7: Admin Tools | Pending |
-| ADMN-03 | Phase 7: Admin Tools | Pending |
-| ADMN-04 | Phase 7: Admin Tools | Pending |
-| ADMN-05 | Phase 7: Admin Tools | Pending |
-| ADMN-06 | Phase 7: Admin Tools | Pending |
-| ADMN-07 | Phase 7: Admin Tools | Pending |
-| ADMN-08 | Phase 7: Admin Tools | Pending |
-| ADMN-09 | Phase 7: Admin Tools | Pending |
-| UI-01 | Cross-cutting (all phases) | Pending |
-| UI-02 | Cross-cutting (all phases) | Pending |
-| UI-03 | Cross-cutting (all phases) | Pending |
-| UI-04 | Cross-cutting (all phases) | Pending |
-| UI-05 | Cross-cutting (all phases) | Pending |
-| UI-06 | Cross-cutting (all phases) | Pending |
-| UI-07 | Cross-cutting (all phases) | Pending |
-| UI-08 | Cross-cutting (all phases) | Pending |
-| UI-09 | Cross-cutting (all phases) | Pending |
-| UI-10 | Cross-cutting (all phases) | Pending |
-| TEST-01 | Phase 2: Spirit Library | Pending |
-| TEST-02 | Phase 3: Spirit Detail & Board | Pending |
-| TEST-03 | Phase 3: Spirit Detail & Board | Pending |
-| TEST-04 | Phase 5: Opening Scrubber | Pending |
-| TEST-05 | Phase 6: User Data | Pending |
-| TEST-06 | Phase 6: User Data | Pending |
-| TEST-07 | Phase 4: PWA & Offline | Pending |
-| TEST-08 | Phase 4: PWA & Offline | Pending |
+| Requirement | Phase                                | Status  |
+| ----------- | ------------------------------------ | ------- |
+| INFRA-01    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-02    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-03    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-04    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-05    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-06    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-07    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-08    | Phase 1: Foundation & Authentication | Pending |
+| INFRA-09    | Phase 1: Foundation & Authentication | Pending |
+| AUTH-01     | Phase 1: Foundation & Authentication | Pending |
+| AUTH-02     | Phase 1: Foundation & Authentication | Pending |
+| AUTH-03     | Phase 1: Foundation & Authentication | Pending |
+| AUTH-04     | Phase 1: Foundation & Authentication | Pending |
+| AUTH-05     | Phase 1: Foundation & Authentication | Pending |
+| AUTH-06     | Phase 1: Foundation & Authentication | Pending |
+| SPRT-01     | Phase 2: Spirit Library              | Pending |
+| SPRT-02     | Phase 2: Spirit Library              | Pending |
+| SPRT-03     | Phase 2: Spirit Library              | Pending |
+| SPRT-04     | Phase 2: Spirit Library              | Pending |
+| SPRT-05     | Phase 2: Spirit Library              | Pending |
+| DATA-01     | Phase 2: Spirit Library              | Pending |
+| DATA-02     | Phase 2: Spirit Library              | Pending |
+| DATA-03     | Phase 2: Spirit Library              | Pending |
+| DATA-04     | Phase 2: Spirit Library              | Pending |
+| DATA-05     | Phase 2: Spirit Library              | Pending |
+| DTAIL-01    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-02    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-03    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-04    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-05    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-06    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-07    | Phase 3: Spirit Detail & Board       | Pending |
+| DTAIL-08    | Phase 3: Spirit Detail & Board       | Pending |
+| BOARD-01    | Phase 3: Spirit Detail & Board       | Pending |
+| BOARD-02    | Phase 3: Spirit Detail & Board       | Pending |
+| BOARD-03    | Phase 3: Spirit Detail & Board       | Pending |
+| BOARD-04    | Phase 3: Spirit Detail & Board       | Pending |
+| BOARD-05    | Phase 3: Spirit Detail & Board       | Pending |
+| PWA-01      | Phase 4: PWA & Offline               | Pending |
+| PWA-02      | Phase 4: PWA & Offline               | Pending |
+| PWA-03      | Phase 4: PWA & Offline               | Pending |
+| PWA-04      | Phase 4: PWA & Offline               | Pending |
+| PWA-05      | Phase 4: PWA & Offline               | Pending |
+| PWA-06      | Phase 4: PWA & Offline               | Pending |
+| PWA-07      | Phase 4: PWA & Offline               | Pending |
+| OPEN-01     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-02     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-03     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-04     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-05     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-06     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-07     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-08     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-09     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-10     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-11     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-12     | Phase 5: Opening Scrubber            | Pending |
+| OPEN-13     | Phase 5: Opening Scrubber            | Pending |
+| SRCH-01     | Phase 5: Opening Scrubber            | Pending |
+| SRCH-02     | Phase 5: Opening Scrubber            | Pending |
+| SRCH-03     | Phase 5: Opening Scrubber            | Pending |
+| GAME-01     | Phase 6: User Data                   | Pending |
+| GAME-02     | Phase 6: User Data                   | Pending |
+| GAME-03     | Phase 6: User Data                   | Pending |
+| GAME-04     | Phase 6: User Data                   | Pending |
+| GAME-05     | Phase 6: User Data                   | Pending |
+| GAME-06     | Phase 6: User Data                   | Pending |
+| GAME-07     | Phase 6: User Data                   | Pending |
+| GAME-08     | Phase 6: User Data                   | Pending |
+| GAME-09     | Phase 6: User Data                   | Pending |
+| GAME-10     | Phase 6: User Data                   | Pending |
+| GAME-11     | Phase 6: User Data                   | Pending |
+| GAME-12     | Phase 6: User Data                   | Pending |
+| GAME-13     | Phase 6: User Data                   | Pending |
+| CSV-01      | Phase 6: User Data                   | Pending |
+| CSV-02      | Phase 6: User Data                   | Pending |
+| CSV-03      | Phase 6: User Data                   | Pending |
+| CSV-04      | Phase 6: User Data                   | Pending |
+| CSV-05      | Phase 6: User Data                   | Pending |
+| CSV-06      | Phase 6: User Data                   | Pending |
+| CSV-07      | Phase 6: User Data                   | Pending |
+| NOTE-01     | Phase 6: User Data                   | Pending |
+| NOTE-02     | Phase 6: User Data                   | Pending |
+| NOTE-03     | Phase 6: User Data                   | Pending |
+| NOTE-04     | Phase 6: User Data                   | Pending |
+| NOTE-05     | Phase 6: User Data                   | Pending |
+| NOTE-06     | Phase 6: User Data                   | Pending |
+| NOTE-07     | Phase 6: User Data                   | Pending |
+| NOTE-08     | Phase 6: User Data                   | Pending |
+| ADMN-01     | Phase 7: Admin Tools                 | Pending |
+| ADMN-02     | Phase 7: Admin Tools                 | Pending |
+| ADMN-03     | Phase 7: Admin Tools                 | Pending |
+| ADMN-04     | Phase 7: Admin Tools                 | Pending |
+| ADMN-05     | Phase 7: Admin Tools                 | Pending |
+| ADMN-06     | Phase 7: Admin Tools                 | Pending |
+| ADMN-07     | Phase 7: Admin Tools                 | Pending |
+| ADMN-08     | Phase 7: Admin Tools                 | Pending |
+| ADMN-09     | Phase 7: Admin Tools                 | Pending |
+| UI-01       | Cross-cutting (all phases)           | Pending |
+| UI-02       | Cross-cutting (all phases)           | Pending |
+| UI-03       | Cross-cutting (all phases)           | Pending |
+| UI-04       | Cross-cutting (all phases)           | Pending |
+| UI-05       | Cross-cutting (all phases)           | Pending |
+| UI-06       | Cross-cutting (all phases)           | Pending |
+| UI-07       | Cross-cutting (all phases)           | Pending |
+| UI-08       | Cross-cutting (all phases)           | Pending |
+| UI-09       | Cross-cutting (all phases)           | Pending |
+| UI-10       | Cross-cutting (all phases)           | Pending |
+| TEST-01     | Phase 2: Spirit Library              | Pending |
+| TEST-02     | Phase 3: Spirit Detail & Board       | Pending |
+| TEST-03     | Phase 3: Spirit Detail & Board       | Pending |
+| TEST-04     | Phase 5: Opening Scrubber            | Pending |
+| TEST-05     | Phase 6: User Data                   | Pending |
+| TEST-06     | Phase 6: User Data                   | Pending |
+| TEST-07     | Phase 4: PWA & Offline               | Pending |
+| TEST-08     | Phase 4: PWA & Offline               | Pending |
 
 **Coverage:**
+
 - v1 requirements: 89 total
 - Mapped to phases: 89
 - Unmapped: 0
 
 ---
-*Requirements defined: 2025-01-24*
-*Last updated: 2025-01-25 after roadmap creation*
+
+_Requirements defined: 2025-01-24_ _Last updated: 2025-01-25 after roadmap
+creation_
