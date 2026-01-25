@@ -1,0 +1,147 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    # Only deploy after CI passes
+    needs: []
+
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+
+    steps:
+      - name: Validate required secrets and variables
+        run: |
+          missing=()
+
+          # Check secrets (we can only check if they're set, not their values)
+          if [ -z "$CONVEX_DEPLOY_KEY" ]; then missing+=("secret: CONVEX_DEPLOY_KEY"); fi
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then missing+=("secret: CLOUDFLARE_API_TOKEN"); fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then missing+=("secret: CLOUDFLARE_ACCOUNT_ID"); fi
+
+          # Check variables
+          if [ -z "$VITE_CONVEX_URL" ]; then missing+=("variable: VITE_CONVEX_URL"); fi
+          if [ -z "$VITE_CLERK_PUBLISHABLE_KEY" ]; then missing+=("variable: VITE_CLERK_PUBLISHABLE_KEY"); fi
+
+          # Validate format of variables
+          if [ -n "$VITE_CONVEX_URL" ] && ! echo "$VITE_CONVEX_URL" | grep -qE '^https://.*\.convex\.cloud$'; then
+            echo "::error::VITE_CONVEX_URL must be a valid Convex URL (https://*.convex.cloud)"
+            missing+=("variable: VITE_CONVEX_URL (invalid format)")
+          fi
+
+          if [ -n "$VITE_CLERK_PUBLISHABLE_KEY" ] && ! echo "$VITE_CLERK_PUBLISHABLE_KEY" | grep -qE '^pk_(test|live)_'; then
+            echo "::error::VITE_CLERK_PUBLISHABLE_KEY must start with pk_test_ or pk_live_"
+            missing+=("variable: VITE_CLERK_PUBLISHABLE_KEY (invalid format)")
+          fi
+
+          if [ ${#missing[@]} -ne 0 ]; then
+            echo "::error::Missing or invalid required configuration:"
+            printf '  - %s\n' "${missing[@]}"
+            echo ""
+            echo "Add missing secrets/variables in: Settings > Secrets and variables > Actions"
+            exit 1
+          fi
+
+          echo "All required secrets and variables are configured"
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy Convex functions
+        run: pnpm exec convex deploy --cmd-url-env-var-name VITE_CONVEX_URL
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+
+      - name: Build
+        run: pnpm build
+        env:
+          VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+      # Production deployment (push to main)
+      - name: Deploy to Production
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config dist/server/wrangler.json
+
+      # Preview deployment (pull requests)
+      - name: Deploy Preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config dist/server/wrangler.json --name the-dahan-codex-pr-${{ github.event.pull_request.number }}
+
+      - name: Comment Preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const previewUrl = `https://the-dahan-codex-pr-${prNumber}.<your-subdomain>.workers.dev`;
+            const body = `## Preview Deployed
+
+            ${previewUrl}
+
+            This preview will be updated on each push to this PR.`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+
+            const botComment = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Preview Deployed')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
