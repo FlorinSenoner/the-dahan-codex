@@ -21,7 +21,7 @@ priority.
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Authentication** - TanStack Start, Convex, Clerk,
+- [x] **Phase 1: Foundation & Authentication** - TanStack Start, Convex, Clerk,
       PWA generation, Cloudflare deployment validated
 - [ ] **Phase 2: Spirit Library** - Browsable spirit list with reference data
       and basic navigation
@@ -53,17 +53,18 @@ Criteria** (what must be TRUE):
 4. Public routes are accessible without login; authenticated routes redirect to
    sign-in
 5. Pre-commit hooks run Biome checks and CI runs typecheck, build, and
-   Playwright smoke test **Plans**: 6 plans
+   Playwright smoke test **Plans**: 7 plans
 
 Plans:
 
-- [ ] 01-01-PLAN.md — Project scaffolding with TanStack Start, mise, biome,
+- [x] 01-01-PLAN.md — Project scaffolding with TanStack Start, mise, biome,
       lefthook
-- [ ] 01-02-PLAN.md — Cloudflare Workers deployment configuration
-- [ ] 01-03-PLAN.md — Convex backend integration with TanStack Query
-- [ ] 01-04-PLAN.md — Clerk authentication with SSR token handling
-- [ ] 01-05-PLAN.md — Manual Workbox PWA with service worker generation
-- [ ] 01-06-PLAN.md — GitHub Actions CI/CD with Playwright tests
+- [x] 01-02-PLAN.md — Cloudflare Workers deployment configuration
+- [x] 01-03-PLAN.md — Convex backend integration with TanStack Query
+- [x] 01-04-PLAN.md — Clerk authentication with SSR token handling
+- [x] 01-05-PLAN.md — Manual Workbox PWA with service worker generation
+- [x] 01-06-PLAN.md — GitHub Actions CI/CD with Playwright tests
+- [x] 01-07-PLAN.md — Fix service worker registration timing (gap closure)
 
 ### Phase 2: Spirit Library
 
@@ -200,15 +201,15 @@ development:
 
 **Execution Order:** Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7
 
-| Phase                          | Plans Complete | Status      | Completed |
-| ------------------------------ | -------------- | ----------- | --------- |
-| 1. Foundation & Authentication | 0/6            | Not started | -         |
-| 2. Spirit Library              | 0/TBD          | Not started | -         |
-| 3. Spirit Detail & Board       | 0/TBD          | Not started | -         |
-| 4. PWA & Offline               | 0/TBD          | Not started | -         |
-| 5. Opening Scrubber            | 0/TBD          | Not started | -         |
-| 6. User Data                   | 0/TBD          | Not started | -         |
-| 7. Admin Tools                 | 0/TBD          | Not started | -         |
+| Phase                          | Plans Complete | Status   | Completed  |
+| ------------------------------ | -------------- | -------- | ---------- |
+| 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
+| 2. Spirit Library              | 0/TBD          | Pending  | -          |
+| 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
+| 4. PWA & Offline               | 0/TBD          | Pending  | -          |
+| 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
+| 6. User Data                   | 0/TBD          | Pending  | -          |
+| 7. Admin Tools                 | 0/TBD          | Pending  | -          |
 
 ---
 

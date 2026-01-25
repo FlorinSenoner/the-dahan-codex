@@ -229,23 +229,23 @@ Explicitly excluded. Documented to prevent scope creep.
 
 Phase assignments from ROADMAP.md (7 phases).
 
-| Requirement | Phase                                | Status  |
-| ----------- | ------------------------------------ | ------- |
-| INFRA-01    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-02    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-03    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-04    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-05    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-06    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-07    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-08    | Phase 1: Foundation & Authentication | Pending |
-| INFRA-09    | Phase 1: Foundation & Authentication | Pending |
-| AUTH-01     | Phase 1: Foundation & Authentication | Pending |
-| AUTH-02     | Phase 1: Foundation & Authentication | Pending |
-| AUTH-03     | Phase 1: Foundation & Authentication | Pending |
-| AUTH-04     | Phase 1: Foundation & Authentication | Pending |
-| AUTH-05     | Phase 1: Foundation & Authentication | Pending |
-| AUTH-06     | Phase 1: Foundation & Authentication | Pending |
+| Requirement | Phase                                | Status   |
+| ----------- | ------------------------------------ | -------- |
+| INFRA-01    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-02    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-03    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-04    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-05    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-06    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-07    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-08    | Phase 1: Foundation & Authentication | Complete |
+| INFRA-09    | Phase 1: Foundation & Authentication | Complete |
+| AUTH-01     | Phase 1: Foundation & Authentication | Complete |
+| AUTH-02     | Phase 1: Foundation & Authentication | Complete |
+| AUTH-03     | Phase 1: Foundation & Authentication | Complete |
+| AUTH-04     | Phase 1: Foundation & Authentication | Complete |
+| AUTH-05     | Phase 1: Foundation & Authentication | Complete |
+| AUTH-06     | Phase 1: Foundation & Authentication | Complete |
 | SPRT-01     | Phase 2: Spirit Library              | Pending |
 | SPRT-02     | Phase 2: Spirit Library              | Pending |
 | SPRT-03     | Phase 2: Spirit Library              | Pending |
