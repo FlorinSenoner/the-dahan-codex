@@ -1,5 +1,11 @@
 export function registerSW() {
   if (typeof window === "undefined") return;
+
+  // Skip service worker registration in development mode
+  if (import.meta.env.DEV) {
+    return;
+  }
+
   if (!("serviceWorker" in navigator)) {
     console.log("Service worker not supported");
     return;
