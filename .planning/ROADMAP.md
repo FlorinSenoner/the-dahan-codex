@@ -25,7 +25,7 @@ Decimal phases appear between their surrounding integers in numeric order.
       PWA generation, Cloudflare deployment validated
 - [x] **Phase 2: Spirit Library** - Browsable spirit list with reference data
       and basic navigation
-- [ ] **Phase 2.1: Spirit Library Polish** - UAT fixes: images, data, UI polish, SSR (INSERTED)
+- [x] **Phase 2.1: Spirit Library Polish** - UAT fixes: images, data, UI polish, SSR (INSERTED)
 - [ ] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
@@ -115,12 +115,12 @@ Plans:
 **Plans**: 6 plans
 
 Plans:
-- [ ] 02.1-01-PLAN.md — Schema + data: add Immense, complexityModifier, description
-- [ ] 02.1-02-PLAN.md — Scrape spirit images from wiki
-- [ ] 02.1-03-PLAN.md — Touch targets + cursor-pointer fixes
-- [ ] 02.1-04-PLAN.md — Color coding for complexity and elements
-- [ ] 02.1-05-PLAN.md — Fix view transition CSS
-- [ ] 02.1-06-PLAN.md — Aspect title display + description field
+- [x] 02.1-01-PLAN.md — Schema + data: add Immense, complexityModifier, description
+- [x] 02.1-02-PLAN.md — Scrape spirit images from wiki
+- [x] 02.1-03-PLAN.md — Touch targets + cursor-pointer fixes
+- [x] 02.1-04-PLAN.md — Color coding for complexity and elements
+- [x] 02.1-05-PLAN.md — Fix view transition CSS
+- [x] 02.1-06-PLAN.md — Aspect title display + description field
 
 ### Phase 3: Spirit Detail & Board
 
@@ -243,7 +243,7 @@ development:
 | ------------------------------ | -------------- | -------- | ---------- |
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
 | 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
-| 2.1 Spirit Library Polish      | 0/6            | Planned  | -          |
+| 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
 | 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
