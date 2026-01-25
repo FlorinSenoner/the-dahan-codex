@@ -6,3 +6,10 @@ dist/
 *.local
 .env
 .env.local
+
+
+mise.*.toml
+
+# Playwright
+playwright-report/
+test-results/
