@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { useQuery } from "convex/react";
 import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -42,10 +43,16 @@ function SpiritDetailPage() {
   const { aspect } = Route.useSearch();
   const navigate = useNavigate();
 
-  const spirit = useQuery(api.spirits.getSpiritBySlug, {
-    slug,
-    aspect,
-  });
+  // Client-only rendering to avoid SSR issues with Convex provider
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const spirit = useQuery(
+    api.spirits.getSpiritBySlug,
+    isClient ? { slug, aspect } : "skip",
+  );
 
   // Loading state
   if (spirit === undefined) {
