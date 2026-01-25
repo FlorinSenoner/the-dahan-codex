@@ -60,7 +60,7 @@ export function FilterChips({ filters }: FilterChipsProps) {
             type="button"
             onClick={() => removeFilter(type, value)}
             className={cn(
-              "inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-full text-sm font-medium cursor-pointer",
+              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer",
               "bg-primary/10 text-primary border border-primary/20",
               "hover:bg-primary/20 transition-colors",
             )}
@@ -73,7 +73,7 @@ export function FilterChips({ filters }: FilterChipsProps) {
       <button
         type="button"
         onClick={clearAll}
-        className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer min-h-[44px] px-2 ml-2 border-l border-border"
+        className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-1.5 px-2 ml-2 border-l border-border"
       >
         Clear all
       </button>
