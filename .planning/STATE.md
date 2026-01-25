@@ -5,35 +5,35 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 2 - Spirit Library
+spirit openings **Current focus:** Phase 3 - Spirit Content Pages
 
 ## Current Position
 
-Phase: 2 of 7 (Spirit Library)
-Plan: 5 of 6 in current phase (02-04, 02-05 complete; 02-06 remaining)
-Status: In progress
-Last activity: 2026-01-25 - Completed 02-04-PLAN.md (Filter and Search)
+Phase: 2 of 7 (Spirit Library) - COMPLETE
+Plan: 6 of 6 in current phase
+Status: Phase complete
+Last activity: 2026-01-25 - Completed 02-06-PLAN.md (Bottom Navigation & E2E Tests)
 
-Progress: [████████░░] ~48%
+Progress: [█████████░] ~50%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 13
-- Average duration: 7.8 min
-- Total execution time: 1.62 hours
+- Total plans completed: 14
+- Average duration: 7.5 min
+- Total execution time: 1.68 hours
 
 **By Phase:**
 
 | Phase | Plans | Total  | Avg/Plan |
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
-| 02    | 6     | 16 min | 2.7 min  |
+| 02    | 7     | 20 min | 2.9 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 2 min, 2 min, 2 min, 2 min
+- Last 5 plans: 2 min, 2 min, 2 min, 2 min, 4 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -77,6 +77,8 @@ affecting current work:
 - Aspect URLs: /spirits/{base-slug}?aspect={aspect-name}
 - Filter bottom sheet: Drawer with pending state + Apply button
 - URL search params for filter state (shareable filtered views)
+- SSR-safe Convex queries: useQuery with "skip" param when isClient is false
+- aria-label on icon-only buttons for accessibility and E2E testing
 
 ### Pending Todos
 
@@ -127,19 +129,31 @@ Phase 1 (Foundation & Authentication) is now complete with:
 - Playwright smoke tests
 - UAT gaps addressed (01-07: SW registration timing fix)
 
+## Phase 2 Summary
+
+Phase 2 (Spirit Library) is now complete with:
+
+- Tailwind v4 + shadcn/ui design system with Spirit Island theme
+- Convex spirit schema with base spirits and aspects
+- Spirit list UI with filtering (complexity, elements) and URL persistence
+- Spirit detail page with view transitions
+- Bottom navigation (Spirits active, future tabs disabled)
+- Credits page with legal disclaimer and attribution
+- 5 E2E tests covering spirit library functionality
+
 ## Phase 2 Progress
 
-Phase 2 (Spirit Library) in progress:
+Phase 2 (Spirit Library) complete:
 
 - [x] 02-01: Tailwind + shadcn/ui Setup (design system foundation)
 - [x] 02-02: Spirit Schema and Seed Data
 - [x] 02-03: Spirit List UI
 - [x] 02-04: Filter and Search
 - [x] 02-05: Spirit Detail & View Transitions
-- [ ] 02-06: Bottom Navigation
+- [x] 02-06: Bottom Navigation & E2E Tests
 
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02-04-PLAN.md (Filter and Search)
+Stopped at: Completed 02-06-PLAN.md (Bottom Navigation & E2E Tests)
 Resume file: None
