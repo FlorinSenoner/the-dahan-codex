@@ -73,16 +73,21 @@ Plans:
 SPRT-05, DATA-01, DATA-02, DATA-03, DATA-04, DATA-05 **Success Criteria** (what
 must be TRUE):
 
-1. User sees a grid of spirit cards showing name, image, and complexity label
-2. Tapping a spirit card navigates to spirit detail page with shareable URL
+1. User sees a list of spirit rows showing name, image, and complexity label
+2. Tapping a spirit row navigates to spirit detail page with shareable URL
 3. River Surges in Sunlight and Lightning's Swift Strike are fully populated
    with all aspects
 4. Credits/attribution page is accessible with disclaimer and external source
-   links **Plans**: TBD
+   links **Plans**: 6 plans
 
 Plans:
 
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Design system setup (Tailwind v4 + shadcn/ui + Spirit Island theme)
+- [ ] 02-02-PLAN.md — Convex spirit schema and seed data
+- [ ] 02-03-PLAN.md — Spirit list route and components
+- [ ] 02-04-PLAN.md — Filter system with bottom sheet
+- [ ] 02-05-PLAN.md — Spirit detail route with View Transitions
+- [ ] 02-06-PLAN.md — Bottom navigation, credits page, and E2E tests
 
 ### Phase 3: Spirit Detail & Board
 
@@ -204,7 +209,7 @@ development:
 | Phase                          | Plans Complete | Status   | Completed  |
 | ------------------------------ | -------------- | -------- | ---------- |
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
-| 2. Spirit Library              | 0/TBD          | Pending  | -          |
+| 2. Spirit Library              | 0/6            | Planned  | -          |
 | 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
