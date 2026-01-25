@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 2.1 - Spirit Library Polish (UAT fixes)
 ## Current Position
 
 Phase: 2.1 (Spirit Library Polish) - IN PROGRESS
-Plan: 3 of 6 in current phase
+Plan: 6 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 02.1-03-PLAN.md (Filter Fixes)
+Last activity: 2026-01-25 - Completed 02.1-06-PLAN.md (Aspect Title & Description)
 
-Progress: [█████████░] ~60%
+Progress: [█████████░] ~85%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 16
-- Average duration: 7.9 min
-- Total execution time: 2.0 hours
+- Total plans completed: 17
+- Average duration: 7.5 min
+- Total execution time: 2.1 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [█████████░] ~60%
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
-| 02.1  | 2     | 20 min | 10.0 min |
+| 02.1  | 3     | 21 min | 7.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 2 min, 4 min, 4 min, 16 min
+- Last 5 plans: 2 min, 2 min, 4 min, 16 min, 1 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -84,6 +84,7 @@ affecting current work:
 - reseedSpirits mutation for refreshing database data
 - Downloaded images as PNG from wiki instead of converting to WebP
 - Spirit images stored locally in public/spirits/
+- Aspect title display: aspect name as h1, "Aspect of [Base]" as subtitle
 
 ### Pending Todos
 
@@ -170,10 +171,10 @@ Phase 2.1 (Spirit Library Polish) in progress:
 - [x] 02.1-03: Filter Fixes
 - [ ] 02.1-04: Accessibility and Polish
 - [x] 02.1-05: View Transitions
-- [ ] 02.1-06: E2E Tests
+- [x] 02.1-06: Aspect Title & Description
 
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02.1-03-PLAN.md (Filter Fixes)
-Resume file: .planning/phases/02.1-spirit-library-polish/02.1-03-SUMMARY.md
+Stopped at: Completed 02.1-06-PLAN.md (Aspect Title & Description)
+Resume file: .planning/phases/02.1-spirit-library-polish/02.1-06-SUMMARY.md
