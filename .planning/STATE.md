@@ -10,7 +10,7 @@ spirit openings **Current focus:** Phase 1 Complete - Ready for Phase 2
 ## Current Position
 
 Phase: 1 of 7 (Foundation & Authentication) - COMPLETE Plan: 7 of 7 in current
-phase (6 original + 1 gap-closure) Status: Phase 1 complete Last activity: 2026-01-25 - Completed 01-07-PLAN.md (SW registration fix)
+phase (6 original + 1 gap-closure) Status: Phase 1 complete Last activity: 2026-01-25 - Completed quick-006 (README.md and CLAUDE.md)
 
 Progress: [███████░░░] ~32%
 
@@ -79,6 +79,7 @@ None yet.
 | 003 | Wire Clerk routing env vars | 2026-01-25 | b00528b | [003-wire-clerk-routing-env-vars](./quick/003-wire-clerk-routing-env-vars/) |
 | 004 | Improve deployment workflow | 2026-01-25 | 23c1c3e | [004-improve-deployment-workflow](./quick/004-improve-deployment-workflow/) |
 | 005 | Fix Clerk sign-in e2e test selector | 2026-01-25 | 8a054ec | [005-fix-clerk-sign-in-e2e-test-selector](./quick/005-fix-clerk-sign-in-e2e-test-selector/) |
+| 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
 
 ### Blockers/Concerns
 
@@ -116,5 +117,5 @@ Phase 1 (Foundation & Authentication) is now complete with:
 
 ## Session Continuity
 
-Last session: 2026-01-25 Stopped at: Completed quick-005 (Fix Clerk sign-in e2e test selector)
+Last session: 2026-01-25 Stopped at: Completed quick-006 (Create README.md and update CLAUDE.md)
 Resume file: None
