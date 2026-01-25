@@ -10,6 +10,8 @@
 
 import type * as health from "../health.js";
 import type * as lib_auth from "../lib/auth.js";
+import type * as seed from "../seed.js";
+import type * as spirits from "../spirits.js";
 
 import type {
   ApiFromModules,
@@ -20,6 +22,8 @@ import type {
 declare const fullApi: ApiFromModules<{
   health: typeof health;
   "lib/auth": typeof lib_auth;
+  seed: typeof seed;
+  spirits: typeof spirits;
 }>;
 
 /**
