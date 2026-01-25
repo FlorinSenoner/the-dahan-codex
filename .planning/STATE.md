@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 2.1 - Spirit Library Polish (UAT fixes)
+spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 2.1 (Spirit Library Polish) - IN PROGRESS
-Plan: 4 of 6 in current phase
-Status: In progress
-Last activity: 2026-01-25 - Completed 02.1-04-PLAN.md (Accessibility and Polish)
+Phase: 2.1 (Spirit Library Polish) - COMPLETE
+Plan: 6 of 6 in current phase
+Status: Phase verified and complete
+Last activity: 2026-01-25 - Completed Phase 2.1 execution (6/6 must-haves verified)
 
-Progress: [█████████░] ~90%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 18
-- Average duration: 7.2 min
-- Total execution time: 2.1 hours
+- Total plans completed: 20
+- Average duration: 6.8 min
+- Total execution time: 2.3 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [█████████░] ~90%
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
-| 02.1  | 4     | 24 min | 6.0 min  |
+| 02.1  | 6     | 28 min | 4.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 4 min, 16 min, 1 min, 3 min
+- Last 5 plans: 16 min, 1 min, 3 min, 3 min, 1 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -164,9 +164,24 @@ Phase 2 (Spirit Library) complete:
 - [x] 02-05: Spirit Detail & View Transitions
 - [x] 02-06: Bottom Navigation & E2E Tests
 
+## Phase 2.1 Summary
+
+Phase 2.1 (Spirit Library Polish) is now complete with:
+
+- complexityModifier and description fields added to spirit schema
+- Immense aspect added for Lightning's Swift Strike (all 7 aspects now have modifiers)
+- Spirit images scraped from wiki and stored locally (River, Lightning)
+- 44px touch targets and cursor-pointer on all interactive elements
+- Color-coded complexity modifiers (harder=fire red, easier=plant green)
+- Element-specific colors in filter pills when selected
+- View transition CSS fixed with correct ::view-transition-group(*) syntax
+- Aspect title display cleaned up (aspect name as h1, "Aspect of [Base]" subtitle)
+- Description field displayed on spirit detail pages
+- SSR skip pattern verified working
+
 ## Phase 2.1 Progress
 
-Phase 2.1 (Spirit Library Polish) in progress:
+Phase 2.1 (Spirit Library Polish) complete:
 
 - [x] 02.1-01: Schema and Seed Data Update
 - [x] 02.1-02: Spirit Images
@@ -178,5 +193,5 @@ Phase 2.1 (Spirit Library Polish) in progress:
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02.1-04-PLAN.md (Accessibility and Polish)
-Resume file: .planning/phases/02.1-spirit-library-polish/02.1-04-SUMMARY.md
+Stopped at: Phase 2.1 complete, ready for Phase 3
+Resume file: .planning/phases/02.1-spirit-library-polish/02.1-VERIFICATION.md
