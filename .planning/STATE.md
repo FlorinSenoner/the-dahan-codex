@@ -5,32 +5,32 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** The Opening Scrubber - graphical, scrubbable visualization of spirit openings
-**Current focus:** Phase 1 - Foundation & Authentication
+**Current focus:** Phase 1 Complete - Ready for Phase 2
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation & Authentication)
-Plan: 5 of 6 in current phase
-Status: In progress
-Last activity: 2026-01-25 - Completed 01-05-PLAN.md (PWA Service Worker)
+Phase: 1 of 7 (Foundation & Authentication) - COMPLETE
+Plan: 6 of 6 in current phase
+Status: Phase 1 complete
+Last activity: 2026-01-25 - Completed 01-06-PLAN.md (CI/CD Pipeline)
 
-Progress: [█████░░░░░] ~24%
+Progress: [██████░░░░] ~29%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 14 min
-- Total execution time: 1.17 hours
+- Total plans completed: 6
+- Average duration: 13.3 min
+- Total execution time: 1.33 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 5 | 70 min | 14 min |
+| 01 | 6 | 80 min | 13.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 45 min, 5 min, 5 min, 7 min, 8 min
+- Last 5 plans: 5 min, 5 min, 7 min, 8 min, 10 min
 - Trend: Stable (fast execution)
 
 *Updated after each plan completion*
@@ -58,6 +58,8 @@ Recent decisions affecting current work:
 - Manual Workbox generation via scripts/generate-sw.ts (vite-plugin-pwa incompatible with Vite 7)
 - skipWaiting: false for service worker updates (prevents broken state during user sessions)
 - Service worker registration in root layout useEffect
+- Playwright with Chromium-only for smoke tests (faster CI)
+- Deploy job gated on CI success and main branch push
 
 ### Pending Todos
 
@@ -66,25 +68,30 @@ None yet.
 ### Blockers/Concerns
 
 **From Research:**
-- PWA service worker generation requires manual Workbox (vite-plugin-pwa incompatible) - IMPLEMENTED
-- Cloudflare Workers needs pinned TanStack Start version (1.140.5) - CONFIRMED WORKING
-- SSR auth tokens need explicit handling in route beforeLoad - IMPLEMENTED
 - iOS PWA testing needed (cache purging behavior)
 
 **From Plan 01-05:**
 - Placeholder icons need replacement with branded artwork (low priority)
 
-**From Plan 01-01:**
-- Vite dev server port is 5173, not 3000 (may need to configure for consistency)
-
-**From Plan 01-02:**
-- Wrangler preview runs on port 8787 (Cloudflare default)
+**From Plan 01-06:**
+- GitHub Secrets must be configured for CI to pass (VITE_CONVEX_URL, VITE_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)
 
 **From Plan 01-04:**
 - User must configure Clerk and set CLERK_JWT_ISSUER_DOMAIN in Convex dashboard
 
+## Phase 1 Summary
+
+Phase 1 (Foundation & Authentication) is now complete with:
+- TanStack Start + Vite 7 + React 19 application
+- Convex backend with health check query
+- Clerk authentication with protected routes
+- PWA with Workbox service worker
+- GitHub Actions CI/CD with Cloudflare Workers deployment
+- Pre-commit hooks (biome lint/format, typecheck)
+- Playwright smoke tests
+
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 01-05-PLAN.md
+Stopped at: Completed 01-06-PLAN.md (Phase 1 complete)
 Resume file: None
