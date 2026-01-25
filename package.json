@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "start": "vite preview",
+    "preview": "wrangler dev --config dist/server/wrangler.json",
+    "deploy": "pnpm build && wrangler deploy --config dist/server/wrangler.json",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
