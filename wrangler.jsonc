@@ -1,10 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "the-dahan-codex",
-  "compatibility_date": "2025-01-01",
+  "compatibility_date": "2026-01-20",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
   "observability": {
     "enabled": true
+  },
+  // Environment-specific settings
+  "vars": {
+    "ENVIRONMENT": "production"
   }
 }
