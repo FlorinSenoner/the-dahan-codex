@@ -9,28 +9,28 @@ spirit openings **Current focus:** Phase 1 Complete - Ready for Phase 2
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation & Authentication) - COMPLETE Plan: 6 of 6 in current
-phase Status: Phase 1 complete Last activity: 2026-01-25 - Completed quick task 004: improve deployment workflow
+Phase: 1 of 7 (Foundation & Authentication) - COMPLETE Plan: 7 of 7 in current
+phase (6 original + 1 gap-closure) Status: Phase 1 complete Last activity: 2026-01-25 - Completed 01-07-PLAN.md (SW registration fix)
 
-Progress: [██████░░░░] ~29%
+Progress: [███████░░░] ~32%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
-- Average duration: 13.3 min
-- Total execution time: 1.33 hours
+- Total plans completed: 7
+- Average duration: 11.6 min
+- Total execution time: 1.35 hours
 
 **By Phase:**
 
 | Phase | Plans | Total  | Avg/Plan |
 | ----- | ----- | ------ | -------- |
-| 01    | 6     | 80 min | 13.3 min |
+| 01    | 7     | 81 min | 11.6 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 5 min, 7 min, 8 min, 10 min
+- Last 5 plans: 5 min, 7 min, 8 min, 10 min, 1 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -62,6 +62,7 @@ affecting current work:
 - skipWaiting: false for service worker updates (prevents broken state during
   user sessions)
 - Service worker registration in root layout useEffect
+- Check document.readyState before adding load listeners (hydration-safe pattern)
 - Playwright with Chromium-only for smoke tests (faster CI)
 - Deploy job gated on CI success and main branch push
 
@@ -106,12 +107,13 @@ Phase 1 (Foundation & Authentication) is now complete with:
 - TanStack Start + Vite 7 + React 19 application
 - Convex backend with health check query
 - Clerk authentication with protected routes
-- PWA with Workbox service worker
+- PWA with Workbox service worker (hydration-safe registration)
 - GitHub Actions CI/CD with Cloudflare Workers deployment
 - Pre-commit hooks (biome lint/format, typecheck)
 - Playwright smoke tests
+- UAT gaps addressed (01-07: SW registration timing fix)
 
 ## Session Continuity
 
-Last session: 2026-01-25 Stopped at: Completed quick task 004: improve deployment workflow
+Last session: 2026-01-25 Stopped at: Completed 01-07-PLAN.md (SW registration timing fix)
 Resume file: None
