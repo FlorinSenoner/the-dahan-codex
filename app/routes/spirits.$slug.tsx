@@ -162,7 +162,7 @@ function SpiritDetailPage() {
       <main className="p-4">
         {/* Hero image */}
         <div className="relative w-full aspect-square max-w-[300px] mx-auto mb-6">
-          {imgError ? (
+          {imgError || !spirit.imageUrl ? (
             <div
               className="w-full h-full rounded-xl flex items-center justify-center text-muted-foreground"
               style={{
