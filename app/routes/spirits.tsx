@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { FilterChips } from "@/components/spirits/filter-chips";
+import { FilterSheet } from "@/components/spirits/filter-sheet";
 import { SpiritList } from "@/components/spirits/spirit-list";
 
 // Filter schema for URL search params (prepared for Plan 04)
@@ -18,6 +20,10 @@ export const Route = createFileRoute("/spirits")({
 function SpiritsPage() {
   const filters = Route.useSearch();
 
+  // Calculate active filter count
+  const activeFilterCount =
+    (filters.complexity?.length || 0) + (filters.elements?.length || 0);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -26,9 +32,18 @@ function SpiritsPage() {
           <h1 className="font-headline text-2xl font-semibold text-foreground">
             Spirits
           </h1>
-          {/* Filter button placeholder - will be added in Plan 04 */}
+          <FilterSheet
+            currentFilters={{
+              complexity: filters.complexity,
+              elements: filters.elements,
+            }}
+            activeCount={activeFilterCount}
+          />
         </div>
       </header>
+
+      {/* Active filter chips */}
+      <FilterChips filters={filters} />
 
       {/* Spirit list */}
       <main className="pb-20">
