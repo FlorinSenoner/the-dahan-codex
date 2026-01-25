@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 2.1 - Spirit Library Polish (UAT fixes)
 ## Current Position
 
 Phase: 2.1 (Spirit Library Polish) - IN PROGRESS
-Plan: 1 of 6 in current phase
+Plan: 2 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 02.1-01-PLAN.md (Schema and Seed Data Update)
+Last activity: 2026-01-25 - Completed 02.1-02-PLAN.md (Spirit Images)
 
-Progress: [█████████░] ~52%
+Progress: [█████████░] ~55%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 15
-- Average duration: 7.3 min
-- Total execution time: 1.75 hours
+- Total plans completed: 16
+- Average duration: 7.9 min
+- Total execution time: 2.0 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [█████████░] ~52%
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
-| 02.1  | 1     | 4 min  | 4.0 min  |
+| 02.1  | 2     | 20 min | 10.0 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 2 min, 2 min, 4 min, 4 min
+- Last 5 plans: 2 min, 2 min, 4 min, 4 min, 16 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -82,6 +82,8 @@ affecting current work:
 - aria-label on icon-only buttons for accessibility and E2E testing
 - Aspects inherit base complexity (Low) - complexityModifier is display-only
 - reseedSpirits mutation for refreshing database data
+- Downloaded images as PNG from wiki instead of converting to WebP
+- Spirit images stored locally in public/spirits/
 
 ### Pending Todos
 
@@ -164,7 +166,7 @@ Phase 2 (Spirit Library) complete:
 Phase 2.1 (Spirit Library Polish) in progress:
 
 - [x] 02.1-01: Schema and Seed Data Update
-- [ ] 02.1-02: Aspect Details UI
+- [x] 02.1-02: Spirit Images
 - [ ] 02.1-03: Filter Fixes
 - [ ] 02.1-04: Accessibility and Polish
 - [ ] 02.1-05: View Transitions
@@ -173,5 +175,5 @@ Phase 2.1 (Spirit Library Polish) in progress:
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02.1-01-PLAN.md (Schema and Seed Data Update)
-Resume file: .planning/phases/02.1-spirit-library-polish/02.1-01-SUMMARY.md
+Stopped at: Completed 02.1-02-PLAN.md (Spirit Images)
+Resume file: .planning/phases/02.1-spirit-library-polish/02.1-02-SUMMARY.md
