@@ -25,6 +25,7 @@ Decimal phases appear between their surrounding integers in numeric order.
       PWA generation, Cloudflare deployment validated
 - [x] **Phase 2: Spirit Library** - Browsable spirit list with reference data
       and basic navigation
+- [ ] **Phase 2.1: Spirit Library Polish** - UAT fixes: images, data, UI polish, SSR (INSERTED)
 - [ ] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
@@ -88,6 +89,38 @@ Plans:
 - [x] 02-04-PLAN.md — Filter system with bottom sheet
 - [x] 02-05-PLAN.md — Spirit detail route with View Transitions
 - [x] 02-06-PLAN.md — Bottom navigation, credits page, and E2E tests
+
+### Phase 2.1: Spirit Library Polish (INSERTED)
+
+**Goal**: Address UAT issues from Phase 2 - fix data gaps, improve UI polish, resolve SSR errors
+**Depends on**: Phase 2 **Requirements**: From UAT gaps **Success Criteria** (what must be TRUE):
+
+1. Spirit images load correctly (scraped from Spirit Island wiki)
+2. All aspects present including Immense for Lightning's Swift Strike
+3. Aspect complexity modifiers displayed (up/down/equal arrows with color coding)
+4. Touch targets meet 44px minimum, pointer cursors on interactive elements
+5. SSR errors resolved (Convex queries skip during server render)
+6. View transitions animate between list and detail pages
+
+**UAT Gaps to Address:**
+- Images: Scrape from wiki (spiritislandwiki.com)
+- Data: Add Immense aspect, fix aspect complexity values
+- UI: Complexity color coding, element colors in filters, touch targets, pointer cursors
+- Layout: Fix Clear All button shift, filter chip sizing
+- SSR: Fix Convex useQuery outside provider errors
+- Transitions: Enable view transitions for title and image
+- Content: Add longer description field for spirit theme/playstyle
+- Aspect title: Show just aspect name, not "Spirit (Aspect)"
+
+**Plans**: 6 plans
+
+Plans:
+- [ ] 02.1-01-PLAN.md — Schema + data: add Immense, complexityModifier, description
+- [ ] 02.1-02-PLAN.md — Scrape spirit images from wiki
+- [ ] 02.1-03-PLAN.md — Touch targets + cursor-pointer fixes
+- [ ] 02.1-04-PLAN.md — Color coding for complexity and elements
+- [ ] 02.1-05-PLAN.md — Fix view transition CSS
+- [ ] 02.1-06-PLAN.md — Aspect title display + description field
 
 ### Phase 3: Spirit Detail & Board
 
@@ -204,13 +237,14 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 4 > 5 > 6 > 7
 
 | Phase                          | Plans Complete | Status   | Completed  |
 | ------------------------------ | -------------- | -------- | ---------- |
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
 | 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
-| 3. Spirit Detail & Board       | 0/TBD          | Planned  | -          |
+| 2.1 Spirit Library Polish      | 0/6            | Planned  | -          |
+| 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
