@@ -1,0 +1,8 @@
+[tools]
+node = "22"
+
+[env]
+_.path = ["{{config_root}}/node_modules/.bin"]
+
+[settings]
+experimental = true
