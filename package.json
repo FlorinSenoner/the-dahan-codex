@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && pnpm generate-sw",
+    "generate-sw": "tsx scripts/generate-sw.ts",
     "preview": "wrangler dev --config dist/server/wrangler.json",
     "deploy": "pnpm build && wrangler deploy --config dist/server/wrangler.json",
     "typecheck": "tsc --noEmit",
