@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 01-foundation-authentication
 source: [01-01-SUMMARY.md, 01-02-SUMMARY.md, 01-03-SUMMARY.md, 01-04-SUMMARY.md, 01-05-SUMMARY.md, 01-06-SUMMARY.md]
 started: 2026-01-25T14:15:00Z
@@ -71,17 +71,26 @@ skipped: 0
   reason: "User reported: there is no registered. sw.js not in dev mode and not in the deployed version https://the-dahan-codex.suppo-jo.workers.dev/"
   severity: major
   test: 9
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Race condition: registerSW() called from useEffect adds window.load listener, but load event has already fired by the time React hydrates"
+  artifacts:
+    - path: "app/lib/sw-register.ts"
+      issue: "Uses window.addEventListener('load', ...) which misses the event when called after hydration"
+    - path: "app/routes/__root.tsx"
+      issue: "Calls registerSW() in useEffect which runs after load event"
+  missing:
+    - "Check document.readyState before adding load listener"
+    - "If already loaded, register immediately instead of waiting"
+  debug_session: ".planning/debug/service-worker-not-registering.md"
 
 - truth: "Preview server should serve app with service worker active"
   status: failed
   reason: "User reported: the app fully works, but there is no service worker"
   severity: major
   test: 10
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Same as test 9 - race condition in registration timing"
+  artifacts:
+    - path: "app/lib/sw-register.ts"
+      issue: "Uses window.addEventListener('load', ...) which misses the event when called after hydration"
+  missing:
+    - "Fix registration timing in sw-register.ts"
+  debug_session: ".planning/debug/service-worker-not-registering.md"
