@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { Doc } from "convex/_generated/dataModel";
+import { ArrowDown, ArrowUp, Equal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,20 @@ const complexityColors: Record<string, string> = {
   Moderate: "bg-element-sun/20 text-element-sun border-element-sun/30",
   High: "bg-element-fire/20 text-element-fire border-element-fire/30",
   "Very High": "bg-destructive/20 text-destructive border-destructive/30",
+};
+
+// Map complexity modifier to icon and color
+const modifierConfig: Record<
+  string,
+  { icon: typeof ArrowUp; color: string; label: string }
+> = {
+  easier: { icon: ArrowDown, color: "text-element-plant", label: "Easier" },
+  same: {
+    icon: Equal,
+    color: "text-muted-foreground",
+    label: "Same complexity",
+  },
+  harder: { icon: ArrowUp, color: "text-element-fire", label: "Harder" },
 };
 
 export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
@@ -80,8 +95,30 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
           {spirit.summary}
         </p>
 
-        {/* Complexity badge - only show for base spirits */}
-        {!isAspect && (
+        {/* Complexity badge for base spirits, modifier for aspects */}
+        {isAspect && spirit.complexityModifier ? (
+          <div
+            className="mt-2 flex items-center gap-1"
+            title={modifierConfig[spirit.complexityModifier]?.label}
+          >
+            {(() => {
+              const config = modifierConfig[spirit.complexityModifier];
+              if (!config) return null;
+              const Icon = config.icon;
+              return (
+                <span
+                  className={cn(
+                    "flex items-center gap-1 text-xs",
+                    config.color,
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                  <span className="sr-only">{config.label}</span>
+                </span>
+              );
+            })()}
+          </div>
+        ) : !isAspect ? (
           <Badge
             variant="outline"
             className={cn(
@@ -91,7 +128,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
           >
             {spirit.complexity}
           </Badge>
-        )}
+        ) : null}
       </div>
     </Link>
   );
