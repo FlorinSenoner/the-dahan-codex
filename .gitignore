@@ -2,6 +2,7 @@ node_modules/
 dist/
 .vinxi/
 .output/
+.wrangler/
 *.local
 .env
 .env.local
