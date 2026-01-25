@@ -116,10 +116,10 @@ function SpiritDetailPage() {
   }
 
   // Determine if showing an aspect
+  // For aspects, show just the aspect name as the main title
+  // The subtitle will show "Aspect of [Base Spirit Name]"
   const isAspect = !!spirit.aspectName;
-  const displayName = isAspect
-    ? `${spirit.name} (${spirit.aspectName})`
-    : spirit.name;
+  const displayName = isAspect ? spirit.aspectName : spirit.name;
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -170,7 +170,7 @@ function SpiritDetailPage() {
         {/* Aspect indicator */}
         {isAspect && (
           <p className="text-center text-muted-foreground text-sm mb-4">
-            Aspect of {spirit.name.replace(` (${spirit.aspectName})`, "")}
+            Aspect of {spirit.name}
           </p>
         )}
 
