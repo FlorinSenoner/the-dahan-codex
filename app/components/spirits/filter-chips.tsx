@@ -53,25 +53,27 @@ export function FilterChips({ filters }: FilterChipsProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-border bg-muted/20">
-      {allFilters.map(({ type, value }) => (
-        <button
-          key={`${type}-${value}`}
-          type="button"
-          onClick={() => removeFilter(type, value)}
-          className={cn(
-            "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium",
-            "bg-primary/10 text-primary border border-primary/20",
-            "hover:bg-primary/20 transition-colors",
-          )}
-        >
-          {value}
-          <X className="h-3 w-3" />
-        </button>
-      ))}
+      <div className="flex flex-wrap items-center gap-2 flex-1">
+        {allFilters.map(({ type, value }) => (
+          <button
+            key={`${type}-${value}`}
+            type="button"
+            onClick={() => removeFilter(type, value)}
+            className={cn(
+              "inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-full text-sm font-medium cursor-pointer",
+              "bg-primary/10 text-primary border border-primary/20",
+              "hover:bg-primary/20 transition-colors",
+            )}
+          >
+            {value}
+            <X className="h-3 w-3" />
+          </button>
+        ))}
+      </div>
       <button
         type="button"
         onClick={clearAll}
-        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+        className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer min-h-[44px] px-2 ml-2 border-l border-border"
       >
         Clear all
       </button>
