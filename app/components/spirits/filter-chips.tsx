@@ -10,7 +10,7 @@ interface FilterChipsProps {
 }
 
 export function FilterChips({ filters }: FilterChipsProps) {
-  const navigate = useNavigate({ from: "/spirits" });
+  const navigate = useNavigate({ from: "/spirits/" });
 
   const allFilters: Array<{ type: "complexity" | "elements"; value: string }> =
     [
