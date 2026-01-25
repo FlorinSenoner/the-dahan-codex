@@ -150,6 +150,11 @@
   }
 }
 
+/* Safe area for iOS bottom nav */
+.h-safe-area-inset-bottom {
+  height: env(safe-area-inset-bottom, 0px);
+}
+
 /* Base layer reset */
 @layer base {
   * {

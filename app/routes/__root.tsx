@@ -8,6 +8,7 @@ import {
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+import { BottomNav } from "../components/layout/bottom-nav";
 import { convex } from "../lib/convex";
 import { registerSW } from "../lib/sw-register";
 import "../styles/globals.css";
@@ -66,6 +67,7 @@ function RootLayout() {
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <Outlet />
+        <BottomNav />
       </ConvexProviderWithClerk>
     </ClerkProvider>
   );
