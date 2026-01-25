@@ -33,10 +33,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. App deploys to Cloudflare Workers and serves a page with real-time Convex connection
   4. Public routes are accessible without login; authenticated routes redirect to sign-in
   5. Pre-commit hooks run Biome checks and CI runs typecheck, build, and Playwright smoke test
-**Plans**: TBD
+**Plans**: 6 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Project scaffolding with TanStack Start, mise, biome, lefthook
+- [ ] 01-02-PLAN.md — Cloudflare Workers deployment configuration
+- [ ] 01-03-PLAN.md — Convex backend integration with TanStack Query
+- [ ] 01-04-PLAN.md — Clerk authentication with SSR token handling
+- [ ] 01-05-PLAN.md — Manual Workbox PWA with service worker generation
+- [ ] 01-06-PLAN.md — GitHub Actions CI/CD with Playwright tests
 
 ### Phase 2: Spirit Library
 
@@ -154,7 +159,7 @@ Phases execute in numeric order: 1 > 2 > 3 > 4 > 5 > 6 > 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Authentication | 0/TBD | Not started | - |
+| 1. Foundation & Authentication | 0/6 | Not started | - |
 | 2. Spirit Library | 0/TBD | Not started | - |
 | 3. Spirit Detail & Board | 0/TBD | Not started | - |
 | 4. PWA & Offline | 0/TBD | Not started | - |
