@@ -26,7 +26,7 @@ export default defineSchema({
       v.literal("Very High"),
     ),
     summary: v.string(), // 1-line playstyle description
-    imageUrl: v.string(), // Path to spirit panel art
+    imageUrl: v.optional(v.string()), // Path to spirit panel art (optional for aspects without unique art)
     expansionId: v.id("expansions"),
     elements: v.array(v.string()), // ["Sun", "Water"] (primary elements)
     // For aspects: link to base spirit
