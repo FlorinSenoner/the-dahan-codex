@@ -5,6 +5,8 @@
     "app/client.tsx",
     "app/router.tsx",
     "app/server.tsx",
+    "app/components/ui/*.tsx",
+    "app/lib/utils.ts",
     "scripts/*.ts"
   ],
   "project": [
@@ -26,6 +28,8 @@
     "workbox-expiration",
     "workbox-precaching",
     "workbox-routing",
-    "workbox-strategies"
+    "workbox-strategies",
+    "tailwindcss",
+    "lucide-react"
   ]
 }

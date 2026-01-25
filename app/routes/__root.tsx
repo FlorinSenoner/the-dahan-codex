@@ -10,6 +10,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { convex } from "../lib/convex";
 import { registerSW } from "../lib/sw-register";
+import "../styles/globals.css";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -30,11 +31,11 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-screen bg-background font-body antialiased">
         {children}
         <Scripts />
       </body>
