@@ -8,6 +8,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// Placeholder gradient for spirits without images
+const PLACEHOLDER_GRADIENT =
+  "linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%)";
+
 // Search params for aspect selection
 const detailSearchSchema = z.object({
   aspect: z.string().optional(),
@@ -45,6 +49,9 @@ function SpiritDetailPage() {
 
   // Client-only rendering to avoid SSR issues with Convex provider
   const [isClient, setIsClient] = useState(false);
+  // Image error handling for placeholder
+  const [imgError, setImgError] = useState(false);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -53,6 +60,13 @@ function SpiritDetailPage() {
     api.spirits.getSpiritBySlug,
     isClient ? { slug, aspect } : "skip",
   );
+
+  // Reset imgError when spirit/image changes (imageUrl as trigger is intentional)
+  const imageUrl = spirit?.imageUrl;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
+  useEffect(() => {
+    setImgError(false);
+  }, [imageUrl]);
 
   // Loading state
   if (spirit === undefined) {
@@ -120,6 +134,9 @@ function SpiritDetailPage() {
   // The subtitle will show "Aspect of [Base Spirit Name]"
   const isAspect = !!spirit.aspectName;
   const displayName = isAspect ? spirit.aspectName : spirit.name;
+  const viewTransitionName = isAspect
+    ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
+    : `spirit-image-${slug}`;
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -145,16 +162,27 @@ function SpiritDetailPage() {
       <main className="p-4">
         {/* Hero image */}
         <div className="relative w-full aspect-square max-w-[300px] mx-auto mb-6">
-          <img
-            src={spirit.imageUrl}
-            alt={displayName}
-            className="w-full h-full object-cover rounded-xl"
-            style={{
-              viewTransitionName: isAspect
-                ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
-                : `spirit-image-${slug}`,
-            }}
-          />
+          {imgError ? (
+            <div
+              className="w-full h-full rounded-xl flex items-center justify-center text-muted-foreground"
+              style={{
+                background: PLACEHOLDER_GRADIENT,
+                viewTransitionName,
+              }}
+            >
+              <span className="text-6xl font-headline">
+                {displayName?.[0] || "?"}
+              </span>
+            </div>
+          ) : (
+            <img
+              src={spirit.imageUrl}
+              alt={displayName}
+              className="w-full h-full object-cover rounded-xl"
+              style={{ viewTransitionName }}
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
 
         {/* Spirit name */}
