@@ -1,8 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowDown, ArrowUp, Equal } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+
+// Placeholder gradient for spirits without images
+const PLACEHOLDER_GRADIENT =
+  "linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%)";
 
 interface SpiritRowProps {
   spirit: Doc<"spirits"> & { isAspect: boolean };
@@ -32,6 +37,8 @@ const modifierConfig: Record<
 };
 
 export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
+  const [imgError, setImgError] = useState(false);
+
   // Build the URL - aspects use query param
   const href = isAspect
     ? `/spirits/${spirit.slug}?aspect=${spirit.aspectName?.toLowerCase()}`
@@ -39,6 +46,10 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
 
   // Display name includes aspect name if applicable
   const displayName = isAspect ? `${spirit.aspectName}` : spirit.name;
+
+  const viewTransitionName = isAspect
+    ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
+    : `spirit-image-${spirit.slug}`;
 
   return (
     <Link
@@ -56,16 +67,27 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
           isAspect ? "w-[80px] h-[80px]" : "w-[100px] h-[100px]",
         )}
       >
-        <img
-          src={spirit.imageUrl}
-          alt={spirit.name}
-          className="w-full h-full object-cover rounded-lg"
-          style={{
-            viewTransitionName: isAspect
-              ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
-              : `spirit-image-${spirit.slug}`,
-          }}
-        />
+        {imgError ? (
+          <div
+            className="w-full h-full rounded-lg flex items-center justify-center text-muted-foreground"
+            style={{
+              background: PLACEHOLDER_GRADIENT,
+              viewTransitionName,
+            }}
+          >
+            <span className="text-2xl font-headline">
+              {(isAspect ? spirit.aspectName?.[0] : spirit.name[0]) || "?"}
+            </span>
+          </div>
+        ) : (
+          <img
+            src={spirit.imageUrl}
+            alt={spirit.name}
+            className="w-full h-full object-cover rounded-lg"
+            style={{ viewTransitionName }}
+            onError={() => setImgError(true)}
+          />
+        )}
         {isAspect && (
           <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
             <span className="text-[10px] text-accent-foreground font-bold">
