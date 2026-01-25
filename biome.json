@@ -16,6 +16,7 @@
       "dist",
       ".vinxi",
       ".output",
+      ".wrangler",
       "convex/_generated",
       ".claude",
       "app/routeTree.gen.ts",
