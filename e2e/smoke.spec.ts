@@ -16,8 +16,8 @@ test.describe("Smoke Tests", () => {
 
   test("sign-in page loads", async ({ page }) => {
     await page.goto("/sign-in");
-    // Clerk sign-in component should render
-    await expect(page.locator('[data-clerk-component="sign-in"]')).toBeVisible({
+    // Clerk v5 renders a heading with the app name in the sign-in form
+    await expect(page.getByRole("heading", { name: /sign in/i })).toBeVisible({
       timeout: 10000,
     });
   });
