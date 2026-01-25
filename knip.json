@@ -1,0 +1,32 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "app/routes/*.tsx",
+    "app/client.tsx",
+    "app/router.tsx",
+    "app/server.tsx",
+    "scripts/*.ts"
+  ],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "convex/**/*.ts",
+    "scripts/*.ts",
+    "*.config.ts"
+  ],
+  "ignore": [
+    ".planning/**",
+    "dist/**",
+    ".tanstack/**",
+    ".wrangler/**",
+    "convex/_generated/**",
+    "app/routeTree.gen.ts"
+  ],
+  "ignoreDependencies": [
+    "@clerk/tanstack-react-start",
+    "workbox-core",
+    "workbox-expiration",
+    "workbox-precaching",
+    "workbox-routing",
+    "workbox-strategies"
+  ]
+}

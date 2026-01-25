@@ -6,6 +6,9 @@ pre-commit:
         pnpm biome check --write --no-errors-on-unmatched
         --files-ignore-unknown=true {staged_files}
       stage_fixed: true
+    knip:
+      glob: "*.{js,ts,jsx,tsx,json}"
+      run: pnpm knip
     typecheck:
       glob: "*.{ts,tsx}"
       run: pnpm tsc --noEmit
