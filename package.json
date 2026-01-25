@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "description": "Spirit Island companion app",
   "type": "module",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "lefthook"
+    ]
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && pnpm generate-sw",
@@ -15,16 +20,16 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write . && prettier --write \"**/*.{md,mdx,yml,yaml}\"",
     "format:check": "biome format . && prettier --check \"**/*.{md,mdx,yml,yaml}\"",
+    "knip": "knip",
+    "knip:fix": "knip --fix",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "ci": "pnpm lint && pnpm typecheck && pnpm build && test -f dist/client/sw.js && pnpm test:e2e"
   },
   "dependencies": {
-    "@clerk/tanstack-react-start": "^0.27.17",
-    "@convex-dev/react-query": "^0.1.0",
-    "@tanstack/react-query": "^5.90.20",
-    "@tanstack/react-router": "1.140.5",
-    "@tanstack/react-start": "1.140.5",
+    "@clerk/clerk-react": "^5.33.2",
+    "@tanstack/react-router": "^1.157.8",
+    "@tanstack/react-start": "^1.157.8",
     "convex": "^1.31.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -35,18 +40,20 @@
     "workbox-strategies": "^7.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.12",
     "@cloudflare/vite-plugin": "^1.21.2",
     "@playwright/test": "^1.58.0",
     "@types/node": "^25.0.10",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
-    "lefthook": "^1.12.0",
-    "prettier": "^3.5.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "knip": "^5.82.1",
+    "lefthook": "^2.0.15",
+    "prettier": "^3.8.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^6.0.5",
     "workbox-build": "^7.4.0",
     "wrangler": "^4.60.0"
   }
