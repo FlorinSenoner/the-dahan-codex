@@ -58,6 +58,14 @@ function RootLayout() {
     <ClerkProvider
       publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
       afterSignOutUrl="/"
+      signInUrl={import.meta.env.VITE_CLERK_SIGN_IN_URL}
+      signUpUrl={import.meta.env.VITE_CLERK_SIGN_UP_URL}
+      signInFallbackRedirectUrl={
+        import.meta.env.VITE_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL
+      }
+      signUpFallbackRedirectUrl={
+        import.meta.env.VITE_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL
+      }
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <Outlet />
