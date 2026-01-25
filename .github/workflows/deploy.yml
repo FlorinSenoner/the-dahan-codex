@@ -104,7 +104,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --config dist/server/wrangler.json --name the-dahan-codex-pr-${{ github.event.pull_request.number }}
+          command:
+            deploy --config dist/server/wrangler.json --name
+            the-dahan-codex-pr-${{ github.event.pull_request.number }}
 
       - name: Comment Preview URL on PR
         if: github.event_name == 'pull_request'
@@ -112,7 +114,7 @@ jobs:
         with:
           script: |
             const prNumber = context.payload.pull_request.number;
-            const previewUrl = `https://the-dahan-codex-pr-${prNumber}.<your-subdomain>.workers.dev`;
+            const previewUrl = `https://the-dahan-codex-pr-${prNumber}.suppo-jo.workers.dev`;
             const body = `## Preview Deployed
 
             ${previewUrl}
