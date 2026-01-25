@@ -115,31 +115,45 @@
 }
 
 /* View Transitions */
+/* Root transition for page changes */
 ::view-transition-group(root) {
-  animation-duration: 400ms;
-  animation-timing-function: ease-in-out;
-}
-
-/* Spirit image transitions - match any spirit-image-* name */
-[style*="view-transition-name: spirit-image-"]::view-transition-old,
-[style*="view-transition-name: spirit-image-"]::view-transition-new {
-  animation-duration: 500ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Spirit name transitions - match any spirit-name-* name */
-[style*="view-transition-name: spirit-name-"]::view-transition-old,
-[style*="view-transition-name: spirit-name-"]::view-transition-new {
-  animation-duration: 400ms;
+  animation-duration: 300ms;
   animation-timing-function: ease-out;
 }
 
-/* Aspect image transitions - match any spirit-aspect-* name */
-[style*="view-transition-name: spirit-aspect-"]::view-transition-old,
-[style*="view-transition-name: spirit-aspect-"]::view-transition-new {
-  animation-duration: 500ms;
+/* Apply to ALL view-transition-name elements with wildcard */
+::view-transition-group(*) {
+  animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Image transitions - crossfade with slight scale */
+::view-transition-image-pair(*) {
+  isolation: isolate;
+}
+
+::view-transition-old(*) {
+  animation: fade-out 250ms ease-out;
+}
+
+::view-transition-new(*) {
+  animation: fade-in 250ms ease-in 150ms;
+}
+
+/* Custom morph animation for smooth element transitions */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* For spirit images specifically - can use dynamic names */
+/* These target any view-transition-name that starts with spirit-image- */
+/* Since CSS can't match partial names in pseudo-elements, we use * */
 
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
@@ -147,6 +161,7 @@
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
   }
 }
 

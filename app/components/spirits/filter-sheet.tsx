@@ -90,7 +90,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <Button
           variant="outline"
           size="icon"
-          className="relative"
+          className="relative min-w-[44px] min-h-[44px] cursor-pointer"
           aria-label="Filter"
         >
           <Filter className="h-4 w-4" />
@@ -113,7 +113,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
                   setPendingComplexity([]);
                   setPendingElements([]);
                 }}
-                className="text-muted-foreground"
+                className="text-muted-foreground cursor-pointer"
               >
                 Clear all
               </Button>
@@ -163,11 +163,11 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <DrawerFooter className="border-t border-border">
           <div className="flex gap-3">
             <DrawerClose asChild>
-              <Button variant="outline" className="flex-1">
+              <Button variant="outline" className="flex-1 cursor-pointer">
                 Cancel
               </Button>
             </DrawerClose>
-            <Button onClick={applyFilters} className="flex-1">
+            <Button onClick={applyFilters} className="flex-1 cursor-pointer">
               Apply Filters
               {pendingCount > 0 && ` (${pendingCount})`}
             </Button>
@@ -193,7 +193,7 @@ function FilterPill({
       type="button"
       onClick={onClick}
       className={cn(
-        "px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
+        "min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer",
         "border",
         selected
           ? "bg-primary text-primary-foreground border-primary"
