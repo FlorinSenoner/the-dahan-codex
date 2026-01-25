@@ -9,11 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpiritsRouteImport } from './routes/spirits'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SpiritsSlugRouteImport } from './routes/spirits.$slug'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 
+const SpiritsRoute = SpiritsRouteImport.update({
+  id: '/spirits',
+  path: '/spirits',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
@@ -22,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SpiritsSlugRoute = SpiritsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SpiritsRoute,
 } as any)
 const SignInSplatRoute = SignInSplatRouteImport.update({
   id: '/sign-in/$',
@@ -36,42 +48,58 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/spirits': typeof SpiritsRouteWithChildren
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/spirits/$slug': typeof SpiritsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/spirits': typeof SpiritsRouteWithChildren
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/spirits/$slug': typeof SpiritsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/spirits': typeof SpiritsRouteWithChildren
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/spirits/$slug': typeof SpiritsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profile' | '/sign-in/$'
+  fullPaths: '/' | '/spirits' | '/profile' | '/sign-in/$' | '/spirits/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profile' | '/sign-in/$'
+  to: '/' | '/spirits' | '/profile' | '/sign-in/$' | '/spirits/$slug'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/spirits'
     | '/_authenticated/profile'
     | '/sign-in/$'
+    | '/spirits/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  SpiritsRoute: typeof SpiritsRouteWithChildren
   SignInSplatRoute: typeof SignInSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/spirits': {
+      id: '/spirits'
+      path: '/spirits'
+      fullPath: '/spirits'
+      preLoaderRoute: typeof SpiritsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -85,6 +113,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/spirits/$slug': {
+      id: '/spirits/$slug'
+      path: '/$slug'
+      fullPath: '/spirits/$slug'
+      preLoaderRoute: typeof SpiritsSlugRouteImport
+      parentRoute: typeof SpiritsRoute
     }
     '/sign-in/$': {
       id: '/sign-in/$'
@@ -115,9 +150,21 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
+interface SpiritsRouteChildren {
+  SpiritsSlugRoute: typeof SpiritsSlugRoute
+}
+
+const SpiritsRouteChildren: SpiritsRouteChildren = {
+  SpiritsSlugRoute: SpiritsSlugRoute,
+}
+
+const SpiritsRouteWithChildren =
+  SpiritsRoute._addFileChildren(SpiritsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  SpiritsRoute: SpiritsRouteWithChildren,
   SignInSplatRoute: SignInSplatRoute,
 }
 export const routeTree = rootRouteImport
