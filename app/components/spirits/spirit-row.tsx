@@ -1,0 +1,98 @@
+import { Link } from "@tanstack/react-router";
+import type { Doc } from "convex/_generated/dataModel";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+
+interface SpiritRowProps {
+  spirit: Doc<"spirits"> & { isAspect: boolean };
+  isAspect: boolean;
+}
+
+// Map complexity to badge variant/color
+const complexityColors: Record<string, string> = {
+  Low: "bg-element-plant/20 text-element-plant border-element-plant/30",
+  Moderate: "bg-element-sun/20 text-element-sun border-element-sun/30",
+  High: "bg-element-fire/20 text-element-fire border-element-fire/30",
+  "Very High": "bg-destructive/20 text-destructive border-destructive/30",
+};
+
+export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
+  // Build the URL - aspects use query param
+  const href = isAspect
+    ? `/spirits/${spirit.slug}?aspect=${spirit.aspectName?.toLowerCase()}`
+    : `/spirits/${spirit.slug}`;
+
+  // Display name includes aspect name if applicable
+  const displayName = isAspect ? `${spirit.aspectName}` : spirit.name;
+
+  return (
+    <Link
+      to={href}
+      className={cn(
+        "flex items-center gap-4 p-4",
+        "active:bg-muted/50 transition-colors duration-150",
+        isAspect && "pl-8 bg-muted/10", // Indent aspects
+      )}
+    >
+      {/* Spirit image */}
+      <div
+        className={cn(
+          "relative flex-shrink-0",
+          isAspect ? "w-[80px] h-[80px]" : "w-[100px] h-[100px]",
+        )}
+      >
+        <img
+          src={spirit.imageUrl}
+          alt={spirit.name}
+          className="w-full h-full object-cover rounded-lg"
+          style={{
+            viewTransitionName: isAspect
+              ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
+              : `spirit-image-${spirit.slug}`,
+          }}
+        />
+        {isAspect && (
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
+            <span className="text-[10px] text-accent-foreground font-bold">
+              A
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Spirit info */}
+      <div className="flex-1 min-w-0">
+        <h3
+          className={cn(
+            "font-headline font-semibold text-foreground truncate",
+            isAspect ? "text-base" : "text-lg",
+          )}
+          style={{
+            viewTransitionName: isAspect
+              ? undefined
+              : `spirit-name-${spirit.slug}`,
+          }}
+        >
+          {displayName}
+        </h3>
+
+        <p className="text-sm text-muted-foreground line-clamp-2 mt-0.5">
+          {spirit.summary}
+        </p>
+
+        {/* Complexity badge - only show for base spirits */}
+        {!isAspect && (
+          <Badge
+            variant="outline"
+            className={cn(
+              "mt-2 text-xs",
+              complexityColors[spirit.complexity] || "",
+            )}
+          >
+            {spirit.complexity}
+          </Badge>
+        )}
+      </div>
+    </Link>
+  );
+}
