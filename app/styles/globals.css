@@ -114,6 +114,42 @@
   --element-animal: oklch(0.55 0.12 50);
 }
 
+/* View Transitions */
+::view-transition-group(root) {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+}
+
+/* Spirit image transitions - match any spirit-image-* name */
+[style*="view-transition-name: spirit-image-"]::view-transition-old,
+[style*="view-transition-name: spirit-image-"]::view-transition-new {
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Spirit name transitions - match any spirit-name-* name */
+[style*="view-transition-name: spirit-name-"]::view-transition-old,
+[style*="view-transition-name: spirit-name-"]::view-transition-new {
+  animation-duration: 400ms;
+  animation-timing-function: ease-out;
+}
+
+/* Aspect image transitions - match any spirit-aspect-* name */
+[style*="view-transition-name: spirit-aspect-"]::view-transition-old,
+[style*="view-transition-name: spirit-aspect-"]::view-transition-new {
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
 /* Base layer reset */
 @layer base {
   * {

@@ -16,6 +16,8 @@ export function createRouter() {
     routeTree,
     scrollRestoration: true,
     defaultNotFoundComponent: NotFound,
+    // Enable View Transitions API globally
+    defaultViewTransition: true,
   });
 
   return router;
