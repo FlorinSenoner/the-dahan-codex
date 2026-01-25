@@ -85,7 +85,7 @@ function AuthStatusClient() {
     return (
       <div>
         <p>You are signed in!</p>
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
         <div style={{ marginTop: "1rem" }}>
           <Link to="/profile">Go to Profile (protected)</Link>
         </div>
