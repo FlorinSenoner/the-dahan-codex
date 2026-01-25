@@ -5,7 +5,7 @@ export function registerSW() {
     return;
   }
 
-  window.addEventListener("load", async () => {
+  const register = async () => {
     try {
       const registration = await navigator.serviceWorker.register("/sw.js", {
         scope: "/",
@@ -39,5 +39,12 @@ export function registerSW() {
     } catch (error) {
       console.error("Service worker registration failed:", error);
     }
-  });
+  };
+
+  // If already loaded, register immediately; otherwise wait for load
+  if (document.readyState === "complete") {
+    register();
+  } else {
+    window.addEventListener("load", register);
+  }
 }
