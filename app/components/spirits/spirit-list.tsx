@@ -1,5 +1,6 @@
 import { api } from "convex/_generated/api";
 import { useQuery } from "convex/react";
+import { useEffect, useState } from "react";
 import { SpiritRow } from "./spirit-row";
 
 interface SpiritListProps {
@@ -12,10 +13,18 @@ interface SpiritListProps {
 }
 
 export function SpiritList({ filters }: SpiritListProps) {
-  const spirits = useQuery(api.spirits.listSpirits, {
-    complexity: filters.complexity,
-    elements: filters.elements,
-  });
+  // Client-only rendering to avoid SSR issues with Convex provider
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const spirits = useQuery(
+    api.spirits.listSpirits,
+    isClient
+      ? { complexity: filters.complexity, elements: filters.elements }
+      : "skip",
+  );
 
   // Loading state - reserve space, no spinner per project requirements
   if (spirits === undefined) {
