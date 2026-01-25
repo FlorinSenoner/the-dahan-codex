@@ -5,6 +5,7 @@ pnpm = "10.25.0"
 [env]
 _.path = ["{{config_root}}/node_modules/.bin"]
 VITE_CLERK_PUBLISHABLE_KEY = "pk_test_Z3JlYXQtc3BhbmllbC03OC5jbGVyay5hY2NvdW50cy5kZXYk"
+CLOUDFLARE_ACCOUNT_ID = "5796b41bb99c92705af706d23abb0989"
 
 [settings]
 experimental = true
