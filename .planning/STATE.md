@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 3 - Spirit Content Pages
+spirit openings **Current focus:** Phase 2.1 - Spirit Library Polish (UAT fixes)
 
 ## Current Position
 
-Phase: 2 of 7 (Spirit Library) - COMPLETE
-Plan: 6 of 6 in current phase
-Status: Phase complete
-Last activity: 2026-01-25 - Completed 02-06-PLAN.md (Bottom Navigation & E2E Tests)
+Phase: 2.1 (Spirit Library Polish) - IN PROGRESS
+Plan: 1 of 6 in current phase
+Status: In progress
+Last activity: 2026-01-25 - Completed 02.1-01-PLAN.md (Schema and Seed Data Update)
 
-Progress: [█████████░] ~50%
+Progress: [█████████░] ~52%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 14
-- Average duration: 7.5 min
-- Total execution time: 1.68 hours
+- Total plans completed: 15
+- Average duration: 7.3 min
+- Total execution time: 1.75 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [█████████░] ~50%
 | ----- | ----- | ------ | -------- |
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
+| 02.1  | 1     | 4 min  | 4.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 2 min, 2 min, 2 min, 4 min
+- Last 5 plans: 2 min, 2 min, 2 min, 4 min, 4 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -79,6 +80,8 @@ affecting current work:
 - URL search params for filter state (shareable filtered views)
 - SSR-safe Convex queries: useQuery with "skip" param when isClient is false
 - aria-label on icon-only buttons for accessibility and E2E testing
+- Aspects inherit base complexity (Low) - complexityModifier is display-only
+- reseedSpirits mutation for refreshing database data
 
 ### Pending Todos
 
@@ -94,6 +97,10 @@ None yet.
 | 004 | Improve deployment workflow | 2026-01-25 | 23c1c3e | [004-improve-deployment-workflow](./quick/004-improve-deployment-workflow/) |
 | 005 | Fix Clerk sign-in e2e test selector | 2026-01-25 | 8a054ec | [005-fix-clerk-sign-in-e2e-test-selector](./quick/005-fix-clerk-sign-in-e2e-test-selector/) |
 | 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
+
+### Roadmap Evolution
+
+- Phase 2.1 inserted after Phase 2: Spirit Library Polish (URGENT) - addresses 9 UAT gaps
 
 ### Blockers/Concerns
 
@@ -152,8 +159,19 @@ Phase 2 (Spirit Library) complete:
 - [x] 02-05: Spirit Detail & View Transitions
 - [x] 02-06: Bottom Navigation & E2E Tests
 
+## Phase 2.1 Progress
+
+Phase 2.1 (Spirit Library Polish) in progress:
+
+- [x] 02.1-01: Schema and Seed Data Update
+- [ ] 02.1-02: Aspect Details UI
+- [ ] 02.1-03: Filter Fixes
+- [ ] 02.1-04: Accessibility and Polish
+- [ ] 02.1-05: View Transitions
+- [ ] 02.1-06: E2E Tests
+
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 02-06-PLAN.md (Bottom Navigation & E2E Tests)
-Resume file: None
+Stopped at: Completed 02.1-01-PLAN.md (Schema and Seed Data Update)
+Resume file: .planning/phases/02.1-spirit-library-polish/02.1-01-SUMMARY.md
