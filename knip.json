@@ -22,7 +22,6 @@
     "app/routeTree.gen.ts"
   ],
   "ignoreDependencies": [
-    "@clerk/tanstack-react-start",
     "workbox-core",
     "workbox-expiration",
     "workbox-precaching",
