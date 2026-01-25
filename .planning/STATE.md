@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 1 of 7 (Foundation & Authentication)
-Plan: 1 of TBD in current phase
+Plan: 2 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-25 - Completed 01-01-PLAN.md (Project Scaffold)
+Last activity: 2026-01-25 - Completed 01-02-PLAN.md (Cloudflare Workers Deployment)
 
-Progress: [█░░░░░░░░░] ~5%
+Progress: [██░░░░░░░░] ~10%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 45 min
-- Total execution time: 0.75 hours
+- Total plans completed: 2
+- Average duration: 25 min
+- Total execution time: 0.83 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 1 | 45 min | 45 min |
+| 01 | 2 | 50 min | 25 min |
 
 **Recent Trend:**
-- Last 5 plans: 45 min
-- Trend: Baseline established
+- Last 5 plans: 45 min, 5 min
+- Trend: Improving
 
 *Updated after each plan completion*
 
@@ -45,6 +45,9 @@ Recent decisions affecting current work:
 - Used Vite 7 directly instead of vinxi (TanStack Start 1.140.5 compatibility)
 - Dev server runs on port 5173 (Vite default)
 - Server entry exports { fetch } object for TanStack Start SSR
+- @cloudflare/vite-plugin handles SSR preset automatically (no manual cloudflare-module config)
+- Build output: dist/server/ (worker), dist/client/ (static assets)
+- Preview/deploy scripts reference generated dist/server/wrangler.json
 
 ### Pending Todos
 
@@ -61,8 +64,11 @@ None yet.
 **From Plan 01-01:**
 - Vite dev server port is 5173, not 3000 (may need to configure for consistency)
 
+**From Plan 01-02:**
+- Wrangler preview runs on port 8787 (Cloudflare default)
+
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 01-01-PLAN.md
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
