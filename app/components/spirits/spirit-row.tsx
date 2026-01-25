@@ -67,7 +67,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
           isAspect ? "w-[80px] h-[80px]" : "w-[100px] h-[100px]",
         )}
       >
-        {imgError ? (
+        {imgError || !spirit.imageUrl ? (
           <div
             className="w-full h-full rounded-lg flex items-center justify-center text-muted-foreground"
             style={{
