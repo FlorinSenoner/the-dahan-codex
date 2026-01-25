@@ -17,7 +17,9 @@
       ".vinxi",
       ".output",
       "convex/_generated",
-      ".claude"
+      ".claude",
+      "app/routeTree.gen.ts",
+      "*.timestamp_*.js"
     ]
   }
 }
