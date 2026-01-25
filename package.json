@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.33.2",
-    "@tanstack/react-router": "^1.157.8",
-    "@tanstack/react-start": "^1.157.8",
+    "@tanstack/react-router": "^1.157.9",
+    "@tanstack/react-start": "^1.157.9",
     "convex": "^1.31.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
