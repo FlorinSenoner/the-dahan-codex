@@ -62,6 +62,39 @@ export const listSpirits = query({
   },
 });
 
+// Get base spirit with all aspects for variant selector
+export const getSpiritWithAspects = query({
+  args: {
+    slug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    // Find the base spirit
+    const baseSpirit = await ctx.db
+      .query("spirits")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .filter((q) => q.eq(q.field("baseSpirit"), undefined))
+      .first();
+
+    if (!baseSpirit) return null;
+
+    // Get all aspects
+    const aspects = await ctx.db
+      .query("spirits")
+      .withIndex("by_base_spirit", (q) => q.eq("baseSpirit", baseSpirit._id))
+      .collect();
+
+    // Sort aspects alphabetically by aspectName
+    aspects.sort((a, b) =>
+      (a.aspectName || "").localeCompare(b.aspectName || ""),
+    );
+
+    return {
+      base: baseSpirit,
+      aspects,
+    };
+  },
+});
+
 // Get a single spirit by slug
 export const getSpiritBySlug = query({
   args: {
