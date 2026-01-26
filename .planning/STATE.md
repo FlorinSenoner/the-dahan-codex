@@ -9,20 +9,20 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 2.1 (Spirit Library Polish) - COMPLETE
-Plan: 6 of 6 in current phase
-Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 012: Fix Cloudflare CI auth error
+Phase: 3 (Spirit Detail & Board) - IN PROGRESS
+Plan: 1 of 6 in current phase
+Status: Plan 03-01 complete
+Last activity: 2026-01-26 - Completed 03-01-PLAN.md (Schema and Seed Data)
 
-Progress: [██████████] 100%
+Progress: [█████████████████████░░] 89% (21/24 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 20
-- Average duration: 6.8 min
-- Total execution time: 2.3 hours
+- Total plans completed: 21
+- Average duration: 6.6 min
+- Total execution time: 2.4 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [██████████] 100%
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
+| 03    | 1     | 4 min  | 4 min    |
 
 **Recent Trend:**
 
-- Last 5 plans: 16 min, 1 min, 3 min, 3 min, 1 min
+- Last 5 plans: 1 min, 3 min, 3 min, 1 min, 4 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -90,6 +91,10 @@ affecting current work:
 - Typography components: Heading (h1-h4 variants), Text (body/muted/small variants)
 - Spirit colors centralized in app/lib/spirit-colors.ts (badge colors, filter colors, PLACEHOLDER_GRADIENT)
 - Cloudflare Pages deployment via wrangler-action@v3 (pages-action@v1 deprecated)
+- Power ratings use 0-5 scale (0=None, 5=Extreme)
+- All board fields optional to preserve backward compatibility
+- Aspects inherit board data from base spirit (no duplication)
+- getSpiritWithAspects query returns base + sorted aspects in single call
 
 ### Pending Todos
 
@@ -195,8 +200,19 @@ Phase 2.1 (Spirit Library Polish) complete:
 - [x] 02.1-05: View Transitions
 - [x] 02.1-06: Aspect Title & Description
 
+## Phase 3 Progress
+
+Phase 3 (Spirit Detail & Board) in progress:
+
+- [x] 03-01: Schema and Seed Data (board data fields)
+- [ ] 03-02: Variant Tabs Component
+- [ ] 03-03: Board Layout Components
+- [ ] 03-04: Growth and Presence Track Components
+- [ ] 03-05: Innate and Power Components
+- [ ] 03-06: E2E Tests
+
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Quick task 011 complete, ready for Phase 3
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
