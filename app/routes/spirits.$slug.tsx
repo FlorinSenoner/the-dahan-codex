@@ -12,6 +12,7 @@ import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CardHand } from "@/components/spirits/card-hand";
+import { ExternalLinks } from "@/components/spirits/external-links";
 import { GrowthPanel } from "@/components/spirits/growth-panel";
 import { InnatePowers } from "@/components/spirits/innate-powers";
 import { OverviewSection } from "@/components/spirits/overview-section";
@@ -239,6 +240,8 @@ export function SpiritDetailContent({
       {spirit.innates && <InnatePowers innates={spirit.innates} />}
 
       {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
+
+      <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
     </main>
   );
 }
