@@ -7,31 +7,53 @@ import {
 import { cn } from "@/lib/utils";
 
 interface PresenceSlotProps {
-  value: number | string;
-  elements?: string[];
-  reclaim?: boolean;
-  innateUnlock?: string;
-  specialAbility?: string;
-  type: "energy" | "cardPlays";
+  slot: {
+    value: number | string;
+    elements?: string[];
+    reclaim?: boolean;
+    innateUnlock?: string;
+    specialAbility?: string;
+  };
   index: number;
+  trackColor?: "amber" | "blue" | "purple" | "emerald";
+  trackType?: string;
 }
 
+// Border colors based on track color
+const borderColors: Record<string, string> = {
+  amber: "border-amber-500/50",
+  blue: "border-blue-500/50",
+  purple: "border-purple-500/50",
+  emerald: "border-emerald-500/50",
+};
+
+// Hover border colors based on track color
+const hoverBorderColors: Record<string, string> = {
+  amber: "hover:border-amber-400",
+  blue: "hover:border-blue-400",
+  purple: "hover:border-purple-400",
+  emerald: "hover:border-emerald-400",
+};
+
 export function PresenceSlot({
-  value,
-  elements,
-  reclaim,
-  innateUnlock,
-  specialAbility,
-  type,
+  slot,
   index,
+  trackColor = "amber",
+  trackType,
 }: PresenceSlotProps) {
+  const { value, elements, reclaim, innateUnlock, specialAbility } = slot;
+
   // Build tooltip content
   const tooltipLines: string[] = [];
 
-  if (type === "energy") {
+  if (trackType === "energy") {
     tooltipLines.push("Gain " + value + " Energy per turn");
+  } else if (trackType === "cardPlays") {
+    tooltipLines.push(
+      "Play " + value + " Card" + (value !== 1 ? "s" : "") + " per turn",
+    );
   } else {
-    tooltipLines.push("Play " + value + " Card" + (value !== 1 ? "s" : "") + " per turn");
+    tooltipLines.push(String(value));
   }
 
   if (reclaim) {
@@ -60,14 +82,19 @@ export function PresenceSlot({
           <button
             type="button"
             className={cn(
-              "w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border-2 flex items-center justify-center text-sm font-medium transition-colors cursor-default",
-              "bg-muted/50 border-border text-foreground",
-              "hover:bg-muted hover:border-primary/50",
-              reclaim && "border-amber-500/50 bg-amber-500/10",
+              "w-11 h-11 min-w-[44px] min-h-[44px] rounded-full",
+              "border-2 flex items-center justify-center",
+              "text-sm font-medium transition-colors",
+              "cursor-pointer",
+              "bg-muted/50 text-foreground",
+              "hover:bg-muted/80",
+              borderColors[trackColor] || borderColors.amber,
+              hoverBorderColors[trackColor] || hoverBorderColors.amber,
+              reclaim && "border-amber-500 bg-amber-500/20 text-amber-300",
               elements &&
                 elements.length > 0 &&
                 !reclaim &&
-                "border-primary/50",
+                "border-primary/70",
             )}
             aria-label={tooltipLines.join(". ")}
           >
