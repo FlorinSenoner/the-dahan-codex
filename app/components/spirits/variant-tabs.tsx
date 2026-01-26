@@ -15,6 +15,9 @@ export function VariantTabs({ base, aspects }: VariantTabsProps) {
   const aspect = (params as { aspect?: string }).aspect;
   const currentValue = aspect || "base";
 
+  const tabTriggerClassName =
+    "min-w-fit min-h-[44px] shrink-0 cursor-pointer rounded-none border-b-2 border-transparent data-[state=active]:bg-gradient-to-b data-[state=active]:from-primary/20 data-[state=active]:to-transparent data-[state=active]:border-primary";
+
   return (
     <Tabs
       value={currentValue}
@@ -27,18 +30,15 @@ export function VariantTabs({ base, aspects }: VariantTabsProps) {
       }}
       className="w-full"
     >
-      <TabsList className="sticky top-[57px] z-10 w-full h-auto min-h-[44px] justify-start overflow-x-auto bg-background/95 backdrop-blur border-b border-border rounded-none px-4 gap-1">
-        <TabsTrigger
-          value="base"
-          className="min-w-fit min-h-[44px] shrink-0 cursor-pointer data-[state=active]:bg-primary/10"
-        >
-          {base.name.split(" ").slice(0, 2).join(" ")}
+      <TabsList className="sticky top-[57px] z-10 w-full h-auto min-h-[44px] justify-start overflow-x-auto overflow-y-hidden bg-background/95 backdrop-blur border-b border-border rounded-none gap-0">
+        <TabsTrigger value="base" className={tabTriggerClassName}>
+          Base
         </TabsTrigger>
         {aspects.map((a) => (
           <TabsTrigger
             key={a.aspectName}
             value={a.aspectName?.toLowerCase() || ""}
-            className="min-w-fit min-h-[44px] shrink-0 cursor-pointer data-[state=active]:bg-primary/10"
+            className={tabTriggerClassName}
           >
             {a.aspectName}
           </TabsTrigger>
