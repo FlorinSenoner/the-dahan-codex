@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 2.1 (Spirit Library Polish) - COMPLETE
 Plan: 6 of 6 in current phase
 Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 010: Switch to client-only SPA
+Last activity: 2026-01-26 - Completed quick task 011: Fix view transitions and aspect URLs
 
 Progress: [██████████] 100%
 
@@ -72,8 +72,9 @@ affecting current work:
 - oklch color space for theme colors
 - UI components as knip entry points for library pattern
 - Zod for URL search param validation in TanStack Router
-- View transition names: spirit-image-{slug} and spirit-name-{slug}
-- Aspect URLs: /spirits/{base-slug}?aspect={aspect-name}
+- View transition names: spirit-image-{slug} and spirit-name-{slug} for base spirits
+- Aspect view transition names: spirit-image-{slug}-{aspect} and spirit-name-{slug}-{aspect}
+- Aspect URLs: /spirits/{base-slug}/{aspect-name} (path-based, not query params)
 - Filter bottom sheet: Drawer with pending state + Apply button
 - URL search params for filter state (shareable filtered views)
 - Client-side Convex queries: useSuspenseQuery with loader preloading
@@ -106,6 +107,7 @@ None yet.
 | 007 | Add typography and reusable UI components | 2026-01-26 | 187fc2a | [007-add-typography-and-reusable-ui-component](./quick/007-add-typography-and-reusable-ui-component/) |
 | 009 | Rework element and complexity colors | 2026-01-26 | 8843491 | [009-rework-element-and-complexity-colors](./quick/009-rework-element-and-complexity-colors/) |
 | 010 | Switch to client-only SPA | 2026-01-26 | 32bf3ed | [010-switch-to-client-only-spa](./quick/010-switch-to-client-only-spa/) |
+| 011 | Fix view transitions and aspect URLs | 2026-01-26 | 5a25c3e | [011-fix-view-transitions-and-aspect-urls](./quick/011-fix-view-transitions-and-aspect-urls/) |
 
 ### Roadmap Evolution
 
@@ -194,5 +196,5 @@ Phase 2.1 (Spirit Library Polish) complete:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Quick task 010 complete, ready for Phase 3
+Stopped at: Quick task 011 complete, ready for Phase 3
 Resume file: None
