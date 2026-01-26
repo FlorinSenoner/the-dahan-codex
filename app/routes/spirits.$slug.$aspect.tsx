@@ -1,12 +1,6 @@
 import { convexQuery } from "@convex-dev/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useMatches,
-  useNavigate,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -20,38 +14,25 @@ import {
 } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/spirits/$slug")({
+export const Route = createFileRoute("/spirits/$slug/$aspect")({
   loader: async ({ context, params }) => {
     await context.queryClient.ensureQueryData(
       convexQuery(api.spirits.getSpiritBySlug, {
         slug: params.slug,
+        aspect: params.aspect,
       }),
     );
   },
-  component: SpiritDetailLayout,
+  component: AspectDetailPage,
 });
 
-function SpiritDetailLayout() {
-  const matches = useMatches();
-  // If we have a child route (aspect), render the Outlet
-  const hasChildRoute = matches.some(
-    (m) => m.routeId === "/spirits/$slug/$aspect",
-  );
-
-  if (hasChildRoute) {
-    return <Outlet />;
-  }
-
-  return <SpiritDetailContent />;
-}
-
-function SpiritDetailContent() {
-  const { slug } = Route.useParams();
+function AspectDetailPage() {
+  const { slug, aspect } = Route.useParams();
   const navigate = useNavigate();
   const [imgError, setImgError] = useState(false);
 
   const { data: spirit } = useSuspenseQuery(
-    convexQuery(api.spirits.getSpiritBySlug, { slug }),
+    convexQuery(api.spirits.getSpiritBySlug, { slug, aspect }),
   );
 
   const imageUrl = spirit?.imageUrl;
@@ -74,36 +55,39 @@ function SpiritDetailContent() {
             className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() =>
               navigate({
-                to: "/spirits",
+                to: "/spirits/$slug",
+                params: { slug },
                 viewTransition: true,
               })
             }
-            aria-label="Back to spirits"
+            aria-label="Back to spirit"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </header>
         <div className="flex flex-col items-center justify-center p-8 text-center min-h-[60vh]">
           <p className="text-xl font-serif text-foreground mb-2">
-            Spirit Not Found
+            Aspect Not Found
           </p>
           <p className="text-muted-foreground mb-4">
-            The spirit "{slug}" doesn't exist.
+            The aspect "{aspect}" of "{slug}" doesn't exist.
           </p>
           <Link
-            to="/spirits"
+            to="/spirits/$slug"
+            params={{ slug }}
             viewTransition
             className="text-primary hover:underline cursor-pointer"
           >
-            Back to Spirits
+            Back to Spirit
           </Link>
         </div>
       </div>
     );
   }
 
-  const displayName = spirit.name;
-  const viewTransitionName = `spirit-image-${slug}`;
+  const displayName = spirit.aspectName || spirit.name;
+  // View transition name matches spirit-row.tsx for aspects
+  const viewTransitionName = `spirit-image-${slug}-${aspect}`;
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -118,11 +102,12 @@ function SpiritDetailContent() {
             className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() =>
               navigate({
-                to: "/spirits",
+                to: "/spirits/$slug",
+                params: { slug },
                 viewTransition: true,
               })
             }
-            aria-label="Back to spirits"
+            aria-label="Back to spirit"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
@@ -163,11 +148,15 @@ function SpiritDetailContent() {
           as="h1"
           className="text-foreground text-center mb-2 contain-[layout]"
           style={{
-            viewTransitionName: `spirit-name-${slug}`,
+            viewTransitionName: `spirit-name-${slug}-${aspect}`,
           }}
         >
           {displayName}
         </Heading>
+
+        <Text variant="muted" className="text-center mb-4">
+          Aspect of {spirit.name}
+        </Text>
 
         <div className="flex justify-center mb-4">
           <Badge
