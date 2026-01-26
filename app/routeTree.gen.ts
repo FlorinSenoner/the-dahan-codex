@@ -17,6 +17,7 @@ import { Route as SpiritsIndexRouteImport } from './routes/spirits.index'
 import { Route as SpiritsSlugRouteImport } from './routes/spirits.$slug'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$aspect'
 
 const SpiritsRoute = SpiritsRouteImport.update({
   id: '/spirits',
@@ -57,6 +58,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
+  id: '/$aspect',
+  path: '/$aspect',
+  getParentRoute: () => SpiritsSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -64,16 +70,18 @@ export interface FileRoutesByFullPath {
   '/spirits': typeof SpiritsRouteWithChildren
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/spirits/$slug': typeof SpiritsSlugRoute
+  '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits/': typeof SpiritsIndexRoute
+  '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/spirits/$slug': typeof SpiritsSlugRoute
+  '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits': typeof SpiritsIndexRoute
+  '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -83,8 +91,9 @@ export interface FileRoutesById {
   '/spirits': typeof SpiritsRouteWithChildren
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/spirits/$slug': typeof SpiritsSlugRoute
+  '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits/': typeof SpiritsIndexRoute
+  '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/sign-in/$'
     | '/spirits/$slug'
     | '/spirits/'
+    | '/spirits/$slug/$aspect'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
     | '/sign-in/$'
     | '/spirits/$slug'
     | '/spirits'
+    | '/spirits/$slug/$aspect'
   id:
     | '__root__'
     | '/'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/sign-in/$'
     | '/spirits/$slug'
     | '/spirits/'
+    | '/spirits/$slug/$aspect'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/spirits/$slug/$aspect': {
+      id: '/spirits/$slug/$aspect'
+      path: '/$aspect'
+      fullPath: '/spirits/$slug/$aspect'
+      preLoaderRoute: typeof SpiritsSlugAspectRouteImport
+      parentRoute: typeof SpiritsSlugRoute
+    }
   }
 }
 
@@ -197,13 +216,25 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
+interface SpiritsSlugRouteChildren {
+  SpiritsSlugAspectRoute: typeof SpiritsSlugAspectRoute
+}
+
+const SpiritsSlugRouteChildren: SpiritsSlugRouteChildren = {
+  SpiritsSlugAspectRoute: SpiritsSlugAspectRoute,
+}
+
+const SpiritsSlugRouteWithChildren = SpiritsSlugRoute._addFileChildren(
+  SpiritsSlugRouteChildren,
+)
+
 interface SpiritsRouteChildren {
-  SpiritsSlugRoute: typeof SpiritsSlugRoute
+  SpiritsSlugRoute: typeof SpiritsSlugRouteWithChildren
   SpiritsIndexRoute: typeof SpiritsIndexRoute
 }
 
 const SpiritsRouteChildren: SpiritsRouteChildren = {
-  SpiritsSlugRoute: SpiritsSlugRoute,
+  SpiritsSlugRoute: SpiritsSlugRouteWithChildren,
   SpiritsIndexRoute: SpiritsIndexRoute,
 }
 
@@ -220,13 +251,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
