@@ -9,20 +9,20 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3 (Spirit Detail & Board) - IN PROGRESS
-Plan: 5 of 6 in current phase
-Status: Plan 03-05 complete
-Last activity: 2026-01-26 - Completed 03-05-PLAN.md (Innate and Power Components)
+Phase: 3.1 (Spirit Board Polish) - IN PROGRESS
+Plan: 1 of 7 in current phase
+Status: Completed plan 03.1-03 (Tabs & Radar Polish)
+Last activity: 2026-01-26 - Completed 03.1-03-PLAN.md
 
-Progress: [█████████████████████████] 100% (25/25 plans)
+Progress: [██████████████████████████░░░░] 85% (26/31 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 25
-- Average duration: 6.1 min
-- Total execution time: 2.6 hours
+- Total plans completed: 26
+- Average duration: 6.2 min
+- Total execution time: 2.7 hours
 
 **By Phase:**
 
@@ -32,10 +32,11 @@ Progress: [███████████████████████
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
+| 03.1  | 1     | 8 min  | 8.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 4 min, 3 min, 4 min, 5 min
+- Last 5 plans: 4 min, 3 min, 4 min, 5 min, 8 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -108,6 +109,9 @@ affecting current work:
 - Element threshold keys generated from element-count pairs to avoid array index keys
 - SpecialRules returns null when no rules exist (section hidden entirely)
 - CardHand uses negative margin (-mx-4 px-4) for edge-to-edge scroll on mobile
+- Use oklch color space for radar chart dark mode visibility
+- Radar chart: gridType="polygon" with polarRadius for spider web appearance
+- Tab styling: gradient highlight (from-primary/20 to transparent) + border-b-2
 
 ### Pending Todos
 
@@ -132,6 +136,7 @@ None yet.
 ### Roadmap Evolution
 
 - Phase 2.1 inserted after Phase 2: Spirit Library Polish (URGENT) - addresses 9 UAT gaps
+- Phase 3.1 inserted after Phase 3: Spirit Board Polish (URGENT) - addresses 8 UAT gaps (DSL system, element icons, schema corrections, visual polish)
 
 ### Blockers/Concerns
 
@@ -215,17 +220,45 @@ Phase 2.1 (Spirit Library Polish) complete:
 
 ## Phase 3 Progress
 
-Phase 3 (Spirit Detail & Board) in progress:
+Phase 3 (Spirit Detail & Board) complete:
 
 - [x] 03-01: Schema and Seed Data (board data fields)
 - [x] 03-02: Variant Tabs Component
 - [x] 03-03: Overview Section (radar chart, strengths/weaknesses)
 - [x] 03-04: Growth and Presence Track Components
 - [x] 03-05: Innate and Power Components
-- [ ] 03-06: E2E Tests
+- [x] 03-06: E2E Tests and External Links
+
+**UAT Result:** 5/13 tests passed, 8 issues diagnosed → Phase 3.1 created
+
+## Phase 3.1 Progress
+
+Phase 3.1 (Spirit Board Polish) in progress:
+
+- [ ] 03.1-01: Foundation (element icons, power DSL)
+- [ ] 03.1-02: Schema and Seed Data Update
+- [x] 03.1-03: Tabs & Radar Polish
+- [ ] 03.1-04: Growth Panel Redesign
+- [ ] 03.1-05: Presence Track Redesign
+- [ ] 03.1-06: Innate Powers Redesign
+- [ ] 03.1-07: Cards & External Links
+
+**Completed UAT Gaps:**
+1. [x] Variant tabs styling - "Base" label, gradient highlight, scroll fix
+2. [x] Radar chart visibility - dark mode contrast, spider web grid
+
+**Remaining UAT Gaps:**
+3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
+4. Growth panel (major) - correct data, typed DSL, SVG icons
+5. Presence tracks (major) - dynamic tracks, innate unlocks, visual polish
+6. Innate powers (major) - speed/range/target, 8 element SVGs, shared DSL
+7. Cards styling (minor) - rename, colored outlines, layout change
+8. External links (cosmetic) - consistent with credits page
+
+**Note:** Plans 03.1-01 and 03.1-02 have uncommitted work from previous session that needs re-execution
 
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03-05-PLAN.md
+Stopped at: Completed 03.1-03-PLAN.md
 Resume file: None
