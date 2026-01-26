@@ -3,37 +3,23 @@ import type { Doc } from "convex/_generated/dataModel";
 import { ArrowDown, ArrowUp, Equal } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import {
+  complexityBadgeColors,
+  modifierColors,
+  PLACEHOLDER_GRADIENT,
+} from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
-
-// Placeholder gradient for spirits without images
-const PLACEHOLDER_GRADIENT =
-  "linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%)";
 
 interface SpiritRowProps {
   spirit: Doc<"spirits"> & { isAspect: boolean };
   isAspect: boolean;
 }
 
-// Map complexity to badge variant/color
-const complexityColors: Record<string, string> = {
-  Low: "bg-element-plant/20 text-element-plant border-element-plant/30",
-  Moderate: "bg-element-sun/20 text-element-sun border-element-sun/30",
-  High: "bg-element-fire/20 text-element-fire border-element-fire/30",
-  "Very High": "bg-destructive/20 text-destructive border-destructive/30",
-};
-
-// Map complexity modifier to icon and color
-const modifierConfig: Record<
-  string,
-  { icon: typeof ArrowUp; color: string; label: string }
-> = {
-  easier: { icon: ArrowDown, color: "text-element-plant", label: "Easier" },
-  same: {
-    icon: Equal,
-    color: "text-muted-foreground",
-    label: "Same complexity",
-  },
-  harder: { icon: ArrowUp, color: "text-element-fire", label: "Harder" },
+// Map complexity modifier to icon (icons kept here to avoid lucide-react in lib/)
+const modifierIcons: Record<string, typeof ArrowUp> = {
+  easier: ArrowDown,
+  same: Equal,
+  harder: ArrowUp,
 };
 
 export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
@@ -118,18 +104,18 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
             <span
               className={cn(
                 "flex-shrink-0",
-                modifierConfig[spirit.complexityModifier]?.color,
+                modifierColors[spirit.complexityModifier]?.color,
               )}
-              title={modifierConfig[spirit.complexityModifier]?.label}
+              title={modifierColors[spirit.complexityModifier]?.label}
             >
               {(() => {
-                const config = modifierConfig[spirit.complexityModifier];
-                if (!config) return null;
-                const Icon = config.icon;
+                const colors = modifierColors[spirit.complexityModifier];
+                const Icon = modifierIcons[spirit.complexityModifier];
+                if (!colors || !Icon) return null;
                 return (
                   <>
                     <Icon className="h-4 w-4" />
-                    <span className="sr-only">{config.label}</span>
+                    <span className="sr-only">{colors.label}</span>
                   </>
                 );
               })()}
@@ -139,7 +125,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
               variant="outline"
               className={cn(
                 "flex-shrink-0 text-xs",
-                complexityColors[spirit.complexity] || "",
+                complexityBadgeColors[spirit.complexity] || "",
               )}
             >
               {spirit.complexity}
