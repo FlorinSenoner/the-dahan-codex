@@ -1,60 +1,30 @@
 import { ClerkProvider, useAuth } from "@clerk/clerk-react";
-import {
-  createRootRoute,
-  HeadContent,
-  Outlet,
-  Scripts,
-} from "@tanstack/react-router";
+import type { ConvexQueryClient } from "@convex-dev/react-query";
+import type { QueryClient } from "@tanstack/react-query";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
+import type { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BottomNav } from "../components/layout/bottom-nav";
-import { convex } from "../lib/convex";
 import { registerSW } from "../lib/sw-register";
-import "../styles/globals.css";
 
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "UTF-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-      { name: "theme-color", content: "#1a1a1a" },
-    ],
-    links: [
-      { rel: "manifest", href: "/manifest.json" },
-      { rel: "icon", href: "/icons/icon-192.png" },
-      { rel: "apple-touch-icon", href: "/icons/icon-192.png" },
-    ],
-  }),
-  component: RootLayout,
-  shellComponent: RootDocument,
-});
-
-function RootDocument({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en" className="dark">
-      <head>
-        <HeadContent />
-      </head>
-      <body className="min-h-screen bg-background font-body antialiased">
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
+// Router context type
+interface RouterContext {
+  queryClient: QueryClient;
+  convexClient: ConvexReactClient;
+  convexQueryClient: ConvexQueryClient;
 }
 
-function RootLayout() {
-  const [isMounted, setIsMounted] = useState(false);
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootComponent,
+});
+
+function RootComponent() {
+  const { convexClient } = Route.useRouteContext();
 
   useEffect(() => {
-    setIsMounted(true);
     registerSW();
   }, []);
-
-  if (!isMounted) {
-    return <Outlet />;
-  }
 
   return (
     <ClerkProvider
@@ -65,7 +35,7 @@ function RootLayout() {
       signInFallbackRedirectUrl="/"
       signUpFallbackRedirectUrl="/"
     >
-      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+      <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
         <Outlet />
         <BottomNav />
       </ConvexProviderWithClerk>
