@@ -10,6 +10,8 @@ interface PresenceSlotProps {
   value: number | string;
   elements?: string[];
   reclaim?: boolean;
+  innateUnlock?: string;
+  specialAbility?: string;
   type: "energy" | "cardPlays";
   index: number;
 }
@@ -18,6 +20,8 @@ export function PresenceSlot({
   value,
   elements,
   reclaim,
+  innateUnlock,
+  specialAbility,
   type,
   index,
 }: PresenceSlotProps) {
@@ -25,9 +29,9 @@ export function PresenceSlot({
   const tooltipLines: string[] = [];
 
   if (type === "energy") {
-    tooltipLines.push(`Gain ${value} Energy per turn`);
+    tooltipLines.push("Gain " + value + " Energy per turn");
   } else {
-    tooltipLines.push(`Play ${value} Card${value !== 1 ? "s" : ""} per turn`);
+    tooltipLines.push("Play " + value + " Card" + (value !== 1 ? "s" : "") + " per turn");
   }
 
   if (reclaim) {
@@ -35,7 +39,15 @@ export function PresenceSlot({
   }
 
   if (elements && elements.length > 0) {
-    tooltipLines.push(`+${elements.join(", ")}`);
+    tooltipLines.push("+" + elements.join(", "));
+  }
+
+  if (innateUnlock) {
+    tooltipLines.push("Unlocks: " + innateUnlock);
+  }
+
+  if (specialAbility) {
+    tooltipLines.push(specialAbility);
   }
 
   // Determine display value

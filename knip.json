@@ -7,7 +7,7 @@
     "app/components/ui/*.tsx",
     "app/components/spirits/*.tsx",
     "app/components/icons/**/*.{ts,tsx}",
-    "app/lib/utils.ts",
+    "app/lib/*.ts",
     "scripts/*.ts"
   ],
   "project": [
