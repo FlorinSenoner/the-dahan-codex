@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.1 (Spirit Board Polish) - IN PROGRESS
-Plan: 3 of 7 in current phase
-Status: Completed plans 03.1-01, 03.1-02, 03.1-03
-Last activity: 2026-01-26 - Completed 03.1-02-PLAN.md (schema/seed data redesign)
+Plan: 5 of 7 in current phase
+Status: Completed plans 03.1-01, 03.1-02, 03.1-03, 03.1-05
+Last activity: 2026-01-26 - Completed 03.1-05-PLAN.md (presence track redesign)
 
-Progress: [███████████████████████████░░░] 90% (28/31 plans)
+Progress: [████████████████████████████░░] 94% (29/31 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 28
-- Average duration: 6.2 min
-- Total execution time: 2.9 hours
+- Total plans completed: 29
+- Average duration: 6.1 min
+- Total execution time: 2.95 hours
 
 **By Phase:**
 
@@ -32,7 +32,7 @@ Progress: [███████████████████████
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
-| 03.1  | 3     | 28 min | 9.3 min  |
+| 03.1  | 4     | 33 min | 8.3 min  |
 
 **Recent Trend:**
 
@@ -118,6 +118,9 @@ affecting current work:
 - Growth schema: flat G1/G2/G3 with typed action objects
 - Presence tracks: flexible array of track objects (not hardcoded energy/cardPlays)
 - UniquesPowers require range and target strings for display
+- Track colors: amber/blue/purple/emerald palette for consistent presence track theming
+- Slot receives full slot object instead of individual props for cleaner API
+- Track gradient pattern: from-{color}-500/15 via-{color}-500/5 to-transparent
 
 ### Pending Todos
 
@@ -245,18 +248,18 @@ Phase 3.1 (Spirit Board Polish) in progress:
 - [x] 03.1-02: Schema and Seed Data Update
 - [x] 03.1-03: Tabs & Radar Polish
 - [ ] 03.1-04: Growth Panel Redesign
-- [ ] 03.1-05: Presence Track Redesign
+- [x] 03.1-05: Presence Track Redesign
 - [ ] 03.1-06: Innate Powers Redesign
 - [ ] 03.1-07: Cards & External Links
 
 **Completed UAT Gaps:**
 1. [x] Variant tabs styling - "Base" label, gradient highlight, scroll fix
 2. [x] Radar chart visibility - dark mode contrast, spider web grid
+5. [x] Presence tracks - gradient backgrounds, cursor-pointer, flexible array
 
 **Remaining UAT Gaps:**
 3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
 4. Growth panel (major) - correct data, typed DSL, SVG icons
-5. Presence tracks (major) - dynamic tracks, innate unlocks, visual polish
 6. Innate powers (major) - speed/range/target, 8 element SVGs, shared DSL
 7. Cards styling (minor) - rename, colored outlines, layout change
 8. External links (cosmetic) - consistent with credits page
@@ -264,5 +267,5 @@ Phase 3.1 (Spirit Board Polish) in progress:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03.1-02-PLAN.md
+Stopped at: Completed 03.1-05-PLAN.md
 Resume file: None
