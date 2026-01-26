@@ -26,8 +26,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Spirit Library** - Browsable spirit list with reference data
       and basic navigation
 - [x] **Phase 2.1: Spirit Library Polish** - UAT fixes: images, data, UI polish, SSR (INSERTED)
-- [ ] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
+- [x] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
+- [ ] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -141,12 +142,47 @@ BOARD-03, BOARD-04, BOARD-05 **Success Criteria** (what must be TRUE):
 
 Plans:
 
-- [ ] 03-01-PLAN.md — Schema extension and seed data with board information
-- [ ] 03-02-PLAN.md — Dependencies and variant tabs with URL sync
-- [ ] 03-03-PLAN.md — Overview section with radar chart
-- [ ] 03-04-PLAN.md — Growth panel and presence tracks
-- [ ] 03-05-PLAN.md — Innate powers, special rules, and card hand
-- [ ] 03-06-PLAN.md — External links and E2E verification
+- [x] 03-01-PLAN.md — Schema extension and seed data with board information
+- [x] 03-02-PLAN.md — Dependencies and variant tabs with URL sync
+- [x] 03-03-PLAN.md — Overview section with radar chart
+- [x] 03-04-PLAN.md — Growth panel and presence tracks
+- [x] 03-05-PLAN.md — Innate powers, special rules, and card hand
+- [x] 03-06-PLAN.md — External links and E2E verification
+
+### Phase 3.1: Spirit Board Polish (INSERTED)
+
+**Goal**: Address UAT issues from Phase 3 - fix DSL system for growth/innates/cards, create element SVG icons, correct schema and data, improve visual design
+**Depends on**: Phase 3 **Requirements**: From UAT gaps **Success Criteria** (what must be TRUE):
+
+1. Variant tabs show "Base" label, no vertical scroll, gradient highlight, sticky header with aspect name
+2. Radar chart visible on dark background with spider web grid lines
+3. Overview section in sidebar on desktop, collapsible on mobile
+4. Growth panel shows correct data (G1/G2/G3) with typed DSL and SVG icons for actions
+5. Presence tracks support complex spirits (Serpent pattern), gradient backgrounds, pointer cursor
+6. Innate powers have speed/range/target header, 8 element SVG icons, shared DSL with cards
+7. Cards renamed, speed-based colored outlines, two-line layout with shared DSL
+8. External links use consistent styling with credits page
+
+**UAT Gaps to Address:**
+- Tabs: "Base" label, no vertical scroll, gradient highlight, sticky header with aspect name
+- Radar: Visibility on dark bg, spider web grid, higher contrast
+- Layout: Sidebar on desktop for overview/description, collapsible on mobile
+- Growth: Schema redesign (G1/G2/G3), correct data from wiki, typed action DSL, SVG icons
+- Presence: Dynamic track support, innate unlock slots, gradient backgrounds
+- Innates: Speed/range/target header, 8 element SVGs, effect text DSL, shared with cards
+- Cards: Rename to "Cards", speed-based outline color, range/target fields
+- External Links: Consistent styling with credits page
+
+**Plans**: 7 plans
+
+Plans:
+- [ ] 03.1-01-PLAN.md — Element SVG icons and power DSL types (foundation)
+- [ ] 03.1-02-PLAN.md — Schema redesign and correct seed data
+- [ ] 03.1-03-PLAN.md — Variant tabs and radar chart visual polish
+- [ ] 03.1-04-PLAN.md — Growth panel redesign with icons
+- [ ] 03.1-05-PLAN.md — Presence track dynamic array and styling
+- [ ] 03.1-06-PLAN.md — Innate powers and card hand shared DSL
+- [ ] 03.1-07-PLAN.md — Responsive layout and external links polish
 
 ### Phase 4: PWA & Offline
 
@@ -243,14 +279,15 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 4 > 5 > 6 > 7
 
 | Phase                          | Plans Complete | Status   | Completed  |
 | ------------------------------ | -------------- | -------- | ---------- |
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
 | 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
 | 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
-| 3. Spirit Detail & Board       | 0/6            | Planned  | -          |
+| 3. Spirit Detail & Board       | 6/6            | Complete | 2026-01-26 |
+| 3.1 Spirit Board Polish        | 0/7            | Planned  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
