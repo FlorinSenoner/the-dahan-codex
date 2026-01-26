@@ -1,25 +1,23 @@
 import type { Doc } from "convex/_generated/dataModel";
 import { ChevronDown } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Heading } from "@/components/ui/typography";
-import { complexityBadgeColors, elementBadgeColors } from "@/lib/spirit-colors";
-import { cn } from "@/lib/utils";
+import { Heading, Text } from "@/components/ui/typography";
 import { PowerRadarChart } from "./power-radar-chart";
 
 interface OverviewSectionProps {
   spirit: Doc<"spirits">;
+  description?: string;
 }
 
-export function OverviewSection({ spirit }: OverviewSectionProps) {
+export function OverviewSection({ spirit, description }: OverviewSectionProps) {
   const hasStrengths = spirit.strengths && spirit.strengths.length > 0;
   const hasWeaknesses = spirit.weaknesses && spirit.weaknesses.length > 0;
   const hasContent =
-    spirit.powerRatings || hasStrengths || hasWeaknesses || spirit.description;
+    spirit.powerRatings || hasStrengths || hasWeaknesses || description;
 
   if (!hasContent) {
     return null;
@@ -27,27 +25,15 @@ export function OverviewSection({ spirit }: OverviewSectionProps) {
 
   const content = (
     <div className="space-y-6">
-      {/* Complexity and Elements Row */}
-      <div className="flex flex-wrap items-center gap-2 lg:justify-center">
-        <Badge
-          variant="outline"
-          className={cn(
-            "text-sm",
-            complexityBadgeColors[spirit.complexity] || "",
-          )}
+      {/* Description - inside collapsible */}
+      {description && (
+        <Text
+          variant="muted"
+          className="text-foreground/80 text-center lg:text-left max-w-lg mx-auto lg:mx-0 leading-relaxed"
         >
-          {spirit.complexity} Complexity
-        </Badge>
-        {spirit.elements.map((element) => (
-          <Badge
-            key={element}
-            variant="outline"
-            className={cn("text-xs", elementBadgeColors[element] || "")}
-          >
-            {element}
-          </Badge>
-        ))}
-      </div>
+          {description}
+        </Text>
+      )}
 
       {/* Power Ratings Radar Chart */}
       {spirit.powerRatings && (
