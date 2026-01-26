@@ -6,11 +6,12 @@ import {
   Outlet,
   useMatches,
   useNavigate,
+  useParams,
 } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CardHand } from "@/components/spirits/card-hand";
 import { ExternalLinks } from "@/components/spirits/external-links";
 import { GrowthPanel } from "@/components/spirits/growth-panel";
@@ -241,7 +242,10 @@ export function SpiritDetailContent({
         {spirit.growth && <GrowthPanel growth={spirit.growth} />}
 
         {spirit.presenceTracks && (
-          <PresenceTrack presenceTracks={spirit.presenceTracks} />
+          <PresenceTrack
+            presenceTracks={spirit.presenceTracks}
+            spiritSlug={spirit.slug}
+          />
         )}
 
         {spirit.innates && <InnatePowers innates={spirit.innates} />}
