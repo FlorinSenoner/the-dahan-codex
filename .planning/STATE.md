@@ -87,6 +87,8 @@ affecting current work:
 - Aspect title display: aspect name as h1, "Aspect of [Base]" as subtitle
 - Complexity modifier icons use element colors (harder=fire, easier=plant, same=muted)
 - Filter pills show element-specific colors when selected
+- Typography components: Heading (h1-h4 variants), Text (body/muted/small variants)
+- Spirit colors centralized in app/lib/spirit-colors.ts (badge colors, filter colors, PLACEHOLDER_GRADIENT)
 
 ### Pending Todos
 
@@ -102,6 +104,7 @@ None yet.
 | 004 | Improve deployment workflow | 2026-01-25 | 23c1c3e | [004-improve-deployment-workflow](./quick/004-improve-deployment-workflow/) |
 | 005 | Fix Clerk sign-in e2e test selector | 2026-01-25 | 8a054ec | [005-fix-clerk-sign-in-e2e-test-selector](./quick/005-fix-clerk-sign-in-e2e-test-selector/) |
 | 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
+| 007 | Add typography and reusable UI components | 2026-01-26 | 187fc2a | [007-add-typography-and-reusable-ui-component](./quick/007-add-typography-and-reusable-ui-component/) |
 
 ### Roadmap Evolution
 
@@ -192,6 +195,6 @@ Phase 2.1 (Spirit Library Polish) complete:
 
 ## Session Continuity
 
-Last session: 2026-01-25
-Stopped at: Phase 2.1 complete, ready for Phase 3
-Resume file: .planning/phases/02.1-spirit-library-polish/02.1-VERIFICATION.md
+Last session: 2026-01-26
+Stopped at: Quick task 007 complete, ready for Phase 3
+Resume file: None
