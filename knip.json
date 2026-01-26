@@ -4,7 +4,6 @@
     "app/routes/*.tsx",
     "app/client.tsx",
     "app/router.tsx",
-    "app/server.tsx",
     "app/components/ui/*.tsx",
     "app/lib/utils.ts",
     "scripts/*.ts"
