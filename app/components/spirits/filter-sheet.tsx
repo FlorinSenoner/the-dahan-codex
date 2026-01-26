@@ -30,39 +30,43 @@ const ELEMENT_OPTIONS = [
 const elementColors: Record<string, { selected: string; unselected: string }> =
   {
     Sun: {
-      selected: "bg-element-sun/30 text-element-sun border-element-sun/50",
+      selected:
+        "bg-element-sun/30 text-element-sun border-element-sun/50 hover:bg-element-sun/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Moon: {
-      selected: "bg-element-moon/30 text-element-moon border-element-moon/50",
+      selected:
+        "bg-element-moon/30 text-element-moon border-element-moon/50 hover:bg-element-moon/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Fire: {
-      selected: "bg-element-fire/30 text-element-fire border-element-fire/50",
+      selected:
+        "bg-element-fire/30 text-element-fire border-element-fire/50 hover:bg-element-fire/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Air: {
-      selected: "bg-element-air/30 text-element-air border-element-air/50",
+      selected:
+        "bg-element-air/30 text-element-air border-element-air/50 hover:bg-element-air/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Water: {
       selected:
-        "bg-element-water/30 text-element-water border-element-water/50",
+        "bg-element-water/30 text-element-water border-element-water/50 hover:bg-element-water/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Earth: {
       selected:
-        "bg-element-earth/30 text-element-earth border-element-earth/50",
+        "bg-element-earth/30 text-element-earth border-element-earth/50 hover:bg-element-earth/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Plant: {
       selected:
-        "bg-element-plant/30 text-element-plant border-element-plant/50",
+        "bg-element-plant/30 text-element-plant border-element-plant/50 hover:bg-element-plant/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
     Animal: {
       selected:
-        "bg-element-animal/30 text-element-animal border-element-animal/50",
+        "bg-element-animal/30 text-element-animal border-element-animal/50 hover:bg-element-animal/40",
       unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
     },
   };
@@ -73,19 +77,23 @@ const complexityColors: Record<
   { selected: string; unselected: string }
 > = {
   Low: {
-    selected: "bg-element-plant/30 text-element-plant border-element-plant/50",
+    selected:
+      "bg-element-plant/30 text-element-plant border-element-plant/50 hover:bg-element-plant/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   Moderate: {
-    selected: "bg-element-sun/30 text-element-sun border-element-sun/50",
+    selected:
+      "bg-element-sun/30 text-element-sun border-element-sun/50 hover:bg-element-sun/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   High: {
-    selected: "bg-element-fire/30 text-element-fire border-element-fire/50",
+    selected:
+      "bg-element-fire/30 text-element-fire border-element-fire/50 hover:bg-element-fire/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   "Very High": {
-    selected: "bg-destructive/30 text-destructive border-destructive/50",
+    selected:
+      "bg-destructive/30 text-destructive border-destructive/50 hover:bg-destructive/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
 };
@@ -247,25 +255,27 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
 }
 
 // Reusable filter pill component
-function FilterPill({
+export function FilterPill({
   label,
   selected,
   onClick,
   selectedClass,
   unselectedClass,
+  children,
 }: {
   label: string;
   selected: boolean;
   onClick: () => void;
   selectedClass?: string;
   unselectedClass?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={cn(
-        "min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer",
+        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer",
         "border",
         selected
           ? selectedClass || "bg-primary text-primary-foreground border-primary"
@@ -274,6 +284,10 @@ function FilterPill({
       )}
     >
       {label}
+      {children}
     </button>
   );
 }
+
+// Export color mappings for use in filter-chips.tsx
+export { elementColors, complexityColors };

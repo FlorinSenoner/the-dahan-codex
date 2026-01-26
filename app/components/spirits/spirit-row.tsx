@@ -54,6 +54,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
   return (
     <Link
       to={href}
+      viewTransition
       className={cn(
         "flex items-center gap-4 p-4 cursor-pointer",
         "active:bg-muted/50 transition-colors duration-150",
@@ -63,17 +64,15 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
       {/* Spirit image */}
       <div
         className={cn(
-          "relative flex-shrink-0",
+          "relative shrink-0 contain-[layout] overflow-hidden rounded-lg",
           isAspect ? "w-[80px] h-[80px]" : "w-[100px] h-[100px]",
         )}
+        style={{ viewTransitionName }}
       >
         {imgError || !spirit.imageUrl ? (
           <div
-            className="w-full h-full rounded-lg flex items-center justify-center text-muted-foreground"
-            style={{
-              background: PLACEHOLDER_GRADIENT,
-              viewTransitionName,
-            }}
+            className="w-full h-full flex items-center justify-center text-muted-foreground"
+            style={{ background: PLACEHOLDER_GRADIENT }}
           >
             <span className="text-2xl font-headline">
               {(isAspect ? spirit.aspectName?.[0] : spirit.name[0]) || "?"}
@@ -83,8 +82,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
           <img
             src={spirit.imageUrl}
             alt={spirit.name}
-            className="w-full h-full object-cover rounded-lg"
-            style={{ viewTransitionName }}
+            className="w-full h-full object-cover"
             onError={() => setImgError(true)}
           />
         )}
@@ -103,7 +101,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
         <div className="flex items-center gap-2">
           <h3
             className={cn(
-              "font-headline font-semibold text-foreground truncate",
+              "font-headline font-semibold text-foreground truncate contain-[layout]",
               isAspect ? "text-base" : "text-lg",
             )}
             style={{
