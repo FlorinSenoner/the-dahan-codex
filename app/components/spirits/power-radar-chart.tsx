@@ -31,11 +31,16 @@ export function PowerRadarChart({ ratings }: PowerRadarChartProps) {
     <div className="min-h-[250px] w-full max-w-[300px] mx-auto">
       <ResponsiveContainer width="100%" height={250}>
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-          <PolarGrid stroke="hsl(var(--border))" strokeOpacity={0.5} />
+          <PolarGrid
+            gridType="polygon"
+            polarRadius={[20, 40, 60, 80]}
+            stroke="oklch(0.45 0.02 90)"
+            strokeOpacity={0.6}
+          />
           <PolarAngleAxis
             dataKey="axis"
             tick={{
-              fill: "hsl(var(--muted-foreground))",
+              fill: "oklch(0.75 0.02 90)",
               fontSize: 11,
               fontWeight: 500,
             }}
@@ -43,10 +48,10 @@ export function PowerRadarChart({ ratings }: PowerRadarChartProps) {
           />
           <Radar
             dataKey="value"
-            stroke="hsl(var(--primary))"
+            stroke="oklch(0.65 0.15 145)"
             strokeWidth={2}
-            fill="hsl(var(--primary))"
-            fillOpacity={0.3}
+            fill="oklch(0.55 0.15 145)"
+            fillOpacity={0.4}
           />
         </RadarChart>
       </ResponsiveContainer>
