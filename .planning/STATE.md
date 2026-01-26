@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 2.1 (Spirit Library Polish) - COMPLETE
 Plan: 6 of 6 in current phase
 Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 008: Fix Convex SSR error
+Last activity: 2026-01-26 - Completed quick task 009: Rework element and complexity colors
 
 Progress: [██████████] 100%
 
@@ -85,8 +85,9 @@ affecting current work:
 - Downloaded images as PNG from wiki instead of converting to WebP
 - Spirit images stored locally in public/spirits/
 - Aspect title display: aspect name as h1, "Aspect of [Base]" as subtitle
-- Complexity modifier icons use element colors (harder=fire, easier=plant, same=muted)
-- Filter pills show element-specific colors when selected
+- Element colors match Spirit Island wiki icons (Air=violet, Fire=orange, Earth=grey)
+- Complexity uses independent grayscale scheme (light=easy, dark=hard)
+- Modifier colors (easier/harder) use complexity colors for visual consistency
 - Typography components: Heading (h1-h4 variants), Text (body/muted/small variants)
 - Spirit colors centralized in app/lib/spirit-colors.ts (badge colors, filter colors, PLACEHOLDER_GRADIENT)
 
@@ -106,6 +107,7 @@ None yet.
 | 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
 | 007 | Add typography and reusable UI components | 2026-01-26 | 187fc2a | [007-add-typography-and-reusable-ui-component](./quick/007-add-typography-and-reusable-ui-component/) |
 | 008 | Fix Convex SSR error with ClientOnly wrapper | 2026-01-26 | d8c00c3 | [008-fix-convex-ssr-error](./quick/008-fix-convex-ssr-error/) |
+| 009 | Rework element and complexity colors | 2026-01-26 | 8843491 | [009-rework-element-and-complexity-colors](./quick/009-rework-element-and-complexity-colors/) |
 
 ### Roadmap Evolution
 
@@ -176,8 +178,6 @@ Phase 2.1 (Spirit Library Polish) is now complete with:
 - Immense aspect added for Lightning's Swift Strike (all 7 aspects now have modifiers)
 - Spirit images scraped from wiki and stored locally (River, Lightning)
 - 44px touch targets and cursor-pointer on all interactive elements
-- Color-coded complexity modifiers (harder=fire red, easier=plant green)
-- Element-specific colors in filter pills when selected
 - View transition CSS fixed with correct ::view-transition-group(*) syntax
 - Aspect title display cleaned up (aspect name as h1, "Aspect of [Base]" subtitle)
 - Description field displayed on spirit detail pages
@@ -196,5 +196,5 @@ Phase 2.1 (Spirit Library Polish) complete:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Quick task 007 complete, ready for Phase 3
+Stopped at: Quick task 009 complete, ready for Phase 3
 Resume file: None
