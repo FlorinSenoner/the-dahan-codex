@@ -5,6 +5,7 @@
     "app/client.tsx",
     "app/router.tsx",
     "app/components/ui/*.tsx",
+    "app/components/spirits/*.tsx",
     "app/lib/utils.ts",
     "scripts/*.ts"
   ],
