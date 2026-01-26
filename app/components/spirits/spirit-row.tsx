@@ -25,16 +25,18 @@ const modifierIcons: Record<string, typeof ArrowUp> = {
 export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
   const [imgError, setImgError] = useState(false);
 
-  // Build the URL - aspects use query param
+  // Build the URL - aspects use path-based format
+  const aspectSlug = spirit.aspectName?.toLowerCase().replace(/\s+/g, "-");
   const href = isAspect
-    ? `/spirits/${spirit.slug}?aspect=${spirit.aspectName?.toLowerCase()}`
+    ? `/spirits/${spirit.slug}/${aspectSlug}`
     : `/spirits/${spirit.slug}`;
 
   // Display name includes aspect name if applicable
   const displayName = isAspect ? `${spirit.aspectName}` : spirit.name;
 
+  // View transition names must match detail page
   const viewTransitionName = isAspect
-    ? `spirit-aspect-${spirit.aspectName?.toLowerCase()}`
+    ? `spirit-image-${spirit.slug}-${aspectSlug}`
     : `spirit-image-${spirit.slug}`;
 
   return (
@@ -92,7 +94,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
             )}
             style={{
               viewTransitionName: isAspect
-                ? undefined
+                ? `spirit-name-${spirit.slug}-${aspectSlug}`
                 : `spirit-name-${spirit.slug}`,
             }}
           >
