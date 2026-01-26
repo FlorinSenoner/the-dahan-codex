@@ -161,7 +161,7 @@ function SpiritDetailContent() {
         <Heading
           variant="h1"
           as="h1"
-          className="text-foreground text-center mb-2 contain-[layout]"
+          className="text-foreground text-center mb-2"
           style={{
             viewTransitionName: `spirit-name-${slug}`,
           }}

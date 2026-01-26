@@ -89,7 +89,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
         <div className="flex items-center gap-2">
           <h3
             className={cn(
-              "font-headline font-semibold text-foreground truncate contain-[layout]",
+              "font-headline font-semibold text-foreground truncate",
               isAspect ? "text-base" : "text-lg",
             )}
             style={{
