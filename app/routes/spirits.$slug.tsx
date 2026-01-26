@@ -11,9 +11,12 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
+import { CardHand } from "@/components/spirits/card-hand";
 import { GrowthPanel } from "@/components/spirits/growth-panel";
+import { InnatePowers } from "@/components/spirits/innate-powers";
 import { OverviewSection } from "@/components/spirits/overview-section";
 import { PresenceTrack } from "@/components/spirits/presence-track";
+import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
@@ -223,11 +226,19 @@ export function SpiritDetailContent({
 
       <OverviewSection spirit={spirit} />
 
+      {spirit.specialRules && spirit.specialRules.length > 0 && (
+        <SpecialRules rules={spirit.specialRules} />
+      )}
+
       {spirit.growth && <GrowthPanel growth={spirit.growth} />}
 
       {spirit.presenceTracks && (
         <PresenceTrack presenceTracks={spirit.presenceTracks} />
       )}
+
+      {spirit.innates && <InnatePowers innates={spirit.innates} />}
+
+      {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
     </main>
   );
 }
