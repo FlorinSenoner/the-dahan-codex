@@ -430,9 +430,231 @@ export const seedSpirits = mutation({
       complexityModifier: "harder",
     });
 
+    // Seed Fractured Days Split the Sky (Jagged Earth, Very High complexity)
+    // Unique mechanic: Choose-from-four growth with OR options
+    await ctx.db.insert("spirits", {
+      name: "Fractured Days Split the Sky",
+      slug: "fractured-days-split-the-sky",
+      complexity: "Very High",
+      summary:
+        "Manipulates time with Days That Never Were cards and choose-any growth options.",
+      description:
+        "Fractured Days is a time-manipulation spirit that plays with a unique 'Days That Never Were' card pool. Each turn, you gain Time markers which fuel special abilities. Growth is highly flexible - choose any combination of options rather than picking one. The spirit excels at adapting to any situation but requires careful planning across multiple timelines.",
+      expansionId: jaggedEarthId,
+      elements: ["Moon", "Air"],
+      strengths: [
+        "Extremely flexible growth options",
+        "Time markers enable powerful abilities",
+        "Days That Never Were provide unique solutions",
+        "Strong at adapting to changing situations",
+        "Can manipulate events across time",
+      ],
+      weaknesses: [
+        "Very complex decision space",
+        "Requires tracking multiple resources",
+        "Days That Never Were are one-shot",
+        "Needs time to build up Time markers",
+        "Weak without proper setup",
+      ],
+      powerRatings: {
+        offense: 2,
+        defense: 3,
+        control: 5,
+        fear: 3,
+        utility: 5,
+      },
+      specialRules: [
+        {
+          name: "Days That Never Were",
+          description:
+            "Setup: Shuffle the 'Days That Never Were' cards face-down as a separate pool. Each has a one-time effect that can change the game's timeline.",
+        },
+        {
+          name: "Time Markers",
+          description:
+            "You may spend Time markers for various effects including playing Days That Never Were cards and boosting powers.",
+        },
+      ],
+      growth: {
+        type: "pick-any",
+        options: [
+          {
+            id: "G1",
+            actions: [],
+            orActions: [
+              {
+                label: "1 Time",
+                actions: [{ type: "gainTime", amount: 1 }],
+              },
+              {
+                label: "2 Card Plays (this turn)",
+                actions: [{ type: "gainCardPlays", amount: 2 }],
+              },
+            ],
+          },
+          {
+            id: "G2",
+            actions: [],
+            orActions: [
+              {
+                label: "Reclaim one",
+                actions: [{ type: "reclaim", variant: "one" }],
+              },
+              {
+                label: "+1 Range on all Powers",
+                actions: [{ type: "gainRange", amount: 1 }],
+              },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [],
+            orActions: [
+              {
+                label: "Add a Presence",
+                actions: [{ type: "addPresence", range: 3 }],
+              },
+              {
+                label: "Gain Power Card",
+                actions: [{ type: "gainPowerCard" }],
+              },
+            ],
+          },
+          {
+            id: "G4",
+            actions: [],
+            orActions: [
+              {
+                label: "2 Energy",
+                actions: [{ type: "gainEnergy", amount: 2 }],
+              },
+              {
+                label: "Forget a Power Card to gain 2 Time",
+                actions: [
+                  { type: "forgetPowerCard" },
+                  { type: "gainTime", amount: 2 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "indigo",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "violet",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3, reclaim: true },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+        ],
+      },
+      innates: [
+        {
+          name: "Pour Time Sideways",
+          speed: "Fast",
+          range: "1",
+          target: "Any Land",
+          thresholds: [
+            {
+              elements: { Moon: 1, Air: 1 },
+              effect:
+                "Gather 1 Explorer. Or, if target land has Dahan, move 1 Dahan to an adjacent land.",
+            },
+            {
+              elements: { Moon: 2, Air: 2 },
+              effect: "You may also Push 1 Explorer or 1 Dahan.",
+            },
+            {
+              elements: { Moon: 3, Air: 3 },
+              effect:
+                "You may also add 1 Strife. If you do, 1 Damage to Invaders.",
+            },
+          ],
+        },
+        {
+          name: "Absolute Stasis",
+          speed: "Slow",
+          range: "1",
+          target: "Any Land",
+          thresholds: [
+            {
+              elements: { Sun: 2, Moon: 2, Air: 2 },
+              effect:
+                "Invaders and Dahan in target land do not participate in Ravage or any Action this turn.",
+            },
+          ],
+        },
+      ],
+      uniquePowers: [
+        {
+          name: "The Past Returns Again",
+          cost: 0,
+          speed: "Fast",
+          elements: ["Moon", "Air"],
+          range: "1",
+          target: "Any Land",
+          description:
+            "The next time Dahan would be Destroyed in target land, instead return them to full health.",
+        },
+        {
+          name: "Blur the Arc of Years",
+          cost: 1,
+          speed: "Slow",
+          elements: ["Moon", "Air"],
+          range: "1",
+          target: "Any Land",
+          description:
+            "Push up to 2 Explorers and 1 Town. If you have 2 Time, you may instead Push up to 4 Explorers and 2 Towns.",
+        },
+        {
+          name: "Slip the Flow of Time",
+          cost: 1,
+          speed: "Fast",
+          elements: ["Moon", "Air"],
+          range: "Any Spirit",
+          target: "Any Spirit",
+          description:
+            "Target Spirit may Repeat a Power Card they played this turn by paying its cost again. You may spend 1 Time to do this during the Fast phase.",
+        },
+        {
+          name: "Sever the Ties Between Instants",
+          cost: 3,
+          speed: "Slow",
+          elements: ["Moon", "Air"],
+          range: "0",
+          target: "Any Land",
+          description:
+            "Destroy 1 Town. Destroy 1 Explorer. Add 1 Strife to an Invader.",
+        },
+      ],
+      wikiUrl:
+        "https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky",
+    });
+
     return {
       status: "seeded",
-      message: "Created 3 expansions, 2 base spirits, 7 aspects",
+      message: "Created 3 expansions, 3 base spirits, 7 aspects",
     };
   },
 });
@@ -869,10 +1091,231 @@ export const reseedSpirits = mutation({
       complexityModifier: "harder",
     });
 
+    // Reseed Fractured Days Split the Sky (Jagged Earth, Very High complexity)
+    await ctx.db.insert("spirits", {
+      name: "Fractured Days Split the Sky",
+      slug: "fractured-days-split-the-sky",
+      complexity: "Very High",
+      summary:
+        "Manipulates time with Days That Never Were cards and choose-any growth options.",
+      description:
+        "Fractured Days is a time-manipulation spirit that plays with a unique 'Days That Never Were' card pool. Each turn, you gain Time markers which fuel special abilities. Growth is highly flexible - choose any combination of options rather than picking one. The spirit excels at adapting to any situation but requires careful planning across multiple timelines.",
+      expansionId: jaggedEarthId,
+      elements: ["Moon", "Air"],
+      strengths: [
+        "Extremely flexible growth options",
+        "Time markers enable powerful abilities",
+        "Days That Never Were provide unique solutions",
+        "Strong at adapting to changing situations",
+        "Can manipulate events across time",
+      ],
+      weaknesses: [
+        "Very complex decision space",
+        "Requires tracking multiple resources",
+        "Days That Never Were are one-shot",
+        "Needs time to build up Time markers",
+        "Weak without proper setup",
+      ],
+      powerRatings: {
+        offense: 2,
+        defense: 3,
+        control: 5,
+        fear: 3,
+        utility: 5,
+      },
+      specialRules: [
+        {
+          name: "Days That Never Were",
+          description:
+            "Setup: Shuffle the 'Days That Never Were' cards face-down as a separate pool. Each has a one-time effect that can change the game's timeline.",
+        },
+        {
+          name: "Time Markers",
+          description:
+            "You may spend Time markers for various effects including playing Days That Never Were cards and boosting powers.",
+        },
+      ],
+      growth: {
+        type: "pick-any",
+        options: [
+          {
+            id: "G1",
+            actions: [],
+            orActions: [
+              {
+                label: "1 Time",
+                actions: [{ type: "gainTime", amount: 1 }],
+              },
+              {
+                label: "2 Card Plays (this turn)",
+                actions: [{ type: "gainCardPlays", amount: 2 }],
+              },
+            ],
+          },
+          {
+            id: "G2",
+            actions: [],
+            orActions: [
+              {
+                label: "Reclaim one",
+                actions: [{ type: "reclaim", variant: "one" }],
+              },
+              {
+                label: "+1 Range on all Powers",
+                actions: [{ type: "gainRange", amount: 1 }],
+              },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [],
+            orActions: [
+              {
+                label: "Add a Presence",
+                actions: [{ type: "addPresence", range: 3 }],
+              },
+              {
+                label: "Gain Power Card",
+                actions: [{ type: "gainPowerCard" }],
+              },
+            ],
+          },
+          {
+            id: "G4",
+            actions: [],
+            orActions: [
+              {
+                label: "2 Energy",
+                actions: [{ type: "gainEnergy", amount: 2 }],
+              },
+              {
+                label: "Forget a Power Card to gain 2 Time",
+                actions: [
+                  { type: "forgetPowerCard" },
+                  { type: "gainTime", amount: 2 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "indigo",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "violet",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3, reclaim: true },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+        ],
+      },
+      innates: [
+        {
+          name: "Pour Time Sideways",
+          speed: "Fast",
+          range: "1",
+          target: "Any Land",
+          thresholds: [
+            {
+              elements: { Moon: 1, Air: 1 },
+              effect:
+                "Gather 1 Explorer. Or, if target land has Dahan, move 1 Dahan to an adjacent land.",
+            },
+            {
+              elements: { Moon: 2, Air: 2 },
+              effect: "You may also Push 1 Explorer or 1 Dahan.",
+            },
+            {
+              elements: { Moon: 3, Air: 3 },
+              effect:
+                "You may also add 1 Strife. If you do, 1 Damage to Invaders.",
+            },
+          ],
+        },
+        {
+          name: "Absolute Stasis",
+          speed: "Slow",
+          range: "1",
+          target: "Any Land",
+          thresholds: [
+            {
+              elements: { Sun: 2, Moon: 2, Air: 2 },
+              effect:
+                "Invaders and Dahan in target land do not participate in Ravage or any Action this turn.",
+            },
+          ],
+        },
+      ],
+      uniquePowers: [
+        {
+          name: "The Past Returns Again",
+          cost: 0,
+          speed: "Fast",
+          elements: ["Moon", "Air"],
+          range: "1",
+          target: "Any Land",
+          description:
+            "The next time Dahan would be Destroyed in target land, instead return them to full health.",
+        },
+        {
+          name: "Blur the Arc of Years",
+          cost: 1,
+          speed: "Slow",
+          elements: ["Moon", "Air"],
+          range: "1",
+          target: "Any Land",
+          description:
+            "Push up to 2 Explorers and 1 Town. If you have 2 Time, you may instead Push up to 4 Explorers and 2 Towns.",
+        },
+        {
+          name: "Slip the Flow of Time",
+          cost: 1,
+          speed: "Fast",
+          elements: ["Moon", "Air"],
+          range: "Any Spirit",
+          target: "Any Spirit",
+          description:
+            "Target Spirit may Repeat a Power Card they played this turn by paying its cost again. You may spend 1 Time to do this during the Fast phase.",
+        },
+        {
+          name: "Sever the Ties Between Instants",
+          cost: 3,
+          speed: "Slow",
+          elements: ["Moon", "Air"],
+          range: "0",
+          target: "Any Land",
+          description:
+            "Destroy 1 Town. Destroy 1 Explorer. Add 1 Strife to an Invader.",
+        },
+      ],
+      wikiUrl:
+        "https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky",
+    });
+
     return {
       status: "reseeded",
       message:
-        "Deleted all data and created 3 expansions, 2 base spirits, 7 aspects",
+        "Deleted all data and created 3 expansions, 3 base spirits, 7 aspects",
     };
   },
 });
