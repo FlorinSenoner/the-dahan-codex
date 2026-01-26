@@ -6,10 +6,10 @@ with interactive board state.
 
 ## Tech Stack
 
-- **TanStack Start** (React 19, TypeScript, file-based routing)
+- **TanStack Router** (React 19, TypeScript, file-based routing, client-side SPA)
 - **Convex** (real-time backend, cloud-first)
 - **Clerk** (authentication)
-- **Cloudflare Workers** (deployment)
+- **Cloudflare Pages** (deployment)
 - **Workbox** (PWA service worker, manual generation)
 - **Biome** (linting/formatting - never use Claude for lint work)
 
@@ -17,7 +17,7 @@ with interactive board state.
 
 ```
 app/routes/          # File-based routes (TanStack Router)
-app/lib/             # Shared utilities (convex.ts, sw-register.ts)
+app/lib/             # Shared utilities (sw-register.ts, spirit-colors.ts)
 convex/              # Backend functions organized by domain
 convex/schema.ts     # Database schema (source of truth for types)
 e2e/                 # Playwright E2E tests
@@ -29,11 +29,10 @@ public/              # Static assets, PWA manifest
 ## Commands
 
 ```bash
-pnpm dev              # Dev server (port 5173)
+pnpm dev              # Dev server (port 3000)
 npx convex dev        # Convex dev server (run in parallel)
 pnpm build            # Production build (includes SW generation)
-pnpm preview          # Preview with Wrangler
-pnpm deploy           # Deploy to Cloudflare Workers
+pnpm preview          # Preview production build locally
 pnpm lint:fix         # Fix lint issues with Biome
 pnpm typecheck        # TypeScript check
 pnpm test:e2e         # Run Playwright tests
