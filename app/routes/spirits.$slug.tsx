@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Heading, Text } from "@/components/ui/typography";
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -210,20 +211,22 @@ function SpiritDetailPage() {
         </div>
 
         {/* Spirit name */}
-        <h1
-          className="font-serif text-2xl font-bold text-foreground text-center mb-2 contain-[layout]"
+        <Heading
+          variant="h1"
+          as="h1"
+          className="text-foreground text-center mb-2 contain-[layout]"
           style={{
             viewTransitionName: isAspect ? undefined : `spirit-name-${slug}`,
           }}
         >
           {displayName}
-        </h1>
+        </Heading>
 
         {/* Aspect indicator */}
         {isAspect && (
-          <p className="text-center text-muted-foreground text-sm mb-4">
+          <Text variant="muted" className="text-center mb-4">
             Aspect of {spirit.name}
-          </p>
+          </Text>
         )}
 
         {/* Complexity badge */}
@@ -240,15 +243,18 @@ function SpiritDetailPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-muted-foreground text-center max-w-md mx-auto mb-4">
+        <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
           {spirit.summary}
-        </p>
+        </Text>
 
         {/* Detailed description (if available) */}
         {spirit.description && (
-          <p className="text-foreground/80 text-center max-w-lg mx-auto mb-6 text-sm leading-relaxed">
+          <Text
+            variant="muted"
+            className="text-foreground/80 text-center max-w-lg mx-auto mb-6 leading-relaxed"
+          >
             {spirit.description}
-          </p>
+          </Text>
         )}
 
         {/* Elements */}
@@ -266,9 +272,9 @@ function SpiritDetailPage() {
 
         {/* Placeholder for future content (Phase 3) */}
         <div className="border border-border rounded-lg p-4 bg-card">
-          <p className="text-sm text-muted-foreground text-center">
+          <Text variant="muted" className="text-center">
             Overview, Growth, and Presence tracks coming in Phase 3
-          </p>
+          </Text>
         </div>
       </main>
     </div>
