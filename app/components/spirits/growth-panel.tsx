@@ -1,13 +1,22 @@
 import type { Doc } from "convex/_generated/dataModel";
 import { GrowthIcon } from "@/components/icons/growth";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Heading, Text } from "@/components/ui/typography";
 
 // Type for growth action from schema
 type GrowthAction = NonNullable<
   Doc<"spirits">["growth"]
 >["options"][0]["actions"][0];
+
+// Type for orActions option
+type OrActionOption = NonNullable<
+  NonNullable<Doc<"spirits">["growth"]>["options"][0]["orActions"]
+>[0];
 
 // Type for growth option from schema
 type GrowthOption = NonNullable<Doc<"spirits">["growth"]>["options"][0];
@@ -28,67 +37,136 @@ function isNewGrowthFormat(growth: unknown): growth is GrowthData {
 }
 
 /**
- * Format a growth action into short, readable text
+ * Get short modifier text for an action (e.g., "+2", "Range 1", "Major")
+ * Returns null for actions that don't need modifier text
  */
-function formatGrowthActionShort(action: GrowthAction): string {
+function getActionModifier(action: GrowthAction): string | null {
   switch (action.type) {
     case "reclaim":
-      return action.variant === "all" ? "Reclaim All" : "Reclaim One";
-    case "gainEnergy": {
-      const amt = action.amount ?? 1;
-      return `+${amt} Energy`;
+      return null; // Icon is self-explanatory
+    case "gainEnergy":
+      return action.amount !== undefined ? `+${action.amount}` : null;
+    case "addPresence": {
+      const range = action.range ?? 0;
+      const terrain = action.terrain ? ` ${action.terrain}` : "";
+      return `R${range}${terrain}`;
     }
     case "gainPowerCard":
-      return action.cardType === "major" ? "Gain Major" : "Gain Card";
+      return action.cardType === "major" ? "Major" : null;
+    case "push":
+      return action.count !== undefined ? `${action.count}` : null;
+    case "damage":
+      return action.amount !== undefined ? `${action.amount}` : null;
+    case "gainElement":
+      return action.element ?? null;
+    default:
+      return null;
+  }
+}
+
+/**
+ * Get full action description for tooltip
+ */
+function getActionDescription(action: GrowthAction): string {
+  switch (action.type) {
+    case "reclaim":
+      return action.variant === "all"
+        ? "Reclaim All Cards"
+        : "Reclaim One Card";
+    case "gainEnergy": {
+      const amt = action.amount ?? 1;
+      return `Gain ${amt} Energy`;
+    }
+    case "gainPowerCard":
+      return action.cardType === "major"
+        ? "Gain Major Power"
+        : "Gain Power Card";
     case "addPresence": {
       const range = action.range ?? 0;
       const terrain = action.terrain ? ` (${action.terrain})` : "";
-      return `+Presence R${range}${terrain}`;
+      return `Add Presence at Range ${range}${terrain}`;
     }
     case "push": {
       const count = action.count ?? 1;
-      const piece = action.pieceType ?? "Invader";
-      return `Push ${count} ${piece}`;
+      const piece = action.pieceType ?? "Invaders";
+      const target = action.target ? ` from ${action.target}` : "";
+      return `Push ${count} ${piece}${target}`;
     }
     case "damage": {
       const amount = action.amount ?? 1;
-      return `${amount} Damage`;
+      const target = action.target ?? "in a land";
+      return `Deal ${amount} Damage ${target}`;
     }
     case "gainElement":
-      return `+${action.element}`;
+      return `Gain ${action.element} Element`;
     default:
       return action.type;
   }
 }
 
 /**
- * Individual action badge with icon and label
+ * Individual action icon with tooltip
  */
-function GrowthActionBadge({ action }: { action: GrowthAction }) {
+function GrowthActionIcon({ action }: { action: GrowthAction }) {
   const Icon = GrowthIcon[action.type];
-  const label = formatGrowthActionShort(action);
+  const modifier = getActionModifier(action);
+  const description = getActionDescription(action);
 
   return (
-    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-background/50 border border-border/50">
-      {Icon && <Icon size={16} className="text-primary shrink-0" />}
-      <span className="text-xs text-muted-foreground">{label}</span>
+    <Tooltip delayDuration={100}>
+      <TooltipTrigger asChild>
+        <div className="flex items-center gap-1 cursor-default">
+          {Icon && (
+            <Icon size={32} className="text-muted-foreground shrink-0" />
+          )}
+          {modifier && (
+            <span className="text-sm font-medium text-muted-foreground">
+              {modifier}
+            </span>
+          )}
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>{description}</TooltipContent>
+    </Tooltip>
+  );
+}
+
+/**
+ * Render orActions as "Option A OR Option B" with visual separator
+ */
+function OrActionsGroup({ orActions }: { orActions: OrActionOption[] }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {orActions.map((orOption, idx) => (
+        <div key={orOption.label} className="flex items-center gap-2">
+          {idx > 0 && (
+            <span className="text-xs font-semibold text-amber-500 uppercase">
+              or
+            </span>
+          )}
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-background/50 border border-border/50">
+            <span className="text-xs text-muted-foreground mr-1">
+              {orOption.label}:
+            </span>
+            {orOption.actions.map((action, actionIdx) => {
+              const actionKey = `${orOption.label}-${action.type}-${actionIdx}`;
+              return <GrowthActionIcon key={actionKey} action={action} />;
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
 /**
- * Single growth option card (G1, G2, G3, etc.)
+ * Single growth option card (G1, G2, G3, etc.) with subgrid layout
  */
 function GrowthOptionCard({ option }: { option: GrowthOption }) {
-  return (
-    <Card className="bg-muted/30 group relative">
-      {/* G1/G2/G3 label - visible on hover */}
-      <div className="absolute -top-2 -left-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-        <Badge variant="secondary" className="text-xs">
-          {option.id}
-        </Badge>
-      </div>
+  const hasOrActions = option.orActions && option.orActions.length > 0;
 
+  return (
+    <div className="row-span-2 grid grid-rows-subgrid gap-2 bg-muted/30 rounded-lg p-3 group relative">
       {/* Cost badge if present */}
       {option.cost !== undefined && option.cost > 0 && (
         <div className="absolute -top-2 -right-2 z-10">
@@ -101,13 +179,30 @@ function GrowthOptionCard({ option }: { option: GrowthOption }) {
         </div>
       )}
 
-      <CardContent className="p-3 flex flex-wrap gap-2">
+      {/* Row 1: Actions with icons */}
+      <div className="flex flex-wrap items-center gap-3">
+        {/* Repeat badge if present */}
+        {option.repeat && option.repeat > 1 && (
+          <Badge variant="secondary" className="text-xs">
+            x{option.repeat}
+          </Badge>
+        )}
+
+        {/* Regular actions */}
         {option.actions.map((action, idx) => {
           const actionKey = `${option.id}-${action.type}-${idx}`;
-          return <GrowthActionBadge key={actionKey} action={action} />;
+          return <GrowthActionIcon key={actionKey} action={action} />;
         })}
-      </CardContent>
-    </Card>
+
+        {/* Or actions for complex spirits */}
+        {hasOrActions && <OrActionsGroup orActions={option.orActions!} />}
+      </div>
+
+      {/* Row 2: Option ID (hover reveal) */}
+      <div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+        {option.id}
+      </div>
+    </div>
   );
 }
 
@@ -125,11 +220,15 @@ function GrowthPanelContent({ growth }: { growth: GrowthData }) {
         </Heading>
         {type && (
           <Badge variant="outline" className="text-xs">
-            {type === "pick-two" ? "Pick Two" : "Pick One"}
+            {type === "pick-two"
+              ? "Pick Two"
+              : type === "pick-any"
+                ? "Pick Any"
+                : "Pick One"}
           </Badge>
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 grid-rows-[repeat(2,auto)]">
         {options.map((option) => (
           <GrowthOptionCard key={option.id} option={option} />
         ))}
