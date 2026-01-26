@@ -136,11 +136,17 @@ BOARD-03, BOARD-04, BOARD-05 **Success Criteria** (what must be TRUE):
 4. Presence tracks render as discrete slots showing energy, card plays,
    elements, reclaim
 5. Links to wiki, FAQ, and external resources work from spirit detail page
-   **Plans**: TBD
+
+**Plans**: 6 plans
 
 Plans:
 
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Schema extension and seed data with board information
+- [ ] 03-02-PLAN.md — Dependencies and variant tabs with URL sync
+- [ ] 03-03-PLAN.md — Overview section with radar chart
+- [ ] 03-04-PLAN.md — Growth panel and presence tracks
+- [ ] 03-05-PLAN.md — Innate powers, special rules, and card hand
+- [ ] 03-06-PLAN.md — External links and E2E verification
 
 ### Phase 4: PWA & Offline
 
@@ -244,7 +250,7 @@ development:
 | 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
 | 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
 | 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
-| 3. Spirit Detail & Board       | 0/TBD          | Pending  | -          |
+| 3. Spirit Detail & Board       | 0/6            | Planned  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
