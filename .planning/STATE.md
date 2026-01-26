@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3 (Spirit Detail & Board) - IN PROGRESS
-Plan: 4 of 6 in current phase
-Status: Plan 03-04 complete
-Last activity: 2026-01-26 - Completed 03-04-PLAN.md (Growth and Presence Tracks)
+Plan: 5 of 6 in current phase
+Status: Plan 03-05 complete
+Last activity: 2026-01-26 - Completed 03-05-PLAN.md (Innate and Power Components)
 
-Progress: [████████████████████████] 100% (24/24 plans)
+Progress: [█████████████████████████] 100% (25/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 24
-- Average duration: 6.2 min
-- Total execution time: 2.5 hours
+- Total plans completed: 25
+- Average duration: 6.1 min
+- Total execution time: 2.6 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [███████████████████████
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
-| 03    | 4     | 15 min | 3.8 min  |
+| 03    | 5     | 20 min | 4.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min, 4 min, 4 min, 3 min, 4 min
+- Last 5 plans: 4 min, 4 min, 3 min, 4 min, 5 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -104,6 +104,10 @@ affecting current work:
 - Presence slot touch targets: 44px (11 tailwind units) for WCAG compliance
 - Tooltip delay: 100ms for quick hover feedback
 - Reclaim slots show "R" with amber styling to match Spirit Island aesthetic
+- Fast/Slow badges use amber/blue colors consistently across all power displays
+- Element threshold keys generated from element-count pairs to avoid array index keys
+- SpecialRules returns null when no rules exist (section hidden entirely)
+- CardHand uses negative margin (-mx-4 px-4) for edge-to-edge scroll on mobile
 
 ### Pending Todos
 
@@ -217,11 +221,11 @@ Phase 3 (Spirit Detail & Board) in progress:
 - [x] 03-02: Variant Tabs Component
 - [x] 03-03: Overview Section (radar chart, strengths/weaknesses)
 - [x] 03-04: Growth and Presence Track Components
-- [ ] 03-05: Innate and Power Components
+- [x] 03-05: Innate and Power Components
 - [ ] 03-06: E2E Tests
 
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03-04-PLAN.md
+Stopped at: Completed 03-05-PLAN.md
 Resume file: None
