@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.2 (Spirit Board Refinements) - IN PROGRESS
-Plan: 4 of 6 in current phase
-Status: Completed plans 03.2-01, 03.2-03, 03.2-04, 03.2-05
-Last activity: 2026-01-27 - Completed 03.2-04-PLAN.md (presence tracks & cards polish)
+Plan: 5 of 6 in current phase
+Status: Completed plans 03.2-01, 03.2-02, 03.2-03, 03.2-04, 03.2-05
+Last activity: 2026-01-27 - Completed 03.2-02-PLAN.md (minimalist tabs with scroll sync)
 
-Progress: [█████████████████████████████░] 97% (34/36 plans)
+Progress: [█████████████████████████████░] 97% (35/36 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 33
-- Average duration: 5.6 min
-- Total execution time: 3.1 hours
+- Total plans completed: 34
+- Average duration: 5.5 min
+- Total execution time: 3.2 hours
 
 **By Phase:**
 
@@ -33,11 +33,11 @@ Progress: [███████████████████████
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
-| 03.2  | 3     | 8 min  | 2.7 min  |
+| 03.2  | 4     | 13 min | 3.3 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 8 min, 12 min, 2 min, 3 min
+- Last 5 plans: 8 min, 12 min, 2 min, 3 min, 5 min
 - Trend: Stable (polish plans are quick)
 
 _Updated after each plan completion_
@@ -138,6 +138,9 @@ affecting current work:
 - Collapsible Hand section with card count badge for cards organization
 - Grid layout (1-col mobile, 2-col desktop) for cards instead of horizontal scroll
 - GitBranch icon for connectsTo tracks, Sprout icon for unlocksGrowth tracks
+- Flat border-b-2 tab indicator instead of gradient background for cleaner tabs
+- rootMargin -57px for header height offset in scroll detection
+- Pills always visible below name, description inside collapsible overview
 
 ### Pending Todos
 
@@ -287,7 +290,7 @@ Phase 3.1 (Spirit Board Polish) in progress:
 Phase 3.2 (Spirit Board Refinements) in progress:
 
 - [x] 03.2-01: Foundation (react-intersection-observer, spirit track colors, schema extensions)
-- [ ] 03.2-02: Minimalist Tabs with Scroll Sync
+- [x] 03.2-02: Minimalist Tabs with Scroll Sync (flat border indicator, scroll-aware header, pills below name)
 - [x] 03.2-03: Growth Panel CSS Subgrid and Tooltips
 - [x] 03.2-04: Presence Tracks & Cards Polish (spirit-specific colors, collapsible Hand section)
 - [x] 03.2-05: Innate Powers Border-Only Speed
@@ -296,5 +299,5 @@ Phase 3.2 (Spirit Board Refinements) in progress:
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-04-PLAN.md
+Stopped at: Completed 03.2-02-PLAN.md
 Resume file: None
