@@ -1,8 +1,18 @@
 # Stack Research
 
 **Domain:** Spirit Island companion PWA (offline-first, game reference app)
-**Researched:** 2025-01-24 **Confidence:** MEDIUM (TanStack Start PWA
-integration has known gaps requiring custom solutions)
+**Researched:** 2025-01-24 **Updated:** 2026-01-26 **Confidence:** HIGH
+(Simplified to client-only SPA after removing SSR complexity)
+
+> **ARCHITECTURE DECISION (2026-01-26):** This app is a **client-only SPA**.
+> SSR was removed in quick-010 because:
+>
+> - SEO is not important for this app
+> - SSR added auth hydration complexity with Clerk/Convex
+> - Cloudflare Pages (static) is simpler/cheaper than Workers
+> - PWA with service worker caching provides fast loads anyway
+>
+> **DO NOT re-introduce SSR** unless there's a compelling new requirement.
 
 ## Recommended Stack
 
@@ -10,8 +20,7 @@ integration has known gaps requiring custom solutions)
 
 | Technology      | Version                      | Purpose                    | Why Recommended                                                                                                              | Confidence |
 | --------------- | ---------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| TanStack Start  | ^1.157.x                     | Full-stack React framework | SSR, streaming, server functions, Vite-native. Official Cloudflare Workers support. RC but API-stable.                       | HIGH       |
-| TanStack Router | ^1.157.x                     | Type-safe routing          | File-based routing, search params, loader patterns. Comes with TanStack Start.                                               | HIGH       |
+| TanStack Router | ^1.157.x                     | Type-safe routing          | File-based routing, search params, loader patterns. Client-side only.                                                        | HIGH       |
 | TanStack Query  | ^5.x                         | Server state management    | Automatic caching, background refetching, optimistic updates. Best-in-class for async state.                                 | HIGH       |
 | Convex          | ^1.25.0+                     | Backend/database           | Reactive queries over WebSocket, TypeScript-first, serverless. Tight TanStack Query integration via @convex-dev/react-query. | HIGH       |
 | Clerk           | ^5.59.x (@clerk/clerk-react) | Authentication             | First-party Convex integration, JWT templates, social auth, MFA. ConvexProviderWithClerk simplifies setup.                   | HIGH       |
@@ -53,9 +62,8 @@ additional effort: 1-2 days.
 
 | Technology              | Version | Purpose           | Why Recommended                                                                      | Confidence |
 | ----------------------- | ------- | ----------------- | ------------------------------------------------------------------------------------ | ---------- |
-| Cloudflare Workers      | N/A     | Edge runtime      | Official TanStack Start support via @cloudflare/vite-plugin. Global edge deployment. | HIGH       |
-| Wrangler                | Latest  | CF Workers CLI    | Official Cloudflare deployment tool. Required for deploy script.                     | HIGH       |
-| @cloudflare/vite-plugin | Latest  | Build integration | Required for TanStack Start + Workers. Replaces older Nitro preset approach.         | HIGH       |
+| Cloudflare Pages        | N/A     | Static hosting    | Free tier, global CDN, automatic preview deployments. Perfect for client-only SPA.   | HIGH       |
+| cloudflare/pages-action | Latest  | GitHub Action     | Official deployment action for Pages. Simpler than wrangler for static sites.        | HIGH       |
 
 ### Development Tools
 
@@ -119,9 +127,11 @@ pnpm add -D typescript @types/react @types/react-dom @cloudflare/vite-plugin wra
 
 | Avoid                                | Why                                                             | Use Instead                                                 |
 | ------------------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------- |
-| vite-plugin-pwa                      | Incompatible with TanStack Start (Vite 6 environment API issue) | Manual Workbox setup with custom Vite plugin                |
-| Serwist with TanStack Start          | Same incompatibility as vite-plugin-pwa                         | Manual Workbox setup                                        |
-| @tanstack/start (old package)        | Deprecated package name                                         | @tanstack/react-start                                       |
+| **TanStack Start / SSR**             | Adds complexity with no benefit for this app (no SEO needs)     | TanStack Router (client-only)                               |
+| **@tanstack/react-start**            | SSR framework - removed in quick-010                            | @tanstack/react-router                                      |
+| **Cloudflare Workers**               | Overkill for static SPA                                         | Cloudflare Pages                                            |
+| **wrangler**                         | Not needed for Pages deployment                                 | cloudflare/pages-action                                     |
+| vite-plugin-pwa                      | Incompatible with TanStack Start (no longer relevant)           | Manual Workbox setup                                        |
 | Clerk's `<SignedIn>` / `<SignedOut>` | Doesn't sync with Convex auth state                             | Convex's `<Authenticated>` / `<Unauthenticated>` components |
 | useAuth() from Clerk                 | Doesn't wait for Convex token validation                        | useConvexAuth() hook                                        |
 | Redux                                | Overkill for this app, adds boilerplate                         | Zustand + TanStack Query                                    |
@@ -195,33 +205,27 @@ export default {
 };
 ```
 
-## Cloudflare Workers Configuration
+## Cloudflare Pages Configuration
 
 ```typescript
-// vite.config.ts
+// vite.config.ts (client-only SPA)
 import { defineConfig } from "vite";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { cloudflare } from "@cloudflare/vite-plugin";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsConfigPaths from "vite-tsconfig-paths";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
-  plugins: [
-    cloudflare({ viteEnvironment: { name: "ssr" } }),
-    tanstackStart(),
-    react(),
-  ],
+  plugins: [TanStackRouterVite(), react(), tailwindcss(), tsConfigPaths()],
+  build: {
+    outDir: "dist",
+  },
 });
 ```
 
-```jsonc
-// wrangler.jsonc
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "the-dahan-codex",
-  "compatibility_date": "2025-01-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
-}
+```
+# public/_redirects (SPA catch-all for client-side routing)
+/* /index.html 200
 ```
 
 ## PWA Service Worker Pattern (Manual Workbox)

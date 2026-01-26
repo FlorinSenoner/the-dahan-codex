@@ -13,8 +13,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **INFRA-02**: Convex backend connected with real-time subscriptions
 - [ ] **INFRA-03**: Manual Workbox PWA setup (service worker generation
       validated in CI)
-- [ ] **INFRA-04**: Cloudflare Workers deployment (pinned TanStack Start
-      version)
+- [x] **INFRA-04**: Cloudflare Pages deployment (client-only SPA)
 - [ ] **INFRA-05**: Biome formatting/linting configured
 - [ ] **INFRA-06**: mise toolchain management configured
 - [ ] **INFRA-07**: Pre-commit hooks running Biome checks
@@ -28,7 +27,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **AUTH-03**: Public read access (spirits/openings viewable without login)
 - [ ] **AUTH-04**: Authenticated write access (games/notes require login)
 - [ ] **AUTH-05**: Session persistence across browser refresh
-- [ ] **AUTH-06**: SSR auth token handling in route loaders
+- [x] **AUTH-06**: ~~SSR auth token handling in route loaders~~ (Removed: client-only SPA)
 
 ### PWA & Offline
 
