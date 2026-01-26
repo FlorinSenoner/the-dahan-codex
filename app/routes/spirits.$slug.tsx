@@ -4,6 +4,7 @@ import { useQuery } from "convex/react";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
+import { ClientOnly } from "@/components/client-only";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
@@ -14,7 +15,6 @@ import {
 } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
 
-// Search params for aspect selection
 const detailSearchSchema = z.object({
   aspect: z.string().optional(),
 });
@@ -27,82 +27,91 @@ export const Route = createFileRoute("/spirits/$slug")({
 function SpiritDetailPage() {
   const { slug } = Route.useParams();
   const { aspect } = Route.useSearch();
+
+  return (
+    <ClientOnly fallback={<SpiritDetailSkeleton slug={slug} aspect={aspect} />}>
+      <SpiritDetailContent slug={slug} aspect={aspect} />
+    </ClientOnly>
+  );
+}
+
+interface SpiritDetailSkeletonProps {
+  slug: string;
+  aspect?: string;
+}
+
+function SpiritDetailSkeleton({ slug, aspect }: SpiritDetailSkeletonProps) {
   const navigate = useNavigate();
 
-  // Client-only rendering to avoid SSR issues with Convex provider
-  const [isClient, setIsClient] = useState(false);
-  // Image error handling for placeholder
+  const loadingImageVTN = aspect
+    ? `spirit-aspect-${aspect.toLowerCase()}`
+    : `spirit-image-${slug}`;
+  const loadingTitleVTN = aspect ? undefined : `spirit-name-${slug}`;
+
+  return (
+    <div className="min-h-screen bg-background">
+      <header
+        className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
+        style={{ viewTransitionName: "detail-header" }}
+      >
+        <Button
+          variant="ghost"
+          size="icon"
+          className="min-w-[44px] min-h-[44px] cursor-pointer"
+          onClick={() =>
+            navigate({
+              to: "/spirits",
+              search: { returning: slug, returningAspect: aspect },
+              viewTransition: true,
+            })
+          }
+          aria-label="Back to spirits"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+      </header>
+      <div className="p-4 animate-pulse">
+        <div className="flex justify-center">
+          <div
+            className="h-[300px] aspect-3/2 bg-muted rounded-xl contain-[layout] overflow-hidden"
+            style={{ viewTransitionName: loadingImageVTN }}
+          />
+        </div>
+        <div
+          className="h-8 bg-muted rounded w-3/4 mx-auto mb-2 contain-[layout]"
+          style={{ viewTransitionName: loadingTitleVTN }}
+        />
+        <div className="h-4 bg-muted rounded w-full mb-4" />
+        <div className="flex justify-center gap-2">
+          <div className="h-6 bg-muted rounded w-16" />
+          <div className="h-6 bg-muted rounded w-16" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface SpiritDetailContentProps {
+  slug: string;
+  aspect?: string;
+}
+
+function SpiritDetailContent({ slug, aspect }: SpiritDetailContentProps) {
+  const navigate = useNavigate();
   const [imgError, setImgError] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const spirit = useQuery(api.spirits.getSpiritBySlug, { slug, aspect });
 
-  const spirit = useQuery(
-    api.spirits.getSpiritBySlug,
-    isClient ? { slug, aspect } : "skip",
-  );
-
-  // Reset imgError when spirit/image changes (imageUrl as trigger is intentional)
   const imageUrl = spirit?.imageUrl;
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
   useEffect(() => {
     setImgError(false);
   }, [imageUrl]);
 
-  // Compute view-transition-names from URL params (available even during loading)
-  const loadingImageVTN = aspect
-    ? `spirit-aspect-${aspect.toLowerCase()}`
-    : `spirit-image-${slug}`;
-  // Title only morphs for base spirits (not aspects)
-  const loadingTitleVTN = aspect ? undefined : `spirit-name-${slug}`;
-
-  // Loading state
   if (spirit === undefined) {
-    return (
-      <div className="min-h-screen bg-background">
-        <header
-          className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
-          style={{ viewTransitionName: "detail-header" }}
-        >
-          <Button
-            variant="ghost"
-            size="icon"
-            className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() =>
-              navigate({
-                to: "/spirits",
-                search: { returning: slug, returningAspect: aspect },
-                viewTransition: true,
-              })
-            }
-            aria-label="Back to spirits"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-        </header>
-        <div className="p-4 animate-pulse">
-          <div className="flex justify-center">
-            <div
-              className="h-[300px] aspect-3/2 bg-muted rounded-xl contain-[layout] overflow-hidden"
-              style={{ viewTransitionName: loadingImageVTN }}
-            />
-          </div>
-          <div
-            className="h-8 bg-muted rounded w-3/4 mx-auto mb-2 contain-[layout]"
-            style={{ viewTransitionName: loadingTitleVTN }}
-          />
-          <div className="h-4 bg-muted rounded w-full mb-4" />
-          <div className="flex justify-center gap-2">
-            <div className="h-6 bg-muted rounded w-16" />
-            <div className="h-6 bg-muted rounded w-16" />
-          </div>
-        </div>
-      </div>
-    );
+    return <SpiritDetailSkeleton slug={slug} aspect={aspect} />;
   }
 
-  // Not found state
   if (spirit === null) {
     return (
       <div className="min-h-screen bg-background">
@@ -145,9 +154,6 @@ function SpiritDetailPage() {
     );
   }
 
-  // Determine if showing an aspect
-  // For aspects, show just the aspect name as the main title
-  // The subtitle will show "Aspect of [Base Spirit Name]"
   const isAspect = !!spirit.aspectName;
   const displayName = isAspect ? spirit.aspectName : spirit.name;
   const viewTransitionName = isAspect
@@ -156,7 +162,6 @@ function SpiritDetailPage() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      {/* Header with back button */}
       <header
         className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
         style={{ viewTransitionName: "detail-header" }}
@@ -183,7 +188,6 @@ function SpiritDetailPage() {
         </div>
       </header>
 
-      {/* Spirit content */}
       <main className="p-4">
         <div className="flex justify-center mb-6">
           <div
@@ -210,7 +214,6 @@ function SpiritDetailPage() {
           </div>
         </div>
 
-        {/* Spirit name */}
         <Heading
           variant="h1"
           as="h1"
@@ -222,14 +225,12 @@ function SpiritDetailPage() {
           {displayName}
         </Heading>
 
-        {/* Aspect indicator */}
         {isAspect && (
           <Text variant="muted" className="text-center mb-4">
             Aspect of {spirit.name}
           </Text>
         )}
 
-        {/* Complexity badge */}
         <div className="flex justify-center mb-4">
           <Badge
             variant="outline"
@@ -242,12 +243,10 @@ function SpiritDetailPage() {
           </Badge>
         </div>
 
-        {/* Summary */}
         <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
           {spirit.summary}
         </Text>
 
-        {/* Detailed description (if available) */}
         {spirit.description && (
           <Text
             variant="muted"
@@ -257,7 +256,6 @@ function SpiritDetailPage() {
           </Text>
         )}
 
-        {/* Elements */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {spirit.elements.map((element) => (
             <Badge
@@ -270,7 +268,6 @@ function SpiritDetailPage() {
           ))}
         </div>
 
-        {/* Placeholder for future content (Phase 3) */}
         <div className="border border-border rounded-lg p-4 bg-card">
           <Text variant="muted" className="text-center">
             Overview, Growth, and Presence tracks coming in Phase 3
