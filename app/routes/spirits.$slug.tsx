@@ -11,16 +11,11 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
+import { OverviewSection } from "@/components/spirits/overview-section";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
-import {
-  complexityBadgeColors,
-  elementBadgeColors,
-  PLACEHOLDER_GRADIENT,
-} from "@/lib/spirit-colors";
-import { cn } from "@/lib/utils";
+import { PLACEHOLDER_GRADIENT } from "@/lib/spirit-colors";
 
 export const Route = createFileRoute("/spirits/$slug")({
   loader: async ({ context, params }) => {
@@ -211,18 +206,6 @@ export function SpiritDetailContent({
         </Text>
       )}
 
-      <div className="flex justify-center mb-4">
-        <Badge
-          variant="outline"
-          className={cn(
-            "text-sm",
-            complexityBadgeColors[spirit.complexity] || "",
-          )}
-        >
-          {spirit.complexity} Complexity
-        </Badge>
-      </div>
-
       <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
         {spirit.summary}
       </Text>
@@ -236,23 +219,7 @@ export function SpiritDetailContent({
         </Text>
       )}
 
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {spirit.elements.map((element) => (
-          <Badge
-            key={element}
-            variant="outline"
-            className={cn("text-xs", elementBadgeColors[element] || "")}
-          >
-            {element}
-          </Badge>
-        ))}
-      </div>
-
-      <div className="border border-border rounded-lg p-4 bg-card">
-        <Text variant="muted" className="text-center">
-          Overview, Growth, and Presence tracks coming in Phase 3
-        </Text>
-      </div>
+      <OverviewSection spirit={spirit} />
     </main>
   );
 }
