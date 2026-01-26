@@ -143,7 +143,7 @@ function AspectDetailPage() {
         <Heading
           variant="h1"
           as="h1"
-          className="text-foreground text-center mb-2"
+          className="text-foreground text-center mb-2 w-fit mx-auto"
           style={{
             viewTransitionName: `spirit-name-${slug}-${aspect}`,
           }}
