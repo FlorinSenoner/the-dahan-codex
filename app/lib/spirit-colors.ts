@@ -124,3 +124,51 @@ export const modifierColors: Record<string, { color: string; label: string }> =
     same: { color: "text-element-sun", label: "Same complexity" },
     harder: { color: "text-element-animal", label: "Harder" },
   };
+
+/**
+ * Spirit-specific presence track color palettes
+ * Based on primary/secondary elements of each spirit
+ */
+export const spiritTrackColors: Record<
+  string,
+  { energy: string; cardPlays: string }
+> = {
+  "river-surges-in-sunlight": { energy: "cyan", cardPlays: "amber" }, // Water/Sun
+  "lightnings-swift-strike": { energy: "orange", cardPlays: "violet" }, // Fire/Air
+  "fractured-days-split-the-sky": { energy: "indigo", cardPlays: "violet" }, // Moon/Air
+  "starlight-seeks-its-form": { energy: "indigo", cardPlays: "amber" }, // Moon/Sun
+  "finder-of-paths-unseen": { energy: "violet", cardPlays: "emerald" }, // Air/Plant
+  "serpent-slumbering-beneath-the-island": {
+    energy: "orange",
+    cardPlays: "stone",
+  }, // Fire/Earth
+};
+
+/**
+ * Tailwind gradient classes for track colors
+ * Pattern: "bg-gradient-to-r from-{color}-500/15 via-{color}-500/5 to-transparent"
+ */
+export const trackGradientClasses: Record<string, string> = {
+  amber: "bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent",
+  blue: "bg-gradient-to-r from-blue-500/15 via-blue-500/5 to-transparent",
+  cyan: "bg-gradient-to-r from-cyan-500/15 via-cyan-500/5 to-transparent",
+  orange: "bg-gradient-to-r from-orange-500/15 via-orange-500/5 to-transparent",
+  violet: "bg-gradient-to-r from-violet-500/15 via-violet-500/5 to-transparent",
+  indigo: "bg-gradient-to-r from-indigo-500/15 via-indigo-500/5 to-transparent",
+  emerald:
+    "bg-gradient-to-r from-emerald-500/15 via-emerald-500/5 to-transparent",
+  stone: "bg-gradient-to-r from-stone-500/15 via-stone-500/5 to-transparent",
+  purple: "bg-gradient-to-r from-purple-500/15 via-purple-500/5 to-transparent",
+};
+
+/**
+ * Get spirit-specific track colors with fallback to defaults
+ * @param slug - Spirit slug
+ * @returns Object with energy and cardPlays color names
+ */
+export function getSpiritTrackColors(slug: string): {
+  energy: string;
+  cardPlays: string;
+} {
+  return spiritTrackColors[slug] ?? { energy: "amber", cardPlays: "blue" };
+}

@@ -31,6 +31,6 @@
     "workbox-routing",
     "workbox-strategies",
     "tailwindcss",
-    "recharts"
+    "react-intersection-observer"
   ]
 }
