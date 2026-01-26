@@ -43,7 +43,7 @@ jobs:
 
       - name: Verify service worker generated
         run: |
-          if [ ! -f "dist/client/sw.js" ]; then
+          if [ ! -f "dist/sw.js" ]; then
             echo "Error: Service worker not generated!"
             exit 1
           fi
