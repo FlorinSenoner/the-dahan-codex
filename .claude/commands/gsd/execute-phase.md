@@ -24,6 +24,7 @@ Context budget: ~15% orchestrator, 100% fresh per subagent.
 
 <execution_context>
 @./.claude/get-shit-done/references/ui-brand.md
+@./.claude/get-shit-done/references/browser-verification.md
 @./.claude/get-shit-done/workflows/execute-phase.md
 </execution_context>
 
@@ -53,6 +54,7 @@ Phase: $ARGUMENTS
    |-------|---------|----------|--------|
    | gsd-executor | opus | sonnet | sonnet |
    | gsd-verifier | sonnet | sonnet | haiku |
+   | gsd-browser-verifier | sonnet | sonnet | haiku |
 
    Store resolved models for use in Task calls below.
 
@@ -96,19 +98,40 @@ Phase: $ARGUMENTS
 
    **If clean:** Continue to verification.
 
-7. **Verify phase goal**
+7. **Verify phase goal (static)**
    Check config: `WORKFLOW_VERIFIER=$(cat .planning/config.json 2>/dev/null | grep -o '"verifier"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")`
 
-   **If `workflow.verifier` is `false`:** Skip to step 8 (treat as passed).
+   **If `workflow.verifier` is `false`:** Skip to step 7.5 (treat as passed).
 
    **Otherwise:**
    - Spawn `gsd-verifier` subagent with phase directory and goal
    - Verifier checks must_haves against actual codebase (not SUMMARY claims)
    - Creates VERIFICATION.md with detailed report
    - Route by status:
+     - `passed` or `human_needed` → continue to step 7.5
+     - `gaps_found` → present gaps, offer `/gsd:plan-phase {X} --gaps` (skip browser verification)
+
+7.5. **Verify phase goal (browser)**
+   Check config: `WORKFLOW_BROWSER_VERIFIER=$(cat .planning/config.json 2>/dev/null | grep -o '"browser_verifier"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "false")`
+
+   **If `workflow.browser_verifier` is `false`:** Skip to step 8.
+
+   **If static verifier status was `gaps_found`:** Skip browser verification (fix static gaps first).
+
+   **Otherwise:**
+   - Read phase context (ROADMAP goal, PLAN must_haves, VERIFICATION.md if exists)
+   - Spawn `gsd-browser-verifier` subagent with:
+     - Phase directory path
+     - Phase number
+     - Phase goal
+   - Browser verifier starts dev server, navigates to changes, interacts with UI
+   - Creates BROWSER-VERIFICATION.md with test results and screenshots
+   - Route by status:
      - `passed` → continue to step 8
-     - `human_needed` → present items, get approval or feedback
-     - `gaps_found` → present gaps, offer `/gsd:plan-phase {X} --gaps`
+     - `gaps_found` → present browser failures, offer `/gsd:plan-phase {X} --gaps`
+     - `blocked` → inform user, recommend manual verification, continue to step 8
+
+   **Note:** Browser verification only tests user-facing truths. Backend/infrastructure truths are covered by static verification.
 
 8. **Update roadmap and state**
    - Update ROADMAP.md, STATE.md
@@ -314,8 +337,8 @@ After all tasks in a plan complete:
 
 **Phase Completion Commit:**
 
-After all plans in phase complete (step 7):
-1. Stage: ROADMAP.md, STATE.md, REQUIREMENTS.md (if updated), VERIFICATION.md
+After all plans in phase complete (step 7/7.5):
+1. Stage: ROADMAP.md, STATE.md, REQUIREMENTS.md (if updated), VERIFICATION.md, BROWSER-VERIFICATION.md (if exists)
 2. Commit with format: `docs({phase}): complete {phase-name} phase`
 3. Bundles all phase-level state updates in one commit
 
@@ -332,6 +355,8 @@ After all plans in phase complete (step 7):
 - [ ] Each plan has SUMMARY.md
 - [ ] Phase goal verified (must_haves checked against codebase)
 - [ ] VERIFICATION.md created in phase directory
+- [ ] Browser verification run (if enabled and static passed)
+- [ ] BROWSER-VERIFICATION.md created (if browser verifier ran)
 - [ ] STATE.md reflects phase completion
 - [ ] ROADMAP.md updated
 - [ ] REQUIREMENTS.md updated (phase requirements marked Complete)
