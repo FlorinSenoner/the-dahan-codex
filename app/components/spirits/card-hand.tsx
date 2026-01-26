@@ -1,6 +1,12 @@
 import type { Doc } from "convex/_generated/dataModel";
+import { ChevronDown } from "lucide-react";
 import { ElementIcon } from "@/components/icons/elements";
 import { Badge } from "@/components/ui/badge";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
@@ -14,16 +20,22 @@ function PowerCard({ power }: { power: UniquePower }) {
   return (
     <div
       className={cn(
-        "min-w-[200px] max-w-[280px] p-3 rounded-lg shrink-0",
-        "border-2",
+        "p-3 rounded-lg min-w-0",
+        // Border-only speed indicator (left border)
+        "border-l-4",
         power.speed === "Fast"
-          ? "border-amber-500/60 bg-amber-500/5"
-          : "border-blue-500/60 bg-blue-500/5",
+          ? "border-l-amber-500 bg-muted/30"
+          : "border-l-blue-500 bg-muted/30",
       )}
     >
       {/* Card title and cost */}
       <div className="flex items-start justify-between gap-2 mb-2">
-        <span className="text-sm font-medium leading-tight">{power.name}</span>
+        <h4
+          className="text-sm font-medium leading-tight truncate"
+          title={power.name}
+        >
+          {power.name}
+        </h4>
         <Badge
           variant="outline"
           className="shrink-0 text-xs px-1.5 py-0 text-amber-400 border-amber-500/50"
@@ -33,21 +45,10 @@ function PowerCard({ power }: { power: UniquePower }) {
       </div>
 
       <div className="space-y-2">
-        {/* Line 1: Speed/Range/Target */}
+        {/* Line 1: Range/Target (no speed badge - indicated by border) */}
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <Badge
-            variant="outline"
-            className={cn(
-              "text-xs",
-              power.speed === "Fast"
-                ? "border-amber-500/50 text-amber-400"
-                : "border-blue-500/50 text-blue-400",
-            )}
-          >
-            {power.speed}
-          </Badge>
           {power.range && <span>R: {power.range}</span>}
-          {power.target && <span>T: {power.target}</span>}
+          {power.target && <span className="truncate">T: {power.target}</span>}
         </div>
 
         {/* Line 2: Element icons */}
@@ -74,16 +75,49 @@ export function CardHand({ uniquePowers }: CardHandProps) {
     );
   }
 
+  // For now, all uniquePowers are "hand" cards
+  // Discard section will be added when discardPile field is added to schema
+  const handCards = uniquePowers;
+
   return (
     <section className="space-y-3 mt-8">
       <Heading variant="h3" as="h2">
         Cards
       </Heading>
-      <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
-        {uniquePowers.map((power) => (
-          <PowerCard key={power.name} power={power} />
-        ))}
-      </div>
+
+      <Collapsible defaultOpen>
+        <CollapsibleTrigger className="flex items-center gap-2 w-full py-2 cursor-pointer">
+          <ChevronDown className="w-4 h-4 transition-transform duration-200 data-[state=closed]:-rotate-90" />
+          <span className="font-medium">Hand</span>
+          <span className="text-xs text-muted-foreground">
+            ({handCards.length})
+          </span>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            {handCards.map((power) => (
+              <PowerCard key={power.name} power={power} />
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
+      {/* Discard section placeholder - will be populated when discardPile is added to schema
+      <Collapsible defaultOpen={false}>
+        <CollapsibleTrigger className="flex items-center gap-2 w-full py-2 cursor-pointer">
+          <ChevronDown className="w-4 h-4 transition-transform duration-200 data-[state=closed]:-rotate-90" />
+          <span className="font-medium">Discard</span>
+          <span className="text-xs text-muted-foreground">(0)</span>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            {discardCards.map((power) => (
+              <PowerCard key={power.name} power={power} />
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+      */}
     </section>
   );
 }
