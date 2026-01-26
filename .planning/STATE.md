@@ -124,6 +124,9 @@ affecting current work:
 - Element icons render as number + icon pairs (e.g., "2 Sun" becomes "2 <SunIcon>")
 - Cards use div with border-2 instead of shadcn Card for simpler speed-based styling
 - Range/Target abbreviated format (R: / T:) for cards, full format for innate headers
+- GrowthIcon Record pattern matching ElementIcon for dynamic icon rendering
+- Type guard pattern (isNewGrowthFormat) for schema format detection
+- Group hover with opacity transition for revealing G1/G2/G3 labels
 
 ### Pending Todos
 
@@ -250,7 +253,7 @@ Phase 3.1 (Spirit Board Polish) in progress:
 - [x] 03.1-01: Foundation (element icons, power DSL)
 - [x] 03.1-02: Schema and Seed Data Update
 - [x] 03.1-03: Tabs & Radar Polish
-- [ ] 03.1-04: Growth Panel Redesign
+- [x] 03.1-04: Growth Panel Redesign
 - [x] 03.1-05: Presence Track Redesign
 - [x] 03.1-06: Innate Powers & Cards Redesign
 - [ ] 03.1-07: External Links Polish
@@ -258,17 +261,17 @@ Phase 3.1 (Spirit Board Polish) in progress:
 **Completed UAT Gaps:**
 1. [x] Variant tabs styling - "Base" label, gradient highlight, scroll fix
 2. [x] Radar chart visibility - dark mode contrast, spider web grid
+4. [x] Growth panel - SVG icons, hover labels, backward compatibility
 5. [x] Presence tracks - gradient backgrounds, cursor-pointer, flexible array
 6. [x] Innate powers - SVG element icons, speed/range/target header
 7. [x] Cards styling - renamed to "Cards", speed-based outlines, element icons
 
 **Remaining UAT Gaps:**
 3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
-4. Growth panel (major) - correct data, typed DSL, SVG icons
 8. External links (cosmetic) - consistent with credits page
 
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03.1-06-PLAN.md
+Stopped at: Completed 03.1-04-PLAN.md
 Resume file: None
