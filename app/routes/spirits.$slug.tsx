@@ -20,9 +20,15 @@ import { OverviewSection } from "@/components/spirits/overview-section";
 import { PresenceTrack } from "@/components/spirits/presence-track";
 import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
-import { PLACEHOLDER_GRADIENT } from "@/lib/spirit-colors";
+import {
+  complexityBadgeColors,
+  elementBadgeColors,
+  PLACEHOLDER_GRADIENT,
+} from "@/lib/spirit-colors";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/spirits/$slug")({
   loader: async ({ context, params }) => {
@@ -243,28 +249,41 @@ export function SpiritDetailContent({
           </Heading>
 
           {spirit.aspectName && (
-            <Text variant="muted" className="text-center mb-4">
+            <Text variant="muted" className="text-center mb-2">
               Aspect of {spirit.name}
             </Text>
           )}
 
-          <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
+          {/* Pills below name - always visible */}
+          <div className="flex flex-wrap justify-center gap-2 mt-2 mb-4">
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-sm",
+                complexityBadgeColors[spirit.complexity] || "",
+              )}
+            >
+              {spirit.complexity} Complexity
+            </Badge>
+            {spirit.elements.map((element) => (
+              <Badge
+                key={element}
+                variant="outline"
+                className={cn("text-xs", elementBadgeColors[element] || "")}
+              >
+                {element}
+              </Badge>
+            ))}
+          </div>
+
+          <Text className="text-muted-foreground text-center max-w-md mx-auto">
             {spirit.summary}
           </Text>
-
-          {spirit.description && (
-            <Text
-              variant="muted"
-              className="text-foreground/80 text-center max-w-lg mx-auto leading-relaxed"
-            >
-              {spirit.description}
-            </Text>
-          )}
         </div>
 
         {/* Mobile: Overview section appears here */}
         <div className="lg:hidden">
-          <OverviewSection spirit={spirit} />
+          <OverviewSection spirit={spirit} description={spirit.description} />
         </div>
 
         {spirit.specialRules && spirit.specialRules.length > 0 && (
@@ -289,7 +308,7 @@ export function SpiritDetailContent({
 
       {/* Right column: Sidebar (overview) - desktop only */}
       <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
-        <OverviewSection spirit={spirit} />
+        <OverviewSection spirit={spirit} description={spirit.description} />
       </aside>
     </main>
   );
