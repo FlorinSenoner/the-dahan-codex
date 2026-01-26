@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 03-spirit-detail-board
 source: 03-01-SUMMARY.md, 03-02-SUMMARY.md, 03-03-SUMMARY.md, 03-04-SUMMARY.md, 03-05-SUMMARY.md, 03-06-PLAN.md
 started: 2026-01-26T15:00:00Z
@@ -91,81 +91,151 @@ skipped: 0
 ## Gaps
 
 - truth: "Variant tabs display correctly below header with proper styling"
-  status: failed
+  status: diagnosed
   reason: "User reported: tabs present but multiple issues - sticky header should show aspect name when scrolled, base tab should say 'Base' not spirit name, vertical scroll appearing in tab bar, highlighted tab has rounded corners and padding, highlight not vibrant enough"
   severity: major
   test: 1
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Multiple styling/UX issues: same z-index on header and tabs causes overlap, base tab shows truncated spirit name instead of 'Base', overflow-y not hidden on TabsList, TabsTrigger has rounded-md class, highlight uses flat bg-primary/10 instead of gradient"
+  artifacts:
+    - path: "app/components/spirits/variant-tabs.tsx"
+      issue: "z-index, 'Base' text, overflow, padding, highlight styling"
+    - path: "app/routes/spirits.$slug.tsx"
+      issue: "header z-index needs to be higher, needs scroll observer for aspect name"
+    - path: "app/components/ui/tabs.tsx"
+      issue: "TabsTrigger has rounded-md that needs override"
+  missing:
+    - "Scroll observer logic to update header title with aspect name"
+    - "overflow-y-hidden on TabsList"
+    - "Remove px-4 padding from TabsList"
+    - "Override rounded-md on TabsTrigger"
+    - "Gradient-based highlight styling"
+    - "Change base tab label to 'Base'"
 
 - truth: "Radar chart visible with dark theme colors"
-  status: failed
+  status: diagnosed
   reason: "User reported: the chart is not visible at all against the black background. make it visible. make sure to add a spider web to make it visually more appealing and easier to read"
   severity: major
   test: 3
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "CSS variables have low contrast on dark bg: --primary (oklch 0.55) with 30% opacity fill is invisible, --border (oklch 0.30) with 50% opacity for grid is nearly invisible. PolarGrid only renders angle lines, no concentric rings."
+  artifacts:
+    - path: "app/components/spirits/power-radar-chart.tsx"
+      issue: "Low contrast colors/opacities for dark backgrounds"
+  missing:
+    - "Higher contrast grid lines with increased opacity"
+    - "Radial grid levels (gridType='polygon' or explicit rings at 1-5 levels)"
+    - "Higher contrast radar fill (increase opacity or use brighter color)"
+    - "Explicit colors optimized for dark mode"
 
 - truth: "Strengths and weaknesses displayed with good visual design"
-  status: failed
+  status: diagnosed
   reason: "User reported: visible but visually not interesting. move this, radar, and description text into a sidebar on larger screens (too much whitespace). on mobile it should be collapsed by default"
   severity: minor
   test: 4
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Single-column mobile-first layout without responsive desktop adaptation. Content stacked linearly in main element with no sidebar pattern. Collapsible component exists but not used."
+  artifacts:
+    - path: "app/routes/spirits.$slug.tsx"
+      issue: "Main layout needs responsive sidebar grid"
+    - path: "app/components/spirits/overview-section.tsx"
+      issue: "Needs refactor for sidebar-compatible layout"
+  missing:
+    - "Responsive two-column grid layout (lg:grid-cols-[1fr_320px])"
+    - "Collapsible wrapper for mobile (defaultOpen=false)"
+    - "Move description, radar, strengths/weaknesses to sidebar aside"
+    - "Sidebar-specific styling (sticky positioning)"
 
 - truth: "Growth panel displays all growth options with proper visualization"
-  status: failed
+  status: diagnosed
   reason: "User reported: only 2 growth options shown for each spirit (should be more per wiki). titles 'Top'/'Bottom' wrong - should be G1/G2/G3 on hover only. needs cards with separate boxes and SVG icons for each action type (energy, card, presence, reclaim). DSL needs typed action structure."
   severity: major
   test: 5
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Wrong schema structure models growth as 'Top/Bottom groups' instead of numbered options (G1,G2,G3). Data is incomplete/incorrect. Actions are untyped strings displayed as plain text with no iconography."
+  artifacts:
+    - path: "convex/schema.ts"
+      issue: "Growth schema needs redesign: flat array of growth options with typed action objects"
+    - path: "convex/seed.ts"
+      issue: "Growth data incorrect for both spirits - need accurate data from wiki"
+    - path: "app/components/spirits/growth-panel.tsx"
+      issue: "Needs complete redesign: card layout, SVG icons, G1/G2/G3 hover labels"
+  missing:
+    - "Typed action DSL: reclaim, gainPowerCard, gainEnergy, addPresence, damage, push"
+    - "Correct growth data for River (3 options) and Lightning (3 options)"
+    - "SVG icon set: energy, card, presence, reclaim, damage, terrain icons"
+    - "Card-based layout with icons per action"
+    - "G1/G2/G3 labels shown on hover"
 
 - truth: "Presence tracks display with good visual design and robust data model"
-  status: failed
+  status: diagnosed
   reason: "User reported: visually not appealing - add gradient backgrounds with color variations to pick from. cursor should show pointer on hover. DSL insufficient for complex spirits like Serpent (absorbed presence track, element unlocks, reclaim one slots, innate power unlocks). Need more robust data model."
   severity: major
   test: 6
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Schema hardcoded to two tracks (energy, cardPlays) with limited slot properties. Cannot represent arbitrary track count, innate power unlocks, or 'reclaim one' slots. Cursor is cursor-default, no gradient styling."
+  artifacts:
+    - path: "convex/schema.ts"
+      issue: "presenceTracks schema hardcoded to two tracks, limited unlock types"
+    - path: "app/components/spirits/presence-track.tsx"
+      issue: "Hardcodes exactly two tracks with specific labels"
+    - path: "app/components/spirits/presence-slot.tsx"
+      issue: "cursor-default instead of cursor-pointer, no gradient backgrounds"
+  missing:
+    - "Dynamic track array with type (energy|cardPlays|absorbed|custom)"
+    - "Expanded slot unlock types: innateUnlock, specialAbility"
+    - "Composite unlocks (value + element + reclaim + innate)"
+    - "Gradient background variations (2-3 styles to pick from)"
+    - "cursor-pointer on slots"
 
 - truth: "Innate powers display correctly with element thresholds and descriptions"
-  status: failed
+  status: diagnosed
   reason: "User reported: River innate data wrong. DSL needs: speed (fast/slow), range (normal/sacred site/sacred site + land type), target land. Horizontal layout for speed/range/target. Share DSL with unique power cards. Create 8 element SVG icons matching original markers (Sun, Moon, Fire, Air, Water, Earth, Plant, Animal). Thresholds need element counts + icons + effect text with inline icons."
   severity: major
   test: 8
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Minimal data model with simple strings for range/target/effect. No structured DSL for game terminology. No element SVG icons exist - elements shown as text badges. No shared DSL with cards. uniquePowers schema lacks range/target."
+  artifacts:
+    - path: "convex/schema.ts"
+      issue: "innates.range/target are simple strings, effect is plain text, uniquePowers lacks range/target"
+    - path: "convex/seed.ts"
+      issue: "Needs migration to structured format with range type, sacred site flags"
+    - path: "app/components/spirits/innate-powers.tsx"
+      issue: "Elements as text badges, no horizontal header bar, no inline icon parsing"
+    - path: "app/components/spirits/card-hand.tsx"
+      issue: "Missing range/target display, no shared DSL"
+  missing:
+    - "8 element SVG icons (Sun, Moon, Fire, Air, Water, Earth, Plant, Animal)"
+    - "Game term icons (Dahan, Explorer, Town, City, Blight)"
+    - "Range DSL: numeric, sacred site, sacred site + land type"
+    - "Target land DSL: ANY, land with conditions, terrain types"
+    - "Effect text DSL with inline icon parsing"
+    - "Shared power-dsl.ts module for innates and cards"
+    - "Horizontal header layout for speed/range/target"
 
 - truth: "Starting cards display with proper styling and shared DSL"
-  status: failed
+  status: diagnosed
   reason: "User reported: should be called 'Cards' not 'Starting Cards'. use same DSL and depiction as innate powers. keep cost as is. red outline if fast, blue outline if slow. display in two lines: 1) speed, range, target 2) element icons"
   severity: minor
   test: 9
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Section titled 'Starting Cards' instead of 'Cards'. No speed-based card outline color. Layout shows elements vertically, not speed/range/target + elements. uniquePowers schema lacks range/target fields."
+  artifacts:
+    - path: "app/components/spirits/card-hand.tsx"
+      issue: "Wrong section name, no speed-based outline, wrong layout"
+    - path: "convex/schema.ts"
+      issue: "uniquePowers missing range and target fields"
+  missing:
+    - "Rename section to 'Cards'"
+    - "Speed-based card outline: red for Fast, blue for Slow"
+    - "Two-line layout: speed/range/target, then element icons"
+    - "Add range and target fields to uniquePowers schema"
+    - "Shared element display DSL with innate-powers"
 
 - truth: "External resource links consistent with credits page"
-  status: failed
+  status: diagnosed
   reason: "User reported: works fine but use same component as /credits page (icons different). make text clear user is directed to relevant page for current spirit. remove 'Links open in a new tab' text"
   severity: cosmetic
   test: 10
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "ExternalLinks uses different icons (BookOpen, HelpCircle, Search) than credits page (only ExternalLink icon). Descriptions are generic, not spirit-specific. Unnecessary hint text at bottom."
+  artifacts:
+    - path: "app/components/spirits/external-links.tsx"
+      issue: "Different icons, generic descriptions, unnecessary hint text"
+  missing:
+    - "Use consistent ExternalLink icon matching credits page"
+    - "Update styling to match credits page"
+    - "Spirit-specific descriptions (e.g., 'Strategy guides for {spiritName}')"
+    - "Remove 'Links open in a new tab' text"
