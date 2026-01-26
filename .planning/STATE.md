@@ -267,7 +267,7 @@ Phase 3 (Spirit Detail & Board) complete:
 
 ## Phase 3.1 Progress
 
-Phase 3.1 (Spirit Board Polish) in progress:
+Phase 3.1 (Spirit Board Polish) complete:
 
 - [x] 03.1-01: Foundation (element icons, power DSL)
 - [x] 03.1-02: Schema and Seed Data Update
@@ -275,19 +275,7 @@ Phase 3.1 (Spirit Board Polish) in progress:
 - [x] 03.1-04: Growth Panel Redesign
 - [x] 03.1-05: Presence Track Redesign
 - [x] 03.1-06: Innate Powers & Cards Redesign
-- [ ] 03.1-07: External Links Polish
-
-**Completed UAT Gaps:**
-1. [x] Variant tabs styling - "Base" label, gradient highlight, scroll fix
-2. [x] Radar chart visibility - dark mode contrast, spider web grid
-4. [x] Growth panel - SVG icons, hover labels, backward compatibility
-5. [x] Presence tracks - gradient backgrounds, cursor-pointer, flexible array
-6. [x] Innate powers - SVG element icons, speed/range/target header
-7. [x] Cards styling - renamed to "Cards", speed-based outlines, element icons
-
-**Remaining UAT Gaps:**
-3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
-8. External links (cosmetic) - consistent with credits page
+- [x] 03.1-07: External Links Polish (merged into Phase 3.2)
 
 ## Phase 3.2 Summary
 

@@ -29,7 +29,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
-- [ ] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
+- [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -213,12 +213,12 @@ Plans:
 **Plans**: 6 plans
 
 Plans:
-- [ ] 03.2-01-PLAN.md — Install react-intersection-observer, spirit track colors, schema extensions
-- [ ] 03.2-02-PLAN.md — Minimalist aspect tabs with scroll detection
-- [ ] 03.2-03-PLAN.md — Growth panel CSS subgrid and tooltips
-- [ ] 03.2-04-PLAN.md — Spirit-specific presence colors and cards hand/discard
-- [ ] 03.2-05-PLAN.md — Innate powers border-only speed styling
-- [ ] 03.2-06-PLAN.md — Seed data for 4 complex spirits
+- [x] 03.2-01-PLAN.md — Install react-intersection-observer, spirit track colors, schema extensions
+- [x] 03.2-02-PLAN.md — Minimalist aspect tabs with scroll detection
+- [x] 03.2-03-PLAN.md — Growth panel CSS subgrid and tooltips
+- [x] 03.2-04-PLAN.md — Spirit-specific presence colors and cards hand/discard
+- [x] 03.2-05-PLAN.md — Innate powers border-only speed styling
+- [x] 03.2-06-PLAN.md — Seed data for 4 complex spirits
 
 ### Phase 4: PWA & Offline
 
@@ -324,7 +324,7 @@ development:
 | 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
 | 3. Spirit Detail & Board       | 6/6            | Complete | 2026-01-26 |
 | 3.1 Spirit Board Polish        | 7/7            | Complete | 2026-01-27 |
-| 3.2 Spirit Board Refinements   | 0/6            | Planned  | -          |
+| 3.2 Spirit Board Refinements   | 6/6            | Complete | 2026-01-27 |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
