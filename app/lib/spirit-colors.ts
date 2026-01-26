@@ -121,6 +121,6 @@ export const complexityFilterColors: Record<
 export const modifierColors: Record<string, { color: string; label: string }> =
   {
     easier: { color: "text-element-plant", label: "Easier" },
-    same: { color: "text-muted-foreground", label: "Same complexity" },
-    harder: { color: "text-element-fire", label: "Harder" },
+    same: { color: "text-element-sun", label: "Same complexity" },
+    harder: { color: "text-element-animal", label: "Harder" },
   };
