@@ -15,7 +15,16 @@ interface PresenceSlotProps {
     specialAbility?: string;
   };
   index: number;
-  trackColor?: "amber" | "blue" | "purple" | "emerald";
+  trackColor?:
+    | "amber"
+    | "blue"
+    | "purple"
+    | "emerald"
+    | "cyan"
+    | "orange"
+    | "violet"
+    | "indigo"
+    | "stone";
   trackType?: string;
 }
 
@@ -25,6 +34,11 @@ const borderColors: Record<string, string> = {
   blue: "border-blue-500/50",
   purple: "border-purple-500/50",
   emerald: "border-emerald-500/50",
+  cyan: "border-cyan-500/50",
+  orange: "border-orange-500/50",
+  violet: "border-violet-500/50",
+  indigo: "border-indigo-500/50",
+  stone: "border-stone-500/50",
 };
 
 // Hover border colors based on track color
@@ -33,6 +47,11 @@ const hoverBorderColors: Record<string, string> = {
   blue: "hover:border-blue-400",
   purple: "hover:border-purple-400",
   emerald: "hover:border-emerald-400",
+  cyan: "hover:border-cyan-400",
+  orange: "hover:border-orange-400",
+  violet: "hover:border-violet-400",
+  indigo: "hover:border-indigo-400",
+  stone: "hover:border-stone-400",
 };
 
 export function PresenceSlot({
