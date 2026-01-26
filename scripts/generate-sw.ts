@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 const rootDir = join(__dirname, "..");
 
 async function buildServiceWorker() {
-  const outputDir = join(rootDir, "dist", "client");
+  const outputDir = join(rootDir, "dist");
 
   // Ensure output directory exists
   if (!existsSync(outputDir)) {
