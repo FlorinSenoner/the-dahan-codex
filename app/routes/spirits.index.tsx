@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { ClientOnly } from "@/components/client-only";
 import { FilterChips } from "@/components/spirits/filter-chips";
 import { FilterSheet } from "@/components/spirits/filter-sheet";
-import { SpiritList } from "@/components/spirits/spirit-list";
+import {
+  SpiritList,
+  SpiritListSkeleton,
+} from "@/components/spirits/spirit-list";
 import { PageHeader } from "@/components/ui/page-header";
 
 // Filter schema for URL search params (prepared for Plan 04)
@@ -43,11 +47,16 @@ function SpiritsPage() {
       <FilterChips filters={filters} />
 
       <main className="pb-20">
-        <SpiritList
-          filters={filters}
-          returning={filters.returning}
-          returningAspect={filters.returningAspect}
-        />
+        <ClientOnly
+          fallback={
+            <SpiritListSkeleton
+              returning={filters.returning}
+              returningAspect={filters.returningAspect}
+            />
+          }
+        >
+          <SpiritList filters={filters} />
+        </ClientOnly>
       </main>
     </div>
   );
