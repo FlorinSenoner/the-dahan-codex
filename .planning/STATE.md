@@ -9,20 +9,20 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3.2 (Spirit Board Refinements) - IN PROGRESS
-Plan: 5 of 6 in current phase
-Status: Completed plans 03.2-01, 03.2-02, 03.2-03, 03.2-04, 03.2-05
-Last activity: 2026-01-27 - Completed 03.2-02-PLAN.md (minimalist tabs with scroll sync)
+Phase: 3.2 (Spirit Board Refinements) - COMPLETE
+Plan: 6 of 6 in current phase
+Status: Completed plans 03.2-01, 03.2-02, 03.2-03, 03.2-04, 03.2-05, 03.2-06
+Last activity: 2026-01-27 - Completed 03.2-06-PLAN.md (complex spirits seed data)
 
-Progress: [█████████████████████████████░] 97% (35/36 plans)
+Progress: [██████████████████████████████] 100% (36/36 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 34
-- Average duration: 5.5 min
-- Total execution time: 3.2 hours
+- Total plans completed: 36
+- Average duration: 5.4 min
+- Total execution time: 3.3 hours
 
 **By Phase:**
 
@@ -33,7 +33,7 @@ Progress: [███████████████████████
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
-| 03.2  | 4     | 13 min | 3.3 min  |
+| 03.2  | 6     | 18 min | 3.0 min  |
 
 **Recent Trend:**
 
@@ -141,6 +141,10 @@ affecting current work:
 - Flat border-b-2 tab indicator instead of gradient background for cleaner tabs
 - rootMargin -57px for header height offset in scroll detection
 - Pills always visible below name, description inside collapsible overview
+- Fractured Days uses orActions with empty actions array (all options are OR choices)
+- Starlight has 6 tracks with 4 marked as unlocksGrowth: true
+- Finder's energy track connectsTo cardPlays at connectionPoint 3
+- Serpent's Deep Slumber track uses presenceCap values 5-13
 
 ### Pending Todos
 
@@ -285,19 +289,32 @@ Phase 3.1 (Spirit Board Polish) in progress:
 3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
 8. External links (cosmetic) - consistent with credits page
 
+## Phase 3.2 Summary
+
+Phase 3.2 (Spirit Board Refinements) is now complete with:
+
+- react-intersection-observer for scroll-aware aspect name in header
+- Spirit-specific presence track colors (cyan, orange, violet, indigo, stone)
+- Schema extensions for complex spirits (orActions, connectsTo, unlocksGrowth, presenceCap)
+- Minimalist tabs with flat border-b-2 indicator
+- CSS subgrid for equal-height growth cards
+- Collapsible Hand section with card count badge
+- Border-only speed indicators for innate powers
+- Four Very High complexity spirits demonstrating all patterns
+
 ## Phase 3.2 Progress
 
-Phase 3.2 (Spirit Board Refinements) in progress:
+Phase 3.2 (Spirit Board Refinements) complete:
 
 - [x] 03.2-01: Foundation (react-intersection-observer, spirit track colors, schema extensions)
 - [x] 03.2-02: Minimalist Tabs with Scroll Sync (flat border indicator, scroll-aware header, pills below name)
 - [x] 03.2-03: Growth Panel CSS Subgrid and Tooltips
 - [x] 03.2-04: Presence Tracks & Cards Polish (spirit-specific colors, collapsible Hand section)
 - [x] 03.2-05: Innate Powers Border-Only Speed
-- [ ] 03.2-06: E2E Tests
+- [x] 03.2-06: Complex Spirits Seed Data (Fractured Days, Starlight, Finder, Serpent)
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-02-PLAN.md
+Stopped at: Completed 03.2-06-PLAN.md (Phase 3.2 complete)
 Resume file: None
