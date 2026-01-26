@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 3.1 (Spirit Board Polish) - IN PROGRESS
 Plan: 3 of 7 in current phase
 Status: Completed plans 03.1-01, 03.1-02, 03.1-03
-Last activity: 2026-01-26 - Completed 03.1-01-PLAN.md
+Last activity: 2026-01-26 - Completed 03.1-02-PLAN.md (schema/seed data redesign)
 
 Progress: [███████████████████████████░░░] 90% (28/31 plans)
 
@@ -115,6 +115,9 @@ affecting current work:
 - Element icons: aria-hidden="true" for decorative SVGs, 20px default size
 - ElementIcon Record enables dynamic rendering: ElementIcon["Sun"]
 - Power DSL: discriminated union for GrowthAction types
+- Growth schema: flat G1/G2/G3 with typed action objects
+- Presence tracks: flexible array of track objects (not hardcoded energy/cardPlays)
+- UniquesPowers require range and target strings for display
 
 ### Pending Todos
 
@@ -261,5 +264,5 @@ Phase 3.1 (Spirit Board Polish) in progress:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03.1-01-PLAN.md
+Stopped at: Completed 03.1-02-PLAN.md
 Resume file: None
