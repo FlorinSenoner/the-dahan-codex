@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.2 (Spirit Board Refinements) - IN PROGRESS
-Plan: 1 of 4 in current phase
-Status: Completed plan 03.2-01
-Last activity: 2026-01-26 - Completed 03.2-01-PLAN.md (foundation)
+Plan: 4 of 6 in current phase
+Status: Completed plans 03.2-01, 03.2-03, 03.2-04, 03.2-05
+Last activity: 2026-01-27 - Completed 03.2-04-PLAN.md (presence tracks & cards polish)
 
-Progress: [█████████████████████████████░] 97% (31/32 plans)
+Progress: [█████████████████████████████░] 97% (34/36 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 31
-- Average duration: 5.8 min
-- Total execution time: 3.0 hours
+- Total plans completed: 33
+- Average duration: 5.6 min
+- Total execution time: 3.1 hours
 
 **By Phase:**
 
@@ -33,12 +33,12 @@ Progress: [███████████████████████
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
-| 03.2  | 1     | 2 min  | 2.0 min  |
+| 03.2  | 3     | 8 min  | 2.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 5 min, 8 min, 12 min, 2 min
-- Trend: Stable (foundation plan was quick)
+- Last 5 plans: 5 min, 8 min, 12 min, 2 min, 3 min
+- Trend: Stable (polish plans are quick)
 
 _Updated after each plan completion_
 
@@ -132,6 +132,12 @@ affecting current work:
 - getSpiritTrackColors(slug) with amber/blue fallback for unknown spirits
 - orActions pattern for choose-from-multiple growth options
 - Schema extensions (orActions, repeat, layout, connectsTo, connectionPoint, unlocksGrowth, presenceCap) are optional for backward compatibility
+- Innate powers use border-l-4 for speed (amber=Fast, blue=Slow) - consistent with cards
+- Innate powers always visible (no accordion) - reduces clicks
+- Extended trackColor type to support spirit-specific colors (cyan, orange, violet, indigo, stone)
+- Collapsible Hand section with card count badge for cards organization
+- Grid layout (1-col mobile, 2-col desktop) for cards instead of horizontal scroll
+- GitBranch icon for connectsTo tracks, Sprout icon for unlocksGrowth tracks
 
 ### Pending Todos
 
@@ -282,11 +288,13 @@ Phase 3.2 (Spirit Board Refinements) in progress:
 
 - [x] 03.2-01: Foundation (react-intersection-observer, spirit track colors, schema extensions)
 - [ ] 03.2-02: Minimalist Tabs with Scroll Sync
-- [ ] 03.2-03: Complex Spirit Data
-- [ ] 03.2-04: E2E Tests
+- [x] 03.2-03: Growth Panel CSS Subgrid and Tooltips
+- [x] 03.2-04: Presence Tracks & Cards Polish (spirit-specific colors, collapsible Hand section)
+- [x] 03.2-05: Innate Powers Border-Only Speed
+- [ ] 03.2-06: E2E Tests
 
 ## Session Continuity
 
-Last session: 2026-01-26
-Stopped at: Completed 03.2-01-PLAN.md
+Last session: 2026-01-27
+Stopped at: Completed 03.2-04-PLAN.md
 Resume file: None
