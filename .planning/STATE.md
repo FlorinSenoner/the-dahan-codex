@@ -10,18 +10,18 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3 (Spirit Detail & Board) - IN PROGRESS
-Plan: 1 of 6 in current phase
-Status: Plan 03-01 complete
-Last activity: 2026-01-26 - Completed 03-01-PLAN.md (Schema and Seed Data)
+Plan: 2 of 6 in current phase
+Status: Plan 03-02 complete
+Last activity: 2026-01-26 - Completed 03-02-PLAN.md (Variant Tabs Component)
 
-Progress: [█████████████████████░░] 89% (21/24 plans)
+Progress: [██████████████████████░] 92% (22/24 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 21
-- Average duration: 6.6 min
+- Total plans completed: 22
+- Average duration: 6.5 min
 - Total execution time: 2.4 hours
 
 **By Phase:**
@@ -31,11 +31,11 @@ Progress: [█████████████████████░░
 | 01    | 7     | 81 min | 11.6 min |
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
-| 03    | 1     | 4 min  | 4 min    |
+| 03    | 2     | 8 min  | 4 min    |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min, 3 min, 3 min, 1 min, 4 min
+- Last 5 plans: 3 min, 3 min, 1 min, 4 min, 4 min
 - Trend: Stable (fast execution)
 
 _Updated after each plan completion_
@@ -95,6 +95,9 @@ affecting current work:
 - All board fields optional to preserve backward compatibility
 - Aspects inherit board data from base spirit (no duplication)
 - getSpiritWithAspects query returns base + sorted aspects in single call
+- URL as single source of truth for variant tab selection (no local state)
+- Parallel query preloading in route loaders (getSpiritBySlug + getSpiritWithAspects)
+- Spirit components directory: app/components/spirits/ for spirit-specific components
 
 ### Pending Todos
 
@@ -205,7 +208,7 @@ Phase 2.1 (Spirit Library Polish) complete:
 Phase 3 (Spirit Detail & Board) in progress:
 
 - [x] 03-01: Schema and Seed Data (board data fields)
-- [ ] 03-02: Variant Tabs Component
+- [x] 03-02: Variant Tabs Component
 - [ ] 03-03: Board Layout Components
 - [ ] 03-04: Growth and Presence Track Components
 - [ ] 03-05: Innate and Power Components
@@ -214,5 +217,5 @@ Phase 3 (Spirit Detail & Board) in progress:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03-01-PLAN.md
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
