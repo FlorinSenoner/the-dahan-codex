@@ -115,12 +115,12 @@ export const complexityFilterColors: Record<
 
 /**
  * Modifier colors for aspect complexity indicators (text colors only)
- * Uses complexity colors to maintain visual separation from elements
+ * Uses vibrant element colors (plant green, fire orange) for clear visual feedback
  * Icons are defined in the component to avoid lucide-react dependency here
  */
 export const modifierColors: Record<string, { color: string; label: string }> =
   {
-    easier: { color: "text-complexity-low", label: "Easier" },
+    easier: { color: "text-element-plant", label: "Easier" },
     same: { color: "text-muted-foreground", label: "Same complexity" },
-    harder: { color: "text-complexity-very-high", label: "Harder" },
+    harder: { color: "text-element-fire", label: "Harder" },
   };
