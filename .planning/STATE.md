@@ -9,19 +9,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3.1 (Spirit Board Polish) - IN PROGRESS
-Plan: 6 of 7 in current phase
-Status: Completed plans 03.1-01, 03.1-02, 03.1-03, 03.1-05, 03.1-06
-Last activity: 2026-01-26 - Completed 03.1-06-PLAN.md (innate powers & cards redesign)
+Phase: 3.2 (Spirit Board Refinements) - IN PROGRESS
+Plan: 1 of 4 in current phase
+Status: Completed plan 03.2-01
+Last activity: 2026-01-26 - Completed 03.2-01-PLAN.md (foundation)
 
-Progress: [█████████████████████████████░] 97% (30/31 plans)
+Progress: [█████████████████████████████░] 97% (31/32 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 30
-- Average duration: 6.0 min
+- Total plans completed: 31
+- Average duration: 5.8 min
 - Total execution time: 3.0 hours
 
 **By Phase:**
@@ -33,11 +33,12 @@ Progress: [███████████████████████
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
+| 03.2  | 1     | 2 min  | 2.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 4 min, 5 min, 8 min, 12 min
-- Trend: Stable (moderate complexity plans)
+- Last 5 plans: 4 min, 5 min, 8 min, 12 min, 2 min
+- Trend: Stable (foundation plan was quick)
 
 _Updated after each plan completion_
 
@@ -127,6 +128,10 @@ affecting current work:
 - GrowthIcon Record pattern matching ElementIcon for dynamic icon rendering
 - Type guard pattern (isNewGrowthFormat) for schema format detection
 - Group hover with opacity transition for revealing G1/G2/G3 labels
+- Spirit track colors derived from primary/secondary elements (e.g., River: Water/Sun = cyan/amber)
+- getSpiritTrackColors(slug) with amber/blue fallback for unknown spirits
+- orActions pattern for choose-from-multiple growth options
+- Schema extensions (orActions, repeat, layout, connectsTo, connectionPoint, unlocksGrowth, presenceCap) are optional for backward compatibility
 
 ### Pending Todos
 
@@ -152,6 +157,7 @@ None yet.
 
 - Phase 2.1 inserted after Phase 2: Spirit Library Polish (URGENT) - addresses 9 UAT gaps
 - Phase 3.1 inserted after Phase 3: Spirit Board Polish (URGENT) - addresses 8 UAT gaps (DSL system, element icons, schema corrections, visual polish)
+- Phase 3.2 inserted after Phase 3.1: Spirit Board Refinements (URGENT) - addresses 13 UAT gaps (minimalist tabs, scroll behavior, growth icons, complex spirits support)
 
 ### Blockers/Concerns
 
@@ -270,8 +276,17 @@ Phase 3.1 (Spirit Board Polish) in progress:
 3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
 8. External links (cosmetic) - consistent with credits page
 
+## Phase 3.2 Progress
+
+Phase 3.2 (Spirit Board Refinements) in progress:
+
+- [x] 03.2-01: Foundation (react-intersection-observer, spirit track colors, schema extensions)
+- [ ] 03.2-02: Minimalist Tabs with Scroll Sync
+- [ ] 03.2-03: Complex Spirit Data
+- [ ] 03.2-04: E2E Tests
+
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03.1-04-PLAN.md
+Stopped at: Completed 03.2-01-PLAN.md
 Resume file: None
