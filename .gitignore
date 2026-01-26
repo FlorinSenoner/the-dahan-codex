@@ -22,3 +22,7 @@ mise.*.toml
 # Playwright
 playwright-report/
 test-results/
+
+# Generated/Cache
+.tanstack/
+.playwright-mcp/

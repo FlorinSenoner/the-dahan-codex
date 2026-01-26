@@ -10,6 +10,9 @@ const spiritFilterSchema = z.object({
   expansion: z.array(z.string()).optional().catch([]),
   elements: z.array(z.string()).optional().catch([]),
   sort: z.enum(["alpha", "complexity"]).optional().catch("alpha"),
+  // For view transitions: tracks which spirit we're returning from
+  returning: z.string().optional(),
+  returningAspect: z.string().optional(),
 });
 
 export const Route = createFileRoute("/spirits/")({
@@ -26,8 +29,10 @@ function SpiritsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3">
+      <header
+        className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
+        style={{ viewTransitionName: "list-header" }}
+      >
         <div className="flex items-center justify-between">
           <h1 className="font-headline text-2xl font-semibold text-foreground">
             Spirits
@@ -42,13 +47,14 @@ function SpiritsPage() {
         </div>
       </header>
 
-      {/* Active filter chips */}
       <FilterChips filters={filters} />
 
-      {/* Spirit list */}
       <main className="pb-20">
-        {/* pb-20 for bottom nav space */}
-        <SpiritList filters={filters} />
+        <SpiritList
+          filters={filters}
+          returning={filters.returning}
+          returningAspect={filters.returningAspect}
+        />
       </main>
     </div>
   );
