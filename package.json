@@ -10,11 +10,10 @@
     ]
   },
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite",
     "build": "vite build && pnpm generate-sw",
     "generate-sw": "tsx scripts/generate-sw.ts",
-    "preview": "wrangler dev --config dist/server/wrangler.json",
-    "deploy": "pnpm build && wrangler deploy --config dist/server/wrangler.json",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
@@ -24,14 +23,16 @@
     "knip:fix": "knip --fix",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "ci": "pnpm lint && pnpm typecheck && pnpm build && test -f dist/client/sw.js && pnpm test:e2e"
+    "ci": "pnpm lint && pnpm typecheck && pnpm build && test -f dist/sw.js && pnpm test:e2e"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.33.2",
+    "@convex-dev/react-query": "^0.1.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-router": "^1.157.9",
-    "@tanstack/react-start": "^1.157.9",
+    "@tanstack/router-plugin": "^1.157.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.31.6",
@@ -50,7 +51,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.12",
-    "@cloudflare/vite-plugin": "^1.21.2",
     "@playwright/test": "^1.58.0",
     "@types/node": "^25.0.10",
     "@types/react": "^19.2.9",
@@ -64,7 +64,6 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^6.0.5",
-    "workbox-build": "^7.4.0",
-    "wrangler": "^4.60.0"
+    "workbox-build": "^7.4.0"
   }
 }
