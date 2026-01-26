@@ -1,5 +1,5 @@
-import { BookOpen, ExternalLink, HelpCircle, Search } from "lucide-react";
-import { Heading, Text } from "@/components/ui/typography";
+import { ExternalLink } from "lucide-react";
+import { Heading } from "@/components/ui/typography";
 
 interface ExternalLinksProps {
   spiritName: string;
@@ -8,12 +8,10 @@ interface ExternalLinksProps {
 
 function ResourceLink({
   href,
-  icon: Icon,
   label,
   description,
 }: {
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
   label: string;
   description: string;
 }) {
@@ -22,28 +20,41 @@ function ResourceLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 border border-border hover:border-primary/50 hover:bg-muted/50 transition-colors group"
+      className="flex items-start gap-3 p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors"
     >
-      <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary shrink-0 mt-0.5" />
-      <div className="space-y-0.5 min-w-0">
-        <div className="flex items-center gap-1">
-          <span className="font-medium text-sm group-hover:text-primary">
-            {label}
-          </span>
+      <div className="flex-1">
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-foreground">{label}</span>
           <ExternalLink className="h-3 w-3 text-muted-foreground" />
         </div>
-        <Text variant="small" className="text-muted-foreground">
-          {description}
-        </Text>
+        <p className="text-sm text-muted-foreground mt-0.5">{description}</p>
       </div>
     </a>
   );
 }
 
 export function ExternalLinks({ spiritName, wikiUrl }: ExternalLinksProps) {
-  // Build search URLs
+  // Build search URLs with spirit name
   const faqSearchUrl = `https://querki.net/u/darker/spirit-island-faq/#!spirit-island-faq?search=${encodeURIComponent(spiritName)}`;
   const cardSearchUrl = `https://sick.oberien.de/?query=${encodeURIComponent(spiritName)}`;
+
+  const links = [
+    wikiUrl && {
+      href: wikiUrl,
+      label: "Spirit Island Wiki",
+      description: `Strategy guides and details for ${spiritName}`,
+    },
+    {
+      href: faqSearchUrl,
+      label: "Official FAQ",
+      description: `Rules clarifications for ${spiritName}`,
+    },
+    {
+      href: cardSearchUrl,
+      label: "Card Catalogue",
+      description: `Power card reference and combos`,
+    },
+  ].filter(Boolean) as { href: string; label: string; description: string }[];
 
   return (
     <section className="space-y-3 pt-4 border-t border-border">
@@ -51,34 +62,16 @@ export function ExternalLinks({ spiritName, wikiUrl }: ExternalLinksProps) {
         Resources
       </Heading>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {wikiUrl && (
+      <div className="space-y-2">
+        {links.map((link) => (
           <ResourceLink
-            href={wikiUrl}
-            icon={BookOpen}
-            label="Spirit Island Wiki"
-            description="Official wiki with detailed strategy guides"
+            key={link.href}
+            href={link.href}
+            label={link.label}
+            description={link.description}
           />
-        )}
-
-        <ResourceLink
-          href={faqSearchUrl}
-          icon={HelpCircle}
-          label="FAQ & Rulings"
-          description="Search official rulings and clarifications"
-        />
-
-        <ResourceLink
-          href={cardSearchUrl}
-          icon={Search}
-          label="Card Catalogue"
-          description="View full card images and artwork"
-        />
+        ))}
       </div>
-
-      <Text variant="small" className="text-muted-foreground text-center pt-2">
-        Links open in a new tab
-      </Text>
     </section>
   );
 }
