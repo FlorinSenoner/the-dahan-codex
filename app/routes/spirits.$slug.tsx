@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  complexityBadgeColors,
+  elementBadgeColors,
+  PLACEHOLDER_GRADIENT,
+} from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
-
-// Placeholder gradient for spirits without images
-const PLACEHOLDER_GRADIENT =
-  "linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%)";
 
 // Search params for aspect selection
 const detailSearchSchema = z.object({
@@ -21,26 +22,6 @@ export const Route = createFileRoute("/spirits/$slug")({
   validateSearch: detailSearchSchema,
   component: SpiritDetailPage,
 });
-
-// Complexity badge colors (same as spirit-row)
-const complexityColors: Record<string, string> = {
-  Low: "bg-element-plant/20 text-element-plant border-element-plant/30",
-  Moderate: "bg-element-sun/20 text-element-sun border-element-sun/30",
-  High: "bg-element-fire/20 text-element-fire border-element-fire/30",
-  "Very High": "bg-destructive/20 text-destructive border-destructive/30",
-};
-
-// Element badge colors
-const elementColors: Record<string, string> = {
-  Sun: "bg-element-sun/20 text-element-sun border-element-sun/30",
-  Moon: "bg-element-moon/20 text-element-moon border-element-moon/30",
-  Fire: "bg-element-fire/20 text-element-fire border-element-fire/30",
-  Air: "bg-element-air/20 text-element-air border-element-air/30",
-  Water: "bg-element-water/20 text-element-water border-element-water/30",
-  Earth: "bg-element-earth/20 text-element-earth border-element-earth/30",
-  Plant: "bg-element-plant/20 text-element-plant border-element-plant/30",
-  Animal: "bg-element-animal/20 text-element-animal border-element-animal/30",
-};
 
 function SpiritDetailPage() {
   const { slug } = Route.useParams();
@@ -249,7 +230,10 @@ function SpiritDetailPage() {
         <div className="flex justify-center mb-4">
           <Badge
             variant="outline"
-            className={cn("text-sm", complexityColors[spirit.complexity] || "")}
+            className={cn(
+              "text-sm",
+              complexityBadgeColors[spirit.complexity] || "",
+            )}
           >
             {spirit.complexity} Complexity
           </Badge>
@@ -273,7 +257,7 @@ function SpiritDetailPage() {
             <Badge
               key={element}
               variant="outline"
-              className={cn("text-xs", elementColors[element] || "")}
+              className={cn("text-xs", elementBadgeColors[element] || "")}
             >
               {element}
             </Badge>

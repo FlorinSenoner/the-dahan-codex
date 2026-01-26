@@ -1,6 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
-import { complexityColors, elementColors, FilterPill } from "./filter-sheet";
+import {
+  complexityFilterColors,
+  elementFilterColors,
+} from "@/lib/spirit-colors";
+import { FilterPill } from "./filter-sheet";
 
 interface FilterChipsProps {
   filters: {
@@ -57,8 +61,8 @@ export function FilterChips({ filters }: FilterChipsProps) {
         {allFilters.map(({ type, value }) => {
           const colors =
             type === "complexity"
-              ? complexityColors[value]
-              : elementColors[value];
+              ? complexityFilterColors[value]
+              : elementFilterColors[value];
           return (
             <FilterPill
               key={`${type}-${value}`}
