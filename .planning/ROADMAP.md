@@ -28,7 +28,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2.1: Spirit Library Polish** - UAT fixes: images, data, UI polish, SSR (INSERTED)
 - [x] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
-- [ ] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
+- [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
+- [ ] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -176,13 +177,48 @@ Plans:
 **Plans**: 7 plans
 
 Plans:
-- [ ] 03.1-01-PLAN.md — Element SVG icons and power DSL types (foundation)
-- [ ] 03.1-02-PLAN.md — Schema redesign and correct seed data
-- [ ] 03.1-03-PLAN.md — Variant tabs and radar chart visual polish
-- [ ] 03.1-04-PLAN.md — Growth panel redesign with icons
-- [ ] 03.1-05-PLAN.md — Presence track dynamic array and styling
-- [ ] 03.1-06-PLAN.md — Innate powers and card hand shared DSL
-- [ ] 03.1-07-PLAN.md — Responsive layout and external links polish
+- [x] 03.1-01-PLAN.md — Element SVG icons and power DSL types (foundation)
+- [x] 03.1-02-PLAN.md — Schema redesign and correct seed data
+- [x] 03.1-03-PLAN.md — Variant tabs and radar chart visual polish
+- [x] 03.1-04-PLAN.md — Growth panel redesign with icons
+- [x] 03.1-05-PLAN.md — Presence track dynamic array and styling
+- [x] 03.1-06-PLAN.md — Innate powers and card hand shared DSL
+- [x] 03.1-07-PLAN.md — Responsive layout and external links polish
+
+### Phase 3.2: Spirit Board Refinements (INSERTED)
+
+**Goal**: Address remaining UI/UX issues - minimalist aspect navigation, proper scroll behavior, refined growth panel, and support for complex spirits (Fractured Days, Starlight, Finder, Serpent)
+**Depends on**: Phase 3.1 **Requirements**: From UAT gaps **Success Criteria** (what must be TRUE):
+
+1. Aspect nav bar uses minimalist styling (no gradient), scrolls behind header, shows aspect name in header when scrolled
+2. Aspect nav bar only renders for spirits with 1+ aspects
+3. Complexity/element pills extracted below spirit name, description in collapsible overview
+4. Growth panel uses neutral icons, minimal text (just modifiers), equal-size action cards with CSS subgrid, tooltips on hover
+5. Growth schema supports complex patterns (Fractured Days choose-from-four style)
+6. Presence tracks use spirit-specific colors, support 3+ tracks and connected/overlapping tracks (Finder, Starlight)
+7. Innate powers show elements and effect in one line, speed indicated by border color (not badge)
+8. Cards section split into hand/discard (collapsible), equal-width cards, ellipsis for long titles, speed via border only
+9. New spirits added: Finder of Paths Unseen, Starlight Seeks Its Form, Fractured Days Split the Sky, Serpent Slumbering Beneath the Island
+
+**UAT Gaps to Address:**
+- Tabs: Remove gradient, minimalist style, scroll behind header, aspect name in header when scrolled
+- Conditional render: Hide aspect nav when no aspects exist
+- Layout: Extract pills below name, move description into overview section
+- Growth: Neutral colors, bigger icons, minimal text (modifiers only), CSS subgrid for equal sizing, support Fractured Days pattern
+- Presence: Spirit-specific gradient colors, 3+ tracks, connected/overlapping tracks support
+- Innates: Single-line elements+effect, border color for speed (no badge)
+- Cards: Hand/discard sections, collapsible with count, equal width, ellipsis, border-only speed
+- Data: Add 4 complex spirits to demonstrate all patterns
+
+**Plans**: 6 plans
+
+Plans:
+- [ ] 03.2-01-PLAN.md — Install react-intersection-observer, spirit track colors, schema extensions
+- [ ] 03.2-02-PLAN.md — Minimalist aspect tabs with scroll detection
+- [ ] 03.2-03-PLAN.md — Growth panel CSS subgrid and tooltips
+- [ ] 03.2-04-PLAN.md — Spirit-specific presence colors and cards hand/discard
+- [ ] 03.2-05-PLAN.md — Innate powers border-only speed styling
+- [ ] 03.2-06-PLAN.md — Seed data for 4 complex spirits
 
 ### Phase 4: PWA & Offline
 
@@ -279,7 +315,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 4 > 5 > 6 > 7
 
 | Phase                          | Plans Complete | Status   | Completed  |
 | ------------------------------ | -------------- | -------- | ---------- |
@@ -287,7 +323,8 @@ development:
 | 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
 | 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
 | 3. Spirit Detail & Board       | 6/6            | Complete | 2026-01-26 |
-| 3.1 Spirit Board Polish        | 0/7            | Planned  | -          |
+| 3.1 Spirit Board Polish        | 7/7            | Complete | 2026-01-27 |
+| 3.2 Spirit Board Refinements   | 0/6            | Planned  | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending  | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
 | 6. User Data                   | 0/TBD          | Pending  | -          |
