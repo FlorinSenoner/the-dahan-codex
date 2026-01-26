@@ -47,11 +47,9 @@ export function PresenceSlot({
   const tooltipLines: string[] = [];
 
   if (trackType === "energy") {
-    tooltipLines.push("Gain " + value + " Energy per turn");
+    tooltipLines.push(`Gain ${value} Energy per turn`);
   } else if (trackType === "cardPlays") {
-    tooltipLines.push(
-      "Play " + value + " Card" + (value !== 1 ? "s" : "") + " per turn",
-    );
+    tooltipLines.push(`Play ${value} Card${value !== 1 ? "s" : ""} per turn`);
   } else {
     tooltipLines.push(String(value));
   }
@@ -61,11 +59,11 @@ export function PresenceSlot({
   }
 
   if (elements && elements.length > 0) {
-    tooltipLines.push("+" + elements.join(", "));
+    tooltipLines.push(`+${elements.join(", ")}`);
   }
 
   if (innateUnlock) {
-    tooltipLines.push("Unlocks: " + innateUnlock);
+    tooltipLines.push(`Unlocks: ${innateUnlock}`);
   }
 
   if (specialAbility) {
