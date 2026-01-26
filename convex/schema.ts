@@ -61,14 +61,21 @@ export default defineSchema({
     // Growth options - flat array with G1, G2, G3 ids and typed actions
     growth: v.optional(
       v.object({
-        type: v.optional(v.union(v.literal("pick-one"), v.literal("pick-two"))),
+        type: v.optional(
+          v.union(
+            v.literal("pick-one"),
+            v.literal("pick-two"),
+            v.literal("pick-any"),
+          ),
+        ), // pick-any for Fractured Days choose-from-4
         options: v.array(
           v.object({
             id: v.string(), // "G1", "G2", "G3", etc.
             cost: v.optional(v.number()), // Energy cost for "Or" options
+            repeat: v.optional(v.number()), // "do this N times" options
             actions: v.array(
               v.object({
-                type: v.string(), // "reclaim", "gainEnergy", "gainPowerCard", "addPresence", "push", "damage", "gainElement"
+                type: v.string(), // "reclaim", "gainEnergy", "gainPowerCard", "addPresence", "push", "damage", "gainElement", "gainTime"
                 // Type-specific fields (all optional, used based on type):
                 variant: v.optional(v.string()), // reclaim: "all" | "one"
                 amount: v.optional(v.number()), // gainEnergy, damage
@@ -81,6 +88,28 @@ export default defineSchema({
                 element: v.optional(v.string()), // gainElement
               }),
             ),
+            // For Fractured Days' "gain 1 Time OR 2 Card Plays" style choices
+            orActions: v.optional(
+              v.array(
+                v.object({
+                  label: v.string(),
+                  actions: v.array(
+                    v.object({
+                      type: v.string(),
+                      variant: v.optional(v.string()),
+                      amount: v.optional(v.number()),
+                      cardType: v.optional(v.string()),
+                      range: v.optional(v.number()),
+                      terrain: v.optional(v.string()),
+                      count: v.optional(v.number()),
+                      pieceType: v.optional(v.string()),
+                      target: v.optional(v.string()),
+                      element: v.optional(v.string()),
+                    }),
+                  ),
+                }),
+              ),
+            ),
           }),
         ),
       }),
@@ -88,11 +117,23 @@ export default defineSchema({
     // Presence tracks - flexible array supporting multiple track types
     presenceTracks: v.optional(
       v.object({
+        // Layout type for track arrangement
+        layout: v.optional(
+          v.union(
+            v.literal("linear"),
+            v.literal("branching"),
+            v.literal("multiple"),
+          ),
+        ),
         tracks: v.array(
           v.object({
             type: v.string(), // "energy", "cardPlays", "absorbed", "custom"
             label: v.string(),
             color: v.optional(v.string()), // "amber", "blue", "purple"
+            // For branching tracks (Finder, Starlight)
+            connectsTo: v.optional(v.string()), // Track ID this connects to
+            connectionPoint: v.optional(v.number()), // Slot index where connection occurs
+            unlocksGrowth: v.optional(v.boolean()), // For Starlight's growth-unlocking tracks
             slots: v.array(
               v.object({
                 value: v.union(v.number(), v.string()),
@@ -100,6 +141,7 @@ export default defineSchema({
                 reclaim: v.optional(v.boolean()),
                 innateUnlock: v.optional(v.string()),
                 specialAbility: v.optional(v.string()),
+                presenceCap: v.optional(v.number()), // Serpent's Deep Slumber limit
               }),
             ),
           }),
