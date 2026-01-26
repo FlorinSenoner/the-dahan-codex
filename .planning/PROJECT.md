@@ -219,18 +219,17 @@ that makes openings actually learnable.
 
 ## Constraints
 
-- **Tech stack**: TanStack Start (React + TypeScript), TanStack ecosystem
-  (Router, Query, Form), Convex, Clerk, Cloudflare Workers, Tailwind CSS,
-  Radix/Ark primitives, Framer Motion, Recharts, Serwist — these are fixed
-  choices
+- **Tech stack**: TanStack Router (React 19 + TypeScript, client-only SPA),
+  TanStack Query, Convex, Clerk, Cloudflare Pages, Tailwind CSS, Radix
+  primitives, Framer Motion, Recharts — these are fixed choices
 - **Package manager**: pnpm
 - **Tooling**: Biome (formatting/linting), mise (toolchain management),
   pre-commit hooks
 - **Testing**: Playwright E2E only (Chromium), real spirit data (not mocks), no
   visual regression
 - **Monitoring**: Sentry for error tracking
-- **Deployment**: Cloudflare Workers (not Pages), Cloudflare subdomain for now
-  (custom domain post-v1)
+- **Deployment**: Cloudflare Pages (client-only SPA), Cloudflare subdomain for
+  now (custom domain post-v1)
 - **Auth**: Clerk only, no custom auth system
 - **Licensing**: Unofficial fan project, all Spirit Island materials belong to
   Greater Than Games, LLC
