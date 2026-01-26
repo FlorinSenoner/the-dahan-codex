@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.1 (Spirit Board Polish) - IN PROGRESS
-Plan: 5 of 7 in current phase
-Status: Completed plans 03.1-01, 03.1-02, 03.1-03, 03.1-05
-Last activity: 2026-01-26 - Completed 03.1-05-PLAN.md (presence track redesign)
+Plan: 6 of 7 in current phase
+Status: Completed plans 03.1-01, 03.1-02, 03.1-03, 03.1-05, 03.1-06
+Last activity: 2026-01-26 - Completed 03.1-06-PLAN.md (innate powers & cards redesign)
 
-Progress: [████████████████████████████░░] 94% (29/31 plans)
+Progress: [█████████████████████████████░] 97% (30/31 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 29
-- Average duration: 6.1 min
-- Total execution time: 2.95 hours
+- Total plans completed: 30
+- Average duration: 6.0 min
+- Total execution time: 3.0 hours
 
 **By Phase:**
 
@@ -32,7 +32,7 @@ Progress: [███████████████████████
 | 02    | 7     | 20 min | 2.9 min  |
 | 02.1  | 6     | 28 min | 4.7 min  |
 | 03    | 5     | 20 min | 4.0 min  |
-| 03.1  | 4     | 33 min | 8.3 min  |
+| 03.1  | 5     | 38 min | 7.6 min  |
 
 **Recent Trend:**
 
@@ -121,6 +121,9 @@ affecting current work:
 - Track colors: amber/blue/purple/emerald palette for consistent presence track theming
 - Slot receives full slot object instead of individual props for cleaner API
 - Track gradient pattern: from-{color}-500/15 via-{color}-500/5 to-transparent
+- Element icons render as number + icon pairs (e.g., "2 Sun" becomes "2 <SunIcon>")
+- Cards use div with border-2 instead of shadcn Card for simpler speed-based styling
+- Range/Target abbreviated format (R: / T:) for cards, full format for innate headers
 
 ### Pending Todos
 
@@ -249,23 +252,23 @@ Phase 3.1 (Spirit Board Polish) in progress:
 - [x] 03.1-03: Tabs & Radar Polish
 - [ ] 03.1-04: Growth Panel Redesign
 - [x] 03.1-05: Presence Track Redesign
-- [ ] 03.1-06: Innate Powers Redesign
-- [ ] 03.1-07: Cards & External Links
+- [x] 03.1-06: Innate Powers & Cards Redesign
+- [ ] 03.1-07: External Links Polish
 
 **Completed UAT Gaps:**
 1. [x] Variant tabs styling - "Base" label, gradient highlight, scroll fix
 2. [x] Radar chart visibility - dark mode contrast, spider web grid
 5. [x] Presence tracks - gradient backgrounds, cursor-pointer, flexible array
+6. [x] Innate powers - SVG element icons, speed/range/target header
+7. [x] Cards styling - renamed to "Cards", speed-based outlines, element icons
 
 **Remaining UAT Gaps:**
 3. Overview layout (minor) - sidebar on desktop, collapsible on mobile
 4. Growth panel (major) - correct data, typed DSL, SVG icons
-6. Innate powers (major) - speed/range/target, 8 element SVGs, shared DSL
-7. Cards styling (minor) - rename, colored outlines, layout change
 8. External links (cosmetic) - consistent with credits page
 
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 03.1-05-PLAN.md
+Stopped at: Completed 03.1-06-PLAN.md
 Resume file: None
