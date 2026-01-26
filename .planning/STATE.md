@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 2.1 (Spirit Library Polish) - COMPLETE
 Plan: 6 of 6 in current phase
 Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 009: Rework element and complexity colors
+Last activity: 2026-01-26 - Completed quick task 010: Switch to client-only SPA
 
 Progress: [██████████] 100%
 
@@ -46,13 +46,11 @@ _Updated after each plan completion_
 Decisions are logged in PROJECT.md Key Decisions table. Recent decisions
 affecting current work:
 
-- Used Vite 7 directly instead of vinxi (TanStack Start 1.140.5 compatibility)
-- Dev server runs on port 5173 (Vite default)
-- Server entry exports { fetch } object for TanStack Start SSR
-- @cloudflare/vite-plugin handles SSR preset automatically (no manual
-  cloudflare-module config)
-- Build output: dist/server/ (worker), dist/client/ (static assets)
-- Preview/deploy scripts reference generated dist/server/wrangler.json
+- Switched from TanStack Start SSR to pure client SPA (quick-010)
+- Dev server runs on port 3000
+- Build output: dist/ (static SPA)
+- Deploy to Cloudflare Pages (not Workers)
+- Use useSuspenseQuery with loader preloading for data fetching
 - Convex cloud project: REDACTED_CONVEX_DEPLOYMENT.convex.cloud
 - VITE_CONVEX_URL in .env.local (gitignored)
 - Convex queries imported via api from convex/\_generated/api
@@ -78,7 +76,7 @@ affecting current work:
 - Aspect URLs: /spirits/{base-slug}?aspect={aspect-name}
 - Filter bottom sheet: Drawer with pending state + Apply button
 - URL search params for filter state (shareable filtered views)
-- SSR-safe Convex queries: useQuery with "skip" param when isClient is false
+- Client-side Convex queries: useSuspenseQuery with loader preloading
 - aria-label on icon-only buttons for accessibility and E2E testing
 - Aspects inherit base complexity (Low) - complexityModifier is display-only
 - reseedSpirits mutation for refreshing database data
@@ -107,6 +105,7 @@ None yet.
 | 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
 | 007 | Add typography and reusable UI components | 2026-01-26 | 187fc2a | [007-add-typography-and-reusable-ui-component](./quick/007-add-typography-and-reusable-ui-component/) |
 | 009 | Rework element and complexity colors | 2026-01-26 | 8843491 | [009-rework-element-and-complexity-colors](./quick/009-rework-element-and-complexity-colors/) |
+| 010 | Switch to client-only SPA | 2026-01-26 | 32bf3ed | [010-switch-to-client-only-spa](./quick/010-switch-to-client-only-spa/) |
 
 ### Roadmap Evolution
 
@@ -137,11 +136,11 @@ None yet.
 
 Phase 1 (Foundation & Authentication) is now complete with:
 
-- TanStack Start + Vite 7 + React 19 application
+- TanStack Router + Vite 7 + React 19 client-side SPA
 - Convex backend with health check query
 - Clerk authentication with protected routes
 - PWA with Workbox service worker (hydration-safe registration)
-- GitHub Actions CI/CD with Cloudflare Workers deployment
+- GitHub Actions CI/CD with Cloudflare Pages deployment
 - Pre-commit hooks (biome lint/format, typecheck)
 - Playwright smoke tests
 - UAT gaps addressed (01-07: SW registration timing fix)
@@ -195,5 +194,5 @@ Phase 2.1 (Spirit Library Polish) complete:
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Quick task 009 complete, ready for Phase 3
+Stopped at: Quick task 010 complete, ready for Phase 3
 Resume file: None
