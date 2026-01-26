@@ -163,8 +163,6 @@ function OrActionsGroup({ orActions }: { orActions: OrActionOption[] }) {
  * Single growth option card (G1, G2, G3, etc.) with subgrid layout
  */
 function GrowthOptionCard({ option }: { option: GrowthOption }) {
-  const hasOrActions = option.orActions && option.orActions.length > 0;
-
   return (
     <div className="row-span-2 grid grid-rows-subgrid gap-2 bg-muted/30 rounded-lg p-3 group relative">
       {/* Cost badge if present */}
@@ -195,7 +193,9 @@ function GrowthOptionCard({ option }: { option: GrowthOption }) {
         })}
 
         {/* Or actions for complex spirits */}
-        {hasOrActions && <OrActionsGroup orActions={option.orActions!} />}
+        {option.orActions && option.orActions.length > 0 && (
+          <OrActionsGroup orActions={option.orActions} />
+        )}
       </div>
 
       {/* Row 2: Option ID (hover reveal) */}
