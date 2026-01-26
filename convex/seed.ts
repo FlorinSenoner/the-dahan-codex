@@ -57,73 +57,88 @@ export const seedSpirits = mutation({
       ],
       powerRatings: { offense: 2, defense: 3, control: 4, fear: 2, utility: 4 },
       specialRules: [],
-      growth: [
-        {
-          title: "Top",
-          options: [
-            { actions: ["Reclaim All", "Gain 1 Power Card"] },
-            { actions: ["Gain 1 Power Card", "Add 1 Presence (Range 1)"] },
-          ],
-        },
-        {
-          title: "Bottom",
-          options: [
-            { actions: ["Gain 1 Energy", "Add 1 Presence (Range 2, Wetland)"] },
-            {
-              actions: [
-                "Gain 1 Energy",
-                "Add 1 Presence (Range 1)",
-                "Push 1 Explorer from each of your lands",
-              ],
-            },
-          ],
-        },
-      ],
-      presenceTracks: {
-        energy: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 3 },
-          { value: 4 },
-          { value: 5 },
+      growth: {
+        type: "pick-one",
+        options: [
+          {
+            id: "G1",
+            actions: [{ type: "reclaim", variant: "all" }],
+          },
+          {
+            id: "G2",
+            actions: [
+              { type: "addPresence", range: 1 },
+              { type: "addPresence", range: 1 },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [
+              { type: "addPresence", range: 2, terrain: "Wetland" },
+              { type: "gainEnergy", amount: 1 },
+            ],
+          },
         ],
-        cardPlays: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 3 },
-          { value: 4 },
-          { value: 4, reclaim: true },
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "amber",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "blue",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 3, reclaim: true },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
         ],
       },
       innates: [
         {
           name: "Massive Flooding",
-          speed: "Fast",
-          range: "1",
-          target: "Any",
+          speed: "Slow",
+          range: "Sacred Site",
+          target: "Any Land",
           thresholds: [
             {
               elements: { Sun: 1, Water: 2 },
-              effect: "Push up to 3 Explorers",
+              effect: "Push up to 3 Explorers and/or Towns.",
             },
             {
               elements: { Sun: 2, Water: 3 },
-              effect: "Push up to 6 Explorers and/or Towns",
+              effect:
+                "Instead, push up to 3 Explorers and/or Towns, and up to 3 Dahan.",
             },
             {
-              elements: { Sun: 2, Water: 4 },
+              elements: { Sun: 3, Water: 4 },
               effect:
-                "Push up to 3 Explorers and/or Towns. You may instead deal 1 Damage to each Invader.",
+                "You may also deal 1 Damage to each Invader in target land.",
             },
           ],
         },
         {
           name: "Boon of Vigor",
-          speed: "Slow",
+          speed: "Fast",
           range: "Any Spirit",
           target: "Any Spirit",
           thresholds: [
@@ -134,7 +149,7 @@ export const seedSpirits = mutation({
             {
               elements: { Sun: 3, Water: 3 },
               effect:
-                "Target Spirit either gains +3 Energy or may Reclaim up to 2 Power Cards.",
+                "If target Spirit has a Sacred Site, they also gain +3 Energy.",
             },
           ],
         },
@@ -145,6 +160,8 @@ export const seedSpirits = mutation({
           cost: 0,
           speed: "Slow",
           elements: ["Sun", "Water"],
+          range: "1",
+          target: "Any Land",
           description:
             "Gather up to 2 Dahan. If there are now at least 2 Dahan, add 1 Fertility.",
         },
@@ -153,6 +170,8 @@ export const seedSpirits = mutation({
           cost: 1,
           speed: "Slow",
           elements: ["Water", "Earth"],
+          range: "1",
+          target: "Any Land",
           description: "Push up to 3 Explorers / Towns.",
         },
         {
@@ -160,6 +179,8 @@ export const seedSpirits = mutation({
           cost: 2,
           speed: "Fast",
           elements: ["Sun", "Water"],
+          range: "1",
+          target: "Any Land",
           description: "1 Damage. If target land is Coastal, +1 Damage.",
         },
         {
@@ -167,6 +188,8 @@ export const seedSpirits = mutation({
           cost: 0,
           speed: "Fast",
           elements: ["Sun", "Water"],
+          range: "Any",
+          target: "Any Spirit",
           description:
             "Target Spirit gains 1 Energy. If you target another Spirit, you also gain 1 Energy.",
         },
@@ -208,7 +231,6 @@ export const seedSpirits = mutation({
       slug: "river-surges-in-sunlight",
       complexity: "Low",
       summary: "Protective spirit focused on defending sacred sites.",
-      // No aspect art available yet - will use placeholder
       expansionId: jaggedEarthId,
       elements: ["Sun", "Water"],
       baseSpirit: riverId,
@@ -243,49 +265,60 @@ export const seedSpirits = mutation({
       ],
       powerRatings: { offense: 5, defense: 1, control: 2, fear: 4, utility: 2 },
       specialRules: [],
-      growth: [
-        {
-          title: "Top",
-          options: [
-            { actions: ["Reclaim All", "Gain 1 Power Card"] },
-            {
-              actions: [
-                "Gain 1 Power Card",
-                "Add 1 Presence (Range 1, Or Inland)",
-              ],
-            },
-          ],
-        },
-        {
-          title: "Bottom",
-          options: [
-            {
-              actions: [
-                "Gain 1 Energy",
-                "Add 1 Presence (Range 2, Or Inland)",
-                "1 Damage in one of your lands",
-              ],
-            },
-            { actions: ["Add 1 Presence (Range 1)"] },
-          ],
-        },
-      ],
-      presenceTracks: {
-        energy: [
-          { value: 1 },
-          { value: 2 },
-          { value: 3 },
-          { value: 4 },
-          { value: 4 },
-          { value: 5 },
-          { value: 6 },
+      growth: {
+        type: "pick-one",
+        options: [
+          {
+            id: "G1",
+            actions: [
+              { type: "reclaim", variant: "all" },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G2",
+            actions: [
+              { type: "addPresence", range: 2 },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [
+              { type: "addPresence", range: 1 },
+              { type: "gainEnergy", amount: 3 },
+            ],
+          },
         ],
-        cardPlays: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 4 },
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "amber",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 4 },
+              { value: 5 },
+              { value: 6 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "blue",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+            ],
+          },
         ],
       },
       innates: [
@@ -293,11 +326,11 @@ export const seedSpirits = mutation({
           name: "Thundering Destruction",
           speed: "Fast",
           range: "0",
-          target: "Any",
+          target: "Any Land",
           thresholds: [
-            { elements: { Fire: 2, Air: 1 }, effect: "1 Damage" },
-            { elements: { Fire: 3, Air: 2 }, effect: "1 Damage" },
-            { elements: { Fire: 4, Air: 3 }, effect: "1 Damage" },
+            { elements: { Fire: 2, Air: 1 }, effect: "1 Damage." },
+            { elements: { Fire: 3, Air: 2 }, effect: "1 Damage." },
+            { elements: { Fire: 4, Air: 3 }, effect: "1 Damage." },
           ],
         },
       ],
@@ -307,6 +340,8 @@ export const seedSpirits = mutation({
           cost: 0,
           speed: "Slow",
           elements: ["Fire", "Air"],
+          range: "1",
+          target: "Any Land",
           description: "Push up to 2 Dahan.",
         },
         {
@@ -314,6 +349,8 @@ export const seedSpirits = mutation({
           cost: 1,
           speed: "Fast",
           elements: ["Fire", "Air"],
+          range: "Any",
+          target: "Any Spirit",
           description:
             "Target Spirit may use up to 2 Slow Powers as Fast Powers this turn.",
         },
@@ -322,6 +359,8 @@ export const seedSpirits = mutation({
           cost: 2,
           speed: "Fast",
           elements: ["Fire", "Air"],
+          range: "1",
+          target: "Any Land",
           description: "1 Fear. 1 Damage.",
         },
         {
@@ -329,6 +368,8 @@ export const seedSpirits = mutation({
           cost: 3,
           speed: "Slow",
           elements: ["Fire", "Air", "Water"],
+          range: "1",
+          target: "Any Land",
           description: "1 Fear. 2 Damage.",
         },
       ],
@@ -369,7 +410,6 @@ export const seedSpirits = mutation({
       slug: "lightnings-swift-strike",
       complexity: "Low",
       summary: "Focused on efficient, repeated small strikes.",
-      // No aspect art available yet - will use placeholder
       expansionId: jaggedEarthId,
       elements: ["Fire", "Air"],
       baseSpirit: lightningId,
@@ -459,73 +499,88 @@ export const reseedSpirits = mutation({
       ],
       powerRatings: { offense: 2, defense: 3, control: 4, fear: 2, utility: 4 },
       specialRules: [],
-      growth: [
-        {
-          title: "Top",
-          options: [
-            { actions: ["Reclaim All", "Gain 1 Power Card"] },
-            { actions: ["Gain 1 Power Card", "Add 1 Presence (Range 1)"] },
-          ],
-        },
-        {
-          title: "Bottom",
-          options: [
-            { actions: ["Gain 1 Energy", "Add 1 Presence (Range 2, Wetland)"] },
-            {
-              actions: [
-                "Gain 1 Energy",
-                "Add 1 Presence (Range 1)",
-                "Push 1 Explorer from each of your lands",
-              ],
-            },
-          ],
-        },
-      ],
-      presenceTracks: {
-        energy: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 3 },
-          { value: 4 },
-          { value: 5 },
+      growth: {
+        type: "pick-one",
+        options: [
+          {
+            id: "G1",
+            actions: [{ type: "reclaim", variant: "all" }],
+          },
+          {
+            id: "G2",
+            actions: [
+              { type: "addPresence", range: 1 },
+              { type: "addPresence", range: 1 },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [
+              { type: "addPresence", range: 2, terrain: "Wetland" },
+              { type: "gainEnergy", amount: 1 },
+            ],
+          },
         ],
-        cardPlays: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 3 },
-          { value: 4 },
-          { value: 4, reclaim: true },
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "amber",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "blue",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 3, reclaim: true },
+              { value: 4 },
+              { value: 5 },
+            ],
+          },
         ],
       },
       innates: [
         {
           name: "Massive Flooding",
-          speed: "Fast",
-          range: "1",
-          target: "Any",
+          speed: "Slow",
+          range: "Sacred Site",
+          target: "Any Land",
           thresholds: [
             {
               elements: { Sun: 1, Water: 2 },
-              effect: "Push up to 3 Explorers",
+              effect: "Push up to 3 Explorers and/or Towns.",
             },
             {
               elements: { Sun: 2, Water: 3 },
-              effect: "Push up to 6 Explorers and/or Towns",
+              effect:
+                "Instead, push up to 3 Explorers and/or Towns, and up to 3 Dahan.",
             },
             {
-              elements: { Sun: 2, Water: 4 },
+              elements: { Sun: 3, Water: 4 },
               effect:
-                "Push up to 3 Explorers and/or Towns. You may instead deal 1 Damage to each Invader.",
+                "You may also deal 1 Damage to each Invader in target land.",
             },
           ],
         },
         {
           name: "Boon of Vigor",
-          speed: "Slow",
+          speed: "Fast",
           range: "Any Spirit",
           target: "Any Spirit",
           thresholds: [
@@ -536,7 +591,7 @@ export const reseedSpirits = mutation({
             {
               elements: { Sun: 3, Water: 3 },
               effect:
-                "Target Spirit either gains +3 Energy or may Reclaim up to 2 Power Cards.",
+                "If target Spirit has a Sacred Site, they also gain +3 Energy.",
             },
           ],
         },
@@ -547,6 +602,8 @@ export const reseedSpirits = mutation({
           cost: 0,
           speed: "Slow",
           elements: ["Sun", "Water"],
+          range: "1",
+          target: "Any Land",
           description:
             "Gather up to 2 Dahan. If there are now at least 2 Dahan, add 1 Fertility.",
         },
@@ -555,6 +612,8 @@ export const reseedSpirits = mutation({
           cost: 1,
           speed: "Slow",
           elements: ["Water", "Earth"],
+          range: "1",
+          target: "Any Land",
           description: "Push up to 3 Explorers / Towns.",
         },
         {
@@ -562,6 +621,8 @@ export const reseedSpirits = mutation({
           cost: 2,
           speed: "Fast",
           elements: ["Sun", "Water"],
+          range: "1",
+          target: "Any Land",
           description: "1 Damage. If target land is Coastal, +1 Damage.",
         },
         {
@@ -569,6 +630,8 @@ export const reseedSpirits = mutation({
           cost: 0,
           speed: "Fast",
           elements: ["Sun", "Water"],
+          range: "Any",
+          target: "Any Spirit",
           description:
             "Target Spirit gains 1 Energy. If you target another Spirit, you also gain 1 Energy.",
         },
@@ -609,7 +672,6 @@ export const reseedSpirits = mutation({
       slug: "river-surges-in-sunlight",
       complexity: "Low",
       summary: "Protective spirit focused on defending sacred sites.",
-      // No aspect art available yet - will use placeholder
       expansionId: jaggedEarthId,
       elements: ["Sun", "Water"],
       baseSpirit: riverId,
@@ -643,49 +705,60 @@ export const reseedSpirits = mutation({
       ],
       powerRatings: { offense: 5, defense: 1, control: 2, fear: 4, utility: 2 },
       specialRules: [],
-      growth: [
-        {
-          title: "Top",
-          options: [
-            { actions: ["Reclaim All", "Gain 1 Power Card"] },
-            {
-              actions: [
-                "Gain 1 Power Card",
-                "Add 1 Presence (Range 1, Or Inland)",
-              ],
-            },
-          ],
-        },
-        {
-          title: "Bottom",
-          options: [
-            {
-              actions: [
-                "Gain 1 Energy",
-                "Add 1 Presence (Range 2, Or Inland)",
-                "1 Damage in one of your lands",
-              ],
-            },
-            { actions: ["Add 1 Presence (Range 1)"] },
-          ],
-        },
-      ],
-      presenceTracks: {
-        energy: [
-          { value: 1 },
-          { value: 2 },
-          { value: 3 },
-          { value: 4 },
-          { value: 4 },
-          { value: 5 },
-          { value: 6 },
+      growth: {
+        type: "pick-one",
+        options: [
+          {
+            id: "G1",
+            actions: [
+              { type: "reclaim", variant: "all" },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G2",
+            actions: [
+              { type: "addPresence", range: 2 },
+              { type: "gainPowerCard" },
+            ],
+          },
+          {
+            id: "G3",
+            actions: [
+              { type: "addPresence", range: 1 },
+              { type: "gainEnergy", amount: 3 },
+            ],
+          },
         ],
-        cardPlays: [
-          { value: 1 },
-          { value: 2 },
-          { value: 2 },
-          { value: 3 },
-          { value: 4 },
+      },
+      presenceTracks: {
+        tracks: [
+          {
+            type: "energy",
+            label: "Energy/Turn",
+            color: "amber",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+              { value: 4 },
+              { value: 5 },
+              { value: 6 },
+            ],
+          },
+          {
+            type: "cardPlays",
+            label: "Card Plays",
+            color: "blue",
+            slots: [
+              { value: 1 },
+              { value: 2 },
+              { value: 2 },
+              { value: 3 },
+              { value: 4 },
+            ],
+          },
         ],
       },
       innates: [
@@ -693,11 +766,11 @@ export const reseedSpirits = mutation({
           name: "Thundering Destruction",
           speed: "Fast",
           range: "0",
-          target: "Any",
+          target: "Any Land",
           thresholds: [
-            { elements: { Fire: 2, Air: 1 }, effect: "1 Damage" },
-            { elements: { Fire: 3, Air: 2 }, effect: "1 Damage" },
-            { elements: { Fire: 4, Air: 3 }, effect: "1 Damage" },
+            { elements: { Fire: 2, Air: 1 }, effect: "1 Damage." },
+            { elements: { Fire: 3, Air: 2 }, effect: "1 Damage." },
+            { elements: { Fire: 4, Air: 3 }, effect: "1 Damage." },
           ],
         },
       ],
@@ -707,6 +780,8 @@ export const reseedSpirits = mutation({
           cost: 0,
           speed: "Slow",
           elements: ["Fire", "Air"],
+          range: "1",
+          target: "Any Land",
           description: "Push up to 2 Dahan.",
         },
         {
@@ -714,6 +789,8 @@ export const reseedSpirits = mutation({
           cost: 1,
           speed: "Fast",
           elements: ["Fire", "Air"],
+          range: "Any",
+          target: "Any Spirit",
           description:
             "Target Spirit may use up to 2 Slow Powers as Fast Powers this turn.",
         },
@@ -722,6 +799,8 @@ export const reseedSpirits = mutation({
           cost: 2,
           speed: "Fast",
           elements: ["Fire", "Air"],
+          range: "1",
+          target: "Any Land",
           description: "1 Fear. 1 Damage.",
         },
         {
@@ -729,6 +808,8 @@ export const reseedSpirits = mutation({
           cost: 3,
           speed: "Slow",
           elements: ["Fire", "Air", "Water"],
+          range: "1",
+          target: "Any Land",
           description: "1 Fear. 2 Damage.",
         },
       ],
@@ -768,7 +849,6 @@ export const reseedSpirits = mutation({
       slug: "lightnings-swift-strike",
       complexity: "Low",
       summary: "Focused on efficient, repeated small strikes.",
-      // No aspect art available yet - will use placeholder
       expansionId: jaggedEarthId,
       elements: ["Fire", "Air"],
       baseSpirit: lightningId,
