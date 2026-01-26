@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 2.1 (Spirit Library Polish) - COMPLETE
 Plan: 6 of 6 in current phase
 Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 007: Add typography and reusable UI components
+Last activity: 2026-01-26 - Completed quick task 008: Fix Convex SSR error
 
 Progress: [██████████] 100%
 
@@ -78,7 +78,7 @@ affecting current work:
 - Aspect URLs: /spirits/{base-slug}?aspect={aspect-name}
 - Filter bottom sheet: Drawer with pending state + Apply button
 - URL search params for filter state (shareable filtered views)
-- SSR-safe Convex queries: useQuery with "skip" param when isClient is false
+- SSR-safe Convex queries: ClientOnly wrapper prevents hooks from running during SSR
 - aria-label on icon-only buttons for accessibility and E2E testing
 - Aspects inherit base complexity (Low) - complexityModifier is display-only
 - reseedSpirits mutation for refreshing database data
@@ -105,6 +105,7 @@ None yet.
 | 005 | Fix Clerk sign-in e2e test selector | 2026-01-25 | 8a054ec | [005-fix-clerk-sign-in-e2e-test-selector](./quick/005-fix-clerk-sign-in-e2e-test-selector/) |
 | 006 | Create README.md and update CLAUDE.md | 2026-01-25 | 8bf08bd | [006-create-readme-and-update-claude-md](./quick/006-create-readme-and-update-claude-md/) |
 | 007 | Add typography and reusable UI components | 2026-01-26 | 187fc2a | [007-add-typography-and-reusable-ui-component](./quick/007-add-typography-and-reusable-ui-component/) |
+| 008 | Fix Convex SSR error with ClientOnly wrapper | 2026-01-26 | d8c00c3 | [008-fix-convex-ssr-error](./quick/008-fix-convex-ssr-error/) |
 
 ### Roadmap Evolution
 
@@ -180,7 +181,6 @@ Phase 2.1 (Spirit Library Polish) is now complete with:
 - View transition CSS fixed with correct ::view-transition-group(*) syntax
 - Aspect title display cleaned up (aspect name as h1, "Aspect of [Base]" subtitle)
 - Description field displayed on spirit detail pages
-- SSR skip pattern verified working
 
 ## Phase 2.1 Progress
 
