@@ -1,4 +1,5 @@
 import type { Doc } from "convex/_generated/dataModel";
+import { ElementIcon } from "@/components/icons/elements";
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +8,6 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Heading, Text } from "@/components/ui/typography";
-import { elementBadgeColors } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
 
 type Innate = NonNullable<Doc<"spirits">["innates"]>[number];
@@ -51,19 +51,53 @@ function ElementThreshold({
   }));
 
   return (
-    <div className="flex flex-wrap gap-1">
-      {elementCounts.map(({ element, count }) => (
-        <Badge
-          key={element}
-          variant="outline"
-          className={cn(
-            "text-xs px-1.5 py-0",
-            elementBadgeColors[element] || "",
-          )}
-        >
-          {count} {element}
-        </Badge>
-      ))}
+    <div className="flex items-center gap-2">
+      {elementCounts.map(({ element, count }) => {
+        const Icon = ElementIcon[element];
+        return (
+          <div key={element} className="flex items-center gap-0.5">
+            <span className="text-sm font-medium text-muted-foreground">
+              {count}
+            </span>
+            {Icon && <Icon size={18} />}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function PowerHeader({
+  speed,
+  range,
+  target,
+}: {
+  speed: "Fast" | "Slow";
+  range?: string;
+  target?: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+      <Badge
+        variant="outline"
+        className={cn(
+          speed === "Fast"
+            ? "border-amber-500/50 text-amber-400"
+            : "border-blue-500/50 text-blue-400",
+        )}
+      >
+        {speed}
+      </Badge>
+      {range && (
+        <span>
+          <span className="text-muted-foreground/70">Range:</span> {range}
+        </span>
+      )}
+      {target && (
+        <span>
+          <span className="text-muted-foreground/70">Target:</span> {target}
+        </span>
+      )}
     </div>
   );
 }
@@ -93,32 +127,14 @@ export function InnatePowers({ innates }: InnatePowersProps) {
             className="border border-border rounded-lg bg-muted/20 px-4"
           >
             <AccordionTrigger className="hover:no-underline py-3">
-              <div className="flex items-center gap-2 text-left">
-                <span className="font-medium">{innate.name}</span>
-                <Badge
-                  variant="outline"
-                  className={cn(
-                    "text-xs",
-                    innate.speed === "Fast"
-                      ? "border-amber-500/50 text-amber-400"
-                      : "border-blue-500/50 text-blue-400",
-                  )}
-                >
-                  {innate.speed}
-                </Badge>
-              </div>
+              <span className="font-medium text-left">{innate.name}</span>
             </AccordionTrigger>
             <AccordionContent className="pb-4 space-y-3">
-              {innate.range && (
-                <Text variant="small" className="text-muted-foreground">
-                  Range: {innate.range}
-                </Text>
-              )}
-              {innate.target && (
-                <Text variant="small" className="text-muted-foreground">
-                  Target: {innate.target}
-                </Text>
-              )}
+              <PowerHeader
+                speed={innate.speed}
+                range={innate.range}
+                target={innate.target}
+              />
               <div className="space-y-3">
                 {innate.thresholds.map((threshold) => (
                   <div
