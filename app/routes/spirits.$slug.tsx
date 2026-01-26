@@ -169,79 +169,92 @@ export function SpiritDetailContent({
     : `spirit-name-${slug}`;
 
   return (
-    <main className="p-4">
-      <div className="flex justify-center mb-6">
-        <div
-          className="h-[300px] aspect-3/2 contain-[layout] overflow-hidden rounded-xl"
-          style={{ viewTransitionName }}
-        >
-          {imgError || !spirit.imageUrl ? (
-            <div
-              className="w-full h-full flex items-center justify-center text-muted-foreground"
-              style={{ background: PLACEHOLDER_GRADIENT }}
+    <main className="p-4 lg:grid lg:grid-cols-[1fr_340px] lg:gap-8 lg:max-w-6xl lg:mx-auto">
+      {/* Left column: Main board content */}
+      <div className="space-y-6">
+        <div className="flex justify-center">
+          <div
+            className="h-[300px] aspect-3/2 contain-[layout] overflow-hidden rounded-xl"
+            style={{ viewTransitionName }}
+          >
+            {imgError || !spirit.imageUrl ? (
+              <div
+                className="w-full h-full flex items-center justify-center text-muted-foreground"
+                style={{ background: PLACEHOLDER_GRADIENT }}
+              >
+                <span className="text-6xl font-headline">
+                  {displayName?.[0] || "?"}
+                </span>
+              </div>
+            ) : (
+              <img
+                src={spirit.imageUrl}
+                alt={displayName}
+                className="w-full h-full object-cover"
+                onError={() => setImgError(true)}
+              />
+            )}
+          </div>
+        </div>
+
+        <div>
+          <Heading
+            variant="h1"
+            as="h1"
+            className="text-foreground text-center mb-2 w-fit mx-auto"
+            style={{
+              viewTransitionName: nameTransitionName,
+            }}
+          >
+            {displayName}
+          </Heading>
+
+          {spirit.aspectName && (
+            <Text variant="muted" className="text-center mb-4">
+              Aspect of {spirit.name}
+            </Text>
+          )}
+
+          <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
+            {spirit.summary}
+          </Text>
+
+          {spirit.description && (
+            <Text
+              variant="muted"
+              className="text-foreground/80 text-center max-w-lg mx-auto leading-relaxed"
             >
-              <span className="text-6xl font-headline">
-                {displayName?.[0] || "?"}
-              </span>
-            </div>
-          ) : (
-            <img
-              src={spirit.imageUrl}
-              alt={displayName}
-              className="w-full h-full object-cover"
-              onError={() => setImgError(true)}
-            />
+              {spirit.description}
+            </Text>
           )}
         </div>
+
+        {/* Mobile: Overview section appears here */}
+        <div className="lg:hidden">
+          <OverviewSection spirit={spirit} />
+        </div>
+
+        {spirit.specialRules && spirit.specialRules.length > 0 && (
+          <SpecialRules rules={spirit.specialRules} />
+        )}
+
+        {spirit.growth && <GrowthPanel growth={spirit.growth} />}
+
+        {spirit.presenceTracks && (
+          <PresenceTrack presenceTracks={spirit.presenceTracks} />
+        )}
+
+        {spirit.innates && <InnatePowers innates={spirit.innates} />}
+
+        {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
+
+        <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
 
-      <Heading
-        variant="h1"
-        as="h1"
-        className="text-foreground text-center mb-2 w-fit mx-auto"
-        style={{
-          viewTransitionName: nameTransitionName,
-        }}
-      >
-        {displayName}
-      </Heading>
-
-      {spirit.aspectName && (
-        <Text variant="muted" className="text-center mb-4">
-          Aspect of {spirit.name}
-        </Text>
-      )}
-
-      <Text className="text-muted-foreground text-center max-w-md mx-auto mb-4">
-        {spirit.summary}
-      </Text>
-
-      {spirit.description && (
-        <Text
-          variant="muted"
-          className="text-foreground/80 text-center max-w-lg mx-auto mb-6 leading-relaxed"
-        >
-          {spirit.description}
-        </Text>
-      )}
-
-      <OverviewSection spirit={spirit} />
-
-      {spirit.specialRules && spirit.specialRules.length > 0 && (
-        <SpecialRules rules={spirit.specialRules} />
-      )}
-
-      {spirit.growth && <GrowthPanel growth={spirit.growth} />}
-
-      {spirit.presenceTracks && (
-        <PresenceTrack presenceTracks={spirit.presenceTracks} />
-      )}
-
-      {spirit.innates && <InnatePowers innates={spirit.innates} />}
-
-      {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
-
-      <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
+      {/* Right column: Sidebar (overview) - desktop only */}
+      <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
+        <OverviewSection spirit={spirit} />
+      </aside>
     </main>
   );
 }
