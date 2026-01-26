@@ -12,7 +12,7 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 Phase: 2.1 (Spirit Library Polish) - COMPLETE
 Plan: 6 of 6 in current phase
 Status: Phase verified and complete
-Last activity: 2026-01-26 - Completed quick task 011: Fix view transitions and aspect URLs
+Last activity: 2026-01-26 - Completed quick task 012: Fix Cloudflare CI auth error
 
 Progress: [██████████] 100%
 
@@ -89,6 +89,7 @@ affecting current work:
 - Modifier colors (easier/harder) use complexity colors for visual consistency
 - Typography components: Heading (h1-h4 variants), Text (body/muted/small variants)
 - Spirit colors centralized in app/lib/spirit-colors.ts (badge colors, filter colors, PLACEHOLDER_GRADIENT)
+- Cloudflare Pages deployment via wrangler-action@v3 (pages-action@v1 deprecated)
 
 ### Pending Todos
 
@@ -108,6 +109,7 @@ None yet.
 | 009 | Rework element and complexity colors | 2026-01-26 | 8843491 | [009-rework-element-and-complexity-colors](./quick/009-rework-element-and-complexity-colors/) |
 | 010 | Switch to client-only SPA | 2026-01-26 | 32bf3ed | [010-switch-to-client-only-spa](./quick/010-switch-to-client-only-spa/) |
 | 011 | Fix view transitions and aspect URLs | 2026-01-26 | 5a25c3e | [011-fix-view-transitions-and-aspect-urls](./quick/011-fix-view-transitions-and-aspect-urls/) |
+| 012 | Fix Cloudflare CI auth error | 2026-01-26 | 8b3f308 | [012-fix-cloudflare-ci-auth-error](./quick/012-fix-cloudflare-ci-auth-error/) |
 
 ### Roadmap Evolution
 
