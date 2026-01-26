@@ -55,12 +55,11 @@ function AspectDetailPage() {
             className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() =>
               navigate({
-                to: "/spirits/$slug",
-                params: { slug },
+                to: "/spirits",
                 viewTransition: true,
               })
             }
-            aria-label="Back to spirit"
+            aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
@@ -73,12 +72,11 @@ function AspectDetailPage() {
             The aspect "{aspect}" of "{slug}" doesn't exist.
           </p>
           <Link
-            to="/spirits/$slug"
-            params={{ slug }}
+            to="/spirits"
             viewTransition
             className="text-primary hover:underline cursor-pointer"
           >
-            Back to Spirit
+            Back to Spirits
           </Link>
         </div>
       </div>
@@ -102,17 +100,16 @@ function AspectDetailPage() {
             className="min-w-[44px] min-h-[44px] cursor-pointer"
             onClick={() =>
               navigate({
-                to: "/spirits/$slug",
-                params: { slug },
+                to: "/spirits",
                 viewTransition: true,
               })
             }
-            aria-label="Back to spirit"
+            aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <span className="font-serif text-lg font-medium truncate">
-            {spirit.name}
+            {spirit.aspectName}
           </span>
         </div>
       </header>
