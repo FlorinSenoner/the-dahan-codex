@@ -13,8 +13,6 @@ const spiritFilterSchema = z.object({
   expansion: z.array(z.string()).optional().catch([]),
   elements: z.array(z.string()).optional().catch([]),
   sort: z.enum(["alpha", "complexity"]).optional().catch("alpha"),
-  returning: z.string().optional(),
-  returningAspect: z.string().optional(),
 });
 
 export const Route = createFileRoute("/spirits/")({
