@@ -101,12 +101,6 @@ function SpiritDetailLayout() {
   const { base, aspects } = spiritData;
   const hasAspects = aspects.length > 0;
 
-  // Show base spirit name in header (or aspect name if viewing aspect)
-  const headerName = hasChildRoute
-    ? matches.find((m) => m.routeId === "/spirits/$slug/$aspect")?.params
-        ?.aspect || base.name
-    : base.name;
-
   return (
     <div className="min-h-screen bg-background pb-20">
       <header
