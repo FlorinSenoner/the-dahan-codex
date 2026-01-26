@@ -24,24 +24,34 @@ export function GrowthPanel({ growth }: GrowthPanelProps) {
         Growth
       </Heading>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {growth.map((growthOption, idx) => (
-          <Card key={idx} className="bg-muted/30">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-primary">
-                {growthOption.title || `Option ${idx + 1}`}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <ul className="space-y-1">
-                {growthOption.options.map((option, optIdx) => (
-                  <li key={optIdx} className="text-sm text-muted-foreground">
-                    {option.actions.join(" + ")}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        ))}
+        {growth.map((growthOption, idx) => {
+          const key = growthOption.title || `option-${idx}`;
+          return (
+            <Card key={key} className="bg-muted/30">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-primary">
+                  {growthOption.title || `Option ${idx + 1}`}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <ul className="space-y-1">
+                  {growthOption.options.map((option) => {
+                    // Create a stable key from actions
+                    const actionKey = option.actions.join("-");
+                    return (
+                      <li
+                        key={actionKey}
+                        className="text-sm text-muted-foreground"
+                      >
+                        {option.actions.join(" + ")}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </section>
   );
