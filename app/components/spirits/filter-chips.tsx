@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { complexityColors, elementColors, FilterPill } from "./filter-sheet";
 
 interface FilterChipsProps {
   filters: {
@@ -54,21 +54,23 @@ export function FilterChips({ filters }: FilterChipsProps) {
   return (
     <div className="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-border bg-muted/20">
       <div className="flex flex-wrap items-center gap-2 flex-1">
-        {allFilters.map(({ type, value }) => (
-          <button
-            key={`${type}-${value}`}
-            type="button"
-            onClick={() => removeFilter(type, value)}
-            className={cn(
-              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer",
-              "bg-primary/10 text-primary border border-primary/20",
-              "hover:bg-primary/20 transition-colors",
-            )}
-          >
-            {value}
-            <X className="h-3 w-3" />
-          </button>
-        ))}
+        {allFilters.map(({ type, value }) => {
+          const colors =
+            type === "complexity"
+              ? complexityColors[value]
+              : elementColors[value];
+          return (
+            <FilterPill
+              key={`${type}-${value}`}
+              label={value}
+              selected={true}
+              onClick={() => removeFilter(type, value)}
+              selectedClass={colors?.selected}
+            >
+              <X className="h-3 w-3" />
+            </FilterPill>
+          );
+        })}
       </div>
       <button
         type="button"

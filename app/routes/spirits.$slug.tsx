@@ -68,26 +68,50 @@ function SpiritDetailPage() {
     setImgError(false);
   }, [imageUrl]);
 
+  // Compute view-transition-names from URL params (available even during loading)
+  const loadingImageVTN = aspect
+    ? `spirit-aspect-${aspect.toLowerCase()}`
+    : `spirit-image-${slug}`;
+  // Title only morphs for base spirits (not aspects)
+  const loadingTitleVTN = aspect ? undefined : `spirit-name-${slug}`;
+
   // Loading state
   if (spirit === undefined) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3">
+        <header
+          className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
+          style={{ viewTransitionName: "detail-header" }}
+        >
           <Button
             variant="ghost"
             size="icon"
             className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() => navigate({ to: "/spirits" })}
+            onClick={() =>
+              navigate({
+                to: "/spirits",
+                search: { returning: slug, returningAspect: aspect },
+                viewTransition: true,
+              })
+            }
             aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </header>
         <div className="p-4 animate-pulse">
-          <div className="w-full h-[200px] bg-muted rounded-lg mb-4" />
-          <div className="h-8 bg-muted rounded w-3/4 mb-2" />
+          <div className="flex justify-center">
+            <div
+              className="h-[300px] aspect-3/2 bg-muted rounded-xl contain-[layout] overflow-hidden"
+              style={{ viewTransitionName: loadingImageVTN }}
+            />
+          </div>
+          <div
+            className="h-8 bg-muted rounded w-3/4 mx-auto mb-2 contain-[layout]"
+            style={{ viewTransitionName: loadingTitleVTN }}
+          />
           <div className="h-4 bg-muted rounded w-full mb-4" />
-          <div className="flex gap-2">
+          <div className="flex justify-center gap-2">
             <div className="h-6 bg-muted rounded w-16" />
             <div className="h-6 bg-muted rounded w-16" />
           </div>
@@ -100,12 +124,21 @@ function SpiritDetailPage() {
   if (spirit === null) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3">
+        <header
+          className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
+          style={{ viewTransitionName: "detail-header" }}
+        >
           <Button
             variant="ghost"
             size="icon"
             className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() => navigate({ to: "/spirits" })}
+            onClick={() =>
+              navigate({
+                to: "/spirits",
+                search: { returning: slug, returningAspect: aspect },
+                viewTransition: true,
+              })
+            }
             aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -120,6 +153,7 @@ function SpiritDetailPage() {
           </p>
           <Link
             to="/spirits"
+            viewTransition
             className="text-primary hover:underline cursor-pointer"
           >
             Back to Spirits
@@ -141,13 +175,22 @@ function SpiritDetailPage() {
   return (
     <div className="min-h-screen bg-background pb-20">
       {/* Header with back button */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3">
+      <header
+        className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
+        style={{ viewTransitionName: "detail-header" }}
+      >
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="icon"
             className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() => navigate({ to: "/spirits" })}
+            onClick={() =>
+              navigate({
+                to: "/spirits",
+                search: { returning: slug, returningAspect: aspect },
+                viewTransition: true,
+              })
+            }
             aria-label="Back to spirits"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -160,34 +203,34 @@ function SpiritDetailPage() {
 
       {/* Spirit content */}
       <main className="p-4">
-        {/* Hero image */}
-        <div className="relative w-full aspect-square max-w-[300px] mx-auto mb-6">
-          {imgError || !spirit.imageUrl ? (
-            <div
-              className="w-full h-full rounded-xl flex items-center justify-center text-muted-foreground"
-              style={{
-                background: PLACEHOLDER_GRADIENT,
-                viewTransitionName,
-              }}
-            >
-              <span className="text-6xl font-headline">
-                {displayName?.[0] || "?"}
-              </span>
-            </div>
-          ) : (
-            <img
-              src={spirit.imageUrl}
-              alt={displayName}
-              className="w-full h-full object-cover rounded-xl"
-              style={{ viewTransitionName }}
-              onError={() => setImgError(true)}
-            />
-          )}
+        <div className="flex justify-center mb-6">
+          <div
+            className="h-[300px] aspect-3/2 contain-[layout] overflow-hidden rounded-xl"
+            style={{ viewTransitionName }}
+          >
+            {imgError || !spirit.imageUrl ? (
+              <div
+                className="w-full h-full flex items-center justify-center text-muted-foreground"
+                style={{ background: PLACEHOLDER_GRADIENT }}
+              >
+                <span className="text-6xl font-headline">
+                  {displayName?.[0] || "?"}
+                </span>
+              </div>
+            ) : (
+              <img
+                src={spirit.imageUrl}
+                alt={displayName}
+                className="w-full h-full object-cover"
+                onError={() => setImgError(true)}
+              />
+            )}
+          </div>
         </div>
 
         {/* Spirit name */}
         <h1
-          className="font-serif text-2xl font-bold text-foreground text-center mb-2"
+          className="font-serif text-2xl font-bold text-foreground text-center mb-2 contain-[layout]"
           style={{
             viewTransitionName: isAspect ? undefined : `spirit-name-${slug}`,
           }}
