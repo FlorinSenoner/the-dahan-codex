@@ -28,6 +28,7 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss"
+    "tailwindcss",
+    "recharts"
   ]
 }
