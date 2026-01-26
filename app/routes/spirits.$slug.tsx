@@ -11,7 +11,9 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
+import { GrowthPanel } from "@/components/spirits/growth-panel";
 import { OverviewSection } from "@/components/spirits/overview-section";
+import { PresenceTrack } from "@/components/spirits/presence-track";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
@@ -220,6 +222,12 @@ export function SpiritDetailContent({
       )}
 
       <OverviewSection spirit={spirit} />
+
+      {spirit.growth && <GrowthPanel growth={spirit.growth} />}
+
+      {spirit.presenceTracks && (
+        <PresenceTrack presenceTracks={spirit.presenceTracks} />
+      )}
     </main>
   );
 }
