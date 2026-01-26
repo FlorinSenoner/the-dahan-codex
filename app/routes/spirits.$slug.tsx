@@ -47,11 +47,21 @@ function SpiritDetailLayout() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
   const matches = useMatches();
+  const params = useParams({ strict: false });
+
+  // Track tabs visibility for header aspect name display
+  const [tabsVisible, setTabsVisible] = useState(true);
+  const handleVisibilityChange = useCallback((visible: boolean) => {
+    setTabsVisible(visible);
+  }, []);
 
   // Check if we have a child route (aspect)
   const hasChildRoute = matches.some(
     (m) => m.routeId === "/spirits/$slug/$aspect",
   );
+
+  // Get current aspect from URL params
+  const currentAspect = (params as { aspect?: string }).aspect;
 
   // Get base spirit with aspects for the tabs
   const { data: spiritData } = useSuspenseQuery(
@@ -103,6 +113,15 @@ function SpiritDetailLayout() {
   const { base, aspects } = spiritData;
   const hasAspects = aspects.length > 0;
 
+  // Find current aspect display name
+  const currentAspectData = currentAspect
+    ? aspects.find((a) => a.aspectName?.toLowerCase() === currentAspect)
+    : null;
+  const aspectDisplayName = currentAspectData?.aspectName;
+
+  // Show aspect name in header when tabs are scrolled out of view
+  const showAspectInHeader = !tabsVisible && aspectDisplayName;
+
   return (
     <div className="min-h-screen bg-background pb-20">
       <header
@@ -124,13 +143,26 @@ function SpiritDetailLayout() {
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <span className="font-serif text-lg font-medium truncate">
-            {base.name}
-          </span>
+          <div className="flex flex-col min-w-0">
+            <span className="font-serif text-lg font-medium truncate">
+              {base.name}
+            </span>
+            {showAspectInHeader && (
+              <span className="text-xs text-muted-foreground truncate">
+                {aspectDisplayName}
+              </span>
+            )}
+          </div>
         </div>
       </header>
 
-      {hasAspects && <VariantTabs base={base} aspects={aspects} />}
+      {hasAspects && (
+        <VariantTabs
+          base={base}
+          aspects={aspects}
+          onVisibilityChange={handleVisibilityChange}
+        />
+      )}
 
       {hasChildRoute ? (
         <Outlet />
