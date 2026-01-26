@@ -1,12 +1,5 @@
 import type { Doc } from "convex/_generated/dataModel";
 import { ElementIcon } from "@/components/icons/elements";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
@@ -39,8 +32,10 @@ function getThresholdKey(
 
 function ElementThreshold({
   elements,
+  effect,
 }: {
   elements: Innate["thresholds"][number]["elements"];
+  effect: string;
 }) {
   // Convert elements object to array of {element, count}
   const elementCounts = ELEMENT_ORDER.filter(
@@ -51,52 +46,44 @@ function ElementThreshold({
   }));
 
   return (
-    <div className="flex items-center gap-2">
-      {elementCounts.map(({ element, count }) => {
-        const Icon = ElementIcon[element];
-        return (
-          <div key={element} className="flex items-center gap-0.5">
-            <span className="text-sm font-medium text-muted-foreground">
-              {count}
+    <div className="flex items-start gap-2 flex-wrap">
+      {/* Element icons */}
+      <div className="flex items-center gap-1 shrink-0">
+        {elementCounts.map(({ element, count }) => {
+          const Icon = ElementIcon[element];
+          return (
+            <span key={element} className="flex items-center gap-0.5">
+              <span className="text-sm font-medium text-muted-foreground">
+                {count}
+              </span>
+              {Icon && <Icon size={16} />}
             </span>
-            {Icon && <Icon size={18} />}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+      {/* Effect text */}
+      <span className="text-sm text-muted-foreground flex-1">{effect}</span>
     </div>
   );
 }
 
 function PowerHeader({
-  speed,
+  name,
   range,
   target,
 }: {
-  speed: "Fast" | "Slow";
+  name: string;
   range?: string;
   target?: string;
 }) {
   return (
-    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-      <Badge
-        variant="outline"
-        className={cn(
-          speed === "Fast"
-            ? "border-amber-500/50 text-amber-400"
-            : "border-blue-500/50 text-blue-400",
-        )}
-      >
-        {speed}
-      </Badge>
+    <div className="flex items-center gap-3 flex-wrap">
+      <span className="font-medium">{name}</span>
       {range && (
-        <span>
-          <span className="text-muted-foreground/70">Range:</span> {range}
-        </span>
+        <span className="text-xs text-muted-foreground">Range: {range}</span>
       )}
       {target && (
-        <span>
-          <span className="text-muted-foreground/70">Target:</span> {target}
-        </span>
+        <span className="text-xs text-muted-foreground">Target: {target}</span>
       )}
     </div>
   );
@@ -119,37 +106,44 @@ export function InnatePowers({ innates }: InnatePowersProps) {
       <Heading variant="h3" as="h2">
         Innate Powers
       </Heading>
-      <Accordion type="multiple" className="w-full space-y-2">
-        {innates.map((innate, idx) => (
-          <AccordionItem
+      <div className="space-y-4">
+        {innates.map((innate) => (
+          <div
             key={innate.name}
-            value={`innate-${idx}`}
-            className="border border-border rounded-lg bg-muted/20 px-4"
+            className={cn(
+              "border-l-4 pl-3 py-2 rounded-r-lg bg-muted/20",
+              innate.speed === "Fast"
+                ? "border-l-amber-500"
+                : "border-l-blue-500",
+            )}
           >
-            <AccordionTrigger className="hover:no-underline py-3">
-              <span className="font-medium text-left">{innate.name}</span>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 space-y-3">
-              <PowerHeader
-                speed={innate.speed}
-                range={innate.range}
-                target={innate.target}
-              />
-              <div className="space-y-3">
-                {innate.thresholds.map((threshold) => (
-                  <div
-                    key={getThresholdKey(threshold.elements)}
-                    className="p-3 bg-background/50 rounded-md space-y-2"
-                  >
-                    <ElementThreshold elements={threshold.elements} />
-                    <Text variant="small">{threshold.effect}</Text>
-                  </div>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+            {/* Power header with name, range, target */}
+            <PowerHeader
+              name={innate.name}
+              range={innate.range}
+              target={innate.target}
+            />
+
+            {/* Thresholds */}
+            <div className="mt-3 space-y-2">
+              {innate.thresholds.map((threshold, idx) => (
+                <div
+                  key={getThresholdKey(threshold.elements)}
+                  className={cn(
+                    "py-1.5",
+                    idx > 0 && "border-t border-border/30",
+                  )}
+                >
+                  <ElementThreshold
+                    elements={threshold.elements}
+                    effect={threshold.effect}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
-      </Accordion>
+      </div>
     </section>
   );
 }
