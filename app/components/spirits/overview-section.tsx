@@ -1,6 +1,12 @@
 import type { Doc } from "convex/_generated/dataModel";
+import { ChevronDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Heading, Text } from "@/components/ui/typography";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Heading } from "@/components/ui/typography";
 import { complexityBadgeColors, elementBadgeColors } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
 import { PowerRadarChart } from "./power-radar-chart";
@@ -12,11 +18,17 @@ interface OverviewSectionProps {
 export function OverviewSection({ spirit }: OverviewSectionProps) {
   const hasStrengths = spirit.strengths && spirit.strengths.length > 0;
   const hasWeaknesses = spirit.weaknesses && spirit.weaknesses.length > 0;
+  const hasContent =
+    spirit.powerRatings || hasStrengths || hasWeaknesses || spirit.description;
 
-  return (
-    <section className="space-y-6">
+  if (!hasContent) {
+    return null;
+  }
+
+  const content = (
+    <div className="space-y-6">
       {/* Complexity and Elements Row */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 lg:justify-center">
         <Badge
           variant="outline"
           className={cn(
@@ -45,7 +57,7 @@ export function OverviewSection({ spirit }: OverviewSectionProps) {
       )}
 
       {/* Strengths and Weaknesses */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-4">
         {hasStrengths && (
           <div className="space-y-2">
             <Heading variant="h4" as="h3" className="text-green-400">
@@ -82,13 +94,22 @@ export function OverviewSection({ spirit }: OverviewSectionProps) {
           </div>
         )}
       </div>
+    </div>
+  );
 
-      {/* Fallback for spirits without data */}
-      {!spirit.powerRatings && !hasStrengths && !hasWeaknesses && (
-        <Text variant="muted" className="text-center py-4">
-          Detailed overview data coming soon.
-        </Text>
-      )}
-    </section>
+  return (
+    <>
+      {/* Mobile: Collapsible */}
+      <Collapsible defaultOpen={false} className="lg:hidden">
+        <CollapsibleTrigger className="w-full flex justify-between items-center py-3 px-4 bg-muted/30 rounded-lg cursor-pointer min-h-[44px]">
+          <span className="font-medium">Overview</span>
+          <ChevronDown className="h-4 w-4 transition-transform duration-200 data-[state=open]:rotate-180" />
+        </CollapsibleTrigger>
+        <CollapsibleContent className="pt-4">{content}</CollapsibleContent>
+      </Collapsible>
+
+      {/* Desktop: Always visible in sidebar */}
+      <div className="hidden lg:block">{content}</div>
+    </>
   );
 }
