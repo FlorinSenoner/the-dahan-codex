@@ -97,4 +97,93 @@ test.describe("Spirit Library", () => {
       page.getByRole("link", { name: /spirit island wiki/i }),
     ).toBeVisible();
   });
+
+  test("spirit detail shows variant tabs", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
+
+    // Wait for tabs to load (River has base + 3 aspects)
+    await expect(page.getByRole("tab", { name: /River/ })).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByRole("tab", { name: "Sunshine" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Travel" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Haven" })).toBeVisible();
+  });
+
+  test("variant tabs navigate to correct URL", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
+
+    // Wait for tabs to load
+    await expect(page.getByRole("tab", { name: /River/ })).toBeVisible({
+      timeout: 15000,
+    });
+
+    // Click on Sunshine tab
+    await page.getByRole("tab", { name: "Sunshine" }).click();
+
+    // URL should update
+    await expect(page).toHaveURL(/river-surges-in-sunlight\/sunshine/);
+
+    // Content should update (subtitle shows "Aspect of")
+    await expect(
+      page.getByText("Aspect of River Surges in Sunlight"),
+    ).toBeVisible();
+  });
+
+  test("spirit detail shows overview section", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
+
+    // Wait for page to load
+    await expect(
+      page.getByRole("heading", { name: /river surges in sunlight/i }),
+    ).toBeVisible({ timeout: 15000 });
+
+    // Check for strengths and weaknesses headings
+    await expect(
+      page.getByRole("heading", { name: "Strengths" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Weaknesses" }),
+    ).toBeVisible();
+  });
+
+  test("spirit detail shows board sections", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
+
+    // Wait for page to load
+    await expect(
+      page.getByRole("heading", { name: /river surges in sunlight/i }),
+    ).toBeVisible({ timeout: 15000 });
+
+    // Check for board section headings
+    await expect(page.getByRole("heading", { name: "Growth" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Presence Tracks" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Innate Powers" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Starting Cards" }),
+    ).toBeVisible();
+  });
+
+  test("spirit detail shows external links", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
+
+    // Wait for page to load
+    await expect(
+      page.getByRole("heading", { name: /river surges in sunlight/i }),
+    ).toBeVisible({ timeout: 15000 });
+
+    // Check for Resources section
+    await expect(
+      page.getByRole("heading", { name: "Resources" }),
+    ).toBeVisible();
+
+    // Check for external link to wiki
+    const wikiLink = page.getByRole("link", { name: /Spirit Island Wiki/i });
+    await expect(wikiLink).toBeVisible();
+    await expect(wikiLink).toHaveAttribute("target", "_blank");
+  });
 });
