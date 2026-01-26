@@ -9,12 +9,15 @@ export const PLACEHOLDER_GRADIENT =
 
 /**
  * Badge colors for complexity levels (used on spirit detail and list views)
+ * Uses neutral grayscale progression separate from element colors
  */
 export const complexityBadgeColors: Record<string, string> = {
-  Low: "bg-element-plant/20 text-element-plant border-element-plant/30",
-  Moderate: "bg-element-sun/20 text-element-sun border-element-sun/30",
-  High: "bg-element-fire/20 text-element-fire border-element-fire/30",
-  "Very High": "bg-destructive/20 text-destructive border-destructive/30",
+  Low: "bg-complexity-low/20 text-complexity-low border-complexity-low/30",
+  Moderate:
+    "bg-complexity-moderate/20 text-complexity-moderate border-complexity-moderate/30",
+  High: "bg-complexity-high/20 text-complexity-high border-complexity-high/30",
+  "Very High":
+    "bg-complexity-very-high/20 text-complexity-very-high border-complexity-very-high/30",
 };
 
 /**
@@ -82,6 +85,7 @@ export const elementFilterColors: Record<
 
 /**
  * Complexity filter colors with selected/unselected states (used in filter-sheet)
+ * Uses neutral grayscale progression separate from element colors
  */
 export const complexityFilterColors: Record<
   string,
@@ -89,33 +93,34 @@ export const complexityFilterColors: Record<
 > = {
   Low: {
     selected:
-      "bg-element-plant/30 text-element-plant border-element-plant/50 hover:bg-element-plant/40",
+      "bg-complexity-low/30 text-complexity-low border-complexity-low/50 hover:bg-complexity-low/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   Moderate: {
     selected:
-      "bg-element-sun/30 text-element-sun border-element-sun/50 hover:bg-element-sun/40",
+      "bg-complexity-moderate/30 text-complexity-moderate border-complexity-moderate/50 hover:bg-complexity-moderate/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   High: {
     selected:
-      "bg-element-fire/30 text-element-fire border-element-fire/50 hover:bg-element-fire/40",
+      "bg-complexity-high/30 text-complexity-high border-complexity-high/50 hover:bg-complexity-high/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
   "Very High": {
     selected:
-      "bg-destructive/30 text-destructive border-destructive/50 hover:bg-destructive/40",
+      "bg-complexity-very-high/30 text-complexity-very-high border-complexity-very-high/50 hover:bg-complexity-very-high/40",
     unselected: "bg-muted/30 text-foreground border-border hover:bg-muted/50",
   },
 };
 
 /**
  * Modifier colors for aspect complexity indicators (text colors only)
+ * Uses complexity colors to maintain visual separation from elements
  * Icons are defined in the component to avoid lucide-react dependency here
  */
 export const modifierColors: Record<string, { color: string; label: string }> =
   {
-    easier: { color: "text-element-plant", label: "Easier" },
+    easier: { color: "text-complexity-low", label: "Easier" },
     same: { color: "text-muted-foreground", label: "Same complexity" },
-    harder: { color: "text-element-fire", label: "Harder" },
+    harder: { color: "text-complexity-very-high", label: "Harder" },
   };
