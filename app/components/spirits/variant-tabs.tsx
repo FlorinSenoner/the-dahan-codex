@@ -50,7 +50,7 @@ export function VariantTabs({
     >
       <TabsList
         ref={tabsRef}
-        className="sticky top-[57px] z-10 w-full h-auto min-h-[44px] justify-start overflow-x-auto overflow-y-hidden bg-background/95 backdrop-blur border-b border-border rounded-none gap-0"
+        className="sticky top-[57px] z-0 w-full h-auto min-h-[44px] justify-start overflow-x-auto overflow-y-hidden bg-background/95 backdrop-blur border-b border-border rounded-none gap-0"
       >
         <TabsTrigger value="base" className={tabTriggerClassName}>
           Base
