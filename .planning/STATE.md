@@ -10,11 +10,11 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.4 (Presence Track Graph DSL)
-Plan: 6 of 7 complete
+Plan: 8 of 10 complete (includes gap closure plans 08-10)
 Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-06-PLAN.md
+Last activity: 2026-01-27 - Completed 03.4-10-PLAN.md (gap closure)
 
-Progress: [██████░░░░░░░░░░░░░░░░░░░░░░░░░] 86% (6/7 plans in phase)
+Progress: [████████░░░░░░░░░░░░░░░░░░░░░░░] 80% (8/10 plans in phase)
 
 ## Performance Metrics
 
@@ -171,6 +171,14 @@ affecting current work:
 - PresenceTrack is thin wrapper delegating to GraphPresenceTrack (public API stability)
 - PresenceSlot replaced by PresenceNode (graph-aware interface)
 - Simple spirits use empty edges array (linear tracks need no explicit edges - implicit left-to-right)
+- trackLabel field on presence nodes overrides derived label from trackType (custom row labels)
+- Serpent Deep Slumber nodes use trackLabel: "Deep Slumber" for custom row label
+- specialAbility on first Deep Slumber node shows "Requires Both Preceding Spaces" condition
+- elementValidator union type at top of schema.ts for explicit element values (Sun, Moon, Fire, Air, Water, Earth, Plant, Animal, Any, Star)
+- Any icon uses multicolor gradient with question mark to represent wildcard element
+- Star icon uses gold gradient 5-pointed star design
+- Element icons render below main value in presence slots at 12px size
+- Type guard isGraphFormat for narrowing presenceTracks union type
 
 ### Pending Todos
 
@@ -362,10 +370,16 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 - [x] 03.4-06: Complex Spirit Testing (verified - already done in 03.4-01)
 - [ ] 03.4-07: E2E Tests
 
+**Gap Closure Plans (UAT fixes):**
+
+- [ ] 03.4-08: Absorbed Essence trackLabel fix
+- [x] 03.4-09: Serpent Deep Slumber trackLabel fix (trackLabel field, custom row labels)
+- [x] 03.4-10: Any/Star element icons (elementValidator, AnyIcon, StarIcon, visual rendering)
+
 **Note:** 03.4-01 pulled forward component update (03.4-04) and seed conversion (03.4-05) to unblock typecheck. 03.4-03 integrated EdgeOverlay into presence-track.tsx. Plans 05 and 06 were verification-only.
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.4-06-PLAN.md
+Stopped at: Completed 03.4-10-PLAN.md (gap closure - Any/Star element icons)
 Resume file: None
