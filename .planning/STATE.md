@@ -9,19 +9,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3.2 (Spirit Board Refinements) - VERIFIED ✓
-Plan: 10 of 10 complete
-Status: Phase complete - static verification passed (9/9), browser verification passed (7/7)
-Last activity: 2026-01-27 - Phase 3.2 verified
+Phase: 3.3 (Spirit Board Final Polish)
+Plan: 1 of 1 complete
+Status: In progress
+Last activity: 2026-01-27 - Completed 03.3-01-PLAN.md
 
-Progress: [██████████████████████████████] 100% (40/40 plans)
+Progress: [███████████████████████████████] 100% (41/41 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 36
-- Average duration: 5.4 min
+- Total plans completed: 37
+- Average duration: 5.3 min
 - Total execution time: 3.3 hours
 
 **By Phase:**
@@ -34,6 +34,7 @@ Progress: [███████████████████████
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
+| 03.3  | 1     | 1 min  | 1.0 min  |
 
 **Recent Trend:**
 
@@ -127,7 +128,7 @@ affecting current work:
 - Range/Target abbreviated format (R: / T:) for cards, full format for innate headers
 - GrowthIcon Record pattern matching ElementIcon for dynamic icon rendering
 - Type guard pattern (isNewGrowthFormat) for schema format detection
-- Inline G1/G2/G3 labels with backdrop-blur-sm frosty effect (always visible, not hover-reveal)
+- G1/G2/G3 labels hidden by default, revealed on hover via Tailwind group-hover pattern
 - Spirit track colors derived from primary/secondary elements (e.g., River: Water/Sun = cyan/amber)
 - getSpiritTrackColors(slug) with amber/blue fallback for unknown spirits
 - orActions pattern for choose-from-multiple growth options
@@ -178,6 +179,7 @@ None yet.
 - Phase 2.1 inserted after Phase 2: Spirit Library Polish (URGENT) - addresses 9 UAT gaps
 - Phase 3.1 inserted after Phase 3: Spirit Board Polish (URGENT) - addresses 8 UAT gaps (DSL system, element icons, schema corrections, visual polish)
 - Phase 3.2 inserted after Phase 3.1: Spirit Board Refinements (URGENT) - addresses 13 UAT gaps (minimalist tabs, scroll behavior, growth icons, complex spirits support)
+- Phase 3.3 inserted after Phase 3.2: Spirit Board Final Polish - addresses cosmetic G1/G2/G3 hover labels + presence track branching DSL for complex spirits
 
 ### Blockers/Concerns
 
@@ -315,8 +317,14 @@ Phase 3.2 (Spirit Board Refinements) complete:
 - [x] 03.2-09: Card speed border styling (full border, hover effects, collapsible innates)
 - [x] 03.2-10: Tabs z-index fix (z-10 to z-0 for proper scroll stacking)
 
+## Phase 3.3 Progress
+
+Phase 3.3 (Spirit Board Final Polish) in progress:
+
+- [x] 03.3-01: Hover-reveal G1/G2/G3 labels (group-hover pattern)
+
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-09-PLAN.md (card speed border styling)
+Stopped at: Completed 03.3-01-PLAN.md (hover-reveal G1/G2/G3 labels)
 Resume file: None
