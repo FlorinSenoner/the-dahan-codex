@@ -10,18 +10,18 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.4 (Presence Track Graph DSL)
-Plan: 4 of 7 complete
+Plan: 5 of 7 complete
 Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-04-PLAN.md
+Last activity: 2026-01-27 - Completed 03.4-05-PLAN.md
 
-Progress: [████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 57% (4/7 plans in phase)
+Progress: [█████░░░░░░░░░░░░░░░░░░░░░░░░░░] 71% (5/7 plans in phase)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 41
-- Average duration: 5.2 min
+- Total plans completed: 42
+- Average duration: 5.1 min
 - Total execution time: 3.5 hours
 
 **By Phase:**
@@ -35,12 +35,12 @@ Progress: [████░░░░░░░░░░░░░░░░░░░
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
-| 03.4  | 4     | 18 min | 4.5 min  |
+| 03.4  | 5     | 19 min | 3.8 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min, 3 min, 12 min, 2 min, 2 min, 2 min
-- Trend: 03.4-04 fast - PresenceTrack wiring and PresenceSlot deletion
+- Last 5 plans: 3 min, 12 min, 2 min, 2 min, 2 min, 1 min
+- Trend: 03.4-05 instant - verified seed data already converted in 03.4-01
 
 _Updated after each plan completion_
 
@@ -170,6 +170,7 @@ affecting current work:
 - globalBidirectional defaults to true (most presence track edges are bidirectional)
 - PresenceTrack is thin wrapper delegating to GraphPresenceTrack (public API stability)
 - PresenceSlot replaced by PresenceNode (graph-aware interface)
+- Simple spirits use empty edges array (linear tracks need no explicit edges - implicit left-to-right)
 
 ### Pending Todos
 
@@ -357,7 +358,7 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 - [x] 03.4-02: GraphPresenceTrack Component (CSS Grid-based renderer)
 - [x] 03.4-03: EdgeOverlay Component (SVG lines for non-adjacent connections)
 - [x] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
-- [ ] 03.4-05: Seed Data Conversion (already done in 03.4-01)
+- [x] 03.4-05: Seed Data Conversion (verified - already done in 03.4-01)
 - [ ] 03.4-06: Complex Spirit Testing
 - [ ] 03.4-07: E2E Tests
 
@@ -366,5 +367,5 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.4-04-PLAN.md
+Stopped at: Completed 03.4-05-PLAN.md
 Resume file: None
