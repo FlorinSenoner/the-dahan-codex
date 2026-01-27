@@ -86,7 +86,6 @@ export const seedSpirits = mutation({
           {
             type: "energy",
             label: "Energy/Turn",
-            color: "amber",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -100,7 +99,6 @@ export const seedSpirits = mutation({
           {
             type: "cardPlays",
             label: "Card Plays",
-            color: "blue",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -296,7 +294,6 @@ export const seedSpirits = mutation({
           {
             type: "energy",
             label: "Energy/Turn",
-            color: "amber",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -310,7 +307,6 @@ export const seedSpirits = mutation({
           {
             type: "cardPlays",
             label: "Card Plays",
-            color: "blue",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -1373,7 +1369,6 @@ export const reseedSpirits = mutation({
           {
             type: "energy",
             label: "Energy/Turn",
-            color: "amber",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -1387,7 +1382,6 @@ export const reseedSpirits = mutation({
           {
             type: "cardPlays",
             label: "Card Plays",
-            color: "blue",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -1581,7 +1575,6 @@ export const reseedSpirits = mutation({
           {
             type: "energy",
             label: "Energy/Turn",
-            color: "amber",
             slots: [
               { value: 1 },
               { value: 2 },
@@ -1595,7 +1588,6 @@ export const reseedSpirits = mutation({
           {
             type: "cardPlays",
             label: "Card Plays",
-            color: "blue",
             slots: [
               { value: 1 },
               { value: 2 },
