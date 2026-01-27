@@ -11,6 +11,7 @@ import {
   trackGradientClasses,
 } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
+import { EdgeOverlay } from "./edge-overlay";
 import { PresenceSlot } from "./presence-slot";
 
 // All supported track colors
@@ -47,7 +48,7 @@ export function PresenceTrack({
   presenceTracks,
   spiritSlug,
 }: PresenceTrackProps) {
-  const { nodes } = presenceTracks;
+  const { nodes, edges, rows, cols, bidirectional } = presenceTracks;
 
   // Get spirit-specific colors (defaults to amber/blue if not mapped)
   const spiritColors = spiritSlug
@@ -125,73 +126,87 @@ export function PresenceTrack({
         Presence Tracks
       </Heading>
 
-      <div className="space-y-3">
-        {Object.entries(nodesByRow)
-          .sort(([a], [b]) => Number(a) - Number(b))
-          .map(([rowIndex, rowNodes]) => {
-            const firstNode = rowNodes[0];
-            const color = getNodeColor(firstNode);
-            const gradient =
-              trackGradientClasses[color] || trackGradientClasses.amber;
-            const labelColor =
-              trackLabelColors[color] || trackLabelColors.amber;
+      {/* Relative container for edge overlay positioning */}
+      <div className="relative">
+        <div className="space-y-3">
+          {Object.entries(nodesByRow)
+            .sort(([a], [b]) => Number(a) - Number(b))
+            .map(([rowIndex, rowNodes]) => {
+              const firstNode = rowNodes[0];
+              const color = getNodeColor(firstNode);
+              const gradient =
+                trackGradientClasses[color] || trackGradientClasses.amber;
+              const labelColor =
+                trackLabelColors[color] || trackLabelColors.amber;
 
-            return (
-              <div
-                key={`row-${rowIndex}`}
-                className={cn("rounded-lg p-3", gradient)}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <Text
-                    variant="small"
-                    className={cn(
-                      "font-medium uppercase tracking-wider",
-                      labelColor,
+              return (
+                <div
+                  key={`row-${rowIndex}`}
+                  className={cn("rounded-lg p-3", gradient)}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <Text
+                      variant="small"
+                      className={cn(
+                        "font-medium uppercase tracking-wider",
+                        labelColor,
+                      )}
+                    >
+                      {getRowLabel(rowNodes)}
+                    </Text>
+                    {/* Unlocks growth indicator (Starlight) */}
+                    {firstNode.unlocksGrowth && (
+                      <Tooltip delayDuration={100}>
+                        <TooltipTrigger asChild>
+                          <span className="text-emerald-400 cursor-help">
+                            <Sprout className="w-3.5 h-3.5" />
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="text-xs">
+                            Unlocks growth options when emptied
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
                     )}
-                  >
-                    {getRowLabel(rowNodes)}
-                  </Text>
-                  {/* Unlocks growth indicator (Starlight) */}
-                  {firstNode.unlocksGrowth && (
-                    <Tooltip delayDuration={100}>
-                      <TooltipTrigger asChild>
-                        <span className="text-emerald-400 cursor-help">
-                          <Sprout className="w-3.5 h-3.5" />
-                        </span>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p className="text-xs">
-                          Unlocks growth options when emptied
-                        </p>
-                      </TooltipContent>
-                    </Tooltip>
-                  )}
-                </div>
+                  </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {rowNodes.map((node) => {
-                    // Create slot object compatible with PresenceSlot
-                    const slot = {
-                      value: node.value ?? 0,
-                      elements: node.elements,
-                      reclaim: node.reclaim,
-                      specialAbility: node.specialAbility,
-                      presenceCap: node.presenceCap,
-                    };
-                    return (
-                      <PresenceSlot
-                        key={node.id}
-                        slot={slot}
-                        index={node.col}
-                        trackColor={color}
-                        trackType={node.trackType ?? "energy"}
-                      />
-                    );
-                  })}
+                  <div className="flex flex-wrap gap-2">
+                    {rowNodes.map((node) => {
+                      // Create slot object compatible with PresenceSlot
+                      const slot = {
+                        value: node.value ?? 0,
+                        elements: node.elements,
+                        reclaim: node.reclaim,
+                        specialAbility: node.specialAbility,
+                        presenceCap: node.presenceCap,
+                      };
+                      return (
+                        <PresenceSlot
+                          key={node.id}
+                          slot={slot}
+                          index={node.col}
+                          trackColor={color}
+                          trackType={node.trackType ?? "energy"}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
+
+        {/* Edge overlay for non-adjacent connections */}
+        {edges && edges.length > 0 && (
+          <EdgeOverlay
+            edges={edges}
+            nodes={nodes}
+            rows={rows}
+            cols={cols}
+            globalBidirectional={bidirectional ?? true}
+          />
+        )}
       </div>
     </section>
   );
