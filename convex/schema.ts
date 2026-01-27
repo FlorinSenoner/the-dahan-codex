@@ -114,36 +114,58 @@ export default defineSchema({
         ),
       }),
     ),
-    // Presence tracks - flexible array supporting multiple track types
+    // Presence tracks - unified Node-Edge Graph model
     presenceTracks: v.optional(
       v.object({
-        // Layout type for track arrangement
-        layout: v.optional(
-          v.union(
-            v.literal("linear"),
-            v.literal("branching"),
-            v.literal("multiple"),
-          ),
-        ),
-        tracks: v.array(
+        // Grid dimensions for CSS Grid layout
+        rows: v.number(),
+        cols: v.number(),
+
+        // Whether all edges are bidirectional by default (default: true)
+        bidirectional: v.optional(v.boolean()),
+
+        // Nodes represent presence slots with explicit positioning
+        nodes: v.array(
           v.object({
-            type: v.string(), // "energy", "cardPlays", "absorbed", "custom"
-            label: v.string(),
-            color: v.optional(v.string()), // "amber", "blue", "purple"
-            // For branching tracks (Finder, Starlight)
-            connectsTo: v.optional(v.string()), // Track ID this connects to
-            connectionPoint: v.optional(v.number()), // Slot index where connection occurs
-            unlocksGrowth: v.optional(v.boolean()), // For Starlight's growth-unlocking tracks
-            slots: v.array(
-              v.object({
-                value: v.union(v.number(), v.string()),
-                elements: v.optional(v.array(v.string())),
-                reclaim: v.optional(v.boolean()),
-                innateUnlock: v.optional(v.string()),
-                specialAbility: v.optional(v.string()),
-                presenceCap: v.optional(v.number()), // Serpent's Deep Slumber limit
-              }),
+            // Unique node identifier (required)
+            id: v.string(),
+
+            // Grid position for rendering (0-indexed)
+            row: v.number(),
+            col: v.number(),
+
+            // Node content
+            value: v.optional(v.union(v.number(), v.string())), // 1, 2, "+1", "+2", etc.
+
+            // What type of bonus this provides
+            trackType: v.optional(
+              v.union(
+                v.literal("energy"), // Base energy value
+                v.literal("cardPlays"), // Base card plays value
+                v.literal("energyMod"), // +N Energy modifier
+                v.literal("cardPlaysMod"), // +N Card Plays modifier
+                v.literal("elements"), // Element only (value 0)
+                v.literal("special"), // Special ability text
+                v.literal("start"), // Starting position marker
+              ),
             ),
+
+            // Optional metadata
+            elements: v.optional(v.array(v.string())), // ["Moon", "Air"]
+            reclaim: v.optional(v.boolean()), // Reclaim One icon
+            specialAbility: v.optional(v.string()), // Custom text
+            presenceCap: v.optional(v.number()), // Serpent's limit track
+            unlocksGrowth: v.optional(v.boolean()), // Starlight's growth unlock
+          }),
+        ),
+
+        // Edges connect nodes (explicit graph structure)
+        edges: v.array(
+          v.object({
+            from: v.string(), // Source node ID
+            to: v.string(), // Target node ID
+            // Override global bidirectional setting for this edge
+            bidirectional: v.optional(v.boolean()),
           }),
         ),
       }),

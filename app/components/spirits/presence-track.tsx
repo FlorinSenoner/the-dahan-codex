@@ -1,5 +1,5 @@
 import type { Doc } from "convex/_generated/dataModel";
-import { GitBranch, Sprout } from "lucide-react";
+import { Sprout } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -43,28 +43,18 @@ const trackLabelColors: Record<string, string> = {
   stone: "text-stone-400",
 };
 
-// Fallback colors for multi-track spirits without specific mappings
-const fallbackColors: TrackColor[] = [
-  "amber",
-  "blue",
-  "purple",
-  "emerald",
-  "indigo",
-  "cyan",
-];
-
 export function PresenceTrack({
   presenceTracks,
   spiritSlug,
 }: PresenceTrackProps) {
-  const { tracks } = presenceTracks;
+  const { nodes } = presenceTracks;
 
   // Get spirit-specific colors (defaults to amber/blue if not mapped)
   const spiritColors = spiritSlug
     ? getSpiritTrackColors(spiritSlug)
     : { energy: "amber", cardPlays: "blue" };
 
-  if (!tracks || tracks.length === 0) {
+  if (!nodes || nodes.length === 0) {
     return (
       <section className="space-y-4 mt-6">
         <Heading variant="h3" as="h2">
@@ -76,22 +66,57 @@ export function PresenceTrack({
   }
 
   /**
-   * Get the color for a track based on type and spirit
-   * Priority: track.color > spiritColors[track.type] > fallback by index
+   * Get the color for a node based on trackType and spirit
+   * Priority: spiritColors[trackType] > fallback by trackType
    */
-  const getTrackColor = (
-    track: (typeof tracks)[number],
-    index: number,
-  ): TrackColor => {
-    // Explicit color in data takes precedence
-    if (track.color) return track.color as TrackColor;
+  const getNodeColor = (node: (typeof nodes)[number]): TrackColor => {
+    const trackType = node.trackType;
 
     // Use spirit-specific colors for standard track types
-    if (track.type === "energy") return spiritColors.energy as TrackColor;
-    if (track.type === "cardPlays") return spiritColors.cardPlays as TrackColor;
+    if (trackType === "energy" || trackType === "energyMod")
+      return spiritColors.energy as TrackColor;
+    if (trackType === "cardPlays" || trackType === "cardPlaysMod")
+      return spiritColors.cardPlays as TrackColor;
 
-    // Fallback for custom tracks (cycle through palette)
-    return fallbackColors[index % fallbackColors.length];
+    // Fallback for other track types
+    return "purple";
+  };
+
+  // Group nodes by row for rendering
+  const nodesByRow = nodes.reduce(
+    (acc, node) => {
+      if (!acc[node.row]) acc[node.row] = [];
+      acc[node.row].push(node);
+      return acc;
+    },
+    {} as Record<number, typeof nodes>,
+  );
+
+  // Sort nodes within each row by column
+  for (const row of Object.keys(nodesByRow)) {
+    nodesByRow[Number(row)].sort((a, b) => a.col - b.col);
+  }
+
+  // Get row label based on first node's trackType
+  const getRowLabel = (rowNodes: typeof nodes): string => {
+    const firstNode = rowNodes[0];
+    if (!firstNode?.trackType) return "Track";
+    switch (firstNode.trackType) {
+      case "energy":
+        return "Energy/Turn";
+      case "cardPlays":
+        return "Card Plays";
+      case "energyMod":
+        return "Energy Modifier";
+      case "cardPlaysMod":
+        return "Card Plays Modifier";
+      case "elements":
+        return "Elements";
+      case "special":
+        return "Special";
+      default:
+        return "Track";
+    }
   };
 
   return (
@@ -101,76 +126,72 @@ export function PresenceTrack({
       </Heading>
 
       <div className="space-y-3">
-        {tracks.map((track, trackIndex) => {
-          const color = getTrackColor(track, trackIndex);
-          const gradient =
-            trackGradientClasses[color] || trackGradientClasses.amber;
-          const labelColor = trackLabelColors[color] || trackLabelColors.amber;
+        {Object.entries(nodesByRow)
+          .sort(([a], [b]) => Number(a) - Number(b))
+          .map(([rowIndex, rowNodes]) => {
+            const firstNode = rowNodes[0];
+            const color = getNodeColor(firstNode);
+            const gradient =
+              trackGradientClasses[color] || trackGradientClasses.amber;
+            const labelColor =
+              trackLabelColors[color] || trackLabelColors.amber;
 
-          return (
-            <div key={track.type} className={cn("rounded-lg p-3", gradient)}>
-              <div className="flex items-center gap-2 mb-2">
-                <Text
-                  variant="small"
-                  className={cn(
-                    "font-medium uppercase tracking-wider",
-                    labelColor,
+            return (
+              <div
+                key={`row-${rowIndex}`}
+                className={cn("rounded-lg p-3", gradient)}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <Text
+                    variant="small"
+                    className={cn(
+                      "font-medium uppercase tracking-wider",
+                      labelColor,
+                    )}
+                  >
+                    {getRowLabel(rowNodes)}
+                  </Text>
+                  {/* Unlocks growth indicator (Starlight) */}
+                  {firstNode.unlocksGrowth && (
+                    <Tooltip delayDuration={100}>
+                      <TooltipTrigger asChild>
+                        <span className="text-emerald-400 cursor-help">
+                          <Sprout className="w-3.5 h-3.5" />
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-xs">
+                          Unlocks growth options when emptied
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
                   )}
-                >
-                  {track.label}
-                </Text>
-                {/* Branching track indicator (Finder) */}
-                {track.connectsTo && (
-                  <Tooltip delayDuration={100}>
-                    <TooltipTrigger asChild>
-                      <span className="text-muted-foreground cursor-help">
-                        <GitBranch className="w-3.5 h-3.5" />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-xs">
-                        Connects to {track.connectsTo} track
-                        {track.connectionPoint !== undefined &&
-                          ` at slot ${track.connectionPoint + 1}`}
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                )}
-                {/* Unlocks growth indicator (Starlight) */}
-                {track.unlocksGrowth && (
-                  <Tooltip delayDuration={100}>
-                    <TooltipTrigger asChild>
-                      <span className="text-emerald-400 cursor-help">
-                        <Sprout className="w-3.5 h-3.5" />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-xs">
-                        Unlocks growth options when emptied
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                )}
-              </div>
+                </div>
 
-              <div className="flex flex-wrap gap-2">
-                {track.slots.map((slot, idx) => {
-                  // Create unique key from slot content to avoid array index warning
-                  const slotKey = `${track.type}-${slot.value}-${slot.reclaim ? "R" : ""}-${idx}`;
-                  return (
-                    <PresenceSlot
-                      key={slotKey}
-                      slot={slot}
-                      index={idx}
-                      trackColor={color}
-                      trackType={track.type}
-                    />
-                  );
-                })}
+                <div className="flex flex-wrap gap-2">
+                  {rowNodes.map((node) => {
+                    // Create slot object compatible with PresenceSlot
+                    const slot = {
+                      value: node.value ?? 0,
+                      elements: node.elements,
+                      reclaim: node.reclaim,
+                      specialAbility: node.specialAbility,
+                      presenceCap: node.presenceCap,
+                    };
+                    return (
+                      <PresenceSlot
+                        key={node.id}
+                        slot={slot}
+                        index={node.col}
+                        trackColor={color}
+                        trackType={node.trackType ?? "energy"}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </section>
   );
