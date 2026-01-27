@@ -258,6 +258,9 @@ Plans:
 3. Non-adjacent connections rendered as SVG overlay between nodes
 4. All spirits (simple and complex) use the same schema format
 5. Old linear format code removed entirely
+6. Finder data verified against actual spirit panel (not speculation)
+7. Serpent Deep Slumber correctly modeled with custom track labels
+8. Any/Star element icons render with explanatory tooltips
 
 **UAT Gaps to Address:**
 - Schema: Replace linear tracks with nodes + edges arrays (no v.union needed)
@@ -265,17 +268,23 @@ Plans:
 - Data: All 6 spirits converted to Node-Edge Graph format
 - Old code: Remove linear track renderer and PresenceSlot component
 - Connections: EdgeOverlay SVG for non-horizontal-adjacent connections
+- Finder: Verify data from actual panel image
+- Serpent: Add trackLabel for "Deep Slumber" custom label
+- Elements: Add Any/Star icons and render in presence slots
 
-**Plans**: 7 plans
+**Plans**: 10 plans
 
 Plans:
-- [ ] 03.4-01-PLAN.md — Replace presenceTracks schema with Node-Edge Graph model
-- [ ] 03.4-02-PLAN.md — GraphPresenceTrack and PresenceNode components
-- [ ] 03.4-03-PLAN.md — EdgeOverlay SVG for non-adjacent connections
-- [ ] 03.4-04-PLAN.md — Wire PresenceTrack to use GraphPresenceTrack
-- [ ] 03.4-05-PLAN.md — Convert River, Lightning, Fractured Days seed data
-- [ ] 03.4-06-PLAN.md — Convert Starlight, Finder, Serpent seed data
+- [x] 03.4-01-PLAN.md — Replace presenceTracks schema with Node-Edge Graph model
+- [x] 03.4-02-PLAN.md — GraphPresenceTrack and PresenceNode components
+- [x] 03.4-03-PLAN.md — EdgeOverlay SVG for non-adjacent connections
+- [x] 03.4-04-PLAN.md — Wire PresenceTrack to use GraphPresenceTrack
+- [x] 03.4-05-PLAN.md — Convert River, Lightning, Fractured Days seed data
+- [x] 03.4-06-PLAN.md — Convert Starlight, Finder, Serpent seed data
 - [ ] 03.4-07-PLAN.md — Integration verification and reseed
+- [ ] 03.4-08-PLAN.md — Finder data verification from panel image (gap closure)
+- [ ] 03.4-09-PLAN.md — Serpent Deep Slumber modeling with trackLabel (gap closure)
+- [ ] 03.4-10-PLAN.md — Any/Star element icons and visual rendering (gap closure)
 
 ### Phase 4: PWA & Offline
 
@@ -383,7 +392,7 @@ development:
 | 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
 | 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
 | 3.3 Spirit Board Final Polish  | 2/2            | Complete    | 2026-01-27 |
-| 3.4 Presence Track Graph DSL   | 0/7            | Pending     | -          |
+| 3.4 Presence Track Graph DSL   | 6/10           | In Progress | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending     | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
 | 6. User Data                   | 0/TBD          | Pending     | -          |
