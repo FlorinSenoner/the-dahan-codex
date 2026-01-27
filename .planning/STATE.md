@@ -10,19 +10,19 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.3 (Spirit Board Final Polish)
-Plan: 1 of 1 complete
-Status: In progress
-Last activity: 2026-01-27 - Completed 03.3-01-PLAN.md
+Plan: 2 of 2 complete
+Status: Phase complete
+Last activity: 2026-01-27 - Completed 03.3-02-PLAN.md
 
-Progress: [███████████████████████████████] 100% (41/41 plans)
+Progress: [███████████████████████████████] 100% (42/42 plans)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 37
-- Average duration: 5.3 min
-- Total execution time: 3.3 hours
+- Total plans completed: 38
+- Average duration: 5.2 min
+- Total execution time: 3.4 hours
 
 **By Phase:**
 
@@ -34,11 +34,11 @@ Progress: [███████████████████████
 | 03    | 5     | 20 min | 4.0 min  |
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
-| 03.3  | 1     | 1 min  | 1.0 min  |
+| 03.3  | 2     | 4 min  | 2.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 8 min, 12 min, 2 min, 3 min, 5 min
+- Last 5 plans: 12 min, 2 min, 3 min, 5 min, 1 min, 3 min
 - Trend: Stable (polish plans are quick)
 
 _Updated after each plan completion_
@@ -153,6 +153,10 @@ affecting current work:
 - Hover effects: border-{color}-400 + bg-{color}-500/10 for interactive feedback
 - Innate powers collapsed by default (defaultOpen={false}) to reduce visual clutter
 - Matching accordion trigger styling between Hand and Overview (bg-muted/30, chevron right)
+- Radix Tooltip for track indicators with cursor-help styling
+- connectionPoint displayed as 1-indexed in tooltip (user-friendly)
+- presenceCap slots use stone/gray styling to differentiate from energy/cardPlays tracks
+- presenceCap takes visual precedence in slot display value
 
 ### Pending Todos
 
@@ -317,14 +321,23 @@ Phase 3.2 (Spirit Board Refinements) complete:
 - [x] 03.2-09: Card speed border styling (full border, hover effects, collapsible innates)
 - [x] 03.2-10: Tabs z-index fix (z-10 to z-0 for proper scroll stacking)
 
+## Phase 3.3 Summary
+
+Phase 3.3 (Spirit Board Final Polish) is now complete with:
+
+- G1/G2/G3 labels inline with frosty blur backdrop effect
+- Radix Tooltip for branching (GitBranch) and unlock (Sprout) track indicators
+- presenceCap display in presence slots with stone/gray styling
+
 ## Phase 3.3 Progress
 
-Phase 3.3 (Spirit Board Final Polish) in progress:
+Phase 3.3 (Spirit Board Final Polish) complete:
 
 - [x] 03.3-01: Hover-reveal G1/G2/G3 labels (group-hover pattern)
+- [x] 03.3-02: Presence track indicators and presenceCap display
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.3-01-PLAN.md (hover-reveal G1/G2/G3 labels)
+Stopped at: Completed 03.3-02-PLAN.md (presence track indicators and caps)
 Resume file: None
