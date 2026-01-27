@@ -8,6 +8,18 @@ import {
 import { cn } from "@/lib/utils";
 import { PresenceSlot } from "./presence-slot";
 
+// All supported track colors
+type TrackColor =
+  | "amber"
+  | "blue"
+  | "purple"
+  | "emerald"
+  | "cyan"
+  | "orange"
+  | "violet"
+  | "indigo"
+  | "stone";
+
 interface PresenceTrackProps {
   presenceTracks: NonNullable<Doc<"spirits">["presenceTracks"]>;
   spiritSlug?: string; // For getting spirit-specific colors
@@ -27,7 +39,14 @@ const trackLabelColors: Record<string, string> = {
 };
 
 // Fallback colors for multi-track spirits without specific mappings
-const fallbackColors = ["amber", "blue", "purple", "emerald", "indigo", "cyan"];
+const fallbackColors: TrackColor[] = [
+  "amber",
+  "blue",
+  "purple",
+  "emerald",
+  "indigo",
+  "cyan",
+];
 
 export function PresenceTrack({
   presenceTracks,
@@ -58,13 +77,13 @@ export function PresenceTrack({
   const getTrackColor = (
     track: (typeof tracks)[number],
     index: number,
-  ): string => {
+  ): TrackColor => {
     // Explicit color in data takes precedence
-    if (track.color) return track.color;
+    if (track.color) return track.color as TrackColor;
 
     // Use spirit-specific colors for standard track types
-    if (track.type === "energy") return spiritColors.energy;
-    if (track.type === "cardPlays") return spiritColors.cardPlays;
+    if (track.type === "energy") return spiritColors.energy as TrackColor;
+    if (track.type === "cardPlays") return spiritColors.cardPlays as TrackColor;
 
     // Fallback for custom tracks (cycle through palette)
     return fallbackColors[index % fallbackColors.length];
@@ -124,9 +143,7 @@ export function PresenceTrack({
                       key={slotKey}
                       slot={slot}
                       index={idx}
-                      trackColor={
-                        color as "amber" | "blue" | "purple" | "emerald"
-                      }
+                      trackColor={color}
                       trackType={track.type}
                     />
                   );
