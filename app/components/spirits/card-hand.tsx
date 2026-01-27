@@ -20,12 +20,12 @@ function PowerCard({ power }: { power: UniquePower }) {
   return (
     <div
       className={cn(
-        "p-3 rounded-lg min-w-0",
-        // Border-only speed indicator (left border)
-        "border-l-4",
+        "p-3 rounded-lg min-w-0 transition-colors",
+        // Full border with speed-based color and hover effects
+        "border",
         power.speed === "Fast"
-          ? "border-l-amber-500 bg-muted/30"
-          : "border-l-blue-500 bg-muted/30",
+          ? "border-amber-500/50 hover:border-amber-400 hover:bg-amber-500/10"
+          : "border-blue-500/50 hover:border-blue-400 hover:bg-blue-500/10",
       )}
     >
       {/* Card title and cost */}
@@ -86,12 +86,14 @@ export function CardHand({ uniquePowers }: CardHandProps) {
       </Heading>
 
       <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center gap-2 w-full py-2 cursor-pointer">
-          <ChevronDown className="w-4 h-4 transition-transform duration-200 data-[state=closed]:-rotate-90" />
-          <span className="font-medium">Hand</span>
-          <span className="text-xs text-muted-foreground">
-            ({handCards.length})
-          </span>
+        <CollapsibleTrigger className="w-full flex justify-between items-center py-3 px-4 bg-muted/30 rounded-lg cursor-pointer min-h-[44px]">
+          <div className="flex items-center gap-2">
+            <span className="font-medium">Hand</span>
+            <span className="text-xs text-muted-foreground">
+              ({handCards.length})
+            </span>
+          </div>
+          <ChevronDown className="h-4 w-4 transition-transform duration-200 data-[state=open]:rotate-180" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
