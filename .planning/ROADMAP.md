@@ -30,6 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
       visualization (radar, presence, growth)
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
+- [ ] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -224,6 +225,28 @@ Plans:
 - [x] 03.2-09-PLAN.md — Cards and innates full border with collapsible innates (gap closure)
 - [x] 03.2-10-PLAN.md — Tabs z-index fix (gap closure)
 
+### Phase 3.3: Spirit Board Final Polish (INSERTED)
+
+**Goal**: Address final cosmetic issues and enhance presence track visualization for complex spirits (Finder, Starlight, Serpent)
+**Depends on**: Phase 3.2 **Requirements**: From UAT gaps **Success Criteria** (what must be TRUE):
+
+1. G1/G2/G3 labels show on hover only (not always visible), positioned absolute top-right of growth cards
+2. Presence track indicators use Radix Tooltip with connection details
+3. Unlock track indicators show tooltip explaining growth unlock
+4. presenceCap slots display cap values prominently with appropriate styling
+5. Complex spirits render their unique track patterns correctly
+
+**UAT Gaps to Address:**
+- Growth: G1/G2/G3 badges hover-only with absolute top-right positioning for more compact cards
+- Presence: Enhanced track indicators with Radix Tooltip (connectionPoint info)
+- Presence: presenceCap display in slots for Serpent's Deep Slumber track
+
+**Plans**: 2 plans
+
+Plans:
+- [ ] 03.3-01-PLAN.md — Growth panel hover-reveal G1/G2/G3 labels
+- [ ] 03.3-02-PLAN.md — Enhanced presence track indicators and presenceCap display
+
 ### Phase 4: PWA & Offline
 
 **Goal**: App works offline with cached reference data and proper update flow
@@ -319,7 +342,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 4 > 5 > 6 > 7
 
 | Phase                          | Plans Complete | Status      | Completed  |
 | ------------------------------ | -------------- | ----------- | ---------- |
@@ -329,6 +352,7 @@ development:
 | 3. Spirit Detail & Board       | 6/6            | Complete    | 2026-01-26 |
 | 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
 | 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
+| 3.3 Spirit Board Final Polish  | 0/2            | Planned     | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending     | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
 | 6. User Data                   | 0/TBD          | Pending     | -          |
