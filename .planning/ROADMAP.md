@@ -31,6 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [x] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
+- [ ] **Phase 3.4: Presence Track Graph DSL** - Graph-based presence track model for complex spirits (Finder, Starlight, Serpent) (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -247,6 +248,33 @@ Plans:
 - [x] 03.3-01-PLAN.md — Growth panel hover-reveal G1/G2/G3 labels
 - [x] 03.3-02-PLAN.md — Enhanced presence track indicators and presenceCap display
 
+### Phase 3.4: Presence Track Graph DSL (INSERTED)
+
+**Goal**: Redesign presence track DSL to support graph-based structures for complex spirits (Finder, Starlight, Serpent) with bidirectional traversal and convergent paths
+**Depends on**: Phase 3.3 **Requirements**: From research at .planning/debug/presence-track-graph-dsl.md **Success Criteria** (what must be TRUE):
+
+1. Schema supports both legacy linear format AND new grid-based graph format
+2. Grid renderer component displays 2D presence track layouts correctly
+3. Non-adjacent connections are visually indicated between cells
+4. Complex spirits (Finder, Starlight, Serpent) render their actual board topology
+5. Existing spirits continue to work with backward-compatible linear format
+
+**UAT Gaps to Address:**
+- Schema: Add v.union for legacy + grid format with connections array
+- Renderer: New PresenceTrackGrid component for grid layouts
+- Data: Accurate grid data for Finder, Starlight, Serpent based on actual boards
+- Migration: Convert linear spirits to single-row grids (optional)
+- Connections: Visual indicators for non-adjacent cell connections
+
+**Plans**: 5 plans
+
+Plans:
+- [ ] 03.4-01-PLAN.md — Schema extension with v.union for legacy + grid formats
+- [ ] 03.4-02-PLAN.md — PresenceTrackGrid component for 2D layouts
+- [ ] 03.4-03-PLAN.md — ConnectionLines SVG for non-adjacent connections
+- [ ] 03.4-04-PLAN.md — Finder of Paths Unseen grid data
+- [ ] 03.4-05-PLAN.md — Starlight and Serpent grid data
+
 ### Phase 4: PWA & Offline
 
 **Goal**: App works offline with cached reference data and proper update flow
@@ -342,7 +370,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.4 > 4 > 5 > 6 > 7
 
 | Phase                          | Plans Complete | Status      | Completed  |
 | ------------------------------ | -------------- | ----------- | ---------- |
@@ -353,6 +381,7 @@ development:
 | 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
 | 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
 | 3.3 Spirit Board Final Polish  | 2/2            | Complete    | 2026-01-27 |
+| 3.4 Presence Track Graph DSL   | 0/5            | Pending     | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending     | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
 | 6. User Data                   | 0/TBD          | Pending     | -          |
