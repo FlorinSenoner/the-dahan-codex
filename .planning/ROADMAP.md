@@ -29,7 +29,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Spirit Detail & Board** - Complete spirit pages with
       visualization (radar, presence, growth)
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
-- [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
+- [ ] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -210,7 +210,7 @@ Plans:
 - Cards: Hand/discard sections, collapsible with count, equal width, ellipsis, border-only speed
 - Data: Add 4 complex spirits to demonstrate all patterns
 
-**Plans**: 6 plans
+**Plans**: 10 plans
 
 Plans:
 - [x] 03.2-01-PLAN.md — Install react-intersection-observer, spirit track colors, schema extensions
@@ -219,6 +219,10 @@ Plans:
 - [x] 03.2-04-PLAN.md — Spirit-specific presence colors and cards hand/discard
 - [x] 03.2-05-PLAN.md — Innate powers border-only speed styling
 - [x] 03.2-06-PLAN.md — Seed data for 4 complex spirits
+- [ ] 03.2-07-PLAN.md — Fix seed data colors and presence track type (gap closure)
+- [ ] 03.2-08-PLAN.md — Growth panel simplification with hover effects (gap closure)
+- [ ] 03.2-09-PLAN.md — Cards and innates full border with collapsible innates (gap closure)
+- [ ] 03.2-10-PLAN.md — Tabs z-index fix (gap closure)
 
 ### Phase 4: PWA & Offline
 
@@ -317,18 +321,18 @@ development:
 
 **Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 4 > 5 > 6 > 7
 
-| Phase                          | Plans Complete | Status   | Completed  |
-| ------------------------------ | -------------- | -------- | ---------- |
-| 1. Foundation & Authentication | 7/7            | Complete | 2026-01-25 |
-| 2. Spirit Library              | 6/6            | Complete | 2026-01-25 |
-| 2.1 Spirit Library Polish      | 6/6            | Complete | 2026-01-25 |
-| 3. Spirit Detail & Board       | 6/6            | Complete | 2026-01-26 |
-| 3.1 Spirit Board Polish        | 7/7            | Complete | 2026-01-27 |
-| 3.2 Spirit Board Refinements   | 6/6            | Complete | 2026-01-27 |
-| 4. PWA & Offline               | 0/TBD          | Pending  | -          |
-| 5. Opening Scrubber            | 0/TBD          | Pending  | -          |
-| 6. User Data                   | 0/TBD          | Pending  | -          |
-| 7. Admin Tools                 | 0/TBD          | Pending  | -          |
+| Phase                          | Plans Complete | Status      | Completed  |
+| ------------------------------ | -------------- | ----------- | ---------- |
+| 1. Foundation & Authentication | 7/7            | Complete    | 2026-01-25 |
+| 2. Spirit Library              | 6/6            | Complete    | 2026-01-25 |
+| 2.1 Spirit Library Polish      | 6/6            | Complete    | 2026-01-25 |
+| 3. Spirit Detail & Board       | 6/6            | Complete    | 2026-01-26 |
+| 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
+| 3.2 Spirit Board Refinements   | 6/10           | In Progress | -          |
+| 4. PWA & Offline               | 0/TBD          | Pending     | -          |
+| 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
+| 6. User Data                   | 0/TBD          | Pending     | -          |
+| 7. Admin Tools                 | 0/TBD          | Pending     | -          |
 
 ---
 
