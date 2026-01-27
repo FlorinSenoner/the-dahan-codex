@@ -10,18 +10,18 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.4 (Presence Track Graph DSL)
-Plan: 8 of 10 complete (includes gap closure plans 08-10)
+Plan: 9 of 10 complete (includes gap closure plans 08-10)
 Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-10-PLAN.md (gap closure)
+Last activity: 2026-01-27 - Completed 03.4-08-PLAN.md (Finder presence track fix)
 
-Progress: [████████░░░░░░░░░░░░░░░░░░░░░░░] 80% (8/10 plans in phase)
+Progress: [█████████░░░░░░░░░░░░░░░░░░░░░░] 90% (9/10 plans in phase)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 43
-- Average duration: 5.0 min
+- Total plans completed: 44
+- Average duration: 4.9 min
 - Total execution time: 3.6 hours
 
 **By Phase:**
@@ -35,7 +35,7 @@ Progress: [████████░░░░░░░░░░░░░░░
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
-| 03.4  | 6     | 21 min | 3.5 min  |
+| 03.4  | 7     | 22 min | 3.1 min  |
 
 **Recent Trend:**
 
@@ -179,6 +179,8 @@ affecting current work:
 - Star icon uses gold gradient 5-pointed star design
 - Element icons render below main value in presence slots at 12px size
 - Type guard isGraphFormat for narrowing presenceTracks union type
+- Finder presence tracks use 3-row diamond/web structure with junction nodes at row 1 (col 2 and 4)
+- Finder edges form X/diamond pattern with bidirectional traversal from both starting positions
 
 ### Pending Todos
 
@@ -372,7 +374,7 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 
 **Gap Closure Plans (UAT fixes):**
 
-- [ ] 03.4-08: Absorbed Essence trackLabel fix
+- [x] 03.4-08: Finder presence track fix (3-row diamond/web structure, diagonal edges)
 - [x] 03.4-09: Serpent Deep Slumber trackLabel fix (trackLabel field, custom row labels)
 - [x] 03.4-10: Any/Star element icons (elementValidator, AnyIcon, StarIcon, visual rendering)
 
@@ -381,5 +383,5 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.4-10-PLAN.md (gap closure - Any/Star element icons)
+Stopped at: Completed 03.4-08-PLAN.md (Finder presence track fix)
 Resume file: None
