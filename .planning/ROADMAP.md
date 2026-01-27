@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
       visualization (radar, presence, growth)
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
-- [ ] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
+- [x] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
@@ -244,8 +244,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03.3-01-PLAN.md — Growth panel hover-reveal G1/G2/G3 labels
-- [ ] 03.3-02-PLAN.md — Enhanced presence track indicators and presenceCap display
+- [x] 03.3-01-PLAN.md — Growth panel hover-reveal G1/G2/G3 labels
+- [x] 03.3-02-PLAN.md — Enhanced presence track indicators and presenceCap display
 
 ### Phase 4: PWA & Offline
 
@@ -352,7 +352,7 @@ development:
 | 3. Spirit Detail & Board       | 6/6            | Complete    | 2026-01-26 |
 | 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
 | 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
-| 3.3 Spirit Board Final Polish  | 0/2            | Planned     | -          |
+| 3.3 Spirit Board Final Polish  | 2/2            | Complete    | 2026-01-27 |
 | 4. PWA & Offline               | 0/TBD          | Pending     | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
 | 6. User Data                   | 0/TBD          | Pending     | -          |
