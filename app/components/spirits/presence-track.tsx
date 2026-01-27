@@ -1,5 +1,10 @@
 import type { Doc } from "convex/_generated/dataModel";
 import { GitBranch, Sprout } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Heading, Text } from "@/components/ui/typography";
 import {
   getSpiritTrackColors,
@@ -116,21 +121,35 @@ export function PresenceTrack({
                 </Text>
                 {/* Branching track indicator (Finder) */}
                 {track.connectsTo && (
-                  <span
-                    className="text-muted-foreground"
-                    title={`Connects to ${track.connectsTo} track`}
-                  >
-                    <GitBranch className="w-3.5 h-3.5" />
-                  </span>
+                  <Tooltip delayDuration={100}>
+                    <TooltipTrigger asChild>
+                      <span className="text-muted-foreground cursor-help">
+                        <GitBranch className="w-3.5 h-3.5" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-xs">
+                        Connects to {track.connectsTo} track
+                        {track.connectionPoint !== undefined &&
+                          ` at slot ${track.connectionPoint + 1}`}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 )}
                 {/* Unlocks growth indicator (Starlight) */}
                 {track.unlocksGrowth && (
-                  <span
-                    className="text-emerald-400"
-                    title="Unlocks growth options when emptied"
-                  >
-                    <Sprout className="w-3.5 h-3.5" />
-                  </span>
+                  <Tooltip delayDuration={100}>
+                    <TooltipTrigger asChild>
+                      <span className="text-emerald-400 cursor-help">
+                        <Sprout className="w-3.5 h-3.5" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-xs">
+                        Unlocks growth options when emptied
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 )}
               </div>
 
