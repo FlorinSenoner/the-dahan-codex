@@ -1,20 +1,24 @@
 import type { ComponentType } from "react";
 import { AirIcon, type ElementIconProps } from "./air";
 import { AnimalIcon } from "./animal";
+import { AnyIcon } from "./any";
 import { EarthIcon } from "./earth";
 import { FireIcon } from "./fire";
 import { MoonIcon } from "./moon";
 import { PlantIcon } from "./plant";
+import { StarIcon } from "./star";
 import { SunIcon } from "./sun";
 import { WaterIcon } from "./water";
 
 export type { ElementIconProps } from "./air";
 export { AirIcon } from "./air";
 export { AnimalIcon } from "./animal";
+export { AnyIcon } from "./any";
 export { EarthIcon } from "./earth";
 export { FireIcon } from "./fire";
 export { MoonIcon } from "./moon";
 export { PlantIcon } from "./plant";
+export { StarIcon } from "./star";
 export { SunIcon } from "./sun";
 export { WaterIcon } from "./water";
 
@@ -31,4 +35,6 @@ export const ElementIcon: Record<string, ComponentType<ElementIconProps>> = {
   Earth: EarthIcon,
   Plant: PlantIcon,
   Animal: AnimalIcon,
+  Any: AnyIcon,
+  Star: StarIcon,
 };

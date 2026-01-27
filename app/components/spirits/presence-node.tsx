@@ -1,3 +1,4 @@
+import { ElementIcon } from "@/components/icons/elements";
 import {
   Tooltip,
   TooltipContent,
@@ -121,9 +122,14 @@ export function PresenceNode({
     tooltipLines.push("Reclaim One");
   }
 
-  // Add elements
+  // Add elements with explanations for Any and Star
   if (elements && elements.length > 0) {
-    tooltipLines.push(`+${elements.join(", ")}`);
+    const elementDescriptions = elements.map((el) => {
+      if (el === "Any") return "Any Element (choose when revealed)";
+      if (el === "Star") return "Star Element";
+      return el;
+    });
+    tooltipLines.push(`+${elementDescriptions.join(", ")}`);
   }
 
   // Add presence cap
@@ -154,7 +160,7 @@ export function PresenceNode({
           <button
             type="button"
             className={cn(
-              "w-11 h-11 min-w-[44px] min-h-[44px] rounded-full",
+              "w-11 min-w-[44px] min-h-[44px] rounded-full",
               "border-2 flex items-center justify-center",
               "text-sm font-medium transition-colors",
               "cursor-pointer",
@@ -162,6 +168,8 @@ export function PresenceNode({
               "hover:bg-muted/80",
               borderColors[color],
               hoverBorderColors[color],
+              // Taller slots when there are elements to display
+              elements && elements.length > 0 ? "h-auto py-1" : "h-11",
               // Special styling for reclaim slots
               reclaim && "border-amber-500 bg-amber-500/20 text-amber-300",
               // Special styling for element-only slots (no reclaim override)
@@ -176,7 +184,22 @@ export function PresenceNode({
             style={style}
             aria-label={tooltipLines.join(". ")}
           >
-            {displayValue}
+            <div className="flex flex-col items-center gap-0.5">
+              {/* Main value */}
+              <span>{displayValue}</span>
+
+              {/* Element icons (if any) */}
+              {elements && elements.length > 0 && (
+                <div className="flex gap-0.5">
+                  {elements.map((element) => {
+                    const Icon = ElementIcon[element];
+                    return Icon ? (
+                      <Icon key={element} size={12} className="opacity-80" />
+                    ) : null;
+                  })}
+                </div>
+              )}
+            </div>
           </button>
         </TooltipTrigger>
         <TooltipContent side="top" className="max-w-[200px]">
