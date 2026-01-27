@@ -148,6 +148,10 @@ affecting current work:
 - z-0 for tabs so they scroll behind sticky header (not z-10 which causes overlap)
 - TrackColor union type in presence-track.tsx for all 9 supported colors
 - Type assertion at getSpiritTrackColors return boundary (not at component prop)
+- Full border (not border-l-4) for cards and innates with speed-based colors (amber=Fast, blue=Slow)
+- Hover effects: border-{color}-400 + bg-{color}-500/10 for interactive feedback
+- Innate powers collapsed by default (defaultOpen={false}) to reduce visual clutter
+- Matching accordion trigger styling between Hand and Overview (bg-muted/30, chevron right)
 
 ### Pending Todos
 
@@ -308,11 +312,11 @@ Phase 3.2 (Spirit Board Refinements) complete:
 
 - [x] 03.2-07: Fix presence track colors (TrackColor type, remove type cast)
 - [x] 03.2-08: Growth panel layout simplification (inline labels with frosty blur, hover effects)
-- [x] 03.2-09: Skip (superseded by 03.2-06)
+- [x] 03.2-09: Card speed border styling (full border, hover effects, collapsible innates)
 - [x] 03.2-10: Tabs z-index fix (z-10 to z-0 for proper scroll stacking)
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-07-PLAN.md (fix presence track colors)
+Stopped at: Completed 03.2-09-PLAN.md (card speed border styling)
 Resume file: None
