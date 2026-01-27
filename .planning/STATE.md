@@ -10,17 +10,17 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 ## Current Position
 
 Phase: 3.4 (Presence Track Graph DSL)
-Plan: 3 of 7 complete
+Plan: 4 of 7 complete
 Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-03-PLAN.md
+Last activity: 2026-01-27 - Completed 03.4-04-PLAN.md
 
-Progress: [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 43% (3/7 plans in phase)
+Progress: [████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 57% (4/7 plans in phase)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 40
+- Total plans completed: 41
 - Average duration: 5.2 min
 - Total execution time: 3.5 hours
 
@@ -35,12 +35,12 @@ Progress: [███░░░░░░░░░░░░░░░░░░░░
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
-| 03.4  | 3     | 16 min | 5.3 min  |
+| 03.4  | 4     | 18 min | 4.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 1 min, 3 min, 12 min, 2 min, 2 min
-- Trend: 03.4-03 fast - EdgeOverlay component and integration
+- Last 5 plans: 1 min, 3 min, 12 min, 2 min, 2 min, 2 min
+- Trend: 03.4-04 fast - PresenceTrack wiring and PresenceSlot deletion
 
 _Updated after each plan completion_
 
@@ -168,6 +168,8 @@ affecting current work:
 - EdgeOverlay uses SVG viewBox 0 0 100 100 for percentage-based responsive positioning
 - Adjacent edges (same row, col diff 1) are filtered out as implicit in grid layout
 - globalBidirectional defaults to true (most presence track edges are bidirectional)
+- PresenceTrack is thin wrapper delegating to GraphPresenceTrack (public API stability)
+- PresenceSlot replaced by PresenceNode (graph-aware interface)
 
 ### Pending Todos
 
@@ -354,7 +356,7 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 - [x] 03.4-01: Node-Edge Graph Schema (replaced tracks/slots with nodes/edges)
 - [x] 03.4-02: GraphPresenceTrack Component (CSS Grid-based renderer)
 - [x] 03.4-03: EdgeOverlay Component (SVG lines for non-adjacent connections)
-- [ ] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
+- [x] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
 - [ ] 03.4-05: Seed Data Conversion (already done in 03.4-01)
 - [ ] 03.4-06: Complex Spirit Testing
 - [ ] 03.4-07: E2E Tests
@@ -364,5 +366,5 @@ Phase 3.4 (Presence Track Graph DSL) in progress:
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.4-03-PLAN.md
+Stopped at: Completed 03.4-04-PLAN.md
 Resume file: None
