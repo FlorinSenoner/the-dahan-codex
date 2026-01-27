@@ -13,6 +13,7 @@ interface PresenceSlotProps {
     reclaim?: boolean;
     innateUnlock?: string;
     specialAbility?: string;
+    presenceCap?: number;
   };
   index: number;
   trackColor?:
@@ -60,7 +61,14 @@ export function PresenceSlot({
   trackColor = "amber",
   trackType,
 }: PresenceSlotProps) {
-  const { value, elements, reclaim, innateUnlock, specialAbility } = slot;
+  const {
+    value,
+    elements,
+    reclaim,
+    innateUnlock,
+    specialAbility,
+    presenceCap,
+  } = slot;
 
   // Build tooltip content
   const tooltipLines: string[] = [];
@@ -89,8 +97,16 @@ export function PresenceSlot({
     tooltipLines.push(specialAbility);
   }
 
-  // Determine display value
-  const displayValue = reclaim ? "R" : value;
+  if (presenceCap !== undefined) {
+    tooltipLines.push(`Presence limit: ${presenceCap}`);
+  }
+
+  // Determine display value - presenceCap takes visual precedence for limit tracks
+  const displayValue = reclaim
+    ? "R"
+    : presenceCap !== undefined
+      ? presenceCap
+      : value;
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -112,6 +128,8 @@ export function PresenceSlot({
                 elements.length > 0 &&
                 !reclaim &&
                 "border-primary/70",
+              presenceCap !== undefined &&
+                "border-stone-500/70 bg-stone-500/10 text-stone-300",
             )}
             aria-label={tooltipLines.join(". ")}
           >
