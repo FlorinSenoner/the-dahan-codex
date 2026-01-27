@@ -9,12 +9,12 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3.3 (Spirit Board Final Polish) - VERIFIED ✓
-Plan: 2 of 2 complete
-Status: Phase complete - static verification passed (5/5), browser verification passed (5/5)
-Last activity: 2026-01-27 - Phase 3.3 verified
+Phase: 3.4 (Presence Track Graph DSL)
+Plan: 1 of 7 complete
+Status: In progress
+Last activity: 2026-01-27 - Completed 03.4-01-PLAN.md
 
-Progress: [███████████████████████████████] 100% (42/42 plans)
+Progress: [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 14% (1/7 plans in phase)
 
 ## Performance Metrics
 
@@ -35,11 +35,12 @@ Progress: [███████████████████████
 | 03.1  | 5     | 38 min | 7.6 min  |
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
+| 03.4  | 1     | 12 min | 12.0 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 12 min, 2 min, 3 min, 5 min, 1 min, 3 min
-- Trend: Stable (polish plans are quick)
+- Last 5 plans: 2 min, 3 min, 5 min, 1 min, 3 min, 12 min
+- Trend: 03.4-01 took longer due to blocking issue requiring seed data conversion
 
 _Updated after each plan completion_
 
@@ -157,6 +158,10 @@ affecting current work:
 - connectionPoint displayed as 1-indexed in tooltip (user-friendly)
 - presenceCap slots use stone/gray styling to differentiate from energy/cardPlays tracks
 - presenceCap takes visual precedence in slot display value
+- presenceTracks uses nodes + edges instead of tracks + slots (Node-Edge Graph DSL)
+- trackType is per-node, not per-track (enables mixed-type rows)
+- Grid dimensions (rows, cols) stored for CSS Grid layout
+- edges array supports bidirectional flag for Finder's track traversal
 
 ### Pending Todos
 
@@ -336,8 +341,22 @@ Phase 3.3 (Spirit Board Final Polish) complete:
 - [x] 03.3-01: Hover-reveal G1/G2/G3 labels (group-hover pattern)
 - [x] 03.3-02: Presence track indicators and presenceCap display
 
+## Phase 3.4 Progress
+
+Phase 3.4 (Presence Track Graph DSL) in progress:
+
+- [x] 03.4-01: Node-Edge Graph Schema (replaced tracks/slots with nodes/edges)
+- [ ] 03.4-02: GraphPresenceTrack Component (CSS Grid-based renderer)
+- [ ] 03.4-03: EdgeOverlay Component (SVG lines for non-adjacent connections)
+- [ ] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
+- [ ] 03.4-05: Seed Data Conversion (already done in 03.4-01)
+- [ ] 03.4-06: Complex Spirit Testing
+- [ ] 03.4-07: E2E Tests
+
+**Note:** 03.4-01 pulled forward component update (03.4-04) and seed conversion (03.4-05) to unblock typecheck. Those plans may have reduced scope.
+
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Phase 3.3 verified and complete
+Stopped at: Completed 03.4-01-PLAN.md
 Resume file: None
