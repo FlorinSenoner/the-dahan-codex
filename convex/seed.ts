@@ -1050,34 +1050,100 @@ export const seedSpirits = mutation({
         ],
       },
       presenceTracks: {
-        rows: 2,
+        rows: 3,
         cols: 6,
         bidirectional: true,
         nodes: [
-          // Energy track (row 0)
+          // Row 0: Energy track (top) - starting position at e0
           { id: "e0", row: 0, col: 0, value: 0, trackType: "energy" },
-          { id: "e1", row: 0, col: 1, value: 1, trackType: "energy" },
-          { id: "e2", row: 0, col: 2, value: 1, trackType: "energy" },
-          { id: "e3", row: 0, col: 3, value: 2, trackType: "energy" },
-          { id: "e4", row: 0, col: 4, value: 2, trackType: "energy" },
-          { id: "e5", row: 0, col: 5, value: 3, trackType: "energy" },
-          // Card plays track (row 1)
-          { id: "c0", row: 1, col: 0, value: 1, trackType: "cardPlays" },
-          { id: "c1", row: 1, col: 1, value: 2, trackType: "cardPlays" },
-          { id: "c2", row: 1, col: 2, value: 2, trackType: "cardPlays" },
           {
-            id: "c3",
-            row: 1,
-            col: 3,
-            value: 2,
-            trackType: "cardPlays",
-            reclaim: true,
+            id: "e1",
+            row: 0,
+            col: 1,
+            trackType: "elements",
+            elements: ["Sun"],
           },
-          { id: "c4", row: 1, col: 4, value: 3, trackType: "cardPlays" },
-          { id: "c5", row: 1, col: 5, value: 4, trackType: "cardPlays" },
+          {
+            id: "e2",
+            row: 0,
+            col: 2,
+            value: 2,
+            trackType: "energy",
+            elements: ["Water"],
+          },
+          // e3 at col 3 is covered - skip
+          {
+            id: "e4",
+            row: 0,
+            col: 4,
+            value: "+2",
+            trackType: "energyMod",
+          },
+          {
+            id: "e5",
+            row: 0,
+            col: 5,
+            value: "+1",
+            trackType: "energyMod",
+            elements: ["Any"],
+            specialAbility: "+1 Range (on everything)",
+          },
+          // Row 1: Middle junction nodes (only col 2 and col 4)
+          {
+            id: "m2",
+            row: 1,
+            col: 2,
+            value: 1,
+            trackType: "energy",
+            elements: ["Moon"],
+          },
+          {
+            id: "m4",
+            row: 1,
+            col: 4,
+            trackType: "special",
+            elements: ["Air"],
+            specialAbility: "Move Presence",
+          },
+          // Row 2: Card Plays track (bottom) - starting position at c0
+          { id: "c0", row: 2, col: 0, value: 1, trackType: "cardPlays" },
+          {
+            id: "c1",
+            row: 2,
+            col: 1,
+            trackType: "elements",
+            elements: ["Earth"],
+          },
+          // c2 at col 2 is covered - skip
+          { id: "c3", row: 2, col: 3, value: "+1", trackType: "cardPlaysMod" },
+          { id: "c4", row: 2, col: 4, value: "+1", trackType: "cardPlaysMod" },
+          {
+            id: "c5",
+            row: 2,
+            col: 5,
+            trackType: "special",
+            specialAbility: "Push 1 Town/City from 1 of your Lands",
+          },
         ],
-        // Energy track connects to card plays track at slot 3
-        edges: [{ from: "e3", to: "c3" }],
+        edges: [
+          // Linear connections within rows
+          { from: "e0", to: "e1" },
+          { from: "e1", to: "e2" },
+          { from: "e4", to: "e5" },
+          { from: "c0", to: "c1" },
+          { from: "c3", to: "c4" },
+          { from: "c4", to: "c5" },
+          // Diagonal cross-connections (the X/diamond pattern)
+          { from: "e1", to: "m2" }, // Sun -> 1,Moon
+          { from: "c1", to: "m2" }, // Earth -> 1,Moon
+          { from: "e2", to: "c3" }, // 2,Water -> +1CP
+          { from: "m2", to: "e4" }, // 1,Moon -> +2E
+          { from: "m2", to: "c4" }, // 1,Moon -> +1CP
+          { from: "m4", to: "e5" }, // Move,Air -> +1E,Any
+          { from: "m4", to: "c5" }, // Move,Air -> Push
+          { from: "e4", to: "m4" }, // +2E -> Move,Air
+          { from: "c4", to: "m4" }, // +1CP -> Move,Air
+        ],
       },
       innates: [
         {
@@ -2540,34 +2606,100 @@ export const reseedSpirits = mutation({
         ],
       },
       presenceTracks: {
-        rows: 2,
+        rows: 3,
         cols: 6,
         bidirectional: true,
         nodes: [
-          // Energy track (row 0)
+          // Row 0: Energy track (top) - starting position at e0
           { id: "e0", row: 0, col: 0, value: 0, trackType: "energy" },
-          { id: "e1", row: 0, col: 1, value: 1, trackType: "energy" },
-          { id: "e2", row: 0, col: 2, value: 1, trackType: "energy" },
-          { id: "e3", row: 0, col: 3, value: 2, trackType: "energy" },
-          { id: "e4", row: 0, col: 4, value: 2, trackType: "energy" },
-          { id: "e5", row: 0, col: 5, value: 3, trackType: "energy" },
-          // Card plays track (row 1)
-          { id: "c0", row: 1, col: 0, value: 1, trackType: "cardPlays" },
-          { id: "c1", row: 1, col: 1, value: 2, trackType: "cardPlays" },
-          { id: "c2", row: 1, col: 2, value: 2, trackType: "cardPlays" },
           {
-            id: "c3",
-            row: 1,
-            col: 3,
-            value: 2,
-            trackType: "cardPlays",
-            reclaim: true,
+            id: "e1",
+            row: 0,
+            col: 1,
+            trackType: "elements",
+            elements: ["Sun"],
           },
-          { id: "c4", row: 1, col: 4, value: 3, trackType: "cardPlays" },
-          { id: "c5", row: 1, col: 5, value: 4, trackType: "cardPlays" },
+          {
+            id: "e2",
+            row: 0,
+            col: 2,
+            value: 2,
+            trackType: "energy",
+            elements: ["Water"],
+          },
+          // e3 at col 3 is covered - skip
+          {
+            id: "e4",
+            row: 0,
+            col: 4,
+            value: "+2",
+            trackType: "energyMod",
+          },
+          {
+            id: "e5",
+            row: 0,
+            col: 5,
+            value: "+1",
+            trackType: "energyMod",
+            elements: ["Any"],
+            specialAbility: "+1 Range (on everything)",
+          },
+          // Row 1: Middle junction nodes (only col 2 and col 4)
+          {
+            id: "m2",
+            row: 1,
+            col: 2,
+            value: 1,
+            trackType: "energy",
+            elements: ["Moon"],
+          },
+          {
+            id: "m4",
+            row: 1,
+            col: 4,
+            trackType: "special",
+            elements: ["Air"],
+            specialAbility: "Move Presence",
+          },
+          // Row 2: Card Plays track (bottom) - starting position at c0
+          { id: "c0", row: 2, col: 0, value: 1, trackType: "cardPlays" },
+          {
+            id: "c1",
+            row: 2,
+            col: 1,
+            trackType: "elements",
+            elements: ["Earth"],
+          },
+          // c2 at col 2 is covered - skip
+          { id: "c3", row: 2, col: 3, value: "+1", trackType: "cardPlaysMod" },
+          { id: "c4", row: 2, col: 4, value: "+1", trackType: "cardPlaysMod" },
+          {
+            id: "c5",
+            row: 2,
+            col: 5,
+            trackType: "special",
+            specialAbility: "Push 1 Town/City from 1 of your Lands",
+          },
         ],
-        // Energy track connects to card plays track at slot 3
-        edges: [{ from: "e3", to: "c3" }],
+        edges: [
+          // Linear connections within rows
+          { from: "e0", to: "e1" },
+          { from: "e1", to: "e2" },
+          { from: "e4", to: "e5" },
+          { from: "c0", to: "c1" },
+          { from: "c3", to: "c4" },
+          { from: "c4", to: "c5" },
+          // Diagonal cross-connections (the X/diamond pattern)
+          { from: "e1", to: "m2" }, // Sun -> 1,Moon
+          { from: "c1", to: "m2" }, // Earth -> 1,Moon
+          { from: "e2", to: "c3" }, // 2,Water -> +1CP
+          { from: "m2", to: "e4" }, // 1,Moon -> +2E
+          { from: "m2", to: "c4" }, // 1,Moon -> +1CP
+          { from: "m4", to: "e5" }, // Move,Air -> +1E,Any
+          { from: "m4", to: "c5" }, // Move,Air -> Push
+          { from: "e4", to: "m4" }, // +2E -> Move,Air
+          { from: "c4", to: "m4" }, // +1CP -> Move,Air
+        ],
       },
       innates: [
         {
