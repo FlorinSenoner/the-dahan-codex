@@ -1,5 +1,11 @@
 import type { Doc } from "convex/_generated/dataModel";
+import { ChevronDown } from "lucide-react";
 import { ElementIcon } from "@/components/icons/elements";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
@@ -108,40 +114,43 @@ export function InnatePowers({ innates }: InnatePowersProps) {
       </Heading>
       <div className="space-y-4">
         {innates.map((innate) => (
-          <div
-            key={innate.name}
-            className={cn(
-              "border-l-4 pl-3 py-2 rounded-r-lg bg-muted/20",
-              innate.speed === "Fast"
-                ? "border-l-amber-500"
-                : "border-l-blue-500",
-            )}
-          >
-            {/* Power header with name, range, target */}
-            <PowerHeader
-              name={innate.name}
-              range={innate.range}
-              target={innate.target}
-            />
-
-            {/* Thresholds */}
-            <div className="mt-3 space-y-2">
-              {innate.thresholds.map((threshold, idx) => (
-                <div
-                  key={getThresholdKey(threshold.elements)}
-                  className={cn(
-                    "py-1.5",
-                    idx > 0 && "border-t border-border/30",
-                  )}
-                >
-                  <ElementThreshold
-                    elements={threshold.elements}
-                    effect={threshold.effect}
-                  />
+          <Collapsible key={innate.name} defaultOpen={false}>
+            <div
+              className={cn(
+                "border rounded-lg transition-colors",
+                innate.speed === "Fast"
+                  ? "border-amber-500/50 hover:border-amber-400 hover:bg-amber-500/10"
+                  : "border-blue-500/50 hover:border-blue-400 hover:bg-blue-500/10",
+              )}
+            >
+              <CollapsibleTrigger className="w-full p-3 flex justify-between items-center cursor-pointer min-h-[44px]">
+                <PowerHeader
+                  name={innate.name}
+                  range={innate.range}
+                  target={innate.target}
+                />
+                <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-180" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <div className="px-3 pb-3 space-y-2">
+                  {innate.thresholds.map((threshold, idx) => (
+                    <div
+                      key={getThresholdKey(threshold.elements)}
+                      className={cn(
+                        "py-1.5",
+                        idx > 0 && "border-t border-border/30",
+                      )}
+                    >
+                      <ElementThreshold
+                        elements={threshold.elements}
+                        effect={threshold.effect}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </CollapsibleContent>
             </div>
-          </div>
+          </Collapsible>
         ))}
       </div>
     </section>
