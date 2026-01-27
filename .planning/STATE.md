@@ -146,6 +146,8 @@ affecting current work:
 - Finder's energy track connectsTo cardPlays at connectionPoint 3
 - Serpent's Deep Slumber track uses presenceCap values 5-13
 - z-0 for tabs so they scroll behind sticky header (not z-10 which causes overlap)
+- TrackColor union type in presence-track.tsx for all 9 supported colors
+- Type assertion at getSpiritTrackColors return boundary (not at component prop)
 
 ### Pending Todos
 
@@ -304,7 +306,7 @@ Phase 3.2 (Spirit Board Refinements) complete:
 
 **Gap Closure Plans (UAT fixes):**
 
-- [x] 03.2-07: Skip (superseded by 03.2-02)
+- [x] 03.2-07: Fix presence track colors (TrackColor type, remove type cast)
 - [x] 03.2-08: Growth panel layout simplification (inline labels with frosty blur, hover effects)
 - [x] 03.2-09: Skip (superseded by 03.2-06)
 - [x] 03.2-10: Tabs z-index fix (z-10 to z-0 for proper scroll stacking)
@@ -312,5 +314,5 @@ Phase 3.2 (Spirit Board Refinements) complete:
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-08-PLAN.md (growth panel layout simplification)
+Stopped at: Completed 03.2-07-PLAN.md (fix presence track colors)
 Resume file: None
