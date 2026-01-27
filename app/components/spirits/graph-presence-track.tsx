@@ -44,10 +44,72 @@ interface GraphPresenceTrackProps {
   spiritSlug?: string;
 }
 
+// Type guard to check for Node-Edge Graph format
+function isGraphFormat(
+  pt: NonNullable<Doc<"spirits">["presenceTracks"]>,
+): pt is {
+  rows: number;
+  cols: number;
+  nodes: Array<{
+    id: string;
+    row: number;
+    col: number;
+    trackLabel?: string;
+    value?: number | string;
+    trackType?:
+      | "energy"
+      | "cardPlays"
+      | "energyMod"
+      | "cardPlaysMod"
+      | "elements"
+      | "special"
+      | "start";
+    elements?: Array<
+      | "Sun"
+      | "Moon"
+      | "Fire"
+      | "Air"
+      | "Water"
+      | "Earth"
+      | "Plant"
+      | "Animal"
+      | "Any"
+      | "Star"
+    >;
+    reclaim?: boolean;
+    specialAbility?: string;
+    presenceCap?: number;
+    unlocksGrowth?: boolean;
+  }>;
+  edges: Array<{
+    from: string;
+    to: string;
+    bidirectional?: boolean;
+  }>;
+  bidirectional?: boolean;
+} {
+  return "nodes" in pt && "edges" in pt && "rows" in pt && "cols" in pt;
+}
+
 export function GraphPresenceTrack({
   presenceTracks,
   spiritSlug,
 }: GraphPresenceTrackProps) {
+  // Only handle the Node-Edge Graph format
+  if (!isGraphFormat(presenceTracks)) {
+    return (
+      <section className="space-y-4 mt-6">
+        <Heading variant="h3" as="h2">
+          Presence Tracks
+        </Heading>
+        <Text variant="muted">
+          Legacy presence track format not supported. Please update to Node-Edge
+          Graph format.
+        </Text>
+      </section>
+    );
+  }
+
   const { rows, cols, nodes, edges, bidirectional } = presenceTracks;
 
   // Get spirit-specific colors (defaults to amber/blue if not mapped)
@@ -101,9 +163,15 @@ export function GraphPresenceTrack({
     nodesByRow[Number(row)].sort((a, b) => a.col - b.col);
   }
 
-  // Get row label based on first node's trackType
+  // Get row label based on first node's trackLabel or trackType
   const getRowLabel = (rowNodes: typeof nodes): string => {
     const firstNode = rowNodes[0];
+
+    // Prefer explicit trackLabel over derived label
+    if (firstNode?.trackLabel) {
+      return firstNode.trackLabel;
+    }
+
     if (!firstNode?.trackType) return "Track";
     switch (firstNode.trackType) {
       case "energy":

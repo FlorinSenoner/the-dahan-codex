@@ -1,6 +1,20 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
+// Element validator for presence track nodes - includes all valid element values
+const elementValidator = v.union(
+  v.literal("Sun"),
+  v.literal("Moon"),
+  v.literal("Fire"),
+  v.literal("Air"),
+  v.literal("Water"),
+  v.literal("Earth"),
+  v.literal("Plant"),
+  v.literal("Animal"),
+  v.literal("Any"), // Wildcard element (choose when revealed)
+  v.literal("Star"), // Special star element
+);
+
 export default defineSchema({
   // Minimal table for health check / connectivity test
   healthCheck: defineTable({
@@ -114,61 +128,99 @@ export default defineSchema({
         ),
       }),
     ),
-    // Presence tracks - unified Node-Edge Graph model
+    // Presence tracks - accepts both legacy (tracks/slots) and new (nodes/edges) formats
+    // New format: Node-Edge Graph model for complex spirits
+    // Legacy format: kept for backward compatibility during migration
     presenceTracks: v.optional(
-      v.object({
-        // Grid dimensions for CSS Grid layout
-        rows: v.number(),
-        cols: v.number(),
+      v.union(
+        // NEW FORMAT: Node-Edge Graph model
+        v.object({
+          // Grid dimensions for CSS Grid layout
+          rows: v.number(),
+          cols: v.number(),
 
-        // Whether all edges are bidirectional by default (default: true)
-        bidirectional: v.optional(v.boolean()),
+          // Whether all edges are bidirectional by default (default: true)
+          bidirectional: v.optional(v.boolean()),
 
-        // Nodes represent presence slots with explicit positioning
-        nodes: v.array(
-          v.object({
-            // Unique node identifier (required)
-            id: v.string(),
+          // Nodes represent presence slots with explicit positioning
+          nodes: v.array(
+            v.object({
+              // Unique node identifier (required)
+              id: v.string(),
 
-            // Grid position for rendering (0-indexed)
-            row: v.number(),
-            col: v.number(),
+              // Grid position for rendering (0-indexed)
+              row: v.number(),
+              col: v.number(),
 
-            // Node content
-            value: v.optional(v.union(v.number(), v.string())), // 1, 2, "+1", "+2", etc.
+              // Optional custom track label (overrides derived label from trackType)
+              trackLabel: v.optional(v.string()),
 
-            // What type of bonus this provides
-            trackType: v.optional(
-              v.union(
-                v.literal("energy"), // Base energy value
-                v.literal("cardPlays"), // Base card plays value
-                v.literal("energyMod"), // +N Energy modifier
-                v.literal("cardPlaysMod"), // +N Card Plays modifier
-                v.literal("elements"), // Element only (value 0)
-                v.literal("special"), // Special ability text
-                v.literal("start"), // Starting position marker
+              // Node content
+              value: v.optional(v.union(v.number(), v.string())), // 1, 2, "+1", "+2", etc.
+
+              // What type of bonus this provides
+              trackType: v.optional(
+                v.union(
+                  v.literal("energy"), // Base energy value
+                  v.literal("cardPlays"), // Base card plays value
+                  v.literal("energyMod"), // +N Energy modifier
+                  v.literal("cardPlaysMod"), // +N Card Plays modifier
+                  v.literal("elements"), // Element only (value 0)
+                  v.literal("special"), // Special ability text
+                  v.literal("start"), // Starting position marker
+                ),
               ),
+
+              // Optional metadata
+              elements: v.optional(v.array(elementValidator)), // ["Moon", "Air", "Any", "Star"]
+              reclaim: v.optional(v.boolean()), // Reclaim One icon
+              specialAbility: v.optional(v.string()), // Custom text
+              presenceCap: v.optional(v.number()), // Serpent's limit track
+              unlocksGrowth: v.optional(v.boolean()), // Starlight's growth unlock
+            }),
+          ),
+
+          // Edges connect nodes (explicit graph structure)
+          edges: v.array(
+            v.object({
+              from: v.string(), // Source node ID
+              to: v.string(), // Target node ID
+              // Override global bidirectional setting for this edge
+              bidirectional: v.optional(v.boolean()),
+            }),
+          ),
+        }),
+        // LEGACY FORMAT: tracks/slots array (for backward compatibility)
+        v.object({
+          layout: v.optional(
+            v.union(
+              v.literal("linear"),
+              v.literal("branching"),
+              v.literal("multiple"),
             ),
-
-            // Optional metadata
-            elements: v.optional(v.array(v.string())), // ["Moon", "Air"]
-            reclaim: v.optional(v.boolean()), // Reclaim One icon
-            specialAbility: v.optional(v.string()), // Custom text
-            presenceCap: v.optional(v.number()), // Serpent's limit track
-            unlocksGrowth: v.optional(v.boolean()), // Starlight's growth unlock
-          }),
-        ),
-
-        // Edges connect nodes (explicit graph structure)
-        edges: v.array(
-          v.object({
-            from: v.string(), // Source node ID
-            to: v.string(), // Target node ID
-            // Override global bidirectional setting for this edge
-            bidirectional: v.optional(v.boolean()),
-          }),
-        ),
-      }),
+          ),
+          tracks: v.array(
+            v.object({
+              label: v.string(),
+              type: v.string(),
+              color: v.optional(v.string()),
+              connectsTo: v.optional(v.string()),
+              connectionPoint: v.optional(v.number()),
+              unlocksGrowth: v.optional(v.boolean()),
+              slots: v.array(
+                v.object({
+                  value: v.union(v.number(), v.string()),
+                  elements: v.optional(v.array(v.string())),
+                  reclaim: v.optional(v.boolean()),
+                  presenceCap: v.optional(v.number()),
+                  specialAbility: v.optional(v.string()),
+                  innateUnlock: v.optional(v.string()),
+                }),
+              ),
+            }),
+          ),
+        }),
+      ),
     ),
     innates: v.optional(
       v.array(
