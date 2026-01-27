@@ -117,7 +117,10 @@ function GrowthActionIcon({ action }: { action: GrowthAction }) {
       <TooltipTrigger asChild>
         <div className="flex items-center gap-1 cursor-default">
           {Icon && (
-            <Icon size={32} className="text-muted-foreground shrink-0" />
+            <Icon
+              size={32}
+              className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
+            />
           )}
           {modifier && (
             <span className="text-sm font-medium text-muted-foreground">
@@ -160,11 +163,11 @@ function OrActionsGroup({ orActions }: { orActions: OrActionOption[] }) {
 }
 
 /**
- * Single growth option card (G1, G2, G3, etc.) with subgrid layout
+ * Single growth option card (G1, G2, G3, etc.) with inline label
  */
 function GrowthOptionCard({ option }: { option: GrowthOption }) {
   return (
-    <div className="row-span-2 grid grid-rows-subgrid gap-2 bg-muted/30 rounded-lg p-3 group relative">
+    <div className="bg-muted/30 rounded-lg p-3 relative hover:bg-muted/50 transition-colors">
       {/* Cost badge if present */}
       {option.cost !== undefined && option.cost > 0 && (
         <div className="absolute -top-2 -right-2 z-10">
@@ -177,8 +180,13 @@ function GrowthOptionCard({ option }: { option: GrowthOption }) {
         </div>
       )}
 
-      {/* Row 1: Actions with icons */}
+      {/* Actions row with inline G1/G2/G3 label */}
       <div className="flex flex-wrap items-center gap-3">
+        {/* G1/G2/G3 label with frosty blur effect */}
+        <span className="text-xs font-semibold text-muted-foreground bg-muted/50 backdrop-blur-sm px-2 py-0.5 rounded">
+          {option.id}
+        </span>
+
         {/* Repeat badge if present */}
         {option.repeat && option.repeat > 1 && (
           <Badge variant="secondary" className="text-xs">
@@ -196,11 +204,6 @@ function GrowthOptionCard({ option }: { option: GrowthOption }) {
         {option.orActions && option.orActions.length > 0 && (
           <OrActionsGroup orActions={option.orActions} />
         )}
-      </div>
-
-      {/* Row 2: Option ID (hover reveal) */}
-      <div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-        {option.id}
       </div>
     </div>
   );
@@ -228,7 +231,7 @@ function GrowthPanelContent({ growth }: { growth: GrowthData }) {
           </Badge>
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 grid-rows-[repeat(2,auto)]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {options.map((option) => (
           <GrowthOptionCard key={option.id} option={option} />
         ))}
