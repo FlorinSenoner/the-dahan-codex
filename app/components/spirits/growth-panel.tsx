@@ -163,14 +163,19 @@ function OrActionsGroup({ orActions }: { orActions: OrActionOption[] }) {
 }
 
 /**
- * Single growth option card (G1, G2, G3, etc.) with inline label
+ * Single growth option card (G1, G2, G3, etc.) with hover-reveal label
  */
 function GrowthOptionCard({ option }: { option: GrowthOption }) {
   return (
-    <div className="bg-muted/30 rounded-lg p-3 relative hover:bg-muted/50 transition-colors">
+    <div className="bg-muted/30 rounded-lg p-3 relative group hover:bg-muted/50 transition-colors">
+      {/* G1/G2/G3 label - hidden until hover */}
+      <span className="absolute top-1 right-1 z-10 hidden group-hover:inline-block text-xs font-semibold text-muted-foreground bg-muted/50 backdrop-blur-sm px-2 py-0.5 rounded">
+        {option.id}
+      </span>
+
       {/* Cost badge if present */}
       {option.cost !== undefined && option.cost > 0 && (
-        <div className="absolute -top-2 -right-2 z-10">
+        <div className="absolute -top-2 -right-2 z-20">
           <Badge
             variant="outline"
             className="text-xs text-amber-400 border-amber-400/50"
@@ -180,13 +185,8 @@ function GrowthOptionCard({ option }: { option: GrowthOption }) {
         </div>
       )}
 
-      {/* Actions row with inline G1/G2/G3 label */}
+      {/* Actions row */}
       <div className="flex flex-wrap items-center gap-3">
-        {/* G1/G2/G3 label with frosty blur effect */}
-        <span className="text-xs font-semibold text-muted-foreground bg-muted/50 backdrop-blur-sm px-2 py-0.5 rounded">
-          {option.id}
-        </span>
-
         {/* Repeat badge if present */}
         {option.repeat && option.repeat > 1 && (
           <Badge variant="secondary" className="text-xs">
