@@ -9,12 +9,12 @@ spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
 
 ## Current Position
 
-Phase: 3.2 (Spirit Board Refinements) - COMPLETE
-Plan: 6 of 6 in current phase
-Status: Completed plans 03.2-01, 03.2-02, 03.2-03, 03.2-04, 03.2-05, 03.2-06
-Last activity: 2026-01-27 - Completed 03.2-06-PLAN.md (complex spirits seed data)
+Phase: 3.2 (Spirit Board Refinements) - Gap closure complete
+Plan: 10 of 10 (gap closure plans 07-10)
+Status: Completed plans 03.2-01 through 03.2-06 + gap closure 03.2-07 through 03.2-10
+Last activity: 2026-01-27 - Completed 03.2-10-PLAN.md (tabs z-index fix)
 
-Progress: [██████████████████████████████] 100% (36/36 plans)
+Progress: [██████████████████████████████] 100% (40/40 plans including gap closure)
 
 ## Performance Metrics
 
@@ -127,7 +127,7 @@ affecting current work:
 - Range/Target abbreviated format (R: / T:) for cards, full format for innate headers
 - GrowthIcon Record pattern matching ElementIcon for dynamic icon rendering
 - Type guard pattern (isNewGrowthFormat) for schema format detection
-- Group hover with opacity transition for revealing G1/G2/G3 labels
+- Inline G1/G2/G3 labels with backdrop-blur-sm frosty effect (always visible, not hover-reveal)
 - Spirit track colors derived from primary/secondary elements (e.g., River: Water/Sun = cyan/amber)
 - getSpiritTrackColors(slug) with amber/blue fallback for unknown spirits
 - orActions pattern for choose-from-multiple growth options
@@ -145,6 +145,7 @@ affecting current work:
 - Starlight has 6 tracks with 4 marked as unlocksGrowth: true
 - Finder's energy track connectsTo cardPlays at connectionPoint 3
 - Serpent's Deep Slumber track uses presenceCap values 5-13
+- z-0 for tabs so they scroll behind sticky header (not z-10 which causes overlap)
 
 ### Pending Todos
 
@@ -301,8 +302,15 @@ Phase 3.2 (Spirit Board Refinements) complete:
 - [x] 03.2-05: Innate Powers Border-Only Speed
 - [x] 03.2-06: Complex Spirits Seed Data (Fractured Days, Starlight, Finder, Serpent)
 
+**Gap Closure Plans (UAT fixes):**
+
+- [x] 03.2-07: Skip (superseded by 03.2-02)
+- [x] 03.2-08: Growth panel layout simplification (inline labels with frosty blur, hover effects)
+- [x] 03.2-09: Skip (superseded by 03.2-06)
+- [x] 03.2-10: Tabs z-index fix (z-10 to z-0 for proper scroll stacking)
+
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03.2-06-PLAN.md (Phase 3.2 complete)
+Stopped at: Completed 03.2-08-PLAN.md (growth panel layout simplification)
 Resume file: None
