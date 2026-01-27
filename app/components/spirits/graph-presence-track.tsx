@@ -11,6 +11,7 @@ import {
   trackGradientClasses,
 } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
+import { EdgeOverlay } from "./edge-overlay";
 import { PresenceNode } from "./presence-node";
 
 // All supported track colors
@@ -47,7 +48,7 @@ export function GraphPresenceTrack({
   presenceTracks,
   spiritSlug,
 }: GraphPresenceTrackProps) {
-  const { rows, cols, nodes } = presenceTracks;
+  const { rows, cols, nodes, edges, bidirectional } = presenceTracks;
 
   // Get spirit-specific colors (defaults to amber/blue if not mapped)
   const spiritColors = spiritSlug
@@ -196,7 +197,16 @@ export function GraphPresenceTrack({
             );
           })}
 
-        {/* Edge overlay placeholder - SVG lines will be added in Plan 03 */}
+        {/* Edge overlay for non-adjacent connections */}
+        {edges && edges.length > 0 && (
+          <EdgeOverlay
+            edges={edges}
+            nodes={nodes}
+            rows={rows}
+            cols={cols}
+            globalBidirectional={bidirectional ?? true}
+          />
+        )}
       </div>
     </section>
   );
