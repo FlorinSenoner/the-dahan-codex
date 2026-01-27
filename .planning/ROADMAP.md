@@ -250,30 +250,32 @@ Plans:
 
 ### Phase 3.4: Presence Track Graph DSL (INSERTED)
 
-**Goal**: Redesign presence track DSL to support graph-based structures for complex spirits (Finder, Starlight, Serpent) with bidirectional traversal and convergent paths
-**Depends on**: Phase 3.3 **Requirements**: From research at .planning/debug/presence-track-graph-dsl.md **Success Criteria** (what must be TRUE):
+**Goal**: Redesign presence track DSL to unified Node-Edge Graph model for all spirits (no backward compatibility - clean migration)
+**Depends on**: Phase 3.3 **Requirements**: From research at .planning/phases/03.4-presence-track-graph-dsl/03.4-RESEARCH.md **Success Criteria** (what must be TRUE):
 
-1. Schema supports both legacy linear format AND new grid-based graph format
-2. Grid renderer component displays 2D presence track layouts correctly
-3. Non-adjacent connections are visually indicated between cells
-4. Complex spirits (Finder, Starlight, Serpent) render their actual board topology
-5. Existing spirits continue to work with backward-compatible linear format
+1. Schema uses unified Node-Edge Graph model for ALL spirits (no legacy format)
+2. GraphPresenceTrack renderer component displays node-edge layouts with CSS Grid
+3. Non-adjacent connections rendered as SVG overlay between nodes
+4. All spirits (simple and complex) use the same schema format
+5. Old linear format code removed entirely
 
 **UAT Gaps to Address:**
-- Schema: Add v.union for legacy + grid format with connections array
-- Renderer: New PresenceTrackGrid component for grid layouts
-- Data: Accurate grid data for Finder, Starlight, Serpent based on actual boards
-- Migration: Convert linear spirits to single-row grids (optional)
-- Connections: Visual indicators for non-adjacent cell connections
+- Schema: Replace linear tracks with nodes + edges arrays (no v.union needed)
+- Renderer: New GraphPresenceTrack component with CSS Grid positioning
+- Data: All 6 spirits converted to Node-Edge Graph format
+- Old code: Remove linear track renderer and PresenceSlot component
+- Connections: EdgeOverlay SVG for non-horizontal-adjacent connections
 
-**Plans**: 5 plans
+**Plans**: 7 plans
 
 Plans:
-- [ ] 03.4-01-PLAN.md — Schema extension with v.union for legacy + grid formats
-- [ ] 03.4-02-PLAN.md — PresenceTrackGrid component for 2D layouts
-- [ ] 03.4-03-PLAN.md — ConnectionLines SVG for non-adjacent connections
-- [ ] 03.4-04-PLAN.md — Finder of Paths Unseen grid data
-- [ ] 03.4-05-PLAN.md — Starlight and Serpent grid data
+- [ ] 03.4-01-PLAN.md — Replace presenceTracks schema with Node-Edge Graph model
+- [ ] 03.4-02-PLAN.md — GraphPresenceTrack and PresenceNode components
+- [ ] 03.4-03-PLAN.md — EdgeOverlay SVG for non-adjacent connections
+- [ ] 03.4-04-PLAN.md — Wire PresenceTrack to use GraphPresenceTrack
+- [ ] 03.4-05-PLAN.md — Convert River, Lightning, Fractured Days seed data
+- [ ] 03.4-06-PLAN.md — Convert Starlight, Finder, Serpent seed data
+- [ ] 03.4-07-PLAN.md — Integration verification and reseed
 
 ### Phase 4: PWA & Offline
 
@@ -381,7 +383,7 @@ development:
 | 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
 | 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
 | 3.3 Spirit Board Final Polish  | 2/2            | Complete    | 2026-01-27 |
-| 3.4 Presence Track Graph DSL   | 0/5            | Pending     | -          |
+| 3.4 Presence Track Graph DSL   | 0/7            | Pending     | -          |
 | 4. PWA & Offline               | 0/TBD          | Pending     | -          |
 | 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
 | 6. User Data                   | 0/TBD          | Pending     | -          |
