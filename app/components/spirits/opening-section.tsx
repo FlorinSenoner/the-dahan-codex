@@ -11,6 +11,8 @@ interface OpeningSectionProps {
   spiritId: Id<"spirits">;
 }
 
+// Design: Each spirit (base or aspect) queries openings by its own _id.
+// Aspects never inherit openings from their base spirit.
 export function OpeningSection({ spiritId }: OpeningSectionProps) {
   const { data: openings, isLoading } = useQuery(
     convexQuery(api.openings.listBySpirit, { spiritId }),
