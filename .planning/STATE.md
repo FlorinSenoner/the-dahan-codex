@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 4 (PWA & Offline)
-Plan: 6 of 9 (gap closure)
+Plan: 8 of 9 (gap closure)
 Status: In progress
-Last activity: 2026-01-28 - Completed 04-06-PLAN.md (Subtle Offline Indicator)
+Last activity: 2026-01-28 - Completed 04-08-PLAN.md (Query Persistence)
 
-Progress: [########################                ] 57% (Phase 4 complete)
+Progress: [########################                ] 58% (Phase 4 gap closure)
 
 ## Performance Metrics
 
@@ -213,6 +213,10 @@ affecting current work:
 - Bottom nav link types explicitly list enabled routes ("/spirits" | "/settings")
 - Playwright context.setOffline() for network simulation in PWA tests
 - Manual test checklist for cold-start offline (cross-session state complex to automate)
+- Settings page simplified: single Cache Management section with Sync Data and Clear Cache buttons
+- Sync Data uses getSpiritWithAspects to fetch all spirit data including aspects
+- Clear Cache clears both SW caches AND IndexedDB "tanstack-query-cache" via idb-keyval del()
+- Outline variant for cache management buttons (subtle, non-alarming styling)
 
 ### Pending Todos
 
@@ -452,9 +456,10 @@ Phase 4 (PWA & Offline) complete:
 **Gap Closure Plans (UAT fixes):**
 
 - [x] 04-06: Subtle Offline Indicator (bottom-right pill, muted zinc styling)
+- [x] 04-07: Simplify Settings Page (Sync Data button, Clear Cache with IndexedDB)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-06-PLAN.md (Subtle Offline Indicator)
+Stopped at: Completed 04-07-PLAN.md (Simplify Settings Page)
 Resume file: None
