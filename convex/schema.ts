@@ -1,20 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
-// Element validator for presence track nodes - includes all valid element values
-const elementValidator = v.union(
-  v.literal("Sun"),
-  v.literal("Moon"),
-  v.literal("Fire"),
-  v.literal("Air"),
-  v.literal("Water"),
-  v.literal("Earth"),
-  v.literal("Plant"),
-  v.literal("Animal"),
-  v.literal("Any"), // Wildcard element (choose when revealed)
-  v.literal("Star"), // Special star element
-);
-
 export default defineSchema({
   // Minimal table for health check / connectivity test
   healthCheck: defineTable({
@@ -64,6 +50,10 @@ export default defineSchema({
         utility: v.number(),
       }),
     ),
+    wikiUrl: v.optional(v.string()),
+    // DEPRECATED: specialRules field exists in production data but is no longer used.
+    // Keep optional for backward compatibility until all documents are migrated.
+    // Run `npx convex run seed:reseedSpirits` on production to remove this field from data.
     specialRules: v.optional(
       v.array(
         v.object({
@@ -72,198 +62,37 @@ export default defineSchema({
         }),
       ),
     ),
-    // Growth options - flat array with G1, G2, G3 ids and typed actions
-    growth: v.optional(
-      v.object({
-        type: v.optional(
-          v.union(
-            v.literal("pick-one"),
-            v.literal("pick-two"),
-            v.literal("pick-any"),
-          ),
-        ), // pick-any for Fractured Days choose-from-4
-        options: v.array(
-          v.object({
-            id: v.string(), // "G1", "G2", "G3", etc.
-            cost: v.optional(v.number()), // Energy cost for "Or" options
-            repeat: v.optional(v.number()), // "do this N times" options
-            actions: v.array(
-              v.object({
-                type: v.string(), // "reclaim", "gainEnergy", "gainPowerCard", "addPresence", "push", "damage", "gainElement", "gainTime"
-                // Type-specific fields (all optional, used based on type):
-                variant: v.optional(v.string()), // reclaim: "all" | "one"
-                amount: v.optional(v.number()), // gainEnergy, damage
-                cardType: v.optional(v.string()), // gainPowerCard: "minor" | "major"
-                range: v.optional(v.number()), // addPresence
-                terrain: v.optional(v.string()), // addPresence restriction
-                count: v.optional(v.number()), // push count
-                pieceType: v.optional(v.string()), // push piece type
-                target: v.optional(v.string()), // damage/push target description
-                element: v.optional(v.string()), // gainElement
-              }),
-            ),
-            // For Fractured Days' "gain 1 Time OR 2 Card Plays" style choices
-            orActions: v.optional(
-              v.array(
-                v.object({
-                  label: v.string(),
-                  actions: v.array(
-                    v.object({
-                      type: v.string(),
-                      variant: v.optional(v.string()),
-                      amount: v.optional(v.number()),
-                      cardType: v.optional(v.string()),
-                      range: v.optional(v.number()),
-                      terrain: v.optional(v.string()),
-                      count: v.optional(v.number()),
-                      pieceType: v.optional(v.string()),
-                      target: v.optional(v.string()),
-                      element: v.optional(v.string()),
-                    }),
-                  ),
-                }),
-              ),
-            ),
-          }),
-        ),
-      }),
-    ),
-    // Presence tracks - accepts both legacy (tracks/slots) and new (nodes/edges) formats
-    // New format: Node-Edge Graph model for complex spirits
-    // Legacy format: kept for backward compatibility during migration
-    presenceTracks: v.optional(
-      v.union(
-        // NEW FORMAT: Node-Edge Graph model
-        v.object({
-          // Grid dimensions for CSS Grid layout
-          rows: v.number(),
-          cols: v.number(),
-
-          // Whether all edges are bidirectional by default (default: true)
-          bidirectional: v.optional(v.boolean()),
-
-          // Nodes represent presence slots with explicit positioning
-          nodes: v.array(
-            v.object({
-              // Unique node identifier (required)
-              id: v.string(),
-
-              // Grid position for rendering (0-indexed)
-              row: v.number(),
-              col: v.number(),
-
-              // Optional custom track label (overrides derived label from trackType)
-              trackLabel: v.optional(v.string()),
-
-              // Node content
-              value: v.optional(v.union(v.number(), v.string())), // 1, 2, "+1", "+2", etc.
-
-              // What type of bonus this provides
-              trackType: v.optional(
-                v.union(
-                  v.literal("energy"), // Base energy value
-                  v.literal("cardPlays"), // Base card plays value
-                  v.literal("energyMod"), // +N Energy modifier
-                  v.literal("cardPlaysMod"), // +N Card Plays modifier
-                  v.literal("elements"), // Element only (value 0)
-                  v.literal("special"), // Special ability text
-                  v.literal("start"), // Starting position marker
-                ),
-              ),
-
-              // Optional metadata
-              elements: v.optional(v.array(elementValidator)), // ["Moon", "Air", "Any", "Star"]
-              reclaim: v.optional(v.boolean()), // Reclaim One icon
-              specialAbility: v.optional(v.string()), // Custom text
-              presenceCap: v.optional(v.number()), // Serpent's limit track
-              unlocksGrowth: v.optional(v.boolean()), // Starlight's growth unlock
-            }),
-          ),
-
-          // Edges connect nodes (explicit graph structure)
-          edges: v.array(
-            v.object({
-              from: v.string(), // Source node ID
-              to: v.string(), // Target node ID
-              // Override global bidirectional setting for this edge
-              bidirectional: v.optional(v.boolean()),
-            }),
-          ),
-        }),
-        // LEGACY FORMAT: tracks/slots array (for backward compatibility)
-        v.object({
-          layout: v.optional(
-            v.union(
-              v.literal("linear"),
-              v.literal("branching"),
-              v.literal("multiple"),
-            ),
-          ),
-          tracks: v.array(
-            v.object({
-              label: v.string(),
-              type: v.string(),
-              color: v.optional(v.string()),
-              connectsTo: v.optional(v.string()),
-              connectionPoint: v.optional(v.number()),
-              unlocksGrowth: v.optional(v.boolean()),
-              slots: v.array(
-                v.object({
-                  value: v.union(v.number(), v.string()),
-                  elements: v.optional(v.array(v.string())),
-                  reclaim: v.optional(v.boolean()),
-                  presenceCap: v.optional(v.number()),
-                  specialAbility: v.optional(v.string()),
-                  innateUnlock: v.optional(v.string()),
-                }),
-              ),
-            }),
-          ),
-        }),
-      ),
-    ),
-    innates: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          speed: v.union(v.literal("Fast"), v.literal("Slow")),
-          range: v.optional(v.string()),
-          target: v.optional(v.string()),
-          thresholds: v.array(
-            v.object({
-              elements: v.object({
-                Sun: v.optional(v.number()),
-                Moon: v.optional(v.number()),
-                Fire: v.optional(v.number()),
-                Air: v.optional(v.number()),
-                Water: v.optional(v.number()),
-                Earth: v.optional(v.number()),
-                Plant: v.optional(v.number()),
-                Animal: v.optional(v.number()),
-              }),
-              effect: v.string(),
-            }),
-          ),
-        }),
-      ),
-    ),
-    uniquePowers: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          cost: v.number(),
-          speed: v.union(v.literal("Fast"), v.literal("Slow")),
-          elements: v.array(v.string()),
-          range: v.optional(v.string()), // "0", "1", "Sacred Site", etc.
-          target: v.optional(v.string()), // "Any Land", "Land with Invaders", etc.
-          description: v.optional(v.string()),
-        }),
-      ),
-    ),
-    wikiUrl: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
     .index("by_expansion", ["expansionId"])
     .index("by_base_spirit", ["baseSpirit"])
     .index("by_complexity", ["complexity"]),
+
+  // Openings table - text-based turn-by-turn opening guides
+  openings: defineTable({
+    spiritId: v.id("spirits"), // Link to spirit (base or aspect)
+    slug: v.string(), // URL-friendly identifier: "standard-opening"
+    name: v.string(), // Display name: "Standard Opening"
+    description: v.optional(v.string()), // Brief summary of the strategy
+    difficulty: v.optional(
+      v.union(
+        v.literal("Beginner"),
+        v.literal("Intermediate"),
+        v.literal("Advanced"),
+      ),
+    ), // Optional difficulty rating
+    turns: v.array(
+      // Turn-by-turn text instructions
+      v.object({
+        turn: v.number(), // Turn 1, 2, 3, etc.
+        title: v.optional(v.string()), // "Setup" or "Turn 1: Establishing Presence"
+        instructions: v.string(), // Main text content for this turn
+        notes: v.optional(v.string()), // Additional context/tips
+      }),
+    ),
+    author: v.optional(v.string()), // Attribution
+    sourceUrl: v.optional(v.string()), // Link to original guide
+  })
+    .index("by_spirit", ["spiritId"])
+    .index("by_slug", ["slug"]),
 });

@@ -12,13 +12,9 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import { CardHand } from "@/components/spirits/card-hand";
 import { ExternalLinks } from "@/components/spirits/external-links";
-import { GrowthPanel } from "@/components/spirits/growth-panel";
-import { InnatePowers } from "@/components/spirits/innate-powers";
+import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
-import { PresenceTrack } from "@/components/spirits/presence-track";
-import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -286,22 +282,7 @@ export function SpiritDetailContent({
           <OverviewSection spirit={spirit} description={spirit.description} />
         </div>
 
-        {spirit.specialRules && spirit.specialRules.length > 0 && (
-          <SpecialRules rules={spirit.specialRules} />
-        )}
-
-        {spirit.growth && <GrowthPanel growth={spirit.growth} />}
-
-        {spirit.presenceTracks && (
-          <PresenceTrack
-            presenceTracks={spirit.presenceTracks}
-            spiritSlug={spirit.slug}
-          />
-        )}
-
-        {spirit.innates && <InnatePowers innates={spirit.innates} />}
-
-        {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
+        <OpeningSection spiritId={spirit._id} />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>

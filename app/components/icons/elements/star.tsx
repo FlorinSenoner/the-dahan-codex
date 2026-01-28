@@ -8,11 +8,7 @@ export interface ElementIconProps extends SVGProps<SVGSVGElement> {
  * Star Element icon - special element that appears on some spirit tracks.
  * Design: 5-pointed star in gold.
  */
-export function StarIcon({
-  size = 20,
-  className,
-  ...props
-}: ElementIconProps) {
+export function StarIcon({ size = 20, className, ...props }: ElementIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
