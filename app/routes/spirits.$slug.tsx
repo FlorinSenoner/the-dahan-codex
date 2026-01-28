@@ -12,12 +12,8 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
-import { CardHand } from "@/components/spirits/card-hand";
 import { ExternalLinks } from "@/components/spirits/external-links";
-import { GrowthPanel } from "@/components/spirits/growth-panel";
-import { InnatePowers } from "@/components/spirits/innate-powers";
 import { OverviewSection } from "@/components/spirits/overview-section";
-import { PresenceTrack } from "@/components/spirits/presence-track";
 import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Badge } from "@/components/ui/badge";
@@ -289,19 +285,6 @@ export function SpiritDetailContent({
         {spirit.specialRules && spirit.specialRules.length > 0 && (
           <SpecialRules rules={spirit.specialRules} />
         )}
-
-        {spirit.growth && <GrowthPanel growth={spirit.growth} />}
-
-        {spirit.presenceTracks && (
-          <PresenceTrack
-            presenceTracks={spirit.presenceTracks}
-            spiritSlug={spirit.slug}
-          />
-        )}
-
-        {spirit.innates && <InnatePowers innates={spirit.innates} />}
-
-        {spirit.uniquePowers && <CardHand uniquePowers={spirit.uniquePowers} />}
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
