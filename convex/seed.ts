@@ -377,9 +377,47 @@ export const seedSpirits = mutation({
         "https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island",
     });
 
+    // Seed sample opening for River Surges in Sunlight
+    await ctx.db.insert("openings", {
+      spiritId: riverId,
+      slug: "river-standard-opening",
+      name: "Standard Opening",
+      description:
+        "A balanced opening focusing on energy generation and board control.",
+      difficulty: "Beginner",
+      turns: [
+        {
+          turn: 1,
+          title: "Turn 1: Establish Presence",
+          instructions:
+            "Take Growth Option 2: Add two Presence and gain a Power Card. Place presence in lands with Dahan to maximize your reach. Play Boon of Vigor on a spirit that needs energy (or yourself).",
+          notes:
+            "River's first turn is about establishing reach. Don't worry about defending yet.",
+        },
+        {
+          turn: 2,
+          title: "Turn 2: Build Momentum",
+          instructions:
+            "Take Growth Option 3: Add Presence to a Wetland within Range 2 and gain 1 Energy. Play Flash Floods to push Explorers away from a building land, or use River's Bounty to gather Dahan.",
+          notes:
+            "Start setting up for your innate power by getting Water presence revealed.",
+        },
+        {
+          turn: 3,
+          title: "Turn 3: Control the Flow",
+          instructions:
+            "Take Growth Option 2 again for more presence and cards. By now you should have enough presence to trigger Massive Flooding. Focus on lands where you can push Invaders into each other or off the island.",
+          notes:
+            "River excels at controlling Invader movement. Use this to create favorable Ravage situations.",
+        },
+      ],
+      author: "Spirit Island Community",
+      sourceUrl: "https://querki.net/u/darker/spirit-island-faq/#!.7w4g8aw",
+    });
+
     return {
       status: "seeded",
-      message: "Created 3 expansions, 6 base spirits, 7 aspects",
+      message: "Created 3 expansions, 6 base spirits, 7 aspects, 1 opening",
     };
   },
 });
@@ -389,7 +427,13 @@ export const seedSpirits = mutation({
 export const reseedSpirits = mutation({
   args: {},
   handler: async (ctx) => {
-    // Delete all spirits first (aspects reference base spirits)
+    // Delete all openings first (they reference spirits)
+    const allOpenings = await ctx.db.query("openings").collect();
+    for (const opening of allOpenings) {
+      await ctx.db.delete(opening._id);
+    }
+
+    // Delete all spirits (aspects reference base spirits)
     const allSpirits = await ctx.db.query("spirits").collect();
     for (const spirit of allSpirits) {
       await ctx.db.delete(spirit._id);
@@ -763,10 +807,48 @@ export const reseedSpirits = mutation({
         "https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island",
     });
 
+    // Reseed sample opening for River Surges in Sunlight
+    await ctx.db.insert("openings", {
+      spiritId: riverId,
+      slug: "river-standard-opening",
+      name: "Standard Opening",
+      description:
+        "A balanced opening focusing on energy generation and board control.",
+      difficulty: "Beginner",
+      turns: [
+        {
+          turn: 1,
+          title: "Turn 1: Establish Presence",
+          instructions:
+            "Take Growth Option 2: Add two Presence and gain a Power Card. Place presence in lands with Dahan to maximize your reach. Play Boon of Vigor on a spirit that needs energy (or yourself).",
+          notes:
+            "River's first turn is about establishing reach. Don't worry about defending yet.",
+        },
+        {
+          turn: 2,
+          title: "Turn 2: Build Momentum",
+          instructions:
+            "Take Growth Option 3: Add Presence to a Wetland within Range 2 and gain 1 Energy. Play Flash Floods to push Explorers away from a building land, or use River's Bounty to gather Dahan.",
+          notes:
+            "Start setting up for your innate power by getting Water presence revealed.",
+        },
+        {
+          turn: 3,
+          title: "Turn 3: Control the Flow",
+          instructions:
+            "Take Growth Option 2 again for more presence and cards. By now you should have enough presence to trigger Massive Flooding. Focus on lands where you can push Invaders into each other or off the island.",
+          notes:
+            "River excels at controlling Invader movement. Use this to create favorable Ravage situations.",
+        },
+      ],
+      author: "Spirit Island Community",
+      sourceUrl: "https://querki.net/u/darker/spirit-island-faq/#!.7w4g8aw",
+    });
+
     return {
       status: "reseeded",
       message:
-        "Deleted all data and created 3 expansions, 6 base spirits, 7 aspects",
+        "Deleted all data and created 3 expansions, 6 base spirits, 7 aspects, 1 opening",
     };
   },
 });
