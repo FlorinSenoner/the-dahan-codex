@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 5 of 7
+Plan: 6 of 7
 Status: In progress
-Last activity: 2026-01-28 - Completed 03.6-05-PLAN.md (sample opening seed data)
+Last activity: 2026-01-28 - Completed 03.6-06-PLAN.md (opening display components)
 
-Progress: [##########                              ] 25% (03.6-05 complete)
+Progress: [############                            ] 30% (03.6-06 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 49
-- Average duration: 4.7 min
-- Total execution time: 3.92 hours
+- Total plans completed: 50
+- Average duration: 4.6 min
+- Total execution time: 3.94 hours
 
 **By Phase:**
 
@@ -36,12 +36,12 @@ Progress: [##########                              ] 25% (03.6-05 complete)
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
-| 03.6  | 5     | 18 min | 3.6 min |
+| 03.6  | 6     | 19 min | 3.2 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 3 min, 3 min, 4 min, 3 min
-- Trend: 03.6-05 sample opening seed data
+- Last 5 plans: 3 min, 3 min, 4 min, 3 min, 1.5 min
+- Trend: 03.6-06 opening display components
 
 _Updated after each plan completion_
 
@@ -189,6 +189,8 @@ affecting current work:
 - listBySpirit and getBySlug queries for openings table
 - Opening seed data includes attribution (author, sourceUrl)
 - reseedSpirits deletes openings before spirits (foreign key order)
+- TurnAccordion component with all turns expanded by default via defaultValue
+- OpeningSection queries openings by spiritId, handles loading/empty states gracefully
 
 ### Pending Todos
 
@@ -390,11 +392,11 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
 - [x] 03.6-03: E2E Test Updates (removed board sections test, fixed variant tabs assertions)
 - [x] 03.6-04: Openings Schema and Queries (openings table, listBySpirit, getBySlug)
 - [x] 03.6-05: Sample Opening Seed Data (River standard opening with 3 turns)
-- [ ] 03.6-06: TBD (frontend integration)
-- [ ] 03.6-07: TBD (additional spirits)
+- [x] 03.6-06: Opening Display Components (TurnAccordion, OpeningSection)
+- [ ] 03.6-07: TBD (spirit detail page integration)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-05-PLAN.md - sample opening seed data
+Stopped at: Completed 03.6-06-PLAN.md - opening display components
 Resume file: None
