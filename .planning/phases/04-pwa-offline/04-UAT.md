@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 04-pwa-offline
 source: 04-01-SUMMARY.md, 04-02-SUMMARY.md, 04-03-SUMMARY.md, 04-04-SUMMARY.md, 04-05-SUMMARY.md
 started: 2026-01-28T19:30:00Z
@@ -67,37 +67,72 @@ skipped: 2
   reason: "User reported: the offline banner is functionally working. but it is way too prominent and in your face. also it's flickering when navigating (probably due to re-rendering). make it more subtle -> add an offline icon in the bottom right corner just so the user is informed, but the app should work normally so no need to have such a prominent banner"
   severity: minor
   test: 1
-  artifacts: []
-  missing: []
+  root_cause: "Full-width amber banner at top with fixed positioning causes visual disruption during navigation. Design is overly intrusive for an app that works seamlessly offline."
+  artifacts:
+    - path: "app/components/pwa/offline-indicator.tsx"
+      issue: "Uses prominent bg-amber-600 banner at top-0 with full width"
+  missing:
+    - "Move to subtle bottom-right pill/icon (bottom-20 to clear BottomNav)"
+    - "Use muted styling (bg-zinc-800/90) instead of prominent amber"
+    - "Reduce z-index from z-50 to z-40"
 
 - truth: "Settings page icons should be subtle and grouped logically"
   status: failed
   reason: "User reported: make the icons more subtle. no need to make them green and red. also group them all together under cache management with refresh and download next to each other"
   severity: cosmetic
   test: 2
-  artifacts: []
-  missing: []
+  root_cause: "Buttons split across two sections (Offline Access vs Cache Management). Uses prominent styling: default variant, destructive variant (red), green success text."
+  artifacts:
+    - path: "app/routes/settings.tsx"
+      issue: "Lines 97-172: Separate sections, prominent button variants, colored status text"
+  missing:
+    - "Consolidate all buttons under single Cache Management section"
+    - "Change buttons to variant='outline' for subtle styling"
+    - "Replace text-green-500 with text-muted-foreground"
+    - "Place Download and Refresh buttons side-by-side"
 
 - truth: "Download for Offline should fetch all spirit data including aspects"
   status: failed
   reason: "User reported: not all data is downloaded. only spirits are fetched, the aspects are not"
   severity: minor
   test: 3
-  artifacts: []
-  missing: []
+  root_cause: "Download calls getSpiritBySlug without aspect parameter. Never calls getSpiritWithAspects. Aspects require the aspect parameter or getSpiritWithAspects query to fetch their data."
+  artifacts:
+    - path: "app/routes/settings.tsx"
+      issue: "Lines 32-43: Loops calling getSpiritBySlug({ slug }) which only fetches base spirits"
+  missing:
+    - "Call getSpiritWithAspects for each base spirit to cache all aspect data"
+    - "Or detect isAspect flag and call with correct aspect parameter"
 
 - truth: "Settings cache buttons should be simplified to single Sync Data button"
   status: failed
   reason: "User reported: combine refresh + download into a single button for simplicity"
   severity: minor
   test: 4
-  artifacts: []
-  missing: []
+  root_cause: "Three separate buttons (Download, Refresh, Clear) with confusing distinctions. Users don't understand difference between downloading and refreshing."
+  artifacts:
+    - path: "app/routes/settings.tsx"
+      issue: "Three separate handler functions with overlapping purposes"
+  missing:
+    - "Single syncData() function: clear cache, then fetch all data fresh"
+    - "Rename to 'Sync Data' button with RefreshCw icon"
+    - "Keep Clear Cache as secondary/advanced option"
 
 - truth: "Downloaded data should enable offline access to all spirit pages without prior visit"
   status: failed
   reason: "User reported: this only works for pages the user has previously visited. even if the user downloads the data on the settings page and he navigates to the spirits page, then goes offline, he can't open any of the spirit detail pages. also re-loading the pages shows nothing"
   severity: major
   test: 8
-  artifacts: []
-  missing: []
+  root_cause: "Three architectural issues: (1) Convex uses WebSockets not HTTP - service worker cannot cache WebSocket data. (2) No data persistence layer - download only populates memory cache, lost on reload. (3) useSuspenseQuery hangs forever offline with no fallback."
+  artifacts:
+    - path: "app/routes/settings.tsx"
+      issue: "Download populates memory-only cache with no persistence"
+    - path: "scripts/generate-sw.ts"
+      issue: "convex.cloud caching rule ineffective for WebSocket connections"
+    - path: "app/router.tsx"
+      issue: "Missing persistQueryClient configuration"
+  missing:
+    - "Install @tanstack/query-persist-client-core + idb-keyval for IndexedDB persistence"
+    - "Configure persistQueryClient in router.tsx with gcTime/staleTime"
+    - "Add offline-aware data fetching with cached data fallback"
+    - "Remove ineffective convex-api-cache service worker rule"
