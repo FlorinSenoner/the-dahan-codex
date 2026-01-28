@@ -15,6 +15,7 @@
     "generate-sw": "tsx scripts/generate-sw.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "typecheck:convex": "convex typecheck",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write . && prettier --write \"**/*.{md,mdx,yml,yaml}\"",
@@ -23,7 +24,7 @@
     "knip:fix": "knip --fix",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "ci": "pnpm lint && pnpm typecheck && pnpm build && test -f dist/sw.js && pnpm test:e2e"
+    "ci": "pnpm lint && pnpm typecheck && pnpm typecheck:convex && pnpm build && test -f dist/sw.js && pnpm test:e2e"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.33.2",

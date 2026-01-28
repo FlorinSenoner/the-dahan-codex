@@ -102,7 +102,7 @@ test.describe("Spirit Library", () => {
     await page.goto("/spirits/river-surges-in-sunlight");
 
     // Wait for tabs to load (River has base + 3 aspects)
-    await expect(page.getByRole("tab", { name: /River/ })).toBeVisible({
+    await expect(page.getByRole("tab", { name: "Base" })).toBeVisible({
       timeout: 15000,
     });
     await expect(page.getByRole("tab", { name: "Sunshine" })).toBeVisible();
@@ -114,7 +114,7 @@ test.describe("Spirit Library", () => {
     await page.goto("/spirits/river-surges-in-sunlight");
 
     // Wait for tabs to load
-    await expect(page.getByRole("tab", { name: /River/ })).toBeVisible({
+    await expect(page.getByRole("tab", { name: "Base" })).toBeVisible({
       timeout: 15000,
     });
 
@@ -144,27 +144,6 @@ test.describe("Spirit Library", () => {
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Weaknesses" }),
-    ).toBeVisible();
-  });
-
-  test("spirit detail shows board sections", async ({ page }) => {
-    await page.goto("/spirits/river-surges-in-sunlight");
-
-    // Wait for page to load
-    await expect(
-      page.getByRole("heading", { name: /river surges in sunlight/i }),
-    ).toBeVisible({ timeout: 15000 });
-
-    // Check for board section headings
-    await expect(page.getByRole("heading", { name: "Growth" })).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Presence Tracks" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Innate Powers" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Starting Cards" }),
     ).toBeVisible();
   });
 

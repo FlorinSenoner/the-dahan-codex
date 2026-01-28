@@ -35,6 +35,9 @@ jobs:
       - name: Type check
         run: pnpm typecheck
 
+      - name: Convex typecheck
+        run: pnpm exec convex typecheck
+
       - name: Build
         run: pnpm build
         env:
