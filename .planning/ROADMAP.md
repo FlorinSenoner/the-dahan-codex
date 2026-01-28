@@ -305,7 +305,7 @@ PWA-06, PWA-07
 2. App loads and displays spirit library when completely offline
 3. Offline indicator appears only when disconnected, disappears on reconnection
 4. Update banner appears when new service worker is waiting; user controls when
-   to reload **Plans**: 5 plans
+   to reload **Plans**: 9 plans
 
 Plans:
 
@@ -314,6 +314,10 @@ Plans:
 - [x] 04-03-PLAN.md — Settings page with cache management
 - [x] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
 - [x] 04-05-PLAN.md — E2E tests for PWA and settings
+- [ ] 04-06-PLAN.md — Offline indicator redesign (subtle bottom-right pill) [gap closure]
+- [ ] 04-07-PLAN.md — Settings page simplification (Sync Data button, fetch aspects) [gap closure]
+- [ ] 04-08-PLAN.md — TanStack Query persistence to IndexedDB [gap closure]
+- [ ] 04-09-PLAN.md — Remove dead SW code, document offline architecture [gap closure]
 
 ### Phase 5: Text Opening Management
 
@@ -407,7 +411,7 @@ development:
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
-| 4. PWA & Offline                     | 5/5            | Complete    | 2026-01-28 |
+| 4. PWA & Offline                     | 5/9            | In Progress | -          |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
