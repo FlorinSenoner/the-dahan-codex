@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 4 (PWA & Offline)
-Plan: 8 of 9 (gap closure)
-Status: In progress
-Last activity: 2026-01-28 - Completed 04-08-PLAN.md (Query Persistence)
+Plan: 9 of 9 (gap closure)
+Status: Phase complete
+Last activity: 2026-01-28 - Completed 04-09-PLAN.md (Service Worker Cleanup)
 
-Progress: [########################                ] 58% (Phase 4 gap closure)
+Progress: [############################            ] 62% (Phase 4 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 57
+- Total plans completed: 58
 - Average duration: 4.4 min
-- Total execution time: 4.37 hours
+- Total execution time: 4.42 hours
 
 **By Phase:**
 
@@ -37,12 +37,12 @@ Progress: [########################                ] 58% (Phase 4 gap closure)
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
-| 04    | 5     | 23 min | 4.6 min  |
+| 04    | 9     | 26 min | 2.9 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 8 min, 2 min, 4 min, 4 min, 5 min
-- Trend: Phase 4 complete
+- Last 5 plans: 2 min, 4 min, 4 min, 5 min, 3 min
+- Trend: Phase 4 gap closure complete
 
 _Updated after each plan completion_
 
@@ -221,6 +221,8 @@ affecting current work:
 - TanStack Query gcTime 7 days for offline data retention
 - persistQueryClient only persists successful queries (shouldDehydrateQuery filter)
 - createIDBPersister factory function for idb-keyval integration with TanStack Query
+- Convex data cached via TanStack Query/IndexedDB, not service worker (WebSocket protocol)
+- JSDoc comments on route components documenting offline behavior expectations
 
 ### Pending Todos
 
@@ -462,9 +464,10 @@ Phase 4 (PWA & Offline) complete:
 - [x] 04-06: Subtle Offline Indicator (bottom-right pill, muted zinc styling)
 - [x] 04-07: Simplify Settings Page (Sync Data button, Clear Cache with IndexedDB)
 - [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
+- [x] 04-09: Service Worker Cleanup (remove dead Convex caching rule, document offline architecture)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-08-PLAN.md (Query Persistence)
+Stopped at: Completed 04-09-PLAN.md (Service Worker Cleanup) - Phase 4 complete
 Resume file: None
