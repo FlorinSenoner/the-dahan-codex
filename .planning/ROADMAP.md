@@ -291,7 +291,7 @@ Plans:
 - [x] 03.6-05-PLAN.md — Add sample opening data for River
 - [x] 03.6-06-PLAN.md — Create opening display components (accordion UI)
 - [x] 03.6-07-PLAN.md — Integrate OpeningSection into spirit detail page
-- [ ] 03.6-08-PLAN.md — UAT gap closure: remove SpecialRules, fix sourceUrl, verify aspect isolation
+- [x] 03.6-08-PLAN.md — UAT gap closure: remove SpecialRules, fix sourceUrl, verify aspect isolation
 
 ### Phase 4: PWA & Offline
 
@@ -400,7 +400,7 @@ development:
 | 3.2 Spirit Board Refinements         | 10/10          | Complete    | 2026-01-27 |
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
-| 3.6 Simplify Board + Text Openings   | 7/8            | **Active**  | -          |
+| 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 0/TBD          | Pending     | -          |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |

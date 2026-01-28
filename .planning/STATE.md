@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 3.6 - Simplify Spirit Board + Text Openings
+**Current focus:** Phase 4 - PWA & Offline
 
 ## Current Position
 
@@ -406,9 +406,10 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 - [x] 03.6-05: Sample Opening Seed Data (River standard opening with 3 turns)
 - [x] 03.6-06: Opening Display Components (TurnAccordion, OpeningSection)
 - [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
+- [x] 03.6-08: UAT Gap Closure (SpecialRules removed, sourceUrl fixed, aspect isolation documented)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-08-PLAN.md - Phase 3.6 complete (all gap closures done)
+Stopped at: Phase 3.6 complete, ready for Phase 4
 Resume file: None
