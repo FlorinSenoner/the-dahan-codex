@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 7 of 7
-Status: Phase complete
-Last activity: 2026-01-28 - Completed 03.6-07-PLAN.md (spirit detail integration)
+Plan: 8 of 8
+Status: Phase 3.6 complete (all gap closures done)
+Last activity: 2026-01-28 - Completed 03.6-08-PLAN.md (UAT gap closure)
 
-Progress: [################                        ] 40% (Phase 3.6 complete)
+Progress: [################                        ] 41% (Phase 3.6 complete with gap closures)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 51
-- Average duration: 4.5 min
-- Total execution time: 3.99 hours
+- Total plans completed: 52
+- Average duration: 4.4 min
+- Total execution time: 4.01 hours
 
 **By Phase:**
 
@@ -36,12 +36,12 @@ Progress: [################                        ] 40% (Phase 3.6 complete)
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
-| 03.6  | 7     | 22 min | 3.1 min |
+| 03.6  | 8     | 23 min | 2.9 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 4 min, 3 min, 1.5 min, 3 min
-- Trend: 03.6-07 spirit detail integration
+- Last 5 plans: 4 min, 3 min, 1.5 min, 3 min, 1.4 min
+- Trend: 03.6-08 UAT gap closure (verification only)
 
 _Updated after each plan completion_
 
@@ -191,7 +191,8 @@ affecting current work:
 - reseedSpirits deletes openings before spirits (foreign key order)
 - TurnAccordion component with all turns expanded by default via defaultValue
 - OpeningSection queries openings by spiritId, handles loading/empty states gracefully
-- OpeningSection placed between SpecialRules and ExternalLinks in spirit detail page
+- Aspect openings isolation: Each spirit (base or aspect) queries openings by its own _id, never inherits from base
+- SpecialRules component and specialRules schema field removed (simplified spirit detail page)
 
 ### Pending Todos
 
@@ -409,5 +410,5 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-07-PLAN.md - Phase 3.6 complete
+Stopped at: Completed 03.6-08-PLAN.md - Phase 3.6 complete (all gap closures done)
 Resume file: None
