@@ -4,25 +4,25 @@
 
 See: .planning/PROJECT.md (updated 2025-01-24)
 
-**Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
+**Core value:** Text-based opening guides for Spirit Island spirits
+**Current focus:** Phase 4 - PWA & Offline
 
 ## Current Position
 
-Phase: 3.4 (Presence Track Graph DSL)
-Plan: 9 of 10 complete (includes gap closure plans 08-10)
-Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-08-PLAN.md (Finder presence track fix)
+Phase: 3.6 (Simplify Spirit Board + Text Openings)
+Plan: 8 of 8
+Status: Phase 3.6 complete (all gap closures done)
+Last activity: 2026-01-28 - Completed 03.6-08-PLAN.md (UAT gap closure)
 
-Progress: [█████████░░░░░░░░░░░░░░░░░░░░░░] 90% (9/10 plans in phase)
+Progress: [################                        ] 41% (Phase 3.6 complete with gap closures)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 44
-- Average duration: 4.9 min
-- Total execution time: 3.6 hours
+- Total plans completed: 52
+- Average duration: 4.4 min
+- Total execution time: 4.01 hours
 
 **By Phase:**
 
@@ -36,11 +36,12 @@ Progress: [█████████░░░░░░░░░░░░░░
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
+| 03.6  | 8     | 23 min | 2.9 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 12 min, 2 min, 2 min, 2 min, 1 min, 2 min
-- Trend: 03.4-06 fast - verified complex spirits already converted in 03.4-01
+- Last 5 plans: 4 min, 3 min, 1.5 min, 3 min, 1.4 min
+- Trend: 03.6-08 UAT gap closure (verification only)
 
 _Updated after each plan completion_
 
@@ -181,6 +182,17 @@ affecting current work:
 - Type guard isGraphFormat for narrowing presenceTracks union type
 - Finder presence tracks use 3-row diamond/web structure with junction nodes at row 1 (col 2 and 4)
 - Finder edges form X/diamond pattern with bidirectional traversal from both starting positions
+- VariantTabs shows "Base" for base spirit tab instead of spirit name (simplified UI)
+- Openings table with spiritId reference for text-based turn-by-turn guides
+- Openings difficulty uses Beginner/Intermediate/Advanced literals
+- Openings turns array structure: turn number, optional title, instructions, optional notes
+- listBySpirit and getBySlug queries for openings table
+- Opening seed data includes attribution (author, sourceUrl)
+- reseedSpirits deletes openings before spirits (foreign key order)
+- TurnAccordion component with all turns expanded by default via defaultValue
+- OpeningSection queries openings by spiritId, handles loading/empty states gracefully
+- Aspect openings isolation: Each spirit (base or aspect) queries openings by its own _id, never inherits from base
+- SpecialRules component and specialRules schema field removed (simplified spirit detail page)
 
 ### Pending Todos
 
@@ -208,6 +220,10 @@ None yet.
 - Phase 3.1 inserted after Phase 3: Spirit Board Polish (URGENT) - addresses 8 UAT gaps (DSL system, element icons, schema corrections, visual polish)
 - Phase 3.2 inserted after Phase 3.1: Spirit Board Refinements (URGENT) - addresses 13 UAT gaps (minimalist tabs, scroll behavior, growth icons, complex spirits support)
 - Phase 3.3 inserted after Phase 3.2: Spirit Board Final Polish - addresses cosmetic G1/G2/G3 hover labels + presence track branching DSL for complex spirits
+- Phase 3.4 ABANDONED: Graph DSL approach too complex, entire board visualization strategy abandoned
+- Phase 3.6 inserted after Phase 3.4: Simplify Spirit Board + Text Openings - removes growth/presence/innate/cards, adds simple text-based openings (PIVOT)
+- Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
+- Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 
 ### Blockers/Concerns
 
@@ -360,28 +376,40 @@ Phase 3.3 (Spirit Board Final Polish) complete:
 - [x] 03.3-01: Hover-reveal G1/G2/G3 labels (group-hover pattern)
 - [x] 03.3-02: Presence track indicators and presenceCap display
 
-## Phase 3.4 Progress
+## Phase 3.4 Summary (ABANDONED)
 
-Phase 3.4 (Presence Track Graph DSL) in progress:
+Phase 3.4 (Presence Track Graph DSL) was abandoned at 9/10 plans complete. The graph DSL approach was too complex - the entire board visualization strategy (growth panels, presence tracks, innate powers, cards) was abandoned in favor of a simpler text-based opening guide approach.
 
-- [x] 03.4-01: Node-Edge Graph Schema (replaced tracks/slots with nodes/edges)
-- [x] 03.4-02: GraphPresenceTrack Component (CSS Grid-based renderer)
-- [x] 03.4-03: EdgeOverlay Component (SVG lines for non-adjacent connections)
-- [x] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
-- [x] 03.4-05: Seed Data Conversion (verified - already done in 03.4-01)
-- [x] 03.4-06: Complex Spirit Testing (verified - already done in 03.4-01)
-- [ ] 03.4-07: E2E Tests
+**Partial work completed before abandonment:**
+- [x] 03.4-01 through 03.4-10 (except 03.4-07 E2E tests)
 
-**Gap Closure Plans (UAT fixes):**
+**Reason for abandonment**: The graphical board visualization approach required too much complexity to accurately represent all spirit patterns. A simpler text-based opening guide better serves users who want to learn spirit openings.
 
-- [x] 03.4-08: Finder presence track fix (3-row diamond/web structure, diagonal edges)
-- [x] 03.4-09: Serpent Deep Slumber trackLabel fix (trackLabel field, custom row labels)
-- [x] 03.4-10: Any/Star element icons (elementValidator, AnyIcon, StarIcon, visual rendering)
+## Phase 3.6 Summary
 
-**Note:** 03.4-01 pulled forward component update (03.4-04) and seed conversion (03.4-05) to unblock typecheck. 03.4-03 integrated EdgeOverlay into presence-track.tsx. Plans 05 and 06 were verification-only.
+Phase 3.6 (Simplify Spirit Board + Text Openings) is now complete with:
+
+- Board visualization components removed (growth panels, presence tracks, innate powers, cards)
+- Simplified spirit detail page (image, name, badges, summary, overview, special rules, openings, links)
+- Openings table with spiritId reference for text-based turn-by-turn guides
+- TurnAccordion and OpeningSection components for displaying openings
+- River standard opening with 3 turns as sample data
+
+## Phase 3.6 Progress
+
+Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
+
+- [x] 03.6-01: Remove Board Visualization Components
+- [x] 03.6-02: Clean Schema and Seed Data (verified - work done in 03.6-01)
+- [x] 03.6-03: E2E Test Updates (removed board sections test, fixed variant tabs assertions)
+- [x] 03.6-04: Openings Schema and Queries (openings table, listBySpirit, getBySlug)
+- [x] 03.6-05: Sample Opening Seed Data (River standard opening with 3 turns)
+- [x] 03.6-06: Opening Display Components (TurnAccordion, OpeningSection)
+- [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
+- [x] 03.6-08: UAT Gap Closure (SpecialRules removed, sourceUrl fixed, aspect isolation documented)
 
 ## Session Continuity
 
-Last session: 2026-01-27
-Stopped at: Completed 03.4-08-PLAN.md (Finder presence track fix)
+Last session: 2026-01-28
+Stopped at: Phase 3.6 complete, ready for Phase 4
 Resume file: None

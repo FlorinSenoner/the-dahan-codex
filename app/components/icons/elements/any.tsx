@@ -8,11 +8,7 @@ export interface ElementIconProps extends SVGProps<SVGSVGElement> {
  * Any Element icon - wildcard that can be any element.
  * Design: Circle with multicolor gradient representing all elements.
  */
-export function AnyIcon({
-  size = 20,
-  className,
-  ...props
-}: ElementIconProps) {
+export function AnyIcon({ size = 20, className, ...props }: ElementIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
