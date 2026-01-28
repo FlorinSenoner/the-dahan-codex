@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 4 (PWA & Offline)
-Plan: 3 of 5
+Plan: 4 of 5
 Status: In progress
-Last activity: 2026-01-28 - Completed 04-02-PLAN.md (PWA UI components)
+Last activity: 2026-01-28 - Completed 04-04-PLAN.md (PWA Integration)
 
-Progress: [#####################                   ] 49% (Phase 4 in progress)
+Progress: [######################                  ] 51% (Phase 4 in progress)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 55
+- Total plans completed: 56
 - Average duration: 4.4 min
-- Total execution time: 4.22 hours
+- Total execution time: 4.29 hours
 
 **By Phase:**
 
@@ -37,12 +37,12 @@ Progress: [#####################                   ] 49% (Phase 4 in progress)
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
-| 04    | 3     | 14 min | 4.7 min  |
+| 04    | 4     | 18 min | 4.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 1.4 min, 8 min, 2 min, 4 min
-- Trend: 04-02 PWA UI components
+- Last 5 plans: 1.4 min, 8 min, 2 min, 4 min, 4 min
+- Trend: 04-04 PWA Integration
 
 _Updated after each plan completion_
 
@@ -206,6 +206,10 @@ affecting current work:
 - z-50 for top PWA banners (offline/update), z-40 for bottom install prompt
 - 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
 - 2-second delay before showing install prompt to avoid flash on page load
+- PWA components placed before Outlet in root layout for global visibility
+- useServiceWorker hook manages SW lifecycle in root component (replaces registerSW useEffect)
+- sw-register.ts marked deprecated, kept for potential fallback
+- Bottom nav link types explicitly list enabled routes ("/spirits" | "/settings")
 
 ### Pending Todos
 
@@ -428,11 +432,11 @@ Phase 4 (PWA & Offline) in progress:
 - [x] 04-01: PWA Hooks & SW Configuration (workbox-window, useOnlineStatus, useServiceWorker, useInstallPrompt)
 - [x] 04-02: PWA UI Components (offline indicator, update banner, install prompt)
 - [x] 04-03: Settings Page (cache management, offline download)
-- [ ] 04-04: PWA Integration (root layout, bottom nav)
+- [x] 04-04: PWA Integration (root layout, bottom nav)
 - [ ] 04-05: E2E Tests & Integration
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-02-PLAN.md
+Stopped at: Completed 04-04-PLAN.md
 Resume file: None
