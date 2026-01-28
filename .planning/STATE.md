@@ -4,25 +4,25 @@
 
 See: .planning/PROJECT.md (updated 2025-01-24)
 
-**Core value:** The Opening Scrubber - graphical, scrubbable visualization of
-spirit openings **Current focus:** Phase 3 - Spirit Detail & Board
+**Core value:** Text-based opening guides for Spirit Island spirits
+**Current focus:** Phase 3.6 - Simplify Spirit Board + Text Openings
 
 ## Current Position
 
-Phase: 3.4 (Presence Track Graph DSL)
-Plan: 9 of 10 complete (includes gap closure plans 08-10)
+Phase: 3.6 (Simplify Spirit Board + Text Openings)
+Plan: 1 of TBD
 Status: In progress
-Last activity: 2026-01-27 - Completed 03.4-08-PLAN.md (Finder presence track fix)
+Last activity: 2026-01-28 - Completed 03.6-01-PLAN.md (board component removal)
 
-Progress: [█████████░░░░░░░░░░░░░░░░░░░░░░] 90% (9/10 plans in phase)
+Progress: [##                                      ] 5% (03.6-01 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 44
+- Total plans completed: 45
 - Average duration: 4.9 min
-- Total execution time: 3.6 hours
+- Total execution time: 3.7 hours
 
 **By Phase:**
 
@@ -36,11 +36,12 @@ Progress: [█████████░░░░░░░░░░░░░░
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
+| 03.6  | 1     | 5 min  | 5.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 12 min, 2 min, 2 min, 2 min, 1 min, 2 min
-- Trend: 03.4-06 fast - verified complex spirits already converted in 03.4-01
+- Last 5 plans: 2 min, 2 min, 1 min, 2 min, 5 min
+- Trend: 03.6-01 cleanup took 5 min due to seed.ts rewrite
 
 _Updated after each plan completion_
 
@@ -208,6 +209,10 @@ None yet.
 - Phase 3.1 inserted after Phase 3: Spirit Board Polish (URGENT) - addresses 8 UAT gaps (DSL system, element icons, schema corrections, visual polish)
 - Phase 3.2 inserted after Phase 3.1: Spirit Board Refinements (URGENT) - addresses 13 UAT gaps (minimalist tabs, scroll behavior, growth icons, complex spirits support)
 - Phase 3.3 inserted after Phase 3.2: Spirit Board Final Polish - addresses cosmetic G1/G2/G3 hover labels + presence track branching DSL for complex spirits
+- Phase 3.4 ABANDONED: Graph DSL approach too complex, entire board visualization strategy abandoned
+- Phase 3.6 inserted after Phase 3.4: Simplify Spirit Board + Text Openings - removes growth/presence/innate/cards, adds simple text-based openings (PIVOT)
+- Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
+- Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 
 ### Blockers/Concerns
 
@@ -360,28 +365,24 @@ Phase 3.3 (Spirit Board Final Polish) complete:
 - [x] 03.3-01: Hover-reveal G1/G2/G3 labels (group-hover pattern)
 - [x] 03.3-02: Presence track indicators and presenceCap display
 
-## Phase 3.4 Progress
+## Phase 3.4 Summary (ABANDONED)
 
-Phase 3.4 (Presence Track Graph DSL) in progress:
+Phase 3.4 (Presence Track Graph DSL) was abandoned at 9/10 plans complete. The graph DSL approach was too complex - the entire board visualization strategy (growth panels, presence tracks, innate powers, cards) was abandoned in favor of a simpler text-based opening guide approach.
 
-- [x] 03.4-01: Node-Edge Graph Schema (replaced tracks/slots with nodes/edges)
-- [x] 03.4-02: GraphPresenceTrack Component (CSS Grid-based renderer)
-- [x] 03.4-03: EdgeOverlay Component (SVG lines for non-adjacent connections)
-- [x] 03.4-04: PresenceTrack Wiring (delegate to GraphPresenceTrack)
-- [x] 03.4-05: Seed Data Conversion (verified - already done in 03.4-01)
-- [x] 03.4-06: Complex Spirit Testing (verified - already done in 03.4-01)
-- [ ] 03.4-07: E2E Tests
+**Partial work completed before abandonment:**
+- [x] 03.4-01 through 03.4-10 (except 03.4-07 E2E tests)
 
-**Gap Closure Plans (UAT fixes):**
+**Reason for abandonment**: The graphical board visualization approach required too much complexity to accurately represent all spirit patterns. A simpler text-based opening guide better serves users who want to learn spirit openings.
 
-- [x] 03.4-08: Finder presence track fix (3-row diamond/web structure, diagonal edges)
-- [x] 03.4-09: Serpent Deep Slumber trackLabel fix (trackLabel field, custom row labels)
-- [x] 03.4-10: Any/Star element icons (elementValidator, AnyIcon, StarIcon, visual rendering)
+## Phase 3.6 Progress
 
-**Note:** 03.4-01 pulled forward component update (03.4-04) and seed conversion (03.4-05) to unblock typecheck. 03.4-03 integrated EdgeOverlay into presence-track.tsx. Plans 05 and 06 were verification-only.
+Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
+
+- [x] 03.6-01: Remove Board Visualization Components
+- [ ] 03.6-02: TBD (text-based openings)
 
 ## Session Continuity
 
-Last session: 2026-01-27
-Stopped at: Completed 03.4-08-PLAN.md (Finder presence track fix)
+Last session: 2026-01-28
+Stopped at: Completed 03.6-01-PLAN.md - board components removed
 Resume file: None
