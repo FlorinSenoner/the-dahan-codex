@@ -27,6 +27,10 @@ async function buildServiceWorker() {
       // IMPORTANT: skipWaiting false to prevent broken state during updates
       skipWaiting: false,
       clientsClaim: false,
+      // SPA navigation fallback - serve index.html for all navigation requests
+      navigateFallback: "/index.html",
+      // Exclude API calls and files with extensions from fallback
+      navigateFallbackDenylist: [/^\/api\//, /\.[^/]+$/],
       // Runtime caching for API calls
       runtimeCaching: [
         {
