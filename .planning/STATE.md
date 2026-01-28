@@ -12,17 +12,17 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 Phase: 4 (PWA & Offline)
 Plan: 3 of 5
 Status: In progress
-Last activity: 2026-01-28 - Completed 04-03-PLAN.md (Settings page with cache management)
+Last activity: 2026-01-28 - Completed 04-02-PLAN.md (PWA UI components)
 
-Progress: [####################                    ] 47% (Phase 4 in progress)
+Progress: [#####################                   ] 49% (Phase 4 in progress)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 54
+- Total plans completed: 55
 - Average duration: 4.4 min
-- Total execution time: 4.18 hours
+- Total execution time: 4.22 hours
 
 **By Phase:**
 
@@ -37,12 +37,12 @@ Progress: [####################                    ] 47% (Phase 4 in progress)
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
-| 04    | 2     | 10 min | 5.0 min  |
+| 04    | 3     | 14 min | 4.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 1.5 min, 3 min, 1.4 min, 8 min, 2 min
-- Trend: 04-03 Settings page with cache management
+- Last 5 plans: 3 min, 1.4 min, 8 min, 2 min, 4 min
+- Trend: 04-02 PWA UI components
 
 _Updated after each plan completion_
 
@@ -201,6 +201,11 @@ affecting current work:
 - Settings page pattern: sections with Heading h3, descriptive Text muted, full-width Buttons
 - Cache clear pattern: delete all caches + unregister SW + reload
 - useConvex().query for programmatic Convex queries outside React hooks
+- PWA components in app/components/pwa/ directory with knip entry point
+- Semantic <output> element for status indicators (Biome lint prefers over div with role="status")
+- z-50 for top PWA banners (offline/update), z-40 for bottom install prompt
+- 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
+- 2-second delay before showing install prompt to avoid flash on page load
 
 ### Pending Todos
 
@@ -421,7 +426,7 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 Phase 4 (PWA & Offline) in progress:
 
 - [x] 04-01: PWA Hooks & SW Configuration (workbox-window, useOnlineStatus, useServiceWorker, useInstallPrompt)
-- [ ] 04-02: PWA UI Components (offline indicator, update banner, install prompt)
+- [x] 04-02: PWA UI Components (offline indicator, update banner, install prompt)
 - [x] 04-03: Settings Page (cache management, offline download)
 - [ ] 04-04: PWA Integration (root layout, bottom nav)
 - [ ] 04-05: E2E Tests & Integration
@@ -429,5 +434,5 @@ Phase 4 (PWA & Offline) in progress:
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-03-PLAN.md
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
