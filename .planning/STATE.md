@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 3 of TBD
+Plan: 4 of TBD
 Status: In progress
-Last activity: 2026-01-28 - Completed 03.6-03-PLAN.md (E2E test updates)
+Last activity: 2026-01-28 - Completed 03.6-04-PLAN.md (openings schema and queries)
 
-Progress: [######                                  ] 15% (03.6-03 complete)
+Progress: [########                                ] 20% (03.6-04 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 47
+- Total plans completed: 48
 - Average duration: 4.7 min
-- Total execution time: 3.8 hours
+- Total execution time: 3.87 hours
 
 **By Phase:**
 
@@ -36,12 +36,12 @@ Progress: [######                                  ] 15% (03.6-03 complete)
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
-| 03.6  | 3     | 11 min | 3.7 min  |
+| 03.6  | 4     | 15 min | 3.75 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min, 2 min, 5 min, 3 min, 3 min
-- Trend: 03.6-03 straightforward E2E test update
+- Last 5 plans: 2 min, 5 min, 3 min, 3 min, 4 min
+- Trend: 03.6-04 schema/queries with database cleanup
 
 _Updated after each plan completion_
 
@@ -183,6 +183,10 @@ affecting current work:
 - Finder presence tracks use 3-row diamond/web structure with junction nodes at row 1 (col 2 and 4)
 - Finder edges form X/diamond pattern with bidirectional traversal from both starting positions
 - VariantTabs shows "Base" for base spirit tab instead of spirit name (simplified UI)
+- Openings table with spiritId reference for text-based turn-by-turn guides
+- Openings difficulty uses Beginner/Intermediate/Advanced literals
+- Openings turns array structure: turn number, optional title, instructions, optional notes
+- listBySpirit and getBySlug queries for openings table
 
 ### Pending Todos
 
@@ -382,10 +386,12 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
 - [x] 03.6-01: Remove Board Visualization Components
 - [x] 03.6-02: Clean Schema and Seed Data (verified - work done in 03.6-01)
 - [x] 03.6-03: E2E Test Updates (removed board sections test, fixed variant tabs assertions)
-- [ ] 03.6-04: TBD (text-based openings)
+- [x] 03.6-04: Openings Schema and Queries (openings table, listBySpirit, getBySlug)
+- [ ] 03.6-05: TBD (sample opening data)
+- [ ] 03.6-06: TBD (frontend integration)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-03-PLAN.md - E2E test updates
+Stopped at: Completed 03.6-04-PLAN.md - openings schema and queries
 Resume file: None
