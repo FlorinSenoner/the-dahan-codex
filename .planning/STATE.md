@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 6 of 7
-Status: In progress
-Last activity: 2026-01-28 - Completed 03.6-06-PLAN.md (opening display components)
+Plan: 7 of 7
+Status: Phase complete
+Last activity: 2026-01-28 - Completed 03.6-07-PLAN.md (spirit detail integration)
 
-Progress: [############                            ] 30% (03.6-06 complete)
+Progress: [################                        ] 40% (Phase 3.6 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 50
-- Average duration: 4.6 min
-- Total execution time: 3.94 hours
+- Total plans completed: 51
+- Average duration: 4.5 min
+- Total execution time: 3.99 hours
 
 **By Phase:**
 
@@ -36,12 +36,12 @@ Progress: [############                            ] 30% (03.6-06 complete)
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
-| 03.6  | 6     | 19 min | 3.2 min |
+| 03.6  | 7     | 22 min | 3.1 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 3 min, 4 min, 3 min, 1.5 min
-- Trend: 03.6-06 opening display components
+- Last 5 plans: 3 min, 4 min, 3 min, 1.5 min, 3 min
+- Trend: 03.6-07 spirit detail integration
 
 _Updated after each plan completion_
 
@@ -191,6 +191,7 @@ affecting current work:
 - reseedSpirits deletes openings before spirits (foreign key order)
 - TurnAccordion component with all turns expanded by default via defaultValue
 - OpeningSection queries openings by spiritId, handles loading/empty states gracefully
+- OpeningSection placed between SpecialRules and ExternalLinks in spirit detail page
 
 ### Pending Todos
 
@@ -383,9 +384,19 @@ Phase 3.4 (Presence Track Graph DSL) was abandoned at 9/10 plans complete. The g
 
 **Reason for abandonment**: The graphical board visualization approach required too much complexity to accurately represent all spirit patterns. A simpler text-based opening guide better serves users who want to learn spirit openings.
 
+## Phase 3.6 Summary
+
+Phase 3.6 (Simplify Spirit Board + Text Openings) is now complete with:
+
+- Board visualization components removed (growth panels, presence tracks, innate powers, cards)
+- Simplified spirit detail page (image, name, badges, summary, overview, special rules, openings, links)
+- Openings table with spiritId reference for text-based turn-by-turn guides
+- TurnAccordion and OpeningSection components for displaying openings
+- River standard opening with 3 turns as sample data
+
 ## Phase 3.6 Progress
 
-Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
+Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 
 - [x] 03.6-01: Remove Board Visualization Components
 - [x] 03.6-02: Clean Schema and Seed Data (verified - work done in 03.6-01)
@@ -393,10 +404,10 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
 - [x] 03.6-04: Openings Schema and Queries (openings table, listBySpirit, getBySlug)
 - [x] 03.6-05: Sample Opening Seed Data (River standard opening with 3 turns)
 - [x] 03.6-06: Opening Display Components (TurnAccordion, OpeningSection)
-- [ ] 03.6-07: TBD (spirit detail page integration)
+- [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-06-PLAN.md - opening display components
+Stopped at: Completed 03.6-07-PLAN.md - Phase 3.6 complete
 Resume file: None
