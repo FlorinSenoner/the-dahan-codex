@@ -3,14 +3,13 @@
 ## Overview
 
 The Dahan Codex delivers an offline-first companion PWA for Spirit Island,
-progressing from validated infrastructure through complete spirit reference
-functionality to the core differentiator: the opening scrubber. The journey
-prioritizes foundation stability (known pitfalls from research), builds
-reference data as table stakes, establishes offline architecture before user
-mutations, and defers highest-complexity features (opening scrubber, admin
-tools) until core functionality proves valuable. User data features (games,
-notes) come after offline infrastructure is proven, and admin tooling is last
-priority.
+progressing from validated infrastructure through spirit reference functionality
+to text-based opening guides. The journey prioritizes foundation stability
+(known pitfalls from research), builds reference data as table stakes,
+establishes offline architecture before user mutations, and keeps the UI simple
+with text-based turn-by-turn opening descriptions rather than complex graphical
+board visualization. User data features (games, notes) come after offline
+infrastructure is proven, and admin tooling is last priority.
 
 ## Phases
 
@@ -31,14 +30,15 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3.1: Spirit Board Polish** - UAT fixes: DSL system, element icons, schema corrections, visual polish (INSERTED)
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [x] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
-- [ ] **Phase 3.4: Presence Track Graph DSL** - Graph-based presence track model for complex spirits (Finder, Starlight, Serpent) (INSERTED)
+- [ ] ~~**Phase 3.4: Presence Track Graph DSL**~~ - ABANDONED - overly complex DSL approach
+- [ ] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
 - [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
-- [ ] **Phase 5: Opening Scrubber** - Turn-by-turn graphical visualization (core
-      value)
+- [ ] **Phase 5: Text Opening Management** - Admin tools for managing text-based
+      openings
 - [ ] **Phase 6: User Data** - Game tracker, CSV export/import, notes with
       backlinks
-- [ ] **Phase 7: Admin Tools** - Visual opening builder and seed data management
+- [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
 
 ## Phase Details
 
@@ -248,43 +248,49 @@ Plans:
 - [x] 03.3-01-PLAN.md — Growth panel hover-reveal G1/G2/G3 labels
 - [x] 03.3-02-PLAN.md — Enhanced presence track indicators and presenceCap display
 
-### Phase 3.4: Presence Track Graph DSL (INSERTED)
+### Phase 3.4: Presence Track Graph DSL (ABANDONED)
 
-**Goal**: Redesign presence track DSL to unified Node-Edge Graph model for all spirits (no backward compatibility - clean migration)
-**Depends on**: Phase 3.3 **Requirements**: From research at .planning/phases/03.4-presence-track-graph-dsl/03.4-RESEARCH.md **Success Criteria** (what must be TRUE):
+~~**Goal**: Redesign presence track DSL to unified Node-Edge Graph model for all spirits~~
 
-1. Schema uses unified Node-Edge Graph model for ALL spirits (no legacy format)
-2. GraphPresenceTrack renderer component displays node-edge layouts with CSS Grid
-3. Non-adjacent connections rendered as SVG overlay between nodes
-4. All spirits (simple and complex) use the same schema format
-5. Old linear format code removed entirely
-6. Finder data verified against actual spirit panel (not speculation)
-7. Serpent Deep Slumber correctly modeled with custom track labels
-8. Any/Star element icons render with explanatory tooltips
+**Status**: ABANDONED - The complex DSL approach for presence tracks, growth panels, innate powers, and cards was overengineered. Replaced by Phase 3.6 which simplifies the spirit board and adds text-based openings.
 
-**UAT Gaps to Address:**
-- Schema: Replace linear tracks with nodes + edges arrays (no v.union needed)
-- Renderer: New GraphPresenceTrack component with CSS Grid positioning
-- Data: All 6 spirits converted to Node-Edge Graph format
-- Old code: Remove linear track renderer and PresenceSlot component
-- Connections: EdgeOverlay SVG for non-horizontal-adjacent connections
-- Finder: Verify data from actual panel image
-- Serpent: Add trackLabel for "Deep Slumber" custom label
-- Elements: Add Any/Star icons and render in presence slots
+**Partial Progress (6/10 plans):**
+- Schema changed to Node-Edge Graph model
+- GraphPresenceTrack component created
+- EdgeOverlay SVG component added
+- Seed data partially converted
 
-**Plans**: 10 plans
+**Reason for abandonment**: The graphical board visualization approach (growth panels, presence tracks, innate powers, cards) required too much complexity to accurately represent all spirit patterns. A simpler text-based opening guide better serves users who want to learn spirit openings.
+
+### Phase 3.6: Simplify Spirit Board + Text Openings (INSERTED)
+
+**Goal**: Remove complex board visualization components and replace with simple text-based turn-by-turn opening guides
+**Depends on**: Phase 3.3 **Requirements**: Simplification pivot **Success Criteria** (what must be TRUE):
+
+1. Spirit detail page shows: image, title, element/complexity badges, overview with radar, strengths/weaknesses
+2. Growth, presence track, innate powers, and cards sections are removed
+3. New "openings" collection in Convex stores text-based turn-by-turn guides
+4. Openings display as collapsible accordions (one per turn, default open)
+5. Multiple openings per spirit shown as tabs (like aspects), stored in URL
+6. All related schema fields, components, tests, and seed data removed/cleaned
+
+**Approach:**
+- Remove board-related components (GrowthPanel, PresenceTrack, InnatePowers, CardHand)
+- Clean up schema: remove growth, presenceTracks, innatePowers, cards fields
+- Create new "openings" table in Convex for text-based guides
+- Build simple accordion UI for turn-by-turn display
+- Add tabs for multiple openings with URL state
+
+**Plans**: 7 plans
 
 Plans:
-- [x] 03.4-01-PLAN.md — Replace presenceTracks schema with Node-Edge Graph model
-- [x] 03.4-02-PLAN.md — GraphPresenceTrack and PresenceNode components
-- [x] 03.4-03-PLAN.md — EdgeOverlay SVG for non-adjacent connections
-- [x] 03.4-04-PLAN.md — Wire PresenceTrack to use GraphPresenceTrack
-- [x] 03.4-05-PLAN.md — Convert River, Lightning, Fractured Days seed data
-- [x] 03.4-06-PLAN.md — Convert Starlight, Finder, Serpent seed data
-- [ ] 03.4-07-PLAN.md — Integration verification and reseed
-- [ ] 03.4-08-PLAN.md — Finder data verification from panel image (gap closure)
-- [ ] 03.4-09-PLAN.md — Serpent Deep Slumber modeling with trackLabel (gap closure)
-- [ ] 03.4-10-PLAN.md — Any/Star element icons and visual rendering (gap closure)
+- [ ] 03.6-01-PLAN.md — Remove board components and icons from spirit detail
+- [ ] 03.6-02-PLAN.md — Clean schema and seed data (remove board fields)
+- [ ] 03.6-03-PLAN.md — Update E2E tests for simplified spirit detail
+- [ ] 03.6-04-PLAN.md — Create openings table and queries in Convex
+- [ ] 03.6-05-PLAN.md — Add sample opening data for River
+- [ ] 03.6-06-PLAN.md — Create opening display components (accordion UI)
+- [ ] 03.6-07-PLAN.md — Integrate OpeningSection into spirit detail page
 
 ### Phase 4: PWA & Offline
 
@@ -302,20 +308,20 @@ Plans:
 
 - [ ] 04-01: TBD
 
-### Phase 5: Opening Scrubber
+### Phase 5: Text Opening Management
 
-**Goal**: Users can visually scrub through spirit openings turn-by-turn (core
-differentiator) **Depends on**: Phase 3 (requires spirit board visualization)
-**Requirements**: OPEN-01, OPEN-02, OPEN-03, OPEN-04, OPEN-05, OPEN-06, OPEN-07,
-OPEN-08, OPEN-09, OPEN-10, OPEN-11, OPEN-12, OPEN-13, SRCH-01, SRCH-02, SRCH-03
+**Goal**: Admin tools for creating and managing text-based spirit openings
+**Depends on**: Phase 3.6 (requires openings data model)
+**Requirements**: Simplified from original OPEN-* and ADMN-* requirements
 **Success Criteria** (what must be TRUE):
 
-1. User sees list of available openings for current spirit variant
-2. Scrubbing timeline updates board to show exact state at selected turn
-3. Growth panel highlights chosen options; presence tracks show slot-by-slot
-   state
-4. Cards played appear as chips; tapping opens full preview from external source
-5. Global search finds spirits, openings, and works offline **Plans**: TBD
+1. Admin routes are inaccessible to non-admin users (Clerk role check)
+2. Admin can create/edit text-based openings with turn-by-turn descriptions
+3. Admin can add opening metadata (name, difficulty, strategy notes)
+4. Saved opening appears in public opening list for that spirit
+5. Global search finds spirits and openings
+
+**Plans**: TBD
 
 Plans:
 
@@ -343,18 +349,18 @@ Plans:
 
 - [ ] 06-01: TBD
 
-### Phase 7: Admin Tools
+### Phase 7: Seed Data Management
 
-**Goal**: Admin users can visually author openings and manage seed data
-**Depends on**: Phase 5 (requires opening data model) **Requirements**: ADMN-01,
-ADMN-02, ADMN-03, ADMN-04, ADMN-05, ADMN-06, ADMN-07, ADMN-08, ADMN-09 **Success
-Criteria** (what must be TRUE):
+**Goal**: Admin tools for managing spirit seed data
+**Depends on**: Phase 5 **Requirements**: Simplified admin tooling
+**Success Criteria** (what must be TRUE):
 
-1. Admin routes are inaccessible to non-admin users (Clerk role check)
-2. Admin can create opening by selecting growth options and presence placements
-   visually
-3. Admin can add cards played, per-turn notes, and strategy text to opening
-4. Saved opening appears in public opening list for that spirit **Plans**: TBD
+1. Admin can add/edit spirit basic info (name, elements, complexity, description)
+2. Admin can manage aspects for a spirit
+3. Admin can upload spirit images
+4. Seed data changes propagate to all users
+
+**Plans**: TBD
 
 Plans:
 
@@ -381,22 +387,23 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.4 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 7
 
-| Phase                          | Plans Complete | Status      | Completed  |
-| ------------------------------ | -------------- | ----------- | ---------- |
-| 1. Foundation & Authentication | 7/7            | Complete    | 2026-01-25 |
-| 2. Spirit Library              | 6/6            | Complete    | 2026-01-25 |
-| 2.1 Spirit Library Polish      | 6/6            | Complete    | 2026-01-25 |
-| 3. Spirit Detail & Board       | 6/6            | Complete    | 2026-01-26 |
-| 3.1 Spirit Board Polish        | 7/7            | Complete    | 2026-01-27 |
-| 3.2 Spirit Board Refinements   | 10/10          | Complete    | 2026-01-27 |
-| 3.3 Spirit Board Final Polish  | 2/2            | Complete    | 2026-01-27 |
-| 3.4 Presence Track Graph DSL   | 6/10           | In Progress | -          |
-| 4. PWA & Offline               | 0/TBD          | Pending     | -          |
-| 5. Opening Scrubber            | 0/TBD          | Pending     | -          |
-| 6. User Data                   | 0/TBD          | Pending     | -          |
-| 7. Admin Tools                 | 0/TBD          | Pending     | -          |
+| Phase                                | Plans Complete | Status      | Completed  |
+| ------------------------------------ | -------------- | ----------- | ---------- |
+| 1. Foundation & Authentication       | 7/7            | Complete    | 2026-01-25 |
+| 2. Spirit Library                    | 6/6            | Complete    | 2026-01-25 |
+| 2.1 Spirit Library Polish            | 6/6            | Complete    | 2026-01-25 |
+| 3. Spirit Detail & Board             | 6/6            | Complete    | 2026-01-26 |
+| 3.1 Spirit Board Polish              | 7/7            | Complete    | 2026-01-27 |
+| 3.2 Spirit Board Refinements         | 10/10          | Complete    | 2026-01-27 |
+| 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
+| ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
+| 3.6 Simplify Board + Text Openings   | 0/TBD          | **Active**  | -          |
+| 4. PWA & Offline                     | 0/TBD          | Pending     | -          |
+| 5. Text Opening Management           | 0/TBD          | Pending     | -          |
+| 6. User Data                         | 0/TBD          | Pending     | -          |
+| 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
 
