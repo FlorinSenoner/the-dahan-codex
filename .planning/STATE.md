@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 4 - PWA & Offline
+**Current focus:** Phase 5 - Text Opening Management
 
 ## Current Position
 

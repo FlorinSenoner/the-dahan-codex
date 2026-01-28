@@ -31,15 +31,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### PWA & Offline
 
-- [ ] **PWA-01**: App is installable (add to home screen)
-- [ ] **PWA-02**: App works offline in read-only mode
-- [ ] **PWA-03**: In-app update banner when new version available
-- [ ] **PWA-04**: Reference data (spirits, adversaries, scenarios) precached for
+- [x] **PWA-01**: App is installable (add to home screen)
+- [x] **PWA-02**: App works offline in read-only mode
+- [x] **PWA-03**: In-app update banner when new version available
+- [x] **PWA-04**: Reference data (spirits, adversaries, scenarios) precached for
       offline
 - [ ] **PWA-05**: User data (games, notes) cached from Convex for offline
-      viewing
-- [ ] **PWA-06**: Offline indicator shown only when disconnected
-- [ ] **PWA-07**: User-prompted update flow (no automatic skipWaiting)
+      viewing (deferred to Phase 6)
+- [x] **PWA-06**: Offline indicator shown only when disconnected
+- [x] **PWA-07**: User-prompted update flow (no automatic skipWaiting)
 
 ### Spirit Library
 
@@ -268,13 +268,13 @@ Phase assignments from ROADMAP.md (7 phases).
 | BOARD-03    | Phase 3: Spirit Detail & Board       | Pending |
 | BOARD-04    | Phase 3: Spirit Detail & Board       | Pending |
 | BOARD-05    | Phase 3: Spirit Detail & Board       | Pending |
-| PWA-01      | Phase 4: PWA & Offline               | Pending |
-| PWA-02      | Phase 4: PWA & Offline               | Pending |
-| PWA-03      | Phase 4: PWA & Offline               | Pending |
-| PWA-04      | Phase 4: PWA & Offline               | Pending |
-| PWA-05      | Phase 4: PWA & Offline               | Pending |
-| PWA-06      | Phase 4: PWA & Offline               | Pending |
-| PWA-07      | Phase 4: PWA & Offline               | Pending |
+| PWA-01      | Phase 4: PWA & Offline               | Complete |
+| PWA-02      | Phase 4: PWA & Offline               | Complete |
+| PWA-03      | Phase 4: PWA & Offline               | Complete |
+| PWA-04      | Phase 4: PWA & Offline               | Complete |
+| PWA-05      | Phase 6: User Data                   | Pending  |
+| PWA-06      | Phase 4: PWA & Offline               | Complete |
+| PWA-07      | Phase 4: PWA & Offline               | Complete |
 | OPEN-01     | Phase 5: Opening Scrubber            | Pending |
 | OPEN-02     | Phase 5: Opening Scrubber            | Pending |
 | OPEN-03     | Phase 5: Opening Scrubber            | Pending |

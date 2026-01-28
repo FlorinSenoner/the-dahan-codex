@@ -297,7 +297,9 @@ Plans:
 
 **Goal**: App works offline with cached reference data and proper update flow
 **Depends on**: Phase 3 **Requirements**: PWA-01, PWA-02, PWA-03, PWA-04,
-PWA-05, PWA-06, PWA-07 **Success Criteria** (what must be TRUE):
+PWA-06, PWA-07
+**Note**: PWA-05 (user data caching) deferred to Phase 6 with other user data features.
+**Success Criteria** (what must be TRUE):
 
 1. User can install app to home screen (PWA manifest valid)
 2. App loads and displays spirit library when completely offline
@@ -307,11 +309,11 @@ PWA-05, PWA-06, PWA-07 **Success Criteria** (what must be TRUE):
 
 Plans:
 
-- [ ] 04-01-PLAN.md — PWA hooks and service worker configuration (workbox-window, navigateFallback)
-- [ ] 04-02-PLAN.md — PWA UI components (OfflineIndicator, UpdateBanner, InstallPrompt)
-- [ ] 04-03-PLAN.md — Settings page with cache management
-- [ ] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
-- [ ] 04-05-PLAN.md — E2E tests for PWA and settings
+- [x] 04-01-PLAN.md — PWA hooks and service worker configuration (workbox-window, navigateFallback)
+- [x] 04-02-PLAN.md — PWA UI components (OfflineIndicator, UpdateBanner, InstallPrompt)
+- [x] 04-03-PLAN.md — Settings page with cache management
+- [x] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
+- [x] 04-05-PLAN.md — E2E tests for PWA and settings
 
 ### Phase 5: Text Opening Management
 
@@ -405,7 +407,7 @@ development:
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
-| 4. PWA & Offline                     | 0/TBD          | Pending     | -          |
+| 4. PWA & Offline                     | 5/5            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
