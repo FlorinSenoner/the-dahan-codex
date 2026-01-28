@@ -26,6 +26,13 @@ import {
 } from "@/lib/spirit-colors";
 import { cn } from "@/lib/utils";
 
+/**
+ * Spirit detail page
+ *
+ * Offline behavior: This page works offline for spirits that have been
+ * synced via Settings > Sync Data. Without prior sync, the page will
+ * show a loading state while waiting for Convex connection.
+ */
 export const Route = createFileRoute("/spirits/$slug")({
   loader: async ({ context, params }) => {
     // Preload both queries in parallel

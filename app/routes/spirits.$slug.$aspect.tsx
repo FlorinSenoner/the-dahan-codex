@@ -4,6 +4,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { SpiritDetailContent } from "./spirits.$slug";
 
+/**
+ * Spirit detail page
+ *
+ * Offline behavior: This page works offline for spirits that have been
+ * synced via Settings > Sync Data. Without prior sync, the page will
+ * show a loading state while waiting for Convex connection.
+ */
 export const Route = createFileRoute("/spirits/$slug/$aspect")({
   loader: async ({ context, params }) => {
     await context.queryClient.ensureQueryData(
