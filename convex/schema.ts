@@ -64,4 +64,32 @@ export default defineSchema({
     .index("by_expansion", ["expansionId"])
     .index("by_base_spirit", ["baseSpirit"])
     .index("by_complexity", ["complexity"]),
+
+  // Openings table - text-based turn-by-turn opening guides
+  openings: defineTable({
+    spiritId: v.id("spirits"), // Link to spirit (base or aspect)
+    slug: v.string(), // URL-friendly identifier: "standard-opening"
+    name: v.string(), // Display name: "Standard Opening"
+    description: v.optional(v.string()), // Brief summary of the strategy
+    difficulty: v.optional(
+      v.union(
+        v.literal("Beginner"),
+        v.literal("Intermediate"),
+        v.literal("Advanced"),
+      ),
+    ), // Optional difficulty rating
+    turns: v.array(
+      // Turn-by-turn text instructions
+      v.object({
+        turn: v.number(), // Turn 1, 2, 3, etc.
+        title: v.optional(v.string()), // "Setup" or "Turn 1: Establishing Presence"
+        instructions: v.string(), // Main text content for this turn
+        notes: v.optional(v.string()), // Additional context/tips
+      }),
+    ),
+    author: v.optional(v.string()), // Attribution
+    sourceUrl: v.optional(v.string()), // Link to original guide
+  })
+    .index("by_spirit", ["spiritId"])
+    .index("by_slug", ["slug"]),
 });
