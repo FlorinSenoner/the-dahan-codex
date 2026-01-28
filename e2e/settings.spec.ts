@@ -14,23 +14,9 @@ test.describe("Settings Page", () => {
     await expect(page.getByRole("heading", { name: "Settings" })).toBeVisible();
   });
 
-  test("displays offline access section with download button", async ({
+  test("displays cache management section with sync and clear buttons", async ({
     page,
   }) => {
-    await page.goto("/settings");
-
-    // Verify offline access section exists (PWA-04)
-    await expect(
-      page.getByRole("heading", { name: /offline access/i }),
-    ).toBeVisible();
-
-    // Verify Download for Offline button is present
-    await expect(
-      page.getByRole("button", { name: /download for offline/i }),
-    ).toBeVisible();
-  });
-
-  test("displays cache management section", async ({ page }) => {
     await page.goto("/settings");
 
     // Verify cache management section exists
@@ -38,9 +24,9 @@ test.describe("Settings Page", () => {
       page.getByRole("heading", { name: /cache management/i }),
     ).toBeVisible();
 
-    // Verify buttons are present
+    // Verify Sync Data and Clear Cache buttons are present
     await expect(
-      page.getByRole("button", { name: /refresh data/i }),
+      page.getByRole("button", { name: /sync data/i }),
     ).toBeVisible();
     await expect(
       page.getByRole("button", { name: /clear cache/i }),

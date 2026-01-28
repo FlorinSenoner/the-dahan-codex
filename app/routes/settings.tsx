@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useConvex } from "convex/react";
-import { Download, RefreshCw, Trash2 } from "lucide-react";
+import { del } from "idb-keyval";
+import { RefreshCw, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
@@ -14,65 +15,78 @@ export const Route = createFileRoute("/settings")({
 function SettingsPage() {
   const convex = useConvex();
 
-  // State for Download for Offline
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState<string | null>(null);
-
-  // State for Refresh Data
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  // State for Sync Data
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<string | null>(null);
 
   // State for Clear Cache
   const [isClearing, setIsClearing] = useState(false);
 
-  async function downloadForOffline() {
-    setIsDownloading(true);
-    setDownloadProgress("Loading spirits...");
+  async function syncData() {
+    setIsSyncing(true);
+    setSyncStatus("Loading spirits...");
     try {
-      // Fetch all spirits to populate Convex cache
+      // Fetch all spirits
       const spirits = await convex.query(api.spirits.listSpirits, {});
 
-      // Fetch each spirit's detail data (triggers cache population)
-      setDownloadProgress(`Loading spirit details (0/${spirits.length})...`);
-      for (let i = 0; i < spirits.length; i++) {
-        await convex.query(api.spirits.getSpiritBySlug, {
-          slug: spirits[i].slug,
+      // Get unique base spirit slugs (filter out aspects)
+      const baseSpiritSlugs = spirits
+        .filter((s) => !s.isAspect)
+        .map((s) => s.slug);
+
+      // Fetch each base spirit AND its aspects via getSpiritWithAspects
+      setSyncStatus(`Syncing spirits (0/${baseSpiritSlugs.length})...`);
+      for (let i = 0; i < baseSpiritSlugs.length; i++) {
+        // This fetches base spirit AND all its aspects in one query
+        await convex.query(api.spirits.getSpiritWithAspects, {
+          slug: baseSpiritSlugs[i],
         });
-        setDownloadProgress(
-          `Loading spirit details (${i + 1}/${spirits.length})...`,
+        setSyncStatus(
+          `Syncing spirits (${i + 1}/${baseSpiritSlugs.length})...`,
         );
       }
 
+      // Also fetch individual spirit pages to cache getSpiritBySlug responses
+      for (const spirit of spirits) {
+        if (spirit.isAspect) {
+          // For aspects, need to call with aspect parameter
+          const baseSpirit = spirits.find((s) => s._id === spirit.baseSpirit);
+          if (baseSpirit && spirit.aspectName) {
+            await convex.query(api.spirits.getSpiritBySlug, {
+              slug: baseSpirit.slug,
+              aspect: spirit.aspectName,
+            });
+          }
+        } else {
+          await convex.query(api.spirits.getSpiritBySlug, {
+            slug: spirit.slug,
+          });
+        }
+      }
+
       // Fetch openings for each spirit
-      setDownloadProgress("Loading openings...");
+      setSyncStatus("Syncing openings...");
       for (const spirit of spirits) {
         await convex.query(api.openings.listBySpirit, { spiritId: spirit._id });
       }
 
-      setDownloadProgress("Download complete!");
+      setSyncStatus("Sync complete!");
+      setTimeout(() => setSyncStatus(null), 3000);
     } catch (error) {
-      console.error("Failed to download for offline:", error);
-      setDownloadProgress("Download failed. Check your connection.");
+      console.error("Failed to sync data:", error);
+      setSyncStatus("Sync failed. Check your connection.");
     } finally {
-      setIsDownloading(false);
-    }
-  }
-
-  async function refreshData() {
-    setIsRefreshing(true);
-    try {
-      // Clear the Convex API cache if it exists
-      await caches.delete("convex-api-cache");
-      window.location.reload();
-    } catch (error) {
-      console.error("Failed to refresh data:", error);
-      setIsRefreshing(false);
+      setIsSyncing(false);
     }
   }
 
   async function clearCache() {
     setIsClearing(true);
     try {
-      // Delete all caches
+      // Delete TanStack Query IndexedDB cache
+      await del("tanstack-query-cache");
+
+      // Delete all service worker caches
       const cacheNames = await caches.keys();
       await Promise.all(cacheNames.map((name) => caches.delete(name)));
 
@@ -94,82 +108,42 @@ function SettingsPage() {
       <PageHeader title="Settings" backHref="/spirits" />
 
       <main className="p-4 max-w-lg mx-auto">
-        {/* Offline Access Section */}
-        <section className="mt-6">
-          <Heading variant="h3" className="text-foreground">
-            Offline Access
-          </Heading>
-          <div className="mt-4 space-y-3">
-            <Text variant="muted">
-              Download all spirit data and openings for offline use. Required
-              for full offline access.
-            </Text>
-            <Button
-              onClick={downloadForOffline}
-              disabled={isDownloading || isRefreshing || isClearing}
-              className="w-full"
-            >
-              <Download className="h-4 w-4" />
-              {isDownloading
-                ? downloadProgress || "Downloading..."
-                : "Download for Offline"}
-            </Button>
-            {downloadProgress && !isDownloading && (
-              <Text
-                variant="small"
-                className={
-                  downloadProgress.includes("failed")
-                    ? "text-destructive"
-                    : "text-green-500"
-                }
-              >
-                {downloadProgress}
-              </Text>
-            )}
-          </div>
-        </section>
-
         {/* Cache Management Section */}
-        <section className="mt-8">
+        <section className="mt-6">
           <Heading variant="h3" className="text-foreground">
             Cache Management
           </Heading>
-          <div className="mt-4 space-y-4">
-            {/* Refresh Data */}
-            <div className="space-y-2">
-              <Text variant="muted">
-                Fetch fresh data while keeping app files cached.
-              </Text>
-              <Button
-                variant="outline"
-                onClick={refreshData}
-                disabled={isDownloading || isRefreshing || isClearing}
-                className="w-full"
-              >
-                <RefreshCw
-                  className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
-                />
-                {isRefreshing ? "Refreshing..." : "Refresh Data"}
-              </Button>
-            </div>
-
-            {/* Clear Cache */}
-            <div className="space-y-2">
-              <Text variant="muted">
-                Remove all cached data and app files. Useful if something seems
-                broken.
-              </Text>
-              <Button
-                variant="destructive"
-                onClick={clearCache}
-                disabled={isDownloading || isRefreshing || isClearing}
-                className="w-full"
-              >
-                <Trash2 className="h-4 w-4" />
-                {isClearing ? "Clearing..." : "Clear Cache"}
-              </Button>
-            </div>
+          <Text variant="muted" className="mt-2">
+            Sync spirit data for offline access or clear cached data if
+            something seems broken.
+          </Text>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <Button
+              variant="outline"
+              onClick={syncData}
+              disabled={isSyncing || isClearing}
+              className="flex-1"
+            >
+              <RefreshCw
+                className={`h-4 w-4 ${isSyncing ? "animate-spin" : ""}`}
+              />
+              {isSyncing ? syncStatus || "Syncing..." : "Sync Data"}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={clearCache}
+              disabled={isSyncing || isClearing}
+              className="flex-1"
+            >
+              <Trash2 className="h-4 w-4" />
+              {isClearing ? "Clearing..." : "Clear Cache"}
+            </Button>
           </div>
+          {syncStatus && !isSyncing && (
+            <Text variant="small" className="mt-2 text-muted-foreground">
+              {syncStatus}
+            </Text>
+          )}
         </section>
       </main>
     </div>
