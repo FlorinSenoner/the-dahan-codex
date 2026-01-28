@@ -13,6 +13,7 @@ import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { ExternalLinks } from "@/components/spirits/external-links";
+import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
 import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
@@ -285,6 +286,8 @@ export function SpiritDetailContent({
         {spirit.specialRules && spirit.specialRules.length > 0 && (
           <SpecialRules rules={spirit.specialRules} />
         )}
+
+        <OpeningSection spiritId={spirit._id} />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
