@@ -56,7 +56,6 @@ export const seedSpirits = mutation({
         "Vulnerable to fast aggression",
       ],
       powerRatings: { offense: 2, defense: 3, control: 4, fear: 2, utility: 4 },
-      specialRules: [],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight",
     });
@@ -127,7 +126,6 @@ export const seedSpirits = mutation({
         "Fragile board position",
       ],
       powerRatings: { offense: 5, defense: 1, control: 2, fear: 4, utility: 2 },
-      specialRules: [],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike",
     });
@@ -217,18 +215,6 @@ export const seedSpirits = mutation({
         fear: 3,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Days That Never Were",
-          description:
-            "Setup: Shuffle the 'Days That Never Were' cards face-down as a separate pool. Each has a one-time effect that can change the game's timeline.",
-        },
-        {
-          name: "Time Markers",
-          description:
-            "You may spend Time markers for various effects including playing Days That Never Were cards and boosting powers.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky",
     });
@@ -265,18 +251,6 @@ export const seedSpirits = mutation({
         fear: 3,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Growth Begets Growth",
-          description:
-            "Some Growth choices are hidden. When you remove the last Presence from a track, reveal and gain access to the Growth choice underneath.",
-        },
-        {
-          name: "Shifting Form",
-          description:
-            "You may gain elements from any of your revealed presence tracks during the Spirit Phase.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Starlight_Seeks_Its_Form",
     });
@@ -313,18 +287,6 @@ export const seedSpirits = mutation({
         fear: 2,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Paths From Here to There",
-          description:
-            "You may move Presence along your presence tracks in either direction during Growth. Moving presence backward is how you 'regain' track bonuses.",
-        },
-        {
-          name: "Ways Apart and Unmarked",
-          description:
-            "Your Presence adds +1 Range to Dahan movement. When a Dahan moves from a land with your Presence, it may move +1 additional land.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Finder_of_Paths_Unseen",
     });
@@ -361,18 +323,6 @@ export const seedSpirits = mutation({
         fear: 4,
         utility: 3,
       },
-      specialRules: [
-        {
-          name: "Deep Slumber",
-          description:
-            "You cannot have more Presence on the island than the number shown on your Deep Slumber track. If you ever have more, immediately Absorb Essence or return Presence to your tracks.",
-        },
-        {
-          name: "Absorb Essence",
-          description:
-            "You may remove Presence from the island (yours or another Spirit's, with permission) to advance your Absorbed Essence track. This increases your presence limit.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island",
     });
@@ -412,7 +362,7 @@ export const seedSpirits = mutation({
         },
       ],
       author: "Spirit Island Community",
-      sourceUrl: "https://querki.net/u/darker/spirit-island-faq/#!.7w4g8aw",
+      sourceUrl: "https://querki.net/u/darker/spirit-island-faq",
     });
 
     return {
@@ -489,7 +439,6 @@ export const reseedSpirits = mutation({
         "Vulnerable to fast aggression",
       ],
       powerRatings: { offense: 2, defense: 3, control: 4, fear: 2, utility: 4 },
-      specialRules: [],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight",
     });
@@ -558,7 +507,6 @@ export const reseedSpirits = mutation({
         "Fragile board position",
       ],
       powerRatings: { offense: 5, defense: 1, control: 2, fear: 4, utility: 2 },
-      specialRules: [],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike",
     });
@@ -647,18 +595,6 @@ export const reseedSpirits = mutation({
         fear: 3,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Days That Never Were",
-          description:
-            "Setup: Shuffle the 'Days That Never Were' cards face-down as a separate pool. Each has a one-time effect that can change the game's timeline.",
-        },
-        {
-          name: "Time Markers",
-          description:
-            "You may spend Time markers for various effects including playing Days That Never Were cards and boosting powers.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky",
     });
@@ -695,18 +631,6 @@ export const reseedSpirits = mutation({
         fear: 3,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Growth Begets Growth",
-          description:
-            "Some Growth choices are hidden. When you remove the last Presence from a track, reveal and gain access to the Growth choice underneath.",
-        },
-        {
-          name: "Shifting Form",
-          description:
-            "You may gain elements from any of your revealed presence tracks during the Spirit Phase.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Starlight_Seeks_Its_Form",
     });
@@ -743,18 +667,6 @@ export const reseedSpirits = mutation({
         fear: 2,
         utility: 5,
       },
-      specialRules: [
-        {
-          name: "Paths From Here to There",
-          description:
-            "You may move Presence along your presence tracks in either direction during Growth. Moving presence backward is how you 'regain' track bonuses.",
-        },
-        {
-          name: "Ways Apart and Unmarked",
-          description:
-            "Your Presence adds +1 Range to Dahan movement. When a Dahan moves from a land with your Presence, it may move +1 additional land.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Finder_of_Paths_Unseen",
     });
@@ -791,18 +703,6 @@ export const reseedSpirits = mutation({
         fear: 4,
         utility: 3,
       },
-      specialRules: [
-        {
-          name: "Deep Slumber",
-          description:
-            "You cannot have more Presence on the island than the number shown on your Deep Slumber track. If you ever have more, immediately Absorb Essence or return Presence to your tracks.",
-        },
-        {
-          name: "Absorb Essence",
-          description:
-            "You may remove Presence from the island (yours or another Spirit's, with permission) to advance your Absorbed Essence track. This increases your presence limit.",
-        },
-      ],
       wikiUrl:
         "https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island",
     });
@@ -842,7 +742,7 @@ export const reseedSpirits = mutation({
         },
       ],
       author: "Spirit Island Community",
-      sourceUrl: "https://querki.net/u/darker/spirit-island-faq/#!.7w4g8aw",
+      sourceUrl: "https://querki.net/u/darker/spirit-island-faq",
     });
 
     return {

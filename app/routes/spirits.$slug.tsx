@@ -15,7 +15,6 @@ import { useCallback, useEffect, useState } from "react";
 import { ExternalLinks } from "@/components/spirits/external-links";
 import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
-import { SpecialRules } from "@/components/spirits/special-rules";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -282,10 +281,6 @@ export function SpiritDetailContent({
         <div className="lg:hidden">
           <OverviewSection spirit={spirit} description={spirit.description} />
         </div>
-
-        {spirit.specialRules && spirit.specialRules.length > 0 && (
-          <SpecialRules rules={spirit.specialRules} />
-        )}
 
         <OpeningSection spiritId={spirit._id} />
 

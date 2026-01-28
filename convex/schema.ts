@@ -50,14 +50,6 @@ export default defineSchema({
         utility: v.number(),
       }),
     ),
-    specialRules: v.optional(
-      v.array(
-        v.object({
-          name: v.string(),
-          description: v.string(),
-        }),
-      ),
-    ),
     wikiUrl: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
