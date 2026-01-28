@@ -9,20 +9,20 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 
 ## Current Position
 
-Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 8 of 8
-Status: Phase 3.6 complete (all gap closures done)
-Last activity: 2026-01-28 - Completed 03.6-08-PLAN.md (UAT gap closure)
+Phase: 4 (PWA & Offline)
+Plan: 1 of 5
+Status: In progress
+Last activity: 2026-01-28 - Completed 04-01-PLAN.md (PWA hooks foundation)
 
-Progress: [################                        ] 41% (Phase 3.6 complete with gap closures)
+Progress: [#################                       ] 43% (Phase 4 started)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 52
+- Total plans completed: 53
 - Average duration: 4.4 min
-- Total execution time: 4.01 hours
+- Total execution time: 4.15 hours
 
 **By Phase:**
 
@@ -37,11 +37,12 @@ Progress: [################                        ] 41% (Phase 3.6 complete wit
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
+| 04    | 1     | 8 min  | 8.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 3 min, 1.5 min, 3 min, 1.4 min
-- Trend: 03.6-08 UAT gap closure (verification only)
+- Last 5 plans: 3 min, 1.5 min, 3 min, 1.4 min, 8 min
+- Trend: 04-01 PWA hooks foundation
 
 _Updated after each plan completion_
 
@@ -193,6 +194,10 @@ affecting current work:
 - OpeningSection queries openings by spiritId, handles loading/empty states gracefully
 - Aspect openings isolation: Each spirit (base or aspect) queries openings by its own _id, never inherits from base
 - SpecialRules component and specialRules schema field removed (simplified spirit detail page)
+- useSyncExternalStore for useOnlineStatus hook (concurrency-safe online/offline detection)
+- workbox-window Workbox class for SW lifecycle management in useServiceWorker hook
+- navigateFallbackDenylist: [/^\/api\//, /\.[^/]+$/] excludes API calls and static files
+- PWA hooks exported via app/hooks/index.ts barrel (library pattern)
 
 ### Pending Todos
 
@@ -408,8 +413,18 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 - [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
 - [x] 03.6-08: UAT Gap Closure (SpecialRules removed, sourceUrl fixed, aspect isolation documented)
 
+## Phase 4 Progress
+
+Phase 4 (PWA & Offline) in progress:
+
+- [x] 04-01: PWA Hooks & SW Configuration (workbox-window, useOnlineStatus, useServiceWorker, useInstallPrompt)
+- [ ] 04-02: Offline Banner UI Component
+- [ ] 04-03: Update Available Banner
+- [ ] 04-04: Install Prompt UI
+- [ ] 04-05: E2E Tests & Integration
+
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Phase 3.6 complete, ready for Phase 4
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None
