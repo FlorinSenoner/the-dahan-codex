@@ -303,11 +303,15 @@ PWA-05, PWA-06, PWA-07 **Success Criteria** (what must be TRUE):
 2. App loads and displays spirit library when completely offline
 3. Offline indicator appears only when disconnected, disappears on reconnection
 4. Update banner appears when new service worker is waiting; user controls when
-   to reload **Plans**: TBD
+   to reload **Plans**: 5 plans
 
 Plans:
 
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — PWA hooks and service worker configuration (workbox-window, navigateFallback)
+- [ ] 04-02-PLAN.md — PWA UI components (OfflineIndicator, UpdateBanner, InstallPrompt)
+- [ ] 04-03-PLAN.md — Settings page with cache management
+- [ ] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
+- [ ] 04-05-PLAN.md — E2E tests for PWA and settings
 
 ### Phase 5: Text Opening Management
 
