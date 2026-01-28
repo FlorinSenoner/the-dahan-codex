@@ -1,3 +1,5 @@
+// DEPRECATED: SW registration moved to useServiceWorker hook
+// This file can be deleted in future cleanup
 export function registerSW() {
   if (typeof window === "undefined") return;
 
