@@ -217,6 +217,10 @@ affecting current work:
 - Sync Data uses getSpiritWithAspects to fetch all spirit data including aspects
 - Clear Cache clears both SW caches AND IndexedDB "tanstack-query-cache" via idb-keyval del()
 - Outline variant for cache management buttons (subtle, non-alarming styling)
+- TanStack Query staleTime 5 minutes for fresh data balance
+- TanStack Query gcTime 7 days for offline data retention
+- persistQueryClient only persists successful queries (shouldDehydrateQuery filter)
+- createIDBPersister factory function for idb-keyval integration with TanStack Query
 
 ### Pending Todos
 
@@ -457,9 +461,10 @@ Phase 4 (PWA & Offline) complete:
 
 - [x] 04-06: Subtle Offline Indicator (bottom-right pill, muted zinc styling)
 - [x] 04-07: Simplify Settings Page (Sync Data button, Clear Cache with IndexedDB)
+- [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-07-PLAN.md (Simplify Settings Page)
+Stopped at: Completed 04-08-PLAN.md (Query Persistence)
 Resume file: None
