@@ -39,7 +39,7 @@ const tabs: Tab[] = [
     href: "/settings",
     icon: Settings,
     matchPattern: /^\/settings/,
-    disabled: true, // Future
+    disabled: false,
   },
 ];
 
@@ -74,7 +74,7 @@ export function BottomNav() {
           return (
             <Link
               key={tab.name}
-              to={tab.href as "/spirits"}
+              to={tab.href as "/spirits" | "/settings"}
               className={cn(
                 "flex flex-col items-center justify-center flex-1 h-full",
                 "transition-colors",
