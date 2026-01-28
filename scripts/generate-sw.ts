@@ -31,23 +31,12 @@ async function buildServiceWorker() {
       navigateFallback: "/index.html",
       // Exclude API calls and files with extensions from fallback
       navigateFallbackDenylist: [/^\/api\//, /\.[^/]+$/],
-      // Runtime caching for API calls
+      // Runtime caching rules
+      // Note: Convex data is cached via TanStack Query persistence to IndexedDB,
+      // not via service worker (Convex uses WebSockets, not HTTP)
       runtimeCaching: [
         {
-          // Cache Convex API responses (read-only data)
-          urlPattern: /^https:\/\/.*\.convex\.cloud/,
-          handler: "NetworkFirst",
-          options: {
-            cacheName: "convex-api-cache",
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24, // 24 hours
-              maxEntries: 100,
-            },
-            networkTimeoutSeconds: 10,
-          },
-        },
-        {
-          // Cache external images
+          // Cache external images (spirit images are local in public/)
           urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/,
           handler: "CacheFirst",
           options: {
