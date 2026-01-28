@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 2 of TBD
+Plan: 3 of TBD
 Status: In progress
-Last activity: 2026-01-28 - Completed 03.6-02-PLAN.md (schema/seed cleanup verified)
+Last activity: 2026-01-28 - Completed 03.6-03-PLAN.md (E2E test updates)
 
-Progress: [####                                    ] 10% (03.6-02 complete)
+Progress: [######                                  ] 15% (03.6-03 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 46
-- Average duration: 4.8 min
-- Total execution time: 3.75 hours
+- Total plans completed: 47
+- Average duration: 4.7 min
+- Total execution time: 3.8 hours
 
 **By Phase:**
 
@@ -36,12 +36,12 @@ Progress: [####                                    ] 10% (03.6-02 complete)
 | 03.2  | 6     | 18 min | 3.0 min  |
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
-| 03.6  | 2     | 8 min  | 4.0 min  |
+| 03.6  | 3     | 11 min | 3.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 1 min, 2 min, 5 min, 3 min
-- Trend: 03.6-02 was verification-only (work done in 03.6-01)
+- Last 5 plans: 1 min, 2 min, 5 min, 3 min, 3 min
+- Trend: 03.6-03 straightforward E2E test update
 
 _Updated after each plan completion_
 
@@ -182,6 +182,7 @@ affecting current work:
 - Type guard isGraphFormat for narrowing presenceTracks union type
 - Finder presence tracks use 3-row diamond/web structure with junction nodes at row 1 (col 2 and 4)
 - Finder edges form X/diamond pattern with bidirectional traversal from both starting positions
+- VariantTabs shows "Base" for base spirit tab instead of spirit name (simplified UI)
 
 ### Pending Todos
 
@@ -380,11 +381,11 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) in progress:
 
 - [x] 03.6-01: Remove Board Visualization Components
 - [x] 03.6-02: Clean Schema and Seed Data (verified - work done in 03.6-01)
-- [ ] 03.6-03: TBD (spirit detail page updates)
+- [x] 03.6-03: E2E Test Updates (removed board sections test, fixed variant tabs assertions)
 - [ ] 03.6-04: TBD (text-based openings)
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 03.6-02-PLAN.md - schema/seed cleanup verified
+Stopped at: Completed 03.6-03-PLAN.md - E2E test updates
 Resume file: None
