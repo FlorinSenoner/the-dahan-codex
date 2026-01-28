@@ -51,6 +51,17 @@ export default defineSchema({
       }),
     ),
     wikiUrl: v.optional(v.string()),
+    // DEPRECATED: specialRules field exists in production data but is no longer used.
+    // Keep optional for backward compatibility until all documents are migrated.
+    // Run `npx convex run seed:reseedSpirits` on production to remove this field from data.
+    specialRules: v.optional(
+      v.array(
+        v.object({
+          name: v.string(),
+          description: v.string(),
+        }),
+      ),
+    ),
   })
     .index("by_slug", ["slug"])
     .index("by_expansion", ["expansionId"])
