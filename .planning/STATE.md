@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 4 (PWA & Offline)
-Plan: 5 of 5
-Status: Phase complete
-Last activity: 2026-01-28 - Completed 04-05-PLAN.md (E2E Tests & Integration)
+Plan: 6 of 9 (gap closure)
+Status: In progress
+Last activity: 2026-01-28 - Completed 04-06-PLAN.md (Subtle Offline Indicator)
 
 Progress: [########################                ] 57% (Phase 4 complete)
 
@@ -203,7 +203,8 @@ affecting current work:
 - useConvex().query for programmatic Convex queries outside React hooks
 - PWA components in app/components/pwa/ directory with knip entry point
 - Semantic <output> element for status indicators (Biome lint prefers over div with role="status")
-- z-50 for top PWA banners (offline/update), z-40 for bottom install prompt
+- z-50 for top PWA banners (update), z-40 for offline indicator pill and bottom install prompt
+- Offline indicator: bottom-right pill with muted zinc styling (non-intrusive)
 - 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
 - 2-second delay before showing install prompt to avoid flash on page load
 - PWA components placed before Outlet in root layout for global visibility
@@ -448,8 +449,12 @@ Phase 4 (PWA & Offline) complete:
 - [x] 04-04: PWA Integration (root layout, bottom nav)
 - [x] 04-05: E2E Tests & Integration
 
+**Gap Closure Plans (UAT fixes):**
+
+- [x] 04-06: Subtle Offline Indicator (bottom-right pill, muted zinc styling)
+
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Phase 4 complete, ready for Phase 5
+Stopped at: Completed 04-06-PLAN.md (Subtle Offline Indicator)
 Resume file: None
