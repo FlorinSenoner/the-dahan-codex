@@ -31,8 +31,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [x] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
 - [ ] ~~**Phase 3.4: Presence Track Graph DSL**~~ - ABANDONED - overly complex DSL approach
-- [ ] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
-- [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
+- [x] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
+- [x] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Text Opening Management** - Admin tools for managing text-based
       openings
@@ -314,10 +314,10 @@ Plans:
 - [x] 04-03-PLAN.md — Settings page with cache management
 - [x] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
 - [x] 04-05-PLAN.md — E2E tests for PWA and settings
-- [ ] 04-06-PLAN.md — Offline indicator redesign (subtle bottom-right pill) [gap closure]
-- [ ] 04-07-PLAN.md — Settings page simplification (Sync Data button, fetch aspects) [gap closure]
-- [ ] 04-08-PLAN.md — TanStack Query persistence to IndexedDB [gap closure]
-- [ ] 04-09-PLAN.md — Remove dead SW code, document offline architecture [gap closure]
+- [x] 04-06-PLAN.md — Offline indicator redesign (subtle bottom-right pill) [gap closure]
+- [x] 04-07-PLAN.md — Settings page simplification (Sync Data button, fetch aspects) [gap closure]
+- [x] 04-08-PLAN.md — TanStack Query persistence to IndexedDB [gap closure]
+- [x] 04-09-PLAN.md — Remove dead SW code, document offline architecture [gap closure]
 
 ### Phase 5: Text Opening Management
 
@@ -411,7 +411,7 @@ development:
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
-| 4. PWA & Offline                     | 5/9            | In Progress | -          |
+| 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
