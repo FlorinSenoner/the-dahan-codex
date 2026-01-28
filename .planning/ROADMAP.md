@@ -268,29 +268,30 @@ Plans:
 **Depends on**: Phase 3.3 **Requirements**: Simplification pivot **Success Criteria** (what must be TRUE):
 
 1. Spirit detail page shows: image, title, element/complexity badges, overview with radar, strengths/weaknesses
-2. Growth, presence track, innate powers, and cards sections are removed
+2. Growth, presence track, innate powers, cards, and special rules sections are removed
 3. New "openings" collection in Convex stores text-based turn-by-turn guides
 4. Openings display as collapsible accordions (one per turn, default open)
 5. Multiple openings per spirit shown as tabs (like aspects), stored in URL
 6. All related schema fields, components, tests, and seed data removed/cleaned
 
 **Approach:**
-- Remove board-related components (GrowthPanel, PresenceTrack, InnatePowers, CardHand)
-- Clean up schema: remove growth, presenceTracks, innatePowers, cards fields
+- Remove board-related components (GrowthPanel, PresenceTrack, InnatePowers, CardHand, SpecialRules)
+- Clean up schema: remove growth, presenceTracks, innatePowers, cards, specialRules fields
 - Create new "openings" table in Convex for text-based guides
 - Build simple accordion UI for turn-by-turn display
 - Add tabs for multiple openings with URL state
 
-**Plans**: 7 plans
+**Plans**: 8 plans
 
 Plans:
-- [ ] 03.6-01-PLAN.md — Remove board components and icons from spirit detail
-- [ ] 03.6-02-PLAN.md — Clean schema and seed data (remove board fields)
-- [ ] 03.6-03-PLAN.md — Update E2E tests for simplified spirit detail
-- [ ] 03.6-04-PLAN.md — Create openings table and queries in Convex
-- [ ] 03.6-05-PLAN.md — Add sample opening data for River
-- [ ] 03.6-06-PLAN.md — Create opening display components (accordion UI)
-- [ ] 03.6-07-PLAN.md — Integrate OpeningSection into spirit detail page
+- [x] 03.6-01-PLAN.md — Remove board components and icons from spirit detail
+- [x] 03.6-02-PLAN.md — Clean schema and seed data (remove board fields)
+- [x] 03.6-03-PLAN.md — Update E2E tests for simplified spirit detail
+- [x] 03.6-04-PLAN.md — Create openings table and queries in Convex
+- [x] 03.6-05-PLAN.md — Add sample opening data for River
+- [x] 03.6-06-PLAN.md — Create opening display components (accordion UI)
+- [x] 03.6-07-PLAN.md — Integrate OpeningSection into spirit detail page
+- [ ] 03.6-08-PLAN.md — UAT gap closure: remove SpecialRules, fix sourceUrl, verify aspect isolation
 
 ### Phase 4: PWA & Offline
 
@@ -399,7 +400,7 @@ development:
 | 3.2 Spirit Board Refinements         | 10/10          | Complete    | 2026-01-27 |
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
-| 3.6 Simplify Board + Text Openings   | 0/TBD          | **Active**  | -          |
+| 3.6 Simplify Board + Text Openings   | 7/8            | **Active**  | -          |
 | 4. PWA & Offline                     | 0/TBD          | Pending     | -          |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
