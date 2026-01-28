@@ -186,7 +186,6 @@ export const seedSpirits = mutation({
     });
 
     // Seed Fractured Days Split the Sky (Jagged Earth, Very High complexity)
-    // Unique mechanic: Choose-from-four growth with OR options
     await ctx.db.insert("spirits", {
       name: "Fractured Days Split the Sky",
       slug: "fractured-days-split-the-sky",
@@ -235,7 +234,6 @@ export const seedSpirits = mutation({
     });
 
     // Seed Starlight Seeks Its Form (Jagged Earth, Very High complexity)
-    // Unique mechanic: 6 presence tracks, 4 unlock growth choices
     await ctx.db.insert("spirits", {
       name: "Starlight Seeks Its Form",
       slug: "starlight-seeks-its-form",
@@ -284,7 +282,6 @@ export const seedSpirits = mutation({
     });
 
     // Seed Finder of Paths Unseen (Jagged Earth, Very High complexity)
-    // Unique mechanic: Branching presence tracks with bidirectional traversal
     await ctx.db.insert("spirits", {
       name: "Finder of Paths Unseen",
       slug: "finder-of-paths-unseen",
@@ -333,7 +330,6 @@ export const seedSpirits = mutation({
     });
 
     // Seed Serpent Slumbering Beneath the Island (Jagged Earth, Very High complexity)
-    // Unique mechanic: Deep Slumber presence limit track (5-13)
     await ctx.db.insert("spirits", {
       name: "Serpent Slumbering Beneath the Island",
       slug: "serpent-slumbering-beneath-the-island",
@@ -770,7 +766,7 @@ export const reseedSpirits = mutation({
     return {
       status: "reseeded",
       message:
-        "Deleted all data and recreated 3 expansions, 6 base spirits, 7 aspects",
+        "Deleted all data and created 3 expansions, 6 base spirits, 7 aspects",
     };
   },
 });
