@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 4 (PWA & Offline)
-Plan: 4 of 5
-Status: In progress
-Last activity: 2026-01-28 - Completed 04-04-PLAN.md (PWA Integration)
+Plan: 5 of 5
+Status: Phase complete
+Last activity: 2026-01-28 - Completed 04-05-PLAN.md (E2E Tests & Integration)
 
-Progress: [######################                  ] 51% (Phase 4 in progress)
+Progress: [########################                ] 57% (Phase 4 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 56
+- Total plans completed: 57
 - Average duration: 4.4 min
-- Total execution time: 4.29 hours
+- Total execution time: 4.37 hours
 
 **By Phase:**
 
@@ -37,12 +37,12 @@ Progress: [######################                  ] 51% (Phase 4 in progress)
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
-| 04    | 4     | 18 min | 4.5 min  |
+| 04    | 5     | 23 min | 4.6 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 1.4 min, 8 min, 2 min, 4 min, 4 min
-- Trend: 04-04 PWA Integration
+- Last 5 plans: 8 min, 2 min, 4 min, 4 min, 5 min
+- Trend: Phase 4 complete
 
 _Updated after each plan completion_
 
@@ -210,6 +210,8 @@ affecting current work:
 - useServiceWorker hook manages SW lifecycle in root component (replaces registerSW useEffect)
 - sw-register.ts marked deprecated, kept for potential fallback
 - Bottom nav link types explicitly list enabled routes ("/spirits" | "/settings")
+- Playwright context.setOffline() for network simulation in PWA tests
+- Manual test checklist for cold-start offline (cross-session state complex to automate)
 
 ### Pending Todos
 
@@ -425,18 +427,29 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 - [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
 - [x] 03.6-08: UAT Gap Closure (SpecialRules removed, sourceUrl fixed, aspect isolation documented)
 
+## Phase 4 Summary
+
+Phase 4 (PWA & Offline) is now complete with:
+
+- PWA hooks: useOnlineStatus, useServiceWorker, useInstallPrompt (workbox-window)
+- PWA UI components: offline indicator, update banner, install prompt
+- Settings page with cache management (Download for Offline, Refresh Data, Clear Cache)
+- PWA integration in root layout and bottom nav
+- E2E tests for offline indicator, settings page, and manifest validation
+- Manual test checklist for cold-start offline verification
+
 ## Phase 4 Progress
 
-Phase 4 (PWA & Offline) in progress:
+Phase 4 (PWA & Offline) complete:
 
 - [x] 04-01: PWA Hooks & SW Configuration (workbox-window, useOnlineStatus, useServiceWorker, useInstallPrompt)
 - [x] 04-02: PWA UI Components (offline indicator, update banner, install prompt)
 - [x] 04-03: Settings Page (cache management, offline download)
 - [x] 04-04: PWA Integration (root layout, bottom nav)
-- [ ] 04-05: E2E Tests & Integration
+- [x] 04-05: E2E Tests & Integration
 
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Completed 04-04-PLAN.md
+Stopped at: Phase 4 complete, ready for Phase 5
 Resume file: None
