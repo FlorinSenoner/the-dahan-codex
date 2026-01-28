@@ -7,6 +7,7 @@
     "app/components/ui/*.tsx",
     "app/components/spirits/*.tsx",
     "app/components/icons/**/*.{ts,tsx}",
+    "app/hooks/*.ts",
     "app/lib/*.ts",
     "scripts/*.ts"
   ],
@@ -30,7 +31,6 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss",
-    "react-intersection-observer"
+    "tailwindcss"
   ]
 }
