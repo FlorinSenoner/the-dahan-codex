@@ -321,9 +321,9 @@ Plans:
 
 ### Phase 5: Text Opening Management
 
-**Goal**: Admin tools for creating and managing text-based spirit openings
+**Goal**: Admin tools for creating and managing text-based spirit openings, plus global search
 **Depends on**: Phase 3.6 (requires openings data model)
-**Requirements**: Simplified from original OPEN-* and ADMN-* requirements
+**Requirements**: ADMN-01 (admin routes), SRCH-01/02/03 (global search)
 **Success Criteria** (what must be TRUE):
 
 1. Admin routes are inaccessible to non-admin users (Clerk role check)
@@ -332,11 +332,16 @@ Plans:
 4. Saved opening appears in public opening list for that spirit
 5. Global search finds spirits and openings
 
-**Plans**: TBD
+**Plans**: 6 plans
 
 Plans:
 
-- [ ] 05-01: TBD
+- [ ] 05-01-PLAN.md — Admin foundation: _admin layout, Convex mutations with requireAdmin
+- [ ] 05-02-PLAN.md — Opening form component with Zod validation and useFieldArray
+- [ ] 05-03-PLAN.md — Admin openings list page with CRUD actions
+- [ ] 05-04-PLAN.md — Create and edit opening pages
+- [ ] 05-05-PLAN.md — Global search with Fuse.js and search page
+- [ ] 05-06-PLAN.md — E2E tests for admin and search
 
 ### Phase 6: User Data
 
@@ -412,7 +417,7 @@ development:
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
-| 5. Text Opening Management           | 0/TBD          | Pending     | -          |
+| 5. Text Opening Management           | 0/6            | Planned     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
