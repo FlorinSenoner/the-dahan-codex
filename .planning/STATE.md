@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 3 of ? (Admin Openings List)
+Plan: 4 of ? (Create/Edit Opening Routes)
 Status: In progress
-Last activity: 2026-01-29 - Completed 05-03-PLAN.md (Admin Openings List)
+Last activity: 2026-01-29 - Completed 05-04-PLAN.md (Create/Edit Opening Routes)
 
-Progress: [################################        ] 68% (Phase 5 plan 3 complete)
+Progress: [##################################      ] 70% (Phase 5 plan 4 complete)
 
 ## Performance Metrics
 
@@ -38,12 +38,12 @@ Progress: [################################        ] 68% (Phase 5 plan 3 complet
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 4     | 14 min | 3.5 min  |
+| 05    | 5     | 19 min | 3.8 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 3 min, 8 min, 3 min, 0 min
-- Trend: Phase 5 opening form complete (pre-completed during 05-03)
+- Last 5 plans: 3 min, 8 min, 3 min, 0 min, 5 min
+- Trend: Admin CRUD for openings complete
 
 _Updated after each plan completion_
 
@@ -240,6 +240,10 @@ affecting current work:
 - useFieldArray with field.id as React key (CRITICAL - prevents data corruption on array item removal)
 - Zod form schema: export schema and inferred type together (openingFormSchema + OpeningFormData)
 - Optional form fields with .optional().or(z.literal("")) for empty string handling
+- Pathless _admin layout means URLs are /openings/* not /admin/openings/*
+- onSlugGenerate prop on OpeningForm for slug auto-generation on name blur
+- useMutation from convex/react with manual isSubmitting state (not useConvexMutation)
+- TurnAccordion used for live preview in edit opening page
 
 ### Pending Todos
 
@@ -490,10 +494,11 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-01: Admin Foundation (admin layout, Convex CRUD mutations)
 - [x] 05-02: Opening Form Component (Zod schema, OpeningForm with useFieldArray)
 - [x] 05-03: Admin Openings List (openings list page with edit/delete actions)
+- [x] 05-04: Create/Edit Opening Routes (new/edit pages with slug auto-generation and preview)
 - [x] 05-05: Global Search (Fuse.js, search page, bottom nav)
 
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 05-02-PLAN.md (Opening Form Component)
+Stopped at: Completed 05-04-PLAN.md (Create/Edit Opening Routes)
 Resume file: None
