@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 5 of ? (Global Search)
+Plan: 1 of ? (Admin Foundation)
 Status: In progress
-Last activity: 2026-01-29 - Completed 05-05-PLAN.md (Global Search)
+Last activity: 2026-01-29 - Completed 05-01-PLAN.md (Admin Foundation)
 
-Progress: [#############################           ] 64% (Phase 5 plan 5 complete)
+Progress: [##############################          ] 65% (Phase 5 plan 1 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 59
+- Total plans completed: 60
 - Average duration: 4.4 min
-- Total execution time: 4.47 hours
+- Total execution time: 4.6 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [#############################           ] 64% (Phase 5 plan 5 complet
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 1     | 3 min  | 3.0 min  |
+| 05    | 2     | 11 min | 5.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 5 min, 3 min, 3 min, 3 min
-- Trend: Phase 5 global search complete
+- Last 5 plans: 5 min, 3 min, 3 min, 3 min, 8 min
+- Trend: Phase 5 admin foundation complete
 
 _Updated after each plan completion_
 
@@ -230,6 +230,10 @@ affecting current work:
 - Opening links navigate to spirit page via spiritSlug
 - listAllSpirits and listAll queries for flat data retrieval (search)
 - Bottom nav updated to include /search route type
+- Admin layout pattern: _admin.tsx with Clerk publicMetadata.isAdmin check
+- Admin mutation pattern: await requireAdmin(ctx) as first line in mutation handler
+- useUser() for publicMetadata access (not useAuth() which only has auth state)
+- Placeholder child route required for pathless layouts in TanStack Router
 
 ### Pending Todos
 
@@ -477,10 +481,11 @@ Phase 4 (PWA & Offline) complete:
 
 Phase 5 (Text Opening Management) in progress:
 
+- [x] 05-01: Admin Foundation (admin layout, Convex CRUD mutations)
 - [x] 05-05: Global Search (Fuse.js, search page, bottom nav)
 
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 05-05-PLAN.md (Global Search)
+Stopped at: Completed 05-01-PLAN.md (Admin Foundation)
 Resume file: None
