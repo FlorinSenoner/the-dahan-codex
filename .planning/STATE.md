@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 4 - PWA & Offline
+**Current focus:** Phase 5 - Text Opening Management
 
 ## Current Position
 
-Phase: 3.6 (Simplify Spirit Board + Text Openings)
-Plan: 8 of 8
-Status: Phase 3.6 complete (all gap closures done)
-Last activity: 2026-01-28 - Completed 03.6-08-PLAN.md (UAT gap closure)
+Phase: 4 (PWA & Offline)
+Plan: 9 of 9 (gap closure)
+Status: Phase complete
+Last activity: 2026-01-28 - Completed 04-09-PLAN.md (Service Worker Cleanup)
 
-Progress: [################                        ] 41% (Phase 3.6 complete with gap closures)
+Progress: [############################            ] 62% (Phase 4 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 52
+- Total plans completed: 58
 - Average duration: 4.4 min
-- Total execution time: 4.01 hours
+- Total execution time: 4.42 hours
 
 **By Phase:**
 
@@ -37,11 +37,12 @@ Progress: [################                        ] 41% (Phase 3.6 complete wit
 | 03.3  | 2     | 4 min  | 2.0 min  |
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
+| 04    | 9     | 26 min | 2.9 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 3 min, 1.5 min, 3 min, 1.4 min
-- Trend: 03.6-08 UAT gap closure (verification only)
+- Last 5 plans: 2 min, 4 min, 4 min, 5 min, 3 min
+- Trend: Phase 4 gap closure complete
 
 _Updated after each plan completion_
 
@@ -193,6 +194,35 @@ affecting current work:
 - OpeningSection queries openings by spiritId, handles loading/empty states gracefully
 - Aspect openings isolation: Each spirit (base or aspect) queries openings by its own _id, never inherits from base
 - SpecialRules component and specialRules schema field removed (simplified spirit detail page)
+- useSyncExternalStore for useOnlineStatus hook (concurrency-safe online/offline detection)
+- workbox-window Workbox class for SW lifecycle management in useServiceWorker hook
+- navigateFallbackDenylist: [/^\/api\//, /\.[^/]+$/] excludes API calls and static files
+- PWA hooks exported via app/hooks/index.ts barrel (library pattern)
+- Settings page pattern: sections with Heading h3, descriptive Text muted, full-width Buttons
+- Cache clear pattern: delete all caches + unregister SW + reload
+- useConvex().query for programmatic Convex queries outside React hooks
+- PWA components in app/components/pwa/ directory with knip entry point
+- Semantic <output> element for status indicators (Biome lint prefers over div with role="status")
+- z-50 for top PWA banners (update), z-40 for offline indicator pill and bottom install prompt
+- Offline indicator: bottom-right pill with muted zinc styling (non-intrusive)
+- 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
+- 2-second delay before showing install prompt to avoid flash on page load
+- PWA components placed before Outlet in root layout for global visibility
+- useServiceWorker hook manages SW lifecycle in root component (replaces registerSW useEffect)
+- sw-register.ts marked deprecated, kept for potential fallback
+- Bottom nav link types explicitly list enabled routes ("/spirits" | "/settings")
+- Playwright context.setOffline() for network simulation in PWA tests
+- Manual test checklist for cold-start offline (cross-session state complex to automate)
+- Settings page simplified: single Cache Management section with Sync Data and Clear Cache buttons
+- Sync Data uses getSpiritWithAspects to fetch all spirit data including aspects
+- Clear Cache clears both SW caches AND IndexedDB "tanstack-query-cache" via idb-keyval del()
+- Outline variant for cache management buttons (subtle, non-alarming styling)
+- TanStack Query staleTime 5 minutes for fresh data balance
+- TanStack Query gcTime 7 days for offline data retention
+- persistQueryClient only persists successful queries (shouldDehydrateQuery filter)
+- createIDBPersister factory function for idb-keyval integration with TanStack Query
+- Convex data cached via TanStack Query/IndexedDB, not service worker (WebSocket protocol)
+- JSDoc comments on route components documenting offline behavior expectations
 
 ### Pending Todos
 
@@ -408,8 +438,36 @@ Phase 3.6 (Simplify Spirit Board + Text Openings) complete:
 - [x] 03.6-07: Spirit Detail Integration (OpeningSection integrated into spirits.$slug.tsx)
 - [x] 03.6-08: UAT Gap Closure (SpecialRules removed, sourceUrl fixed, aspect isolation documented)
 
+## Phase 4 Summary
+
+Phase 4 (PWA & Offline) is now complete with:
+
+- PWA hooks: useOnlineStatus, useServiceWorker, useInstallPrompt (workbox-window)
+- PWA UI components: offline indicator, update banner, install prompt
+- Settings page with cache management (Download for Offline, Refresh Data, Clear Cache)
+- PWA integration in root layout and bottom nav
+- E2E tests for offline indicator, settings page, and manifest validation
+- Manual test checklist for cold-start offline verification
+
+## Phase 4 Progress
+
+Phase 4 (PWA & Offline) complete:
+
+- [x] 04-01: PWA Hooks & SW Configuration (workbox-window, useOnlineStatus, useServiceWorker, useInstallPrompt)
+- [x] 04-02: PWA UI Components (offline indicator, update banner, install prompt)
+- [x] 04-03: Settings Page (cache management, offline download)
+- [x] 04-04: PWA Integration (root layout, bottom nav)
+- [x] 04-05: E2E Tests & Integration
+
+**Gap Closure Plans (UAT fixes):**
+
+- [x] 04-06: Subtle Offline Indicator (bottom-right pill, muted zinc styling)
+- [x] 04-07: Simplify Settings Page (Sync Data button, Clear Cache with IndexedDB)
+- [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
+- [x] 04-09: Service Worker Cleanup (remove dead Convex caching rule, document offline architecture)
+
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: Phase 3.6 complete, ready for Phase 4
+Stopped at: Completed 04-09-PLAN.md (Service Worker Cleanup) - Phase 4 complete
 Resume file: None

@@ -24,37 +24,21 @@ async function buildServiceWorker() {
       globDirectory: outputDir,
       globPatterns: ["**/*.{js,css,html,png,svg,ico,webp,woff,woff2,json}"],
       globIgnores: ["**/node_modules/**", "sw.js", "workbox-*.js"],
+      // Add leading slash to all URLs for consistency with navigateFallback
+      modifyURLPrefix: {
+        "": "/",
+      },
       // IMPORTANT: skipWaiting false to prevent broken state during updates
       skipWaiting: false,
       clientsClaim: false,
-      // Runtime caching for API calls
-      runtimeCaching: [
-        {
-          // Cache Convex API responses (read-only data)
-          urlPattern: /^https:\/\/.*\.convex\.cloud/,
-          handler: "NetworkFirst",
-          options: {
-            cacheName: "convex-api-cache",
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24, // 24 hours
-              maxEntries: 100,
-            },
-            networkTimeoutSeconds: 10,
-          },
-        },
-        {
-          // Cache external images
-          urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/,
-          handler: "CacheFirst",
-          options: {
-            cacheName: "image-cache",
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
-              maxEntries: 200,
-            },
-          },
-        },
-      ],
+      // SPA navigation fallback - serve index.html for all navigation requests
+      navigateFallback: "/index.html",
+      // Exclude API calls and files with extensions from fallback
+      navigateFallbackDenylist: [/^\/api\//, /\.[^/]+$/],
+      // Runtime caching rules
+      // Note: Convex data is cached via TanStack Query persistence to IndexedDB,
+      // not via service worker (Convex uses WebSockets, not HTTP)
+      runtimeCaching: [],
     });
 
     console.log("Generated service worker");

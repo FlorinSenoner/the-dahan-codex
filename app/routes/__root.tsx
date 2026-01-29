@@ -4,9 +4,11 @@ import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import type { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { useEffect } from "react";
 import { BottomNav } from "../components/layout/bottom-nav";
-import { registerSW } from "../lib/sw-register";
+import { InstallPrompt } from "../components/pwa/install-prompt";
+import { OfflineIndicator } from "../components/pwa/offline-indicator";
+import { UpdateBanner } from "../components/pwa/update-banner";
+import { useServiceWorker } from "../hooks/use-service-worker";
 
 // Router context type
 interface RouterContext {
@@ -21,10 +23,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootComponent() {
   const { convexClient } = Route.useRouteContext();
-
-  useEffect(() => {
-    registerSW();
-  }, []);
+  const { isUpdateAvailable, triggerUpdate } = useServiceWorker();
 
   return (
     <ClerkProvider
@@ -36,6 +35,9 @@ function RootComponent() {
       signUpFallbackRedirectUrl="/"
     >
       <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
+        <OfflineIndicator />
+        {isUpdateAvailable && <UpdateBanner onReload={triggerUpdate} />}
+        <InstallPrompt />
         <Outlet />
         <BottomNav />
       </ConvexProviderWithClerk>

@@ -31,8 +31,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3.2: Spirit Board Refinements** - UI polish: minimalist tabs, scroll behavior, growth icons, complex spirits support (INSERTED)
 - [x] **Phase 3.3: Spirit Board Final Polish** - Growth hover labels, presence track branching DSL for complex spirits (INSERTED)
 - [ ] ~~**Phase 3.4: Presence Track Graph DSL**~~ - ABANDONED - overly complex DSL approach
-- [ ] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
-- [ ] **Phase 4: PWA & Offline** - Full offline-first experience for reference
+- [x] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
+- [x] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
 - [ ] **Phase 5: Text Opening Management** - Admin tools for managing text-based
       openings
@@ -297,17 +297,27 @@ Plans:
 
 **Goal**: App works offline with cached reference data and proper update flow
 **Depends on**: Phase 3 **Requirements**: PWA-01, PWA-02, PWA-03, PWA-04,
-PWA-05, PWA-06, PWA-07 **Success Criteria** (what must be TRUE):
+PWA-06, PWA-07
+**Note**: PWA-05 (user data caching) deferred to Phase 6 with other user data features.
+**Success Criteria** (what must be TRUE):
 
 1. User can install app to home screen (PWA manifest valid)
 2. App loads and displays spirit library when completely offline
 3. Offline indicator appears only when disconnected, disappears on reconnection
 4. Update banner appears when new service worker is waiting; user controls when
-   to reload **Plans**: TBD
+   to reload **Plans**: 9 plans
 
 Plans:
 
-- [ ] 04-01: TBD
+- [x] 04-01-PLAN.md — PWA hooks and service worker configuration (workbox-window, navigateFallback)
+- [x] 04-02-PLAN.md — PWA UI components (OfflineIndicator, UpdateBanner, InstallPrompt)
+- [x] 04-03-PLAN.md — Settings page with cache management
+- [x] 04-04-PLAN.md — Integrate PWA components into root, enable Settings tab
+- [x] 04-05-PLAN.md — E2E tests for PWA and settings
+- [x] 04-06-PLAN.md — Offline indicator redesign (subtle bottom-right pill) [gap closure]
+- [x] 04-07-PLAN.md — Settings page simplification (Sync Data button, fetch aspects) [gap closure]
+- [x] 04-08-PLAN.md — TanStack Query persistence to IndexedDB [gap closure]
+- [x] 04-09-PLAN.md — Remove dead SW code, document offline architecture [gap closure]
 
 ### Phase 5: Text Opening Management
 
@@ -401,7 +411,7 @@ development:
 | 3.3 Spirit Board Final Polish        | 2/2            | Complete    | 2026-01-27 |
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
-| 4. PWA & Offline                     | 0/TBD          | Pending     | -          |
+| 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 0/TBD          | Pending     | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
