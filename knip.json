@@ -32,6 +32,9 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss"
+    "tailwindcss",
+    "react-hook-form",
+    "@hookform/resolvers",
+    "fuse.js"
   ]
 }

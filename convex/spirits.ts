@@ -1,6 +1,14 @@
 import { v } from "convex/values";
 import { query } from "./_generated/server";
 
+// List all spirits (flat, no filtering - for search)
+export const listAllSpirits = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("spirits").collect();
+  },
+});
+
 // List all spirits with optional filtering
 export const listSpirits = query({
   args: {

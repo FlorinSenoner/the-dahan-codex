@@ -22,3 +22,25 @@ export const getBySlug = query({
       .first();
   },
 });
+
+// List all openings (for search)
+export const listAll = query({
+  args: {},
+  handler: async (ctx) => {
+    const openings = await ctx.db.query("openings").collect();
+
+    // Enrich with spirit name for search
+    const enriched = await Promise.all(
+      openings.map(async (opening) => {
+        const spirit = await ctx.db.get(opening.spiritId);
+        return {
+          ...opening,
+          spiritName: spirit?.name,
+          spiritSlug: spirit?.slug,
+        };
+      }),
+    );
+
+    return enriched;
+  },
+});
