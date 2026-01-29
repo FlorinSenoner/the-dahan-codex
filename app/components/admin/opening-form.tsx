@@ -16,6 +16,8 @@ interface OpeningFormProps {
   onSubmit: (data: OpeningFormData) => Promise<void>;
   spirits: Spirit[];
   isSubmitting?: boolean;
+  /** Callback to generate slug from name. If provided, auto-fills slug on name blur when slug is empty */
+  onSlugGenerate?: (name: string) => string;
 }
 
 export function OpeningForm({
@@ -23,11 +25,14 @@ export function OpeningForm({
   onSubmit,
   spirits,
   isSubmitting = false,
+  onSlugGenerate,
 }: OpeningFormProps) {
   const {
     register,
     control,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<OpeningFormData>({
     resolver: zodResolver(openingFormSchema),
@@ -41,6 +46,17 @@ export function OpeningForm({
     control,
     name: "turns",
   });
+
+  const currentSlug = watch("slug");
+
+  const handleNameBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (onSlugGenerate && !currentSlug) {
+      const name = e.target.value;
+      if (name) {
+        setValue("slug", onSlugGenerate(name));
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -82,6 +98,7 @@ export function OpeningForm({
             id="name"
             type="text"
             {...register("name")}
+            onBlur={handleNameBlur}
             className="w-full border border-border rounded-md p-2 bg-background text-foreground"
           />
           {errors.name?.message && (

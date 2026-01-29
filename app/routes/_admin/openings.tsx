@@ -42,7 +42,7 @@ function AdminOpeningsPage() {
   return (
     <>
       <PageHeader title="Manage Openings">
-        <a href="/admin/openings/new">
+        <a href="/openings/new">
           <Button>
             <Plus className="h-4 w-4 mr-2" /> New Opening
           </Button>
@@ -72,7 +72,7 @@ function AdminOpeningsPage() {
             <p className="text-muted-foreground mb-4">
               No openings yet. Create your first opening.
             </p>
-            <a href="/admin/openings/new">
+            <a href="/openings/new">
               <Button>
                 <Plus className="h-4 w-4 mr-2" /> New Opening
               </Button>
@@ -117,7 +117,7 @@ function AdminOpeningsPage() {
 
                   {/* Actions */}
                   <div className="flex gap-2">
-                    <a href={`/admin/openings/${opening._id}/edit`}>
+                    <a href={`/openings/${opening._id}/edit`}>
                       <Button
                         variant="outline"
                         size="icon"
