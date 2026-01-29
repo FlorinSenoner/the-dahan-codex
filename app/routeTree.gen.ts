@@ -11,13 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpiritsRouteImport } from './routes/spirits'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as CreditsRouteImport } from './routes/credits'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SpiritsIndexRouteImport } from './routes/spirits.index'
 import { Route as SpiritsSlugRouteImport } from './routes/spirits.$slug'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AdminOpeningsRouteImport } from './routes/_admin/openings'
 import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$aspect'
 
 const SpiritsRoute = SpiritsRouteImport.update({
@@ -30,6 +33,11 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CreditsRoute = CreditsRouteImport.update({
   id: '/credits',
   path: '/credits',
@@ -37,6 +45,10 @@ const CreditsRoute = CreditsRouteImport.update({
 } as any)
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -64,6 +76,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AdminOpeningsRoute = AdminOpeningsRouteImport.update({
+  id: '/openings',
+  path: '/openings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
   id: '/$aspect',
   path: '/$aspect',
@@ -73,8 +90,10 @@ const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
+  '/openings': typeof AdminOpeningsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
@@ -84,7 +103,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
+  '/openings': typeof AdminOpeningsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
@@ -94,10 +115,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/credits': typeof CreditsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
+  '/_admin/openings': typeof AdminOpeningsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
@@ -109,8 +133,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/credits'
+    | '/search'
     | '/settings'
     | '/spirits'
+    | '/openings'
     | '/profile'
     | '/sign-in/$'
     | '/spirits/$slug'
@@ -120,7 +146,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/credits'
+    | '/search'
     | '/settings'
+    | '/openings'
     | '/profile'
     | '/sign-in/$'
     | '/spirits/$slug'
@@ -129,10 +157,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_admin'
     | '/_authenticated'
     | '/credits'
+    | '/search'
     | '/settings'
     | '/spirits'
+    | '/_admin/openings'
     | '/_authenticated/profile'
     | '/sign-in/$'
     | '/spirits/$slug'
@@ -142,8 +173,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   CreditsRoute: typeof CreditsRoute
+  SearchRoute: typeof SearchRoute
   SettingsRoute: typeof SettingsRoute
   SpiritsRoute: typeof SpiritsRouteWithChildren
   SignInSplatRoute: typeof SignInSplatRoute
@@ -165,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/credits': {
       id: '/credits'
       path: '/credits'
@@ -177,6 +217,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -214,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_admin/openings': {
+      id: '/_admin/openings'
+      path: '/openings'
+      fullPath: '/openings'
+      preLoaderRoute: typeof AdminOpeningsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/spirits/$slug/$aspect': {
       id: '/spirits/$slug/$aspect'
       path: '/$aspect'
@@ -223,6 +277,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminOpeningsRoute: typeof AdminOpeningsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminOpeningsRoute: AdminOpeningsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AuthenticatedRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -263,8 +327,10 @@ const SpiritsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   CreditsRoute: CreditsRoute,
+  SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   SpiritsRoute: SpiritsRouteWithChildren,
   SignInSplatRoute: SignInSplatRoute,
