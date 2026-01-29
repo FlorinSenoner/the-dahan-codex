@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpiritsRouteImport } from './routes/spirits'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as CreditsRouteImport } from './routes/credits'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -22,6 +23,11 @@ import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$a
 const SpiritsRoute = SpiritsRouteImport.update({
   id: '/spirits',
   path: '/spirits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreditsRoute = CreditsRouteImport.update({
@@ -67,6 +73,7 @@ const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
+  '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
+  '/settings': typeof SettingsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/credits': typeof CreditsRoute
+  '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/sign-in/$': typeof SignInSplatRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/credits'
+    | '/settings'
     | '/spirits'
     | '/profile'
     | '/sign-in/$'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/credits'
+    | '/settings'
     | '/profile'
     | '/sign-in/$'
     | '/spirits/$slug'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/credits'
+    | '/settings'
     | '/spirits'
     | '/_authenticated/profile'
     | '/sign-in/$'
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   CreditsRoute: typeof CreditsRoute
+  SettingsRoute: typeof SettingsRoute
   SpiritsRoute: typeof SpiritsRouteWithChildren
   SignInSplatRoute: typeof SignInSplatRoute
 }
@@ -143,6 +156,13 @@ declare module '@tanstack/react-router' {
       path: '/spirits'
       fullPath: '/spirits'
       preLoaderRoute: typeof SpiritsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/credits': {
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   CreditsRoute: CreditsRoute,
+  SettingsRoute: SettingsRoute,
   SpiritsRoute: SpiritsRouteWithChildren,
   SignInSplatRoute: SignInSplatRoute,
 }
