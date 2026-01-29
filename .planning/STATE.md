@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 1 of ? (Admin Foundation)
+Plan: 3 of ? (Admin Openings List)
 Status: In progress
-Last activity: 2026-01-29 - Completed 05-01-PLAN.md (Admin Foundation)
+Last activity: 2026-01-29 - Completed 05-03-PLAN.md (Admin Openings List)
 
-Progress: [##############################          ] 65% (Phase 5 plan 1 complete)
+Progress: [################################        ] 68% (Phase 5 plan 3 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 60
+- Total plans completed: 61
 - Average duration: 4.4 min
-- Total execution time: 4.6 hours
+- Total execution time: 4.65 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [##############################          ] 65% (Phase 5 plan 1 complet
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 2     | 11 min | 5.5 min  |
+| 05    | 3     | 14 min | 4.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 3 min, 3 min, 3 min, 8 min
-- Trend: Phase 5 admin foundation complete
+- Last 5 plans: 3 min, 3 min, 3 min, 8 min, 3 min
+- Trend: Phase 5 admin openings list complete
 
 _Updated after each plan completion_
 
@@ -234,6 +234,9 @@ affecting current work:
 - Admin mutation pattern: await requireAdmin(ctx) as first line in mutation handler
 - useUser() for publicMetadata access (not useAuth() which only has auth state)
 - Placeholder child route required for pathless layouts in TanStack Router
+- Admin list page pattern: PageHeader with action button, loading skeleton, empty state, card-based list
+- Inline delete confirmation pattern: reveal Cancel/Delete buttons on same card
+- Use standard anchor tags for routes not yet defined (TanStack Router type-safe Link requires route to exist)
 
 ### Pending Todos
 
@@ -482,10 +485,11 @@ Phase 4 (PWA & Offline) complete:
 Phase 5 (Text Opening Management) in progress:
 
 - [x] 05-01: Admin Foundation (admin layout, Convex CRUD mutations)
+- [x] 05-03: Admin Openings List (openings list page with edit/delete actions)
 - [x] 05-05: Global Search (Fuse.js, search page, bottom nav)
 
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 05-01-PLAN.md (Admin Foundation)
+Stopped at: Completed 05-03-PLAN.md (Admin Openings List)
 Resume file: None
