@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 4 of ? (Create/Edit Opening Routes)
-Status: In progress
-Last activity: 2026-01-29 - Completed 05-04-PLAN.md (Create/Edit Opening Routes)
+Plan: 6 of 6 (E2E Tests for Search and Admin)
+Status: Phase complete
+Last activity: 2026-01-29 - Completed 05-06-PLAN.md (E2E Tests for Search and Admin)
 
-Progress: [##################################      ] 70% (Phase 5 plan 4 complete)
+Progress: [########################################] 100% (Phase 5 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 62
+- Total plans completed: 63
 - Average duration: 4.4 min
-- Total execution time: 4.65 hours
+- Total execution time: 4.73 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [##################################      ] 70% (Phase 5 plan 4 complet
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 5     | 19 min | 3.8 min  |
+| 05    | 6     | 24 min | 4.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 8 min, 3 min, 0 min, 5 min
-- Trend: Admin CRUD for openings complete
+- Last 5 plans: 8 min, 3 min, 0 min, 5 min, 5 min
+- Trend: Phase 5 complete with E2E tests
 
 _Updated after each plan completion_
 
@@ -244,6 +244,9 @@ affecting current work:
 - onSlugGenerate prop on OpeningForm for slug auto-generation on name blur
 - useMutation from convex/react with manual isSubmitting state (not useConvexMutation)
 - TurnAccordion used for live preview in edit opening page
+- Search E2E tests: Pre-load /spirits page before search to ensure Convex data is cached
+- Search E2E tests: Use .first() for results that match multiple elements (base spirit + aspects)
+- Admin E2E tests: Skip authenticated tests until Clerk test user is configured
 
 ### Pending Todos
 
@@ -487,18 +490,31 @@ Phase 4 (PWA & Offline) complete:
 - [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
 - [x] 04-09: Service Worker Cleanup (remove dead Convex caching rule, document offline architecture)
 
+## Phase 5 Summary
+
+Phase 5 (Text Opening Management) is now complete with:
+
+- Admin layout with Clerk publicMetadata.isAdmin protection
+- Convex CRUD mutations for openings (create, update, delete)
+- OpeningForm component with Zod validation and useFieldArray for turns
+- Admin openings list page with edit/delete actions
+- Create/edit opening routes with slug auto-generation and live preview
+- Global search with Fuse.js (works offline with cached data)
+- E2E tests for search page and admin route protection
+
 ## Phase 5 Progress
 
-Phase 5 (Text Opening Management) in progress:
+Phase 5 (Text Opening Management) complete:
 
 - [x] 05-01: Admin Foundation (admin layout, Convex CRUD mutations)
 - [x] 05-02: Opening Form Component (Zod schema, OpeningForm with useFieldArray)
 - [x] 05-03: Admin Openings List (openings list page with edit/delete actions)
 - [x] 05-04: Create/Edit Opening Routes (new/edit pages with slug auto-generation and preview)
 - [x] 05-05: Global Search (Fuse.js, search page, bottom nav)
+- [x] 05-06: E2E Tests for Search and Admin (9 tests: 6 search, 3 admin protection)
 
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 05-04-PLAN.md (Create/Edit Opening Routes)
+Stopped at: Completed 05-06-PLAN.md (E2E Tests for Search and Admin) - Phase 5 complete
 Resume file: None
