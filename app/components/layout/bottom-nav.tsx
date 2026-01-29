@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { LucideIcon } from "lucide-react";
-import { FileText, Gamepad2, Ghost, Settings } from "lucide-react";
+import { FileText, Gamepad2, Ghost, Search, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Tab {
@@ -18,6 +18,13 @@ const tabs: Tab[] = [
     href: "/spirits",
     icon: Ghost,
     matchPattern: /^\/spirits/,
+    disabled: false,
+  },
+  {
+    name: "Search",
+    href: "/search",
+    icon: Search,
+    matchPattern: /^\/search/,
     disabled: false,
   },
   {
@@ -74,7 +81,7 @@ export function BottomNav() {
           return (
             <Link
               key={tab.name}
-              to={tab.href as "/spirits" | "/settings"}
+              to={tab.href as "/spirits" | "/search" | "/settings"}
               className={cn(
                 "flex flex-col items-center justify-center flex-1 h-full",
                 "transition-colors",
