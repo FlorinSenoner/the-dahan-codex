@@ -24,23 +24,34 @@ export const getBySlug = query({
   },
 });
 
-// List all openings (for search)
+// List all openings with spirit info (for admin and search)
 export const listAll = query({
   args: {},
   handler: async (ctx) => {
     const openings = await ctx.db.query("openings").collect();
 
-    // Enrich with spirit name for search
+    // Enrich with spirit name
     const enriched = await Promise.all(
       openings.map(async (opening) => {
         const spirit = await ctx.db.get(opening.spiritId);
         return {
           ...opening,
-          spiritName: spirit?.name,
+          spiritName: spirit
+            ? spirit.aspectName
+              ? `${spirit.name} (${spirit.aspectName})`
+              : spirit.name
+            : "Unknown Spirit",
           spiritSlug: spirit?.slug,
         };
       }),
     );
+
+    // Sort by spirit name, then opening name
+    enriched.sort((a, b) => {
+      const spiritCompare = a.spiritName.localeCompare(b.spiritName);
+      if (spiritCompare !== 0) return spiritCompare;
+      return a.name.localeCompare(b.name);
+    });
 
     return enriched;
   },

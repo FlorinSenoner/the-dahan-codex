@@ -1,11 +1,27 @@
 import { v } from "convex/values";
 import { query } from "./_generated/server";
 
-// List all spirits (flat, no filtering - for search)
+// List all spirits (base + aspects) for admin dropdowns and search
 export const listAllSpirits = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("spirits").collect();
+    const spirits = await ctx.db.query("spirits").collect();
+    // Sort: base spirits first alphabetically, then aspects under their base
+    spirits.sort((a, b) => {
+      // Base spirits before aspects
+      if (!a.baseSpirit && b.baseSpirit) return -1;
+      if (a.baseSpirit && !b.baseSpirit) return 1;
+      // Among base spirits: alphabetical
+      if (!a.baseSpirit && !b.baseSpirit) {
+        return a.name.localeCompare(b.name);
+      }
+      // Among aspects: group by base, then alphabetical
+      if (a.baseSpirit !== b.baseSpirit) {
+        return String(a.baseSpirit).localeCompare(String(b.baseSpirit));
+      }
+      return (a.aspectName || "").localeCompare(b.aspectName || "");
+    });
+    return spirits;
   },
 });
 
