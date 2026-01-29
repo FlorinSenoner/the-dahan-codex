@@ -34,7 +34,6 @@
     "workbox-strategies",
     "tailwindcss",
     "react-hook-form",
-    "@hookform/resolvers",
-    "fuse.js"
+    "@hookform/resolvers"
   ]
 }
