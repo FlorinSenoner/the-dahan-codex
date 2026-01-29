@@ -24,6 +24,14 @@ export const getBySlug = query({
   },
 });
 
+// Get opening by ID (for edit page)
+export const getById = query({
+  args: { id: v.id("openings") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+  },
+});
+
 // List all openings with spirit info (for admin and search)
 export const listAll = query({
   args: {},
