@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useConvex } from "convex/react";
+import { convexQuery } from "@convex-dev/react-query";
+import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { del } from "idb-keyval";
 import { RefreshCw, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -7,13 +7,16 @@ import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
 import { Heading, Text } from "@/components/ui/typography";
 import { api } from "../../convex/_generated/api";
+import { persistQueryCache } from "../router";
+
+const routeApi = getRouteApi("/settings");
 
 export const Route = createFileRoute("/settings")({
   component: SettingsPage,
 });
 
 function SettingsPage() {
-  const convex = useConvex();
+  const { queryClient } = routeApi.useRouteContext();
 
   // State for Sync Data
   const [isSyncing, setIsSyncing] = useState(false);
@@ -26,8 +29,10 @@ function SettingsPage() {
     setIsSyncing(true);
     setSyncStatus("Loading spirits...");
     try {
-      // Fetch all spirits
-      const spirits = await convex.query(api.spirits.listSpirits, {});
+      // Fetch all spirits via TanStack Query (this gets persisted to IndexedDB)
+      const spirits = await queryClient.fetchQuery(
+        convexQuery(api.spirits.listSpirits, {}),
+      );
 
       // Get unique base spirit slugs (filter out aspects)
       const baseSpiritSlugs = spirits
@@ -38,9 +43,11 @@ function SettingsPage() {
       setSyncStatus(`Syncing spirits (0/${baseSpiritSlugs.length})...`);
       for (let i = 0; i < baseSpiritSlugs.length; i++) {
         // This fetches base spirit AND all its aspects in one query
-        await convex.query(api.spirits.getSpiritWithAspects, {
-          slug: baseSpiritSlugs[i],
-        });
+        await queryClient.prefetchQuery(
+          convexQuery(api.spirits.getSpiritWithAspects, {
+            slug: baseSpiritSlugs[i],
+          }),
+        );
         setSyncStatus(
           `Syncing spirits (${i + 1}/${baseSpiritSlugs.length})...`,
         );
@@ -49,26 +56,36 @@ function SettingsPage() {
       // Also fetch individual spirit pages to cache getSpiritBySlug responses
       for (const spirit of spirits) {
         if (spirit.isAspect) {
-          // For aspects, need to call with aspect parameter
+          // For aspects, need to call with aspect parameter (lowercase to match URL)
           const baseSpirit = spirits.find((s) => s._id === spirit.baseSpirit);
           if (baseSpirit && spirit.aspectName) {
-            await convex.query(api.spirits.getSpiritBySlug, {
-              slug: baseSpirit.slug,
-              aspect: spirit.aspectName,
-            });
+            await queryClient.prefetchQuery(
+              convexQuery(api.spirits.getSpiritBySlug, {
+                slug: baseSpirit.slug,
+                aspect: spirit.aspectName.toLowerCase(),
+              }),
+            );
           }
         } else {
-          await convex.query(api.spirits.getSpiritBySlug, {
-            slug: spirit.slug,
-          });
+          await queryClient.prefetchQuery(
+            convexQuery(api.spirits.getSpiritBySlug, {
+              slug: spirit.slug,
+            }),
+          );
         }
       }
 
       // Fetch openings for each spirit
       setSyncStatus("Syncing openings...");
       for (const spirit of spirits) {
-        await convex.query(api.openings.listBySpirit, { spiritId: spirit._id });
+        await queryClient.prefetchQuery(
+          convexQuery(api.openings.listBySpirit, { spiritId: spirit._id }),
+        );
       }
+
+      // Manually persist to IndexedDB to ensure data is saved
+      setSyncStatus("Saving to offline storage...");
+      await persistQueryCache(queryClient);
 
       setSyncStatus("Sync complete!");
       setTimeout(() => setSyncStatus(null), 3000);
@@ -122,7 +139,7 @@ function SettingsPage() {
               variant="outline"
               onClick={syncData}
               disabled={isSyncing || isClearing}
-              className="flex-1"
+              className="flex-1 cursor-pointer"
             >
               <RefreshCw
                 className={`h-4 w-4 ${isSyncing ? "animate-spin" : ""}`}
@@ -133,7 +150,7 @@ function SettingsPage() {
               variant="outline"
               onClick={clearCache}
               disabled={isSyncing || isClearing}
-              className="flex-1"
+              className="flex-1 cursor-pointer"
             >
               <Trash2 className="h-4 w-4" />
               {isClearing ? "Clearing..." : "Clear Cache"}

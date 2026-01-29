@@ -35,19 +35,24 @@ import { cn } from "@/lib/utils";
  */
 export const Route = createFileRoute("/spirits/$slug")({
   loader: async ({ context, params }) => {
-    // Preload both queries in parallel
-    await Promise.all([
-      context.queryClient.ensureQueryData(
-        convexQuery(api.spirits.getSpiritBySlug, {
-          slug: params.slug,
-        }),
-      ),
-      context.queryClient.ensureQueryData(
-        convexQuery(api.spirits.getSpiritWithAspects, {
-          slug: params.slug,
-        }),
-      ),
-    ]);
+    // Use prefetchQuery to avoid blocking when offline
+    // The component's useSuspenseQuery will use cached data if available
+    try {
+      await Promise.all([
+        context.queryClient.prefetchQuery(
+          convexQuery(api.spirits.getSpiritBySlug, {
+            slug: params.slug,
+          }),
+        ),
+        context.queryClient.prefetchQuery(
+          convexQuery(api.spirits.getSpiritWithAspects, {
+            slug: params.slug,
+          }),
+        ),
+      ]);
+    } catch {
+      // Ignore fetch errors - component will use cached data or show error state
+    }
   },
   component: SpiritDetailLayout,
 });

@@ -3,14 +3,22 @@ import {
   type PersistedClient,
   persistQueryClient,
 } from "@tanstack/query-persist-client-core";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  dehydrate,
+  hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { del, get, set } from "idb-keyval";
 import { routeTree } from "./routeTree.gen";
 
+const IDB_CACHE_KEY = "tanstack-query-cache";
+const MAX_AGE = 1000 * 60 * 60 * 24 * 7; // 7 days
+
 // IndexedDB persister for TanStack Query
-function createIDBPersister(idbKey = "tanstack-query-cache") {
+function createIDBPersister(idbKey = IDB_CACHE_KEY) {
   return {
     persistClient: async (client: PersistedClient) => {
       await set(idbKey, client);
@@ -24,6 +32,41 @@ function createIDBPersister(idbKey = "tanstack-query-cache") {
   };
 }
 
+/**
+ * Restore cached queries from IndexedDB into the query client.
+ * Called before router initialization to ensure offline data is available.
+ */
+async function restoreQueryCache(queryClient: QueryClient) {
+  try {
+    const persistedClient = await get<PersistedClient>(IDB_CACHE_KEY);
+    if (persistedClient) {
+      // Check if cache is still valid (not expired)
+      const isExpired = Date.now() - persistedClient.timestamp > MAX_AGE;
+      if (!isExpired && persistedClient.clientState) {
+        hydrate(queryClient, persistedClient.clientState);
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to restore query cache:", error);
+  }
+}
+
+/**
+ * Manually persist the query cache to IndexedDB.
+ * Call this after bulk data fetching to ensure persistence.
+ */
+export async function persistQueryCache(queryClient: QueryClient) {
+  const dehydratedState = dehydrate(queryClient, {
+    shouldDehydrateQuery: (query) => query.state.status === "success",
+  });
+  const persistedClient: PersistedClient = {
+    timestamp: Date.now(),
+    buster: "",
+    clientState: dehydratedState,
+  };
+  await set(IDB_CACHE_KEY, persistedClient);
+}
+
 function NotFound() {
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
@@ -34,7 +77,7 @@ function NotFound() {
   );
 }
 
-export function createRouter() {
+export async function createRouter() {
   const convexUrl = import.meta.env.VITE_CONVEX_URL as string;
 
   const convexClient = new ConvexReactClient(convexUrl, {
@@ -51,21 +94,23 @@ export function createRouter() {
         // Keep data fresh for 5 minutes
         staleTime: 1000 * 60 * 5,
         // Keep data in cache for 7 days (for offline access)
-        gcTime: 1000 * 60 * 60 * 24 * 7,
+        gcTime: MAX_AGE,
       },
     },
   });
 
   convexQueryClient.connect(queryClient);
 
-  // Setup IndexedDB persistence for offline access
+  // Restore cached queries from IndexedDB BEFORE router starts
+  // This ensures offline data is available for initial navigation
+  await restoreQueryCache(queryClient);
+
+  // Setup ongoing IndexedDB persistence for future changes
   const persister = createIDBPersister();
   persistQueryClient({
     queryClient,
     persister,
-    // Max age matches gcTime (7 days)
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    // Dehydrate options to control what gets persisted
+    maxAge: MAX_AGE,
     dehydrateOptions: {
       shouldDehydrateQuery: (query) => {
         // Only persist successful queries
@@ -98,6 +143,6 @@ export function createRouter() {
 
 declare module "@tanstack/react-router" {
   interface Register {
-    router: ReturnType<typeof createRouter>;
+    router: Awaited<ReturnType<typeof createRouter>>;
   }
 }

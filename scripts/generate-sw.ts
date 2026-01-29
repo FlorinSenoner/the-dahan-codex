@@ -24,6 +24,10 @@ async function buildServiceWorker() {
       globDirectory: outputDir,
       globPatterns: ["**/*.{js,css,html,png,svg,ico,webp,woff,woff2,json}"],
       globIgnores: ["**/node_modules/**", "sw.js", "workbox-*.js"],
+      // Add leading slash to all URLs for consistency with navigateFallback
+      modifyURLPrefix: {
+        "": "/",
+      },
       // IMPORTANT: skipWaiting false to prevent broken state during updates
       skipWaiting: false,
       clientsClaim: false,
@@ -34,20 +38,7 @@ async function buildServiceWorker() {
       // Runtime caching rules
       // Note: Convex data is cached via TanStack Query persistence to IndexedDB,
       // not via service worker (Convex uses WebSockets, not HTTP)
-      runtimeCaching: [
-        {
-          // Cache external images (spirit images are local in public/)
-          urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/,
-          handler: "CacheFirst",
-          options: {
-            cacheName: "image-cache",
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
-              maxEntries: 200,
-            },
-          },
-        },
-      ],
+      runtimeCaching: [],
     });
 
     console.log("Generated service worker");

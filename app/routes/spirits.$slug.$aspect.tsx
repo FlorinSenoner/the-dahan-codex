@@ -13,12 +13,18 @@ import { SpiritDetailContent } from "./spirits.$slug";
  */
 export const Route = createFileRoute("/spirits/$slug/$aspect")({
   loader: async ({ context, params }) => {
-    await context.queryClient.ensureQueryData(
-      convexQuery(api.spirits.getSpiritBySlug, {
-        slug: params.slug,
-        aspect: params.aspect,
-      }),
-    );
+    // Use prefetchQuery to avoid blocking when offline
+    // The component's useSuspenseQuery will use cached data if available
+    try {
+      await context.queryClient.prefetchQuery(
+        convexQuery(api.spirits.getSpiritBySlug, {
+          slug: params.slug,
+          aspect: params.aspect,
+        }),
+      );
+    } catch {
+      // Ignore fetch errors - component will use cached data or show error state
+    }
   },
   component: AspectDetailPage,
 });

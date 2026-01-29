@@ -22,12 +22,18 @@ export const Route = createFileRoute("/spirits/")({
     elements: search.elements,
   }),
   loader: async ({ context, deps }) => {
-    await context.queryClient.ensureQueryData(
-      convexQuery(api.spirits.listSpirits, {
-        complexity: deps.complexity,
-        elements: deps.elements,
-      }),
-    );
+    // Use prefetchQuery instead of ensureQueryData to avoid blocking when offline
+    // The component's useSuspenseQuery will use cached data if available
+    try {
+      await context.queryClient.prefetchQuery(
+        convexQuery(api.spirits.listSpirits, {
+          complexity: deps.complexity,
+          elements: deps.elements,
+        }),
+      );
+    } catch {
+      // Ignore fetch errors - component will use cached data or show error state
+    }
   },
   component: SpiritsPage,
 });
