@@ -20,7 +20,7 @@ Progress: [################################        ] 68% (Phase 5 plan 3 complet
 
 **Velocity:**
 
-- Total plans completed: 61
+- Total plans completed: 62
 - Average duration: 4.4 min
 - Total execution time: 4.65 hours
 
@@ -38,12 +38,12 @@ Progress: [################################        ] 68% (Phase 5 plan 3 complet
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 3     | 14 min | 4.7 min  |
+| 05    | 4     | 14 min | 3.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 3 min, 3 min, 8 min, 3 min
-- Trend: Phase 5 admin openings list complete
+- Last 5 plans: 3 min, 3 min, 8 min, 3 min, 0 min
+- Trend: Phase 5 opening form complete (pre-completed during 05-03)
 
 _Updated after each plan completion_
 
@@ -237,6 +237,9 @@ affecting current work:
 - Admin list page pattern: PageHeader with action button, loading skeleton, empty state, card-based list
 - Inline delete confirmation pattern: reveal Cancel/Delete buttons on same card
 - Use standard anchor tags for routes not yet defined (TanStack Router type-safe Link requires route to exist)
+- useFieldArray with field.id as React key (CRITICAL - prevents data corruption on array item removal)
+- Zod form schema: export schema and inferred type together (openingFormSchema + OpeningFormData)
+- Optional form fields with .optional().or(z.literal("")) for empty string handling
 
 ### Pending Todos
 
@@ -485,11 +488,12 @@ Phase 4 (PWA & Offline) complete:
 Phase 5 (Text Opening Management) in progress:
 
 - [x] 05-01: Admin Foundation (admin layout, Convex CRUD mutations)
+- [x] 05-02: Opening Form Component (Zod schema, OpeningForm with useFieldArray)
 - [x] 05-03: Admin Openings List (openings list page with edit/delete actions)
 - [x] 05-05: Global Search (Fuse.js, search page, bottom nav)
 
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 05-03-PLAN.md (Admin Openings List)
+Stopped at: Completed 05-02-PLAN.md (Opening Form Component)
 Resume file: None
