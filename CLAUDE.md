@@ -59,6 +59,17 @@ pnpm ci               # Full CI: lint, typecheck, build, test
 2. Run tests: `pnpm test:e2e`
 3. Debug with UI: `pnpm test:e2e:ui`
 
+**Starting a new phase:**
+
+1. Create branch from main: `git checkout -b feat/phase-<number>-<name>`
+   - Example: `feat/phase-5-text-opening-management`
+2. Work through all plans in the phase
+3. After phase complete, verify all checks pass: `pnpm ci`
+4. Push and create PR: `git push -u origin <branch> && gh pr create`
+5. Wait for CI to pass, then merge
+6. Return to main: `git checkout main && git pull`
+7. Ready for next phase
+
 ## Key Patterns
 
 - Use `useConvexAuth()` for auth state (not Clerk's `useAuth()`)
