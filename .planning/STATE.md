@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 3 of 6 (edit mode infrastructure)
+Plan: 4 of 6 (opening editor)
 Status: In progress
-Last activity: 2026-01-30 - Completed 05-03-PLAN.md (Edit Mode Infrastructure)
+Last activity: 2026-01-30 - Completed 05-04-PLAN.md (Opening Editor)
 
-Progress: [##############################          ] 67% (Plan 05-03 complete)
+Progress: [################################        ] 68% (Plan 05-04 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 60
+- Total plans completed: 61
 - Average duration: 4.4 min
-- Total execution time: 4.58 hours
+- Total execution time: 4.61 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [##############################          ] 67% (Plan 05-03 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 3     | 13 min | 4.3 min  |
+| 05    | 4     | 15 min | 3.8 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 5 min, 3 min, 5 min, 8 min
-- Trend: Phase 5 in progress (wave 1 complete)
+- Last 5 plans: 5 min, 3 min, 5 min, 8 min, 2 min
+- Trend: Phase 5 wave 2 in progress (05-04 complete)
 
 _Updated after each plan completion_
 
@@ -237,6 +237,12 @@ affecting current work:
 - EditFab positioned bottom-20 to stay above bottom nav (which uses bottom-16)
 - Admin components directory: app/components/admin/ with knip entry point
 - biome-ignore for TanStack Router search typing with strict: false (necessary for route-agnostic hooks)
+- EditableText pattern: isEditing prop controls span vs input/textarea rendering
+- OpeningFormData exported interface for parent component integration
+- Turn renumbering automatic on delete to maintain sequential order
+- hasChanges calculated via deep comparison in useMemo
+- Form data change propagation: child calls onChange, parent tracks hasChanges
+- Edit mode section pattern: show editor when isEditing, show display otherwise
 
 ### Pending Todos
 
@@ -487,12 +493,12 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-01: Admin Infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
 - [x] 05-02: Spirit Search (search input with URL persistence)
 - [x] 05-03: Edit Mode Infrastructure (useEditMode hook, EditFab component)
-- [ ] 05-04: Opening Editor
+- [x] 05-04: Opening Editor (EditableText, EditableOpening, OpeningSection edit mode)
 - [ ] 05-05: Opening CRUD Operations
 - [ ] 05-06: E2E Tests
 
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed 05-03-PLAN.md (Edit Mode Infrastructure)
+Stopped at: Completed 05-04-PLAN.md (Opening Editor)
 Resume file: None
