@@ -2,6 +2,7 @@ import { convexQuery } from "@convex-dev/react-query";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "convex/_generated/api";
 import type { Id } from "convex/_generated/dataModel";
+import { useMutation } from "convex/react";
 import { BookOpen, Plus } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -15,10 +16,7 @@ import { TurnAccordion } from "./turn-accordion";
 
 interface OpeningSectionProps {
   spiritId: Id<"spirits">;
-  onFormDataChange?: (
-    data: OpeningFormData | null,
-    openingId: Id<"openings"> | null,
-  ) => void;
+  onSaveHandlerReady?: (saveHandler: (() => Promise<void>) | null) => void;
   onHasChangesChange?: (hasChanges: boolean) => void;
 }
 
@@ -26,13 +24,18 @@ interface OpeningSectionProps {
 // Aspects never inherit openings from their base spirit.
 export function OpeningSection({
   spiritId,
-  onFormDataChange,
+  onSaveHandlerReady,
   onHasChangesChange,
 }: OpeningSectionProps) {
   const { data: openings, isLoading } = useQuery(
     convexQuery(api.openings.listBySpirit, { spiritId }),
   );
   const { isEditing } = useEditMode();
+
+  // Convex mutations
+  const createOpeningMutation = useMutation(api.openings.createOpening);
+  const updateOpeningMutation = useMutation(api.openings.updateOpening);
+  const deleteOpeningMutation = useMutation(api.openings.deleteOpening);
 
   // For now, just show the first opening
   // Future: add tabs for multiple openings
@@ -41,6 +44,7 @@ export function OpeningSection({
   // Form data state for edit mode
   const [formData, setFormData] = useState<OpeningFormData | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Create empty form data for new opening
   const createEmptyFormData = useCallback((): OpeningFormData => {
@@ -110,17 +114,72 @@ export function OpeningSection({
     onHasChangesChange?.(hasChanges);
   }, [hasChanges, onHasChangesChange]);
 
-  // Notify parent of form data changes
-  useEffect(() => {
-    if (formData) {
-      onFormDataChange?.(
-        formData,
-        isCreatingNew ? null : (opening?._id ?? null),
-      );
-    } else {
-      onFormDataChange?.(null, null);
+  // Save handler for creating or updating opening
+  const handleSave = useCallback(async () => {
+    if (!formData) return;
+    setIsSaving(true);
+    try {
+      if (isCreatingNew) {
+        await createOpeningMutation({
+          spiritId,
+          name: formData.name,
+          description: formData.description || undefined,
+          turns: formData.turns.map((t) => ({
+            turn: t.turn,
+            title: t.title || undefined,
+            instructions: t.instructions,
+            notes: t.notes || undefined,
+          })),
+          author: formData.author || undefined,
+          sourceUrl: formData.sourceUrl || undefined,
+        });
+      } else if (opening) {
+        await updateOpeningMutation({
+          id: opening._id,
+          name: formData.name,
+          description: formData.description || undefined,
+          turns: formData.turns.map((t) => ({
+            turn: t.turn,
+            title: t.title || undefined,
+            instructions: t.instructions,
+            notes: t.notes || undefined,
+          })),
+          author: formData.author || undefined,
+          sourceUrl: formData.sourceUrl || undefined,
+        });
+      }
+      // Data will refresh via query invalidation
+      setIsCreatingNew(false);
+    } catch (error) {
+      console.error("Save failed:", error);
+    } finally {
+      setIsSaving(false);
     }
-  }, [formData, isCreatingNew, opening, onFormDataChange]);
+  }, [
+    formData,
+    isCreatingNew,
+    spiritId,
+    opening,
+    createOpeningMutation,
+    updateOpeningMutation,
+  ]);
+
+  // Delete handler for removing opening
+  const handleDelete = useCallback(async () => {
+    if (!opening) return;
+    try {
+      await deleteOpeningMutation({ id: opening._id });
+      setFormData(null);
+      setIsCreatingNew(false);
+    } catch (error) {
+      console.error("Delete failed:", error);
+    }
+  }, [opening, deleteOpeningMutation]);
+
+  // Expose save handler to parent
+  useEffect(() => {
+    onSaveHandlerReady?.(formData && hasChanges ? handleSave : null);
+  }, [formData, hasChanges, handleSave, onSaveHandlerReady]);
 
   // Handle form data change
   const handleFormDataChange = useCallback((data: OpeningFormData) => {
@@ -161,6 +220,7 @@ export function OpeningSection({
             opening={opening}
             formData={formData!}
             onChange={handleFormDataChange}
+            onDelete={handleDelete}
             isNew={isCreatingNew}
           />
         </section>
