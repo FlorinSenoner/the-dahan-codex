@@ -20,9 +20,9 @@ Progress: [##############################          ] 67% (Plan 05-03 complete)
 
 **Velocity:**
 
-- Total plans completed: 59
+- Total plans completed: 60
 - Average duration: 4.4 min
-- Total execution time: 4.50 hours
+- Total execution time: 4.58 hours
 
 **By Phase:**
 
@@ -38,11 +38,12 @@ Progress: [##############################          ] 67% (Plan 05-03 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
+| 05    | 3     | 13 min | 4.3 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 4 min, 5 min, 3 min, 5 min
-- Trend: Phase 5 in progress
+- Last 5 plans: 4 min, 5 min, 3 min, 5 min, 8 min
+- Trend: Phase 5 in progress (wave 1 complete)
 
 _Updated after each plan completion_
 
@@ -231,6 +232,11 @@ affecting current work:
 - Opening timestamps (createdAt, updatedAt) optional in schema for backward compatibility
 - Opening slug auto-generated from name: lowercase, remove special chars, replace spaces with dashes
 - Difficulty field deprecated in openings schema but kept optional for existing production data
+- useEditMode hook uses URL ?edit=true for state persistence across refreshes
+- Edit mode defense-in-depth: isEditing = isAdmin && search.edit === true (non-admins cannot activate even with URL param)
+- EditFab positioned bottom-20 to stay above bottom nav (which uses bottom-16)
+- Admin components directory: app/components/admin/ with knip entry point
+- biome-ignore for TanStack Router search typing with strict: false (necessary for route-agnostic hooks)
 
 ### Pending Todos
 
@@ -480,7 +486,7 @@ Phase 5 (Text Opening Management) in progress:
 
 - [x] 05-01: Admin Infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
 - [x] 05-02: Spirit Search (search input with URL persistence)
-- [ ] 05-03: Opening List Improvements
+- [x] 05-03: Edit Mode Infrastructure (useEditMode hook, EditFab component)
 - [ ] 05-04: Opening Editor
 - [ ] 05-05: Opening CRUD Operations
 - [ ] 05-06: E2E Tests
@@ -488,5 +494,5 @@ Phase 5 (Text Opening Management) in progress:
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed 05-02-PLAN.md (Spirit Search)
+Stopped at: Completed 05-03-PLAN.md (Edit Mode Infrastructure)
 Resume file: None
