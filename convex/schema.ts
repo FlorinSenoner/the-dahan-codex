@@ -80,7 +80,6 @@ export default defineSchema({
         turn: v.number(), // Turn 1, 2, 3, etc.
         title: v.optional(v.string()), // "Setup" or "Turn 1: Establishing Presence"
         instructions: v.string(), // Main text content for this turn
-        notes: v.optional(v.string()), // Additional context/tips
       }),
     ),
     author: v.optional(v.string()), // Attribution

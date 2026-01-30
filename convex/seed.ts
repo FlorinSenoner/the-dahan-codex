@@ -340,24 +340,18 @@ export const seedSpirits = mutation({
           title: "Turn 1: Establish Presence",
           instructions:
             "Take Growth Option 2: Add two Presence and gain a Power Card. Place presence in lands with Dahan to maximize your reach. Play Boon of Vigor on a spirit that needs energy (or yourself).",
-          notes:
-            "River's first turn is about establishing reach. Don't worry about defending yet.",
         },
         {
           turn: 2,
           title: "Turn 2: Build Momentum",
           instructions:
             "Take Growth Option 3: Add Presence to a Wetland within Range 2 and gain 1 Energy. Play Flash Floods to push Explorers away from a building land, or use River's Bounty to gather Dahan.",
-          notes:
-            "Start setting up for your innate power by getting Water presence revealed.",
         },
         {
           turn: 3,
           title: "Turn 3: Control the Flow",
           instructions:
             "Take Growth Option 2 again for more presence and cards. By now you should have enough presence to trigger Massive Flooding. Focus on lands where you can push Invaders into each other or off the island.",
-          notes:
-            "River excels at controlling Invader movement. Use this to create favorable Ravage situations.",
         },
       ],
       author: "Spirit Island Community",
@@ -721,24 +715,18 @@ export const reseedSpirits = mutation({
           title: "Turn 1: Establish Presence",
           instructions:
             "Take Growth Option 2: Add two Presence and gain a Power Card. Place presence in lands with Dahan to maximize your reach. Play Boon of Vigor on a spirit that needs energy (or yourself).",
-          notes:
-            "River's first turn is about establishing reach. Don't worry about defending yet.",
         },
         {
           turn: 2,
           title: "Turn 2: Build Momentum",
           instructions:
             "Take Growth Option 3: Add Presence to a Wetland within Range 2 and gain 1 Energy. Play Flash Floods to push Explorers away from a building land, or use River's Bounty to gather Dahan.",
-          notes:
-            "Start setting up for your innate power by getting Water presence revealed.",
         },
         {
           turn: 3,
           title: "Turn 3: Control the Flow",
           instructions:
             "Take Growth Option 2 again for more presence and cards. By now you should have enough presence to trigger Massive Flooding. Focus on lands where you can push Invaders into each other or off the island.",
-          notes:
-            "River excels at controlling Invader movement. Use this to create favorable Ravage situations.",
         },
       ],
       author: "Spirit Island Community",

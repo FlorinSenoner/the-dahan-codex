@@ -51,7 +51,7 @@ export function OpeningSection({
     return {
       name: "",
       description: "",
-      turns: [{ turn: 1, title: "", instructions: "", notes: "" }],
+      turns: [{ turn: 1, title: "", instructions: "" }],
       author: "",
       sourceUrl: "",
     };
@@ -67,7 +67,6 @@ export function OpeningSection({
           turn: t.turn,
           title: t.title || "",
           instructions: t.instructions,
-          notes: t.notes || "",
         })),
         author: opening.author || "",
         sourceUrl: opening.sourceUrl || "",
@@ -103,7 +102,6 @@ export function OpeningSection({
       if (formTurn.turn !== origTurn.turn) return true;
       if (formTurn.title !== (origTurn.title || "")) return true;
       if (formTurn.instructions !== origTurn.instructions) return true;
-      if (formTurn.notes !== (origTurn.notes || "")) return true;
     }
 
     return false;
@@ -128,7 +126,6 @@ export function OpeningSection({
             turn: t.turn,
             title: t.title || undefined,
             instructions: t.instructions,
-            notes: t.notes || undefined,
           })),
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
@@ -142,7 +139,6 @@ export function OpeningSection({
             turn: t.turn,
             title: t.title || undefined,
             instructions: t.instructions,
-            notes: t.notes || undefined,
           })),
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,

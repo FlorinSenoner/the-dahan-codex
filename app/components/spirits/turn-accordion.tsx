@@ -10,7 +10,6 @@ interface Turn {
   turn: number;
   title?: string;
   instructions: string;
-  notes?: string;
 }
 
 interface TurnAccordionProps {
@@ -32,11 +31,6 @@ export function TurnAccordion({ turns }: TurnAccordionProps) {
             <Text className="text-foreground whitespace-pre-wrap">
               {turn.instructions}
             </Text>
-            {turn.notes && (
-              <Text variant="muted" className="mt-3 text-sm italic">
-                {turn.notes}
-              </Text>
-            )}
           </AccordionContent>
         </AccordionItem>
       ))}

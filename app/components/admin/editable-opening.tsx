@@ -8,7 +8,6 @@ interface Turn {
   turn: number;
   title?: string;
   instructions: string;
-  notes?: string;
 }
 
 export interface OpeningFormData {
@@ -51,7 +50,7 @@ export function EditableOpening({
     const nextTurn = formData.turns.length + 1;
     updateField("turns", [
       ...formData.turns,
-      { turn: nextTurn, title: "", instructions: "", notes: "" },
+      { turn: nextTurn, title: "", instructions: "" },
     ]);
   };
 
@@ -132,14 +131,6 @@ export function EditableOpening({
               multiline
               placeholder="Instructions for this turn..."
               required
-            />
-            <EditableText
-              value={turn.notes || ""}
-              onChange={(v) => updateTurn(index, { notes: v })}
-              isEditing={true}
-              multiline
-              placeholder="Additional notes (optional)"
-              className="text-sm"
             />
           </div>
         ))}
