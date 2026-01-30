@@ -20,9 +20,9 @@ Progress: [##################################      ] 70% (Plan 05-05 complete)
 
 **Velocity:**
 
-- Total plans completed: 62
+- Total plans completed: 63
 - Average duration: 4.4 min
-- Total execution time: 4.66 hours
+- Total execution time: 4.71 hours
 
 **By Phase:**
 
@@ -38,7 +38,7 @@ Progress: [##################################      ] 70% (Plan 05-05 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 5     | 18 min | 3.6 min  |
+| 05    | 6     | 21 min | 3.5 min  |
 
 **Recent Trend:**
 
@@ -187,7 +187,7 @@ affecting current work:
 - VariantTabs shows "Base" for base spirit tab instead of spirit name (simplified UI)
 - Openings table with spiritId reference for text-based turn-by-turn guides
 - Openings difficulty uses Beginner/Intermediate/Advanced literals
-- Openings turns array structure: turn number, optional title, instructions, optional notes
+- Openings turns array structure: turn number, optional title, instructions (notes field removed in 05-08)
 - listBySpirit and getBySlug queries for openings table
 - Opening seed data includes attribution (author, sourceUrl)
 - reseedSpirits deletes openings before spirits (foreign key order)
@@ -503,9 +503,10 @@ Phase 5 (Text Opening Management) in progress:
 **Gap Closure Plans:**
 
 - [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
+- [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-07-PLAN.md (Role System Change)
+Stopped at: Completed 05-08-PLAN.md (Remove Turn Notes Field)
 Resume file: None
