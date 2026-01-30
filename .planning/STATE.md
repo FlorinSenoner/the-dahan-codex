@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 2 of 6 (spirit search)
+Plan: 3 of 6 (edit mode infrastructure)
 Status: In progress
-Last activity: 2026-01-30 - Completed 05-02-PLAN.md (Spirit Search)
+Last activity: 2026-01-30 - Completed 05-03-PLAN.md (Edit Mode Infrastructure)
 
-Progress: [##############################          ] 65% (Plan 05-02 complete)
+Progress: [##############################          ] 67% (Plan 05-03 complete)
 
 ## Performance Metrics
 
@@ -226,6 +226,11 @@ affecting current work:
 - Client-side search filtering with useDeferredValue for smooth typing
 - URL ?search= parameter for shareable filtered spirit lists
 - Search applies after backend filters (complexity/elements) for composable filtering
+- useAdmin hook checks Clerk publicMetadata.isAdmin === true for frontend admin status
+- Opening mutations (createOpening, updateOpening, deleteOpening) protected by requireAdmin(ctx)
+- Opening timestamps (createdAt, updatedAt) optional in schema for backward compatibility
+- Opening slug auto-generated from name: lowercase, remove special chars, replace spaces with dashes
+- Difficulty field deprecated in openings schema but kept optional for existing production data
 
 ### Pending Todos
 
@@ -473,7 +478,7 @@ Phase 4 (PWA & Offline) complete:
 
 Phase 5 (Text Opening Management) in progress:
 
-- [ ] 05-01: Admin Role & Edit Mode (pending - some work done but not complete)
+- [x] 05-01: Admin Infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
 - [x] 05-02: Spirit Search (search input with URL persistence)
 - [ ] 05-03: Opening List Improvements
 - [ ] 05-04: Opening Editor
