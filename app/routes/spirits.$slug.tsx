@@ -4,6 +4,7 @@ import {
   createFileRoute,
   Link,
   Outlet,
+  useBlocker,
   useMatches,
   useNavigate,
   useParams,
@@ -12,6 +13,7 @@ import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { EditFab } from "@/components/admin/edit-fab";
 import { ExternalLinks } from "@/components/spirits/external-links";
 import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
@@ -19,6 +21,7 @@ import { VariantTabs } from "@/components/spirits/variant-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
+import { useAdmin } from "@/hooks";
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -199,6 +202,33 @@ export function SpiritDetailContent({
   aspect,
 }: SpiritDetailContentProps) {
   const [imgError, setImgError] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [saveHandler, setSaveHandler] = useState<(() => Promise<void>) | null>(
+    null,
+  );
+  const [isSaving, setIsSaving] = useState(false);
+  const isAdmin = useAdmin();
+
+  // Block navigation when there are unsaved changes
+  // VERIFIED: TanStack Router v1.157.9 uses shouldBlockFn API (v1.40+)
+  useBlocker({
+    shouldBlockFn: () => {
+      if (!hasChanges) return false;
+      return !confirm("You have unsaved changes. Leave anyway?");
+    },
+    enableBeforeUnload: hasChanges,
+  });
+
+  // Wrap save handler to track saving state
+  const handleSave = useCallback(async () => {
+    if (!saveHandler) return;
+    setIsSaving(true);
+    try {
+      await saveHandler();
+    } finally {
+      setIsSaving(false);
+    }
+  }, [saveHandler]);
 
   const imageUrl = spirit.imageUrl;
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -294,7 +324,11 @@ export function SpiritDetailContent({
           <OverviewSection spirit={spirit} description={spirit.description} />
         </div>
 
-        <OpeningSection spiritId={spirit._id} />
+        <OpeningSection
+          spiritId={spirit._id}
+          onSaveHandlerReady={setSaveHandler}
+          onHasChangesChange={setHasChanges}
+        />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
@@ -303,6 +337,14 @@ export function SpiritDetailContent({
       <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
         <OverviewSection spirit={spirit} description={spirit.description} />
       </aside>
+
+      {isAdmin && (
+        <EditFab
+          onSave={handleSave}
+          hasChanges={hasChanges}
+          isSaving={isSaving}
+        />
+      )}
     </main>
   );
 }
