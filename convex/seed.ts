@@ -334,7 +334,6 @@ export const seedSpirits = mutation({
       name: "Standard Opening",
       description:
         "A balanced opening focusing on energy generation and board control.",
-      difficulty: "Beginner",
       turns: [
         {
           turn: 1,
@@ -363,6 +362,8 @@ export const seedSpirits = mutation({
       ],
       author: "Spirit Island Community",
       sourceUrl: "https://querki.net/u/darker/spirit-island-faq",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
 
     return {
@@ -714,7 +715,6 @@ export const reseedSpirits = mutation({
       name: "Standard Opening",
       description:
         "A balanced opening focusing on energy generation and board control.",
-      difficulty: "Beginner",
       turns: [
         {
           turn: 1,
@@ -743,6 +743,8 @@ export const reseedSpirits = mutation({
       ],
       author: "Spirit Island Community",
       sourceUrl: "https://querki.net/u/darker/spirit-island-faq",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
 
     return {

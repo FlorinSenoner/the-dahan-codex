@@ -9,20 +9,20 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 
 ## Current Position
 
-Phase: 4 (PWA & Offline)
-Plan: 9 of 9 (gap closure)
-Status: Phase complete
-Last activity: 2026-01-28 - Completed 04-09-PLAN.md (Service Worker Cleanup)
+Phase: 5 (Text Opening Management)
+Plan: 2 of 6 (spirit search)
+Status: In progress
+Last activity: 2026-01-30 - Completed 05-02-PLAN.md (Spirit Search)
 
-Progress: [############################            ] 62% (Phase 4 complete)
+Progress: [##############################          ] 65% (Plan 05-02 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 58
+- Total plans completed: 59
 - Average duration: 4.4 min
-- Total execution time: 4.42 hours
+- Total execution time: 4.50 hours
 
 **By Phase:**
 
@@ -41,8 +41,8 @@ Progress: [############################            ] 62% (Phase 4 complete)
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 4 min, 4 min, 5 min, 3 min
-- Trend: Phase 4 gap closure complete
+- Last 5 plans: 4 min, 4 min, 5 min, 3 min, 5 min
+- Trend: Phase 5 in progress
 
 _Updated after each plan completion_
 
@@ -223,6 +223,9 @@ affecting current work:
 - createIDBPersister factory function for idb-keyval integration with TanStack Query
 - Convex data cached via TanStack Query/IndexedDB, not service worker (WebSocket protocol)
 - JSDoc comments on route components documenting offline behavior expectations
+- Client-side search filtering with useDeferredValue for smooth typing
+- URL ?search= parameter for shareable filtered spirit lists
+- Search applies after backend filters (complexity/elements) for composable filtering
 
 ### Pending Todos
 
@@ -466,8 +469,19 @@ Phase 4 (PWA & Offline) complete:
 - [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
 - [x] 04-09: Service Worker Cleanup (remove dead Convex caching rule, document offline architecture)
 
+## Phase 5 Progress
+
+Phase 5 (Text Opening Management) in progress:
+
+- [ ] 05-01: Admin Role & Edit Mode (pending - some work done but not complete)
+- [x] 05-02: Spirit Search (search input with URL persistence)
+- [ ] 05-03: Opening List Improvements
+- [ ] 05-04: Opening Editor
+- [ ] 05-05: Opening CRUD Operations
+- [ ] 05-06: E2E Tests
+
 ## Session Continuity
 
-Last session: 2026-01-28
-Stopped at: Completed 04-09-PLAN.md (Service Worker Cleanup) - Phase 4 complete
+Last session: 2026-01-30
+Stopped at: Completed 05-02-PLAN.md (Spirit Search)
 Resume file: None
