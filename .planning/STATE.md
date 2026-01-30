@@ -227,7 +227,7 @@ affecting current work:
 - Client-side search filtering with useDeferredValue for smooth typing
 - URL ?search= parameter for shareable filtered spirit lists
 - Search applies after backend filters (complexity/elements) for composable filtering
-- useAdmin hook checks Clerk publicMetadata.isAdmin === true for frontend admin status
+- useAdmin hook checks Clerk publicMetadata.role === "admin" for frontend admin status (role-based for future RBAC expansion)
 - Opening mutations (createOpening, updateOpening, deleteOpening) protected by requireAdmin(ctx)
 - Opening timestamps (createdAt, updatedAt) optional in schema for backward compatibility
 - Opening slug auto-generated from name: lowercase, remove special chars, replace spaces with dashes
@@ -500,8 +500,12 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-05: Opening CRUD Operations (CRUD mutations, EditFab integration, navigation blocking)
 - [ ] 05-06: E2E Tests
 
+**Gap Closure Plans:**
+
+- [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
+
 ## Session Continuity
 
-Last session: 2026-01-30
-Stopped at: Completed 05-05-PLAN.md (Opening CRUD Operations)
+Last session: 2026-01-31
+Stopped at: Completed 05-07-PLAN.md (Role System Change)
 Resume file: None
