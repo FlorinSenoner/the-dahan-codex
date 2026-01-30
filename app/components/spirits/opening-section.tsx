@@ -2,20 +2,136 @@ import { convexQuery } from "@convex-dev/react-query";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "convex/_generated/api";
 import type { Id } from "convex/_generated/dataModel";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Plus } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  EditableOpening,
+  type OpeningFormData,
+} from "@/components/admin/editable-opening";
+import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
+import { useEditMode } from "@/hooks/use-edit-mode";
 import { TurnAccordion } from "./turn-accordion";
 
 interface OpeningSectionProps {
   spiritId: Id<"spirits">;
+  onFormDataChange?: (
+    data: OpeningFormData | null,
+    openingId: Id<"openings"> | null,
+  ) => void;
+  onHasChangesChange?: (hasChanges: boolean) => void;
 }
 
 // Design: Each spirit (base or aspect) queries openings by its own _id.
 // Aspects never inherit openings from their base spirit.
-export function OpeningSection({ spiritId }: OpeningSectionProps) {
+export function OpeningSection({
+  spiritId,
+  onFormDataChange,
+  onHasChangesChange,
+}: OpeningSectionProps) {
   const { data: openings, isLoading } = useQuery(
     convexQuery(api.openings.listBySpirit, { spiritId }),
   );
+  const { isEditing } = useEditMode();
+
+  // For now, just show the first opening
+  // Future: add tabs for multiple openings
+  const opening = openings?.[0] ?? null;
+
+  // Form data state for edit mode
+  const [formData, setFormData] = useState<OpeningFormData | null>(null);
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
+
+  // Create empty form data for new opening
+  const createEmptyFormData = useCallback((): OpeningFormData => {
+    return {
+      name: "",
+      description: "",
+      turns: [{ turn: 1, title: "", instructions: "", notes: "" }],
+      author: "",
+      sourceUrl: "",
+    };
+  }, []);
+
+  // Initialize form data from opening when entering edit mode
+  useEffect(() => {
+    if (isEditing && opening && !isCreatingNew) {
+      setFormData({
+        name: opening.name,
+        description: opening.description || "",
+        turns: opening.turns.map((t) => ({
+          turn: t.turn,
+          title: t.title || "",
+          instructions: t.instructions,
+          notes: t.notes || "",
+        })),
+        author: opening.author || "",
+        sourceUrl: opening.sourceUrl || "",
+      });
+    } else if (!isEditing) {
+      // Reset form data when exiting edit mode
+      setFormData(null);
+      setIsCreatingNew(false);
+    }
+  }, [isEditing, opening, isCreatingNew]);
+
+  // Calculate if there are changes
+  const hasChanges = useMemo(() => {
+    if (!formData) return false;
+
+    // New opening - has changes if name is filled
+    if (isCreatingNew) {
+      return formData.name.trim().length > 0;
+    }
+
+    // Existing opening - compare with original
+    if (!opening) return false;
+
+    if (formData.name !== opening.name) return true;
+    if (formData.description !== (opening.description || "")) return true;
+    if (formData.author !== (opening.author || "")) return true;
+    if (formData.sourceUrl !== (opening.sourceUrl || "")) return true;
+    if (formData.turns.length !== opening.turns.length) return true;
+
+    for (let i = 0; i < formData.turns.length; i++) {
+      const formTurn = formData.turns[i];
+      const origTurn = opening.turns[i];
+      if (formTurn.turn !== origTurn.turn) return true;
+      if (formTurn.title !== (origTurn.title || "")) return true;
+      if (formTurn.instructions !== origTurn.instructions) return true;
+      if (formTurn.notes !== (origTurn.notes || "")) return true;
+    }
+
+    return false;
+  }, [formData, opening, isCreatingNew]);
+
+  // Notify parent of changes
+  useEffect(() => {
+    onHasChangesChange?.(hasChanges);
+  }, [hasChanges, onHasChangesChange]);
+
+  // Notify parent of form data changes
+  useEffect(() => {
+    if (formData) {
+      onFormDataChange?.(
+        formData,
+        isCreatingNew ? null : (opening?._id ?? null),
+      );
+    } else {
+      onFormDataChange?.(null, null);
+    }
+  }, [formData, isCreatingNew, opening, onFormDataChange]);
+
+  // Handle form data change
+  const handleFormDataChange = useCallback((data: OpeningFormData) => {
+    setFormData(data);
+  }, []);
+
+  // Handle creating new opening
+  const handleCreateNew = useCallback(() => {
+    setIsCreatingNew(true);
+    setFormData(createEmptyFormData());
+  }, [createEmptyFormData]);
 
   // Loading state
   if (isLoading) {
@@ -30,15 +146,54 @@ export function OpeningSection({ spiritId }: OpeningSectionProps) {
     );
   }
 
-  // Don't render section if no openings exist
-  if (!openings || openings.length === 0) {
+  // Edit mode: show editor or create button
+  if (isEditing) {
+    // Has opening or creating new - show editor
+    if ((opening && formData) || isCreatingNew) {
+      return (
+        <section className="space-y-4">
+          <Heading variant="h2" as="h2" className="flex items-center gap-2">
+            <BookOpen className="h-5 w-5" />
+            Openings
+          </Heading>
+
+          <EditableOpening
+            opening={opening}
+            formData={formData!}
+            onChange={handleFormDataChange}
+            isNew={isCreatingNew}
+          />
+        </section>
+      );
+    }
+
+    // No opening and not creating - show create button
+    return (
+      <section className="space-y-4">
+        <Heading variant="h2" as="h2" className="flex items-center gap-2">
+          <BookOpen className="h-5 w-5" />
+          Openings
+        </Heading>
+
+        <div className="bg-card border border-dashed border-border rounded-lg p-8 text-center">
+          <Text variant="muted" className="mb-4">
+            No openings yet for this spirit.
+          </Text>
+          <Button onClick={handleCreateNew}>
+            <Plus className="h-4 w-4 mr-2" />
+            Add Opening
+          </Button>
+        </div>
+      </section>
+    );
+  }
+
+  // Read-only mode: don't render section if no openings exist
+  if (!opening) {
     return null;
   }
 
-  // For now, just show the first opening
-  // Future: add tabs for multiple openings
-  const opening = openings[0];
-
+  // Read-only mode: show opening display
   return (
     <section className="space-y-4">
       <Heading variant="h2" as="h2" className="flex items-center gap-2">
