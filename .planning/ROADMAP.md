@@ -332,16 +332,24 @@ Plans:
 4. Saved opening appears in public opening list for that spirit
 5. Search finds spirits by name and description
 
-**Plans**: 6 plans
+**Plans**: 14 plans (6 original + 8 gap closure)
 
 Plans:
 
-- [ ] 05-01-PLAN.md — Admin infrastructure (useAdmin hook, schema updates, Convex mutations)
-- [ ] 05-02-PLAN.md — Spirit search (search bar, URL state, client-side filtering)
-- [ ] 05-03-PLAN.md — Edit mode infrastructure (URL state, FAB, navigation blocking)
-- [ ] 05-04-PLAN.md — Inline editing components (EditableText, EditableOpening)
-- [ ] 05-05-PLAN.md — Spirit detail integration (CRUD wiring, save/delete)
+- [x] 05-01-PLAN.md — Admin infrastructure (useAdmin hook, schema updates, Convex mutations)
+- [x] 05-02-PLAN.md — Spirit search (search bar, URL state, client-side filtering)
+- [x] 05-03-PLAN.md — Edit mode infrastructure (URL state, FAB, navigation blocking)
+- [x] 05-04-PLAN.md — Inline editing components (EditableText, EditableOpening)
+- [x] 05-05-PLAN.md — Spirit detail integration (CRUD wiring, save/delete)
 - [ ] 05-06-PLAN.md — E2E tests and verification (admin access, search, CRUD)
+- [ ] 05-07-PLAN.md — Role system update (isAdmin to role-based) [gap closure]
+- [ ] 05-08-PLAN.md — Remove turn notes field [gap closure]
+- [ ] 05-09-PLAN.md — Fix auto-save flickering [gap closure]
+- [ ] 05-10-PLAN.md — Turn validation [gap closure]
+- [ ] 05-11-PLAN.md — Navigation warning fix [gap closure]
+- [ ] 05-12-PLAN.md — Themed delete modals [gap closure]
+- [ ] 05-13-PLAN.md — Scroll behavior fix [gap closure]
+- [ ] 05-14-PLAN.md — Multiple openings support [gap closure]
 
 ### Phase 6: User Data
 
@@ -417,7 +425,7 @@ development:
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
-| 5. Text Opening Management           | 0/6            | Planned     | -          |
+| 5. Text Opening Management           | 5/14           | In Progress | -          |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
