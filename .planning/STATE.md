@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 4 of 6 (opening editor)
+Plan: 5 of 6 (opening CRUD)
 Status: In progress
-Last activity: 2026-01-30 - Completed 05-04-PLAN.md (Opening Editor)
+Last activity: 2026-01-30 - Completed 05-05-PLAN.md (Opening CRUD Operations)
 
-Progress: [################################        ] 68% (Plan 05-04 complete)
+Progress: [##################################      ] 70% (Plan 05-05 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 61
+- Total plans completed: 62
 - Average duration: 4.4 min
-- Total execution time: 4.61 hours
+- Total execution time: 4.66 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [################################        ] 68% (Plan 05-04 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 4     | 15 min | 3.8 min  |
+| 05    | 5     | 18 min | 3.6 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 3 min, 5 min, 8 min, 2 min
-- Trend: Phase 5 wave 2 in progress (05-04 complete)
+- Last 5 plans: 3 min, 5 min, 8 min, 2 min, 3 min
+- Trend: Phase 5 wave 3 in progress (05-05 complete)
 
 _Updated after each plan completion_
 
@@ -243,6 +243,9 @@ affecting current work:
 - hasChanges calculated via deep comparison in useMemo
 - Form data change propagation: child calls onChange, parent tracks hasChanges
 - Edit mode section pattern: show editor when isEditing, show display otherwise
+- Save handler exposed via callback pattern (onSaveHandlerReady prop)
+- useBlocker with shouldBlockFn API for navigation warning (TanStack Router v1.40+)
+- isSaving tracked in parent for unified loading state across save button
 
 ### Pending Todos
 
@@ -494,11 +497,11 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-02: Spirit Search (search input with URL persistence)
 - [x] 05-03: Edit Mode Infrastructure (useEditMode hook, EditFab component)
 - [x] 05-04: Opening Editor (EditableText, EditableOpening, OpeningSection edit mode)
-- [ ] 05-05: Opening CRUD Operations
+- [x] 05-05: Opening CRUD Operations (CRUD mutations, EditFab integration, navigation blocking)
 - [ ] 05-06: E2E Tests
 
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed 05-04-PLAN.md (Opening Editor)
+Stopped at: Completed 05-05-PLAN.md (Opening CRUD Operations)
 Resume file: None
