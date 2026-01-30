@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "convex/_generated/api";
 import type { Id } from "convex/_generated/dataModel";
 import { BookOpen } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Heading, Text } from "@/components/ui/typography";
 import { TurnAccordion } from "./turn-accordion";
 
@@ -48,16 +47,9 @@ export function OpeningSection({ spiritId }: OpeningSectionProps) {
       </Heading>
 
       <div className="bg-card border border-border rounded-lg p-4 space-y-4">
-        <div className="flex items-center justify-between">
-          <Heading variant="h3" as="h3">
-            {opening.name}
-          </Heading>
-          {opening.difficulty && (
-            <Badge variant="outline" className="text-xs">
-              {opening.difficulty}
-            </Badge>
-          )}
-        </div>
+        <Heading variant="h3" as="h3">
+          {opening.name}
+        </Heading>
 
         {opening.description && (
           <Text variant="muted">{opening.description}</Text>
