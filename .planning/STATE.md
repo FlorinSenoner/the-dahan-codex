@@ -259,6 +259,9 @@ affecting current work:
 - Form state reset via setFormData(null) triggers re-init from query data
 - isValid controls button disabled state, save visible when hasChanges
 - Save handler exits edit mode after successful save
+- Delete opening uses { ...search, opening: undefined } to preserve all params while removing opening
+- Delete turn button hidden when only 1 turn exists (formData.turns.length > 1 conditional)
+- app/contexts/*.tsx added to knip entry points for context files
 
 ### Pending Todos
 
