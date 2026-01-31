@@ -255,6 +255,10 @@ affecting current work:
 - Multiple openings tabs UI with URL-synced selection via ?opening=<id> query param
 - validateSearch in route config for typed search params (spirits.$slug.tsx)
 - Single opening spirits display without tabs wrapper for cleaner UI
+- useBlocker withResolver pattern for AlertDialog navigation blocking
+- Form state reset via setFormData(null) triggers re-init from query data
+- isValid controls button disabled state, save visible when hasChanges
+- Save handler exits edit mode after successful save
 
 ### Pending Todos
 
