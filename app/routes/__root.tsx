@@ -8,6 +8,7 @@ import { BottomNav } from "../components/layout/bottom-nav";
 import { InstallPrompt } from "../components/pwa/install-prompt";
 import { OfflineIndicator } from "../components/pwa/offline-indicator";
 import { UpdateBanner } from "../components/pwa/update-banner";
+import { Toaster } from "../components/ui/sonner";
 import { EditModeProvider } from "../contexts/edit-mode-context";
 import { useServiceWorker } from "../hooks/use-service-worker";
 
@@ -42,6 +43,7 @@ function RootComponent() {
           <InstallPrompt />
           <Outlet />
           <BottomNav />
+          <Toaster />
         </EditModeProvider>
       </ConvexProviderWithClerk>
     </ClerkProvider>
