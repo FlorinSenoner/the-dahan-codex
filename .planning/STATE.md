@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 6 (User Data)
-Plan: 5 of 9
+Plan: 6 of 9
 Status: In Progress
-Last activity: 2026-01-31 - Completed 06-05-PLAN.md (New Game Page)
+Last activity: 2026-01-31 - Completed 06-06-PLAN.md (Game Detail Page)
 
-Progress: [##################################################] 100% (21/21 plans complete)
+Progress: [##################################################] 100% (22/22 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 69
+- Total plans completed: 70
 - Average duration: 4.5 min
-- Total execution time: 5.18 hours
+- Total execution time: 5.28 hours
 
 **By Phase:**
 
@@ -39,12 +39,12 @@ Progress: [##################################################] 100% (21/21 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
-| 06    | 5     | 28 min | 5.6 min  |
+| 06    | 6     | 34 min | 5.7 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 3 min, 7 min, 9 min, 6 min
-- Trend: Phase 6 in progress (06-05 complete)
+- Last 5 plans: 3 min, 7 min, 9 min, 6 min, 6 min
+- Trend: Phase 6 in progress (06-06 complete)
 
 _Updated after each plan completion_
 
@@ -563,10 +563,10 @@ Phase 6 (User Data) in progress:
 - [x] 06-03: Game List Page (games routes, GameRow, bottom nav)
 - [x] 06-04: Game Form UI (GameForm, SpiritPicker, AdversaryPicker)
 - [x] 06-05: New Game Page (/games/new route, form wiring)
-- [ ] 06-06: Game Detail Page (/games/$id)
+- [x] 06-06: Game Detail Page (/games/$id)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 06-05-PLAN.md - New Game Page
+Stopped at: Completed 06-06-PLAN.md - Game Detail Page
 Resume file: None
