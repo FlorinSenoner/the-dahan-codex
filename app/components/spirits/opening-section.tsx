@@ -216,11 +216,10 @@ export function OpeningSection({
     if (!selectedOpening) return;
     try {
       await deleteOpeningMutation({ id: selectedOpening._id });
-      // Clear URL opening param to go back to first opening
-      const { opening: _, ...rest } = search;
+      // Clear URL opening param to go back to first opening, but preserve edit mode
       navigate({
         // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
-        search: rest as any,
+        search: { ...search, opening: undefined } as any,
         replace: true,
       });
       setFormData(null);
