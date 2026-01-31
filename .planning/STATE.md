@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 6 (User Data)
-Plan: 7 of 9
+Plan: 8 of 9
 Status: In Progress
-Last activity: 2026-01-31 - Completed 06-07-PLAN.md (CSV Export)
+Last activity: 2026-01-31 - Completed 06-08-PLAN.md (CSV Import)
 
 Progress: [##################################################] 100% (22/22 plans complete)
 
@@ -20,9 +20,9 @@ Progress: [##################################################] 100% (22/22 plans
 
 **Velocity:**
 
-- Total plans completed: 71
+- Total plans completed: 72
 - Average duration: 4.5 min
-- Total execution time: 5.31 hours
+- Total execution time: 5.38 hours
 
 **By Phase:**
 
@@ -39,12 +39,12 @@ Progress: [##################################################] 100% (22/22 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
-| 06    | 7     | 36 min | 5.1 min  |
+| 06    | 8     | 40 min | 5.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 7 min, 9 min, 6 min, 6 min, 2 min
-- Trend: Phase 6 in progress (06-07 complete)
+- Last 5 plans: 9 min, 6 min, 6 min, 2 min, 4 min
+- Trend: Phase 6 in progress (06-08 complete)
 
 _Updated after each plan completion_
 
@@ -274,6 +274,9 @@ affecting current work:
 - Composite key pattern for spirit list: spiritId when selected, otherwise slot-{index}
 - Reference data (ADVERSARIES, SCENARIOS, WIN_TYPES) as hardcoded constants for v1
 - Games components directory added to knip entry points
+- CSV import uses full replacement on ID match (missing fields removed from existing records)
+- Import doesn't resolve spirit IDs - uses name only (CSV format limitation)
+- CSVPreview composite key: id or date+spirit1+index for unique keys
 
 ### Pending Todos
 
@@ -565,9 +568,10 @@ Phase 6 (User Data) in progress:
 - [x] 06-05: New Game Page (/games/new route, form wiring)
 - [x] 06-06: Game Detail Page (/games/$id)
 - [x] 06-07: CSV Export (exportGamesToCSV utility, Export button)
+- [x] 06-08: CSV Import (import utility, preview, importGames mutation)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 06-07-PLAN.md - CSV Export
+Stopped at: Completed 06-08-PLAN.md - CSV Import
 Resume file: None
