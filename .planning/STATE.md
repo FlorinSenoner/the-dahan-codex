@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 18 of 18 (all gap closures complete)
-Status: Ready for UAT
-Last activity: 2026-01-31 - Completed 05-18-PLAN.md
+Plan: 18 of 18 (all plans complete including 05-06)
+Status: Phase Complete
+Last activity: 2026-01-31 - Completed 05-06-PLAN.md (E2E tests + checkpoint fixes)
 
 Progress: [##################################################] 100% (18/18 plans complete)
 
@@ -262,6 +262,8 @@ affecting current work:
 - Delete opening uses { ...search, opening: undefined } to preserve all params while removing opening
 - Delete turn button hidden when only 1 turn exists (formData.turns.length > 1 conditional)
 - app/contexts/*.tsx added to knip entry points for context files
+- useBlocker shouldBlockFn must check isEditing && hasChanges && !isSaving to prevent false positives
+- Loading spinner (Loader2 with animate-spin) shown on save button during async save operations
 
 ### Pending Todos
 
@@ -514,7 +516,7 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-03: Edit Mode Infrastructure (useEditMode hook, EditFab component)
 - [x] 05-04: Opening Editor (EditableText, EditableOpening, OpeningSection edit mode)
 - [x] 05-05: Opening CRUD Operations (CRUD mutations, EditFab integration, navigation blocking)
-- [ ] 05-06: E2E Tests
+- [x] 05-06: E2E Tests (search tests, admin access tests, navigation blocker fixes)
 
 **Gap Closure Plans:**
 
@@ -531,8 +533,19 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-17: Navigation Warning Dialog (AlertDialog for unsaved changes)
 - [x] 05-18: Edit Mode Scroll Fix (React Context instead of URL state)
 
+## Phase 5 Summary
+
+Phase 5 (Text Opening Management) is now complete with:
+
+- Admin infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
+- Spirit search with URL persistence and aspect name filtering
+- Edit mode with React Context for session-scoped state
+- Opening editor (inline editing, validation, navigation blocking)
+- E2E tests for search and admin access control
+- 26 total E2E tests passing
+
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-18-PLAN.md - All Phase 5 gap closures complete
+Stopped at: Completed 05-06-PLAN.md - Phase 5 complete
 Resume file: None
