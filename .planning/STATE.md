@@ -246,6 +246,7 @@ affecting current work:
 - Save handler exposed via callback pattern (onSaveHandlerReady prop)
 - useBlocker with shouldBlockFn API for navigation warning (TanStack Router v1.40+)
 - isSaving tracked in parent for unified loading state across save button
+- Single wrapper pattern for edit mode components: Keep outer container mounted, swap only inner content to preserve scroll position
 
 ### Pending Todos
 
@@ -504,9 +505,10 @@ Phase 5 (Text Opening Management) in progress:
 
 - [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
 - [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
+- [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-08-PLAN.md (Remove Turn Notes Field)
+Stopped at: Completed 05-13-PLAN.md (Fix Scroll Behavior on Edit Toggle)
 Resume file: None
