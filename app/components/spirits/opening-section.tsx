@@ -188,30 +188,19 @@ export function OpeningSection({
     setFormData(createEmptyFormData());
   }, [createEmptyFormData]);
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <section className="space-y-4">
-        <Heading variant="h2" as="h2" className="flex items-center gap-2">
-          <BookOpen className="h-5 w-5" />
-          Openings
-        </Heading>
-        <div className="animate-pulse bg-muted/30 rounded-lg h-32" />
-      </section>
-    );
-  }
+  // Render content based on state
+  // Use single section wrapper to prevent layout shifts when toggling edit mode
+  const renderContent = () => {
+    // Loading state
+    if (isLoading) {
+      return <div className="animate-pulse bg-muted/30 rounded-lg h-32" />;
+    }
 
-  // Edit mode: show editor or create button
-  if (isEditing) {
-    // Has opening or creating new - show editor
-    if ((opening && formData) || isCreatingNew) {
-      return (
-        <section className="space-y-4">
-          <Heading variant="h2" as="h2" className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5" />
-            Openings
-          </Heading>
-
+    // Edit mode: show editor or create button
+    if (isEditing) {
+      // Has opening or creating new - show editor
+      if ((opening && formData) || isCreatingNew) {
+        return (
           <EditableOpening
             opening={opening}
             formData={formData!}
@@ -219,18 +208,11 @@ export function OpeningSection({
             onDelete={handleDelete}
             isNew={isCreatingNew}
           />
-        </section>
-      );
-    }
+        );
+      }
 
-    // No opening and not creating - show create button
-    return (
-      <section className="space-y-4">
-        <Heading variant="h2" as="h2" className="flex items-center gap-2">
-          <BookOpen className="h-5 w-5" />
-          Openings
-        </Heading>
-
+      // No opening and not creating - show create button
+      return (
         <div className="bg-card border border-dashed border-border rounded-lg p-8 text-center">
           <Text variant="muted" className="mb-4">
             No openings yet for this spirit.
@@ -240,23 +222,16 @@ export function OpeningSection({
             Add Opening
           </Button>
         </div>
-      </section>
-    );
-  }
+      );
+    }
 
-  // Read-only mode: don't render section if no openings exist
-  if (!opening) {
-    return null;
-  }
+    // Read-only mode: no content if no openings exist
+    if (!opening) {
+      return null;
+    }
 
-  // Read-only mode: show opening display
-  return (
-    <section className="space-y-4">
-      <Heading variant="h2" as="h2" className="flex items-center gap-2">
-        <BookOpen className="h-5 w-5" />
-        Openings
-      </Heading>
-
+    // Read-only mode: show opening display
+    return (
       <div className="bg-card border border-border rounded-lg p-4 space-y-4">
         <Heading variant="h3" as="h3">
           {opening.name}
@@ -285,6 +260,24 @@ export function OpeningSection({
           </div>
         )}
       </div>
+    );
+  };
+
+  const content = renderContent();
+
+  // In read-only mode with no openings, don't render the section at all
+  // But always render when editing (to show create button) or loading
+  if (!isEditing && !isLoading && !opening) {
+    return null;
+  }
+
+  return (
+    <section className="space-y-4">
+      <Heading variant="h2" as="h2" className="flex items-center gap-2">
+        <BookOpen className="h-5 w-5" />
+        Openings
+      </Heading>
+      {content}
     </section>
   );
 }
