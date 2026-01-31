@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 10 of 10+ (gap closures in progress)
+Plan: 14 of 14+ (gap closures in progress)
 Status: In progress
-Last activity: 2026-01-31 - Completed 05-10-PLAN.md (Turn Validation)
+Last activity: 2026-01-31 - Completed 05-14-PLAN.md (Multiple Openings Tabs UI)
 
-Progress: [#####################################   ] 77% (Plan 05-10 complete)
+Progress: [########################################] 80% (Plan 05-14 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 64
+- Total plans completed: 65
 - Average duration: 4.4 min
-- Total execution time: 4.78 hours
+- Total execution time: 4.83 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [#####################################   ] 77% (Plan 05-10 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 8     | 28 min | 3.5 min  |
+| 05    | 9     | 31 min | 3.4 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 8 min, 2 min, 3 min, 3 min, 4 min
-- Trend: Phase 5 gap closures in progress (05-10 complete)
+- Last 5 plans: 2 min, 3 min, 3 min, 4 min, 3 min
+- Trend: Phase 5 gap closures in progress (05-14 complete)
 
 _Updated after each plan completion_
 
@@ -251,6 +251,9 @@ affecting current work:
 - isValid useMemo pattern for form validation (checks name, turns, title, instructions)
 - Save handler exposed only when hasChanges AND isValid are true
 - Visual validation feedback via border-destructive class on empty required fields
+- Multiple openings tabs UI with URL-synced selection via ?opening=<id> query param
+- validateSearch in route config for typed search params (spirits.$slug.tsx)
+- Single opening spirits display without tabs wrapper for cleaner UI
 
 ### Pending Todos
 
@@ -514,9 +517,10 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-11: Navigation Warning (verified useBlocker works after callback stabilization)
 - [x] 05-12: Delete Confirmation Modals (AlertDialog replaces browser confirm() for themed UX)
 - [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
+- [x] 05-14: Multiple Openings Tabs UI (tabs for multiple openings, URL-synced selection)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-10-PLAN.md (Turn Validation)
+Stopped at: Completed 05-14-PLAN.md (Multiple Openings Tabs UI)
 Resume file: None
