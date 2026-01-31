@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 15 of 18 (gap closure plans)
-Status: In progress
-Last activity: 2026-01-31 - Completed 05-15-PLAN.md
+Plan: 18 of 18 (all gap closures complete)
+Status: Ready for UAT
+Last activity: 2026-01-31 - Completed 05-18-PLAN.md
 
-Progress: [#########################################---------] 83% (15/18 plans complete)
+Progress: [##################################################] 100% (18/18 plans complete)
 
 ## Performance Metrics
 
@@ -42,8 +42,8 @@ Progress: [#########################################---------] 83% (15/18 plans 
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 3 min, 4 min, 3 min, 1 min
-- Trend: Phase 5 gap closures in progress (05-15 complete)
+- Last 5 plans: 3 min, 4 min, 3 min, 1 min, 4 min
+- Trend: Phase 5 gap closures complete (05-18 complete)
 
 _Updated after each plan completion_
 
@@ -232,8 +232,9 @@ affecting current work:
 - Opening timestamps (createdAt, updatedAt) optional in schema for backward compatibility
 - Opening slug auto-generated from name: lowercase, remove special chars, replace spaces with dashes
 - Difficulty field deprecated in openings schema but kept optional for existing production data
-- useEditMode hook uses URL ?edit=true for state persistence across refreshes
-- Edit mode defense-in-depth: isEditing = isAdmin && search.edit === true (non-admins cannot activate even with URL param)
+- useEditMode hook uses React Context for session-scoped edit state (not URL to avoid scroll jump)
+- Edit mode defense-in-depth: isEditing = isAdmin && isEditMode (non-admins cannot activate)
+- EditModeProvider wraps app content inside ConvexProviderWithClerk
 - EditFab positioned bottom-20 to stay above bottom nav (which uses bottom-16)
 - Admin components directory: app/components/admin/ with knip entry point
 - biome-ignore for TanStack Router search typing with strict: false (necessary for route-agnostic hooks)
@@ -519,9 +520,12 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
 - [x] 05-14: Multiple Openings Tabs UI (tabs for multiple openings, URL-synced selection)
 - [x] 05-15: Aspect Name Search (aspectName field added to search filter)
+- [x] 05-16: Form State Reset (reset form after save, expose isValid)
+- [x] 05-17: Navigation Warning Dialog (AlertDialog for unsaved changes)
+- [x] 05-18: Edit Mode Scroll Fix (React Context instead of URL state)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-15-PLAN.md
+Stopped at: Completed 05-18-PLAN.md - All Phase 5 gap closures complete
 Resume file: None
