@@ -168,8 +168,9 @@ export function EditableOpening({
               value={turn.title || ""}
               onChange={(v) => updateTurn(index, { title: v })}
               isEditing={true}
-              placeholder="Turn title (optional)"
+              placeholder="Turn title *"
               className="text-sm"
+              required
             />
             <EditableText
               value={turn.instructions}

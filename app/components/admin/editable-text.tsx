@@ -33,10 +33,15 @@ export function EditableText({
     );
   }
 
+  const showError = required && !value.trim();
+
   const inputClassName = cn(
-    "w-full bg-muted/30 border border-primary/30 rounded px-2 py-1",
-    "focus:border-primary focus:ring-1 focus:ring-primary/50 focus:outline-none",
+    "w-full bg-muted/30 border rounded px-2 py-1",
+    "focus:ring-1 focus:outline-none",
     "text-foreground placeholder:text-muted-foreground",
+    showError
+      ? "border-destructive focus:border-destructive focus:ring-destructive/50"
+      : "border-primary/30 focus:border-primary focus:ring-primary/50",
     className,
   );
 

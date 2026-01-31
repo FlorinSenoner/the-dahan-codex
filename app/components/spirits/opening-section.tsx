@@ -78,6 +78,18 @@ export function OpeningSection({
     }
   }, [isEditing, opening, isCreatingNew]);
 
+  // Calculate if form is valid (all required fields filled)
+  const isValid = useMemo(() => {
+    if (!formData) return false;
+    if (!formData.name.trim()) return false;
+    if (formData.turns.length === 0) return false;
+    for (const turn of formData.turns) {
+      if (!turn.title?.trim()) return false;
+      if (!turn.instructions.trim()) return false;
+    }
+    return true;
+  }, [formData]);
+
   // Calculate if there are changes
   const hasChanges = useMemo(() => {
     if (!formData) return false;
@@ -172,10 +184,10 @@ export function OpeningSection({
     }
   }, [opening, deleteOpeningMutation]);
 
-  // Expose save handler to parent
+  // Expose save handler to parent only when valid and has changes
   useEffect(() => {
-    onSaveHandlerReady?.(formData && hasChanges ? handleSave : null);
-  }, [formData, hasChanges, handleSave, onSaveHandlerReady]);
+    onSaveHandlerReady?.(formData && hasChanges && isValid ? handleSave : null);
+  }, [formData, hasChanges, isValid, handleSave, onSaveHandlerReady]);
 
   // Handle form data change
   const handleFormDataChange = useCallback((data: OpeningFormData) => {
