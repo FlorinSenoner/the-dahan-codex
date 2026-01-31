@@ -22,6 +22,7 @@ import { Route as AuthenticatedGamesRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedGamesIndexRouteImport } from './routes/_authenticated/games/index'
 import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$aspect'
 import { Route as AuthenticatedGamesNewRouteImport } from './routes/_authenticated/games/new'
+import { Route as AuthenticatedGamesImportRouteImport } from './routes/_authenticated/games/import'
 import { Route as AuthenticatedGamesIdRouteImport } from './routes/_authenticated/games/$id'
 
 const SpiritsRoute = SpiritsRouteImport.update({
@@ -88,6 +89,12 @@ const AuthenticatedGamesNewRoute = AuthenticatedGamesNewRouteImport.update({
   path: '/new',
   getParentRoute: () => AuthenticatedGamesRoute,
 } as any)
+const AuthenticatedGamesImportRoute =
+  AuthenticatedGamesImportRouteImport.update({
+    id: '/import',
+    path: '/import',
+    getParentRoute: () => AuthenticatedGamesRoute,
+  } as any)
 const AuthenticatedGamesIdRoute = AuthenticatedGamesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -105,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits/': typeof SpiritsIndexRoute
   '/games/$id': typeof AuthenticatedGamesIdRoute
+  '/games/import': typeof AuthenticatedGamesImportRoute
   '/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
   '/games/': typeof AuthenticatedGamesIndexRoute
@@ -118,6 +126,7 @@ export interface FileRoutesByTo {
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits': typeof SpiritsIndexRoute
   '/games/$id': typeof AuthenticatedGamesIdRoute
+  '/games/import': typeof AuthenticatedGamesImportRoute
   '/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
   '/games': typeof AuthenticatedGamesIndexRoute
@@ -135,6 +144,7 @@ export interface FileRoutesById {
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
   '/spirits/': typeof SpiritsIndexRoute
   '/_authenticated/games/$id': typeof AuthenticatedGamesIdRoute
+  '/_authenticated/games/import': typeof AuthenticatedGamesImportRoute
   '/_authenticated/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
   '/_authenticated/games/': typeof AuthenticatedGamesIndexRoute
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/spirits/$slug'
     | '/spirits/'
     | '/games/$id'
+    | '/games/import'
     | '/games/new'
     | '/spirits/$slug/$aspect'
     | '/games/'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/spirits/$slug'
     | '/spirits'
     | '/games/$id'
+    | '/games/import'
     | '/games/new'
     | '/spirits/$slug/$aspect'
     | '/games'
@@ -181,6 +193,7 @@ export interface FileRouteTypes {
     | '/spirits/$slug'
     | '/spirits/'
     | '/_authenticated/games/$id'
+    | '/_authenticated/games/import'
     | '/_authenticated/games/new'
     | '/spirits/$slug/$aspect'
     | '/_authenticated/games/'
@@ -288,6 +301,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGamesNewRouteImport
       parentRoute: typeof AuthenticatedGamesRoute
     }
+    '/_authenticated/games/import': {
+      id: '/_authenticated/games/import'
+      path: '/import'
+      fullPath: '/games/import'
+      preLoaderRoute: typeof AuthenticatedGamesImportRouteImport
+      parentRoute: typeof AuthenticatedGamesRoute
+    }
     '/_authenticated/games/$id': {
       id: '/_authenticated/games/$id'
       path: '/$id'
@@ -300,12 +320,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedGamesRouteChildren {
   AuthenticatedGamesIdRoute: typeof AuthenticatedGamesIdRoute
+  AuthenticatedGamesImportRoute: typeof AuthenticatedGamesImportRoute
   AuthenticatedGamesNewRoute: typeof AuthenticatedGamesNewRoute
   AuthenticatedGamesIndexRoute: typeof AuthenticatedGamesIndexRoute
 }
 
 const AuthenticatedGamesRouteChildren: AuthenticatedGamesRouteChildren = {
   AuthenticatedGamesIdRoute: AuthenticatedGamesIdRoute,
+  AuthenticatedGamesImportRoute: AuthenticatedGamesImportRoute,
   AuthenticatedGamesNewRoute: AuthenticatedGamesNewRoute,
   AuthenticatedGamesIndexRoute: AuthenticatedGamesIndexRoute,
 }
