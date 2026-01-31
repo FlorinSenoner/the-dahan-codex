@@ -12,7 +12,7 @@ import {
 import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { EditFab } from "@/components/admin/edit-fab";
 import { ExternalLinks } from "@/components/spirits/external-links";
 import { OpeningSection } from "@/components/spirits/opening-section";
@@ -245,8 +245,26 @@ export function SpiritDetailContent({
   // Only block when isEditing AND hasChanges AND not currently saving
   // The !isSaving check prevents the blocker from firing during save operations
   // (e.g., when creating a new opening navigates to the new ID)
+  //
+  // IMPORTANT: Use ref pattern to avoid stale closure issues with shouldBlockFn.
+  // TanStack Router's beforeunload listener may not re-register on every render,
+  // so we need to ensure shouldBlockFn always reads the latest values via ref.
+  //
+  // CRITICAL: enableBeforeUnload must also use the same condition. By default it's
+  // true, which causes the browser's "Changes may not be saved" dialog to ALWAYS
+  // appear on reload, regardless of shouldBlockFn. We must explicitly disable it
+  // when there are no unsaved changes.
+  const blockerConditionRef = useRef({ isEditing, hasChanges, isSaving });
+  blockerConditionRef.current = { isEditing, hasChanges, isSaving };
+
+  const shouldBlock = () => {
+    const { isEditing, hasChanges, isSaving } = blockerConditionRef.current;
+    return isEditing && hasChanges && !isSaving;
+  };
+
   const blocker = useBlocker({
-    shouldBlockFn: () => isEditing && hasChanges && !isSaving,
+    shouldBlockFn: shouldBlock,
+    enableBeforeUnload: shouldBlock,
     withResolver: true,
   });
 

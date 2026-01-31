@@ -60,19 +60,21 @@ export function OpeningSection({
   // Form data state for edit mode
   const [formData, setFormData] = useState<OpeningFormData | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [_isSaving, setIsSaving] = useState(false);
 
   // Handle tab change - update URL
+  // resetScroll: false prevents TanStack Router from scrolling to top on URL change
   const handleTabChange = useCallback(
     (openingId: string) => {
       if (openingId === "new") {
         // Don't update URL for new opening tab, it's handled separately
         return;
       }
-      // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
       navigate({
+        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
         search: { ...search, opening: openingId } as any,
         replace: true,
+        resetScroll: false,
       });
     },
     [navigate, search],
@@ -181,10 +183,12 @@ export function OpeningSection({
           sourceUrl: formData.sourceUrl || undefined,
         });
         // Navigate to the newly created opening
-        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
+        // resetScroll: false prevents scroll jump when updating URL
         navigate({
+          // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
           search: { ...search, opening: newId } as any,
           replace: true,
+          resetScroll: false,
         });
       } else if (selectedOpening) {
         await updateOpeningMutation({
@@ -233,10 +237,12 @@ export function OpeningSection({
     try {
       await deleteOpeningMutation({ id: selectedOpening._id });
       // Clear URL opening param to go back to first opening, but preserve edit mode
+      // resetScroll: false prevents scroll jump when updating URL
       navigate({
         // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
         search: { ...search, opening: undefined } as any,
         replace: true,
+        resetScroll: false,
       });
       setFormData(null);
       setIsCreatingNew(false);
