@@ -59,16 +59,35 @@ pnpm ci               # Full CI: lint, typecheck, build, test
 2. Run tests: `pnpm test:e2e`
 3. Debug with UI: `pnpm test:e2e:ui`
 
-**Starting a new phase:**
+**Starting a new phase (CRITICAL: Branch First!):**
 
-1. Create branch from main: `git checkout -b feat/phase-<number>-<name>`
-   - Example: `feat/phase-5-text-opening-management`
-2. Work through all plans in the phase
-3. After phase complete, verify all checks pass: `pnpm ci`
-4. Push and create PR: `git push -u origin <branch> && gh pr create`
-5. Wait for CI to pass, then merge
-6. Return to main: `git checkout main && git pull`
-7. Ready for next phase
+GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`) commit to git automatically.
+**Never run these on main** — always create a feature branch first.
+
+1. **Create branch from main BEFORE planning:**
+   ```bash
+   git checkout main && git pull
+   git checkout -b feat/phase-<number>-<name>
+   ```
+   Example: `git checkout -b feat/phase-06-user-data`
+
+2. Plan the phase: `/gsd:plan-phase <number>`
+3. Execute the phase: `/gsd:execute-phase <number>`
+4. After phase complete, verify all checks pass: `pnpm ci`
+5. Push and create PR: `git push -u origin <branch> && gh pr create`
+6. Wait for CI to pass, then merge
+7. Return to main: `git checkout main && git pull`
+8. Ready for next phase
+
+**If you accidentally commit to main:**
+```bash
+# Create feature branch with your commits
+git checkout -b feat/phase-<N>-<name>
+# Reset main to origin
+git checkout main && git reset --hard origin/main
+# Continue work on feature branch
+git checkout feat/phase-<N>-<name>
+```
 
 ## Key Patterns
 
