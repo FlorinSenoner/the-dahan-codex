@@ -2,7 +2,7 @@ import { convexQuery } from "@convex-dev/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
-import { Download, Gamepad2, Plus } from "lucide-react";
+import { Download, Gamepad2, Plus, Upload } from "lucide-react";
 import { GameRow } from "@/components/games/game-row";
 import { Button } from "@/components/ui/button";
 import { exportGamesToCSV } from "@/lib/csv-export";
@@ -38,6 +38,12 @@ function GamesIndex() {
     <div className="flex flex-col">
       {/* Action bar */}
       <div className="flex justify-end gap-2 p-3 border-b border-border">
+        <Button asChild variant="outline" size="sm">
+          <Link to="/games/import">
+            <Upload className="h-4 w-4 mr-2" />
+            Import CSV
+          </Link>
+        </Button>
         <Button
           variant="outline"
           size="sm"
