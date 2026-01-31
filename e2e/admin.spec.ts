@@ -15,28 +15,6 @@ test.describe("Admin Features - Non-Admin User", () => {
     ).not.toBeVisible();
   });
 
-  test("edit URL param does not activate edit mode for non-admin", async ({
-    page,
-  }) => {
-    // Try to access edit mode via URL
-    await page.goto("/spirits/river-surges-in-sunlight?edit=true");
-
-    // Page should load normally
-    await expect(
-      page.getByRole("heading", { name: "River Surges in Sunlight" }),
-    ).toBeVisible({ timeout: 15000 });
-
-    // Edit FAB should still not be visible
-    await expect(
-      page.getByRole("button", { name: "Enter edit mode" }),
-    ).not.toBeVisible();
-
-    // No edit UI should be visible (editable inputs)
-    await expect(
-      page.locator('input[placeholder="Opening Name"]'),
-    ).not.toBeVisible();
-  });
-
   test("opening section displays correctly for non-admin", async ({ page }) => {
     await page.goto("/spirits/river-surges-in-sunlight");
 
@@ -53,48 +31,41 @@ test.describe("Admin Features - Non-Admin User", () => {
       page.getByRole("heading", { name: "River Surges in Sunlight" }),
     ).toBeVisible();
   });
-});
 
-test.describe("Admin Features - URL State", () => {
-  test("edit param is preserved in URL when present", async ({ page }) => {
-    // This tests URL state behavior, not admin access
-    await page.goto("/spirits/river-surges-in-sunlight?edit=true");
+  test("no edit UI is visible for non-admin users", async ({ page }) => {
+    await page.goto("/spirits/river-surges-in-sunlight");
 
-    // URL should have edit param
-    await expect(page).toHaveURL(/edit=true/);
-  });
-
-  test("navigating back to spirits list removes edit param", async ({
-    page,
-  }) => {
-    await page.goto("/spirits/river-surges-in-sunlight?edit=true");
-
-    // Wait for page to load
+    // Wait for page to fully load
     await expect(
       page.getByRole("heading", { name: "River Surges in Sunlight" }),
     ).toBeVisible({ timeout: 15000 });
 
-    // Navigate back to spirits list
-    await page.getByRole("button", { name: "Back to spirits" }).click();
+    // Edit FAB should not be visible
+    await expect(
+      page.getByRole("button", { name: "Enter edit mode" }),
+    ).not.toBeVisible();
 
-    // Wait for navigation
-    await expect(page).toHaveURL(/\/spirits$/);
-
-    // Edit param should be gone on spirits list
-    await expect(page).not.toHaveURL(/edit=true/);
+    // No edit UI should be visible (editable inputs)
+    await expect(
+      page.locator('input[placeholder="Opening Name"]'),
+    ).not.toBeVisible();
   });
 });
 
+// NOTE: Edit mode now uses React Context instead of URL state (changed in plan 05-18).
+// The ?edit=true URL param no longer exists. Tests that reference URL state are removed.
+// Edit mode state is not reflected in the URL anymore.
+
 // NOTE: Admin CRUD tests would require:
-// 1. A test user with isAdmin=true in Clerk publicMetadata
+// 1. A test user with role: "admin" in Clerk publicMetadata
 // 2. Authentication setup in Playwright
 // 3. These are verified manually in the checkpoint task below
 //
 // Manual test steps for admin users:
-// 1. Log in as admin (user with isAdmin: true in Clerk)
+// 1. Log in as admin (user with role: "admin" in Clerk)
 // 2. Navigate to /spirits/river-surges-in-sunlight
 // 3. Verify edit FAB appears (pencil button bottom-right)
-// 4. Click FAB to enter edit mode, verify URL shows ?edit=true
+// 4. Click FAB to enter edit mode (no URL change - uses React Context)
 // 5. Edit opening fields, verify save button appears
 // 6. Save changes, verify persistence
 // 7. Test delete with confirmation dialog
