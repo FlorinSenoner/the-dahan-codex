@@ -6,9 +6,15 @@ interface EditFabProps {
   onSave?: () => void;
   hasChanges?: boolean;
   isSaving?: boolean;
+  isValid?: boolean;
 }
 
-export function EditFab({ onSave, hasChanges, isSaving }: EditFabProps) {
+export function EditFab({
+  onSave,
+  hasChanges,
+  isSaving,
+  isValid,
+}: EditFabProps) {
   const isAdmin = useAdmin();
   const { isEditing, toggleEdit } = useEditMode();
 
@@ -19,10 +25,10 @@ export function EditFab({ onSave, hasChanges, isSaving }: EditFabProps) {
 
   return (
     <div className="fixed bottom-20 right-4 z-50 flex gap-2">
-      {isEditing && hasChanges && onSave && (
+      {isEditing && hasChanges && (
         <Button
           onClick={onSave}
-          disabled={isSaving}
+          disabled={isSaving || !isValid}
           size="icon"
           className="h-14 w-14 rounded-full shadow-lg"
           aria-label="Save changes"
