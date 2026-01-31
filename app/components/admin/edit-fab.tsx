@@ -1,4 +1,4 @@
-import { Check, Pencil, X } from "lucide-react";
+import { Check, Loader2, Pencil, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAdmin, useEditMode } from "@/hooks";
 
@@ -33,7 +33,11 @@ export function EditFab({
           className="h-14 w-14 rounded-full shadow-lg"
           aria-label="Save changes"
         >
-          <Check className="h-6 w-6" />
+          {isSaving ? (
+            <Loader2 className="h-6 w-6 animate-spin" />
+          ) : (
+            <Check className="h-6 w-6" />
+          )}
         </Button>
       )}
       <Button

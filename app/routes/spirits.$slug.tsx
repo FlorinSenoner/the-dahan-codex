@@ -222,7 +222,7 @@ export function SpiritDetailContent({
   const [isSaving, setIsSaving] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const isAdmin = useAdmin();
-  const { setEditing } = useEditMode();
+  const { isEditing, setEditing } = useEditMode();
 
   // Stable callback references to prevent child re-renders
   const handleHasChangesChange = useCallback((value: boolean) => {
@@ -240,10 +240,13 @@ export function SpiritDetailContent({
     setIsValid(value);
   }, []);
 
-  // Block navigation when there are unsaved changes
+  // Block navigation when there are unsaved changes in edit mode
   // Uses withResolver pattern for AlertDialog integration
+  // Only block when isEditing AND hasChanges AND not currently saving
+  // The !isSaving check prevents the blocker from firing during save operations
+  // (e.g., when creating a new opening navigates to the new ID)
   const blocker = useBlocker({
-    shouldBlockFn: () => hasChanges,
+    shouldBlockFn: () => isEditing && hasChanges && !isSaving,
     withResolver: true,
   });
 
