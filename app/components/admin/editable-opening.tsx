@@ -1,5 +1,17 @@
 import type { Doc } from "convex/_generated/dataModel";
 import { Plus, Trash2 } from "lucide-react";
+import { useCallback } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/typography";
 import { EditableText } from "./editable-text";
@@ -27,40 +39,52 @@ interface EditableOpeningProps {
 }
 
 export function EditableOpening({
-  opening,
+  opening: _opening,
   formData,
   onChange,
   onDelete,
   isNew = false,
 }: EditableOpeningProps) {
-  const updateField = <K extends keyof OpeningFormData>(
-    field: K,
-    value: OpeningFormData[K],
-  ) => {
-    onChange({ ...formData, [field]: value });
-  };
+  // Stable callback for updating a single field
+  const updateField = useCallback(
+    <K extends keyof OpeningFormData>(field: K, value: OpeningFormData[K]) => {
+      onChange({ ...formData, [field]: value });
+    },
+    [formData, onChange],
+  );
 
-  const updateTurn = (index: number, updates: Partial<Turn>) => {
-    const newTurns = [...formData.turns];
-    newTurns[index] = { ...newTurns[index], ...updates };
-    updateField("turns", newTurns);
-  };
+  // Stable callback for updating a turn
+  const updateTurn = useCallback(
+    (index: number, updates: Partial<Turn>) => {
+      const newTurns = [...formData.turns];
+      newTurns[index] = { ...newTurns[index], ...updates };
+      onChange({ ...formData, turns: newTurns });
+    },
+    [formData, onChange],
+  );
 
-  const addTurn = () => {
+  // Stable callback for adding a turn
+  const addTurn = useCallback(() => {
     const nextTurn = formData.turns.length + 1;
-    updateField("turns", [
-      ...formData.turns,
-      { turn: nextTurn, title: "", instructions: "" },
-    ]);
-  };
+    onChange({
+      ...formData,
+      turns: [
+        ...formData.turns,
+        { turn: nextTurn, title: "", instructions: "" },
+      ],
+    });
+  }, [formData, onChange]);
 
-  const deleteTurn = (index: number) => {
-    if (!confirm("Delete this turn?")) return;
-    const newTurns = formData.turns
-      .filter((_, i) => i !== index)
-      .map((t, i) => ({ ...t, turn: i + 1 })); // Renumber turns
-    updateField("turns", newTurns);
-  };
+  // Stable callback for deleting a turn
+  const deleteTurn = useCallback(
+    (index: number) => {
+      const newTurns = formData.turns
+        .filter((_, i) => i !== index)
+        .map((t, i) => ({ ...t, turn: i + 1 })); // Renumber turns
+      onChange({ ...formData, turns: newTurns });
+    },
+    [formData, onChange],
+  );
 
   return (
     <div className="bg-card border border-primary/30 rounded-lg p-4 space-y-4 ring-1 ring-primary/20">
@@ -107,15 +131,38 @@ export function EditableOpening({
               <Text variant="small" className="font-medium">
                 Turn {turn.turn}
               </Text>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 text-destructive hover:text-destructive"
-                onClick={() => deleteTurn(index)}
-                aria-label={`Delete turn ${turn.turn}`}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-destructive hover:text-destructive"
+                    aria-label={`Delete turn ${turn.turn}`}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Delete Turn {turn.turn}?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. The turn content will be
+                      permanently deleted.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => deleteTurn(index)}
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    >
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
             <EditableText
               value={turn.title || ""}
@@ -174,18 +221,33 @@ export function EditableOpening({
       {/* Delete Opening */}
       {!isNew && onDelete && (
         <div className="pt-4 border-t border-border">
-          <Button
-            variant="destructive"
-            size="sm"
-            onClick={() => {
-              if (confirm("Delete this opening? This cannot be undone.")) {
-                onDelete();
-              }
-            }}
-          >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete Opening
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive" size="sm">
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete Opening
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Delete Opening?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. The opening "
+                  {formData.name || "Untitled"}" and all its turns will be
+                  permanently deleted.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={onDelete}
+                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                >
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       )}
     </div>

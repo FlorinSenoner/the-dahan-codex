@@ -209,6 +209,18 @@ export function SpiritDetailContent({
   const [isSaving, setIsSaving] = useState(false);
   const isAdmin = useAdmin();
 
+  // Stable callback references to prevent child re-renders
+  const handleHasChangesChange = useCallback((value: boolean) => {
+    setHasChanges(value);
+  }, []);
+
+  const handleSaveHandlerReady = useCallback(
+    (handler: (() => Promise<void>) | null) => {
+      setSaveHandler(() => handler);
+    },
+    [],
+  );
+
   // Block navigation when there are unsaved changes
   // VERIFIED: TanStack Router v1.157.9 uses shouldBlockFn API (v1.40+)
   useBlocker({
@@ -326,8 +338,8 @@ export function SpiritDetailContent({
 
         <OpeningSection
           spiritId={spirit._id}
-          onSaveHandlerReady={setSaveHandler}
-          onHasChangesChange={setHasChanges}
+          onSaveHandlerReady={handleSaveHandlerReady}
+          onHasChangesChange={handleHasChangesChange}
         />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
