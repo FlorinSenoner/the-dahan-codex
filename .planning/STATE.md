@@ -507,11 +507,12 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
 - [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
 - [x] 05-09: Fix Auto-Save Flickering (useCallback stabilization for form callbacks)
+- [x] 05-11: Navigation Warning (verified useBlocker works after callback stabilization)
 - [x] 05-12: Delete Confirmation Modals (AlertDialog replaces browser confirm() for themed UX)
 - [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-09-PLAN.md (Fix Auto-Save Flickering)
+Stopped at: Completed 05-11-PLAN.md (Navigation Warning)
 Resume file: None
