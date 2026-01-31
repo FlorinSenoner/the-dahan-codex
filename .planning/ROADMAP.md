@@ -341,7 +341,7 @@ Plans:
 - [x] 05-03-PLAN.md — Edit mode infrastructure (URL state, FAB, navigation blocking)
 - [x] 05-04-PLAN.md — Inline editing components (EditableText, EditableOpening)
 - [x] 05-05-PLAN.md — Spirit detail integration (CRUD wiring, save/delete)
-- [ ] 05-06-PLAN.md — E2E tests and verification (admin access, search, CRUD)
+- [x] 05-06-PLAN.md — E2E tests and verification (admin access, search, CRUD)
 - [x] 05-07-PLAN.md — Role system update (isAdmin to role-based) [gap closure]
 - [x] 05-08-PLAN.md — Remove turn notes field [gap closure]
 - [x] 05-09-PLAN.md — Fix auto-save flickering [gap closure]
@@ -350,10 +350,10 @@ Plans:
 - [x] 05-12-PLAN.md — Themed delete modals [gap closure]
 - [x] 05-13-PLAN.md — Scroll behavior fix [gap closure]
 - [x] 05-14-PLAN.md — Multiple openings tabs UI [gap closure]
-- [ ] 05-15-PLAN.md — Search includes aspect names [gap closure]
-- [ ] 05-16-PLAN.md — Save flow and navigation warning fixes [gap closure]
-- [ ] 05-17-PLAN.md — Delete behavior fixes [gap closure]
-- [ ] 05-18-PLAN.md — Edit mode scroll stability [gap closure]
+- [x] 05-15-PLAN.md — Search includes aspect names [gap closure]
+- [x] 05-16-PLAN.md — Save flow and navigation warning fixes [gap closure]
+- [x] 05-17-PLAN.md — Delete behavior fixes [gap closure]
+- [x] 05-18-PLAN.md — Edit mode scroll stability [gap closure]
 
 ### Phase 6: User Data
 
@@ -429,7 +429,7 @@ development:
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
-| 5. Text Opening Management           | 14/18          | In Progress | -          |
+| 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 

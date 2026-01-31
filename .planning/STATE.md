@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 5 - Text Opening Management
+**Current focus:** Phase 5 complete - Ready for Phase 6 (User Data)
 
 ## Current Position
 
@@ -509,7 +509,7 @@ Phase 4 (PWA & Offline) complete:
 
 ## Phase 5 Progress
 
-Phase 5 (Text Opening Management) in progress:
+Phase 5 (Text Opening Management) complete:
 
 - [x] 05-01: Admin Infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
 - [x] 05-02: Spirit Search (search input with URL persistence)
