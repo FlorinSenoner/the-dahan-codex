@@ -220,7 +220,9 @@ export function SpiritDetailContent({
     null,
   );
   const [isSaving, setIsSaving] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const isAdmin = useAdmin();
+  const { setEditing } = useEditMode();
 
   // Stable callback references to prevent child re-renders
   const handleHasChangesChange = useCallback((value: boolean) => {
@@ -234,26 +236,29 @@ export function SpiritDetailContent({
     [],
   );
 
+  const handleIsValidChange = useCallback((value: boolean) => {
+    setIsValid(value);
+  }, []);
+
   // Block navigation when there are unsaved changes
-  // VERIFIED: TanStack Router v1.157.9 uses shouldBlockFn API (v1.40+)
-  useBlocker({
-    shouldBlockFn: () => {
-      if (!hasChanges) return false;
-      return !confirm("You have unsaved changes. Leave anyway?");
-    },
-    enableBeforeUnload: hasChanges,
+  // Uses withResolver pattern for AlertDialog integration
+  const blocker = useBlocker({
+    shouldBlockFn: () => hasChanges,
+    withResolver: true,
   });
 
-  // Wrap save handler to track saving state
+  // Wrap save handler to track saving state and exit edit mode on success
   const handleSave = useCallback(async () => {
     if (!saveHandler) return;
     setIsSaving(true);
     try {
       await saveHandler();
+      // Exit edit mode after successful save
+      setEditing(false);
     } finally {
       setIsSaving(false);
     }
-  }, [saveHandler]);
+  }, [saveHandler, setEditing]);
 
   const imageUrl = spirit.imageUrl;
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -353,6 +358,7 @@ export function SpiritDetailContent({
           spiritId={spirit._id}
           onSaveHandlerReady={handleSaveHandlerReady}
           onHasChangesChange={handleHasChangesChange}
+          onIsValidChange={handleIsValidChange}
         />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
@@ -368,8 +374,32 @@ export function SpiritDetailContent({
           onSave={handleSave}
           hasChanges={hasChanges}
           isSaving={isSaving}
+          isValid={isValid}
         />
       )}
+
+      <AlertDialog open={blocker.status === "blocked"}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Unsaved Changes</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved changes. Are you sure you want to leave? Your
+              changes will be lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => blocker.reset?.()}>
+              Stay
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => blocker.proceed?.()}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Leave
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </main>
   );
 }
