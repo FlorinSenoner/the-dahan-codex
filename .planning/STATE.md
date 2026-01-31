@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 6 (User Data)
-Plan: 3 of 5
+Plan: 4 of 5
 Status: In Progress
-Last activity: 2026-01-31 - Completed 06-03-PLAN.md (Game List Page)
+Last activity: 2026-01-31 - Completed 06-04-PLAN.md (Game Form UI)
 
 Progress: [##################################################] 100% (20/20 plans complete)
 
@@ -20,9 +20,9 @@ Progress: [##################################################] 100% (20/20 plans
 
 **Velocity:**
 
-- Total plans completed: 67
-- Average duration: 4.4 min
-- Total execution time: 4.93 hours
+- Total plans completed: 68
+- Average duration: 4.5 min
+- Total execution time: 5.08 hours
 
 **By Phase:**
 
@@ -39,12 +39,12 @@ Progress: [##################################################] 100% (20/20 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
-| 06    | 3     | 13 min | 4.3 min  |
+| 06    | 4     | 22 min | 5.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min, 4 min, 3 min, 3 min, 7 min
-- Trend: Phase 6 in progress (06-03 complete)
+- Last 5 plans: 4 min, 3 min, 3 min, 7 min, 9 min
+- Trend: Phase 6 in progress (06-04 complete)
 
 _Updated after each plan completion_
 
@@ -271,6 +271,9 @@ affecting current work:
 - Toaster mounted in root layout for app-wide toast notifications
 - Game CRUD: soft-delete with deletedAt, ownership via identity.tokenIdentifier
 - Score calculation: Victory (5xDiff+10+2xCards+Dahan-Blight), Defeat (2xDiff+CardsUsed+Dahan-Blight)
+- Composite key pattern for spirit list: spiritId when selected, otherwise slot-{index}
+- Reference data (ADVERSARIES, SCENARIOS, WIN_TYPES) as hardcoded constants for v1
+- Games components directory added to knip entry points
 
 ### Pending Todos
 
@@ -558,11 +561,11 @@ Phase 6 (User Data) in progress:
 - [x] 06-01: Schema and Dependencies (games table, sonner/cmdk/papaparse)
 - [x] 06-02: CRUD Mutations (games.ts, scoring.ts)
 - [x] 06-03: Game List Page (games routes, GameRow, bottom nav)
-- [ ] 06-04: New Game Form
+- [x] 06-04: Game Form UI (GameForm, SpiritPicker, AdversaryPicker)
 - [ ] 06-05: Game Detail Page
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 06-03-PLAN.md - Game List Page
+Stopped at: Completed 06-04-PLAN.md - Game Form UI
 Resume file: None
