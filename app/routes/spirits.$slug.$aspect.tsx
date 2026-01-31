@@ -49,6 +49,7 @@ function AspectDetailPage() {
         <Link
           to="/spirits/$slug"
           params={{ slug }}
+          search={{ opening: undefined }}
           viewTransition
           className="text-primary hover:underline cursor-pointer"
         >

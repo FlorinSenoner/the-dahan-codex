@@ -21,16 +21,17 @@ export async function requireAuth(ctx: QueryCtx | MutationCtx) {
 
 /**
  * Check if the current user has admin role
- * Admin claim comes from Clerk JWT template: user.public_metadata.isAdmin
+ * Admin claim comes from Clerk JWT template: user.public_metadata.role
+ * Role can be "admin", "moderator", "contributor", etc. for future expansion
  */
 export async function isAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     return false;
   }
-  // The isAdmin claim is set in Clerk JWT template from user.public_metadata.isAdmin
-  // biome-ignore lint/suspicious/noExplicitAny: Convex identity type doesn't include custom claims
-  return (identity as any).isAdmin === true;
+  // The role claim is set in Clerk JWT template from user.public_metadata.role
+  // biome-ignore lint/suspicious/noExplicitAny: Convex identity type doesn't include custom role claim
+  return (identity as any).role === "admin";
 }
 
 /**
