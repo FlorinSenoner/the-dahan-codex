@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 6 (User Data)
-Plan: 1 of 5
+Plan: 2 of 5
 Status: In Progress
-Last activity: 2026-01-31 - Completed 06-01-PLAN.md (Schema and Dependencies)
+Last activity: 2026-01-31 - Completed 06-02-PLAN.md (Game CRUD Operations)
 
-Progress: [##################################################] 100% (19/19 plans complete)
+Progress: [##################################################] 100% (20/20 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 66
+- Total plans completed: 67
 - Average duration: 4.4 min
-- Total execution time: 4.88 hours
+- Total execution time: 4.93 hours
 
 **By Phase:**
 
@@ -39,12 +39,12 @@ Progress: [##################################################] 100% (19/19 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
-| 06    | 1     | 3 min  | 3.0 min  |
+| 06    | 2     | 6 min  | 3.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 3 min, 1 min, 4 min, 3 min
-- Trend: Phase 6 started (06-01 complete)
+- Last 5 plans: 3 min, 1 min, 4 min, 3 min, 3 min
+- Trend: Phase 6 in progress (06-02 complete)
 
 _Updated after each plan completion_
 
@@ -269,6 +269,8 @@ affecting current work:
 - Spirits array in games denormalized (name stored for CSV export without joins)
 - papaparse, sonner, cmdk installed for Phase 6 features (CSV export, toasts, searchable dropdowns)
 - Toaster mounted in root layout for app-wide toast notifications
+- Game CRUD: soft-delete with deletedAt, ownership via identity.tokenIdentifier
+- Score calculation: Victory (5xDiff+10+2xCards+Dahan-Blight), Defeat (2xDiff+CardsUsed+Dahan-Blight)
 
 ### Pending Todos
 
@@ -554,7 +556,7 @@ Phase 5 (Text Opening Management) is now complete with:
 Phase 6 (User Data) in progress:
 
 - [x] 06-01: Schema and Dependencies (games table, sonner/cmdk/papaparse)
-- [ ] 06-02: CRUD Mutations
+- [x] 06-02: CRUD Mutations (games.ts, scoring.ts)
 - [ ] 06-03: Game Form UI
 - [ ] 06-04: History Page
 - [ ] 06-05: CSV Export
@@ -562,5 +564,5 @@ Phase 6 (User Data) in progress:
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 06-01-PLAN.md - Schema and Dependencies
+Stopped at: Completed 06-02-PLAN.md - Game CRUD Operations
 Resume file: None
