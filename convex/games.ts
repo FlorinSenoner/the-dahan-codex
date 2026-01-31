@@ -1,0 +1,193 @@
+import { v } from "convex/values";
+import { mutation, query } from "./_generated/server";
+import { requireAuth } from "./lib/auth";
+
+// Query to list all non-deleted games for the authenticated user
+export const listGames = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await requireAuth(ctx);
+    return await ctx.db
+      .query("games")
+      .withIndex("by_user", (q) => q.eq("userId", identity.tokenIdentifier))
+      .filter((q) => q.eq(q.field("deletedAt"), undefined))
+      .order("desc")
+      .collect();
+  },
+});
+
+// Query to get a single game by ID (with ownership check)
+export const getGame = query({
+  args: { id: v.id("games") },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const game = await ctx.db.get(args.id);
+    if (!game || game.userId !== identity.tokenIdentifier) {
+      return null;
+    }
+    return game;
+  },
+});
+
+// Mutation to create a new game
+export const createGame = mutation({
+  args: {
+    date: v.string(),
+    result: v.union(v.literal("win"), v.literal("loss")),
+    spirits: v.array(
+      v.object({
+        spiritId: v.id("spirits"),
+        name: v.string(),
+        variant: v.optional(v.string()),
+        player: v.optional(v.string()),
+      }),
+    ),
+    adversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(),
+      }),
+    ),
+    secondaryAdversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(),
+      }),
+    ),
+    scenario: v.optional(
+      v.object({
+        name: v.string(),
+        difficulty: v.optional(v.number()),
+      }),
+    ),
+    winType: v.optional(v.string()),
+    invaderStage: v.optional(v.number()),
+    blightCount: v.optional(v.number()),
+    dahanCount: v.optional(v.number()),
+    cardsRemaining: v.optional(v.number()),
+    score: v.optional(v.number()),
+    notes: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const now = Date.now();
+
+    // Validate at least one spirit
+    if (args.spirits.length === 0) {
+      throw new Error("At least one spirit is required");
+    }
+    if (args.spirits.length > 6) {
+      throw new Error("Maximum 6 spirits allowed");
+    }
+
+    return await ctx.db.insert("games", {
+      ...args,
+      userId: identity.tokenIdentifier,
+      createdAt: now,
+      updatedAt: now,
+    });
+  },
+});
+
+// Mutation to update an existing game
+export const updateGame = mutation({
+  args: {
+    id: v.id("games"),
+    date: v.optional(v.string()),
+    result: v.optional(v.union(v.literal("win"), v.literal("loss"))),
+    spirits: v.optional(
+      v.array(
+        v.object({
+          spiritId: v.id("spirits"),
+          name: v.string(),
+          variant: v.optional(v.string()),
+          player: v.optional(v.string()),
+        }),
+      ),
+    ),
+    adversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(),
+      }),
+    ),
+    secondaryAdversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(),
+      }),
+    ),
+    scenario: v.optional(
+      v.object({
+        name: v.string(),
+        difficulty: v.optional(v.number()),
+      }),
+    ),
+    winType: v.optional(v.string()),
+    invaderStage: v.optional(v.number()),
+    blightCount: v.optional(v.number()),
+    dahanCount: v.optional(v.number()),
+    cardsRemaining: v.optional(v.number()),
+    score: v.optional(v.number()),
+    notes: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const game = await ctx.db.get(args.id);
+
+    if (!game || game.userId !== identity.tokenIdentifier) {
+      throw new Error("Game not found");
+    }
+
+    const { id, ...updates } = args;
+
+    // Validate spirits if provided
+    if (updates.spirits !== undefined) {
+      if (updates.spirits.length === 0) {
+        throw new Error("At least one spirit is required");
+      }
+      if (updates.spirits.length > 6) {
+        throw new Error("Maximum 6 spirits allowed");
+      }
+    }
+
+    await ctx.db.patch(id, {
+      ...updates,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
+// Mutation to soft-delete a game
+export const deleteGame = mutation({
+  args: { id: v.id("games") },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const game = await ctx.db.get(args.id);
+
+    if (!game || game.userId !== identity.tokenIdentifier) {
+      throw new Error("Game not found");
+    }
+
+    await ctx.db.patch(args.id, {
+      deletedAt: Date.now(),
+    });
+  },
+});
+
+// Mutation to restore a soft-deleted game (for undo)
+export const restoreGame = mutation({
+  args: { id: v.id("games") },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const game = await ctx.db.get(args.id);
+
+    if (!game || game.userId !== identity.tokenIdentifier) {
+      throw new Error("Game not found");
+    }
+
+    await ctx.db.patch(args.id, {
+      deletedAt: undefined,
+    });
+  },
+});
