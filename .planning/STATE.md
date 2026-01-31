@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 5 of 6 (opening CRUD)
+Plan: 9 of 9+ (gap closures in progress)
 Status: In progress
-Last activity: 2026-01-30 - Completed 05-05-PLAN.md (Opening CRUD Operations)
+Last activity: 2026-01-31 - Completed 05-09-PLAN.md (Fix Auto-Save Flickering)
 
-Progress: [##################################      ] 70% (Plan 05-05 complete)
+Progress: [####################################    ] 75% (Plan 05-09 complete)
 
 ## Performance Metrics
 
@@ -38,12 +38,12 @@ Progress: [##################################      ] 70% (Plan 05-05 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 6     | 21 min | 3.5 min  |
+| 05    | 7     | 24 min | 3.4 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 5 min, 8 min, 2 min, 3 min
-- Trend: Phase 5 wave 3 in progress (05-05 complete)
+- Last 5 plans: 5 min, 8 min, 2 min, 3 min, 3 min
+- Trend: Phase 5 gap closures in progress (05-09 complete)
 
 _Updated after each plan completion_
 
@@ -247,6 +247,7 @@ affecting current work:
 - useBlocker with shouldBlockFn API for navigation warning (TanStack Router v1.40+)
 - isSaving tracked in parent for unified loading state across save button
 - Single wrapper pattern for edit mode components: Keep outer container mounted, swap only inner content to preserve scroll position
+- AlertDialogTrigger asChild pattern for delete confirmation flows (replaces browser confirm())
 
 ### Pending Todos
 
@@ -505,10 +506,11 @@ Phase 5 (Text Opening Management) in progress:
 
 - [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
 - [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
+- [x] 05-12: Delete Confirmation Modals (AlertDialog replaces browser confirm() for themed UX)
 - [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
 
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-13-PLAN.md (Fix Scroll Behavior on Edit Toggle)
+Stopped at: Completed 05-12-PLAN.md (Delete Confirmation Modals)
 Resume file: None
