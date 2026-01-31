@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 5 (Text Opening Management)
-Plan: 9 of 9+ (gap closures in progress)
+Plan: 10 of 10+ (gap closures in progress)
 Status: In progress
-Last activity: 2026-01-31 - Completed 05-09-PLAN.md (Fix Auto-Save Flickering)
+Last activity: 2026-01-31 - Completed 05-10-PLAN.md (Turn Validation)
 
-Progress: [####################################    ] 75% (Plan 05-09 complete)
+Progress: [#####################################   ] 77% (Plan 05-10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 63
+- Total plans completed: 64
 - Average duration: 4.4 min
-- Total execution time: 4.71 hours
+- Total execution time: 4.78 hours
 
 **By Phase:**
 
@@ -38,12 +38,12 @@ Progress: [####################################    ] 75% (Plan 05-09 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
-| 05    | 7     | 24 min | 3.4 min  |
+| 05    | 8     | 28 min | 3.5 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 5 min, 8 min, 2 min, 3 min, 3 min
-- Trend: Phase 5 gap closures in progress (05-09 complete)
+- Last 5 plans: 8 min, 2 min, 3 min, 3 min, 4 min
+- Trend: Phase 5 gap closures in progress (05-10 complete)
 
 _Updated after each plan completion_
 
@@ -248,6 +248,9 @@ affecting current work:
 - isSaving tracked in parent for unified loading state across save button
 - Single wrapper pattern for edit mode components: Keep outer container mounted, swap only inner content to preserve scroll position
 - AlertDialogTrigger asChild pattern for delete confirmation flows (replaces browser confirm())
+- isValid useMemo pattern for form validation (checks name, turns, title, instructions)
+- Save handler exposed only when hasChanges AND isValid are true
+- Visual validation feedback via border-destructive class on empty required fields
 
 ### Pending Todos
 
@@ -507,6 +510,7 @@ Phase 5 (Text Opening Management) in progress:
 - [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
 - [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
 - [x] 05-09: Fix Auto-Save Flickering (useCallback stabilization for form callbacks)
+- [x] 05-10: Turn Validation (isValid useMemo, visual feedback on required fields)
 - [x] 05-11: Navigation Warning (verified useBlocker works after callback stabilization)
 - [x] 05-12: Delete Confirmation Modals (AlertDialog replaces browser confirm() for themed UX)
 - [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
@@ -514,5 +518,5 @@ Phase 5 (Text Opening Management) in progress:
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-11-PLAN.md (Navigation Warning)
+Stopped at: Completed 05-10-PLAN.md (Turn Validation)
 Resume file: None
