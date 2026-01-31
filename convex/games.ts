@@ -1,4 +1,5 @@
 import { v } from "convex/values";
+import type { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { requireAuth } from "./lib/auth";
 
@@ -189,5 +190,99 @@ export const restoreGame = mutation({
     await ctx.db.patch(args.id, {
       deletedAt: undefined,
     });
+  },
+});
+
+// Mutation to import games from CSV (upsert by ID)
+export const importGames = mutation({
+  args: {
+    games: v.array(
+      v.object({
+        existingId: v.optional(v.string()), // Original game ID if updating
+        date: v.string(),
+        result: v.union(v.literal("win"), v.literal("loss")),
+        spirits: v.array(
+          v.object({
+            name: v.string(),
+            variant: v.optional(v.string()),
+            player: v.optional(v.string()),
+          }),
+        ),
+        adversary: v.optional(
+          v.object({
+            name: v.string(),
+            level: v.number(),
+          }),
+        ),
+        secondaryAdversary: v.optional(
+          v.object({
+            name: v.string(),
+            level: v.number(),
+          }),
+        ),
+        scenario: v.optional(
+          v.object({
+            name: v.string(),
+            difficulty: v.optional(v.number()),
+          }),
+        ),
+        winType: v.optional(v.string()),
+        invaderStage: v.optional(v.number()),
+        blightCount: v.optional(v.number()),
+        dahanCount: v.optional(v.number()),
+        cardsRemaining: v.optional(v.number()),
+        score: v.optional(v.number()),
+        notes: v.optional(v.string()),
+      }),
+    ),
+  },
+  handler: async (ctx, args) => {
+    const identity = await requireAuth(ctx);
+    const now = Date.now();
+
+    let created = 0;
+    let updated = 0;
+
+    for (const gameData of args.games) {
+      const { existingId, spirits, ...data } = gameData;
+
+      // Note: Import doesn't link to spirit IDs since CSV uses names
+      // Create spirit entries with null spiritId (will show name but not link)
+      const spiritsWithNullIds = spirits.map((s) => ({
+        spiritId: null as unknown as Id<"spirits">, // Import doesn't resolve IDs
+        name: s.name,
+        variant: s.variant,
+        player: s.player,
+      }));
+
+      if (existingId) {
+        // Try to find and update existing game
+        const existingGame = await ctx.db.get(existingId as Id<"games">);
+        if (existingGame && existingGame.userId === identity.tokenIdentifier) {
+          // Full replacement per CONTEXT.md
+          await ctx.db.replace(existingId as Id<"games">, {
+            ...data,
+            spirits: spiritsWithNullIds,
+            userId: identity.tokenIdentifier,
+            createdAt: existingGame.createdAt,
+            updatedAt: now,
+          });
+          updated++;
+          continue;
+        }
+      }
+
+      // Create new game
+      await ctx.db.insert("games", {
+        ...data,
+        spirits: spiritsWithNullIds,
+        userId: identity.tokenIdentifier,
+        createdAt: now,
+        updatedAt: now,
+      });
+      created++;
+    }
+
+    return { created, updated };
   },
 });
