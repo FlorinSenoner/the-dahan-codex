@@ -34,6 +34,8 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss"
+    "tailwindcss",
+    "papaparse",
+    "@types/papaparse"
   ]
 }
