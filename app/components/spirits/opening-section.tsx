@@ -20,6 +20,7 @@ interface OpeningSectionProps {
   spiritId: Id<"spirits">;
   onSaveHandlerReady?: (saveHandler: (() => Promise<void>) | null) => void;
   onHasChangesChange?: (hasChanges: boolean) => void;
+  onIsValidChange?: (isValid: boolean) => void;
 }
 
 // Design: Each spirit (base or aspect) queries openings by its own _id.
@@ -28,6 +29,7 @@ export function OpeningSection({
   spiritId,
   onSaveHandlerReady,
   onHasChangesChange,
+  onIsValidChange,
 }: OpeningSectionProps) {
   const { data: openings, isLoading } = useQuery(
     convexQuery(api.openings.listBySpirit, { spiritId }),
@@ -155,6 +157,11 @@ export function OpeningSection({
     onHasChangesChange?.(hasChanges);
   }, [hasChanges, onHasChangesChange]);
 
+  // Notify parent of validity changes
+  useEffect(() => {
+    onIsValidChange?.(isValid);
+  }, [isValid, onIsValidChange]);
+
   // Save handler for creating or updating opening
   const handleSave = useCallback(async () => {
     if (!formData) return;
@@ -195,6 +202,15 @@ export function OpeningSection({
       }
       // Data will refresh via query invalidation
       setIsCreatingNew(false);
+      // Reset form state to trigger re-initialization from query data.
+      // Setting formData to null causes the useEffect (lines ~91-109) to detect
+      // that formData is null while selectedOpening exists, which re-initializes
+      // formData from the query-refetched selectedOpening. This ensures hasChanges
+      // becomes false (since formData will match the saved data) and prevents
+      // false "unsaved changes" warnings after save.
+      if (!isCreatingNew && selectedOpening) {
+        setFormData(null);
+      }
     } catch (error) {
       console.error("Save failed:", error);
     } finally {
@@ -229,10 +245,10 @@ export function OpeningSection({
     }
   }, [selectedOpening, deleteOpeningMutation, navigate, search]);
 
-  // Expose save handler to parent only when valid and has changes
+  // Expose save handler to parent when there are changes (isValid controls disabled state in EditFab)
   useEffect(() => {
-    onSaveHandlerReady?.(formData && hasChanges && isValid ? handleSave : null);
-  }, [formData, hasChanges, isValid, handleSave, onSaveHandlerReady]);
+    onSaveHandlerReady?.(formData && hasChanges ? handleSave : null);
+  }, [formData, hasChanges, handleSave, onSaveHandlerReady]);
 
   // Handle form data change
   const handleFormDataChange = useCallback((data: OpeningFormData) => {
