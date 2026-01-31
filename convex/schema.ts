@@ -101,4 +101,69 @@ export default defineSchema({
   })
     .index("by_spirit", ["spiritId"])
     .index("by_slug", ["slug"]),
+
+  // Games table - user game history for tracking plays
+  games: defineTable({
+    // User ownership
+    userId: v.string(), // Clerk tokenIdentifier
+
+    // Core game info
+    date: v.string(), // ISO 8601 date string "2026-01-31"
+    result: v.union(v.literal("win"), v.literal("loss")),
+
+    // Spirits (1-6, stored as array)
+    spirits: v.array(
+      v.object({
+        spiritId: v.id("spirits"),
+        name: v.string(), // Denormalized for CSV export
+        variant: v.optional(v.string()), // Aspect name if applicable
+        player: v.optional(v.string()), // Player name
+      }),
+    ),
+
+    // Optional adversary
+    adversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(), // 0-6
+      }),
+    ),
+
+    // Optional secondary adversary
+    secondaryAdversary: v.optional(
+      v.object({
+        name: v.string(),
+        level: v.number(),
+      }),
+    ),
+
+    // Optional scenario
+    scenario: v.optional(
+      v.object({
+        name: v.string(),
+        difficulty: v.optional(v.number()),
+      }),
+    ),
+
+    // Detailed outcome (all optional per CONTEXT.md)
+    winType: v.optional(v.string()), // "fear", "blighted", etc.
+    invaderStage: v.optional(v.number()),
+    blightCount: v.optional(v.number()),
+    dahanCount: v.optional(v.number()),
+    cardsRemaining: v.optional(v.number()),
+
+    // Calculated score (optional, can be recalculated)
+    score: v.optional(v.number()),
+
+    // Notes
+    notes: v.optional(v.string()),
+
+    // Timestamps
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    deletedAt: v.optional(v.number()), // For soft delete
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_date", ["userId", "date"])
+    .index("by_user_deleted", ["userId", "deletedAt"]),
 });
