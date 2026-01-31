@@ -61,6 +61,7 @@ function SpiritsPage() {
     return spirits.filter(
       (s) =>
         s.name.toLowerCase().includes(lower) ||
+        s.aspectName?.toLowerCase().includes(lower) ||
         s.summary?.toLowerCase().includes(lower) ||
         s.description?.toLowerCase().includes(lower),
     );
