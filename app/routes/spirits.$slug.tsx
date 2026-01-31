@@ -37,6 +37,10 @@ import { cn } from "@/lib/utils";
  * show a loading state while waiting for Convex connection.
  */
 export const Route = createFileRoute("/spirits/$slug")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    edit: search.edit === true || search.edit === "true",
+    opening: typeof search.opening === "string" ? search.opening : undefined,
+  }),
   loader: async ({ context, params }) => {
     // Use prefetchQuery to avoid blocking when offline
     // The component's useSuspenseQuery will use cached data if available

@@ -1,7 +1,8 @@
 import { convexQuery } from "@convex-dev/react-query";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
-import type { Id } from "convex/_generated/dataModel";
+import type { Doc, Id } from "convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 import { BookOpen, Plus } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -10,6 +11,7 @@ import {
   type OpeningFormData,
 } from "@/components/admin/editable-opening";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heading, Text } from "@/components/ui/typography";
 import { useEditMode } from "@/hooks/use-edit-mode";
 import { TurnAccordion } from "./turn-accordion";
@@ -32,19 +34,47 @@ export function OpeningSection({
   );
   const { isEditing } = useEditMode();
 
+  // URL-synced tab selection
+  // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
+  const search = useSearch({ strict: false }) as any;
+  const navigate = useNavigate();
+  const openingParam = search.opening as string | undefined;
+
   // Convex mutations
   const createOpeningMutation = useMutation(api.openings.createOpening);
   const updateOpeningMutation = useMutation(api.openings.updateOpening);
   const deleteOpeningMutation = useMutation(api.openings.deleteOpening);
 
-  // For now, just show the first opening
-  // Future: add tabs for multiple openings
-  const opening = openings?.[0] ?? null;
+  // Find selected opening from URL or default to first
+  const selectedOpening = useMemo(() => {
+    if (!openings || openings.length === 0) return null;
+    if (openingParam) {
+      const found = openings.find((o) => o._id === openingParam);
+      if (found) return found;
+    }
+    return openings[0];
+  }, [openings, openingParam]);
 
   // Form data state for edit mode
   const [formData, setFormData] = useState<OpeningFormData | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Handle tab change - update URL
+  const handleTabChange = useCallback(
+    (openingId: string) => {
+      if (openingId === "new") {
+        // Don't update URL for new opening tab, it's handled separately
+        return;
+      }
+      // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
+      navigate({
+        search: { ...search, opening: openingId } as any,
+        replace: true,
+      });
+    },
+    [navigate, search],
+  );
 
   // Create empty form data for new opening
   const createEmptyFormData = useCallback((): OpeningFormData => {
@@ -57,26 +87,26 @@ export function OpeningSection({
     };
   }, []);
 
-  // Initialize form data from opening when entering edit mode
+  // Initialize form data from selected opening when entering edit mode
   useEffect(() => {
-    if (isEditing && opening && !isCreatingNew) {
+    if (isEditing && selectedOpening && !isCreatingNew) {
       setFormData({
-        name: opening.name,
-        description: opening.description || "",
-        turns: opening.turns.map((t) => ({
+        name: selectedOpening.name,
+        description: selectedOpening.description || "",
+        turns: selectedOpening.turns.map((t) => ({
           turn: t.turn,
           title: t.title || "",
           instructions: t.instructions,
         })),
-        author: opening.author || "",
-        sourceUrl: opening.sourceUrl || "",
+        author: selectedOpening.author || "",
+        sourceUrl: selectedOpening.sourceUrl || "",
       });
     } else if (!isEditing) {
       // Reset form data when exiting edit mode
       setFormData(null);
       setIsCreatingNew(false);
     }
-  }, [isEditing, opening, isCreatingNew]);
+  }, [isEditing, selectedOpening, isCreatingNew]);
 
   // Calculate if form is valid (all required fields filled)
   const isValid = useMemo(() => {
@@ -100,24 +130,25 @@ export function OpeningSection({
     }
 
     // Existing opening - compare with original
-    if (!opening) return false;
+    if (!selectedOpening) return false;
 
-    if (formData.name !== opening.name) return true;
-    if (formData.description !== (opening.description || "")) return true;
-    if (formData.author !== (opening.author || "")) return true;
-    if (formData.sourceUrl !== (opening.sourceUrl || "")) return true;
-    if (formData.turns.length !== opening.turns.length) return true;
+    if (formData.name !== selectedOpening.name) return true;
+    if (formData.description !== (selectedOpening.description || ""))
+      return true;
+    if (formData.author !== (selectedOpening.author || "")) return true;
+    if (formData.sourceUrl !== (selectedOpening.sourceUrl || "")) return true;
+    if (formData.turns.length !== selectedOpening.turns.length) return true;
 
     for (let i = 0; i < formData.turns.length; i++) {
       const formTurn = formData.turns[i];
-      const origTurn = opening.turns[i];
+      const origTurn = selectedOpening.turns[i];
       if (formTurn.turn !== origTurn.turn) return true;
       if (formTurn.title !== (origTurn.title || "")) return true;
       if (formTurn.instructions !== origTurn.instructions) return true;
     }
 
     return false;
-  }, [formData, opening, isCreatingNew]);
+  }, [formData, selectedOpening, isCreatingNew]);
 
   // Notify parent of changes
   useEffect(() => {
@@ -130,7 +161,7 @@ export function OpeningSection({
     setIsSaving(true);
     try {
       if (isCreatingNew) {
-        await createOpeningMutation({
+        const newId = await createOpeningMutation({
           spiritId,
           name: formData.name,
           description: formData.description || undefined,
@@ -142,9 +173,15 @@ export function OpeningSection({
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
         });
-      } else if (opening) {
+        // Navigate to the newly created opening
+        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
+        navigate({
+          search: { ...search, opening: newId } as any,
+          replace: true,
+        });
+      } else if (selectedOpening) {
         await updateOpeningMutation({
-          id: opening._id,
+          id: selectedOpening._id,
           name: formData.name,
           description: formData.description || undefined,
           turns: formData.turns.map((t) => ({
@@ -167,22 +204,31 @@ export function OpeningSection({
     formData,
     isCreatingNew,
     spiritId,
-    opening,
+    selectedOpening,
     createOpeningMutation,
     updateOpeningMutation,
+    navigate,
+    search,
   ]);
 
   // Delete handler for removing opening
   const handleDelete = useCallback(async () => {
-    if (!opening) return;
+    if (!selectedOpening) return;
     try {
-      await deleteOpeningMutation({ id: opening._id });
+      await deleteOpeningMutation({ id: selectedOpening._id });
+      // Clear URL opening param to go back to first opening
+      const { opening: _, ...rest } = search;
+      navigate({
+        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
+        search: rest as any,
+        replace: true,
+      });
       setFormData(null);
       setIsCreatingNew(false);
     } catch (error) {
       console.error("Delete failed:", error);
     }
-  }, [opening, deleteOpeningMutation]);
+  }, [selectedOpening, deleteOpeningMutation, navigate, search]);
 
   // Expose save handler to parent only when valid and has changes
   useEffect(() => {
@@ -200,6 +246,72 @@ export function OpeningSection({
     setFormData(createEmptyFormData());
   }, [createEmptyFormData]);
 
+  // Cancel creating new opening
+  const handleCancelNew = useCallback(() => {
+    setIsCreatingNew(false);
+    setFormData(null);
+    // Re-initialize form data for selected opening
+    if (selectedOpening) {
+      setFormData({
+        name: selectedOpening.name,
+        description: selectedOpening.description || "",
+        turns: selectedOpening.turns.map((t) => ({
+          turn: t.turn,
+          title: t.title || "",
+          instructions: t.instructions,
+        })),
+        author: selectedOpening.author || "",
+        sourceUrl: selectedOpening.sourceUrl || "",
+      });
+    }
+  }, [selectedOpening]);
+
+  // Render opening content (shared between tabs and single opening display)
+  const renderOpeningContent = (opening: Doc<"openings">) => (
+    <div className="bg-card border border-border rounded-lg p-4 space-y-4">
+      <Heading variant="h3" as="h3">
+        {opening.name}
+      </Heading>
+
+      {opening.description && (
+        <Text variant="muted">{opening.description}</Text>
+      )}
+
+      <TurnAccordion turns={opening.turns} />
+
+      {(opening.author || opening.sourceUrl) && (
+        <div className="pt-2 border-t border-border text-xs text-muted-foreground">
+          {opening.author && <span>By {opening.author}</span>}
+          {opening.author && opening.sourceUrl && <span> · </span>}
+          {opening.sourceUrl && (
+            <a
+              href={opening.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Source
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  // Render opening editor
+  const renderOpeningEditor = (
+    opening: Doc<"openings"> | null,
+    isNew: boolean,
+  ) => (
+    <EditableOpening
+      opening={opening}
+      formData={formData!}
+      onChange={handleFormDataChange}
+      onDelete={isNew ? handleCancelNew : handleDelete}
+      isNew={isNew}
+    />
+  );
+
   // Render content based on state
   // Use single section wrapper to prevent layout shifts when toggling edit mode
   const renderContent = () => {
@@ -208,22 +320,79 @@ export function OpeningSection({
       return <div className="animate-pulse bg-muted/30 rounded-lg h-32" />;
     }
 
-    // Edit mode: show editor or create button
+    const hasOpenings = openings && openings.length > 0;
+
+    // Edit mode
     if (isEditing) {
-      // Has opening or creating new - show editor
-      if ((opening && formData) || isCreatingNew) {
+      // Creating new opening
+      if (isCreatingNew) {
         return (
-          <EditableOpening
-            opening={opening}
-            formData={formData!}
-            onChange={handleFormDataChange}
-            onDelete={handleDelete}
-            isNew={isCreatingNew}
-          />
+          <div className="space-y-4">
+            {hasOpenings && (
+              <div className="flex flex-wrap gap-2">
+                {openings.map((o) => (
+                  <Button
+                    key={o._id}
+                    variant="outline"
+                    size="sm"
+                    className="opacity-50"
+                    onClick={() => {
+                      handleCancelNew();
+                      handleTabChange(o._id);
+                    }}
+                  >
+                    {o.name}
+                  </Button>
+                ))}
+                <Button variant="default" size="sm" disabled>
+                  <Plus className="h-3 w-3 mr-1" />
+                  New
+                </Button>
+              </div>
+            )}
+            {renderOpeningEditor(null, true)}
+          </div>
         );
       }
 
-      // No opening and not creating - show create button
+      // Has openings - show tabs with editor
+      if (hasOpenings && selectedOpening && formData) {
+        return (
+          <Tabs
+            value={selectedOpening._id}
+            onValueChange={handleTabChange}
+            className="space-y-4"
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <TabsList variant="line">
+                {openings.map((o) => (
+                  <TabsTrigger key={o._id} value={o._id}>
+                    {o.name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleCreateNew}
+                className="h-8"
+              >
+                <Plus className="h-3 w-3 mr-1" />
+                Add Opening
+              </Button>
+            </div>
+            {openings.map((o) => (
+              <TabsContent key={o._id} value={o._id}>
+                {o._id === selectedOpening._id
+                  ? renderOpeningEditor(o, false)
+                  : renderOpeningContent(o)}
+              </TabsContent>
+            ))}
+          </Tabs>
+        );
+      }
+
+      // No openings - show create button
       return (
         <div className="bg-card border border-dashed border-border rounded-lg p-8 text-center">
           <Text variant="muted" className="mb-4">
@@ -238,48 +407,47 @@ export function OpeningSection({
     }
 
     // Read-only mode: no content if no openings exist
-    if (!opening) {
+    if (!hasOpenings) {
       return null;
     }
 
-    // Read-only mode: show opening display
-    return (
-      <div className="bg-card border border-border rounded-lg p-4 space-y-4">
-        <Heading variant="h3" as="h3">
-          {opening.name}
-        </Heading>
+    // Read-only mode with multiple openings - show tabs
+    if (openings.length > 1 && selectedOpening) {
+      return (
+        <Tabs
+          value={selectedOpening._id}
+          onValueChange={handleTabChange}
+          className="space-y-4"
+        >
+          <TabsList variant="line">
+            {openings.map((o) => (
+              <TabsTrigger key={o._id} value={o._id}>
+                {o.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {openings.map((o) => (
+            <TabsContent key={o._id} value={o._id}>
+              {renderOpeningContent(o)}
+            </TabsContent>
+          ))}
+        </Tabs>
+      );
+    }
 
-        {opening.description && (
-          <Text variant="muted">{opening.description}</Text>
-        )}
+    // Read-only mode with single opening - show without tabs
+    if (selectedOpening) {
+      return renderOpeningContent(selectedOpening);
+    }
 
-        <TurnAccordion turns={opening.turns} />
-
-        {(opening.author || opening.sourceUrl) && (
-          <div className="pt-2 border-t border-border text-xs text-muted-foreground">
-            {opening.author && <span>By {opening.author}</span>}
-            {opening.author && opening.sourceUrl && <span> · </span>}
-            {opening.sourceUrl && (
-              <a
-                href={opening.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Source
-              </a>
-            )}
-          </div>
-        )}
-      </div>
-    );
+    return null;
   };
 
   const content = renderContent();
 
   // In read-only mode with no openings, don't render the section at all
   // But always render when editing (to show create button) or loading
-  if (!isEditing && !isLoading && !opening) {
+  if (!isEditing && !isLoading && (!openings || openings.length === 0)) {
     return null;
   }
 
