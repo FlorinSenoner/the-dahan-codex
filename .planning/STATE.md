@@ -9,20 +9,20 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 
 ## Current Position
 
-Phase: 5 (Text Opening Management)
-Plan: 18 of 18 (all plans complete including 05-06)
-Status: Phase Complete
-Last activity: 2026-01-31 - Completed 05-06-PLAN.md (E2E tests + checkpoint fixes)
+Phase: 6 (User Data)
+Plan: 1 of 5
+Status: In Progress
+Last activity: 2026-01-31 - Completed 06-01-PLAN.md (Schema and Dependencies)
 
-Progress: [##################################################] 100% (18/18 plans complete)
+Progress: [##################################################] 100% (19/19 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 65
+- Total plans completed: 66
 - Average duration: 4.4 min
-- Total execution time: 4.83 hours
+- Total execution time: 4.88 hours
 
 **By Phase:**
 
@@ -39,11 +39,12 @@ Progress: [##################################################] 100% (18/18 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
+| 06    | 1     | 3 min  | 3.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 4 min, 3 min, 1 min, 4 min
-- Trend: Phase 5 gap closures complete (05-18 complete)
+- Last 5 plans: 4 min, 3 min, 1 min, 4 min, 3 min
+- Trend: Phase 6 started (06-01 complete)
 
 _Updated after each plan completion_
 
@@ -264,6 +265,10 @@ affecting current work:
 - app/contexts/*.tsx added to knip entry points for context files
 - useBlocker shouldBlockFn must check isEditing && hasChanges && !isSaving to prevent false positives
 - Loading spinner (Loader2 with animate-spin) shown on save button during async save operations
+- Games table schema: soft-delete with deletedAt field, by_user/by_user_date/by_user_deleted indexes
+- Spirits array in games denormalized (name stored for CSV export without joins)
+- papaparse, sonner, cmdk installed for Phase 6 features (CSV export, toasts, searchable dropdowns)
+- Toaster mounted in root layout for app-wide toast notifications
 
 ### Pending Todos
 
@@ -544,8 +549,18 @@ Phase 5 (Text Opening Management) is now complete with:
 - E2E tests for search and admin access control
 - 26 total E2E tests passing
 
+## Phase 6 Progress
+
+Phase 6 (User Data) in progress:
+
+- [x] 06-01: Schema and Dependencies (games table, sonner/cmdk/papaparse)
+- [ ] 06-02: CRUD Mutations
+- [ ] 06-03: Game Form UI
+- [ ] 06-04: History Page
+- [ ] 06-05: CSV Export
+
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 05-06-PLAN.md - Phase 5 complete
+Stopped at: Completed 06-01-PLAN.md - Schema and Dependencies
 Resume file: None
