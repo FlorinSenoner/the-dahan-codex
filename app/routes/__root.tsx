@@ -8,6 +8,7 @@ import { BottomNav } from "../components/layout/bottom-nav";
 import { InstallPrompt } from "../components/pwa/install-prompt";
 import { OfflineIndicator } from "../components/pwa/offline-indicator";
 import { UpdateBanner } from "../components/pwa/update-banner";
+import { EditModeProvider } from "../contexts/edit-mode-context";
 import { useServiceWorker } from "../hooks/use-service-worker";
 
 // Router context type
@@ -35,11 +36,13 @@ function RootComponent() {
       signUpFallbackRedirectUrl="/"
     >
       <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
-        <OfflineIndicator />
-        {isUpdateAvailable && <UpdateBanner onReload={triggerUpdate} />}
-        <InstallPrompt />
-        <Outlet />
-        <BottomNav />
+        <EditModeProvider>
+          <OfflineIndicator />
+          {isUpdateAvailable && <UpdateBanner onReload={triggerUpdate} />}
+          <InstallPrompt />
+          <Outlet />
+          <BottomNav />
+        </EditModeProvider>
       </ConvexProviderWithClerk>
     </ClerkProvider>
   );

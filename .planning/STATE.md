@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 5 - Text Opening Management
+**Current focus:** Phase 5 complete - Ready for Phase 6 (User Data)
 
 ## Current Position
 
-Phase: 4 (PWA & Offline)
-Plan: 9 of 9 (gap closure)
-Status: Phase complete
-Last activity: 2026-01-28 - Completed 04-09-PLAN.md (Service Worker Cleanup)
+Phase: 5 (Text Opening Management)
+Plan: 18 of 18 (all plans complete including 05-06)
+Status: Phase Complete
+Last activity: 2026-01-31 - Completed 05-06-PLAN.md (E2E tests + checkpoint fixes)
 
-Progress: [############################            ] 62% (Phase 4 complete)
+Progress: [##################################################] 100% (18/18 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 58
+- Total plans completed: 65
 - Average duration: 4.4 min
-- Total execution time: 4.42 hours
+- Total execution time: 4.83 hours
 
 **By Phase:**
 
@@ -38,11 +38,12 @@ Progress: [############################            ] 62% (Phase 4 complete)
 | 03.4  | 7     | 22 min | 3.1 min  |
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
+| 05    | 9     | 31 min | 3.4 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 4 min, 4 min, 5 min, 3 min
-- Trend: Phase 4 gap closure complete
+- Last 5 plans: 3 min, 4 min, 3 min, 1 min, 4 min
+- Trend: Phase 5 gap closures complete (05-18 complete)
 
 _Updated after each plan completion_
 
@@ -186,7 +187,7 @@ affecting current work:
 - VariantTabs shows "Base" for base spirit tab instead of spirit name (simplified UI)
 - Openings table with spiritId reference for text-based turn-by-turn guides
 - Openings difficulty uses Beginner/Intermediate/Advanced literals
-- Openings turns array structure: turn number, optional title, instructions, optional notes
+- Openings turns array structure: turn number, optional title, instructions (notes field removed in 05-08)
 - listBySpirit and getBySlug queries for openings table
 - Opening seed data includes attribution (author, sourceUrl)
 - reseedSpirits deletes openings before spirits (foreign key order)
@@ -223,6 +224,46 @@ affecting current work:
 - createIDBPersister factory function for idb-keyval integration with TanStack Query
 - Convex data cached via TanStack Query/IndexedDB, not service worker (WebSocket protocol)
 - JSDoc comments on route components documenting offline behavior expectations
+- Client-side search filtering with useDeferredValue for smooth typing
+- URL ?search= parameter for shareable filtered spirit lists
+- Search applies after backend filters (complexity/elements) for composable filtering
+- useAdmin hook checks Clerk publicMetadata.role === "admin" for frontend admin status (role-based for future RBAC expansion)
+- Opening mutations (createOpening, updateOpening, deleteOpening) protected by requireAdmin(ctx)
+- Opening timestamps (createdAt, updatedAt) optional in schema for backward compatibility
+- Opening slug auto-generated from name: lowercase, remove special chars, replace spaces with dashes
+- Difficulty field deprecated in openings schema but kept optional for existing production data
+- useEditMode hook uses React Context for session-scoped edit state (not URL to avoid scroll jump)
+- Edit mode defense-in-depth: isEditing = isAdmin && isEditMode (non-admins cannot activate)
+- EditModeProvider wraps app content inside ConvexProviderWithClerk
+- EditFab positioned bottom-20 to stay above bottom nav (which uses bottom-16)
+- Admin components directory: app/components/admin/ with knip entry point
+- biome-ignore for TanStack Router search typing with strict: false (necessary for route-agnostic hooks)
+- EditableText pattern: isEditing prop controls span vs input/textarea rendering
+- OpeningFormData exported interface for parent component integration
+- Turn renumbering automatic on delete to maintain sequential order
+- hasChanges calculated via deep comparison in useMemo
+- Form data change propagation: child calls onChange, parent tracks hasChanges
+- Edit mode section pattern: show editor when isEditing, show display otherwise
+- Save handler exposed via callback pattern (onSaveHandlerReady prop)
+- useBlocker with shouldBlockFn API for navigation warning (TanStack Router v1.40+)
+- isSaving tracked in parent for unified loading state across save button
+- Single wrapper pattern for edit mode components: Keep outer container mounted, swap only inner content to preserve scroll position
+- AlertDialogTrigger asChild pattern for delete confirmation flows (replaces browser confirm())
+- isValid useMemo pattern for form validation (checks name, turns, title, instructions)
+- Save handler exposed only when hasChanges AND isValid are true
+- Visual validation feedback via border-destructive class on empty required fields
+- Multiple openings tabs UI with URL-synced selection via ?opening=<id> query param
+- validateSearch in route config for typed search params (spirits.$slug.tsx)
+- Single opening spirits display without tabs wrapper for cleaner UI
+- useBlocker withResolver pattern for AlertDialog navigation blocking
+- Form state reset via setFormData(null) triggers re-init from query data
+- isValid controls button disabled state, save visible when hasChanges
+- Save handler exits edit mode after successful save
+- Delete opening uses { ...search, opening: undefined } to preserve all params while removing opening
+- Delete turn button hidden when only 1 turn exists (formData.turns.length > 1 conditional)
+- app/contexts/*.tsx added to knip entry points for context files
+- useBlocker shouldBlockFn must check isEditing && hasChanges && !isSaving to prevent false positives
+- Loading spinner (Loader2 with animate-spin) shown on save button during async save operations
 
 ### Pending Todos
 
@@ -466,8 +507,45 @@ Phase 4 (PWA & Offline) complete:
 - [x] 04-08: Query Persistence (IndexedDB via idb-keyval, 7-day gcTime)
 - [x] 04-09: Service Worker Cleanup (remove dead Convex caching rule, document offline architecture)
 
+## Phase 5 Progress
+
+Phase 5 (Text Opening Management) complete:
+
+- [x] 05-01: Admin Infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
+- [x] 05-02: Spirit Search (search input with URL persistence)
+- [x] 05-03: Edit Mode Infrastructure (useEditMode hook, EditFab component)
+- [x] 05-04: Opening Editor (EditableText, EditableOpening, OpeningSection edit mode)
+- [x] 05-05: Opening CRUD Operations (CRUD mutations, EditFab integration, navigation blocking)
+- [x] 05-06: E2E Tests (search tests, admin access tests, navigation blocker fixes)
+
+**Gap Closure Plans:**
+
+- [x] 05-07: Role System Change (isAdmin boolean to role string for future RBAC)
+- [x] 05-08: Remove Turn Notes Field (simplified turn schema, opening-level description sufficient)
+- [x] 05-09: Fix Auto-Save Flickering (useCallback stabilization for form callbacks)
+- [x] 05-10: Turn Validation (isValid useMemo, visual feedback on required fields)
+- [x] 05-11: Navigation Warning (verified useBlocker works after callback stabilization)
+- [x] 05-12: Delete Confirmation Modals (AlertDialog replaces browser confirm() for themed UX)
+- [x] 05-13: Fix Scroll Behavior on Edit Toggle (single wrapper pattern to prevent scroll jumps)
+- [x] 05-14: Multiple Openings Tabs UI (tabs for multiple openings, URL-synced selection)
+- [x] 05-15: Aspect Name Search (aspectName field added to search filter)
+- [x] 05-16: Form State Reset (reset form after save, expose isValid)
+- [x] 05-17: Navigation Warning Dialog (AlertDialog for unsaved changes)
+- [x] 05-18: Edit Mode Scroll Fix (React Context instead of URL state)
+
+## Phase 5 Summary
+
+Phase 5 (Text Opening Management) is now complete with:
+
+- Admin infrastructure (useAdmin hook, CRUD mutations with requireAdmin)
+- Spirit search with URL persistence and aspect name filtering
+- Edit mode with React Context for session-scoped state
+- Opening editor (inline editing, validation, navigation blocking)
+- E2E tests for search and admin access control
+- 26 total E2E tests passing
+
 ## Session Continuity
 
-Last session: 2026-01-28
-Stopped at: Completed 04-09-PLAN.md (Service Worker Cleanup) - Phase 4 complete
+Last session: 2026-01-31
+Stopped at: Completed 05-06-PLAN.md - Phase 5 complete
 Resume file: None

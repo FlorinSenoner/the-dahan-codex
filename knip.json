@@ -5,9 +5,11 @@
     "app/client.tsx",
     "app/router.tsx",
     "app/components/ui/*.tsx",
+    "app/components/admin/*.tsx",
     "app/components/spirits/*.tsx",
     "app/components/pwa/*.tsx",
     "app/components/icons/**/*.{ts,tsx}",
+    "app/contexts/*.tsx",
     "app/hooks/*.ts",
     "app/lib/*.ts",
     "scripts/*.ts"

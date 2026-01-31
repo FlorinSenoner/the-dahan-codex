@@ -4,6 +4,7 @@ import {
   createFileRoute,
   Link,
   Outlet,
+  useBlocker,
   useMatches,
   useNavigate,
   useParams,
@@ -11,14 +12,26 @@ import {
 import { api } from "convex/_generated/api";
 import type { Doc } from "convex/_generated/dataModel";
 import { ArrowLeft } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { EditFab } from "@/components/admin/edit-fab";
 import { ExternalLinks } from "@/components/spirits/external-links";
 import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
+import { useAdmin, useEditMode } from "@/hooks";
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -34,6 +47,9 @@ import { cn } from "@/lib/utils";
  * show a loading state while waiting for Convex connection.
  */
 export const Route = createFileRoute("/spirits/$slug")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    opening: typeof search.opening === "string" ? search.opening : undefined,
+  }),
   loader: async ({ context, params }) => {
     // Use prefetchQuery to avoid blocking when offline
     // The component's useSuspenseQuery will use cached data if available
@@ -199,6 +215,71 @@ export function SpiritDetailContent({
   aspect,
 }: SpiritDetailContentProps) {
   const [imgError, setImgError] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [saveHandler, setSaveHandler] = useState<(() => Promise<void>) | null>(
+    null,
+  );
+  const [isSaving, setIsSaving] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+  const isAdmin = useAdmin();
+  const { isEditing, setEditing } = useEditMode();
+
+  // Stable callback references to prevent child re-renders
+  const handleHasChangesChange = useCallback((value: boolean) => {
+    setHasChanges(value);
+  }, []);
+
+  const handleSaveHandlerReady = useCallback(
+    (handler: (() => Promise<void>) | null) => {
+      setSaveHandler(() => handler);
+    },
+    [],
+  );
+
+  const handleIsValidChange = useCallback((value: boolean) => {
+    setIsValid(value);
+  }, []);
+
+  // Block navigation when there are unsaved changes in edit mode
+  // Uses withResolver pattern for AlertDialog integration
+  // Only block when isEditing AND hasChanges AND not currently saving
+  // The !isSaving check prevents the blocker from firing during save operations
+  // (e.g., when creating a new opening navigates to the new ID)
+  //
+  // IMPORTANT: Use ref pattern to avoid stale closure issues with shouldBlockFn.
+  // TanStack Router's beforeunload listener may not re-register on every render,
+  // so we need to ensure shouldBlockFn always reads the latest values via ref.
+  //
+  // CRITICAL: enableBeforeUnload must also use the same condition. By default it's
+  // true, which causes the browser's "Changes may not be saved" dialog to ALWAYS
+  // appear on reload, regardless of shouldBlockFn. We must explicitly disable it
+  // when there are no unsaved changes.
+  const blockerConditionRef = useRef({ isEditing, hasChanges, isSaving });
+  blockerConditionRef.current = { isEditing, hasChanges, isSaving };
+
+  const shouldBlock = () => {
+    const { isEditing, hasChanges, isSaving } = blockerConditionRef.current;
+    return isEditing && hasChanges && !isSaving;
+  };
+
+  const blocker = useBlocker({
+    shouldBlockFn: shouldBlock,
+    enableBeforeUnload: shouldBlock,
+    withResolver: true,
+  });
+
+  // Wrap save handler to track saving state and exit edit mode on success
+  const handleSave = useCallback(async () => {
+    if (!saveHandler) return;
+    setIsSaving(true);
+    try {
+      await saveHandler();
+      // Exit edit mode after successful save
+      setEditing(false);
+    } finally {
+      setIsSaving(false);
+    }
+  }, [saveHandler, setEditing]);
 
   const imageUrl = spirit.imageUrl;
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -294,7 +375,12 @@ export function SpiritDetailContent({
           <OverviewSection spirit={spirit} description={spirit.description} />
         </div>
 
-        <OpeningSection spiritId={spirit._id} />
+        <OpeningSection
+          spiritId={spirit._id}
+          onSaveHandlerReady={handleSaveHandlerReady}
+          onHasChangesChange={handleHasChangesChange}
+          onIsValidChange={handleIsValidChange}
+        />
 
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
@@ -303,6 +389,38 @@ export function SpiritDetailContent({
       <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
         <OverviewSection spirit={spirit} description={spirit.description} />
       </aside>
+
+      {isAdmin && (
+        <EditFab
+          onSave={handleSave}
+          hasChanges={hasChanges}
+          isSaving={isSaving}
+          isValid={isValid}
+        />
+      )}
+
+      <AlertDialog open={blocker.status === "blocked"}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Unsaved Changes</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved changes. Are you sure you want to leave? Your
+              changes will be lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => blocker.reset?.()}>
+              Stay
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => blocker.proceed?.()}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Leave
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </main>
   );
 }

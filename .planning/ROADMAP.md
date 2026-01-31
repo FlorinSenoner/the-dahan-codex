@@ -321,22 +321,39 @@ Plans:
 
 ### Phase 5: Text Opening Management
 
-**Goal**: Admin tools for creating and managing text-based spirit openings
+**Goal**: Admin tools for creating and managing text-based spirit openings with inline editing and spirit search
 **Depends on**: Phase 3.6 (requires openings data model)
 **Requirements**: Simplified from original OPEN-* and ADMN-* requirements
 **Success Criteria** (what must be TRUE):
 
 1. Admin routes are inaccessible to non-admin users (Clerk role check)
 2. Admin can create/edit text-based openings with turn-by-turn descriptions
-3. Admin can add opening metadata (name, difficulty, strategy notes)
+3. Admin can add opening metadata (name, strategy notes)
 4. Saved opening appears in public opening list for that spirit
-5. Global search finds spirits and openings
+5. Search finds spirits by name and description
 
-**Plans**: TBD
+**Plans**: 18 plans (6 original + 12 gap closure)
 
 Plans:
 
-- [ ] 05-01: TBD
+- [x] 05-01-PLAN.md — Admin infrastructure (useAdmin hook, schema updates, Convex mutations)
+- [x] 05-02-PLAN.md — Spirit search (search bar, URL state, client-side filtering)
+- [x] 05-03-PLAN.md — Edit mode infrastructure (URL state, FAB, navigation blocking)
+- [x] 05-04-PLAN.md — Inline editing components (EditableText, EditableOpening)
+- [x] 05-05-PLAN.md — Spirit detail integration (CRUD wiring, save/delete)
+- [x] 05-06-PLAN.md — E2E tests and verification (admin access, search, CRUD)
+- [x] 05-07-PLAN.md — Role system update (isAdmin to role-based) [gap closure]
+- [x] 05-08-PLAN.md — Remove turn notes field [gap closure]
+- [x] 05-09-PLAN.md — Fix auto-save flickering [gap closure]
+- [x] 05-10-PLAN.md — Turn validation [gap closure]
+- [x] 05-11-PLAN.md — Navigation warning fix [gap closure]
+- [x] 05-12-PLAN.md — Themed delete modals [gap closure]
+- [x] 05-13-PLAN.md — Scroll behavior fix [gap closure]
+- [x] 05-14-PLAN.md — Multiple openings tabs UI [gap closure]
+- [x] 05-15-PLAN.md — Search includes aspect names [gap closure]
+- [x] 05-16-PLAN.md — Save flow and navigation warning fixes [gap closure]
+- [x] 05-17-PLAN.md — Delete behavior fixes [gap closure]
+- [x] 05-18-PLAN.md — Edit mode scroll stability [gap closure]
 
 ### Phase 6: User Data
 
@@ -412,7 +429,7 @@ development:
 | ~~3.4 Presence Track Graph DSL~~     | 6/10           | Abandoned   | -          |
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
-| 5. Text Opening Management           | 0/TBD          | Pending     | -          |
+| 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 0/TBD          | Pending     | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
