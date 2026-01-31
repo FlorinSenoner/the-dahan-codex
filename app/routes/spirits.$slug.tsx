@@ -18,10 +18,20 @@ import { ExternalLinks } from "@/components/spirits/external-links";
 import { OpeningSection } from "@/components/spirits/opening-section";
 import { OverviewSection } from "@/components/spirits/overview-section";
 import { VariantTabs } from "@/components/spirits/variant-tabs";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
-import { useAdmin } from "@/hooks";
+import { useAdmin, useEditMode } from "@/hooks";
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -38,7 +48,6 @@ import { cn } from "@/lib/utils";
  */
 export const Route = createFileRoute("/spirits/$slug")({
   validateSearch: (search: Record<string, unknown>) => ({
-    edit: search.edit === true || search.edit === "true",
     opening: typeof search.opening === "string" ? search.opening : undefined,
   }),
   loader: async ({ context, params }) => {
