@@ -2,9 +2,10 @@ import { convexQuery } from "@convex-dev/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
-import { Gamepad2, Plus } from "lucide-react";
+import { Download, Gamepad2, Plus } from "lucide-react";
 import { GameRow } from "@/components/games/game-row";
 import { Button } from "@/components/ui/button";
+import { exportGamesToCSV } from "@/lib/csv-export";
 
 export const Route = createFileRoute("/_authenticated/games/")({
   component: GamesIndex,
@@ -36,7 +37,15 @@ function GamesIndex() {
   return (
     <div className="flex flex-col">
       {/* Action bar */}
-      <div className="flex justify-end p-3 border-b border-border">
+      <div className="flex justify-end gap-2 p-3 border-b border-border">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => exportGamesToCSV(games)}
+        >
+          <Download className="h-4 w-4 mr-2" />
+          Export CSV
+        </Button>
         <Button asChild size="sm">
           <Link to="/games/new">
             <Plus className="h-4 w-4 mr-2" />
