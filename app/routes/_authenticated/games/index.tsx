@@ -24,7 +24,6 @@ function GamesIndex() {
           Start tracking your Spirit Island games to see your history and stats.
         </p>
         <Button asChild>
-          {/* @ts-ignore - Route /games/new will be added in 06-04 */}
           <Link to="/games/new">
             <Plus className="h-4 w-4 mr-2" />
             Log Your First Game
@@ -39,7 +38,6 @@ function GamesIndex() {
       {/* Action bar */}
       <div className="flex justify-end p-3 border-b border-border">
         <Button asChild size="sm">
-          {/* @ts-ignore - Route /games/new will be added in 06-04 */}
           <Link to="/games/new">
             <Plus className="h-4 w-4 mr-2" />
             New Game

@@ -30,9 +30,7 @@ export function GameRow({ game }: GameRowProps) {
 
   return (
     <Link
-      // @ts-expect-error - Route /games/$id will be added in 06-05
       to="/games/$id"
-      // @ts-expect-error - params will be valid once /games/$id is created
       params={{ id: game._id }}
       className="flex items-center gap-3 p-3 hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
     >
