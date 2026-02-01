@@ -368,19 +368,20 @@ Plans:
 3. CSV export downloads all games in Excel-friendly format
 4. CSV import validates, previews, and uses ID-based sync (matching IDs = full replacement)
 
-**Plans**: 9 plans
+**Plans**: 10 plans (9 original + 1 gap closure)
 
 Plans:
 
-- [ ] 06-01-PLAN.md — Games schema and UI dependencies (sonner, cmdk, papaparse)
-- [ ] 06-02-PLAN.md — Game CRUD mutations with user scoping
-- [ ] 06-03-PLAN.md — Game list page with bottom nav integration
-- [ ] 06-04-PLAN.md — Game form components (SpiritPicker, AdversaryPicker)
-- [ ] 06-05-PLAN.md — New game page with form integration
-- [ ] 06-06-PLAN.md — Game detail page with inline edit and delete
-- [ ] 06-07-PLAN.md — CSV export functionality
-- [ ] 06-08-PLAN.md — CSV import with preview and ID-based sync
-- [ ] 06-09-PLAN.md — E2E tests and verification checkpoint
+- [x] 06-01-PLAN.md — Games schema and UI dependencies (sonner, cmdk, papaparse)
+- [x] 06-02-PLAN.md — Game CRUD mutations with user scoping
+- [x] 06-03-PLAN.md — Game list page with bottom nav integration
+- [x] 06-04-PLAN.md — Game form components (SpiritPicker, AdversaryPicker)
+- [x] 06-05-PLAN.md — New game page with form integration
+- [x] 06-06-PLAN.md — Game detail page with inline edit and delete
+- [x] 06-07-PLAN.md — CSV export functionality
+- [x] 06-08-PLAN.md — CSV import with preview and ID-based sync
+- [x] 06-09-PLAN.md — E2E tests and verification checkpoint
+- [ ] 06-10-PLAN.md — Replace delete confirmation with undo toast [gap closure]
 
 ### Phase 7: Seed Data Management
 
@@ -435,7 +436,7 @@ development:
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
-| 6. User Data                         | 0/9            | Planned     | -          |
+| 6. User Data                         | 9/10           | In Progress | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
