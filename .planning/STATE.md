@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 6.1 (Cleanup TheDahanCodex)
-Plan: 2 of 2 (UI consistency & docs complete)
+Plan: 3 of 3 (gap closure plan complete)
 Status: Phase Complete
-Last activity: 2026-02-01 - Completed 06.1-02-PLAN.md (UI Consistency & Docs Update)
+Last activity: 2026-02-01 - Completed 06.1-03-PLAN.md (Button Component Consistency & Update Banner Fix)
 
-Progress: [##################################################] 100% (25/25 plans complete)
+Progress: [##################################################] 100% (26/26 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 74
+- Total plans completed: 75
 - Average duration: 4.5 min
-- Total execution time: 5.48 hours
+- Total execution time: 5.65 hours
 
 **By Phase:**
 
@@ -40,12 +40,12 @@ Progress: [##################################################] 100% (25/25 plans
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
 | 06    | 10    | 50 min | 5.0 min  |
-| 06.1  | 2     | 6 min  | 3.0 min  |
+| 06.1  | 3     | 16 min | 5.3 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 4 min, 8 min, 2 min, 3 min, 3 min
-- Trend: Phase 6.1 complete (cleanup + docs done)
+- Last 5 plans: 8 min, 2 min, 3 min, 3 min, 10 min
+- Trend: Phase 6.1 complete (cleanup + docs + button consistency done)
 
 _Updated after each plan completion_
 
@@ -206,6 +206,7 @@ affecting current work:
 - useConvex().query for programmatic Convex queries outside React hooks
 - PWA components in app/components/pwa/ directory with knip entry point
 - Semantic <output> element for status indicators (Biome lint prefers over div with role="status")
+- Always use shadcn Button instead of raw <button> elements (documented pattern)
 - z-50 for top PWA banners (update), z-40 for offline indicator pill and bottom install prompt
 - Offline indicator: bottom-right pill with muted zinc styling (non-intrusive)
 - 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
@@ -608,9 +609,10 @@ Phase 6.1 (Cleanup TheDahanCodex) complete:
 
 - [x] 06.1-01: Dead Code Cleanup (Phase 3.4 artifacts, SSR directives)
 - [x] 06.1-02: UI Consistency & Docs Update (update banner pill, CLAUDE.md accuracy)
+- [x] 06.1-03: Button Component Consistency & Update Banner Fix (UAT gap closure)
 
 ## Session Continuity
 
 Last session: 2026-02-01
-Stopped at: Completed 06.1-02-PLAN.md - UI Consistency & Docs Update (Phase 6.1 Complete)
+Stopped at: Completed 06.1-03-PLAN.md - Button Component Consistency & Update Banner Fix (Phase 6.1 Complete)
 Resume file: None
