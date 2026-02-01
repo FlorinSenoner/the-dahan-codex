@@ -11,11 +11,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { FilterPill } from "@/components/ui/filter-pill";
 import {
   complexityFilterColors,
   elementFilterColors,
 } from "@/lib/spirit-colors";
-import { cn } from "@/lib/utils";
 
 // Filter options
 const COMPLEXITY_OPTIONS = ["Low", "Moderate", "High", "Very High"] as const;
@@ -183,39 +183,5 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  );
-}
-
-// Reusable filter pill component
-export function FilterPill({
-  label,
-  selected,
-  onClick,
-  selectedClass,
-  unselectedClass,
-  children,
-}: {
-  label: string;
-  selected: boolean;
-  onClick: () => void;
-  selectedClass?: string;
-  unselectedClass?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <Button
-      variant="outline"
-      onClick={onClick}
-      className={cn(
-        "h-auto px-3 py-1.5 rounded-full text-sm font-medium",
-        selected
-          ? selectedClass || "bg-primary text-primary-foreground border-primary"
-          : unselectedClass ||
-              "bg-muted/30 text-foreground border-border hover:bg-muted/50",
-      )}
-    >
-      {label}
-      {children}
-    </Button>
   );
 }

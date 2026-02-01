@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import { ExternalLinkCard } from "@/components/ui/external-link-card";
 import { PageHeader } from "@/components/ui/page-header";
 import { Heading, Text } from "@/components/ui/typography";
 
@@ -32,19 +32,19 @@ function CreditsPage() {
             Data Sources
           </Heading>
           <div className="space-y-3">
-            <SourceLink
-              name="Spirit Island Wiki"
-              url="https://spiritislandwiki.com"
+            <ExternalLinkCard
+              title="Spirit Island Wiki"
+              href="https://spiritislandwiki.com"
               description="Spirit details, strategies, and rulings"
             />
-            <SourceLink
-              name="Spirit Island Card Catalog"
-              url="https://sick.oberien.de"
+            <ExternalLinkCard
+              title="Spirit Island Card Catalog"
+              href="https://sick.oberien.de"
               description="Card images and search"
             />
-            <SourceLink
-              name="Spirit Island FAQ"
-              url="https://querki.net/u/darker/spirit-island-faq"
+            <ExternalLinkCard
+              title="Spirit Island FAQ"
+              href="https://querki.net/u/darker/spirit-island-faq"
               description="Official rulings and clarifications"
             />
           </div>
@@ -56,14 +56,14 @@ function CreditsPage() {
             Community
           </Heading>
           <div className="space-y-3">
-            <SourceLink
-              name="r/spiritisland"
-              url="https://reddit.com/r/spiritisland"
+            <ExternalLinkCard
+              title="r/spiritisland"
+              href="https://reddit.com/r/spiritisland"
               description="Spirit Island subreddit"
             />
-            <SourceLink
-              name="BoardGameGeek"
-              url="https://boardgamegeek.com/boardgame/162886/spirit-island"
+            <ExternalLinkCard
+              title="BoardGameGeek"
+              href="https://boardgamegeek.com/boardgame/162886/spirit-island"
               description="Spirit Island on BGG"
             />
           </div>
@@ -90,32 +90,5 @@ function CreditsPage() {
         </section>
       </main>
     </div>
-  );
-}
-
-function SourceLink({
-  name,
-  url,
-  description,
-}: {
-  name: string;
-  url: string;
-  description: string;
-}) {
-  return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-start gap-3 p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors"
-    >
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-medium text-foreground">{name}</span>
-          <ExternalLink className="h-3 w-3 text-muted-foreground" />
-        </div>
-        <p className="text-sm text-muted-foreground mt-0.5">{description}</p>
-      </div>
-    </a>
   );
 }

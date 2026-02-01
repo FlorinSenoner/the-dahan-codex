@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FilterPill } from "@/components/ui/filter-pill";
 import {
   complexityFilterColors,
   elementFilterColors,
 } from "@/lib/spirit-colors";
-import { FilterPill } from "./filter-sheet";
 
 interface FilterChipsProps {
   filters: {
