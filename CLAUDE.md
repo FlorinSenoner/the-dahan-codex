@@ -1,8 +1,7 @@
 # The Dahan Codex
 
-Spirit Island companion PWA with offline-first reference library and graphical
-opening scrubber. The scrubber lets users visualize spirit openings turn-by-turn
-with interactive board state.
+Spirit Island companion PWA with offline-first reference library and game tracker.
+Includes text-based turn-by-turn opening guides for spirits.
 
 ## Tech Stack
 
@@ -17,7 +16,7 @@ with interactive board state.
 
 ```
 app/routes/          # File-based routes (TanStack Router)
-app/lib/             # Shared utilities (sw-register.ts, spirit-colors.ts)
+app/lib/             # Shared utilities (spirit-colors.ts, utils.ts)
 convex/              # Backend functions organized by domain
 convex/schema.ts     # Database schema (source of truth for types)
 e2e/                 # Playwright E2E tests
@@ -95,6 +94,21 @@ git checkout feat/phase-<N>-<name>
 - Service worker registration is hydration-safe (checks `document.readyState`)
 - Pre-commit hooks run Biome + typecheck automatically
 - Convex types flow from `schema.ts` → `_generated/` → app
+
+## Client-Only SPA Architecture
+
+This app is a pure client-side SPA (switched from TanStack Start SSR in quick-010).
+
+**Implications:**
+- No server rendering - all code runs in browser
+- Route loaders run client-side (use for prefetching, not data requirements)
+- "use client" directives have no effect (Vite + React, not Next.js)
+- useSyncExternalStore still needs getServerSnapshot for React 18+ concurrency
+
+**PWA Notes:**
+- Service worker manages static asset caching
+- Convex data cached via TanStack Query + IndexedDB (not SW - WebSocket protocol)
+- typeof window checks in PWA hooks are defensive programming, not SSR handling
 
 ## Context
 
