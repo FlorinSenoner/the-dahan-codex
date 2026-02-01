@@ -37,11 +37,26 @@ export type ScenarioName = (typeof SCENARIOS)[number]["name"];
 
 /**
  * Win types for detailed outcome tracking
+ * Spirit Island victory conditions based on Terror Level
  */
 export const WIN_TYPES = [
   "Fear Victory",
-  "Blighted Island Victory",
-  "Complete Victory",
+  "Terror Level 1 Victory",
+  "Terror Level 2 Victory",
+  "Terror Level 3 Victory",
 ] as const;
 
 export type WinType = (typeof WIN_TYPES)[number];
+
+/**
+ * Loss types for detailed outcome tracking
+ * Spirit Island official loss conditions
+ */
+export const LOSS_TYPES = [
+  "Blighted Island",
+  "Spirit Destroyed",
+  "Time Ran Out",
+  "Scenario/Adversary",
+] as const;
+
+export type LossType = (typeof LOSS_TYPES)[number];
