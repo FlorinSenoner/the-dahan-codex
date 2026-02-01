@@ -1,8 +1,7 @@
 # The Dahan Codex
 
-Spirit Island companion PWA with offline-first reference library and graphical
-opening scrubber. The scrubber lets users visualize spirit openings turn-by-turn
-with interactive board state.
+Spirit Island companion PWA with offline-first reference library and game tracker.
+Includes text-based turn-by-turn opening guides for spirits.
 
 ## Tech Stack
 
@@ -17,7 +16,7 @@ with interactive board state.
 
 ```
 app/routes/          # File-based routes (TanStack Router)
-app/lib/             # Shared utilities (sw-register.ts, spirit-colors.ts)
+app/lib/             # Shared utilities (spirit-colors.ts, utils.ts)
 convex/              # Backend functions organized by domain
 convex/schema.ts     # Database schema (source of truth for types)
 e2e/                 # Playwright E2E tests
@@ -95,6 +94,64 @@ git checkout feat/phase-<N>-<name>
 - Service worker registration is hydration-safe (checks `document.readyState`)
 - Pre-commit hooks run Biome + typecheck automatically
 - Convex types flow from `schema.ts` → `_generated/` → app
+- Always use shadcn `Button` component instead of raw `<button>` elements
+  - `Button variant="ghost" size="icon"` for icon-only buttons
+  - `Button variant="ghost" size="sm"` for text links/actions
+  - `Button variant="outline"` for secondary actions with borders
+
+## Mobile-First with Desktop Support
+
+This is a **mobile-first PWA** designed for use at game tables, but it must also work well on desktop browsers.
+
+**Interactive elements MUST have:**
+- `cursor-pointer` for hover cursor feedback on desktop
+- Proper hover states (color changes, opacity, etc.)
+- Minimum 44px touch targets for mobile accessibility
+
+**Button component:** `cursor-pointer` is built into the shadcn Button component base styles. No need to add it manually.
+
+**Non-Button interactive elements** (divs, Links, custom triggers) need `cursor-pointer` added:
+```tsx
+// Button - cursor-pointer is automatic
+<Button>Click me</Button>
+
+// Non-Button clickable elements - add cursor-pointer manually
+<div onClick={handleClick} className="cursor-pointer">Clickable div</div>
+<CollapsibleTrigger className="cursor-pointer">Toggle</CollapsibleTrigger>
+<Label htmlFor="checkbox" className="cursor-pointer">Click to toggle</Label>
+```
+
+**Why this matters:** Desktop users expect the cursor to change to a pointer when hovering over clickable elements. Without this, the UI feels unresponsive and broken.
+
+## Offline-First (CRITICAL)
+
+This is an **offline-first app**. For every new feature, you MUST:
+
+1. **Consider offline behavior during planning** - How does this feature work without internet?
+2. **Define the offline strategy** - Does it use cached data? Degrade gracefully? Queue actions?
+3. **Handle reconnection** - What happens when connectivity returns? Sync conflicts?
+
+**Common patterns:**
+- Static reference data (spirits, cards) → cached via service worker, always available
+- User data (game history) → optimistic updates with Convex, queued when offline
+- Auth-gated features → show cached data or appropriate offline state
+
+**Never forget:** Users will use this app at game tables without reliable internet.
+
+
+
+This app is a pure client-side SPA (switched from TanStack Start SSR in quick-010).
+
+**Implications:**
+- No server rendering - all code runs in browser
+- Route loaders run client-side (use for prefetching, not data requirements)
+- "use client" directives have no effect (Vite + React, not Next.js)
+- useSyncExternalStore still needs getServerSnapshot for React 18+ concurrency
+
+**PWA Notes:**
+- Service worker manages static asset caching
+- Convex data cached via TanStack Query + IndexedDB (not SW - WebSocket protocol)
+- typeof window checks in PWA hooks are defensive programming, not SSR handling
 
 ## Context
 

@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6 complete - Ready for Phase 7 (Seed Data Management)
+**Current focus:** Phase 6.1 (Cleanup) complete
 
 ## Current Position
 
-Phase: 6 (User Data)
-Plan: 10 of 10 (gap closure complete)
+Phase: 6.1 (Cleanup TheDahanCodex)
+Plan: 3 of 3 (gap closure plan complete)
 Status: Phase Complete
-Last activity: 2026-02-01 - Completed 06-10-PLAN.md (Remove Unused restoreGame)
+Last activity: 2026-02-01 - Component extraction (ExternalLinkCard, FilterPill) + UAT verification complete
 
-Progress: [##################################################] 100% (23/23 plans complete)
+Progress: [##################################################] 100% (26/26 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 72
+- Total plans completed: 75
 - Average duration: 4.5 min
-- Total execution time: 5.38 hours
+- Total execution time: 5.65 hours
 
 **By Phase:**
 
@@ -40,11 +40,12 @@ Progress: [##################################################] 100% (23/23 plans
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
 | 06    | 10    | 50 min | 5.0 min  |
+| 06.1  | 3     | 16 min | 5.3 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 6 min, 2 min, 4 min, 8 min, 2 min
-- Trend: Phase 6 complete (06-10 gap closure done)
+- Last 5 plans: 8 min, 2 min, 3 min, 3 min, 10 min
+- Trend: Phase 6.1 complete (cleanup + docs + button consistency done)
 
 _Updated after each plan completion_
 
@@ -205,6 +206,7 @@ affecting current work:
 - useConvex().query for programmatic Convex queries outside React hooks
 - PWA components in app/components/pwa/ directory with knip entry point
 - Semantic <output> element for status indicators (Biome lint prefers over div with role="status")
+- Always use shadcn Button instead of raw <button> elements (documented pattern)
 - z-50 for top PWA banners (update), z-40 for offline indicator pill and bottom install prompt
 - Offline indicator: bottom-right pill with muted zinc styling (non-intrusive)
 - 7-day localStorage persistence for install prompt dismissal (pwa-install-dismissed key)
@@ -309,6 +311,7 @@ None yet.
 - Phase 3.6 inserted after Phase 3.4: Simplify Spirit Board + Text Openings - removes growth/presence/innate/cards, adds simple text-based openings (PIVOT)
 - Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
+- Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
 
 ### Blockers/Concerns
 
@@ -589,8 +592,27 @@ Phase 6 (User Data) complete:
 - [x] 06-09: E2E Tests and Verification (game tracker tests, full suite validation)
 - [x] 06-10: Remove restoreGame mutation (gap closure - dead code cleanup)
 
+## Phase 6.1 Summary
+
+Phase 6.1 (Cleanup TheDahanCodex) is now complete with:
+
+- 12 dead code files removed (power-dsl.ts, 10 element icons, index barrel)
+- 3 unused exports removed from spirit-colors.ts
+- 7 "use client" SSR-only directives removed from UI components
+- ~650 lines of dead code removed total
+- Update banner pill styling matching offline indicator
+- CLAUDE.md updated with client-only SPA architecture documentation
+
+## Phase 6.1 Progress
+
+Phase 6.1 (Cleanup TheDahanCodex) complete:
+
+- [x] 06.1-01: Dead Code Cleanup (Phase 3.4 artifacts, SSR directives)
+- [x] 06.1-02: UI Consistency & Docs Update (update banner pill, CLAUDE.md accuracy)
+- [x] 06.1-03: Button Component Consistency & Update Banner Fix (UAT gap closure)
+
 ## Session Continuity
 
 Last session: 2026-02-01
-Stopped at: Completed 06-10-PLAN.md - Remove Unused restoreGame (Phase 6 Gap Closure Complete)
+Stopped at: Completed 06.1-03-PLAN.md - Button Component Consistency & Update Banner Fix (Phase 6.1 Complete)
 Resume file: None

@@ -36,7 +36,8 @@ Decimal phases appear between their surrounding integers in numeric order.
       data
 - [x] **Phase 5: Text Opening Management** - Admin tools for managing text-based
       openings
-- [ ] **Phase 6: User Data** - Game tracker with CSV export/import
+- [x] **Phase 6: User Data** - Game tracker with CSV export/import
+- [x] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
 
 ## Phase Details
@@ -383,6 +384,26 @@ Plans:
 - [x] 06-09-PLAN.md — E2E tests and verification checkpoint
 - [x] 06-10-PLAN.md — Remove unused restoreGame mutation [gap closure]
 
+### Phase 6.1: Cleanup TheDahanCodex (INSERTED)
+
+**Goal**: Codebase cleanup - remove SSR remnants, improve component reuse, delete dead code, subtle update banner
+**Depends on**: Phase 6 **Requirements**: Technical debt cleanup
+**Success Criteria** (what must be TRUE):
+
+1. All SSR-related code removed (app is pure client-side SPA)
+2. Update banner uses subtle pill styling (matches offline indicator)
+3. Shared UI components used consistently across codebase (buttons, accordions, pills)
+4. Unused files removed (power-dsl.ts, spirit-colors.ts, and others identified)
+5. CLAUDE.md updated with client-only SPA pattern and component reuse guidelines
+
+**Plans**: 3 plans
+
+Plans:
+
+- [x] 06.1-01-PLAN.md — Remove dead code and SSR directives
+- [x] 06.1-02-PLAN.md — Update banner pill styling and CLAUDE.md
+- [x] 06.1-03-PLAN.md — Button component consistency and update banner UX [gap closure]
+
 ### Phase 7: Seed Data Management
 
 **Goal**: Admin tools for managing spirit seed data
@@ -421,7 +442,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 6.1 > 7
 
 | Phase                                | Plans Complete | Status      | Completed  |
 | ------------------------------------ | -------------- | ----------- | ---------- |
@@ -437,6 +458,7 @@ development:
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
+| 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---

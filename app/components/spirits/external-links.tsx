@@ -1,36 +1,9 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLinkCard } from "@/components/ui/external-link-card";
 import { Heading } from "@/components/ui/typography";
 
 interface ExternalLinksProps {
   spiritName: string;
   wikiUrl?: string;
-}
-
-function ResourceLink({
-  href,
-  label,
-  description,
-}: {
-  href: string;
-  label: string;
-  description: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-start gap-3 p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors"
-    >
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-medium text-foreground">{label}</span>
-          <ExternalLink className="h-3 w-3 text-muted-foreground" />
-        </div>
-        <p className="text-sm text-muted-foreground mt-0.5">{description}</p>
-      </div>
-    </a>
-  );
 }
 
 export function ExternalLinks({ spiritName, wikiUrl }: ExternalLinksProps) {
@@ -64,10 +37,10 @@ export function ExternalLinks({ spiritName, wikiUrl }: ExternalLinksProps) {
 
       <div className="space-y-2">
         {links.map((link) => (
-          <ResourceLink
+          <ExternalLinkCard
             key={link.href}
             href={link.href}
-            label={link.label}
+            title={link.label}
             description={link.description}
           />
         ))}
