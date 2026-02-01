@@ -1,4 +1,5 @@
 import { RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface UpdateBannerProps {
   onReload: () => void;
@@ -6,23 +7,20 @@ interface UpdateBannerProps {
 
 /**
  * Subtle pill-style update notification shown when a new service worker is waiting.
- * Positioned top-right to avoid overlap with offline indicator (bottom-right).
+ * Positioned bottom-right to be accessible but unobtrusive.
+ * Entire pill is clickable - no nested button.
  */
 export function UpdateBanner({ onReload }: UpdateBannerProps) {
   return (
-    <output
-      aria-live="polite"
-      className="fixed top-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-sm text-zinc-300 animate-in fade-in"
-    >
-      <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
-      <span>Update available</span>
-      <button
-        type="button"
+    <div aria-live="polite" className="fixed bottom-20 right-4 z-50">
+      <Button
+        variant="ghost"
         onClick={onReload}
-        className="rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground hover:bg-primary/90"
+        className="h-auto rounded-full border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-700/90 animate-in fade-in"
       >
-        Reload
-      </button>
-    </output>
+        <RefreshCw className="h-3.5 w-3.5 mr-2" aria-hidden="true" />
+        Update
+      </Button>
+    </div>
   );
 }

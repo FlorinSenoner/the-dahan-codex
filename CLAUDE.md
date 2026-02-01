@@ -94,8 +94,27 @@ git checkout feat/phase-<N>-<name>
 - Service worker registration is hydration-safe (checks `document.readyState`)
 - Pre-commit hooks run Biome + typecheck automatically
 - Convex types flow from `schema.ts` → `_generated/` → app
+- Always use shadcn `Button` component instead of raw `<button>` elements
+  - `Button variant="ghost" size="icon"` for icon-only buttons
+  - `Button variant="ghost" size="sm"` for text links/actions
+  - `Button variant="outline"` for secondary actions with borders
 
-## Client-Only SPA Architecture
+## Offline-First (CRITICAL)
+
+This is an **offline-first app**. For every new feature, you MUST:
+
+1. **Consider offline behavior during planning** - How does this feature work without internet?
+2. **Define the offline strategy** - Does it use cached data? Degrade gracefully? Queue actions?
+3. **Handle reconnection** - What happens when connectivity returns? Sync conflicts?
+
+**Common patterns:**
+- Static reference data (spirits, cards) → cached via service worker, always available
+- User data (game history) → optimistic updates with Convex, queued when offline
+- Auth-gated features → show cached data or appropriate offline state
+
+**Never forget:** Users will use this app at game tables without reliable internet.
+
+
 
 This app is a pure client-side SPA (switched from TanStack Start SSR in quick-010).
 
