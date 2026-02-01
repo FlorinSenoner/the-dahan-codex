@@ -26,6 +26,70 @@ export const Route = createFileRoute("/_authenticated/games/$id")({
   component: GameDetailPage,
 });
 
+/**
+ * Display score calculation breakdown
+ * Victory: (5 x Difficulty) + 10 + (2 x cards) + (dahan / players) - (blight / players)
+ * Defeat: (2 x Difficulty) + cards used + (dahan / players) - (blight / players)
+ */
+function ScoreBreakdown({
+  game,
+}: {
+  game: {
+    result: "win" | "loss";
+    spirits: unknown[];
+    adversary?: { level: number } | null;
+    secondaryAdversary?: { level: number } | null;
+    scenario?: { difficulty?: number } | null;
+    cardsRemaining?: number;
+    dahanCount?: number;
+    blightCount?: number;
+  };
+}) {
+  const playerCount = game.spirits.length || 1;
+  const difficulty =
+    (game.adversary?.level ?? 0) +
+    (game.secondaryAdversary?.level ?? 0) +
+    (game.scenario?.difficulty ?? 0);
+
+  const cards = game.cardsRemaining ?? 0;
+  const dahan = game.dahanCount ?? 0;
+  const blight = game.blightCount ?? 0;
+
+  const dahanScore = Math.floor(dahan / playerCount);
+  const blightPenalty = Math.floor(blight / playerCount);
+
+  if (game.result === "win") {
+    // Victory: (5 x Difficulty) + 10 + (2 x cards) + dahanScore - blightPenalty
+    const diffPart = 5 * difficulty;
+    const cardsPart = 2 * cards;
+
+    const parts: string[] = [];
+    if (diffPart > 0) parts.push(`${diffPart}`);
+    parts.push("10");
+    if (cardsPart > 0) parts.push(`${cardsPart}`);
+    if (dahanScore > 0) parts.push(`${dahanScore}`);
+
+    let formula = parts.join(" + ");
+    if (blightPenalty > 0) formula += ` − ${blightPenalty}`;
+
+    return <p className="text-sm text-muted-foreground">= {formula}</p>;
+  }
+
+  // Defeat: (2 x Difficulty) + cards used + dahanScore - blightPenalty
+  const diffPart = 2 * difficulty;
+  const cardsUsed = 12 - cards;
+
+  const parts: string[] = [];
+  if (diffPart > 0) parts.push(`${diffPart}`);
+  if (cardsUsed > 0) parts.push(`${cardsUsed}`);
+  if (dahanScore > 0) parts.push(`${dahanScore}`);
+
+  let formula = parts.length > 0 ? parts.join(" + ") : "0";
+  if (blightPenalty > 0) formula += ` − ${blightPenalty}`;
+
+  return <p className="text-sm text-muted-foreground">= {formula}</p>;
+}
+
 function GameDetailPage() {
   const { id } = Route.useParams();
   const navigate = useNavigate();
@@ -237,7 +301,7 @@ function GameDetailPage() {
           </div>
         )}
 
-        {/* Game Stats - includes Invader Stage now */}
+        {/* Game Stats - order: Stage, Cards Left, Blight, Dahan */}
         {hasStats && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
@@ -252,6 +316,12 @@ function GameDetailPage() {
                   <p className="text-xs text-muted-foreground">Stage</p>
                 </div>
               )}
+              {game.cardsRemaining !== undefined && (
+                <div>
+                  <p className="text-2xl font-bold">{game.cardsRemaining}</p>
+                  <p className="text-xs text-muted-foreground">Cards Left</p>
+                </div>
+              )}
               {game.blightCount !== undefined && (
                 <div>
                   <p className="text-2xl font-bold">{game.blightCount}</p>
@@ -264,23 +334,20 @@ function GameDetailPage() {
                   <p className="text-xs text-muted-foreground">Dahan</p>
                 </div>
               )}
-              {game.cardsRemaining !== undefined && (
-                <div>
-                  <p className="text-2xl font-bold">{game.cardsRemaining}</p>
-                  <p className="text-xs text-muted-foreground">Cards Left</p>
-                </div>
-              )}
             </div>
           </div>
         )}
 
-        {/* Score */}
+        {/* Score with calculation breakdown */}
         {game.score !== undefined && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Score
             </h3>
-            <p className="text-2xl font-bold">{game.score}</p>
+            <div className="flex items-baseline gap-3">
+              <p className="text-2xl font-bold">{game.score}</p>
+              <ScoreBreakdown game={game} />
+            </div>
           </div>
         )}
 
