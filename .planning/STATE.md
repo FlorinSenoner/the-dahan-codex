@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 5 complete - Ready for Phase 6 (User Data)
+**Current focus:** Phase 6 complete - Ready for Phase 7 (Seed Data Management)
 
 ## Current Position
 
-Phase: 5 (Text Opening Management)
-Plan: 18 of 18 (all plans complete including 05-06)
+Phase: 6 (User Data)
+Plan: 10 of 10 (gap closure complete)
 Status: Phase Complete
-Last activity: 2026-01-31 - Completed 05-06-PLAN.md (E2E tests + checkpoint fixes)
+Last activity: 2026-02-01 - Completed 06-10-PLAN.md (Remove Unused restoreGame)
 
-Progress: [##################################################] 100% (18/18 plans complete)
+Progress: [##################################################] 100% (23/23 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 65
-- Average duration: 4.4 min
-- Total execution time: 4.83 hours
+- Total plans completed: 72
+- Average duration: 4.5 min
+- Total execution time: 5.38 hours
 
 **By Phase:**
 
@@ -39,11 +39,12 @@ Progress: [##################################################] 100% (18/18 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
+| 06    | 10    | 50 min | 5.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 3 min, 4 min, 3 min, 1 min, 4 min
-- Trend: Phase 5 gap closures complete (05-18 complete)
+- Last 5 plans: 6 min, 2 min, 4 min, 8 min, 2 min
+- Trend: Phase 6 complete (06-10 gap closure done)
 
 _Updated after each plan completion_
 
@@ -264,6 +265,18 @@ affecting current work:
 - app/contexts/*.tsx added to knip entry points for context files
 - useBlocker shouldBlockFn must check isEditing && hasChanges && !isSaving to prevent false positives
 - Loading spinner (Loader2 with animate-spin) shown on save button during async save operations
+- Games table schema: soft-delete with deletedAt field, by_user/by_user_date/by_user_deleted indexes
+- Spirits array in games denormalized (name stored for CSV export without joins)
+- papaparse, sonner, cmdk installed for Phase 6 features (CSV export, toasts, searchable dropdowns)
+- Toaster mounted in root layout for app-wide toast notifications
+- Game CRUD: soft-delete with deletedAt, ownership via identity.tokenIdentifier
+- Score calculation: Victory (5xDiff+10+2xCards+Dahan-Blight), Defeat (2xDiff+CardsUsed+Dahan-Blight)
+- Composite key pattern for spirit list: spiritId when selected, otherwise slot-{index}
+- Reference data (ADVERSARIES, SCENARIOS, WIN_TYPES) as hardcoded constants for v1
+- Games components directory added to knip entry points
+- CSV import uses full replacement on ID match (missing fields removed from existing records)
+- Import doesn't resolve spirit IDs - uses name only (CSV format limitation)
+- CSVPreview composite key: id or date+spirit1+index for unique keys
 
 ### Pending Todos
 
@@ -284,6 +297,7 @@ None yet.
 | 010 | Switch to client-only SPA | 2026-01-26 | 32bf3ed | [010-switch-to-client-only-spa](./quick/010-switch-to-client-only-spa/) |
 | 011 | Fix view transitions and aspect URLs | 2026-01-26 | 5a25c3e | [011-fix-view-transitions-and-aspect-urls](./quick/011-fix-view-transitions-and-aspect-urls/) |
 | 012 | Fix Cloudflare CI auth error | 2026-01-26 | 8b3f308 | [012-fix-cloudflare-ci-auth-error](./quick/012-fix-cloudflare-ci-auth-error/) |
+| 013 | Game tracker UI polish and CSV import fix | 2026-02-01 | 67b32cf | [013-game-tracker-ui-polish-and-csv-import-fi](./quick/013-game-tracker-ui-polish-and-csv-import-fi/) |
 
 ### Roadmap Evolution
 
@@ -544,8 +558,39 @@ Phase 5 (Text Opening Management) is now complete with:
 - E2E tests for search and admin access control
 - 26 total E2E tests passing
 
+## Phase 6 Summary
+
+Phase 6 (User Data) is now complete with:
+
+- Games table with soft delete and user ownership
+- Game CRUD operations with score calculation
+- Game list page with empty state and game rows
+- Game form with spirit picker (searchable dropdown)
+- Adversary/scenario selection with difficulty levels
+- Game detail page with inline editing
+- Delete with confirmation dialog (soft delete in DB)
+- CSV export with all game fields
+- CSV import with preview and ID-based sync
+- E2E tests for navigation and auth flows
+- 33 total E2E tests passing
+
+## Phase 6 Progress
+
+Phase 6 (User Data) complete:
+
+- [x] 06-01: Schema and Dependencies (games table, sonner/cmdk/papaparse)
+- [x] 06-02: CRUD Mutations (games.ts, scoring.ts)
+- [x] 06-03: Game List Page (games routes, GameRow, bottom nav)
+- [x] 06-04: Game Form UI (GameForm, SpiritPicker, AdversaryPicker)
+- [x] 06-05: New Game Page (/games/new route, form wiring)
+- [x] 06-06: Game Detail Page (/games/$id)
+- [x] 06-07: CSV Export (exportGamesToCSV utility, Export button)
+- [x] 06-08: CSV Import (import utility, preview, importGames mutation)
+- [x] 06-09: E2E Tests and Verification (game tracker tests, full suite validation)
+- [x] 06-10: Remove restoreGame mutation (gap closure - dead code cleanup)
+
 ## Session Continuity
 
-Last session: 2026-01-31
-Stopped at: Completed 05-06-PLAN.md - Phase 5 complete
+Last session: 2026-02-01
+Stopped at: Completed 06-10-PLAN.md - Remove Unused restoreGame (Phase 6 Gap Closure Complete)
 Resume file: None

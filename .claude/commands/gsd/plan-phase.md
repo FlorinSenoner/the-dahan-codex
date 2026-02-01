@@ -42,6 +42,36 @@ Normalize phase input in step 2 before any directory lookups.
 
 <process>
 
+## 0. Branch Safety Check (CRITICAL)
+
+Before ANY work, verify we're on a feature branch:
+
+```bash
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo "Current branch: $CURRENT_BRANCH"
+```
+
+**If branch is `main` or `master`:**
+
+Display error and STOP:
+```
+╔══════════════════════════════════════════════════════════════╗
+║  ERROR: Cannot plan on main branch!                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+Planning commits to git. You must be on a feature branch.
+
+**To fix:**
+1. Create feature branch: git checkout -b feat/phase-{N}-{name}
+2. Re-run: /gsd:plan-phase {N}
+
+Example: git checkout -b feat/phase-06-user-data
+```
+
+**DO NOT PROCEED** if on main/master. Return immediately after showing error.
+
+**If on feature branch:** Continue to step 1.
+
 ## 1. Validate Environment and Resolve Model Profile
 
 ```bash

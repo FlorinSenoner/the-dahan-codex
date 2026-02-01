@@ -25,7 +25,7 @@ const tabs: Tab[] = [
     href: "/games",
     icon: Gamepad2,
     matchPattern: /^\/games/,
-    disabled: true, // Phase 6
+    disabled: false,
   },
   {
     name: "Notes",
@@ -74,7 +74,7 @@ export function BottomNav() {
           return (
             <Link
               key={tab.name}
-              to={tab.href as "/spirits" | "/settings"}
+              to={tab.href as "/spirits" | "/games" | "/settings"}
               className={cn(
                 "flex flex-col items-center justify-center flex-1 h-full",
                 "transition-colors",
