@@ -11,11 +11,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { FilterPill } from "@/components/ui/filter-pill";
 import {
   complexityFilterColors,
   elementFilterColors,
 } from "@/lib/spirit-colors";
-import { cn } from "@/lib/utils";
 
 // Filter options
 const COMPLEXITY_OPTIONS = ["Low", "Moderate", "High", "Very High"] as const;
@@ -94,7 +94,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <Button
           variant="outline"
           size="icon"
-          className="relative min-w-[44px] min-h-[44px] cursor-pointer"
+          className="relative min-w-[44px] min-h-[44px]"
           aria-label="Filter"
         >
           <Filter className="h-4 w-4" />
@@ -117,7 +117,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
                   setPendingComplexity([]);
                   setPendingElements([]);
                 }}
-                className="text-muted-foreground cursor-pointer"
+                className="text-muted-foreground"
               >
                 Clear all
               </Button>
@@ -171,11 +171,11 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <DrawerFooter className="border-t border-border">
           <div className="flex gap-3">
             <DrawerClose asChild>
-              <Button variant="outline" className="flex-1 cursor-pointer">
+              <Button variant="outline" className="flex-1">
                 Cancel
               </Button>
             </DrawerClose>
-            <Button onClick={applyFilters} className="flex-1 cursor-pointer">
+            <Button onClick={applyFilters} className="flex-1">
               Apply Filters
               {pendingCount > 0 && ` (${pendingCount})`}
             </Button>
@@ -183,40 +183,5 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  );
-}
-
-// Reusable filter pill component
-export function FilterPill({
-  label,
-  selected,
-  onClick,
-  selectedClass,
-  unselectedClass,
-  children,
-}: {
-  label: string;
-  selected: boolean;
-  onClick: () => void;
-  selectedClass?: string;
-  unselectedClass?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer",
-        "border",
-        selected
-          ? selectedClass || "bg-primary text-primary-foreground border-primary"
-          : unselectedClass ||
-              "bg-muted/30 text-foreground border-border hover:bg-muted/50",
-      )}
-    >
-      {label}
-      {children}
-    </button>
   );
 }

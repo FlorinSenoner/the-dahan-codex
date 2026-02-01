@@ -41,7 +41,7 @@ export function PageHeader({
               <Button
                 variant="ghost"
                 size="icon"
-                className="min-w-[44px] min-h-[44px] cursor-pointer"
+                className="min-w-[44px] min-h-[44px]"
                 aria-label="Go back"
               >
                 <ArrowLeft className="h-5 w-5" />

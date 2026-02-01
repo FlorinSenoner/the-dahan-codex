@@ -1,22 +1,26 @@
+import { RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 interface UpdateBannerProps {
   onReload: () => void;
 }
 
 /**
- * Non-dismissible update banner shown when a new service worker is waiting.
- * User must click "Reload" to activate the new version.
+ * Subtle pill-style update notification shown when a new service worker is waiting.
+ * Positioned bottom-right to be accessible but unobtrusive.
+ * Entire pill is clickable - no nested button.
  */
 export function UpdateBanner({ onReload }: UpdateBannerProps) {
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-3 bg-primary p-3 text-primary-foreground">
-      <span className="text-sm">A new version is ready</span>
-      <button
-        type="button"
+    <div aria-live="polite" className="fixed bottom-20 right-4 z-50">
+      <Button
+        variant="ghost"
         onClick={onReload}
-        className="rounded bg-background px-4 py-1 text-sm font-medium text-foreground transition-colors hover:bg-background/90"
+        className="h-auto rounded-full border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-700/90 hover:text-zinc-100 animate-in fade-in"
       >
-        Reload
-      </button>
+        <RefreshCw className="h-3.5 w-3.5 mr-2" aria-hidden="true" />
+        Update
+      </Button>
     </div>
   );
 }
