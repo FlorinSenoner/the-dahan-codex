@@ -396,12 +396,13 @@ Plans:
 4. Unused files removed (power-dsl.ts, spirit-colors.ts, and others identified)
 5. CLAUDE.md updated with client-only SPA pattern and component reuse guidelines
 
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
 
 - [x] 06.1-01-PLAN.md — Remove dead code and SSR directives
 - [x] 06.1-02-PLAN.md — Update banner pill styling and CLAUDE.md
+- [x] 06.1-03-PLAN.md — Button component consistency and update banner UX [gap closure]
 
 ### Phase 7: Seed Data Management
 
@@ -457,7 +458,7 @@ development:
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
-| 6.1 Cleanup TheDahanCodex            | 2/2            | Complete    | 2026-02-01 |
+| 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
