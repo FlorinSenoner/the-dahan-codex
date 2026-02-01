@@ -65,7 +65,7 @@ function ScoreBreakdown({
 
     const parts: string[] = [];
     parts.push(`${diffPart} (difficulty × 5 + 10)`);
-    if (cardsPart > 0) parts.push(`${cardsPart} (cards left × 2)`);
+    if (cardsPart > 0) parts.push(`${cardsPart} (cards × 2)`);
     if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
 
     let formula = parts.join(" + ");
