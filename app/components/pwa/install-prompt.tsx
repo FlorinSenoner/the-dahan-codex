@@ -1,5 +1,6 @@
 import { Share, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { useInstallPrompt } from "@/hooks";
 
 const DISMISSED_KEY = "pwa-install-dismissed";
@@ -61,23 +62,18 @@ export function InstallPrompt() {
   if (isInstallable) {
     return (
       <div className="fixed bottom-20 left-4 right-4 z-40 rounded-lg border bg-card p-4 shadow-lg animate-in slide-in-from-bottom">
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={handleDismiss}
-          className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground"
+          className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
           aria-label="Dismiss install prompt"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Button>
         <div className="flex items-center justify-between gap-4 pr-6">
           <p className="text-sm text-foreground">Install for offline access</p>
-          <button
-            type="button"
-            onClick={promptInstall}
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Install
-          </button>
+          <Button onClick={promptInstall}>Install</Button>
         </div>
       </div>
     );
@@ -86,14 +82,15 @@ export function InstallPrompt() {
   // iOS manual instructions
   return (
     <div className="fixed bottom-20 left-4 right-4 z-40 rounded-lg border bg-card p-4 shadow-lg animate-in slide-in-from-bottom">
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={handleDismiss}
-        className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground"
+        className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
         aria-label="Dismiss install prompt"
       >
         <X className="h-4 w-4" />
-      </button>
+      </Button>
       <div className="pr-6">
         <p className="font-medium text-foreground">Install this app</p>
         <p className="mt-1 flex items-center gap-1 text-sm text-muted-foreground">

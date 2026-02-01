@@ -1,10 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FilterPill } from "@/components/ui/filter-pill";
 import {
   complexityFilterColors,
   elementFilterColors,
 } from "@/lib/spirit-colors";
-import { FilterPill } from "./filter-sheet";
 
 interface FilterChipsProps {
   filters: {
@@ -76,13 +77,14 @@ export function FilterChips({ filters }: FilterChipsProps) {
           );
         })}
       </div>
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={clearAll}
-        className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-1.5 px-2 ml-2 border-l border-border"
+        className="text-xs text-muted-foreground hover:text-foreground ml-2 h-auto py-1.5 px-2"
       >
         Clear all
-      </button>
+      </Button>
     </div>
   );
 }
