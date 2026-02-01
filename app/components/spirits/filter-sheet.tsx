@@ -94,7 +94,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <Button
           variant="outline"
           size="icon"
-          className="relative min-w-[44px] min-h-[44px] cursor-pointer"
+          className="relative min-w-[44px] min-h-[44px]"
           aria-label="Filter"
         >
           <Filter className="h-4 w-4" />
@@ -117,7 +117,7 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
                   setPendingComplexity([]);
                   setPendingElements([]);
                 }}
-                className="text-muted-foreground cursor-pointer"
+                className="text-muted-foreground"
               >
                 Clear all
               </Button>
@@ -171,11 +171,11 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <DrawerFooter className="border-t border-border">
           <div className="flex gap-3">
             <DrawerClose asChild>
-              <Button variant="outline" className="flex-1 cursor-pointer">
+              <Button variant="outline" className="flex-1">
                 Cancel
               </Button>
             </DrawerClose>
-            <Button onClick={applyFilters} className="flex-1 cursor-pointer">
+            <Button onClick={applyFilters} className="flex-1">
               Apply Filters
               {pendingCount > 0 && ` (${pendingCount})`}
             </Button>

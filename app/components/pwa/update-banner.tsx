@@ -16,7 +16,7 @@ export function UpdateBanner({ onReload }: UpdateBannerProps) {
       <Button
         variant="ghost"
         onClick={onReload}
-        className="h-auto rounded-full border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-700/90 animate-in fade-in"
+        className="h-auto rounded-full border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-700/90 hover:text-zinc-100 animate-in fade-in"
       >
         <RefreshCw className="h-3.5 w-3.5 mr-2" aria-hidden="true" />
         Update

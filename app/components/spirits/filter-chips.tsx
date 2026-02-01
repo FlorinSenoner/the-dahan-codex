@@ -81,7 +81,7 @@ export function FilterChips({ filters }: FilterChipsProps) {
         variant="ghost"
         size="sm"
         onClick={clearAll}
-        className="text-xs text-muted-foreground hover:text-foreground ml-2 border-l border-border rounded-none h-auto py-1.5 px-2"
+        className="text-xs text-muted-foreground hover:text-foreground ml-2 h-auto py-1.5 px-2"
       >
         Clear all
       </Button>
