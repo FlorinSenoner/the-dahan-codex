@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6.1 (Cleanup) in progress
+**Current focus:** Phase 6.1 (Cleanup) complete
 
 ## Current Position
 
 Phase: 6.1 (Cleanup TheDahanCodex)
-Plan: 1 of 1 (dead code cleanup complete)
+Plan: 2 of 2 (UI consistency & docs complete)
 Status: Phase Complete
-Last activity: 2026-02-01 - Completed 06.1-01-PLAN.md (Dead Code Cleanup)
+Last activity: 2026-02-01 - Completed 06.1-02-PLAN.md (UI Consistency & Docs Update)
 
-Progress: [##################################################] 100% (24/24 plans complete)
+Progress: [##################################################] 100% (25/25 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 73
+- Total plans completed: 74
 - Average duration: 4.5 min
-- Total execution time: 5.43 hours
+- Total execution time: 5.48 hours
 
 **By Phase:**
 
@@ -40,12 +40,12 @@ Progress: [##################################################] 100% (24/24 plans
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
 | 06    | 10    | 50 min | 5.0 min  |
-| 06.1  | 1     | 3 min  | 3.0 min  |
+| 06.1  | 2     | 6 min  | 3.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 2 min, 4 min, 8 min, 2 min, 3 min
-- Trend: Phase 6.1 complete (cleanup done)
+- Last 5 plans: 4 min, 8 min, 2 min, 3 min, 3 min
+- Trend: Phase 6.1 complete (cleanup + docs done)
 
 _Updated after each plan completion_
 
@@ -599,15 +599,18 @@ Phase 6.1 (Cleanup TheDahanCodex) is now complete with:
 - 3 unused exports removed from spirit-colors.ts
 - 7 "use client" SSR-only directives removed from UI components
 - ~650 lines of dead code removed total
+- Update banner pill styling matching offline indicator
+- CLAUDE.md updated with client-only SPA architecture documentation
 
 ## Phase 6.1 Progress
 
 Phase 6.1 (Cleanup TheDahanCodex) complete:
 
 - [x] 06.1-01: Dead Code Cleanup (Phase 3.4 artifacts, SSR directives)
+- [x] 06.1-02: UI Consistency & Docs Update (update banner pill, CLAUDE.md accuracy)
 
 ## Session Continuity
 
 Last session: 2026-02-01
-Stopped at: Completed 06.1-01-PLAN.md - Dead Code Cleanup (Phase 6.1 Complete)
+Stopped at: Completed 06.1-02-PLAN.md - UI Consistency & Docs Update (Phase 6.1 Complete)
 Resume file: None
