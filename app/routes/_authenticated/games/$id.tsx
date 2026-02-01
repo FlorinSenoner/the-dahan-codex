@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_authenticated/games/$id")({
 });
 
 /**
- * Display score calculation breakdown
+ * Display score calculation breakdown with labels
  * Victory: (5 x Difficulty) + 10 + (2 x cards) + (dahan / players) - (blight / players)
  * Defeat: (2 x Difficulty) + cards used + (dahan / players) - (blight / players)
  */
@@ -64,13 +64,13 @@ function ScoreBreakdown({
     const cardsPart = 2 * cards;
 
     const parts: string[] = [];
-    if (diffPart > 0) parts.push(`${diffPart}`);
-    parts.push("10");
-    if (cardsPart > 0) parts.push(`${cardsPart}`);
-    if (dahanScore > 0) parts.push(`${dahanScore}`);
+    if (diffPart > 0) parts.push(`${diffPart} (difficulty × 5)`);
+    parts.push("10 (win)");
+    if (cardsPart > 0) parts.push(`${cardsPart} (cards × 2)`);
+    if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
 
     let formula = parts.join(" + ");
-    if (blightPenalty > 0) formula += ` − ${blightPenalty}`;
+    if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`;
 
     return <p className="text-sm text-muted-foreground">= {formula}</p>;
   }
@@ -80,12 +80,12 @@ function ScoreBreakdown({
   const cardsUsed = 12 - cards;
 
   const parts: string[] = [];
-  if (diffPart > 0) parts.push(`${diffPart}`);
-  if (cardsUsed > 0) parts.push(`${cardsUsed}`);
-  if (dahanScore > 0) parts.push(`${dahanScore}`);
+  if (diffPart > 0) parts.push(`${diffPart} (difficulty × 2)`);
+  if (cardsUsed > 0) parts.push(`${cardsUsed} (cards used)`);
+  if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
 
   let formula = parts.length > 0 ? parts.join(" + ") : "0";
-  if (blightPenalty > 0) formula += ` − ${blightPenalty}`;
+  if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`;
 
   return <p className="text-sm text-muted-foreground">= {formula}</p>;
 }
@@ -344,7 +344,7 @@ function GameDetailPage() {
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Score
             </h3>
-            <div className="flex items-baseline gap-3">
+            <div className="flex items-center gap-3">
               <p className="text-2xl font-bold">{game.score}</p>
               <ScoreBreakdown game={game} />
             </div>
