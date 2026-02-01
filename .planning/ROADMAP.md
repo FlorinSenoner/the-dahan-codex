@@ -37,7 +37,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Text Opening Management** - Admin tools for managing text-based
       openings
 - [x] **Phase 6: User Data** - Game tracker with CSV export/import
-- [ ] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
+- [x] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
 
 ## Phase Details
@@ -400,8 +400,8 @@ Plans:
 
 Plans:
 
-- [ ] 06.1-01-PLAN.md — Remove dead code and SSR directives
-- [ ] 06.1-02-PLAN.md — Update banner pill styling and CLAUDE.md
+- [x] 06.1-01-PLAN.md — Remove dead code and SSR directives
+- [x] 06.1-02-PLAN.md — Update banner pill styling and CLAUDE.md
 
 ### Phase 7: Seed Data Management
 
@@ -457,7 +457,7 @@ development:
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
-| 6.1 Cleanup TheDahanCodex            | 0/2            | Planned     | -          |
+| 6.1 Cleanup TheDahanCodex            | 2/2            | Complete    | 2026-02-01 |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
