@@ -37,7 +37,7 @@ export const createGame = mutation({
     result: v.union(v.literal("win"), v.literal("loss")),
     spirits: v.array(
       v.object({
-        spiritId: v.id("spirits"),
+        spiritId: v.optional(v.id("spirits")),
         name: v.string(),
         variant: v.optional(v.string()),
         player: v.optional(v.string()),
@@ -99,7 +99,7 @@ export const updateGame = mutation({
     spirits: v.optional(
       v.array(
         v.object({
-          spiritId: v.id("spirits"),
+          spiritId: v.optional(v.id("spirits")),
           name: v.string(),
           variant: v.optional(v.string()),
           player: v.optional(v.string()),
@@ -247,9 +247,9 @@ export const importGames = mutation({
       const { existingId, spirits, ...data } = gameData;
 
       // Note: Import doesn't link to spirit IDs since CSV uses names
-      // Create spirit entries with null spiritId (will show name but not link)
+      // Create spirit entries with undefined spiritId (will show name but not link)
       const spiritsWithNullIds = spirits.map((s) => ({
-        spiritId: null as unknown as Id<"spirits">, // Import doesn't resolve IDs
+        spiritId: undefined,
         name: s.name,
         variant: s.variant,
         player: s.player,

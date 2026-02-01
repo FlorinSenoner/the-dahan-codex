@@ -114,7 +114,7 @@ export default defineSchema({
     // Spirits (1-6, stored as array)
     spirits: v.array(
       v.object({
-        spiritId: v.id("spirits"),
+        spiritId: v.optional(v.id("spirits")), // Optional for CSV imports
         name: v.string(), // Denormalized for CSV export
         variant: v.optional(v.string()), // Aspect name if applicable
         player: v.optional(v.string()), // Player name

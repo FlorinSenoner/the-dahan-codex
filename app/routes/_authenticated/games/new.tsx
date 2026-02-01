@@ -4,6 +4,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { toast } from "sonner";
 import { GameForm, type GameFormData } from "@/components/games/game-form";
+import { PageHeader } from "@/components/ui/page-header";
 
 export const Route = createFileRoute("/_authenticated/games/new")({
   component: NewGamePage,
@@ -43,12 +44,20 @@ function NewGamePage() {
       })),
       adversary: data.adversary ?? undefined,
       secondaryAdversary: data.secondaryAdversary ?? undefined,
+      scenario: data.scenario ?? undefined,
+      winType: data.winType || undefined,
+      invaderStage: data.invaderStage,
+      blightCount: data.blightCount,
+      dahanCount: data.dahanCount,
+      cardsRemaining: data.cardsRemaining,
+      score: data.score,
       notes: data.notes || undefined,
     });
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-background pb-20">
+      <PageHeader title="New Game" backHref="/games" />
       <GameForm
         onSubmit={handleSubmit}
         submitLabel="Log Game"

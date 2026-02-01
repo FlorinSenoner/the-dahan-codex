@@ -79,7 +79,7 @@ function SpiritsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageHeader title="Spirits" viewTransitionName="list-header">
+      <PageHeader title="Spirits" backHref="/" viewTransitionName="list-header">
         <FilterSheet
           currentFilters={{
             complexity: filters.complexity,
