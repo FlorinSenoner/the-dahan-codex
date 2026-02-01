@@ -59,13 +59,12 @@ function ScoreBreakdown({
   const blightPenalty = Math.floor(blight / playerCount);
 
   if (game.result === "win") {
-    // Victory: (5 x Difficulty) + 10 + (2 x cards) + dahanScore - blightPenalty
-    const diffPart = 5 * difficulty;
+    // Victory: (5 x Difficulty + 10) + (2 x cards) + dahanScore - blightPenalty
+    const diffPart = 5 * difficulty + 10;
     const cardsPart = 2 * cards;
 
     const parts: string[] = [];
-    if (diffPart > 0) parts.push(`${diffPart} (difficulty × 5)`);
-    parts.push("10 (win)");
+    parts.push(`${diffPart} (difficulty × 5 + 10)`);
     if (cardsPart > 0) parts.push(`${cardsPart} (cards × 2)`);
     if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
 
