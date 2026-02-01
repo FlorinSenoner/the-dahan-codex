@@ -309,6 +309,7 @@ None yet.
 - Phase 3.6 inserted after Phase 3.4: Simplify Spirit Board + Text Openings - removes growth/presence/innate/cards, adds simple text-based openings (PIVOT)
 - Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
+- Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
 
 ### Blockers/Concerns
 
