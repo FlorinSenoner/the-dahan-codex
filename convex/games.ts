@@ -176,23 +176,6 @@ export const deleteGame = mutation({
   },
 });
 
-// Mutation to restore a soft-deleted game (for undo)
-export const restoreGame = mutation({
-  args: { id: v.id("games") },
-  handler: async (ctx, args) => {
-    const identity = await requireAuth(ctx);
-    const game = await ctx.db.get(args.id);
-
-    if (!game || game.userId !== identity.tokenIdentifier) {
-      throw new Error("Game not found");
-    }
-
-    await ctx.db.patch(args.id, {
-      deletedAt: undefined,
-    });
-  },
-});
-
 // Mutation to import games from CSV (upsert by ID)
 export const importGames = mutation({
   args: {
