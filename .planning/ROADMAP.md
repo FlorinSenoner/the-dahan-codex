@@ -364,7 +364,7 @@ Plans:
 **Success Criteria** (what must be TRUE):
 
 1. User can create a game with 1-6 spirits, adversary, scenario, and outcome
-2. User can edit and delete existing games with undo toast
+2. User can edit and delete existing games with confirmation dialog
 3. CSV export downloads all games in Excel-friendly format
 4. CSV import validates, previews, and uses ID-based sync (matching IDs = full replacement)
 
@@ -381,7 +381,7 @@ Plans:
 - [x] 06-07-PLAN.md — CSV export functionality
 - [x] 06-08-PLAN.md — CSV import with preview and ID-based sync
 - [x] 06-09-PLAN.md — E2E tests and verification checkpoint
-- [ ] 06-10-PLAN.md — Replace delete confirmation with undo toast [gap closure]
+- [x] 06-10-PLAN.md — Remove unused restoreGame mutation [gap closure]
 
 ### Phase 7: Seed Data Management
 
@@ -436,7 +436,7 @@ development:
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
-| 6. User Data                         | 9/10           | In Progress | -          |
+| 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---

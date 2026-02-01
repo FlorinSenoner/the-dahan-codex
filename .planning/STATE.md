@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 5 complete - Ready for Phase 6 (User Data)
+**Current focus:** Phase 6 complete - Ready for Phase 7 (Seed Data Management)
 
 ## Current Position
 
@@ -39,12 +39,12 @@ Progress: [##################################################] 100% (23/23 plans
 | 03.6  | 8     | 23 min | 2.9 min |
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
-| 06    | 9     | 48 min | 5.3 min  |
+| 06    | 10    | 50 min | 5.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 6 min, 6 min, 2 min, 4 min, 8 min
-- Trend: Phase 6 complete (06-09 done)
+- Last 5 plans: 6 min, 2 min, 4 min, 8 min, 2 min
+- Trend: Phase 6 complete (06-10 gap closure done)
 
 _Updated after each plan completion_
 
@@ -568,7 +568,7 @@ Phase 6 (User Data) is now complete with:
 - Game form with spirit picker (searchable dropdown)
 - Adversary/scenario selection with difficulty levels
 - Game detail page with inline editing
-- Delete with undo toast (soft delete pattern)
+- Delete with confirmation dialog (soft delete in DB)
 - CSV export with all game fields
 - CSV import with preview and ID-based sync
 - E2E tests for navigation and auth flows
@@ -587,6 +587,7 @@ Phase 6 (User Data) complete:
 - [x] 06-07: CSV Export (exportGamesToCSV utility, Export button)
 - [x] 06-08: CSV Import (import utility, preview, importGames mutation)
 - [x] 06-09: E2E Tests and Verification (game tracker tests, full suite validation)
+- [x] 06-10: Remove restoreGame mutation (gap closure - dead code cleanup)
 
 ## Session Continuity
 

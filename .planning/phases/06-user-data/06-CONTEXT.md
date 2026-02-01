@@ -40,8 +40,8 @@ Logged-in users can track Spirit Island games and export/import via CSV. Game tr
 - Friendly empty state with illustration + "Log your first game" prompt
 
 ### Game deletion
-- Swipe to delete on mobile, click delete icon on desktop
-- Undo toast (not confirmation dialog)
+- Delete button with confirmation dialog
+- Immediate delete on confirmation (no undo)
 
 ### Game detail page
 - All info visible immediately (no collapsible sections)
@@ -62,7 +62,6 @@ Logged-in users can track Spirit Island games and export/import via CSV. Game tr
 - Date format in CSV (ISO 8601 recommended)
 - Exact filter chip options and UI
 - Stats page metrics and visualizations
-- Undo toast duration and styling
 - Form validation messages and UX
 
 </decisions>
@@ -71,7 +70,6 @@ Logged-in users can track Spirit Island games and export/import via CSV. Game tr
 ## Specific Ideas
 
 - Reuse exact form components between create and edit — "edit is create with pre-filled data"
-- Swipe-to-delete with undo is the mobile pattern (like iOS Mail)
 - Stats on separate page keeps game list clean and focused
 
 </specifics>
