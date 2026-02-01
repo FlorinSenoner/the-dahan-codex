@@ -15,6 +15,11 @@ import {
   validateParsedGame,
 } from "@/lib/csv-import";
 
+/** Count of games that will actually be imported (excludes unchanged) */
+function getImportableCount(games: ValidatedGame[]): number {
+  return games.filter((g) => g.isValid && !g.isUnchanged).length;
+}
+
 export const Route = createFileRoute("/_authenticated/games/import")({
   component: ImportPage,
 });
@@ -59,23 +64,24 @@ function ImportPage() {
   const handleImport = async () => {
     if (!validatedGames) return;
 
-    const validGames = validatedGames
-      .filter((g) => g.isValid)
+    // Only import games that are valid AND have changes (skip unchanged)
+    const gamesToImport = validatedGames
+      .filter((g) => g.isValid && !g.isUnchanged)
       .map((g) => rowToGameData(g.row));
 
-    if (validGames.length === 0) {
-      toast.error("No valid games to import");
+    if (gamesToImport.length === 0) {
+      // All games are unchanged, just navigate back
+      navigate({ to: "/games" });
       return;
     }
 
-    const result = await importGames.mutateAsync({ games: validGames });
-    toast.success(
-      `Imported ${result.created} new, updated ${result.updated} existing`,
-    );
+    await importGames.mutateAsync({ games: gamesToImport });
     navigate({ to: "/games" });
   };
 
-  const validCount = validatedGames?.filter((g) => g.isValid).length ?? 0;
+  const importableCount = validatedGames
+    ? getImportableCount(validatedGames)
+    : 0;
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -115,15 +121,17 @@ function ImportPage() {
             <div className="flex gap-2">
               <Button
                 onClick={handleImport}
-                disabled={validCount === 0 || importGames.isPending}
+                disabled={importableCount === 0 || importGames.isPending}
               >
                 {importGames.isPending ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                     Importing...
                   </>
+                ) : importableCount === 0 ? (
+                  "No Changes to Import"
                 ) : (
-                  `Import ${validCount} Game${validCount === 1 ? "" : "s"}`
+                  `Import ${importableCount} Game${importableCount === 1 ? "" : "s"}`
                 )}
               </Button>
               <Button variant="outline" onClick={() => setValidatedGames(null)}>

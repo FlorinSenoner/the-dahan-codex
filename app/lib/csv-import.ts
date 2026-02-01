@@ -228,10 +228,30 @@ export function validateParsedGame(
   const errors: string[] = [];
 
   // Required: date
+  // We'll normalize the date to YYYY-MM-DD for storage
+  let normalizedDate = row.date;
   if (!row.date) {
     errors.push("Missing date");
-  } else if (!/^\d{4}-\d{2}-\d{2}$/.test(row.date)) {
-    errors.push("Invalid date format (expected YYYY-MM-DD)");
+  } else if (/^\d{4}-\d{2}-\d{2}$/.test(row.date)) {
+    // Already YYYY-MM-DD format
+    normalizedDate = row.date;
+  } else if (/^\d{2}\.\d{2}\.\d{4}$/.test(row.date)) {
+    // DD.MM.YYYY format - convert to YYYY-MM-DD
+    const [day, month, year] = row.date.split(".");
+    normalizedDate = `${year}-${month}-${day}`;
+  } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(row.date)) {
+    // MM/DD/YYYY format - convert to YYYY-MM-DD
+    const [month, day, year] = row.date.split("/");
+    normalizedDate = `${year}-${month}-${day}`;
+  } else {
+    errors.push(
+      "Invalid date format (expected YYYY-MM-DD, DD.MM.YYYY, or MM/DD/YYYY)",
+    );
+  }
+
+  // Mutate the row's date to the normalized format for downstream processing
+  if (normalizedDate !== row.date) {
+    row.date = normalizedDate;
   }
 
   // Required: result

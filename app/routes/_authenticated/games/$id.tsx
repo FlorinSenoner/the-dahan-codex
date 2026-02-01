@@ -102,7 +102,6 @@ function GameDetailPage() {
   const updateGame = useMutation({
     mutationFn: useConvexMutation(api.games.updateGame),
     onSuccess: () => {
-      toast.success("Game updated!");
       setIsEditing(false);
     },
     onError: (error) => {
@@ -132,12 +131,12 @@ function GameDetailPage() {
     setShowDeleteConfirm(false);
     await deleteGameMutation.mutateAsync({ id: game._id });
     navigate({ to: "/games" });
-    toast.success("Game deleted");
   };
 
   const handleSubmit = async (data: GameFormData) => {
+    // Include spirits with either a spiritId (picked from dropdown) or a name (imported from CSV)
     const validSpirits = data.spirits.filter(
-      (s): s is typeof s & { spiritId: Id<"spirits"> } => s.spiritId !== null,
+      (s) => s.spiritId !== null || s.name,
     );
 
     await updateGame.mutateAsync({
@@ -145,7 +144,7 @@ function GameDetailPage() {
       date: data.date,
       result: data.result,
       spirits: validSpirits.map((s) => ({
-        spiritId: s.spiritId,
+        spiritId: s.spiritId ?? undefined,
         name: s.name,
         variant: s.variant,
         player: s.player,

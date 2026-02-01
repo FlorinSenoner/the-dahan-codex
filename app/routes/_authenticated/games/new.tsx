@@ -16,7 +16,6 @@ function NewGamePage() {
   const createGame = useMutation({
     mutationFn: useConvexMutation(api.games.createGame),
     onSuccess: () => {
-      toast.success("Game saved!");
       navigate({ to: "/games" });
     },
     onError: (error) => {
@@ -25,8 +24,11 @@ function NewGamePage() {
   });
 
   const handleSubmit = async (data: GameFormData) => {
-    // Filter out spirits without a spiritId selected
-    const validSpirits = data.spirits.filter((s) => s.spiritId !== null);
+    // Filter out spirits without a spiritId selected (new games require picking from dropdown)
+    const validSpirits = data.spirits.filter(
+      (s): s is typeof s & { spiritId: NonNullable<typeof s.spiritId> } =>
+        s.spiritId !== null,
+    );
 
     if (validSpirits.length === 0) {
       toast.error("Please select at least one spirit");
@@ -37,7 +39,7 @@ function NewGamePage() {
       date: data.date,
       result: data.result,
       spirits: validSpirits.map((s) => ({
-        spiritId: s.spiritId!,
+        spiritId: s.spiritId,
         name: s.name,
         variant: s.variant,
         player: s.player,

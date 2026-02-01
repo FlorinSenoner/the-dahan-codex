@@ -116,6 +116,64 @@ function calculateDifficulty(
   return adversaryLevel + secondaryAdversaryLevel + scenarioDifficulty;
 }
 
+/**
+ * Display score calculation breakdown with labels
+ * Victory: (5 x Difficulty) + 10 + (2 x cards) + (dahan / players) - (blight / players)
+ * Defeat: (2 x Difficulty) + cards used + (dahan / players) - (blight / players)
+ */
+function ScoreBreakdown({
+  result,
+  difficulty,
+  playerCount,
+  cardsRemaining,
+  dahanCount,
+  blightCount,
+}: {
+  result: "win" | "loss";
+  difficulty: number;
+  playerCount: number;
+  cardsRemaining?: number;
+  dahanCount?: number;
+  blightCount?: number;
+}) {
+  const cards = cardsRemaining ?? 0;
+  const dahan = dahanCount ?? 0;
+  const blight = blightCount ?? 0;
+
+  const dahanScore = Math.floor(dahan / playerCount);
+  const blightPenalty = Math.floor(blight / playerCount);
+
+  if (result === "win") {
+    // Victory: (5 x Difficulty + 10) + (2 x cards) + dahanScore - blightPenalty
+    const diffPart = 5 * difficulty + 10;
+    const cardsPart = 2 * cards;
+
+    const parts: string[] = [];
+    parts.push(`${diffPart} (difficulty × 5 + 10)`);
+    if (cardsPart > 0) parts.push(`${cardsPart} (cards × 2)`);
+    if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
+
+    let formula = parts.join(" + ");
+    if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`;
+
+    return <p className="text-sm text-muted-foreground">= {formula}</p>;
+  }
+
+  // Defeat: (2 x Difficulty) + cards used + dahanScore - blightPenalty
+  const diffPart = 2 * difficulty;
+  const cardsUsed = 12 - cards;
+
+  const parts: string[] = [];
+  if (diffPart > 0) parts.push(`${diffPart} (difficulty × 2)`);
+  if (cardsUsed > 0) parts.push(`${cardsUsed} (cards used)`);
+  if (dahanScore > 0) parts.push(`${dahanScore} (dahan)`);
+
+  let formula = parts.length > 0 ? parts.join(" + ") : "0";
+  if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`;
+
+  return <p className="text-sm text-muted-foreground">= {formula}</p>;
+}
+
 export function GameForm({
   initialData,
   onSubmit,
@@ -128,9 +186,11 @@ export function GameForm({
     ...initialData,
   });
 
-  const isValid = formData.spirits.some((s) => s.spiritId !== null);
+  // Valid if at least one spirit has either an ID (from picker) or a name (from CSV import)
+  const isValid = formData.spirits.some((s) => s.spiritId !== null || s.name);
+  // Count spirits with either ID or name as players
   const playerCount = formData.spirits.filter(
-    (s) => s.spiritId !== null,
+    (s) => s.spiritId !== null || s.name,
   ).length;
 
   // Calculate difficulty and score
@@ -441,7 +501,7 @@ export function GameForm({
 
       {/* Calculated Score Display */}
       {calculatedScore !== undefined && (
-        <div className="p-4 bg-muted rounded-lg">
+        <div className="p-4 bg-muted rounded-lg space-y-2">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Calculated Score</p>
@@ -451,6 +511,14 @@ export function GameForm({
             </div>
             <p className="text-3xl font-bold">{calculatedScore}</p>
           </div>
+          <ScoreBreakdown
+            result={formData.result}
+            difficulty={difficulty}
+            playerCount={Math.max(playerCount, 1)}
+            cardsRemaining={formData.cardsRemaining}
+            dahanCount={formData.dahanCount}
+            blightCount={formData.blightCount}
+          />
         </div>
       )}
 
