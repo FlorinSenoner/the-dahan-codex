@@ -90,30 +90,30 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Game Tracker
 
-- [ ] **GAME-01**: Create game with date and result (win/loss)
-- [ ] **GAME-02**: Add 1-6 spirits per game (dynamic list entry)
-- [ ] **GAME-03**: Each spirit entry specifies variant (base or aspect)
-- [ ] **GAME-04**: Optional player name per spirit
-- [ ] **GAME-05**: Optional scenario selection with structured difficulty
-- [ ] **GAME-06**: Optional primary adversary with level (0-6)
-- [ ] **GAME-07**: Optional secondary adversary with level
-- [ ] **GAME-08**: Official Spirit Island score calculation
-- [ ] **GAME-09**: Notes field for game
-- [ ] **GAME-10**: Game list view shows all recorded games
-- [ ] **GAME-11**: Game detail view shows full game information
-- [ ] **GAME-12**: Edit existing game
-- [ ] **GAME-13**: Delete game (with confirmation)
+- [x] **GAME-01**: Create game with date and result (win/loss)
+- [x] **GAME-02**: Add 1-6 spirits per game (dynamic list entry)
+- [x] **GAME-03**: Each spirit entry specifies variant (base or aspect)
+- [x] **GAME-04**: Optional player name per spirit
+- [x] **GAME-05**: Optional scenario selection with structured difficulty
+- [x] **GAME-06**: Optional primary adversary with level (0-6)
+- [x] **GAME-07**: Optional secondary adversary with level
+- [x] **GAME-08**: Official Spirit Island score calculation
+- [x] **GAME-09**: Notes field for game
+- [x] **GAME-10**: Game list view shows all recorded games
+- [x] **GAME-11**: Game detail view shows full game information
+- [x] **GAME-12**: Edit existing game
+- [x] **GAME-13**: Delete game (with confirmation)
 
 ### CSV Export/Import
 
-- [ ] **CSV-01**: Export games to CSV (Excel-friendly format)
-- [ ] **CSV-02**: CSV uses fixed columns: spirit1-spirit6 (empty if unused)
-- [ ] **CSV-03**: CSV includes all game fields (date, result, scenario,
+- [x] **CSV-01**: Export games to CSV (Excel-friendly format)
+- [x] **CSV-02**: CSV uses fixed columns: spirit1-spirit6 (empty if unused)
+- [x] **CSV-03**: CSV includes all game fields (date, result, scenario,
       adversary, score, notes)
-- [ ] **CSV-04**: Import games from CSV
-- [ ] **CSV-05**: Import validates known spirit/adversary/scenario names
-- [ ] **CSV-06**: Import allows unknown/custom names
-- [ ] **CSV-07**: Import shows preview before confirming
+- [x] **CSV-04**: Import games from CSV
+- [x] **CSV-05**: Import validates known spirit/adversary/scenario names
+- [x] **CSV-06**: Import allows unknown/custom names
+- [x] **CSV-07**: Import shows preview before confirming
 
 ### Notes
 
@@ -291,26 +291,26 @@ Phase assignments from ROADMAP.md (7 phases).
 | SRCH-01     | Phase 5: Opening Scrubber            | Pending |
 | SRCH-02     | Phase 5: Opening Scrubber            | Pending |
 | SRCH-03     | Phase 5: Opening Scrubber            | Pending |
-| GAME-01     | Phase 6: User Data                   | Pending |
-| GAME-02     | Phase 6: User Data                   | Pending |
-| GAME-03     | Phase 6: User Data                   | Pending |
-| GAME-04     | Phase 6: User Data                   | Pending |
-| GAME-05     | Phase 6: User Data                   | Pending |
-| GAME-06     | Phase 6: User Data                   | Pending |
-| GAME-07     | Phase 6: User Data                   | Pending |
-| GAME-08     | Phase 6: User Data                   | Pending |
-| GAME-09     | Phase 6: User Data                   | Pending |
-| GAME-10     | Phase 6: User Data                   | Pending |
-| GAME-11     | Phase 6: User Data                   | Pending |
-| GAME-12     | Phase 6: User Data                   | Pending |
-| GAME-13     | Phase 6: User Data                   | Pending |
-| CSV-01      | Phase 6: User Data                   | Pending |
-| CSV-02      | Phase 6: User Data                   | Pending |
-| CSV-03      | Phase 6: User Data                   | Pending |
-| CSV-04      | Phase 6: User Data                   | Pending |
-| CSV-05      | Phase 6: User Data                   | Pending |
-| CSV-06      | Phase 6: User Data                   | Pending |
-| CSV-07      | Phase 6: User Data                   | Pending |
+| GAME-01     | Phase 6: User Data                   | Complete |
+| GAME-02     | Phase 6: User Data                   | Complete |
+| GAME-03     | Phase 6: User Data                   | Complete |
+| GAME-04     | Phase 6: User Data                   | Complete |
+| GAME-05     | Phase 6: User Data                   | Complete |
+| GAME-06     | Phase 6: User Data                   | Complete |
+| GAME-07     | Phase 6: User Data                   | Complete |
+| GAME-08     | Phase 6: User Data                   | Complete |
+| GAME-09     | Phase 6: User Data                   | Complete |
+| GAME-10     | Phase 6: User Data                   | Complete |
+| GAME-11     | Phase 6: User Data                   | Complete |
+| GAME-12     | Phase 6: User Data                   | Complete |
+| GAME-13     | Phase 6: User Data                   | Complete |
+| CSV-01      | Phase 6: User Data                   | Complete |
+| CSV-02      | Phase 6: User Data                   | Complete |
+| CSV-03      | Phase 6: User Data                   | Complete |
+| CSV-04      | Phase 6: User Data                   | Complete |
+| CSV-05      | Phase 6: User Data                   | Complete |
+| CSV-06      | Phase 6: User Data                   | Complete |
+| CSV-07      | Phase 6: User Data                   | Complete |
 | NOTE-01     | Phase 6: User Data                   | Pending |
 | NOTE-02     | Phase 6: User Data                   | Pending |
 | NOTE-03     | Phase 6: User Data                   | Pending |

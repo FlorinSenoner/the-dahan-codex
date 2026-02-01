@@ -535,6 +535,21 @@ Where `PHASE_DIR` is the full path (e.g., `.planning/phases/01-foundation`)
 
 **If `COMMIT_PLANNING_DOCS=true` (default):**
 
+**CRITICAL: Branch Check Before Commit**
+
+```bash
+# Verify we're on a feature branch, not main/master
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ "$CURRENT_BRANCH" == "main" || "$CURRENT_BRANCH" == "master" ]]; then
+  echo "ERROR: Cannot commit to $CURRENT_BRANCH branch!"
+  echo "Create a feature branch first: git checkout -b feat/phase-${PHASE}-${PHASE_NAME_SLUG}"
+  # Return error to orchestrator - do not commit
+  exit 1
+fi
+```
+
+If on wrong branch, return error to orchestrator with instructions to create feature branch.
+
 ```bash
 git add "${PHASE_DIR}/${PADDED_PHASE}-RESEARCH.md"
 git commit -m "docs(${PHASE}): research phase domain

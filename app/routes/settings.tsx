@@ -122,7 +122,7 @@ function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      <PageHeader title="Settings" backHref="/spirits" />
+      <PageHeader title="Settings" backHref="/" />
 
       <main className="p-4 max-w-lg mx-auto">
         {/* Cache Management Section */}

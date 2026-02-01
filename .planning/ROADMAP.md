@@ -34,10 +34,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3.6: Simplify Spirit Board + Text Openings** - Remove board sections, add text-based openings (INSERTED)
 - [x] **Phase 4: PWA & Offline** - Full offline-first experience for reference
       data
-- [ ] **Phase 5: Text Opening Management** - Admin tools for managing text-based
+- [x] **Phase 5: Text Opening Management** - Admin tools for managing text-based
       openings
-- [ ] **Phase 6: User Data** - Game tracker, CSV export/import, notes with
-      backlinks
+- [ ] **Phase 6: User Data** - Game tracker with CSV export/import
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
 
 ## Phase Details
@@ -357,25 +356,32 @@ Plans:
 
 ### Phase 6: User Data
 
-**Goal**: Logged-in users can track games, export/import CSV, and take notes
-with backlinks **Depends on**: Phase 4 (requires offline architecture for cached
-user data) **Requirements**: GAME-01, GAME-02, GAME-03, GAME-04, GAME-05,
-GAME-06, GAME-07, GAME-08, GAME-09, GAME-10, GAME-11, GAME-12, GAME-13, CSV-01,
-CSV-02, CSV-03, CSV-04, CSV-05, CSV-06, CSV-07, NOTE-01, NOTE-02, NOTE-03,
-NOTE-04, NOTE-05, NOTE-06, NOTE-07, NOTE-08 **Success Criteria** (what must be
-TRUE):
+**Goal**: Logged-in users can track games and export/import via CSV
+**Depends on**: Phase 4 (requires offline architecture for cached user data)
+**Requirements**: GAME-01 through GAME-13, CSV-01 through CSV-07
+**Note**: Notes with backlinks (NOTE-01 through NOTE-08) deferred to future phase per CONTEXT.md
 
-1. User can create a game with 1-6 spirits, adversary, scenario, and score
-2. User can edit and delete existing games with confirmation
-3. CSV export downloads all games in Excel-friendly format; import validates and
-   previews
-4. User can create rich-text notes attached to spirits, openings, or games
-5. Backlinks appear on spirit/opening/game pages showing which notes mention
-   them **Plans**: TBD
+**Success Criteria** (what must be TRUE):
+
+1. User can create a game with 1-6 spirits, adversary, scenario, and outcome
+2. User can edit and delete existing games with confirmation dialog
+3. CSV export downloads all games in Excel-friendly format
+4. CSV import validates, previews, and uses ID-based sync (matching IDs = full replacement)
+
+**Plans**: 10 plans (9 original + 1 gap closure)
 
 Plans:
 
-- [ ] 06-01: TBD
+- [x] 06-01-PLAN.md — Games schema and UI dependencies (sonner, cmdk, papaparse)
+- [x] 06-02-PLAN.md — Game CRUD mutations with user scoping
+- [x] 06-03-PLAN.md — Game list page with bottom nav integration
+- [x] 06-04-PLAN.md — Game form components (SpiritPicker, AdversaryPicker)
+- [x] 06-05-PLAN.md — New game page with form integration
+- [x] 06-06-PLAN.md — Game detail page with inline edit and delete
+- [x] 06-07-PLAN.md — CSV export functionality
+- [x] 06-08-PLAN.md — CSV import with preview and ID-based sync
+- [x] 06-09-PLAN.md — E2E tests and verification checkpoint
+- [x] 06-10-PLAN.md — Remove unused restoreGame mutation [gap closure]
 
 ### Phase 7: Seed Data Management
 
@@ -430,7 +436,7 @@ development:
 | 3.6 Simplify Board + Text Openings   | 8/8            | Complete    | 2026-01-28 |
 | 4. PWA & Offline                     | 9/9            | Complete    | 2026-01-28 |
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
-| 6. User Data                         | 0/TBD          | Pending     | -          |
+| 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---

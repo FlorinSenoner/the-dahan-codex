@@ -34,10 +34,10 @@ export function PageHeader({
       )}
       style={viewTransitionName ? { viewTransitionName } : undefined}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between min-h-[44px]">
         <div className="flex items-center gap-3">
           {backHref && (
-            <Link to={backHref}>
+            <Link to={backHref} viewTransition>
               <Button
                 variant="ghost"
                 size="icon"

@@ -7,6 +7,7 @@
     "app/components/ui/*.tsx",
     "app/components/admin/*.tsx",
     "app/components/spirits/*.tsx",
+    "app/components/games/*.tsx",
     "app/components/pwa/*.tsx",
     "app/components/icons/**/*.{ts,tsx}",
     "app/contexts/*.tsx",
@@ -34,6 +35,8 @@
     "workbox-precaching",
     "workbox-routing",
     "workbox-strategies",
-    "tailwindcss"
+    "tailwindcss",
+    "papaparse",
+    "@types/papaparse"
   ]
 }
