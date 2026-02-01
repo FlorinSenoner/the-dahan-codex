@@ -51,10 +51,6 @@ function GameDetailPage() {
     mutationFn: useConvexMutation(api.games.deleteGame),
   });
 
-  const restoreGameMutation = useMutation({
-    mutationFn: useConvexMutation(api.games.restoreGame),
-  });
-
   if (!game) {
     return (
       <div className="min-h-screen bg-background">
@@ -70,20 +66,10 @@ function GameDetailPage() {
   }
 
   const handleDelete = async () => {
-    const gameId = game._id;
     setShowDeleteConfirm(false);
-    await deleteGameMutation.mutateAsync({ id: gameId });
+    await deleteGameMutation.mutateAsync({ id: game._id });
     navigate({ to: "/games" });
-    toast("Game deleted", {
-      action: {
-        label: "Undo",
-        onClick: async () => {
-          await restoreGameMutation.mutateAsync({ id: gameId });
-          toast.success("Game restored!");
-        },
-      },
-      duration: 5000,
-    });
+    toast.success("Game deleted");
   };
 
   const handleSubmit = async (data: GameFormData) => {
@@ -337,8 +323,8 @@ function GameDetailPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Game?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will delete the game from {dateStr}. You can undo this action
-              for a few seconds after deletion.
+              This will permanently delete the game from {dateStr}. This action
+              cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

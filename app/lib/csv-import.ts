@@ -41,6 +41,26 @@ export interface ParsedGameRow {
 }
 
 /**
+ * Existing game data for comparison during import
+ */
+export interface ExistingGame {
+  _id: string;
+  date: string;
+  result: string;
+  spirits: Array<{ name: string; variant?: string; player?: string }>;
+  adversary?: { name: string; level: number };
+  secondaryAdversary?: { name: string; level: number };
+  scenario?: { name: string; difficulty?: number };
+  winType?: string;
+  invaderStage?: number;
+  blightCount?: number;
+  dahanCount?: number;
+  cardsRemaining?: number;
+  score?: number;
+  notes?: string;
+}
+
+/**
  * Validated game ready for import
  */
 export interface ValidatedGame {
@@ -48,6 +68,129 @@ export interface ValidatedGame {
   isValid: boolean;
   errors: string[];
   isNew: boolean; // true if ID doesn't match existing game
+  isUnchanged: boolean; // true if all fields match existing game
+}
+
+/**
+ * Compare a CSV row with an existing game to check if they're identical
+ */
+function areGamesEqual(row: ParsedGameRow, existing: ExistingGame): boolean {
+  // Compare required fields
+  if (row.date !== existing.date) return false;
+  if (row.result !== existing.result) return false;
+
+  // Compare spirits (need to handle all 6 slots)
+  const rowSpirits = [
+    {
+      name: row.spirit1,
+      variant: row.spirit1_variant,
+      player: row.spirit1_player,
+    },
+    {
+      name: row.spirit2,
+      variant: row.spirit2_variant,
+      player: row.spirit2_player,
+    },
+    {
+      name: row.spirit3,
+      variant: row.spirit3_variant,
+      player: row.spirit3_player,
+    },
+    {
+      name: row.spirit4,
+      variant: row.spirit4_variant,
+      player: row.spirit4_player,
+    },
+    {
+      name: row.spirit5,
+      variant: row.spirit5_variant,
+      player: row.spirit5_player,
+    },
+    {
+      name: row.spirit6,
+      variant: row.spirit6_variant,
+      player: row.spirit6_player,
+    },
+  ].filter((s) => s.name);
+
+  if (rowSpirits.length !== existing.spirits.length) return false;
+  for (let i = 0; i < rowSpirits.length; i++) {
+    const rowSpirit = rowSpirits[i];
+    const existingSpirit = existing.spirits[i];
+    if (rowSpirit.name !== existingSpirit.name) return false;
+    if ((rowSpirit.variant || "") !== (existingSpirit.variant || ""))
+      return false;
+    if ((rowSpirit.player || "") !== (existingSpirit.player || ""))
+      return false;
+  }
+
+  // Compare adversary
+  const rowHasAdversary = !!row.adversary;
+  const existingHasAdversary = !!existing.adversary;
+  if (rowHasAdversary !== existingHasAdversary) return false;
+  if (rowHasAdversary && existing.adversary) {
+    if (row.adversary !== existing.adversary.name) return false;
+    if (parseInt(row.adversary_level, 10) !== existing.adversary.level)
+      return false;
+  }
+
+  // Compare secondary adversary
+  const rowHasSecondary = !!row.secondary_adversary;
+  const existingHasSecondary = !!existing.secondaryAdversary;
+  if (rowHasSecondary !== existingHasSecondary) return false;
+  if (rowHasSecondary && existing.secondaryAdversary) {
+    if (row.secondary_adversary !== existing.secondaryAdversary.name)
+      return false;
+    if (
+      parseInt(row.secondary_adversary_level, 10) !==
+      existing.secondaryAdversary.level
+    )
+      return false;
+  }
+
+  // Compare scenario
+  const rowHasScenario = !!row.scenario;
+  const existingHasScenario = !!existing.scenario;
+  if (rowHasScenario !== existingHasScenario) return false;
+  if (rowHasScenario && existing.scenario) {
+    if (row.scenario !== existing.scenario.name) return false;
+    const rowDiff = row.scenario_difficulty
+      ? parseInt(row.scenario_difficulty, 10)
+      : undefined;
+    if (rowDiff !== existing.scenario.difficulty) return false;
+  }
+
+  // Compare win_type
+  if ((row.win_type || "") !== (existing.winType || "")) return false;
+
+  // Compare numeric fields
+  const rowInvaderStage = row.invader_stage
+    ? parseInt(row.invader_stage, 10)
+    : undefined;
+  if (rowInvaderStage !== existing.invaderStage) return false;
+
+  const rowBlightCount = row.blight_count
+    ? parseInt(row.blight_count, 10)
+    : undefined;
+  if (rowBlightCount !== existing.blightCount) return false;
+
+  const rowDahanCount = row.dahan_count
+    ? parseInt(row.dahan_count, 10)
+    : undefined;
+  if (rowDahanCount !== existing.dahanCount) return false;
+
+  const rowCardsRemaining = row.cards_remaining
+    ? parseInt(row.cards_remaining, 10)
+    : undefined;
+  if (rowCardsRemaining !== existing.cardsRemaining) return false;
+
+  const rowScore = row.score ? parseInt(row.score, 10) : undefined;
+  if (rowScore !== existing.score) return false;
+
+  // Compare notes
+  if ((row.notes || "") !== (existing.notes || "")) return false;
+
+  return true;
 }
 
 /**
@@ -80,7 +223,7 @@ export function parseGamesCSV(file: File): Promise<ParsedGameRow[]> {
  */
 export function validateParsedGame(
   row: ParsedGameRow,
-  existingIds: Set<string>,
+  existingGames: ExistingGame[],
 ): ValidatedGame {
   const errors: string[] = [];
 
@@ -118,14 +261,21 @@ export function validateParsedGame(
     }
   }
 
-  // Check if this is an update or new game
-  const isNew = !row.id || !existingIds.has(row.id);
+  // Check if this is a new game or update
+  const existingGame = row.id
+    ? existingGames.find((g) => g._id === row.id)
+    : undefined;
+  const isNew = !existingGame;
+
+  // Check if game is unchanged (only for updates)
+  const isUnchanged = existingGame ? areGamesEqual(row, existingGame) : false;
 
   return {
     row,
     isValid: errors.length === 0,
     errors,
     isNew,
+    isUnchanged,
   };
 }
 

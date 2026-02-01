@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle, Plus, RefreshCw } from "lucide-react";
+import { AlertCircle, Check, CheckCircle, Plus, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { ValidatedGame } from "@/lib/csv-import";
 
@@ -10,7 +10,12 @@ export function CSVPreview({ games }: CSVPreviewProps) {
   const validCount = games.filter((g) => g.isValid).length;
   const invalidCount = games.length - validCount;
   const newCount = games.filter((g) => g.isValid && g.isNew).length;
-  const updateCount = games.filter((g) => g.isValid && !g.isNew).length;
+  const unchangedCount = games.filter(
+    (g) => g.isValid && !g.isNew && g.isUnchanged,
+  ).length;
+  const updateCount = games.filter(
+    (g) => g.isValid && !g.isNew && !g.isUnchanged,
+  ).length;
 
   return (
     <div className="space-y-4">
@@ -47,6 +52,12 @@ export function CSVPreview({ games }: CSVPreviewProps) {
             {updateCount} updates
           </Badge>
         )}
+        {unchangedCount > 0 && (
+          <Badge variant="outline" className="gap-1">
+            <Check className="h-3 w-3" />
+            {unchangedCount} unchanged
+          </Badge>
+        )}
       </div>
 
       {/* Game list */}
@@ -75,6 +86,13 @@ export function CSVPreview({ games }: CSVPreviewProps) {
                 {game.isNew ? (
                   <Badge variant="outline" className="text-xs">
                     New
+                  </Badge>
+                ) : game.isUnchanged ? (
+                  <Badge
+                    variant="outline"
+                    className="text-xs text-muted-foreground"
+                  >
+                    Unchanged
                   </Badge>
                 ) : (
                   <Badge variant="outline" className="text-xs">
