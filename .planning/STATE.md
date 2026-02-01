@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6 complete - Ready for Phase 7 (Seed Data Management)
+**Current focus:** Phase 6.1 (Cleanup) in progress
 
 ## Current Position
 
-Phase: 6 (User Data)
-Plan: 10 of 10 (gap closure complete)
+Phase: 6.1 (Cleanup TheDahanCodex)
+Plan: 1 of 1 (dead code cleanup complete)
 Status: Phase Complete
-Last activity: 2026-02-01 - Completed 06-10-PLAN.md (Remove Unused restoreGame)
+Last activity: 2026-02-01 - Completed 06.1-01-PLAN.md (Dead Code Cleanup)
 
-Progress: [##################################################] 100% (23/23 plans complete)
+Progress: [##################################################] 100% (24/24 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 72
+- Total plans completed: 73
 - Average duration: 4.5 min
-- Total execution time: 5.38 hours
+- Total execution time: 5.43 hours
 
 **By Phase:**
 
@@ -40,11 +40,12 @@ Progress: [##################################################] 100% (23/23 plans
 | 04    | 9     | 26 min | 2.9 min  |
 | 05    | 9     | 31 min | 3.4 min  |
 | 06    | 10    | 50 min | 5.0 min  |
+| 06.1  | 1     | 3 min  | 3.0 min  |
 
 **Recent Trend:**
 
-- Last 5 plans: 6 min, 2 min, 4 min, 8 min, 2 min
-- Trend: Phase 6 complete (06-10 gap closure done)
+- Last 5 plans: 2 min, 4 min, 8 min, 2 min, 3 min
+- Trend: Phase 6.1 complete (cleanup done)
 
 _Updated after each plan completion_
 
@@ -590,8 +591,23 @@ Phase 6 (User Data) complete:
 - [x] 06-09: E2E Tests and Verification (game tracker tests, full suite validation)
 - [x] 06-10: Remove restoreGame mutation (gap closure - dead code cleanup)
 
+## Phase 6.1 Summary
+
+Phase 6.1 (Cleanup TheDahanCodex) is now complete with:
+
+- 12 dead code files removed (power-dsl.ts, 10 element icons, index barrel)
+- 3 unused exports removed from spirit-colors.ts
+- 7 "use client" SSR-only directives removed from UI components
+- ~650 lines of dead code removed total
+
+## Phase 6.1 Progress
+
+Phase 6.1 (Cleanup TheDahanCodex) complete:
+
+- [x] 06.1-01: Dead Code Cleanup (Phase 3.4 artifacts, SSR directives)
+
 ## Session Continuity
 
 Last session: 2026-02-01
-Stopped at: Completed 06-10-PLAN.md - Remove Unused restoreGame (Phase 6 Gap Closure Complete)
+Stopped at: Completed 06.1-01-PLAN.md - Dead Code Cleanup (Phase 6.1 Complete)
 Resume file: None
