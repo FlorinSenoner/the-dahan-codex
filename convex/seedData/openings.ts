@@ -3,7 +3,8 @@
 // - latentoctopus.github.io (Spirit Island Hub) - 22 guides for 10 spirits
 // - BoardGameGeek Jeremy Lennert threads - 16 guides for 10 base game spirits
 // - Spirit Island Wiki Phantaskippy guides - 9 guides for 9 base game spirits
-// Total: 47 opening guides
+// - BoardGameGeek Nature Incarnate threads - 4 guides for 1 NI spirit
+// Total: 51 opening guides
 
 // ============================================================================
 // OPENING DATA INTERFACE
@@ -26,7 +27,7 @@ export interface OpeningData {
 }
 
 // ============================================================================
-// OPENINGS (47 total from 3 sources)
+// OPENINGS (51 total from 4 sources)
 // ============================================================================
 
 export const OPENINGS: OpeningData[] = [
@@ -1732,5 +1733,143 @@ export const OPENINGS: OpeningData[] = [
     author: "Phantaskippy (Wiki)",
     sourceUrl:
       "https://spiritislandwiki.com/index.php?title=Thunderspeaker/Phantaskippy%27s_Guide",
+  },
+
+  // ===========================================================================
+  // BoardGameGeek Nature Incarnate Threads (4 openings)
+  // ===========================================================================
+
+  // Breath of Darkness Down Your Spine - BGG Community
+  {
+    spiritSlug: "breath-of-darkness-down-your-spine",
+    slug: "breath-of-darkness-bgg-bottom-track",
+    name: "BGG Opening: Bottom Track Rush",
+    description:
+      "Community opening from BGG focusing on getting to 3 plays quickly via the bottom presence track, enabling powerful fear generation through maxed innates.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: G2 (bottom track) - gain a card and place presence from bottom. Play your drafted card to stop a build if possible. Prioritize getting your Incarna to useful positions.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: G2 (bottom track again). Now at 2 card plays. Start hitting your innate thresholds - aim for tier 2 of Leave a Trail of Deathly Silence and tier 1-2 of Swallowed by the Endless Dark.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: G2 (bottom track). Now at 3 card plays with the moon element. This triggers the powerful combination of 4 moon + 3 air + 2 beast (level 3 left innate, all levels of right innate). Can generate 10+ fear per turn from here.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Reclaim. Continue spamming your innates at maximum levels. The Reclaim 1 space on bottom track is the goal - once there, the spirit becomes unstoppable with consistent high fear output.",
+      },
+    ],
+    author: "BGG Community (DonKidic, Aminar)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin",
+  },
+  {
+    spiritSlug: "breath-of-darkness-down-your-spine",
+    slug: "breath-of-darkness-bgg-hybrid",
+    name: "BGG Opening: Top-to-Bottom Hybrid",
+    description:
+      "Hybrid approach that grabs energy and moon from top track before switching to bottom track for plays. Balances early stability with mid-game power.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: G2 (top track) - gain a card and place presence from top. Get the 2 energy space. Your Uniques are expensive (total 3 cost), so energy helps.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: G2 (top track) - get the moon element. The moon gives strictly more than the Move-1 (as an extra level for Leave A Trail gives more than just a move).",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: G2 (bottom track) - start working toward 3 card plays. With your accumulated cards from G2 choices, you can delay your first reclaim significantly.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Continue bottom track or G3 if you need energy boost. Goal is reaching Empower or 3-Plays before first reclaim. If you got good 0-cost minors, you can even reach Empower first.",
+      },
+    ],
+    author: "BGG Community (Schattenn, Steve Haas)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin",
+  },
+  {
+    spiritSlug: "breath-of-darkness-down-your-spine",
+    slug: "breath-of-darkness-bgg-threshold-rush",
+    name: "BGG Opening: Turn 2 Threshold",
+    description:
+      "Aggressive opening that skips turn 1 plays to threshold Swallowed by the Endless Dark on turn 2, capable of clearing double-city lands early.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: G2 (bottom track). Either play nothing or play your drafted card and the strife card if excellent. Saving cards sets up massive turn 2.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: G2 or G3 (bottom track). Threshold Swallowed by the Endless Dark and hit your innates. This clears out a major land, even double-city lands like Scotland 6's land #2, with good chances of creating a pocket.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3+",
+        instructions:
+          "Continue down bottom track. Main challenge is minimizing reclaim impact. Underplay when needed, take cheap minors, and work toward the Reclaim 1 spot. Works especially well vs Scotland to eliminate coastal city adjacency builds.",
+      },
+    ],
+    author: "BGG Community (Ian Goth)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin",
+  },
+  {
+    spiritSlug: "breath-of-darkness-down-your-spine",
+    slug: "breath-of-darkness-bgg-adversary-adaptive",
+    name: "BGG Opening: Adversary-Adaptive",
+    description:
+      "Flexible approach that adapts presence track choice to the adversary type: top track for 'tall' adversaries like England, bottom track for 'wide' adversaries.",
+    turns: [
+      {
+        turn: 1,
+        title: "Tall Adversaries (England)",
+        instructions:
+          "Pure top track for adversaries that build up lands heavily. Majors are easy to get and the empowered Incarna handles built-up lands well. Spam G2 to potentially get empowered Incarna before first reclaim.",
+      },
+      {
+        turn: 2,
+        title: "Wide Adversaries",
+        instructions:
+          "Pure bottom track for adversaries that start strong or spread wide. Fastest way to trigger level 2-3 of left innate, setting up strong early position. The fast presence move is great for the Incarna.",
+      },
+      {
+        turn: 3,
+        title: "Moderate Adversaries",
+        instructions:
+          "Hybrid approach: G2 top track first, then switch to bottom. Gives flexibility in card options with access to 2 moons on tracks, making air and animal easier to get. Can max innates as fast as pure bottom while adding major plays.",
+      },
+    ],
+    author: "BGG Community (T. Ips)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin",
   },
 ];
