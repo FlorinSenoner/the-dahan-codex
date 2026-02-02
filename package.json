@@ -22,9 +22,10 @@
     "format:check": "biome format . && prettier --check \"**/*.{md,mdx,yml,yaml}\"",
     "knip": "knip",
     "knip:fix": "knip --fix",
+    "jscpd": "jscpd .",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "ci": "pnpm lint && pnpm typecheck && pnpm typecheck:convex && pnpm build && test -f dist/sw.js && pnpm test:e2e"
+    "ci": "pnpm lint && pnpm typecheck && pnpm typecheck:convex && pnpm jscpd && pnpm build && test -f dist/sw.js && pnpm test:e2e"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.33.2",
@@ -77,6 +78,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
     "cheerio": "^1.2.0",
+    "jscpd": "^4.0.8",
     "knip": "^5.82.1",
     "lefthook": "^2.0.15",
     "prettier": "^3.8.1",

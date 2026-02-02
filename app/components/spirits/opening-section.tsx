@@ -16,6 +16,30 @@ import { Heading, Text } from "@/components/ui/typography";
 import { useEditMode } from "@/hooks/use-edit-mode";
 import { TurnAccordion } from "./turn-accordion";
 
+// Helper to create form data from an opening document
+function createFormDataFromOpening(opening: Doc<"openings">): OpeningFormData {
+  return {
+    name: opening.name,
+    description: opening.description || "",
+    turns: opening.turns.map((t) => ({
+      turn: t.turn,
+      title: t.title || "",
+      instructions: t.instructions,
+    })),
+    author: opening.author || "",
+    sourceUrl: opening.sourceUrl || "",
+  };
+}
+
+// Helper to transform turns for save (converts empty strings to undefined)
+function transformTurnsForSave(turns: OpeningFormData["turns"]) {
+  return turns.map((t) => ({
+    turn: t.turn,
+    title: t.title || undefined,
+    instructions: t.instructions,
+  }));
+}
+
 interface OpeningSectionProps {
   spiritId: Id<"spirits">;
   onSaveHandlerReady?: (saveHandler: (() => Promise<void>) | null) => void;
@@ -94,17 +118,7 @@ export function OpeningSection({
   // Initialize form data from selected opening when entering edit mode
   useEffect(() => {
     if (isEditing && selectedOpening && !isCreatingNew) {
-      setFormData({
-        name: selectedOpening.name,
-        description: selectedOpening.description || "",
-        turns: selectedOpening.turns.map((t) => ({
-          turn: t.turn,
-          title: t.title || "",
-          instructions: t.instructions,
-        })),
-        author: selectedOpening.author || "",
-        sourceUrl: selectedOpening.sourceUrl || "",
-      });
+      setFormData(createFormDataFromOpening(selectedOpening));
     } else if (!isEditing) {
       // Reset form data when exiting edit mode
       setFormData(null);
@@ -174,11 +188,7 @@ export function OpeningSection({
           spiritId,
           name: formData.name,
           description: formData.description || undefined,
-          turns: formData.turns.map((t) => ({
-            turn: t.turn,
-            title: t.title || undefined,
-            instructions: t.instructions,
-          })),
+          turns: transformTurnsForSave(formData.turns),
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
         });
@@ -195,11 +205,7 @@ export function OpeningSection({
           id: selectedOpening._id,
           name: formData.name,
           description: formData.description || undefined,
-          turns: formData.turns.map((t) => ({
-            turn: t.turn,
-            title: t.title || undefined,
-            instructions: t.instructions,
-          })),
+          turns: transformTurnsForSave(formData.turns),
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
         });
@@ -273,17 +279,7 @@ export function OpeningSection({
     setFormData(null);
     // Re-initialize form data for selected opening
     if (selectedOpening) {
-      setFormData({
-        name: selectedOpening.name,
-        description: selectedOpening.description || "",
-        turns: selectedOpening.turns.map((t) => ({
-          turn: t.turn,
-          title: t.title || "",
-          instructions: t.instructions,
-        })),
-        author: selectedOpening.author || "",
-        sourceUrl: selectedOpening.sourceUrl || "",
-      });
+      setFormData(createFormDataFromOpening(selectedOpening));
     }
   }, [selectedOpening]);
 

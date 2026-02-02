@@ -1,44 +1,11 @@
 import Papa from "papaparse";
+import { extractSpiritsFromRow, type GameCSVRow } from "./csv-spirits";
 
 /**
  * Parsed row from CSV (matches export column structure)
+ * Re-exported as ParsedGameRow for backwards compatibility
  */
-export interface ParsedGameRow {
-  id: string;
-  date: string;
-  result: string;
-  spirit1: string;
-  spirit1_variant: string;
-  spirit1_player: string;
-  spirit2: string;
-  spirit2_variant: string;
-  spirit2_player: string;
-  spirit3: string;
-  spirit3_variant: string;
-  spirit3_player: string;
-  spirit4: string;
-  spirit4_variant: string;
-  spirit4_player: string;
-  spirit5: string;
-  spirit5_variant: string;
-  spirit5_player: string;
-  spirit6: string;
-  spirit6_variant: string;
-  spirit6_player: string;
-  adversary: string;
-  adversary_level: string;
-  secondary_adversary: string;
-  secondary_adversary_level: string;
-  scenario: string;
-  scenario_difficulty: string;
-  win_type: string;
-  invader_stage: string;
-  blight_count: string;
-  dahan_count: string;
-  cards_remaining: string;
-  score: string;
-  notes: string;
-}
+export type ParsedGameRow = GameCSVRow;
 
 /**
  * Existing game data for comparison during import
@@ -80,38 +47,7 @@ function areGamesEqual(row: ParsedGameRow, existing: ExistingGame): boolean {
   if (row.result !== existing.result) return false;
 
   // Compare spirits (need to handle all 6 slots)
-  const rowSpirits = [
-    {
-      name: row.spirit1,
-      variant: row.spirit1_variant,
-      player: row.spirit1_player,
-    },
-    {
-      name: row.spirit2,
-      variant: row.spirit2_variant,
-      player: row.spirit2_player,
-    },
-    {
-      name: row.spirit3,
-      variant: row.spirit3_variant,
-      player: row.spirit3_player,
-    },
-    {
-      name: row.spirit4,
-      variant: row.spirit4_variant,
-      player: row.spirit4_player,
-    },
-    {
-      name: row.spirit5,
-      variant: row.spirit5_variant,
-      player: row.spirit5_player,
-    },
-    {
-      name: row.spirit6,
-      variant: row.spirit6_variant,
-      player: row.spirit6_player,
-    },
-  ].filter((s) => s.name);
+  const rowSpirits = extractSpiritsFromRow(row);
 
   if (rowSpirits.length !== existing.spirits.length) return false;
   for (let i = 0; i < rowSpirits.length; i++) {
@@ -303,51 +239,12 @@ export function validateParsedGame(
  * Convert validated row to game data for import
  */
 export function rowToGameData(row: ParsedGameRow) {
-  const spirits = [];
-
-  // Collect spirits 1-6
-  const spiritFields = [
-    {
-      name: row.spirit1,
-      variant: row.spirit1_variant,
-      player: row.spirit1_player,
-    },
-    {
-      name: row.spirit2,
-      variant: row.spirit2_variant,
-      player: row.spirit2_player,
-    },
-    {
-      name: row.spirit3,
-      variant: row.spirit3_variant,
-      player: row.spirit3_player,
-    },
-    {
-      name: row.spirit4,
-      variant: row.spirit4_variant,
-      player: row.spirit4_player,
-    },
-    {
-      name: row.spirit5,
-      variant: row.spirit5_variant,
-      player: row.spirit5_player,
-    },
-    {
-      name: row.spirit6,
-      variant: row.spirit6_variant,
-      player: row.spirit6_player,
-    },
-  ];
-
-  for (const spirit of spiritFields) {
-    if (spirit.name) {
-      spirits.push({
-        name: spirit.name,
-        variant: spirit.variant || undefined,
-        player: spirit.player || undefined,
-      });
-    }
-  }
+  // Extract spirits using shared utility and convert to API format
+  const spirits = extractSpiritsFromRow(row).map((s) => ({
+    name: s.name,
+    variant: s.variant || undefined,
+    player: s.player || undefined,
+  }));
 
   return {
     existingId: row.id || undefined,

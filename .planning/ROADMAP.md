@@ -38,6 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
       openings
 - [x] **Phase 6: User Data** - Game tracker with CSV export/import
 - [x] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
+- [ ] **Phase 6.2: Fix Code Duplication** - Eliminate jscpd clones, extract shared validators/components (INSERTED)
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
 
 ## Phase Details
@@ -404,6 +405,31 @@ Plans:
 - [x] 06.1-02-PLAN.md — Update banner pill styling and CLAUDE.md
 - [x] 06.1-03-PLAN.md — Button component consistency and update banner UX [gap closure]
 
+### Phase 6.2: Fix Code Duplication (INSERTED)
+
+**Goal**: Eliminate all jscpd code duplication to achieve 0% duplication threshold
+**Depends on**: Phase 6.1 **Requirements**: Technical debt cleanup
+**Success Criteria** (what must be TRUE):
+
+1. All 23 jscpd clones resolved (0% duplication)
+2. Convex validators extracted and reused (games.ts)
+3. Seed data logic consolidated (reseedSpirits uses seedSpirits helper)
+4. ScoreBreakdown component shared between game routes
+5. CSV spirit utilities shared between import/export
+6. CI passes with jscpd check
+
+**Plans**: 7 plans
+
+Plans:
+
+- [x] 06.2-01-PLAN.md — Convex validator extraction (games.ts)
+- [x] 06.2-02-PLAN.md — Convex query helper (spirits.ts)
+- [x] 06.2-03-PLAN.md — Seed data consolidation (seed.ts)
+- [x] 06.2-04-PLAN.md — ScoreBreakdown component extraction
+- [x] 06.2-05-PLAN.md — Game form payload utility
+- [ ] 06.2-06-PLAN.md — Opening section internal helpers (deferred)
+- [ ] 06.2-07-PLAN.md — CSV spirit field utilities (deferred)
+
 ### Phase 7: Seed Data Management
 
 **Goal**: Admin tools for managing spirit seed data
@@ -442,7 +468,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 6.1 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 6.1 > 6.2 > 7
 
 | Phase                                | Plans Complete | Status      | Completed  |
 | ------------------------------------ | -------------- | ----------- | ---------- |
@@ -459,6 +485,7 @@ development:
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
 | 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
+| 6.2 Fix Code Duplication             | 5/7            | In Progress | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
