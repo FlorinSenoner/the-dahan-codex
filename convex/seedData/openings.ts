@@ -4,7 +4,10 @@
 // - BoardGameGeek Jeremy Lennert threads - 16 guides for 10 base game spirits
 // - Spirit Island Wiki Phantaskippy guides - 9 guides for 9 base game spirits
 // - BoardGameGeek Nature Incarnate threads - 4 guides for 1 NI spirit
-// Total: 51 opening guides
+// - BoardGameGeek Jonah Yonker (jyonker13) JE threads - 12 guides for 12 JE spirits
+// - BoardGameGeek Jonah Yonker promo spirit threads - 2 guides for 2 promo spirits
+// - Spirit Island Wiki Antistone/breppert guides - 3 guides for 2 base game spirits
+// Total: 68 opening guides
 
 // ============================================================================
 // OPENING DATA INTERFACE
@@ -27,7 +30,7 @@ export interface OpeningData {
 }
 
 // ============================================================================
-// OPENINGS (51 total from 4 sources)
+// OPENINGS (68 total from 7 sources)
 // ============================================================================
 
 export const OPENINGS: OpeningData[] = [
@@ -1871,5 +1874,633 @@ export const OPENINGS: OpeningData[] = [
     author: "BGG Community (T. Ips)",
     sourceUrl:
       "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin",
+  },
+
+  // ===========================================================================
+  // BGG OPENINGS - Jonah Yonker (jyonker13) Jagged Earth Threads
+  // ===========================================================================
+
+  // Fractured Days Split the Sky (1 opening)
+  {
+    spiritSlug: "fractured-days-split-the-sky",
+    slug: "fractured-days-split-the-sky-bgg-je-opening-1",
+    name: "BGG JE Opening: Flexible Time Build",
+    description:
+      "A flexible approach leveraging Days That Never Were and Slip the Flow innate, building Time for various Turn 3 options.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Gain Sun, move presence, gain a Minor That Never Was, gain 3 Time (2 from Energy, 1 from Plays). Card Plays: Minor. Choose a Minor for effect, not Elements, even if that effect is just pushing an Explorer to prevent a Build or generating some marginal amount of Fear. Your presence movement should set up for using your Minor optimally, or reposition your presence in a land where you can make a sacred site next turn for Absolute Stasis.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Gain Moon, gain Minor Power, add presence from Energy, gain +2 Card Plays and 1 Time (from Plays). Card Plays: Absolute Stasis (Cost: 1 Time, target land does not exist), Blur the Arc (remove Blight if no Dahan/Invaders, if Invaders Build + Ravage, if Dahan add 1 and Push up to 2), Past Returns (for Elements). Pay 1 Time for Absolute Stasis to prevent a problematic Build or bad Ravage. Use Blur the Arc to get Dahan into defended lands. You can use all three levels of Slip the Flow - consider targeting yourself to use Visions of a Shifting Future fast, then Reclaim a played card based on Elements of your gained Minor.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3 (Multiple Options)",
+        instructions:
+          "Choose based on your Turn 2 decisions: 1) Want a Major? Choose Growth 3, gain a Major That Never Was. 2) Want to let someone Reclaim? If you Reclaimed Past Returns, choose Growth 3, gain 3 Time, play any Moon card + Past Returns to hit tier 2 of Slip the Flow. 3) Reclaimed Blur the Arc? Choose Growth 2 or 3 depending on which tier of Slip the Flow your allies benefit from most. 4) Want tier 3 of Slip the Flow? If you Reclaimed Absolute Stasis, choose Growth 3 and play Sun/Air + Stasis. All options leave at least one more turn before Reclaim All.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2486927/openings-fractured-days-split-the-sky",
+  },
+
+  // Shroud of Silent Mist (1 opening)
+  {
+    spiritSlug: "shroud-of-silent-mist",
+    slug: "shroud-of-silent-mist-bgg-je-opening-1",
+    name: "BGG JE Opening: Damaged Invaders Engine",
+    description:
+      "Energy-focused opening ensuring innates stay active regardless of draft, establishing 3 lands with Damaged Invaders for Slow and Silent Death income.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add 2 presence from Energy. Card Plays: The Fog Closes In (deal 1 damage to different Invader per presence in adjacent land, Push 2 Dahan). The Water from your track allows first level of Lost in the Swirling Haze to save a Dahan or group Dahan for favorable trade. Ideally Fog Closes In damages 1 Town/1 City or 1 Town/1 Explorer. Use presence movement from Shift and Flow to deposit presence for Flowing and Silent Forms next turn.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add 1 presence from Energy, 1 presence from Plays. Card Plays: Flowing and Silent Forms Dart By (2 Fear if Invaders, presence protection, gather 1-2 presence of another Spirit), Dissolving Vapors (1 Fear, 1 Damage to each Invader, 1 Damage to each Dahan). Use Flowing and Silent Forms to distribute presence to farther reaches or pull another Spirit onto your board. You hit tier 1 of Suffocating Shroud and tier 2 of Swirling Haze. Between Dissolving Vapors and Suffocating Shroud, try to achieve '3 lands of yours with damaged Invaders' for extra Energy.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Gain a Minor Power, add a presence from Energy. Card Plays: Unnerving Pall, Minor Power. Elements from Energy track let you hit tier 1 of Suffocating Shroud regardless of Minor gained, so focus on gaining beneficial effects (without Fire is preferable, Water nets tier 1 of Swirling Haze). Use Unnerving Pall to protect Dahan or hold down a land your team has been filling.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Reclaim All, gain a Minor Power. Card Plays: Varies. Even if both Minors gained are weak, you can play Unnerving Pall + The Fog Closes In to hit tier 2 of Suffocating Shroud. That's 2 Powers that do damage for adjacent presence, so you can replace damaged land easily. This opening provides Elements ensuring innates stay active and surplus Energy allows choosing a cheap/mid-costed Major sooner if necessary.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2488254/openings-shroud-of-silent-mist",
+  },
+
+  // Finder of Paths Unseen (1 opening)
+  {
+    spiritSlug: "finder-of-paths-unseen",
+    slug: "finder-of-paths-unseen-bgg-je-opening-1",
+    name: "BGG JE Opening: Consistency Focus",
+    description:
+      "Consistency-focused opening aimed at reducing Finder's barrier to entry, leaving room for player choice after first Reclaim All.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add a presence (from Top), gain a Minor. Card Plays: A Circuitous and Wending Journey (push up to half of Invaders from target land, same for Dahan/presence/Beasts). Add presence to an inner land building a City - Wending Journey can push Town/City into your starting lands. Gain a Minor with Air (Air + Water even better). Use presence push from Wending Journey to position for targeting innates next turn.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add a presence (from Top), +1 Card Play. Card Plays: Offer Passage Between Worlds (move up to 4 Dahan between target/your lands OR 2 fewer Dahan destroyed), Traveler's Boon (target Spirit moves up to 3 presence to your land, bringing 1 Invader/Dahan/Beast). With Sun and Water from top track plus Moon/Air on cards, use first 2 tiers of Lay Paths and tier 1 of Close the Ways. Use Traveler's Boon to help slower Spirit prevent a problematic Build or access difficult land types.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Add a presence (from Bottom), +1 Card Play. Card Plays: Ways of Shore and Heartland (push up to 2 pieces from Coastal/Inland to another Coastal/Inland), Aid From Spirit Speakers (for each Dahan, push 1 piece to land 2 away with Dahan). Uncovering Earth plus these 2 cards hits tier 2 of Lay Paths and first 2 tiers of Close the Ways. Going into first Stage II Explore, try to Isolate empty Coastal lands (covers more outcomes) or inner lands whose Isolation covers multiple Explores.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Options vary based on Turn 1. Card Plays: Paths Tied By Nature (move up to 2 pieces to land within 2 of same terrain), Minor. If your first Minor lacked Air, add presence from Bottom and gain a Minor. If you have Air, either gain another Minor (planning to gain again next turn) or add presence anywhere and take 2 Energy. With an Air card, hit tier 2 of Lay Paths and tier 2 of Close the Ways. Most likely Reclaiming next turn - can grab Minor or Major based on direction you want to go.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2493091/openings-finder-of-paths-unseen",
+  },
+
+  // Downpour Drenches the World (1 opening - BGG JE)
+  {
+    spiritSlug: "downpour-drenches-the-world",
+    slug: "downpour-drenches-the-world-bgg-je-opening-1",
+    name: "BGG JE Opening: Pour Down Power Engine",
+    description:
+      "Leveraging Pour Down Power Across the Land for Energy management and card repetition, centralizing presence for Rain and Mud defense scaling.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add a presence (from Energy), gain a Minor Power, gain +1 Energy. Card Plays: Gift of Abundance (target Spirit gains 2 Energy or Repeats a card by paying its cost). Use long-range presence placement to reach a distant Wetland. Use Pour Down Power to gain 1 Energy. More often your Gift grants Energy, but there are tons of starters worth doubling up. If unsure who to give Repeat to, look for Gift/Boon cards or strong Pushes.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add 2 presence (both from Plays), discard 2 cards, gain 2 Waters. Card Plays: Choose based on situation - Dark Skies (hits tier 1 Rain and Mud, good with Wetlands setup), Unbearable Deluge (costs nothing to Repeat, gives defend/push Dahan/Isolate - hits tiers 1-2 of Rain and Mud), Foundations Sink (can decimate Towns if allies stack them - hits tier 2 Rain and Mud), or your new Minor (with 4 Waters you can repeat it twice even without Water element). Keep one card for next turn.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Add a presence (from Plays), gain a Minor Power, gain +1 Energy. Card Plays: Varies based on saved card. Whether you Repeat anything or gain Energy depends on which card you saved. If you gain a Minor with Water and saved card has Water, you can use Pour Down Power twice; otherwise use it once. Most likely accrue some Energy for Reclaim next turn, but if you get 2 uses you can Repeat once.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Reclaim All, gain a Minor Power, move a presence up to 2. Card Plays: 2 cards. Playing 2 cards means most likely getting 2 uses of Pour Down Power. If you have a good target for Gift of Abundance use it, but saving it for next turn guarantees hitting tier 1 of Water Nourishes Life's Growth. Next turn, choose Growth 2 and add both presence from Energy - with 2 Plays, 3 Waters on track, and 2 Waters from Growth, you can easily use Pour Down Power 3 times.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2496834/openings-dowpour-drenches-the-world",
+  },
+
+  // Many Minds Move as One (1 opening - BGG JE)
+  {
+    spiritSlug: "many-minds-move-as-one",
+    slug: "many-minds-move-as-one-bgg-je-opening-1",
+    name: "BGG JE Opening: Beast Distribution",
+    description:
+      "Building Beast distribution for Beset and Confound defense scaling and Teeming Host gathering, with options for Energy or Plays focus on Turn 3.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add a presence (from Energy) + add a Beast, gain 1 Energy, gather 1 Beast into a land. Card Plays: Ever-Multiplying Swarm (add 2 Beasts). Add presence to a land you'd like to defend next turn (preferably with Dahan, can use range to cover another Spirit's board). Gather Beast from starting land into a more central one, or pull Beast from ally's board closer. Use Ever-Multiplying Swarm in whichever of your 2 lands has more adjacent terrain for Dreadful Tide setup.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add 2 presence (one from Energy, 1 from Plays). Card Plays: Guide the Way on Feathered Wings (move 1 Beast up to 2 lands with up to 2 Dahan), A Dreadful Tide of Scurrying Flesh (remove up to half of Beasts, each removed skips 1 Invader action). If defending land has Dahan, add zero-range presence there. Your sacred site plus added Beast gives 2 Beasts for Beset and Confound. Use Guide the Way to shuttle Dahan to next defense land. You hit tier 2 of Teeming Host and tier 1 of Beset and Confound.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Add 2 presence (options discussed below). Card Plays: Pursue with Scratches, Pecks, and Stings (1 Fear, push Town/Explorer per Beast past first), Boon of Swarming Bedevilment (target Spirit's presence grants Defend 1, Spirit may push 1 presence). Option A: Both from Energy - hits tier 2 of Beset and Confound, good if you need Defend 4 guaranteed. Option B: Both from Plays - spend 2 Energy to gain Minor and play all 3 remaining cards. Minor with Animal hits tier 2 of Beset and Confound; Air hits tier 3 of Teeming Host.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Reclaim All, gain a Power. Card Plays: Varies. If you chose Plays last turn, take Minor with Air + Animal if possible. If choosing between Air or Animal: take Air for tier 3 Teeming Host next turn, Animal for tier 3 Beset and Confound. If you chose Energy last turn, consider taking a Major - you'll have 6 Energy. Turn 5 involves adding 2 presence from whichever track you didn't choose on Turn 3, allowing robust innate hits.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2502110/openings-many-minds-move-as-one",
+  },
+
+  // Grinning Trickster Stirs Up Trouble (1 opening - BGG JE)
+  {
+    spiritSlug: "grinning-trickster-stirs-up-trouble",
+    slug: "grinning-trickster-stirs-up-trouble-bgg-je-opening-1",
+    name: "BGG JE Opening: Authority/Mob Combo",
+    description:
+      "Reliable Authority/Mob combo for Fear generation with options to break the Reclaim cycle when Cities become scarce.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add a presence (from Plays), gain a Minor Power. Card Plays: Impersonate Authority (add 1 Strife), Incite the Mob (1 Invader with Strife deals damage to other Invaders, 1 Fear per Invader destroyed). Gain a Power with Air to hit Let's See What Happens next turn; if no Air, take Fire for tier 3 of Why Don't You and Them Fight. Push a Dahan into the land where you'll add Strife (ideally building a City). Attach Strife to City, then use Incite the Mob to kill Town/Explorer for 3 Fear total.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add a presence (from Plays), gain +1 Energy per Play. Card Plays: Overenthusiastic Arson (destroy 1 Town, discard Minor - if Fire: 1 Fear, 2 Damage, add Blight), Unexpected Tigers (1 Fear if Invaders, gather Beast/push Explorer, or add Beast), Minor Power. Push another Dahan into Strifed City land for counterattack, or consolidate lone Dahan. Arson prevents City or stops Ravage. If you have 3 Fires, use You and Them Fight to kill Explorer in Dahan land. If hitting What Happens, decide on Tigers - ditch it and the Minor for Energy if you don't need them.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Reclaim All, move a presence up to 1, add a presence (from Energy). Card Plays: Impersonate Authority, Incite the Mob, Overenthusiastic Arson. If your board lacks good Authority/Mob targets, move to another board with move + add presence combo. You have just enough Energy for these 3 cards, hitting tier 2 of You and Them Fight and tier 2 of What Happens. When using What Happens, forget Tigers or the Minor you gained. From here, take the Reclaim cycle as needed, or break it by forgetting Arson from play with What Happens (giving 3 cards in hand) or using Growth 3 for third card then Energy for Plays.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2502216/openings-grinning-trickster-stirs-up-trouble",
+  },
+
+  // Shifting Memory of Ages (1 opening)
+  {
+    spiritSlug: "shifting-memory-of-ages",
+    slug: "shifting-memory-of-ages-bgg-je-opening-1",
+    name: "BGG JE Opening: Double Major Rush",
+    description:
+      "Rush to gain two Major Powers by Turn 2, then unleash them both on Turn 3 with 12 Energy available. Focus on either keeping Elements for yourself or donating via Elemental Teaching based on team composition.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Gain Major Power, add presence (from Energy). Card Plays: Study the Invader's Fears (2 Fear, reveal top Fear card) OR Boon of Ancient Memories (target yourself to gain Minor, or target ally to give them Power card paying 2 Energy instead of Forgetting). Choose based on team composition - Study for Fear-generating teams, Boon for high-plays Spirits. Discard whichever starter you didn't play when gaining Major. Shoot for mid-costed Major (3-6 range). Use first tier of Observe the Ever Changing World. Prepare an Element for your Major threshold or for an ally.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Gain Major Power, add presence (from Plays). Card Plays: Elemental Teachings (prepare Element marker, discard up to 3 to give target Spirit those Elements) + Share Secrets of Survival (destroy 2 fewer Dahan OR gather 2 Dahan; threshold grants both). Forget Study/Boon from discard when gaining Major. Look for another mid-costed Major that shares Elements with first. Use Secrets of Survival in a Ravaging land. Use second tier of Learn the Invader's Tactics to cover another Ravage. Consider second tier of Ever-Changing World for 2 Elements. Use Elemental Teachings to prepare Element and either give 3 away or gain threshold Elements.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Gain +9 Energy. Card Plays: Both Major Powers. You'll have 12 Energy total. If you haven't used it yet, your Moon Element from Setup can net you the last Element marker needed for a threshold. Even if you gave Elements away, you'll be doing more this turn than basically anyone at the table.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Reclaim All, add a presence (from Energy). Card Plays: Variable. You've got 2 Majors and most likely enough Energy left to play one. Supplement with one of your starters, and continue down your Energy track in subsequent turns.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2506389/openings-shifting-memory-of-ages",
+  },
+
+  // Volcano Looming High (1 opening)
+  {
+    spiritSlug: "volcano-looming-high",
+    slug: "volcano-looming-high-bgg-je-opening-1",
+    name: "BGG JE Opening: Presence Stacking",
+    description:
+      "Build up presence for eruptions while using Badlands strategically. Timing of Explosive Eruption is key - save up for specific Adversary interactions or cascades. Choose Mountain closer to coast during Setup.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add 2 presence (both from Energy). Card Plays: Lava Flows (add 1 Badlands and 1 Wilds OR deal 1 damage). Add the Badlands wherever you'll need the damage boost next turn. This is a deep thinking turn about when to erupt.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add 2 presence (both from Plays). Card Plays: Rain of Ash (2 Fear if Invaders, push 2 Dahan and 2 Towns/Explorers to lands without your presence) OR Pyroclastic Bombardment (1 damage to each Town/City/Dahan, 1 damage, 1 damage to Dahan). You can do a small 2-presence eruption - you'll hit first tier of Furnace, only losing 1 presence overall, still get range boost from Volcanic Peaks. Play Bombardment for Town-sized problems or combo with Eruption; play Rain of Ash for distant Build/Explore countering.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3 (Option 1: No Eruption/Reposition)",
+        instructions:
+          "If you don't want to erupt again or want to reposition: Growth: Take Growth 3, gain Minor with Fire if possible, add presence from Plays to a Mountain you'd like to occupy. Card Plays: Exaltation of Molten Stone (+1 Energy per Fire, distributed between you and target Spirit) + your Minor + remaining starter. With a Fire Minor, hit third tier of Furnace of the Earth to relocate presence. Otherwise still add presence back with Furnace.",
+      },
+      {
+        turn: 4,
+        title: "Turn 3 (Option 2: Erupt Again)",
+        instructions:
+          "If you want to erupt again or don't care about repositioning: Growth: Take Growth 2, add 1 presence from Energy and 1 from Plays. Card Plays: Exaltation + remaining starter. You still hit second tier of Furnace of the Earth and add enough presence for second tier of Explosive Eruption with a sacred site left over. Distribute Exaltation Energy as you like - giving yourself 2 allows gaining Minor with Furnace. Next turn: Reclaim All, shoot for cheap Major or dig for Minor Elements.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2508259/openings-volcano-looming-high",
+  },
+
+  // Lure of the Deep Wilderness (1 opening - BGG JE)
+  {
+    spiritSlug: "lure-of-the-deep-wilderness",
+    slug: "lure-of-the-deep-wilderness-bgg-je-opening-1",
+    name: "BGG JE Opening: Token Moshpit",
+    description:
+      "Spread out across the middle of the board, creating token concentrations in lands that contact as much real estate as possible. Use Softly Beckon for massive action advantage and Swallowed by the Wilderness for Major-like damage.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add presence (from Energy), gain a Moon and +2 Energy. Card Plays: Softly Beckon Ever Inward (gather up to 2 Explorers, Towns, Beasts, and Dahan). Place presence so Softly Beckon covers maximum lands that will Build/could Explore. This card alone can delay Invaders on several fronts. The Moon from Growth lets you hit second tier of Forsake Society - use to replace a Town in a Building land or break up Coastal fortification for Fear.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add presence (from Plays), gain a Minor Power. Card Plays: Gift of the Untamed Wild (target Spirit adds Wilds in their land OR replaces presence with Disease) + Perils of the Deepest Wild (add Badlands, add Beast within 1 range, push 2 Dahan). Gain Minor with Moon if possible. You'll hit second tier of both Forsake Society and Never Heard From. Use Never Heard From to prevent Build or eat 2 Explorers you caused to Forsake Society. Use Perils to populate midland-moshpit for Swallowed next turn or distribute tokens for Never Heard From. Wilds generally better than Disease unless problematic City brewing.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Add presence (from Energy), gain a Minor Power. Card Plays: Swallowed by the Wilderness (2 Fear, 1 damage per Beast/Disease/Wilds/Badlands, max 5) + Minor Power with Moon. Try again for Moon; if you have it, try for Plant or Air with good effect. Moon + Air is ideal for next turn.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4",
+        instructions:
+          "Growth: Add presence (from Energy), gain a Major Power. Card Plays: Minor Power + Major Power. Forget the Minor you played last turn, or if obsessed with it forget Gift (not recommended - that card is real good). Even a single Plant between your 2 cards nets second tier of Never Heard From Again. Next turn: Reclaim All, grab Energy/Elements for Major or gain Minor for more Plays.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2510069/openings-lure-of-the-deep-wilderness",
+  },
+
+  // Stone's Unyielding Defiance (1 opening)
+  {
+    spiritSlug: "stones-unyielding-defiance",
+    slug: "stones-unyielding-defiance-bgg-je-opening-1",
+    name: "BGG JE Opening: Blight Guardian",
+    description:
+      "Occupy Ravaging lands to add Blight from box instead of card, rebounding damage upon Invaders. Encourage allies to dump spare buildings in your lands for Let Them Break Themselves. Distribute Badlands liberally.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add presence (from Top), gain 3 Energy. Card Plays: Jagged Shards Push from the Earth (add 1 Badlands, push up to 2 Dahan) OR Plows Shatter on Rocky Ground (deal 1 damage to each Town/City then push up to 1 Town OR destroy 1 Town). Use presence placement range to move into a land type you don't occupy, preferably with Town/City, possibly Ravaging next turn. Use Jagged Shards if you need to prep for Stubborn Solidity next turn or shuttle Dahan and set up Badlands for damage. Use Plows Shatter if Dahan already positioned and want to counteract Explore in Town land.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add presence (from Top), gain 3 Energy. Card Plays: Stubborn Solidity (defend 1 per Dahan, Dahan cannot be changed/damaged) + Jagged Shards OR Plows Shatter (whichever you didn't play Turn 1). When uncovering +1 Card Play spot, gain Minor with Earth (Sun + Earth ideal). Add presence to Ravaging land or unoccupied type (preferably with buildings when Ravaging next turn). Use Solidity to guarantee favorable trade in Ravaging land. Hit first tier of Bulwark of Will to mitigate other Ravage for 2 Energy.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Reclaim All, add presence (from Bottom), gain 2 Earth. Card Plays: Variable. Add presence to distant Mountain if useful, or double up in land you control with Blight. Use Solidity in land with enough Dahan. Use Jagged Shards for Dahan repositioning or Badlands distribution for Let Them Break Themselves. Use Plows Shatter for building management or combined with Break Themselves for dense lands. Use Scarred and Stony Land to clear out already-Ravaged land. With 5 Earth total, use second tier of Let Them Break Themselves - in standard Ravaging land (Explorer + Town + City), deal 5 damage back, kill both buildings, only 1 Energy to pull Blight from box. You should have presence in every land type for Reclaim All abuse on large Ravages.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2512536/openings-stones-unyielding-defiance",
+  },
+
+  // Starlight Seeks Its Form (1 opening)
+  {
+    spiritSlug: "starlight-seeks-its-form",
+    slug: "starlight-seeks-its-form-bgg-je-opening-1",
+    name: "BGG JE Opening: Thresholded Major Rush",
+    description:
+      "Draft for Element pairs to hit Major thresholds. Use Boon of Reimagining and Shape the Self Anew to accumulate cards and Energy. Track 1 is topmost track; finish Tracks 1 and 3 with opposite choices (Reclaim vs Power gain).",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Add presence (from Track 1, covering Reclaim 1/2), gain Minor Power, move presence up to 1, gain 1 Energy. Card Plays: Boon of Reimagining (target Forgets a Power card, draws 6 Minors, gains 2) + Shape the Self Anew (gain Minor, Forget to gain 3 Energy, 4 Moons = gain Major) OR your new Minor. If offered strong Turn 1 Minor with Moon, play that instead of Shape. Otherwise draft for ability you like - can trash it during Slow phase. Position presence for Peace of the Nighttime Sky next turn. Use Sidereal Guidance gather to prevent Build or concentrate Dahan. Forget Shape for Energy; use it to gain Minor BEFORE using Boon for more Forgetting options. When using Boon, Forget Gather the Scattered Light or one of gained Minors. Shoot for Element pairs, especially cards with several pairs. Moon cards for next turn are golden.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Add presence (from Track 3, gaining 1 Energy), gain Major Power, move presence up to 1, gain 1 Energy. Card Plays: Peace of the Nighttime Sky (if Terror Level I, Invaders don't Ravage in target land, Forget to repeat and gain Moon) + Minor with Moon OR Shape the Self Anew. Forget Boon of Reimagining from discard when gaining Major. Move presence before adding if needed for Peace positioning. Can swap gain 1 Energy for move presence up to 3 if you don't need the money. Throw out Nighttime Sky to use effect twice - once rolling with Major it'll be hard to work back in, and other Spirits appreciate breathing room.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Gain Major Power, move presence up to 1, add presence (from Track 3, choosing Element and gaining +1 Energy), gain 1 Energy. Card Plays: Major + Minor. If both Majors have pair-able Elements (1 Element needs 3, others only 2), Forget least useful Minor from hand. Forget first Major if it didn't work out. Element gained should be based on Major threshold you're using. Play whichever Major hits hardest; any innate hit will be coincidental based on Element gained.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4 (Good Major/Minor Combo)",
+        instructions:
+          "If you got Major/Minor combo you liked last turn (or Forgot second Major): Add from Track 5 (for income) or Track 6 (for another threshold Element). Reclaim All + gain Minor/move presence and flog that combo!",
+      },
+      {
+        turn: 5,
+        title: "Turn 4 (Kept Both Majors)",
+        instructions:
+          "If you kept both Majors: Uncover any Elements needed for second Major threshold, reclaiming/gaining cards as needed. If threshold isn't compelling/possible, uncover Track 2 for +3 Energy option and midgame becomes more straightforward.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2518429/openings-starlight-seeks-its-form",
+  },
+
+  // Vengeance as a Burning Plague (1 opening)
+  {
+    spiritSlug: "vengeance-as-a-burning-plague",
+    slug: "vengeance-as-a-burning-plague-bgg-je-opening-1",
+    name: "BGG JE Opening: Standard",
+    description:
+      "Opening for Vengeance focusing on flexible Disease placement for either Epidemics Run Rampant (utility) or Savage Revenge (tempo) innate paths.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: +1 Energy, gain Minor Power, add presence from Energy track. Cards: Fetid Breath Spreads Infection (+1 Fear and add a Disease). Add presence to land with no buildings, ideally closer to an ally's board. If choosing between Fire or Animal minor, Fire is generally better as second innate scales better. Add Disease to: land with Town that just Explored (prevent City/farm Build), OR empty explored land (farm Build/push with Plaguebearers), OR land with Town+Blight for first innate next turn.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Place 2 presence (one from Plays, one from Energy/Plays depending on Element needed). Cards: Plaguebearers and new Minor. If using first innate (Epidemics Run Rampant): add first presence from Plays to Ravaging land, second from Energy to different board with Disease. If using second innate (Savage Revenge): add both from Plays to land about to Ravage - lose 1 presence but keep 1 for Savage Revenge. Push Disease with Plaguebearers into land Ravaging next turn to set up Sudden Fevers.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Place 2 presence (Energy/Plays for Element, one from Energy for 3 Energy/turn). Cards: Strike Low with Sudden Fevers (1 Fear, prevent Ravage in land with Disease), Fiery Vengeance (remove destroyed presence, 1 Fear + 1 damage in target Spirit's land). Add both presence to Ravaging land if using second innate. Fiery Vengeance can augment allies' abilities. Next turn: Reclaim All, shoot for Minor matching elements of first one gained.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2484534/openings-vengeance-as-a-burning-plague",
+  },
+
+  // ===========================================================================
+  // BGG OPENINGS - Jonah Yonker Promo Spirit Threads
+  // ===========================================================================
+
+  // Serpent Slumbering Beneath the Island (1 opening)
+  {
+    spiritSlug: "serpent-slumbering-beneath-the-island",
+    slug: "serpent-slumbering-beneath-the-island-bgg-opening-1",
+    name: "BGG Opening: Multiplayer Support",
+    description:
+      "A multiplayer-focused opening for Serpent that emphasizes supporting allies with Gifts while building toward Majors. Rush 2 card plays for consistent innate access, manage your presence cap, and track ally reclaim cycles.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1 - Gift an Ally",
+        instructions:
+          "Growth: +1 Energy, gain Minor Power, place presence (from bottom). Cards: Gift of Flowing Power OR Gift of Primordial Deeps. Rush 2 card plays for consistent innate access. Take a Minor with Moon/Fire and Earth - these are more consistently useful than Plant. Place your first presence in a land touching several lands of the same type, preferably the Build land. Consider which ally benefits most from an extra play (slower Spirits) or Minor access (faster Spirits). Noteworthy plays: Bringer - use Primordial Deeps for Moon/Earth to hit max innates, choose Earth for Serpent Rouses level 2. Vital Strength - use Flowing Power for extra play with Growth 3, enables Rituals + Draw of the Fruitful Earth combo. Wildfire - use Flowing Power for Growth 3, play Flash Fires + Asphyxiating Smoke. Lightning - use Flowing Power for Fire, enables Growth 2 + Harbingers + Shatter Homesteads.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2 - Absorb and Defend",
+        instructions:
+          "Growth: +1 Energy, gain Minor Power, place presence (from bottom). Cards: Absorb Essence + Elemental Aegis. Continue digging for useful cards. Place presence in a land with at least one Town, or touching several Ravage lands. Absorb Essence nets +3 Energy and grants an ally an element they need. Aegis defends your land and all adjacent lands. Hit Serpent Rouses to crush or push a Town (rarely both without setup).",
+      },
+      {
+        turn: 3,
+        title: "Turn 3 - Expand Reach",
+        instructions:
+          "Growth: +4 Energy, place presence (from top). Cards: Remaining Gift + the Minor you like less. Spread presence across the board for better Major targeting next turn. The extra Energy can pay for expensive Events your group wants to avoid.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4 - Major Power",
+        instructions:
+          "Growth: +1 Energy, gain Major Power, place presence (from top). Cards: Other Minor + new Major. You've uncovered the 'Any' element and should have decent Energy. Shoot for a mid-cost Major and forget the Minor in discard. Place presence to meet targeting requirements. Reclaim All next turn.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2282835/openings-serpent-slumbering-beneath-the-island",
+  },
+
+  // Heart of the Wildfire (1 opening - BGG Promo)
+  {
+    spiritSlug: "heart-of-the-wildfire",
+    slug: "heart-of-the-wildfire-bgg-promo-opening-1",
+    name: "BGG Opening: Flexible Aggro",
+    description:
+      "A flexible opening for Wildfire focusing on early damage while managing Blight. Rush Plant elements for massive damage scaling. Plan Reclaims carefully to maintain presence placement for Blazing Presence damage.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1 - Clear Early Threats",
+        instructions:
+          "Growth: Add presence from Plays, gain 2 Energy +1 per Fire (3 total). Cards: Asphyxiating Smoke (1 Fear, destroy 1 Town, Push 1 Dahan). Use presence placement to eliminate an Explorer and prevent a Build. Smoke clears a Town that just built or was just Explored, potentially pushing Dahan to a land another Spirit will defend.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2 - Gain Plant Elements",
+        instructions:
+          "Growth: Add presence from Energy, gain a Minor Power. Cards: Threatening Flames OR new Minor. Prioritize Plant elements over Fire (your tracks provide Fire already). 3 Plant is a huge power spike. If no Plant, consider Fire/Air for Flash Fires or Firestorm combos. If new Minor has Plant, add presence to a land with Town about to Ravage or Town/Explorer about to Build. If playing Threatening Flames, add presence to a land with City + Town to destroy City and push Town.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3 - Maximum Damage",
+        instructions:
+          "Growth: Add presence from Plays, gain 2 Energy +1 per Fire (4 total). Cards: Flame's Fury + Flash Fires. With Flame's Fury and 4 Fire showing, deal 5 damage total (2 from placement, 3 from Firestorm + Fury). Divide damage as needed - tear into a populated land OR clean your own lands. Flash Fires also benefits from Fury for another Town kill. First opportunity to remove Blight with Burned Land Regrows.",
+      },
+      {
+        turn: 4,
+        title: "Turn 4 - Setup for Reclaim",
+        instructions:
+          "Growth: Add presence from Energy OR Plays, gain a Minor. Cards: Threatening Flames + new Minor OR both Minors (depending on Turn 2 play). After 8 Minor draws, odds are very high you've seen at least 1 Plant. Use Growth's extra range to position for Reclaim next turn. Take from Plays if Invaders are building significant real estate (3 plays = damage spike next turn). Take from Energy if lands are inaccessible (Blighted, occupied by allies) or you already occupy affected lands.",
+      },
+      {
+        turn: 5,
+        title: "Turn 5 - Reclaim and Major",
+        instructions:
+          "Growth: Reclaim All, gain 1 Energy, gain Major or Minor. Cards: TBD based on draws. If gaining Major, forget a Minor you don't like or Flash Fires (utility drops off, and forgetting a 2-cost opens budget room). Shoot for 3-4 cost Majors so Growth 3 always affords them. Alternatively, grab a Minor if initial draws lacked Plant for better mid-game scaling.",
+      },
+    ],
+    author: "Jonah Yonker (BGG)",
+    sourceUrl:
+      "https://boardgamegeek.com/thread/2313791/openings-heart-of-the-wildfire",
+  },
+
+  // ===========================================================================
+  // Spirit Island Wiki - Antistone/breppert Guides
+  // ===========================================================================
+
+  // A Spread of Rampant Green - Antistone
+  {
+    spiritSlug: "a-spread-of-rampant-green",
+    slug: "a-spread-of-rampant-green-wiki-antistone",
+    name: "Wiki Opening: Antistone's Standard",
+    description:
+      "Antistone's opening strategy focusing on triggering innates early through presence placement and combining Creepers Tear into Mortar with Dahan counter-attacks.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Place 2 presence (one from each track), +1 card play this turn. Cards: Gift of Proliferation (another spirit places 1 presence), Stem the Flow of Fresh Water (1 damage to a building). The energy uncovered on top track lets you play a moon element to trigger your first innate. Use Choke the Land with Green to prevent builds.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Place 1 presence from bottom track, gain a minor power, +3 energy. Cards: Overgrow in a Night (place 1 presence or 3 fear), Fields Choked with Growth (push 1 town or 3 Dahan). Overgrow triggers All-Enveloping Green for Defend 2. Coordinate with Creepers Tear into Mortar for additional building damage.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Growth: Reclaim cards. If your minor power has plant+moon+water, you can activate level 2 of Creepers Tear into Mortar to destroy a town without needing a combo.",
+      },
+    ],
+    author: "Antistone (Wiki)",
+    sourceUrl:
+      "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Antistone%27s_Opening",
+  },
+
+  // Bringer of Dreams and Nightmares - Antistone
+  {
+    spiritSlug: "bringer-of-dreams-and-nightmares",
+    slug: "bringer-of-dreams-and-nightmares-wiki-antistone",
+    name: "Wiki Opening: Antistone's Major Rush",
+    description:
+      "Antistone's opening focusing on getting a major power early through Call on Midnight's Dreams while maintaining fear generation via Night Terrors innate.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Place 1 presence (from top), gain a minor power. Cards: Dreams of the Dahan (gather Dahan or fear), Predatory Nightmares (2 nightmare damage, push Dahan). The air element from your presence track triggers Spirits May Yet Dream (reveal a fear card) and level 2 Night Terrors (+2 fear). Use Predatory Nightmares to push a town about to ravage.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: +2 energy, place 1 presence (from top) in land with invaders/Dahan. Cards: Dread Apparitions (fear -> defense, 1 fear), Call on Midnight's Dreams (fear or major power). Order matters: use Dread Apparitions, then Night Terrors for 2 fear (defense 3), then Spirits May Yet Dream, then Call on Midnight's Dreams for a major power. Forget Call to use the major immediately if good.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "If you got a good major, use Reclaim One to cast it again alongside your turn 1 minor. If both cards have moon elements, placing presence from top track gives you the third moon for the second part of Spirits May Yet Dream.",
+      },
+    ],
+    author: "Antistone (Wiki)",
+    sourceUrl:
+      "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Antistone%27s_Opening",
+  },
+
+  // Bringer of Dreams and Nightmares - breppert
+  {
+    spiritSlug: "bringer-of-dreams-and-nightmares",
+    slug: "bringer-of-dreams-and-nightmares-wiki-breppert",
+    name: "Wiki Opening: breppert's Dahan Defense",
+    description:
+      "breppert's opening focusing on gathering 3 Dahan to defend against a full land (Explorer + Town + City) while building up to a major power on turn 3.",
+    turns: [
+      {
+        turn: 1,
+        title: "Turn 1",
+        instructions:
+          "Growth: Place Presence (1 away, top track to uncover Air), gain minor power. Cards: Predatory Nightmares (2 Damage + Dahan Push), Dreams of the Dahan (Gather Dahan or Fear per Dahan). Use Dreams to gather 3 Dahan into a land you'll defend turn 2, ideally with Explorer + Town + City. Predatory Nightmares targets towns built during invader turn 1. Triggers level 2 Night Terrors (2 Fear) and Spirits May Yet Dream.",
+      },
+      {
+        turn: 2,
+        title: "Turn 2",
+        instructions:
+          "Growth: Place Presence in Dahan land + 2 Energy. Cards: Dread Apparitions (1 Fear, defend by Fear), Call on Midnight's Dream (Gain Major or 2 Fear). Play Call for the fear. With Night Terrors (2 fear) + Dread Apparitions, you're defending 5. With 3 Dahan, you can wipe out Explorer + Town + City.",
+      },
+      {
+        turn: 3,
+        title: "Turn 3",
+        instructions:
+          "Reclaim one card, use 0-range presence placement to create a sacred site, and get your major power via Call on Midnight's Dreams. You'll have at least 4 Energy before Dahan boost. Accept some blight this turn while setting up major power for board control starting turn 4.",
+      },
+    ],
+    author: "breppert (Wiki)",
+    sourceUrl:
+      "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/breppert%27s_Opening",
   },
 ];

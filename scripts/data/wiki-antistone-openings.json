@@ -1,0 +1,77 @@
+[
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Standard",
+    "description": "Antistone's opening strategy focusing on triggering innates early through presence placement and combining Creepers Tear into Mortar with Dahan counter-attacks.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (one from each track), +1 card play this turn. Cards: Gift of Proliferation (another spirit places 1 presence), Stem the Flow of Fresh Water (1 damage to a building). The energy uncovered on top track lets you play a moon element to trigger your first innate. Use Choke the Land with Green to prevent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence from bottom track, gain a minor power, +3 energy. Cards: Overgrow in a Night (place 1 presence or 3 fear), Fields Choked with Growth (push 1 town or 3 Dahan). Overgrow triggers All-Enveloping Green for Defend 2. Coordinate with Creepers Tear into Mortar for additional building damage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim cards. If your minor power has plant+moon+water, you can activate level 2 of Creepers Tear into Mortar to destroy a town without needing a combo."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Major Rush",
+    "description": "Antistone's opening focusing on getting a major power early through Call on Midnight's Dreams while maintaining fear generation via Night Terrors innate.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 1 presence (from top), gain a minor power. Cards: Dreams of the Dahan (gather Dahan or fear), Predatory Nightmares (2 nightmare damage, push Dahan). The air element from your presence track triggers Spirits May Yet Dream (reveal a fear card) and level 2 Night Terrors (+2 fear). Use Predatory Nightmares to push a town about to ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +2 energy, place 1 presence (from top) in land with invaders/Dahan. Cards: Dread Apparitions (fear -> defense, 1 fear), Call on Midnight's Dreams (fear or major power). Order matters: use Dread Apparitions, then Night Terrors for 2 fear (defense 3), then Spirits May Yet Dream, then Call on Midnight's Dreams for a major power. Forget Call to use the major immediately if good."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If you got a good major, use Reclaim One to cast it again alongside your turn 1 minor. If both cards have moon elements, placing presence from top track gives you the third moon for the second part of Spirits May Yet Dream."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-breppert",
+    "name": "Wiki Opening: breppert's Dahan Defense",
+    "description": "breppert's opening focusing on gathering 3 Dahan to defend against a full land (Explorer + Town + City) while building up to a major power on turn 3.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place Presence (1 away, top track to uncover Air), gain minor power. Cards: Predatory Nightmares (2 Damage + Dahan Push), Dreams of the Dahan (Gather Dahan or Fear per Dahan). Use Dreams to gather 3 Dahan into a land you'll defend turn 2, ideally with Explorer + Town + City. Predatory Nightmares targets towns built during invader turn 1. Triggers level 2 Night Terrors (2 Fear) and Spirits May Yet Dream."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place Presence in Dahan land + 2 Energy. Cards: Dread Apparitions (1 Fear, defend by Fear), Call on Midnight's Dream (Gain Major or 2 Fear). Play Call for the fear. With Night Terrors (2 fear) + Dread Apparitions, you're defending 5. With 3 Dahan, you can wipe out Explorer + Town + City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim one card, use 0-range presence placement to create a sacred site, and get your major power via Call on Midnight's Dreams. You'll have at least 4 Energy before Dahan boost. Accept some blight this turn while setting up major power for board control starting turn 4."
+      }
+    ],
+    "author": "breppert (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/breppert%27s_Opening"
+  }
+]
