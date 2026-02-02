@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6.1 (Cleanup) complete
+**Current focus:** Phase 6.2 (Fix Code Duplication) in progress
 
 ## Current Position
 
-Phase: 6.1 (Cleanup TheDahanCodex)
-Plan: 3 of 3 (gap closure plan complete)
-Status: Phase Complete
-Last activity: 2026-02-01 - Component extraction (ExternalLinkCard, FilterPill) + UAT verification complete
+Phase: 6.2 (Fix Code Duplication)
+Plan: 7 of 7 Complete
+Status: Complete
+Last activity: 2026-02-02 - All 7 plans complete, reduced jscpd clones from 23 to 3
 
-Progress: [##################################################] 100% (26/26 plans complete)
+Progress: [##################################################] 100% (82/82 plans complete)
 
 ## Performance Metrics
 
@@ -312,6 +312,7 @@ None yet.
 - Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 - Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
+- Phase 6.2 inserted after Phase 6.1: Fix Code Duplication - eliminate jscpd clones, extract shared validators/components
 
 ### Blockers/Concerns
 
@@ -611,8 +612,35 @@ Phase 6.1 (Cleanup TheDahanCodex) complete:
 - [x] 06.1-02: UI Consistency & Docs Update (update banner pill, CLAUDE.md accuracy)
 - [x] 06.1-03: Button Component Consistency & Update Banner Fix (UAT gap closure)
 
+## Phase 6.2 Summary
+
+Phase 6.2 (Fix Code Duplication) is now complete with:
+
+- jscpd configuration (.jscpd.json) with 1.5% threshold
+- jscpd integrated into pre-commit hooks and CI
+- Convex validators extracted (spiritEntry, adversary, scenario, optionalGameFields)
+- getBaseSpiritBySlug query helper in convex/spirits.ts
+- convex/seed.ts refactored with shared seeding helpers
+- ScoreBreakdown component extracted to app/components/games/score-breakdown.tsx
+- transformGameFormToPayload utility in app/lib/game-form-utils.ts
+- Opening section helpers (createFormDataFromOpening, transformTurnsForSave)
+- CSV spirit utilities in app/lib/csv-spirits.ts (GameCSVRow, extractSpiritsFromRow, getSpiritAtIndex)
+- Reduced jscpd clones from 23 to 3 (remaining are small patterns)
+
+## Phase 6.2 Progress
+
+Phase 6.2 (Fix Code Duplication) complete:
+
+- [x] 06.2-01: Convex Validators Extraction
+- [x] 06.2-02: Convex Query Helpers
+- [x] 06.2-03: Seed Data Consolidation
+- [x] 06.2-04: ScoreBreakdown Component Extraction
+- [x] 06.2-05: Game Form Payload Utility
+- [x] 06.2-06: Opening Section Internal Helpers
+- [x] 06.2-07: CSV Spirit Field Utilities
+
 ## Session Continuity
 
-Last session: 2026-02-01
-Stopped at: Completed 06.1-03-PLAN.md - Button Component Consistency & Update Banner Fix (Phase 6.1 Complete)
+Last session: 2026-02-02
+Stopped at: Completed 06.2-07-PLAN.md - CSV Spirit Field Utilities (Phase 6.2 Complete)
 Resume file: None

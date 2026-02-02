@@ -1,5 +1,15 @@
 import { v } from "convex/values";
+import type { QueryCtx } from "./_generated/server";
 import { query } from "./_generated/server";
+
+// Helper: Get base spirit by slug (no aspect, no baseSpirit reference)
+async function getBaseSpiritBySlug(ctx: QueryCtx, slug: string) {
+  return ctx.db
+    .query("spirits")
+    .withIndex("by_slug", (q) => q.eq("slug", slug))
+    .filter((q) => q.eq(q.field("baseSpirit"), undefined))
+    .first();
+}
 
 // List all spirits with optional filtering
 export const listSpirits = query({
@@ -68,13 +78,7 @@ export const getSpiritWithAspects = query({
     slug: v.string(),
   },
   handler: async (ctx, args) => {
-    // Find the base spirit
-    const baseSpirit = await ctx.db
-      .query("spirits")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
-      .filter((q) => q.eq(q.field("baseSpirit"), undefined))
-      .first();
-
+    const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug);
     if (!baseSpirit) return null;
 
     // Get all aspects
@@ -102,13 +106,7 @@ export const getSpiritBySlug = query({
     aspect: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    // First find the base spirit
-    const baseSpirit = await ctx.db
-      .query("spirits")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
-      .filter((q) => q.eq(q.field("baseSpirit"), undefined))
-      .first();
-
+    const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug);
     if (!baseSpirit) return null;
 
     // If aspect requested, find it

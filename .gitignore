@@ -26,3 +26,4 @@ test-results/
 # Generated/Cache
 .tanstack/
 .playwright-mcp/
+report/

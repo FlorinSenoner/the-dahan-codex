@@ -9,6 +9,9 @@ pre-commit:
     knip:
       glob: "*.{js,ts,jsx,tsx,json}"
       run: pnpm knip
+    jscpd:
+      glob: "*.{ts,tsx}"
+      run: pnpm jscpd
     typecheck:
       glob: "*.{ts,tsx}"
       run: pnpm tsc --noEmit
