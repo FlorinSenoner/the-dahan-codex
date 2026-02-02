@@ -72,11 +72,19 @@ GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`) commit to git automatical
 
 2. Plan the phase: `/gsd:plan-phase <number>`
 3. Execute the phase: `/gsd:execute-phase <number>`
-4. After phase complete, verify all checks pass: `pnpm ci`
-5. Push and create PR: `git push -u origin <branch> && gh pr create`
-6. Wait for CI to pass, then merge
-7. Return to main: `git checkout main && git pull`
-8. Ready for next phase
+
+**Completing a phase (MANDATORY - Never skip!):**
+
+After `/gsd:execute-phase` or `/gsd:verify-work` completes, you MUST:
+
+1. Push branch: `git push -u origin <branch>`
+2. Create PR: `gh pr create --title "Phase X: Name" --body "..."`
+3. Wait for CI: `gh pr checks <number> --watch`
+4. Merge PR: `gh pr merge <number> --squash --delete-branch`
+5. Verify on main: `git status` should show "On branch main" and "working tree clean"
+6. Ready for next phase
+
+**Do NOT stop after verify-work passes.** The phase is not complete until the PR is merged and you're back on main.
 
 **If you accidentally commit to main:**
 ```bash
