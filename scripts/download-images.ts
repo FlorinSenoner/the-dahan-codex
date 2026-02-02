@@ -214,7 +214,7 @@ function findSpiritImageUrl(
 
 function findAspectImageUrl(
   $: cheerio.CheerioAPI,
-  _aspectName: string,
+  aspectName: string,
   imagePattern: string,
 ): string | null {
   let imageUrl: string | null = null;
@@ -225,29 +225,48 @@ function findAspectImageUrl(
     .replace(/ /g, "_")
     .toLowerCase();
 
+  // Also create pattern from aspect name (e.g., "Lair" -> "lair")
+  const aspectNamePattern = aspectName.toLowerCase().replace(/[\s-]/g, "_");
+
   // First try to find by image pattern
   $("img").each((_, el) => {
     const src = $(el).attr("src") || "";
     const srcset = $(el).attr("srcset") || "";
     const alt = $(el).attr("alt") || "";
 
+    // Skip non-PNG images
+    if (!src.toLowerCase().includes(".png")) {
+      return; // Continue to next image
+    }
+
     const normalizedSrc = src
       .toLowerCase()
       .replace(/%27/g, "'")
+      .replace(/%28/g, "(")
+      .replace(/%29/g, ")")
       .replace(/['\s]/g, "_");
     const normalizedAlt = alt
       .toLowerCase()
       .replace(/%27/g, "'")
+      .replace(/%28/g, "(")
+      .replace(/%29/g, ")")
       .replace(/['\s]/g, "_");
 
-    // Check if src or alt contains the image pattern
-    if (
+    // Check if src or alt contains the image pattern OR aspect name pattern (e.g., "lair_(ni)")
+    const matchesPattern =
       normalizedSrc.includes(normalizedPattern) ||
-      normalizedAlt.includes(normalizedPattern)
-    ) {
-      // Skip small icons
+      normalizedAlt.includes(normalizedPattern);
+
+    const matchesAspectName =
+      normalizedSrc.includes(`${aspectNamePattern}_(ni)`) ||
+      normalizedSrc.includes(`${aspectNamePattern}_ni`) ||
+      normalizedAlt.includes(`${aspectNamePattern}_(ni)`) ||
+      normalizedAlt === `${aspectNamePattern}_(ni).png`;
+
+    if (matchesPattern || matchesAspectName) {
+      // Skip small icons (require width >= 200 for panel art)
       const width = parseInt($(el).attr("width") || "0", 10);
-      if (width > 0 && width < 100) {
+      if (width > 0 && width < 200) {
         return; // Continue to next image
       }
 
@@ -256,7 +275,7 @@ function findAspectImageUrl(
         const srcsetParts = srcset.split(",");
         for (const part of srcsetParts) {
           const url = part.trim().split(" ")[0];
-          if (!url.includes("/thumb/")) {
+          if (!url.includes("/thumb/") && url.toLowerCase().includes(".png")) {
             imageUrl = url;
             return false;
           }
