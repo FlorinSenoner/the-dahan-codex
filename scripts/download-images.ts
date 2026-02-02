@@ -126,54 +126,85 @@ function findSpiritImageUrl(
   $: cheerio.CheerioAPI,
   spiritName: string,
 ): string | null {
-  // Strategy 1: Look for img with srcset containing spirit name pattern
-  // We want the full-res version, not thumbnail
+  // Strategy: Look for img with alt text matching the spirit name pattern
+  // We want the full-res PNG version, not thumbnail or SVG
   let imageUrl: string | null = null;
+
+  // Normalize the spirit name for matching - keep hyphens as underscores
+  const normalizedName = spiritName
+    .toLowerCase()
+    .replace(/'/g, "")
+    .replace(/[\s-]/g, "_")
+    .replace(/_+/g, "_");
 
   $("img").each((_, el) => {
     const alt = $(el).attr("alt") || "";
     const src = $(el).attr("src") || "";
     const srcset = $(el).attr("srcset") || "";
 
-    // Look for images with spirit name in alt or src
-    const nameParts = spiritName.toLowerCase().split(" ");
-    const hasNameMatch =
-      nameParts.some((part) => alt.toLowerCase().includes(part)) ||
-      src
-        .toLowerCase()
-        .includes(spiritName.toLowerCase().replace(/['\s]/g, "_"));
+    // Skip non-PNG images (SVGs, etc.)
+    if (!src.toLowerCase().includes(".png")) {
+      return; // Continue to next image
+    }
 
-    if (hasNameMatch) {
-      // Prefer srcset for higher resolution
+    // Skip small icons (like element icons, presence icons, etc.)
+    const width = parseInt($(el).attr("width") || "0", 10);
+    if (width > 0 && width < 200) {
+      return; // Continue to next image
+    }
+
+    // Check if this is a spirit panel image by looking for the spirit name in alt
+    // Alt text is typically "Spirit_Name.png" or "Spirit Name.png"
+    const normalizedAlt = alt
+      .toLowerCase()
+      .replace(/'/g, "")
+      .replace(/[\s-]/g, "_")
+      .replace(/_+/g, "_");
+
+    // Check for exact match on alt text (e.g., "a_spread_of_rampant_green.png")
+    const isExactMatch =
+      normalizedAlt === `${normalizedName}.png` ||
+      normalizedAlt === normalizedName ||
+      normalizedAlt.includes(normalizedName);
+
+    // Also check src path for the spirit name
+    const normalizedSrc = src
+      .toLowerCase()
+      .replace(/%27/g, "")
+      .replace(/'/g, "")
+      .replace(/[\s-]/g, "_");
+    const hasSrcMatch = normalizedSrc.includes(normalizedName);
+
+    if (isExactMatch || hasSrcMatch) {
+      // Prefer srcset for higher resolution - srcset format: "url 1.5x, url2 2x"
       if (srcset) {
-        // srcset format: "url1 1.5x, url2 2x"
         const srcsetParts = srcset.split(",");
         for (const part of srcsetParts) {
           const url = part.trim().split(" ")[0];
-          // Skip thumbnail URLs (contain /thumb/)
-          if (!url.includes("/thumb/")) {
+          // Skip thumbnail URLs (contain /thumb/) and non-PNG
+          if (!url.includes("/thumb/") && url.toLowerCase().includes(".png")) {
             imageUrl = url;
             return false; // Break the loop
           }
         }
       }
 
-      // Fallback to src if no good srcset
-      if (!imageUrl && src && !src.includes("/thumb/")) {
-        imageUrl = src;
-        return false;
-      }
-
-      // If still no image, try to extract full URL from thumb URL
+      // If srcset didn't have non-thumb URL, extract from thumb URL
       if (!imageUrl && src.includes("/thumb/")) {
-        // Convert /thumb/a/ab/Image.png/600px-Image.png to /a/ab/Image.png
+        // Convert /images/thumb/a/ab/Image.png/600px-Image.png to /images/a/ab/Image.png
         const thumbMatch = src.match(
-          /\/thumb(\/[a-f0-9]\/[a-f0-9]{2}\/[^/]+)/i,
+          /\/images\/thumb(\/[a-f0-9]\/[a-f0-9]{2}\/[^/]+\.png)/i,
         );
         if (thumbMatch) {
           imageUrl = `/images${thumbMatch[1]}`;
           return false;
         }
+      }
+
+      // Fallback to src if it's already full res
+      if (!imageUrl && src && !src.includes("/thumb/")) {
+        imageUrl = src;
+        return false;
       }
     }
   });
@@ -183,18 +214,43 @@ function findSpiritImageUrl(
 
 function findAspectImageUrl(
   $: cheerio.CheerioAPI,
-  aspectName: string,
+  _aspectName: string,
   imagePattern: string,
 ): string | null {
   let imageUrl: string | null = null;
+
+  // Normalize the image pattern for matching
+  const normalizedPattern = imagePattern
+    .replace(".png", "")
+    .replace(/ /g, "_")
+    .toLowerCase();
 
   // First try to find by image pattern
   $("img").each((_, el) => {
     const src = $(el).attr("src") || "";
     const srcset = $(el).attr("srcset") || "";
+    const alt = $(el).attr("alt") || "";
 
-    // Check if src contains the image pattern
-    if (src.includes(imagePattern.replace(".png", "").replace(/ /g, "_"))) {
+    const normalizedSrc = src
+      .toLowerCase()
+      .replace(/%27/g, "'")
+      .replace(/['\s]/g, "_");
+    const normalizedAlt = alt
+      .toLowerCase()
+      .replace(/%27/g, "'")
+      .replace(/['\s]/g, "_");
+
+    // Check if src or alt contains the image pattern
+    if (
+      normalizedSrc.includes(normalizedPattern) ||
+      normalizedAlt.includes(normalizedPattern)
+    ) {
+      // Skip small icons
+      const width = parseInt($(el).attr("width") || "0", 10);
+      if (width > 0 && width < 100) {
+        return; // Continue to next image
+      }
+
       // Prefer srcset for higher resolution
       if (srcset) {
         const srcsetParts = srcset.split(",");
@@ -210,7 +266,7 @@ function findAspectImageUrl(
       // Try to extract full URL from thumb URL
       if (!imageUrl && src.includes("/thumb/")) {
         const thumbMatch = src.match(
-          /\/thumb(\/[a-f0-9]\/[a-f0-9]{2}\/[^/]+)/i,
+          /\/images\/thumb(\/[a-f0-9]\/[a-f0-9]{2}\/[^/]+\.png)/i,
         );
         if (thumbMatch) {
           imageUrl = `/images${thumbMatch[1]}`;
