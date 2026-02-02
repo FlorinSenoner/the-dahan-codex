@@ -910,3 +910,287 @@ export const SPIRITS: SpiritData[] = [
       "https://spiritislandwiki.com/index.php?title=Dances_Up_Earthquakes",
   },
 ];
+
+// ============================================================================
+// ASPECT DATA INTERFACE
+// ============================================================================
+
+export interface AspectData {
+  name: string; // "Sunshine"
+  baseSpiritSlug: string; // "river-surges-in-sunlight"
+  summary: string;
+  expansion: ExpansionSlug;
+  complexityModifier: "easier" | "same" | "harder";
+  imageUrl?: string; // undefined means use base spirit image
+}
+
+// ============================================================================
+// ASPECTS (31 total)
+// ============================================================================
+
+export const ASPECTS: AspectData[] = [
+  // Lightning's Swift Strike aspects (4)
+  {
+    name: "Pandemonium",
+    baseSpiritSlug: "lightnings-swift-strike",
+    summary: "Chaotic lightning that scatters invaders unpredictably.",
+    expansion: "jagged-earth",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/lightnings-swift-strike-pandemonium.webp",
+  },
+  {
+    name: "Wind",
+    baseSpiritSlug: "lightnings-swift-strike",
+    summary:
+      "Swift spirit that prioritizes movement and flexibility over raw damage.",
+    expansion: "jagged-earth",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/lightnings-swift-strike-wind.webp",
+  },
+  {
+    name: "Immense",
+    baseSpiritSlug: "lightnings-swift-strike",
+    summary: "Massive presence with devastating area attacks.",
+    expansion: "promo-pack-2",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/lightnings-swift-strike-immense.webp",
+  },
+  {
+    name: "Sparking",
+    baseSpiritSlug: "lightnings-swift-strike",
+    summary: "Focused on efficient, repeated small strikes.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/lightnings-swift-strike-sparking.webp",
+  },
+  // River Surges in Sunlight aspects (3)
+  {
+    name: "Sunshine",
+    baseSpiritSlug: "river-surges-in-sunlight",
+    summary: "Emphasizes Sun and energy income, with radiant presence.",
+    expansion: "jagged-earth",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/river-surges-in-sunlight-sunshine.webp",
+  },
+  {
+    name: "Travel",
+    baseSpiritSlug: "river-surges-in-sunlight",
+    summary: "Mobile spirit that flows across the island to where it's needed.",
+    expansion: "promo-pack-2",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/river-surges-in-sunlight-travel.webp",
+  },
+  {
+    name: "Haven",
+    baseSpiritSlug: "river-surges-in-sunlight",
+    summary: "Protective spirit focused on defending sacred sites.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/river-surges-in-sunlight-haven.webp",
+  },
+  // Shadows Flicker Like Flame aspects (5)
+  {
+    name: "Madness",
+    baseSpiritSlug: "shadows-flicker-like-flame",
+    summary: "Induces terror and insanity in the Invaders.",
+    expansion: "jagged-earth",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shadows-flicker-like-flame-madness.webp",
+  },
+  {
+    name: "Reach",
+    baseSpiritSlug: "shadows-flicker-like-flame",
+    summary: "Extended range allows targeting distant lands with ease.",
+    expansion: "jagged-earth",
+    complexityModifier: "easier",
+    imageUrl: "/spirits/shadows-flicker-like-flame-reach.webp",
+  },
+  {
+    name: "Amorphous",
+    baseSpiritSlug: "shadows-flicker-like-flame",
+    summary: "Shapeshifting presence that flows between lands.",
+    expansion: "promo-pack-2",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shadows-flicker-like-flame-amorphous.webp",
+  },
+  {
+    name: "Foreboding",
+    baseSpiritSlug: "shadows-flicker-like-flame",
+    summary: "Builds dread and anticipation before striking.",
+    expansion: "promo-pack-2",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shadows-flicker-like-flame-foreboding.webp",
+  },
+  {
+    name: "Dark Fire",
+    baseSpiritSlug: "shadows-flicker-like-flame",
+    summary: "Combines shadow and flame for devastating attacks.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shadows-flicker-like-flame-dark-fire.webp",
+  },
+  // Vital Strength of the Earth aspects (3)
+  {
+    name: "Resilience",
+    baseSpiritSlug: "vital-strength-of-the-earth",
+    summary: "Endures punishment and slowly wears down the Invaders.",
+    expansion: "jagged-earth",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/vital-strength-of-the-earth-resilience.webp",
+  },
+  {
+    name: "Might",
+    baseSpiritSlug: "vital-strength-of-the-earth",
+    summary: "Raw power focused on crushing the Invaders directly.",
+    expansion: "promo-pack-2",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/vital-strength-of-the-earth-might.webp",
+  },
+  {
+    name: "Nourishing",
+    baseSpiritSlug: "vital-strength-of-the-earth",
+    summary: "Supports growth and healing across the island.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/vital-strength-of-the-earth-nourishing.webp",
+  },
+  // A Spread of Rampant Green aspects (2)
+  {
+    name: "Regrowth",
+    baseSpiritSlug: "a-spread-of-rampant-green",
+    summary: "Focuses on healing Blight and restoring the land.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/a-spread-of-rampant-green-regrowth.webp",
+  },
+  {
+    name: "Tangles",
+    baseSpiritSlug: "a-spread-of-rampant-green",
+    summary: "Entangling vines that trap and slow Invaders.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/a-spread-of-rampant-green-tangles.webp",
+  },
+  // Bringer of Dreams and Nightmares aspects (2)
+  {
+    name: "Enticing",
+    baseSpiritSlug: "bringer-of-dreams-and-nightmares",
+    summary: "Lures Invaders into dangerous situations with pleasant dreams.",
+    expansion: "nature-incarnate",
+    complexityModifier: "same",
+    imageUrl: "/spirits/bringer-of-dreams-and-nightmares-enticing.webp",
+  },
+  {
+    name: "Violence",
+    baseSpiritSlug: "bringer-of-dreams-and-nightmares",
+    summary: "Nightmares become deadly, dealing actual damage.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/bringer-of-dreams-and-nightmares-violence.webp",
+  },
+  // Heart of the Wildfire aspects (1)
+  {
+    name: "Transforming",
+    baseSpiritSlug: "heart-of-the-wildfire",
+    summary: "Fire that changes the land rather than just destroying.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/heart-of-the-wildfire-transforming.webp",
+  },
+  // Keeper of the Forbidden Wilds aspects (1)
+  {
+    name: "Spreading Hostility",
+    baseSpiritSlug: "keeper-of-the-forbidden-wilds",
+    summary: "Wilds spread more aggressively across the island.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/keeper-of-the-forbidden-wilds-spreading-hostility.webp",
+  },
+  // Lure of the Deep Wilderness aspects (1)
+  {
+    name: "Lair",
+    baseSpiritSlug: "lure-of-the-deep-wilderness",
+    summary: "Creates a central den that draws prey inward.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/lure-of-the-deep-wilderness-lair.webp",
+  },
+  // Ocean's Hungry Grasp aspects (1)
+  {
+    name: "Deeps",
+    baseSpiritSlug: "oceans-hungry-grasp",
+    summary: "Reaches further inland with abyssal power.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/oceans-hungry-grasp-deeps.webp",
+  },
+  // Serpent Slumbering Beneath the Island aspects (1)
+  {
+    name: "Locus",
+    baseSpiritSlug: "serpent-slumbering-beneath-the-island",
+    summary: "Awakens through a central point of power.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/serpent-slumbering-beneath-the-island-locus.webp",
+  },
+  // Sharp Fangs Behind the Leaves aspects (2)
+  {
+    name: "Encircle",
+    baseSpiritSlug: "sharp-fangs-behind-the-leaves",
+    summary: "Pack tactics that surround and trap prey.",
+    expansion: "nature-incarnate",
+    complexityModifier: "same",
+    imageUrl: "/spirits/sharp-fangs-behind-the-leaves-encircle.webp",
+  },
+  {
+    name: "Unconstrained",
+    baseSpiritSlug: "sharp-fangs-behind-the-leaves",
+    summary: "Beasts roam freely without territorial limits.",
+    expansion: "nature-incarnate",
+    complexityModifier: "easier",
+    imageUrl: "/spirits/sharp-fangs-behind-the-leaves-unconstrained.webp",
+  },
+  // Shifting Memory of Ages aspects (2)
+  {
+    name: "Intensify",
+    baseSpiritSlug: "shifting-memory-of-ages",
+    summary: "Amplifies the power of remembered elements.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shifting-memory-of-ages-intensify.webp",
+  },
+  {
+    name: "Mentor",
+    baseSpiritSlug: "shifting-memory-of-ages",
+    summary: "Shares ancient knowledge with other spirits.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/shifting-memory-of-ages-mentor.webp",
+  },
+  // Shroud of Silent Mist aspects (1)
+  {
+    name: "Stranded",
+    baseSpiritSlug: "shroud-of-silent-mist",
+    summary: "Isolates Invaders in the mist, cutting them off.",
+    expansion: "nature-incarnate",
+    complexityModifier: "easier",
+    imageUrl: "/spirits/shroud-of-silent-mist-stranded.webp",
+  },
+  // Thunderspeaker aspects (2)
+  {
+    name: "Tactician",
+    baseSpiritSlug: "thunderspeaker",
+    summary: "Strategic positioning of Dahan for maximum effect.",
+    expansion: "nature-incarnate",
+    complexityModifier: "same",
+    imageUrl: "/spirits/thunderspeaker-tactician.webp",
+  },
+  {
+    name: "Warrior",
+    baseSpiritSlug: "thunderspeaker",
+    summary: "Leads the Dahan in direct combat against Invaders.",
+    expansion: "nature-incarnate",
+    complexityModifier: "harder",
+    imageUrl: "/spirits/thunderspeaker-warrior.webp",
+  },
+];
