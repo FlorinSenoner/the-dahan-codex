@@ -80,9 +80,10 @@ After `/gsd:execute-phase` or `/gsd:verify-work` completes, you MUST:
 1. Push branch: `git push -u origin <branch>`
 2. Create PR: `gh pr create --title "Phase X: Name" --body "..."`
 3. Wait for CI: `gh pr checks <number> --watch`
-4. Merge PR: `gh pr merge <number> --squash --delete-branch`
-5. Verify on main: `git status` should show "On branch main" and "working tree clean"
-6. Ready for next phase
+4. **Ask user to verify changes work** - CI passing is not enough. Ask the user to test the affected functionality before merging. NEVER merge without user approval.
+5. Merge PR (after user approval): `gh pr merge <number> --squash --delete-branch`
+6. Verify on main: `git status` should show "On branch main" and "working tree clean"
+7. Ready for next phase
 
 **Do NOT stop after verify-work passes.** The phase is not complete until the PR is merged and you're back on main.
 
