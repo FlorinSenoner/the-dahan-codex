@@ -422,13 +422,13 @@ Plans:
 
 Plans:
 
-- [ ] 06.2-01-PLAN.md — Convex validator extraction (games.ts)
-- [ ] 06.2-02-PLAN.md — Convex query helper (spirits.ts)
-- [ ] 06.2-03-PLAN.md — Seed data consolidation (seed.ts)
-- [ ] 06.2-04-PLAN.md — ScoreBreakdown component extraction
-- [ ] 06.2-05-PLAN.md — Game form payload utility
-- [ ] 06.2-06-PLAN.md — Opening section internal helpers
-- [ ] 06.2-07-PLAN.md — CSV spirit field utilities
+- [x] 06.2-01-PLAN.md — Convex validator extraction (games.ts)
+- [x] 06.2-02-PLAN.md — Convex query helper (spirits.ts)
+- [x] 06.2-03-PLAN.md — Seed data consolidation (seed.ts)
+- [x] 06.2-04-PLAN.md — ScoreBreakdown component extraction
+- [x] 06.2-05-PLAN.md — Game form payload utility
+- [ ] 06.2-06-PLAN.md — Opening section internal helpers (deferred)
+- [ ] 06.2-07-PLAN.md — CSV spirit field utilities (deferred)
 
 ### Phase 7: Seed Data Management
 
@@ -485,7 +485,7 @@ development:
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
 | 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
-| 6.2 Fix Code Duplication             | 0/7            | In Progress | -          |
+| 6.2 Fix Code Duplication             | 5/7            | In Progress | -          |
 | 7. Seed Data Management              | 0/TBD          | Pending     | -          |
 
 ---
