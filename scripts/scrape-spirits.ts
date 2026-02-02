@@ -411,54 +411,45 @@ async function downloadImage(url: string, dest: string): Promise<void> {
   });
 }
 
-function parseComplexity($: cheerio.CheerioAPI): Complexity {
-  // Look for complexity in infobox - try multiple selectors
-  let complexityText = "";
-
-  // Strategy 1: Look for table row with "Complexity" header
-  $("th").each((_, el) => {
-    const text = $(el).text().toLowerCase().trim();
-    if (text.includes("complexity")) {
-      const nextTd = $(el).next("td");
-      if (nextTd.length) {
-        complexityText = nextTd.text().toLowerCase().trim();
-      }
+function parseComplexity($: cheerio.CheerioAPI, html: string): Complexity {
+  // Strategy 1: Parse wgCategories from the embedded JSON in the page
+  // Format: "wgCategories":["Spirits","Low Complexity Spirits","Base Game"]
+  const categoriesMatch = html.match(/"wgCategories":\s*\[([^\]]+)\]/);
+  if (categoriesMatch) {
+    const categoriesText = categoriesMatch[1].toLowerCase();
+    if (categoriesText.includes("very high complexity")) {
+      return "Very High";
     }
-  });
-
-  // Strategy 2: Look in infobox
-  if (!complexityText) {
-    $(".infobox td").each((_, el) => {
-      const text = $(el).text().toLowerCase();
-      if (text.includes("complexity")) {
-        const next = $(el).next("td");
-        if (next.length) {
-          complexityText = next.text().toLowerCase().trim();
-        }
-      }
-    });
-  }
-
-  // Strategy 3: Look for any text containing complexity level
-  if (!complexityText) {
-    const pageText = $("body").text().toLowerCase();
-    for (const level of ["very high", "high", "moderate", "low"]) {
-      if (
-        pageText.includes(`complexity: ${level}`) ||
-        pageText.includes(`complexity ${level}`)
-      ) {
-        complexityText = level;
-        break;
-      }
+    if (categoriesText.includes("high complexity")) {
+      return "High";
+    }
+    if (categoriesText.includes("moderate complexity")) {
+      return "Moderate";
+    }
+    if (categoriesText.includes("low complexity")) {
+      return "Low";
     }
   }
 
-  // Map to typed value
-  for (const [key, value] of Object.entries(COMPLEXITY_MAP)) {
-    if (complexityText.includes(key)) {
-      return value;
-    }
+  // Strategy 2: Look for complexity badge in the content (e.g., "LOW", "HIGH")
+  const bodyText = $("body").text();
+  const complexityMatch = bodyText.match(
+    /\b(LOW|MODERATE|HIGH|VERY HIGH)\b(?=\s*(?:complexity|$))/i,
+  );
+  if (complexityMatch) {
+    const level = complexityMatch[1].toLowerCase();
+    if (level === "very high") return "Very High";
+    if (level === "high") return "High";
+    if (level === "moderate") return "Moderate";
+    if (level === "low") return "Low";
   }
+
+  // Strategy 3: Look in category links at bottom of page
+  const categoryLinks = $("#catlinks").text().toLowerCase();
+  if (categoryLinks.includes("very high complexity")) return "Very High";
+  if (categoryLinks.includes("high complexity")) return "High";
+  if (categoryLinks.includes("moderate complexity")) return "Moderate";
+  if (categoryLinks.includes("low complexity")) return "Low";
 
   // Default to Moderate if not found
   console.warn("  Warning: Could not find complexity, defaulting to Moderate");
@@ -467,37 +458,45 @@ function parseComplexity($: cheerio.CheerioAPI): Complexity {
 
 function parseElements($: cheerio.CheerioAPI): Element[] {
   const elements: Set<Element> = new Set();
+  const elementCounts: Map<Element, number> = new Map();
 
-  // Strategy 1: Look for element icons/images
+  // Look for element icons in the page - count occurrences to find primary elements
   $("img").each((_, el) => {
     const alt = $(el).attr("alt")?.toLowerCase() || "";
     const src = $(el).attr("src")?.toLowerCase() || "";
 
     for (const elem of VALID_ELEMENTS) {
+      const elemLower = elem.toLowerCase();
+      // Match element icons (e.g., "Sun.png", "sun" in alt text)
+      // Be careful not to match "sunlight" which is part of spirit names
       if (
-        alt.includes(elem.toLowerCase()) ||
-        src.includes(elem.toLowerCase())
+        alt === `${elemLower}.png` ||
+        alt === elemLower ||
+        src.includes(`/${elemLower}.png`) ||
+        src.includes(`/${elemLower}_`)
       ) {
-        elements.add(elem);
+        const count = elementCounts.get(elem) || 0;
+        elementCounts.set(elem, count + 1);
       }
     }
   });
 
-  // Strategy 2: Look in infobox for elements text
-  $("th").each((_, el) => {
-    const text = $(el).text().toLowerCase();
-    if (text.includes("element")) {
-      const nextTd = $(el).next("td");
-      if (nextTd.length) {
-        const elemText = nextTd.text();
-        for (const elem of VALID_ELEMENTS) {
-          if (elemText.toLowerCase().includes(elem.toLowerCase())) {
-            elements.add(elem);
-          }
-        }
+  // Take elements that appear multiple times (likely in innate powers or presence track)
+  // Primary elements typically appear 3+ times on a spirit page
+  for (const [elem, count] of elementCounts.entries()) {
+    if (count >= 2) {
+      elements.add(elem);
+    }
+  }
+
+  // If we found too few elements, lower the threshold
+  if (elements.size < 2) {
+    for (const [elem, count] of elementCounts.entries()) {
+      if (count >= 1) {
+        elements.add(elem);
       }
     }
-  });
+  }
 
   return Array.from(elements);
 }
@@ -511,65 +510,51 @@ function parsePowerRatings($: cheerio.CheerioAPI): PowerRatings {
     utility: 0,
   };
 
-  const ratingCategories = ["offense", "defense", "control", "fear", "utility"];
-  const pageText = $("body").text().toLowerCase();
+  // The wiki uses a visual bar chart for power summary
+  // Each column has colored cells - count how many are colored to get the rating
+  // The order is: Offense, Control, Fear, Defense, Utility
+  // Gray/empty cells have ##f2f5f7 or #f2f5f7, colored cells have other colors
 
-  // Strategy 1: Look for power summary section/template
-  $("th, td").each((_, el) => {
-    const text = $(el).text().toLowerCase().trim();
+  // Find the power summary table after "SUMMARY OF POWERS"
+  const summaryHeader = $("b:contains('SUMMARY OF POWERS')");
+  if (summaryHeader.length > 0) {
+    // Find the table immediately after the header
+    const table = summaryHeader.closest("p").nextAll("table").first();
+    if (table.length > 0) {
+      // Count colored cells in each column (columns 0-4 map to Offense, Control, Fear, Defense, Utility)
+      const columnColors: number[] = [0, 0, 0, 0, 0];
 
-    for (const category of ratingCategories) {
-      if (text === category || text.includes(category)) {
-        const nextTd = $(el).next("td");
-        if (nextTd.length) {
-          const ratingText = nextTd
-            .text()
-            .toLowerCase()
-            .trim()
-            .replace(/[\s-]/g, "");
-
-          // Try to parse the rating
-          for (const [key, value] of Object.entries(POWER_RATING_MAP)) {
-            if (ratingText.includes(key.replace(/[\s-]/g, ""))) {
-              ratings[category as keyof PowerRatings] = value;
-              break;
+      table.find("tr").each((_, row) => {
+        $(row)
+          .find("td")
+          .each((colIdx, cell) => {
+            if (colIdx < 5) {
+              const style = $(cell).attr("style") || "";
+              // Check if the cell has a non-gray background color
+              // Gray/white cells use ##f2f5f7 or #f2f5f7 (note double # is a wiki typo)
+              // Colored cells have other hex colors like #45653c, #4b7364, etc.
+              const bgMatch = style.match(/background-color:\s*(#[0-9a-f]+)/i);
+              if (bgMatch) {
+                const color = bgMatch[1].toLowerCase();
+                // Check if it's NOT a gray/empty cell
+                if (color !== "#f2f5f7" && !style.includes("##f2f5f7")) {
+                  columnColors[colIdx]++;
+                }
+              }
             }
-          }
-        }
-      }
-    }
-  });
+          });
+      });
 
-  // Strategy 2: Look for rating patterns in page text
-  for (const category of ratingCategories) {
-    if (ratings[category as keyof PowerRatings] === 0) {
-      const patterns = [
-        new RegExp(
-          `${category}[:\\s]*(low|medium-?low|medium|medium-?high|high)`,
-          "i",
-        ),
-        new RegExp(
-          `(low|medium-?low|medium|medium-?high|high)[\\s]*${category}`,
-          "i",
-        ),
-      ];
-
-      for (const pattern of patterns) {
-        const match = pageText.match(pattern);
-        if (match) {
-          const ratingText = match[1].toLowerCase().replace(/[\s-]/g, "");
-          for (const [key, value] of Object.entries(POWER_RATING_MAP)) {
-            if (ratingText === key.replace(/[\s-]/g, "")) {
-              ratings[category as keyof PowerRatings] = value;
-              break;
-            }
-          }
-          break;
-        }
-      }
+      // Map to 0-5 scale - column order is Offense, Control, Fear, Defense, Utility
+      ratings.offense = Math.min(5, columnColors[0]);
+      ratings.control = Math.min(5, columnColors[1]);
+      ratings.fear = Math.min(5, columnColors[2]);
+      ratings.defense = Math.min(5, columnColors[3]);
+      ratings.utility = Math.min(5, columnColors[4]);
     }
   }
 
+  // If we couldn't parse the visual chart, leave as 0 (will need manual review)
   return ratings;
 }
 
@@ -668,7 +653,7 @@ async function scrapeSpirit(
   const $ = cheerio.load(html);
 
   // Parse all the metadata
-  const complexity = parseComplexity($);
+  const complexity = parseComplexity($, html);
   console.log(`  Complexity: ${complexity}`);
 
   const elements = parseElements($);
