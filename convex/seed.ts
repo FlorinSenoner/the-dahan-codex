@@ -1,6 +1,7 @@
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 import { mutation } from "./_generated/server";
+import { OPENINGS } from "./seedData/openings";
 import {
   ASPECTS,
   EXPANSIONS,
@@ -195,6 +196,7 @@ interface SeedStats {
   expansions: number;
   spirits: number;
   aspects: number;
+  openings: number;
 }
 
 /**
@@ -279,51 +281,39 @@ async function seedSpiritsData(
   };
 }
 
-// Seed sample openings
+// Seed opening guides from OPENINGS data
 async function seedOpenings(
   ctx: MutationCtx,
   spiritIdsBySlug: Map<string, Id<"spirits">>,
-) {
+): Promise<number> {
   const now = Date.now();
+  let count = 0;
 
-  // Get River's ID for the sample opening
-  const riverId = spiritIdsBySlug.get("river-surges-in-sunlight");
-  if (!riverId) {
-    console.warn("River spirit not found, skipping sample opening");
-    return;
+  for (const opening of OPENINGS) {
+    // Look up spirit ID by slug
+    const spiritId = spiritIdsBySlug.get(opening.spiritSlug);
+    if (!spiritId) {
+      console.warn(
+        `Spirit "${opening.spiritSlug}" not found for opening "${opening.slug}", skipping`,
+      );
+      continue;
+    }
+
+    await ctx.db.insert("openings", {
+      spiritId,
+      slug: opening.slug,
+      name: opening.name,
+      description: opening.description,
+      turns: opening.turns,
+      author: opening.author,
+      sourceUrl: opening.sourceUrl,
+      createdAt: now,
+      updatedAt: now,
+    });
+    count++;
   }
 
-  await ctx.db.insert("openings", {
-    spiritId: riverId,
-    slug: "river-standard-opening",
-    name: "Standard Opening",
-    description:
-      "A balanced opening focusing on energy generation and board control.",
-    turns: [
-      {
-        turn: 1,
-        title: "Turn 1: Establish Presence",
-        instructions:
-          "Take Growth Option 2: Add two Presence and gain a Power Card. Place presence in lands with Dahan to maximize your reach. Play Boon of Vigor on a spirit that needs energy (or yourself).",
-      },
-      {
-        turn: 2,
-        title: "Turn 2: Build Momentum",
-        instructions:
-          "Take Growth Option 3: Add Presence to a Wetland within Range 2 and gain 1 Energy. Play Flash Floods to push Explorers away from a building land, or use River's Bounty to gather Dahan.",
-      },
-      {
-        turn: 3,
-        title: "Turn 3: Control the Flow",
-        instructions:
-          "Take Growth Option 2 again for more presence and cards. By now you should have enough presence to trigger Massive Flooding. Focus on lands where you can push Invaders into each other or off the island.",
-      },
-    ],
-    author: "Spirit Island Community",
-    sourceUrl: "https://querki.net/u/darker/spirit-island-faq",
-    createdAt: now,
-    updatedAt: now,
-  });
+  return count;
 }
 
 // Shared seed logic used by both seedSpirits and reseedSpirits
@@ -334,7 +324,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
     ctx,
     expansionIds,
   );
-  await seedOpenings(ctx, spiritIdsBySlug);
+  const openingsCount = await seedOpenings(ctx, spiritIdsBySlug);
 
   return {
     spiritIdsBySlug,
@@ -342,6 +332,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
       expansions: EXPANSIONS.length,
       spirits: spiritCount,
       aspects: aspectCount,
+      openings: openingsCount,
     },
   };
 }
@@ -361,7 +352,7 @@ export const seedSpirits = mutation({
 
     return {
       status: "seeded",
-      message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, 1 opening`,
+      message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, ${stats.openings} openings`,
     };
   },
 });
