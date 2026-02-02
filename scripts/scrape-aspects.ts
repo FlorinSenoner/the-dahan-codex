@@ -179,7 +179,9 @@ function generateAspectSlug(
 
 function parseComplexityModifier(text: string): "easier" | "same" | "harder" {
   const lower = text.toLowerCase();
+  // Wiki uses: "Higher Complexity", "Lower Complexity", "No Change"
   if (
+    lower.includes("higher") ||
     lower.includes("increases complexity") ||
     lower.includes("harder") ||
     lower.includes("more complex")
@@ -187,6 +189,7 @@ function parseComplexityModifier(text: string): "easier" | "same" | "harder" {
     return "harder";
   }
   if (
+    lower.includes("lower") ||
     lower.includes("decreases complexity") ||
     lower.includes("easier") ||
     lower.includes("less complex") ||
@@ -204,7 +207,6 @@ interface AspectListEntry {
   aspectName: string;
   baseSpiritName: string;
   expansion: string;
-  complexityText: string;
   wikiPageTitle: string;
 }
 
@@ -217,33 +219,48 @@ async function scrapeAspectListPage(): Promise<AspectListEntry[]> {
 
   const entries: AspectListEntry[] = [];
 
-  // The page has tables with aspect information
-  // Each row typically has: Aspect Name, Spirit, Expansion, Complexity info
-  $("table.wikitable tbody tr").each((_, row) => {
+  // The wiki table structure:
+  // Column 0 (Box Art): Contains expansion link with title attribute
+  // Column 1 (Aspect Art): Contains aspect image
+  // Column 2 (Spirit): Contains spirit name link
+  // Column 3 (Aspect Name): Contains aspect name link
+  $("table.wikitable.sortable tbody tr").each((_, row) => {
     const cells = $(row).find("td");
-    if (cells.length < 3) return; // Skip header rows
+    if (cells.length < 4) return; // Skip header rows
 
-    // Extract data from cells - format varies but typically:
-    // Cell 0: Aspect name (may be a link)
-    // Cell 1: Spirit name
-    // Cell 2: Expansion
-    // Cell 3: Complexity info (if present)
+    // Cell 0: Box art - extract expansion from the first link's title attribute
+    const expansionLinks = $(cells[0]).find("a[title]");
+    let expansion = "";
+    expansionLinks.each((_, link) => {
+      const title = $(link).attr("title") || "";
+      // Take the first expansion link that's not empty
+      if (!expansion && title && !title.includes("File:")) {
+        expansion = title;
+      }
+    });
 
-    const aspectLink = $(cells[0]).find("a").first();
-    const aspectName = aspectLink.text().trim() || $(cells[0]).text().trim();
+    // Cell 2: Spirit name - get from the last link text (not the image link)
+    const spiritLinks = $(cells[2]).find("a[title]");
+    let baseSpiritName = "";
+    spiritLinks.each((_, link) => {
+      const title = $(link).attr("title") || "";
+      // Skip file links
+      if (!title.includes("File:")) {
+        baseSpiritName = title;
+      }
+    });
+
+    // Cell 3: Aspect name - get from link text
+    const aspectLink = $(cells[3]).find("a").first();
+    const aspectName = aspectLink.text().trim() || $(cells[3]).text().trim();
     const wikiPageTitle =
       aspectLink.attr("href")?.replace("/index.php?title=", "") || "";
-
-    const baseSpiritName = $(cells[1]).text().trim();
-    const expansion = $(cells[2]).text().trim();
-    const complexityText = cells.length > 3 ? $(cells[3]).text().trim() : "";
 
     if (aspectName && baseSpiritName) {
       entries.push({
         aspectName,
         baseSpiritName,
         expansion,
-        complexityText,
         wikiPageTitle,
       });
     }
@@ -255,20 +272,18 @@ async function scrapeAspectListPage(): Promise<AspectListEntry[]> {
 
 async function scrapeAspectPage(
   aspectName: string,
-  baseSpiritName: string,
+  wikiPageTitle: string,
 ): Promise<{
   summary: string;
   hasUniqueImage: boolean;
   imagePattern?: string;
+  complexityText: string;
 }> {
-  // Construct wiki page title - aspects are typically named like "Spirit_Name_(Aspect_Name)"
-  // or just "Aspect_Name_(Spirit_Island)" for unique names
-  const wikiTitle = encodeURIComponent(
-    `${baseSpiritName.replace(/'/g, "%27")} (${aspectName})`.replace(/ /g, "_"),
+  // Use the wiki page title from the list page - aspects use just their name as the page title
+  const url = `${WIKI_BASE}/index.php?title=${wikiPageTitle || encodeURIComponent(aspectName)}`;
+  console.log(
+    `  Fetching aspect page: ${aspectName} (${wikiPageTitle || aspectName})`,
   );
-
-  const url = `${WIKI_BASE}/index.php?title=${wikiTitle}`;
-  console.log(`  Fetching aspect page: ${aspectName}`);
 
   try {
     const html = await fetchPage(url);
@@ -277,8 +292,20 @@ async function scrapeAspectPage(
     // Check if page exists
     if ($(".noarticletext").length > 0) {
       console.log(`    No dedicated page found for ${aspectName}`);
-      return { summary: "", hasUniqueImage: false };
+      return { summary: "", hasUniqueImage: false, complexityText: "" };
     }
+
+    // Get complexity from infobox - look for row with "Complexity" cell
+    let complexityText = "";
+    $("table tr").each((_, row) => {
+      const cells = $(row).find("td");
+      if (cells.length >= 2) {
+        const label = $(cells[0]).text().trim();
+        if (label.toLowerCase() === "complexity") {
+          complexityText = $(cells[1]).text().trim();
+        }
+      }
+    });
 
     // Get summary from first paragraph after the infobox
     let summary = "";
@@ -312,10 +339,10 @@ async function scrapeAspectPage(
       }
     });
 
-    return { summary, hasUniqueImage, imagePattern };
+    return { summary, hasUniqueImage, imagePattern, complexityText };
   } catch (error) {
     console.log(`    Error fetching aspect page: ${error}`);
-    return { summary: "", hasUniqueImage: false };
+    return { summary: "", hasUniqueImage: false, complexityText: "" };
   }
 }
 
@@ -372,31 +399,25 @@ async function scrapeAllAspects(testOne = false): Promise<ScrapedAspect[]> {
         `${aspect.name}|${aspect.baseSpiritName}`,
       );
 
-      // Scrape individual aspect page for summary and image info
+      // Scrape individual aspect page for summary, image info, and complexity
       await sleep(REQUEST_DELAY);
-      const pageData = await scrapeAspectPage(
-        aspect.name,
-        aspect.baseSpiritName,
-      );
+      const wikiPageTitle = listEntry?.wikiPageTitle || aspect.name;
+      const pageData = await scrapeAspectPage(aspect.name, wikiPageTitle);
 
-      // Determine complexity modifier
+      // Determine complexity modifier from individual page's infobox
       let complexityModifier: "easier" | "same" | "harder" = "same";
-      if (listEntry?.complexityText) {
-        complexityModifier = parseComplexityModifier(listEntry.complexityText);
+      if (pageData.complexityText) {
+        complexityModifier = parseComplexityModifier(pageData.complexityText);
       }
 
-      // Determine expansion
+      // Determine expansion from list page
       let expansion = "jagged-earth"; // Default - most aspects are from Jagged Earth
       if (listEntry?.expansion) {
         expansion = mapExpansionToSlug(listEntry.expansion);
       }
 
-      const wikiUrl = `${WIKI_BASE}/index.php?title=${encodeURIComponent(
-        `${aspect.baseSpiritName.replace(/'/g, "%27")} (${aspect.name})`.replace(
-          / /g,
-          "_",
-        ),
-      )}`;
+      // Use the actual wiki page URL
+      const wikiUrl = `${WIKI_BASE}/index.php?title=${wikiPageTitle}`;
 
       const scrapedAspect: ScrapedAspect = {
         name: aspect.name,
