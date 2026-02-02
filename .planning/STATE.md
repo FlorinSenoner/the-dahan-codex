@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6.1 (Cleanup) complete
+**Current focus:** Phase 6.2 (Fix Code Duplication) in progress
 
 ## Current Position
 
-Phase: 6.1 (Cleanup TheDahanCodex)
-Plan: 3 of 3 (gap closure plan complete)
-Status: Phase Complete
-Last activity: 2026-02-01 - Component extraction (ExternalLinkCard, FilterPill) + UAT verification complete
+Phase: 6.2 (Fix Code Duplication)
+Plan: 0 of 7 (phase just started)
+Status: In Progress
+Last activity: 2026-02-02 - Phase 6.2 inserted, plans created
 
-Progress: [##################################################] 100% (26/26 plans complete)
+Progress: [##################################################] 100% (75/75 plans complete)
 
 ## Performance Metrics
 
@@ -312,6 +312,7 @@ None yet.
 - Phase 5 changed: "Opening Scrubber" → "Text Opening Management" (admin tools for text openings)
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 - Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
+- Phase 6.2 inserted after Phase 6.1: Fix Code Duplication - eliminate jscpd clones, extract shared validators/components
 
 ### Blockers/Concerns
 
