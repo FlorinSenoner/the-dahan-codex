@@ -464,7 +464,7 @@ Plans:
 - https://spiritislandwiki.com/index.php?title=List_of_Spirits
 - https://spiritislandwiki.com/index.php?title=List_of_Aspect_Cards
 
-**Note**: Opening guides will be manually curated from community sources (Reddit, BGG, strategy guides) rather than auto-scraped due to inconsistent formatting.
+**Note on Opening Guides**: Opening guides are manually curated from community sources (Reddit, BGG, strategy guides) using the admin tools built in Phase 5, rather than auto-scraped. The existing admin tooling supports creating text-based turn-by-turn guides. This phase focuses on spirit/aspect metadata and images only.
 
 **Plans**: 6 plans
 
