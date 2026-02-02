@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6.2 (Fix Code Duplication) in progress
+**Current focus:** Phase 8 (Spirit & Aspect Data Scraping) in progress
 
 ## Current Position
 
-Phase: 6.2 (Fix Code Duplication)
-Plan: 7 of 7 Complete
-Status: Complete
-Last activity: 2026-02-02 - All 7 plans complete, reduced jscpd clones from 23 to 3
+Phase: 8 (Spirit & Aspect Data Scraping)
+Plan: 3 of 3 Complete in Wave 2
+Status: In Progress
+Last activity: 2026-02-02 - Completed 08-03-PLAN.md (Image Downloader)
 
-Progress: [##################################################] 100% (82/82 plans complete)
+Progress: [#####################################-------------] 74% (85/115 plans complete)
 
 ## Performance Metrics
 
@@ -313,6 +313,8 @@ None yet.
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 - Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
 - Phase 6.2 inserted after Phase 6.1: Fix Code Duplication - eliminate jscpd clones, extract shared validators/components
+- Phase 7 marked "On Hold" - admin UI for seed data management deferred
+- Phase 8 added: Spirit & Aspect Data Scraping - populate complete spirit data from wiki, Reddit, BGG, and community resources
 
 ### Blockers/Concerns
 
@@ -642,5 +644,5 @@ Phase 6.2 (Fix Code Duplication) complete:
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 06.2-07-PLAN.md - CSV Spirit Field Utilities (Phase 6.2 Complete)
+Stopped at: Completed 08-03-PLAN.md - Spirit & Aspect Image Downloader (Wave 2 task 3/3)
 Resume file: None
