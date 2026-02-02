@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 8 (Spirit & Aspect Data Scraping)
-Plan: 3 of 3 Complete in Wave 2
+Plan: 4 of 5 (Wave 3 in progress)
 Status: In Progress
-Last activity: 2026-02-02 - Completed 08-03-PLAN.md (Image Downloader)
+Last activity: 2026-02-02 - Completed 08-05-PLAN.md (Opening Preservation)
 
-Progress: [#####################################-------------] 74% (85/115 plans complete)
+Progress: [#####################################-------------] 75% (86/115 plans complete)
 
 ## Performance Metrics
 
@@ -104,6 +104,7 @@ affecting current work:
 - All board fields optional to preserve backward compatibility
 - Aspects inherit board data from base spirit (no duplication)
 - getSpiritWithAspects query returns base + sorted aspects in single call
+- reseedSpirits preserves existing openings via backup/restore by spirit slug
 - URL as single source of truth for variant tab selection (no local state)
 - Parallel query preloading in route loaders (getSpiritBySlug + getSpiritWithAspects)
 - Spirit components directory: app/components/spirits/ for spirit-specific components
@@ -644,5 +645,5 @@ Phase 6.2 (Fix Code Duplication) complete:
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 08-03-PLAN.md - Spirit & Aspect Image Downloader (Wave 2 task 3/3)
+Stopped at: Completed 08-05-PLAN.md - Opening Preservation During Reseed (Wave 3)
 Resume file: None
