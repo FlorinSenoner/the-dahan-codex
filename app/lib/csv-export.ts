@@ -1,67 +1,18 @@
 import type { Doc } from "convex/_generated/dataModel";
 import Papa from "papaparse";
-
-/**
- * CSV column structure for game export
- * Fixed columns for Excel compatibility - spirits 1-6 have dedicated columns
- */
-interface GameCSVRow {
-  id: string;
-  date: string;
-  result: "win" | "loss";
-  spirit1: string;
-  spirit1_variant: string;
-  spirit1_player: string;
-  spirit2: string;
-  spirit2_variant: string;
-  spirit2_player: string;
-  spirit3: string;
-  spirit3_variant: string;
-  spirit3_player: string;
-  spirit4: string;
-  spirit4_variant: string;
-  spirit4_player: string;
-  spirit5: string;
-  spirit5_variant: string;
-  spirit5_player: string;
-  spirit6: string;
-  spirit6_variant: string;
-  spirit6_player: string;
-  adversary: string;
-  adversary_level: string;
-  secondary_adversary: string;
-  secondary_adversary_level: string;
-  scenario: string;
-  scenario_difficulty: string;
-  win_type: string;
-  invader_stage: string;
-  blight_count: string;
-  dahan_count: string;
-  cards_remaining: string;
-  score: string;
-  notes: string;
-}
+import { type GameCSVRow, getSpiritAtIndex } from "./csv-spirits";
 
 /**
  * Convert games to CSV rows with fixed column structure
  */
 function gamesToCSVRows(games: Doc<"games">[]): GameCSVRow[] {
   return games.map((game) => {
-    const getSpiritInfo = (index: number) => {
-      const spirit = game.spirits[index];
-      return {
-        name: spirit?.name ?? "",
-        variant: spirit?.variant ?? "",
-        player: spirit?.player ?? "",
-      };
-    };
-
-    const s1 = getSpiritInfo(0);
-    const s2 = getSpiritInfo(1);
-    const s3 = getSpiritInfo(2);
-    const s4 = getSpiritInfo(3);
-    const s5 = getSpiritInfo(4);
-    const s6 = getSpiritInfo(5);
+    const s1 = getSpiritAtIndex(game.spirits, 0);
+    const s2 = getSpiritAtIndex(game.spirits, 1);
+    const s3 = getSpiritAtIndex(game.spirits, 2);
+    const s4 = getSpiritAtIndex(game.spirits, 3);
+    const s5 = getSpiritAtIndex(game.spirits, 4);
+    const s6 = getSpiritAtIndex(game.spirits, 5);
 
     return {
       id: game._id,

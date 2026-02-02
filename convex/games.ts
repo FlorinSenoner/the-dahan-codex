@@ -3,6 +3,44 @@ import type { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { requireAuth } from "./lib/auth";
 
+// Reusable validators for game mutations
+const spiritEntryValidator = v.object({
+  spiritId: v.optional(v.id("spirits")),
+  name: v.string(),
+  variant: v.optional(v.string()),
+  player: v.optional(v.string()),
+});
+
+const spiritEntryImportValidator = v.object({
+  name: v.string(),
+  variant: v.optional(v.string()),
+  player: v.optional(v.string()),
+});
+
+const adversaryValidator = v.object({
+  name: v.string(),
+  level: v.number(),
+});
+
+const scenarioValidator = v.object({
+  name: v.string(),
+  difficulty: v.optional(v.number()),
+});
+
+// Shared optional game field validators (reused across mutations)
+const optionalGameFields = {
+  adversary: v.optional(adversaryValidator),
+  secondaryAdversary: v.optional(adversaryValidator),
+  scenario: v.optional(scenarioValidator),
+  winType: v.optional(v.string()),
+  invaderStage: v.optional(v.number()),
+  blightCount: v.optional(v.number()),
+  dahanCount: v.optional(v.number()),
+  cardsRemaining: v.optional(v.number()),
+  score: v.optional(v.number()),
+  notes: v.optional(v.string()),
+};
+
 // Query to list all non-deleted games for the authenticated user
 export const listGames = query({
   args: {},
@@ -35,39 +73,8 @@ export const createGame = mutation({
   args: {
     date: v.string(),
     result: v.union(v.literal("win"), v.literal("loss")),
-    spirits: v.array(
-      v.object({
-        spiritId: v.optional(v.id("spirits")),
-        name: v.string(),
-        variant: v.optional(v.string()),
-        player: v.optional(v.string()),
-      }),
-    ),
-    adversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(),
-      }),
-    ),
-    secondaryAdversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(),
-      }),
-    ),
-    scenario: v.optional(
-      v.object({
-        name: v.string(),
-        difficulty: v.optional(v.number()),
-      }),
-    ),
-    winType: v.optional(v.string()),
-    invaderStage: v.optional(v.number()),
-    blightCount: v.optional(v.number()),
-    dahanCount: v.optional(v.number()),
-    cardsRemaining: v.optional(v.number()),
-    score: v.optional(v.number()),
-    notes: v.optional(v.string()),
+    spirits: v.array(spiritEntryValidator),
+    ...optionalGameFields,
   },
   handler: async (ctx, args) => {
     const identity = await requireAuth(ctx);
@@ -96,41 +103,8 @@ export const updateGame = mutation({
     id: v.id("games"),
     date: v.optional(v.string()),
     result: v.optional(v.union(v.literal("win"), v.literal("loss"))),
-    spirits: v.optional(
-      v.array(
-        v.object({
-          spiritId: v.optional(v.id("spirits")),
-          name: v.string(),
-          variant: v.optional(v.string()),
-          player: v.optional(v.string()),
-        }),
-      ),
-    ),
-    adversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(),
-      }),
-    ),
-    secondaryAdversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(),
-      }),
-    ),
-    scenario: v.optional(
-      v.object({
-        name: v.string(),
-        difficulty: v.optional(v.number()),
-      }),
-    ),
-    winType: v.optional(v.string()),
-    invaderStage: v.optional(v.number()),
-    blightCount: v.optional(v.number()),
-    dahanCount: v.optional(v.number()),
-    cardsRemaining: v.optional(v.number()),
-    score: v.optional(v.number()),
-    notes: v.optional(v.string()),
+    spirits: v.optional(v.array(spiritEntryValidator)),
+    ...optionalGameFields,
   },
   handler: async (ctx, args) => {
     const identity = await requireAuth(ctx);
@@ -184,38 +158,8 @@ export const importGames = mutation({
         existingId: v.optional(v.string()), // Original game ID if updating
         date: v.string(),
         result: v.union(v.literal("win"), v.literal("loss")),
-        spirits: v.array(
-          v.object({
-            name: v.string(),
-            variant: v.optional(v.string()),
-            player: v.optional(v.string()),
-          }),
-        ),
-        adversary: v.optional(
-          v.object({
-            name: v.string(),
-            level: v.number(),
-          }),
-        ),
-        secondaryAdversary: v.optional(
-          v.object({
-            name: v.string(),
-            level: v.number(),
-          }),
-        ),
-        scenario: v.optional(
-          v.object({
-            name: v.string(),
-            difficulty: v.optional(v.number()),
-          }),
-        ),
-        winType: v.optional(v.string()),
-        invaderStage: v.optional(v.number()),
-        blightCount: v.optional(v.number()),
-        dahanCount: v.optional(v.number()),
-        cardsRemaining: v.optional(v.number()),
-        score: v.optional(v.number()),
-        notes: v.optional(v.string()),
+        spirits: v.array(spiritEntryImportValidator),
+        ...optionalGameFields,
       }),
     ),
   },
