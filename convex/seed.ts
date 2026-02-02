@@ -1,6 +1,139 @@
-import type { Id } from "./_generated/dataModel";
+import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 import { mutation } from "./_generated/server";
+
+// =============================================================================
+// OPENING PRESERVATION STRATEGY
+// =============================================================================
+//
+// Problem: reseedSpirits deletes ALL data including user-created openings.
+// This destroys user-contributed content during spirit data updates.
+//
+// Solution: Backup openings by spirit SLUG (not ID) before delete, restore after.
+//
+// Why slug instead of ID?
+// - Spirit IDs change during reseed (old records deleted, new ones created)
+// - Slugs are stable identifiers that persist across reseeds
+// - We can map openings back to their spirits using slug lookup
+//
+// Process:
+// 1. BACKUP: Before clearing data, query all openings and store:
+//    - The spirit's slug (for remapping after reseed)
+//    - All opening data except _id, _creationTime, spiritId (these will change)
+//    - Whether it's a seed opening (author: "Spirit Island Community")
+//
+// 2. CLEAR: Delete all openings, spirits, expansions (existing behavior)
+//
+// 3. SEED: Create expansions, spirits, aspects (existing behavior)
+//    - Track spiritIdsBySlug map as spirits are created
+//
+// 4. RESTORE: For each backed-up opening:
+//    - Look up new spirit ID by slug
+//    - Check if opening with same slug already exists (idempotency)
+//    - Insert opening with new spiritId
+//    - Handle orphaned openings gracefully (spirit no longer exists)
+//
+// Edge cases handled:
+// - Duplicate prevention: Check by slug before insert (running reseed twice is safe)
+// - Orphaned openings: Log warning and skip if spirit was removed from seed data
+// - Seed vs user openings: Both preserved, duplicates prevented by slug check
+// =============================================================================
+
+/**
+ * Backup data structure for an opening being preserved across reseed.
+ * Stores the spirit's slug (stable identifier) instead of ID (changes during reseed).
+ */
+interface OpeningBackup {
+  /** Spirit slug - used to look up new spirit ID after reseed */
+  spiritSlug: string;
+  /** Opening data without DB-managed fields */
+  data: Omit<Doc<"openings">, "_id" | "_creationTime" | "spiritId">;
+  /** True if this is a seed opening (author: "Spirit Island Community") */
+  isSeedOpening: boolean;
+}
+
+/**
+ * Backup all openings before clearing data.
+ * Maps each opening to its spirit's slug for later restoration.
+ */
+async function backupOpenings(ctx: MutationCtx): Promise<OpeningBackup[]> {
+  const openings = await ctx.db.query("openings").collect();
+  const backups: OpeningBackup[] = [];
+
+  for (const opening of openings) {
+    // Look up the spirit to get its slug
+    const spirit = await ctx.db.get(opening.spiritId);
+    if (!spirit) {
+      // Spirit already deleted or invalid reference - skip
+      console.warn(
+        `Opening "${opening.slug}" has invalid spiritId, skipping backup`,
+      );
+      continue;
+    }
+
+    // Extract opening data without DB-managed fields
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, _creationTime, spiritId, ...data } = opening;
+
+    backups.push({
+      spiritSlug: spirit.slug,
+      data,
+      isSeedOpening: opening.author === "Spirit Island Community",
+    });
+  }
+
+  return backups;
+}
+
+/**
+ * Restore backed-up openings after seeding.
+ * Uses spiritIdsBySlug map to find new spirit IDs.
+ * Handles idempotency and orphaned openings gracefully.
+ */
+async function restoreOpenings(
+  ctx: MutationCtx,
+  backups: OpeningBackup[],
+  spiritIdsBySlug: Map<string, Id<"spirits">>,
+): Promise<{ restored: number; skipped: number; orphaned: number }> {
+  let restored = 0;
+  let skipped = 0;
+  let orphaned = 0;
+
+  for (const backup of backups) {
+    // Look up new spirit ID by slug
+    const spiritId = spiritIdsBySlug.get(backup.spiritSlug);
+
+    // Handle spirits that no longer exist in seed data
+    if (!spiritId) {
+      console.warn(
+        `Opening "${backup.data.slug}" orphaned: spirit "${backup.spiritSlug}" no longer exists`,
+      );
+      orphaned++;
+      continue;
+    }
+
+    // Check if opening with same slug already exists (idempotency)
+    // This prevents duplicates if reseed is run multiple times
+    const existing = await ctx.db
+      .query("openings")
+      .withIndex("by_slug", (q) => q.eq("slug", backup.data.slug))
+      .first();
+
+    if (existing) {
+      skipped++;
+      continue;
+    }
+
+    // Restore the opening with the new spirit ID
+    await ctx.db.insert("openings", {
+      spiritId,
+      ...backup.data,
+    });
+    restored++;
+  }
+
+  return { restored, skipped, orphaned };
+}
 
 // Spirit data definitions (shared between seed and reseed)
 const EXPANSIONS = [
@@ -50,11 +183,40 @@ async function seedExpansions(ctx: MutationCtx): Promise<ExpansionIds> {
   return ids as ExpansionIds;
 }
 
-// Seed all spirits and return base spirit IDs for openings
+/**
+ * Seed stats returned from insertSeedData for reporting.
+ */
+interface SeedStats {
+  expansions: number;
+  spirits: number;
+  aspects: number;
+}
+
+/**
+ * Result from insertSeedData including spiritIdsBySlug map for opening restoration.
+ */
+interface InsertSeedResult {
+  /** Map of spirit slugs to their new IDs (for opening restoration) */
+  spiritIdsBySlug: Map<string, Id<"spirits">>;
+  /** Counts of seeded entities */
+  stats: SeedStats;
+}
+
+// Seed all spirits and return spiritIdsBySlug map for opening restoration
 async function seedSpiritsData(
   ctx: MutationCtx,
   expansionIds: ExpansionIds,
-): Promise<{ riverId: Id<"spirits"> }> {
+): Promise<{
+  riverId: Id<"spirits">;
+  spiritIdsBySlug: Map<string, Id<"spirits">>;
+  spiritCount: number;
+  aspectCount: number;
+}> {
+  // Track spirit IDs by slug for opening restoration
+  const spiritIdsBySlug = new Map<string, Id<"spirits">>();
+  let spiritCount = 0;
+  let aspectCount = 0;
+
   // River Surges in Sunlight (Base Game, Low complexity)
   const riverId = await ctx.db.insert("spirits", {
     name: "River Surges in Sunlight",
@@ -84,6 +246,8 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight",
   });
+  spiritIdsBySlug.set("river-surges-in-sunlight", riverId);
+  spiritCount++;
 
   // River aspects
   await ctx.db.insert("spirits", {
@@ -123,6 +287,7 @@ async function seedSpiritsData(
     aspectName: "Haven",
     complexityModifier: "harder",
   });
+  aspectCount += 3; // River has 3 aspects
 
   // Lightning's Swift Strike (Base Game, Low complexity)
   const lightningId = await ctx.db.insert("spirits", {
@@ -153,6 +318,8 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike",
   });
+  spiritIdsBySlug.set("lightnings-swift-strike", lightningId);
+  spiritCount++;
 
   // Lightning aspects
   await ctx.db.insert("spirits", {
@@ -206,9 +373,10 @@ async function seedSpiritsData(
     aspectName: "Immense",
     complexityModifier: "harder",
   });
+  aspectCount += 4; // Lightning has 4 aspects
 
   // Fractured Days Split the Sky (Jagged Earth, Very High complexity)
-  await ctx.db.insert("spirits", {
+  const fracturedDaysId = await ctx.db.insert("spirits", {
     name: "Fractured Days Split the Sky",
     slug: "fractured-days-split-the-sky",
     complexity: "Very High",
@@ -242,9 +410,11 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky",
   });
+  spiritIdsBySlug.set("fractured-days-split-the-sky", fracturedDaysId);
+  spiritCount++;
 
   // Starlight Seeks Its Form (Jagged Earth, Very High complexity)
-  await ctx.db.insert("spirits", {
+  const starlightId = await ctx.db.insert("spirits", {
     name: "Starlight Seeks Its Form",
     slug: "starlight-seeks-its-form",
     complexity: "Very High",
@@ -278,9 +448,11 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=Starlight_Seeks_Its_Form",
   });
+  spiritIdsBySlug.set("starlight-seeks-its-form", starlightId);
+  spiritCount++;
 
   // Finder of Paths Unseen (Jagged Earth, Very High complexity)
-  await ctx.db.insert("spirits", {
+  const finderId = await ctx.db.insert("spirits", {
     name: "Finder of Paths Unseen",
     slug: "finder-of-paths-unseen",
     complexity: "Very High",
@@ -314,9 +486,11 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=Finder_of_Paths_Unseen",
   });
+  spiritIdsBySlug.set("finder-of-paths-unseen", finderId);
+  spiritCount++;
 
   // Serpent Slumbering Beneath the Island (Jagged Earth, Very High complexity)
-  await ctx.db.insert("spirits", {
+  const serpentId = await ctx.db.insert("spirits", {
     name: "Serpent Slumbering Beneath the Island",
     slug: "serpent-slumbering-beneath-the-island",
     complexity: "Very High",
@@ -350,8 +524,10 @@ async function seedSpiritsData(
     wikiUrl:
       "https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island",
   });
+  spiritIdsBySlug.set("serpent-slumbering-beneath-the-island", serpentId);
+  spiritCount++;
 
-  return { riverId };
+  return { riverId, spiritIdsBySlug, spiritCount, aspectCount };
 }
 
 // Seed sample openings
@@ -392,10 +568,21 @@ async function seedOpenings(ctx: MutationCtx, riverId: Id<"spirits">) {
 }
 
 // Shared seed logic used by both seedSpirits and reseedSpirits
-async function insertSeedData(ctx: MutationCtx) {
+// Returns spiritIdsBySlug map for opening restoration during reseed
+async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
   const expansionIds = await seedExpansions(ctx);
-  const { riverId } = await seedSpiritsData(ctx, expansionIds);
+  const { riverId, spiritIdsBySlug, spiritCount, aspectCount } =
+    await seedSpiritsData(ctx, expansionIds);
   await seedOpenings(ctx, riverId);
+
+  return {
+    spiritIdsBySlug,
+    stats: {
+      expansions: EXPANSIONS.length,
+      spirits: spiritCount,
+      aspects: aspectCount,
+    },
+  };
 }
 
 // Seed initial spirit data - run manually via Convex dashboard or CLI
@@ -409,27 +596,44 @@ export const seedSpirits = mutation({
       return { status: "skipped", message: "Data already seeded" };
     }
 
-    await insertSeedData(ctx);
+    const { stats } = await insertSeedData(ctx);
 
     return {
       status: "seeded",
-      message: "Created 3 expansions, 6 base spirits, 7 aspects, 1 opening",
+      message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, 1 opening`,
     };
   },
 });
 
 // Reseed mutation - deletes all data and re-runs seed
+// PRESERVES existing openings (user-created and seed) during reseed
 // Use: npx convex run seed:reseedSpirits
 export const reseedSpirits = mutation({
   args: {},
   handler: async (ctx) => {
+    // 1. BACKUP: Save all openings before clearing data
+    // Maps openings to spirit slugs for restoration after reseed
+    const openingBackups = await backupOpenings(ctx);
+
+    // 2. CLEAR: Delete all existing data
     await clearExistingData(ctx);
-    await insertSeedData(ctx);
+
+    // 3. SEED: Create expansions, spirits, aspects (returns spiritIdsBySlug map)
+    const { spiritIdsBySlug, stats } = await insertSeedData(ctx);
+
+    // 4. RESTORE: Re-insert backed-up openings with new spirit IDs
+    // Handles idempotency (skips duplicates) and orphans (spirits removed from seed)
+    const { restored, skipped, orphaned } = await restoreOpenings(
+      ctx,
+      openingBackups,
+      spiritIdsBySlug,
+    );
 
     return {
       status: "reseeded",
       message:
-        "Deleted all data and created 3 expansions, 6 base spirits, 7 aspects, 1 opening",
+        `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects. ` +
+        `Openings: ${restored} restored, ${skipped} skipped (duplicates), ${orphaned} orphaned (missing spirit)`,
     };
   },
 });
