@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
+import { transformGameFormToPayload } from "@/lib/game-form-utils";
 
 export const Route = createFileRoute("/_authenticated/games/$id")({
   component: GameDetailPage,
@@ -72,31 +73,9 @@ function GameDetailPage() {
   };
 
   const handleSubmit = async (data: GameFormData) => {
-    // Include spirits with either a spiritId (picked from dropdown) or a name (imported from CSV)
-    const validSpirits = data.spirits.filter(
-      (s) => s.spiritId !== null || s.name,
-    );
-
     await updateGame.mutateAsync({
       id: game._id,
-      date: data.date,
-      result: data.result,
-      spirits: validSpirits.map((s) => ({
-        spiritId: s.spiritId ?? undefined,
-        name: s.name,
-        variant: s.variant,
-        player: s.player,
-      })),
-      adversary: data.adversary ?? undefined,
-      secondaryAdversary: data.secondaryAdversary ?? undefined,
-      scenario: data.scenario ?? undefined,
-      winType: data.winType || undefined,
-      invaderStage: data.invaderStage,
-      blightCount: data.blightCount,
-      dahanCount: data.dahanCount,
-      cardsRemaining: data.cardsRemaining,
-      score: data.score,
-      notes: data.notes || undefined,
+      ...transformGameFormToPayload(data),
     });
   };
 
