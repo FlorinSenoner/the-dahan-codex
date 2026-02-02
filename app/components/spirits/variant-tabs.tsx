@@ -3,6 +3,7 @@ import type { Doc } from "convex/_generated/dataModel";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { slugify } from "@/lib/utils";
 
 interface VariantTabsProps {
   base: Doc<"spirits">;
@@ -58,7 +59,7 @@ export function VariantTabs({
         {aspects.map((a) => (
           <TabsTrigger
             key={a.aspectName}
-            value={a.aspectName?.toLowerCase() || ""}
+            value={a.aspectName ? slugify(a.aspectName) : ""}
             className={tabTriggerClassName}
           >
             {a.aspectName}
