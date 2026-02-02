@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/jscpd.json",
+  "threshold": 2,
+  "reporters": ["consoleFull"],
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.vinxi/**",
+    "**/convex/_generated/**",
+    "**/*.d.ts",
+    "**/pnpm-lock.yaml",
+    "**/playwright-report/**",
+    "**/.planning/**"
+  ],
+  "format": ["typescript", "tsx"],
+  "gitignore": true,
+  "minLines": 5,
+  "minTokens": 50
+}
