@@ -27,6 +27,20 @@ const scenarioValidator = v.object({
   difficulty: v.optional(v.number()),
 });
 
+// Shared optional game field validators (reused across mutations)
+const optionalGameFields = {
+  adversary: v.optional(adversaryValidator),
+  secondaryAdversary: v.optional(adversaryValidator),
+  scenario: v.optional(scenarioValidator),
+  winType: v.optional(v.string()),
+  invaderStage: v.optional(v.number()),
+  blightCount: v.optional(v.number()),
+  dahanCount: v.optional(v.number()),
+  cardsRemaining: v.optional(v.number()),
+  score: v.optional(v.number()),
+  notes: v.optional(v.string()),
+};
+
 // Query to list all non-deleted games for the authenticated user
 export const listGames = query({
   args: {},
@@ -60,16 +74,7 @@ export const createGame = mutation({
     date: v.string(),
     result: v.union(v.literal("win"), v.literal("loss")),
     spirits: v.array(spiritEntryValidator),
-    adversary: v.optional(adversaryValidator),
-    secondaryAdversary: v.optional(adversaryValidator),
-    scenario: v.optional(scenarioValidator),
-    winType: v.optional(v.string()),
-    invaderStage: v.optional(v.number()),
-    blightCount: v.optional(v.number()),
-    dahanCount: v.optional(v.number()),
-    cardsRemaining: v.optional(v.number()),
-    score: v.optional(v.number()),
-    notes: v.optional(v.string()),
+    ...optionalGameFields,
   },
   handler: async (ctx, args) => {
     const identity = await requireAuth(ctx);
@@ -99,16 +104,7 @@ export const updateGame = mutation({
     date: v.optional(v.string()),
     result: v.optional(v.union(v.literal("win"), v.literal("loss"))),
     spirits: v.optional(v.array(spiritEntryValidator)),
-    adversary: v.optional(adversaryValidator),
-    secondaryAdversary: v.optional(adversaryValidator),
-    scenario: v.optional(scenarioValidator),
-    winType: v.optional(v.string()),
-    invaderStage: v.optional(v.number()),
-    blightCount: v.optional(v.number()),
-    dahanCount: v.optional(v.number()),
-    cardsRemaining: v.optional(v.number()),
-    score: v.optional(v.number()),
-    notes: v.optional(v.string()),
+    ...optionalGameFields,
   },
   handler: async (ctx, args) => {
     const identity = await requireAuth(ctx);
@@ -163,16 +159,7 @@ export const importGames = mutation({
         date: v.string(),
         result: v.union(v.literal("win"), v.literal("loss")),
         spirits: v.array(spiritEntryImportValidator),
-        adversary: v.optional(adversaryValidator),
-        secondaryAdversary: v.optional(adversaryValidator),
-        scenario: v.optional(scenarioValidator),
-        winType: v.optional(v.string()),
-        invaderStage: v.optional(v.number()),
-        blightCount: v.optional(v.number()),
-        dahanCount: v.optional(v.number()),
-        cardsRemaining: v.optional(v.number()),
-        score: v.optional(v.number()),
-        notes: v.optional(v.string()),
+        ...optionalGameFields,
       }),
     ),
   },
