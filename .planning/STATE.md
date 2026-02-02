@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-24)
 ## Current Position
 
 Phase: 8 (Spirit & Aspect Data Scraping)
-Plan: 4 of 5 (Wave 3 in progress)
+Plan: 4 of 5 Complete (Wave 3 complete)
 Status: In Progress
-Last activity: 2026-02-02 - Completed 08-05-PLAN.md (Opening Preservation)
+Last activity: 2026-02-02 - Completed 08-04-PLAN.md (Update Seed Data)
 
-Progress: [#####################################-------------] 75% (86/115 plans complete)
+Progress: [#####################################-------------] 76% (87/115 plans complete)
 
 ## Performance Metrics
 
@@ -279,6 +279,7 @@ affecting current work:
 - Games components directory added to knip entry points
 - CSV import uses full replacement on ID match (missing fields removed from existing records)
 - Import doesn't resolve spirit IDs - uses name only (CSV format limitation)
+- Convex module directory names cannot contain hyphens (seed-data renamed to seedData)
 - CSVPreview composite key: id or date+spirit1+index for unique keys
 
 ### Pending Todos
@@ -645,5 +646,5 @@ Phase 6.2 (Fix Code Duplication) complete:
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 08-05-PLAN.md - Opening Preservation During Reseed (Wave 3)
+Stopped at: Completed 08-04-PLAN.md - Update Seed Data (Wave 3 complete)
 Resume file: None
