@@ -108,5 +108,270 @@
     ],
     "author": "BGG Community (T. Ips)",
     "sourceUrl": "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin"
+  },
+  {
+    "spiritSlug": "wandering-voice-keens-delirium",
+    "slug": "wandering-voice-bgg-air-focus",
+    "name": "BGG Opening: Air Element Focus",
+    "description": "Community opening prioritizing early air elements on top track to maximize Incarna movement and innate consistency. Delays card plays to reach the air element faster.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 top/top. Play either Twist Perceptions or Frightful Keening based on whether you need Keening to solve a land this turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 bottom. Prioritize air on your minor power choice. Play two air cards. If you play Turmoil's Touch, pay energy for it rather than discarding. In solo, delay Turmoil's Touch for turn 3 so you can pay 2 energy for it."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 top/top if you gained an air card on turn 2. If you didn't and need immediate tempo, you can G3 either track, but you'll be significantly weaker the following turn."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim. This sets you up for strong mid-game with consistent air elements and Incarna movement."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Either G2 top/top to access the Incarna push, or bottom/bottom to access 3 plays. Note that top/top leads to excess energy (10+) but difficulty getting a major without delaying 3 plays by another 3 turns."
+      }
+    ],
+    "author": "CelestialSpark (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3139454/wandering-voice-keens-delirium-discussion-analysis"
+  },
+  {
+    "spiritSlug": "relentless-gaze-of-the-sun",
+    "slug": "relentless-gaze-bgg-standard",
+    "name": "BGG Opening: Standard Minor Build",
+    "description": "Community opening focusing on building up minors before expanding to 3 plays. Emphasizes acquiring moon cards for the second innate and using G2 to accumulate card options.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 top. Play Focus the Sun's Rays (comboed with level 1 innate to kill something big) or Unbearable Gaze of the Sun (to clear 2 lands) based on board state."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 bottom. Play the other unique you didn't use turn 1. Start building up your supply of minors - prioritize moon cards to trigger your second innate."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 bottom. Continue acquiring minors. Support cards are slightly less valuable than usual due to limited plays. Powers that add blight are considerably better for this spirit."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Build toward 3 plays + 3 energy. Once there, your clearing ability improves significantly. Shift away from G2 towards G1 and G3 for maximal repeat shenanigans. Focus tends to be your best nuke; Wither Bodies builds badlands count."
+      }
+    ],
+    "author": "Steve Haas (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140073/relentless-gaze-of-the-sun-discussion-analysis-ope"
+  },
+  {
+    "spiritSlug": "relentless-gaze-of-the-sun",
+    "slug": "relentless-gaze-bgg-top-track-major",
+    "name": "BGG Opening: Top Track Major Rush",
+    "description": "Alternative opening focusing on pure top track progression, grabbing a major turn 1 and forgetting Wither Bodies. Builds toward the 4 energy/Any element spot for massive repeat plays.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 top. Gain a major power and forget Wither Bodies, Endlessly Shall You Toil. Play around the major you draft while taking mostly G3s to stockpile energy."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 top. Continue building toward the Any element spot. Move presence around as needed using G3's presence move option."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G3 top. Reach the 4 energy/Any element spot if possible. The Any element helps hit innate thresholds regardless of drafted cards."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Continue with G3 for energy stockpiling. Use your major power repeatedly - with enough energy, you can repeat a major multiple times per turn for devastating effect. One player reported 18 fear in a single turn by repeating Focus the Land's Anguish."
+      }
+    ],
+    "author": "BGG Community (Schaden, rchandra)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140073/relentless-gaze-of-the-sun-discussion-analysis-ope"
+  },
+  {
+    "spiritSlug": "wounded-waters-bleeding",
+    "slug": "wounded-waters-bgg-standard",
+    "name": "BGG Opening: Standard Healing Path",
+    "description": "Community opening following the spirit's natural progression: minor/minor/major to see your options before choosing the first healing card. Splits healing tokens between R1 and R2 for flexibility.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Forced (gain minor, place presence). Take a minor with water or animal to support your future healing card choice. Place your bleeding token on R1."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Forced (gain minor, place presence). Take another minor. Place your bleeding token on R2 to keep options open for both healing cards."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain a major power. Use this to inform your first healing card decision - beast-focused majors push toward Roiling Waters, control majors toward Serene Waters. Choose your first healing card based on your draft."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Unlock G3 and prefer it over G2 (it gives energy). Go for 3 plays first once the track splits. Choose your second healing card based on synergy with your drafted powers. Roiling generates more fear; Serene offers better invader control."
+      }
+    ],
+    "author": "Steve Haas (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3141249/wounded-waters-bleeding-analysis-openings-strategy"
+  },
+  {
+    "spiritSlug": "dances-up-earthquakes",
+    "slug": "dances-up-earthquakes-bgg-t4-earthquake",
+    "name": "BGG Opening: Turn 4 Earthquake",
+    "description": "The signature Dances Up Earthquakes opening that builds to a massive Turn 4 right innate activation with 7+ cards resolving at once. Proven effective against all level 6 adversaries.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Top track for energy. Use all your Plays for making cards Impending, starting with your most expensive Unique Powers. Position quake tokens strategically - most powers that add/move quakes are Range 0."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Continue top track. Keep making cards Impending. Your impending cards accumulate energy each turn from 'Rhythmic Power Builds to a Cataclysmic Crescendo'. Plan card timing around when they'll resolve."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Top track. By now you should have multiple impending cards about to resolve. Position your presence to maximize quake token coverage. The left innate (Gift of Seismic Energy) provides defense/shields based on impending cards."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: As needed. This is the explosion turn - resolve 7+ Powers including 1-2 thresholded majors. Fully activate the right innate (Earth Shudders, Buildings Fall) for massive destruction. This turn often decides the game."
+      }
+    ],
+    "author": "Jason Y (JasonILTG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3107804/opening-strategy-guide-for-dances-up-earthquakes"
+  },
+  {
+    "spiritSlug": "dances-up-earthquakes",
+    "slug": "dances-up-earthquakes-bgg-sustained-pressure",
+    "name": "BGG Opening: Sustained Pressure",
+    "description": "Alternative to the T4 explosion that maintains constant impending cards for regular medium earthquakes and bigger shields. More controlled but requires experienced planning.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Top track. Start impending cards but don't commit to a single massive turn. Keep 2-3 impending cards at all times for consistent shield values from the left innate."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Top track. Balance between resolving some cards and adding new impending ones. This lets you trigger level 1-2 earthquakes regularly rather than one huge level 3+."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Top track to majors. Once earning 2 energy per impending card per round, you need expensive cards (majors) to keep things impending. The presence move is vital for spreading quake tokens."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Maintain the rhythm of impending and resolving. This approach bogs down less in late game than pure T4 strategies. Draft majors aggressively - even on the 'wrong' turn, they're powerful."
+      }
+    ],
+    "author": "Steve Haas (Steve496)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3141722/dances-up-earthquakes-analysis-openings-strategy"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-g3-mobility",
+    "name": "BGG Opening: G3 Mobility Focus",
+    "description": "Opening that prioritizes G3 for Incarna mobility and energy over rushing to empower. Uses proactive control and explorer sniping to stall until mid-game dominance.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 bottom track (presence + 1 energy + move Incarna). Play Radiant and Hallowed Grove + Bloom of the Rocks and Trees to hit level 2 left innate and level 1 right innate. Remove explorers in 1-2 exploring lands fast, then another in slow."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 top track (gain card + major via Boon). Play Entwine the Fates of All + Boon of Resilient Power to hit innates again. Use Entwine as defend 2 (or 4 with threshold) if needed. Draft a major to establish your win condition."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Track choice depends on cards drafted. Good/cheap minors = bottom track for plays. Expensive major = top track for energy, potentially unlocking 4 energy before switching to bottom for 3 plays. Level 2 left innate is critical for stopping builds in newly explored lands."
+      }
+    ],
+    "author": "Schaden",
+    "sourceUrl": "https://boardgamegeek.com/thread/3137601/towering-roots-of-the-jungle-discussion-analysis-o"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-standard-opening",
+    "name": "BGG Opening: Standard G2/G3 Hybrid",
+    "description": "Flexible opening that uses G2 for early growth then transitions to G3 for mobility. Early empower is often a trap - vitality is better placed in lands where you'll use it.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 top track - gain a plant card or good effect. Play 1 card: Blooming of Rocks (add vitality to building land) OR Hallowed Grove (remove invaders) depending on adversary and drafted card."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 bottom track for 2 card plays. Play 2 cards that meet innate requirements. Focus on stopping builds and generating fear if possible."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 to empower Incarna (if situation warrants) OR G3 bottom track to reposition Incarna when needed. Continue playing 2 cards. Note: Early empower can be a trap - G3 mobility is often more valuable."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Growth: G3 or Reclaim as needed. Blooming of Rocks and Entwine of Fates are strong for defense/delay while growing to 4 plays or digging for good majors. The spirit excels at stalling until late-game domination."
+      }
+    ],
+    "author": "JF (iamJFD)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3137601/towering-roots-of-the-jungle-discussion-analysis-o"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-adversary-adaptive",
+    "name": "BGG Opening: Adversary-Adaptive",
+    "description": "Opening that adapts to specific adversaries. Russia favors empowering; Scotland requires coastal positioning. The three key tools are empowering, invader removal, and vitality placement.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "vs Russia",
+        "instructions": "Park Incarna in a land with a beast - use it as your Russia 6/escalation land. G3 top, play the explorer removal card. Or G3 bottom with explorer removal + vitality add to prevent blight. Then spam G2 to add vitality at Incarna for empower."
+      },
+      {
+        "turn": 2,
+        "title": "vs Scotland",
+        "instructions": "Set up Incarna on land 2. Must solve town adds on coast quickly or lose to loss condition. G3, move to coast, take presence from bottom. Play presence re-add card + get a major via Boon + vitality card. Need major for coastal builds OR go bottom track fast for slow-phase town gathering."
+      },
+      {
+        "turn": 3,
+        "title": "General Principles",
+        "instructions": "Three core tools to balance: (1) Empowering Incarna - powerful but situational, (2) Invader removal power - your main control, (3) Vitality placement - flexible defense. Each addresses different problems. Empower is ~50/50 vs Scotland."
+      }
+    ],
+    "author": "Andrew Plassard (aplassard)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3136487/towering-roots-openingstrategy"
   }
 ]

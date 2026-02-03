@@ -73,5 +73,90 @@
     ],
     "author": "breppert (Wiki)",
     "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/breppert%27s_Opening"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-wiki-thommy-mann",
+    "name": "Wiki Opening: ThommyMann's Major Power Rush",
+    "description": "ThommyMann's opening focusing on early major power acquisition by forgetting Rituals of Destruction, building holy sites with Dahan present, and reaching two major power plays per turn by turn 5.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 2nd growth option. Create holy site from energy track; gain a major power (preferably costing 3-4). Play your major power or Draw of Fruitful Earth. Forget Rituals of Destruction. Use whichever action best denies opponent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: 1st growth (reclaim) or 3rd growth if major was unuseful. Place presence from energy track on explorer about to build. Play your major power or Guard the Healing Land. Prioritize lands with Dahan present; this creates defensible holy sites."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: 2nd growth. Gain another major power; place presence to create holy site. Play your major power or Guard the Healing Land. Forget Year of Perfect Stillness, except against England. Established holy sites become mostly safe through mid-game."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: 1st growth (reclaim). Take presence from card play track; place where explorer will build with Dahan. Play cards as needed. Continue building holy site network strategically."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: 2nd growth. Gain minor power or replace weak major; add presence from card plays. You can now play two major powers per turn, positioning for mid-game dominance."
+      }
+    ],
+    "author": "ThommyMann (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth/ThommyMann's_Guide"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Standard",
+    "description": "Antistone's opening focusing on early drowning coordination with allies, using Call of the Deeps to gather explorers and Tidal Boon to support teammates while building ocean presence.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence in oceans (from bottom track), gain +1 energy. Play Call of the Deeps (gather 1 explorer, or 2 into ocean) and Tidal Boon (ally gains +2 energy and pushes 1 town + 2 Dahan). Ocean Breaks the Shore is range 0, so this turn the ONLY land you can target is wherever you placed your coastal presence during setup. Coordinate with allies so they understand they can destroy invaders and give you free energy by moving invaders into your oceans. Call of the Deeps should prevent builds or drown explorers."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Push presence from oceans, place 1 presence from bottom track, gain a minor power card. Play Grasping Tide (Defend 4, 2 fear), Swallow the Land-Dwellers (drown 1 explorer, 1 town, 1 Dahan), and one minor power. Previous drownings should provide sufficient energy. In multiplayer, consider placing presence to reach all boards. Priority minors include water+stone combinations to trigger leveled powers, or air elements. Target Swallow on lands without Dahan. Grasping Tide's range-1 allows flexible targeting on lands with Dahan for counterattacks."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. You MUST gather 1 presence into each ocean (where possible). Plan card plays carefully based on where presence remains for targeting. Avoid presence clustering by balancing pushing and gathering across turns."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Innate Rush",
+    "description": "Antistone's opening focusing on triggering Thundering Destruction innate by turn 2, conserving cards turn 1 to enable a powerful three-card burst with innate activation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence from top track. Play only Shatter Homesteads (1 card). Placing presence from the top establishes a second sacred site for range. Despite having 2 card plays available, only play one card to trigger the innate next turn. Consider using the special rule to make Shatter Homesteads fast if it destroys a town creating out-of-range lands; otherwise play it slow before a ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy, place 1 presence from bottom track. Play Lightning's Boon, Raging Storm, and Harbingers of the Lightning. This triggers Thundering Destruction innate for additional town destruction. Combo Raging Storm with allies or use it on explorer-only locations. Position Dahan pushed by Harbingers to support other spirits or into ravaging lands where buildings were destroyed."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain minor power, +1 energy. Play Shatter Homesteads, Lightning's Boon, and Harbingers of the Lightning. You have high enough energy generation to play at least these three cards and trigger innate again. Can reclaim multiple turns to maintain three-card plays, though this sacrifices presence placement."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike/Antistone%27s_Opening"
   }
 ]
