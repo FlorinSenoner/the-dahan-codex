@@ -176,6 +176,24 @@ This app is a pure client-side SPA (switched from TanStack Start SSR in quick-01
 - Convex data cached via TanStack Query + IndexedDB (not SW - WebSocket protocol)
 - typeof window checks in PWA hooks are defensive programming, not SSR handling
 
+## E2E Testing
+
+**Regression prevention:**
+
+- After fixing E2E tests, always run the full test suite (`pnpm test:e2e`) to catch regressions.
+  Never assume a fix is isolated — changes to shared test utilities can cascade across dozens of
+  tests.
+- Before modifying shared test helpers or utilities, first `Grep` for all call sites and assess the
+  blast radius. List all affected tests before proposing changes.
+
+**Fixing flaky tests:**
+
+- Prefer explicit wait conditions (`waitForSelector`, `waitForResponse`, `page.locator().waitFor()`)
+  over `networkidle` or arbitrary timeouts.
+- Address strict mode violations by using more specific selectors (e.g., `getByRole` with `name`
+  option, `nth()`, or scoped locators) rather than broad queries that match multiple elements.
+- When a test is intermittently failing, investigate timing/race conditions before adding waits.
+
 ## Context
 
 See `.planning/PROJECT.md` for full requirements and constraints. See `.planning/ROADMAP.md` for

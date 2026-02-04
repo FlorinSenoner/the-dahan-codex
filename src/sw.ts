@@ -1,8 +1,12 @@
 /// <reference lib="webworker" />
 
 import { ExpirationPlugin } from 'workbox-expiration'
-import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
-import { registerRoute } from 'workbox-routing'
+import {
+  cleanupOutdatedCaches,
+  createHandlerBoundToURL,
+  precacheAndRoute,
+} from 'workbox-precaching'
+import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 
 declare const self: ServiceWorkerGlobalScope
@@ -12,6 +16,11 @@ cleanupOutdatedCaches()
 
 // Precache all assets injected by vite-plugin-pwa
 precacheAndRoute(self.__WB_MANIFEST)
+
+// SPA navigation fallback: serve precached index.html for all navigation requests
+const navigationHandler = createHandlerBoundToURL('/index.html')
+const navigationRoute = new NavigationRoute(navigationHandler)
+registerRoute(navigationRoute)
 
 // Cache fonts with CacheFirst (1 year)
 registerRoute(

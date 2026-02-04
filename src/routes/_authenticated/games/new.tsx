@@ -5,6 +5,8 @@ import { api } from 'convex/_generated/api'
 import { toast } from 'sonner'
 import { GameForm, type GameFormData } from '@/components/games/game-form'
 import { PageHeader } from '@/components/ui/page-header'
+import { useOnlineStatus } from '@/hooks'
+import { usePendingGames } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 
 export const Route = createFileRoute('/_authenticated/games/new')({
@@ -13,6 +15,8 @@ export const Route = createFileRoute('/_authenticated/games/new')({
 
 function NewGamePage() {
   const navigate = useNavigate()
+  const isOnline = useOnlineStatus()
+  const { saveOfflineGame } = usePendingGames()
 
   const createGame = useMutation({
     mutationFn: useConvexMutation(api.games.createGame),
@@ -32,6 +36,13 @@ function NewGamePage() {
       return
     }
 
+    if (!isOnline) {
+      await saveOfflineGame(data)
+      toast.success('Game saved offline. Will sync when you reconnect.')
+      navigate({ to: '/games' })
+      return
+    }
+
     await createGame.mutateAsync(transformGameFormToPayload(data))
   }
 
@@ -41,7 +52,7 @@ function NewGamePage() {
       <GameForm
         isSubmitting={createGame.isPending}
         onSubmit={handleSubmit}
-        submitLabel="Log Game"
+        submitLabel={isOnline ? 'Log Game' : 'Save Offline'}
       />
     </div>
   )
