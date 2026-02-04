@@ -30,7 +30,7 @@ test.describe('PWA Offline Indicator', () => {
 
 test.describe('PWA Manifest', () => {
   test('has valid manifest.json', async ({ page }) => {
-    const response = await page.goto('/manifest.json')
+    const response = await page.goto('/manifest.webmanifest')
     expect(response?.ok()).toBeTruthy()
 
     const manifest = await response?.json()
