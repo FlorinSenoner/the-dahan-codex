@@ -8,9 +8,9 @@
  */
 
 import * as fs from 'node:fs'
-import * as https from 'node:https'
 import * as path from 'node:path'
 import * as cheerio from 'cheerio'
+import { delay, fetchPage } from './lib/scrape-utils'
 
 const WIKI_BASE = 'https://spiritislandwiki.com'
 const OUTPUT_FILE = 'scripts/data/aspects.json'
@@ -126,35 +126,6 @@ const ASPECTS: AspectDefinition[] = [
 ]
 
 // ----- Utility Functions -----
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-async function fetchPage(url: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            fetchPage(redirectUrl.startsWith('http') ? redirectUrl : `${WIKI_BASE}${redirectUrl}`)
-              .then(resolve)
-              .catch(reject)
-            return
-          }
-        }
-        let data = ''
-        res.on('data', (chunk) => {
-          data += chunk
-        })
-        res.on('end', () => resolve(data))
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
-}
 
 function getBaseSpiritSlug(baseSpiritName: string): string {
   const slug = SPIRIT_NAME_TO_SLUG[baseSpiritName]
@@ -383,7 +354,7 @@ async function scrapeAllAspects(testOne = false): Promise<ScrapedAspect[]> {
       const listEntry = listLookup.get(`${aspect.name}|${aspect.baseSpiritName}`)
 
       // Scrape individual aspect page for summary, image info, and complexity
-      await sleep(REQUEST_DELAY)
+      await delay(REQUEST_DELAY)
       const wikiPageTitle = listEntry?.wikiPageTitle || aspect.name
       const pageData = await scrapeAspectPage(aspect.name, wikiPageTitle)
 

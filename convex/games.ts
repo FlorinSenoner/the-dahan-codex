@@ -1,5 +1,6 @@
 import { v } from 'convex/values'
 import type { Id } from './_generated/dataModel'
+import type { MutationCtx, QueryCtx } from './_generated/server'
 import { mutation, query } from './_generated/server'
 import { requireAuth } from './lib/auth'
 
@@ -39,6 +40,16 @@ const optionalGameFields = {
   cardsRemaining: v.optional(v.number()),
   score: v.optional(v.number()),
   notes: v.optional(v.string()),
+}
+
+// Helper to get a game owned by the authenticated user (throws if not found)
+async function requireOwnedGame(ctx: QueryCtx | MutationCtx, id: Id<'games'>) {
+  const identity = await requireAuth(ctx)
+  const game = await ctx.db.get(id)
+  if (!game || game.userId !== identity.tokenIdentifier) {
+    throw new Error('Game not found')
+  }
+  return { identity, game }
 }
 
 // Query to list all non-deleted games for the authenticated user
@@ -107,13 +118,7 @@ export const updateGame = mutation({
     ...optionalGameFields,
   },
   handler: async (ctx, args) => {
-    const identity = await requireAuth(ctx)
-    const game = await ctx.db.get(args.id)
-
-    if (!game || game.userId !== identity.tokenIdentifier) {
-      throw new Error('Game not found')
-    }
-
+    await requireOwnedGame(ctx, args.id)
     const { id, ...updates } = args
 
     // Validate spirits if provided
@@ -137,13 +142,7 @@ export const updateGame = mutation({
 export const deleteGame = mutation({
   args: { id: v.id('games') },
   handler: async (ctx, args) => {
-    const identity = await requireAuth(ctx)
-    const game = await ctx.db.get(args.id)
-
-    if (!game || game.userId !== identity.tokenIdentifier) {
-      throw new Error('Game not found')
-    }
-
+    await requireOwnedGame(ctx, args.id)
     await ctx.db.patch(args.id, {
       deletedAt: Date.now(),
     })

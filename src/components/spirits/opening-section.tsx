@@ -310,9 +310,13 @@ export function OpeningSection({
   )
 
   // Render opening editor
-  const renderOpeningEditor = (opening: Doc<'openings'> | null, isNew: boolean) => (
+  const renderOpeningEditor = (
+    opening: Doc<'openings'> | null,
+    isNew: boolean,
+    data: OpeningFormData,
+  ) => (
     <EditableOpening
-      formData={formData!}
+      formData={data}
       isNew={isNew}
       onChange={handleFormDataChange}
       onDelete={isNew ? handleCancelNew : handleDelete}
@@ -358,7 +362,7 @@ export function OpeningSection({
                 </Button>
               </div>
             )}
-            {renderOpeningEditor(null, true)}
+            {formData && renderOpeningEditor(null, true, formData)}
           </div>
         )
       }
@@ -390,7 +394,7 @@ export function OpeningSection({
             {openings.map((o) => (
               <TabsContent key={o._id} value={o._id}>
                 {o._id === selectedOpening._id
-                  ? renderOpeningEditor(o, false)
+                  ? renderOpeningEditor(o, false, formData)
                   : renderOpeningContent(o)}
               </TabsContent>
             ))}

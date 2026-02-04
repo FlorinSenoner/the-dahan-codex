@@ -30,9 +30,7 @@ export function ScenarioPicker({
     }
   }
 
-  const handleClear = () => {
-    onChange(null)
-  }
+  const showClear = value?.name && value.name !== 'No Scenario'
 
   return (
     <div className="flex gap-2 items-center">
@@ -50,8 +48,13 @@ export function ScenarioPicker({
         </SelectContent>
       </Select>
 
-      {value?.name && value.name !== 'No Scenario' && (
-        <Button aria-label="Clear scenario" onClick={handleClear} size="icon" variant="ghost">
+      {showClear && (
+        <Button
+          aria-label="Clear scenario"
+          onClick={() => onChange(null)}
+          size="icon"
+          variant="ghost"
+        >
           <X className="h-4 w-4" />
         </Button>
       )}

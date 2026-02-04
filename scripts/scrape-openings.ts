@@ -9,9 +9,9 @@
  */
 
 import * as fs from 'node:fs'
-import * as https from 'node:https'
 import * as path from 'node:path'
 import * as cheerio from 'cheerio'
+import { delay, fetchPage } from './lib/scrape-utils'
 
 const DATA_DIR = 'scripts/data'
 
@@ -206,56 +206,8 @@ const LATENTOCTOPUS_BASE = 'https://latentoctopus.github.io'
 const RATE_LIMIT_DELAY = 500
 
 // =============================================================================
-// UTILITIES
-// =============================================================================
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-async function fetchPage(url: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            fetchPage(
-              redirectUrl.startsWith('http') ? redirectUrl : `${LATENTOCTOPUS_BASE}${redirectUrl}`,
-            )
-              .then(resolve)
-              .catch(reject)
-            return
-          }
-        }
-
-        if (res.statusCode !== 200) {
-          reject(new Error(`HTTP ${res.statusCode} for ${url}`))
-          return
-        }
-
-        let data = ''
-        res.on('data', (chunk) => {
-          data += chunk
-        })
-        res.on('end', () => resolve(data))
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
-}
-
-// =============================================================================
 // PARSING
 // =============================================================================
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-}
 
 function parseLatentoctopusGuide(html: string, config: GuideConfig): ScrapedOpening | null {
   const $ = cheerio.load(html)
@@ -327,7 +279,7 @@ function parseLatentoctopusGuide(html: string, config: GuideConfig): ScrapedOpen
       if (lastPeriod > 200) {
         instructions = truncated.slice(0, lastPeriod + 1)
       } else {
-        instructions = truncated.trim() + '...'
+        instructions = `${truncated.trim()}...`
       }
     }
 
@@ -372,7 +324,7 @@ function parseLatentoctopusGuide(html: string, config: GuideConfig): ScrapedOpen
         !cleaned.includes('Unique Powers') &&
         !cleaned.includes('Spirit panel')
       ) {
-        description = cleaned.endsWith('.') ? cleaned : cleaned + '.'
+        description = cleaned.endsWith('.') ? cleaned : `${cleaned}.`
         break
       }
     }

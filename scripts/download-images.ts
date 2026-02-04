@@ -6,9 +6,9 @@
  */
 
 import * as fs from 'node:fs'
-import * as https from 'node:https'
 import * as path from 'node:path'
 import * as cheerio from 'cheerio'
+import { delay, downloadImage, fetchPage } from './lib/scrape-utils'
 
 const WIKI_BASE = 'https://spiritislandwiki.com'
 const OUTPUT_DIR = 'public/spirits'
@@ -43,79 +43,29 @@ interface DownloadStats {
   noUniqueArt: string[]
 }
 
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+async function downloadAndVerify(imageUrl: string, destPath: string): Promise<void> {
+  await downloadImage(imageUrl, destPath, WIKI_BASE)
+  const fileStats = fs.statSync(destPath)
+  if (fileStats.size < MIN_FILE_SIZE) {
+    fs.unlinkSync(destPath)
+    throw new Error(`Downloaded file too small (${fileStats.size} bytes)`)
+  }
 }
 
-async function fetchPage(url: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            fetchPage(redirectUrl.startsWith('http') ? redirectUrl : `${WIKI_BASE}${redirectUrl}`)
-              .then(resolve)
-              .catch(reject)
-            return
-          }
-        }
-        let data = ''
-        res.on('data', (chunk) => {
-          data += chunk
-        })
-        res.on('end', () => resolve(data))
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
-}
-
-async function downloadImage(url: string, dest: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    // Build full URL - handle relative paths
-    let fullUrl: string
-    if (url.startsWith('http')) {
-      fullUrl = url
-    } else if (url.startsWith('//')) {
-      fullUrl = `https:${url}`
-    } else if (url.startsWith('/')) {
-      fullUrl = `${WIKI_BASE}${url}`
-    } else {
-      fullUrl = `${WIKI_BASE}/${url}`
-    }
-
-    https
-      .get(fullUrl, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            downloadImage(redirectUrl, dest).then(resolve).catch(reject)
-            return
-          }
-        }
-
-        // Check for errors
-        if (res.statusCode !== 200) {
-          reject(new Error(`HTTP ${res.statusCode} for ${fullUrl}`))
-          return
-        }
-
-        const file = fs.createWriteStream(dest)
-        res.pipe(file)
-        file.on('finish', () => {
-          file.close()
-          resolve()
-        })
-        file.on('error', (err) => {
-          fs.unlink(dest, () => {}) // Delete partial file
-          reject(err)
-        })
-      })
-      .on('error', reject)
-  })
+async function withDownloadErrorHandling(
+  label: string,
+  stats: DownloadStats,
+  fn: () => Promise<void>,
+): Promise<void> {
+  try {
+    await fn()
+    console.log('done')
+    stats.downloaded++
+  } catch (error) {
+    const errMsg = error instanceof Error ? error.message : String(error)
+    console.log(`ERROR: ${errMsg}`)
+    stats.errors.push(`${label}: ${errMsg}`)
+  }
 }
 
 function findSpiritImageUrl($: cheerio.CheerioAPI, spiritName: string): string | null {
@@ -309,32 +259,13 @@ async function downloadSpiritImage(
 
   process.stdout.write(`Downloading ${spirit.name}... `)
 
-  try {
-    // Fetch the wiki page to find the image URL
+  await withDownloadErrorHandling(spirit.name, stats, async () => {
     const html = await fetchPage(spirit.wikiUrl)
     const $ = cheerio.load(html)
-
     const imageUrl = findSpiritImageUrl($, spirit.name)
-    if (!imageUrl) {
-      throw new Error('Could not find image URL on wiki page')
-    }
-
-    await downloadImage(imageUrl, destPath)
-
-    // Verify file size
-    const fileStats = fs.statSync(destPath)
-    if (fileStats.size < MIN_FILE_SIZE) {
-      fs.unlinkSync(destPath)
-      throw new Error(`Downloaded file too small (${fileStats.size} bytes)`)
-    }
-
-    console.log('done')
-    stats.downloaded++
-  } catch (error) {
-    const errMsg = error instanceof Error ? error.message : String(error)
-    console.log(`ERROR: ${errMsg}`)
-    stats.errors.push(`${spirit.name}: ${errMsg}`)
-  }
+    if (!imageUrl) throw new Error('Could not find image URL on wiki page')
+    await downloadAndVerify(imageUrl, destPath)
+  })
 }
 
 async function downloadAspectImage(
@@ -364,32 +295,13 @@ async function downloadAspectImage(
 
   process.stdout.write(`Downloading ${aspect.name} aspect... `)
 
-  try {
-    // Fetch the wiki page to find the image URL
+  await withDownloadErrorHandling(`${aspect.name} aspect`, stats, async () => {
     const html = await fetchPage(aspect.wikiUrl)
     const $ = cheerio.load(html)
-
     const imageUrl = findAspectImageUrl($, aspect.name, aspect.imagePattern)
-    if (!imageUrl) {
-      throw new Error('Could not find aspect image URL on wiki page')
-    }
-
-    await downloadImage(imageUrl, destPath)
-
-    // Verify file size
-    const fileStats = fs.statSync(destPath)
-    if (fileStats.size < MIN_FILE_SIZE) {
-      fs.unlinkSync(destPath)
-      throw new Error(`Downloaded file too small (${fileStats.size} bytes)`)
-    }
-
-    console.log('done')
-    stats.downloaded++
-  } catch (error) {
-    const errMsg = error instanceof Error ? error.message : String(error)
-    console.log(`ERROR: ${errMsg}`)
-    stats.errors.push(`${aspect.name} aspect: ${errMsg}`)
-  }
+    if (!imageUrl) throw new Error('Could not find aspect image URL on wiki page')
+    await downloadAndVerify(imageUrl, destPath)
+  })
 }
 
 async function downloadAllSpirits(

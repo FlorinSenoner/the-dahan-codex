@@ -5,9 +5,9 @@
  */
 
 import * as fs from 'node:fs'
-import * as https from 'node:https'
 import * as path from 'node:path'
 import * as cheerio from 'cheerio'
+import { delay, fetchPage } from './lib/scrape-utils'
 
 const WIKI_BASE = 'https://spiritislandwiki.com'
 const OUTPUT_DIR = 'public/spirits'
@@ -288,28 +288,6 @@ const SPIRITS: Record<string, SpiritConfig> = {
 // Rate limiting delay between requests (ms)
 const RATE_LIMIT_DELAY = 1000
 
-// Mapping from wiki text to complexity type
-const COMPLEXITY_MAP: Record<string, Complexity> = {
-  low: 'Low',
-  moderate: 'Moderate',
-  high: 'High',
-  'very high': 'Very High',
-}
-
-// Mapping from wiki power rating text to numeric scale
-const POWER_RATING_MAP: Record<string, number> = {
-  low: 1,
-  'medium-low': 2,
-  medium: 3,
-  'medium-high': 4,
-  high: 5,
-  // Handle alternate spellings
-  'med-low': 2,
-  'med-high': 4,
-  medlow: 2,
-  medhigh: 4,
-}
-
 // Valid elements
 const VALID_ELEMENTS: Element[] = [
   'Sun',
@@ -321,83 +299,6 @@ const VALID_ELEMENTS: Element[] = [
   'Plant',
   'Animal',
 ]
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-async function fetchPage(url: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            fetchPage(redirectUrl.startsWith('http') ? redirectUrl : `${WIKI_BASE}${redirectUrl}`)
-              .then(resolve)
-              .catch(reject)
-            return
-          }
-        }
-        let data = ''
-        res.on('data', (chunk) => {
-          data += chunk
-        })
-        res.on('end', () => resolve(data))
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
-}
-
-async function downloadImage(url: string, dest: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    // Build full URL - handle relative paths
-    let fullUrl: string
-    if (url.startsWith('http')) {
-      fullUrl = url
-    } else if (url.startsWith('//')) {
-      fullUrl = `https:${url}`
-    } else if (url.startsWith('/')) {
-      fullUrl = `${WIKI_BASE}${url}`
-    } else {
-      fullUrl = `${WIKI_BASE}/${url}`
-    }
-
-    console.log(`  Full URL: ${fullUrl}`)
-
-    https
-      .get(fullUrl, (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location
-          if (redirectUrl) {
-            downloadImage(redirectUrl, dest).then(resolve).catch(reject)
-            return
-          }
-        }
-
-        // Check for errors
-        if (res.statusCode !== 200) {
-          reject(new Error(`HTTP ${res.statusCode} for ${fullUrl}`))
-          return
-        }
-
-        const file = fs.createWriteStream(dest)
-        res.pipe(file)
-        file.on('finish', () => {
-          file.close()
-          resolve()
-        })
-        file.on('error', (err) => {
-          fs.unlink(dest, () => {}) // Delete partial file
-          reject(err)
-        })
-      })
-      .on('error', reject)
-  })
-}
 
 function parseComplexity($: cheerio.CheerioAPI, html: string): Complexity {
   // Strategy 1: Parse wgCategories from the embedded JSON in the page
@@ -607,13 +508,13 @@ function parseSummaryAndDescription(
   // First substantial paragraph becomes the summary (truncated to 150 chars)
   if (paragraphs.length > 0) {
     const firstPara = paragraphs[0]
-    summary = firstPara.length > 150 ? firstPara.substring(0, 147) + '...' : firstPara
+    summary = firstPara.length > 150 ? `${firstPara.substring(0, 147)}...` : firstPara
   }
 
   // First 2-3 paragraphs become description (up to 500 chars)
   if (paragraphs.length > 0) {
     const descText = paragraphs.slice(0, 3).join(' ')
-    description = descText.length > 500 ? descText.substring(0, 497) + '...' : descText
+    description = descText.length > 500 ? `${descText.substring(0, 497)}...` : descText
   }
 
   // Fallback: use spirit name as placeholder
