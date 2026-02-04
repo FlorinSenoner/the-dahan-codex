@@ -2,7 +2,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { useDeferredValue, useMemo } from 'react'
+import { useMemo } from 'react'
 import { z } from 'zod'
 import { FilterChips } from '@/components/spirits/filter-chips'
 import { FilterSheet } from '@/components/spirits/filter-sheet'
@@ -45,8 +45,6 @@ export const Route = createFileRoute('/spirits/')({
 function SpiritsPage() {
   const filters = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
-  const deferredSearch = useDeferredValue(filters.search)
-
   const { data: spirits } = useSuspenseQuery(
     convexQuery(api.spirits.listSpirits, {
       complexity: filters.complexity,
@@ -56,8 +54,8 @@ function SpiritsPage() {
 
   // Search filters AFTER existing backend filters (complexity/elements)
   const filteredSpirits = useMemo(() => {
-    if (!deferredSearch) return spirits
-    const lower = deferredSearch.toLowerCase()
+    if (!filters.search) return spirits
+    const lower = filters.search.toLowerCase()
     return spirits.filter(
       (s) =>
         s.name.toLowerCase().includes(lower) ||
@@ -65,7 +63,7 @@ function SpiritsPage() {
         s.summary?.toLowerCase().includes(lower) ||
         s.description?.toLowerCase().includes(lower),
     )
-  }, [spirits, deferredSearch])
+  }, [spirits, filters.search])
 
   const handleSearchChange = (value: string) => {
     navigate({
@@ -78,7 +76,12 @@ function SpiritsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageHeader backHref="/" title="Spirits" viewTransitionName="list-header">
+      <PageHeader
+        backHref="/"
+        center={<SpiritSearch onChange={handleSearchChange} value={filters.search || ''} />}
+        title="Spirits"
+        viewTransitionName="list-header"
+      >
         <FilterSheet
           activeCount={activeFilterCount}
           currentFilters={{
@@ -88,13 +91,9 @@ function SpiritsPage() {
         />
       </PageHeader>
 
-      <div className="px-4 py-2">
-        <SpiritSearch onChange={handleSearchChange} value={filters.search || ''} />
-      </div>
-
       <FilterChips filters={filters} />
 
-      {deferredSearch && (
+      {filters.search && (
         <Text className="px-4 text-sm" variant="muted">
           {filteredSpirits.length} spirit
           {filteredSpirits.length !== 1 ? 's' : ''} found

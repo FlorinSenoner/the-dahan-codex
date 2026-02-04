@@ -4,7 +4,6 @@ node_modules/
 
 # Build
 dist/
-.wrangler/
 .tanstack/
 
 # Environment
