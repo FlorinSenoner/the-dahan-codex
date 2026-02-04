@@ -1,20 +1,41 @@
 pre-commit:
+  parallel: true
   commands:
+    check-branch:
+      run: |
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$BRANCH" = "main" ]; then
+          echo "ERROR: Do not commit directly to main!"
+          exit 1
+        fi
+
     biome:
-      glob: "*.{js,ts,jsx,tsx,json,jsonc}"
-      run:
-        pnpm biome check --write --no-errors-on-unmatched
-        --files-ignore-unknown=true {staged_files}
+      glob: "*.{js,jsx,ts,tsx,json,css}"
+      run: npx biome check --write --staged {staged_files}
       stage_fixed: true
-    knip:
-      glob: "*.{js,ts,jsx,tsx,json}"
-      run: pnpm knip
-    jscpd:
-      glob: "*.{ts,tsx}"
-      run: pnpm jscpd
+
+    prettier:
+      glob: "*.{md,mdx,html,yml,yaml}"
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+
     typecheck:
       glob: "*.{ts,tsx}"
-      run: pnpm tsc --noEmit
-    convex:
-      glob: "convex/*.ts"
-      run: pnpm exec convex typecheck
+      run: pnpm typecheck
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit {1}
+
+pre-push:
+  parallel: true
+  commands:
+    knip:
+      run: pnpm knip
+
+    jscpd:
+      run: pnpm jscpd
+
+    test:
+      run: pnpm test:e2e

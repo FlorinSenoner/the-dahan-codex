@@ -236,16 +236,7 @@
     "wikiTitle": "Starlight_Seeks_Its_Form",
     "imagePattern": "Starlight_Seeks_Its_Form",
     "complexity": "Very High",
-    "elements": [
-      "Moon",
-      "Air",
-      "Earth",
-      "Fire",
-      "Water",
-      "Plant",
-      "Animal",
-      "Sun"
-    ],
+    "elements": ["Moon", "Air", "Earth", "Fire", "Water", "Plant", "Animal", "Sun"],
     "summary": "A build-your-own-Spirit, capable of going in many different directions based on Elements picked, Growth choices selected, and Power Cards kept. Has...",
     "description": "A build-your-own-Spirit, capable of going in many different directions based on Elements picked, Growth choices selected, and Power Cards kept. Has a very high personal/visual complexity and a huge number of early-game options, but doesn't alter play much for other players at the table. As it commits to choices, it loses versatility - not all paths will be good (or even possible) at all things. It especially wants a measure of adaptation to early Power Cards, rather than trying to pre-select ...",
     "strengths": [],

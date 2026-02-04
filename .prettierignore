@@ -1,8 +1,26 @@
-node_modules
+# Biome handles these
+*.js
+*.jsx
+*.ts
+*.tsx
+*.json
+*.css
+
+# Build outputs
 dist
-.vinxi
+.nitro
+.tanstack
 .output
-.wrangler
+
+# Dependencies
+node_modules
+
+# Generated
 convex/_generated
+src/routeTree.gen.ts
+
+# Claude Code configuration
 .claude
+.planning
+
 pnpm-lock.yaml

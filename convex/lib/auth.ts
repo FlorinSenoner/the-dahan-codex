@@ -1,22 +1,22 @@
-import type { MutationCtx, QueryCtx } from "../_generated/server";
+import type { MutationCtx, QueryCtx } from '../_generated/server'
 
 /**
  * Get the current user's identity from Convex auth
  * Returns null if not authenticated
  */
 export async function getIdentity(ctx: QueryCtx | MutationCtx) {
-  return await ctx.auth.getUserIdentity();
+  return await ctx.auth.getUserIdentity()
 }
 
 /**
  * Require authentication - throws if not authenticated
  */
 export async function requireAuth(ctx: QueryCtx | MutationCtx) {
-  const identity = await ctx.auth.getUserIdentity();
+  const identity = await ctx.auth.getUserIdentity()
   if (!identity) {
-    throw new Error("Not authenticated");
+    throw new Error('Not authenticated')
   }
-  return identity;
+  return identity
 }
 
 /**
@@ -25,23 +25,23 @@ export async function requireAuth(ctx: QueryCtx | MutationCtx) {
  * Role can be "admin", "moderator", "contributor", etc. for future expansion
  */
 export async function isAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
-  const identity = await ctx.auth.getUserIdentity();
+  const identity = await ctx.auth.getUserIdentity()
   if (!identity) {
-    return false;
+    return false
   }
   // The role claim is set in Clerk JWT template from user.public_metadata.role
   // biome-ignore lint/suspicious/noExplicitAny: Convex identity type doesn't include custom role claim
-  return (identity as any).role === "admin";
+  return (identity as any).role === 'admin'
 }
 
 /**
  * Require admin role - throws if not admin
  */
 export async function requireAdmin(ctx: QueryCtx | MutationCtx) {
-  const identity = await requireAuth(ctx);
-  const admin = await isAdmin(ctx);
+  const identity = await requireAuth(ctx)
+  const admin = await isAdmin(ctx)
   if (!admin) {
-    throw new Error("Admin access required");
+    throw new Error('Admin access required')
   }
-  return identity;
+  return identity
 }

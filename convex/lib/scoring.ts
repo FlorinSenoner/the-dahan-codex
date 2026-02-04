@@ -3,12 +3,12 @@
  * Source: Official Spirit Island rules (Dized)
  */
 interface ScoreParams {
-  result: "win" | "loss";
-  difficulty: number;
-  cardsRemaining: number; // Cards left in invader deck
-  dahanCount: number;
-  blightCount: number;
-  playerCount: number;
+  result: 'win' | 'loss'
+  difficulty: number
+  cardsRemaining: number // Cards left in invader deck
+  dahanCount: number
+  blightCount: number
+  playerCount: number
 }
 
 /**
@@ -21,28 +21,19 @@ interface ScoreParams {
  * Standard invader deck has 12 cards (3 per stage)
  */
 export function calculateScore(params: ScoreParams): number {
-  const {
-    result,
-    difficulty,
-    cardsRemaining,
-    dahanCount,
-    blightCount,
-    playerCount,
-  } = params;
+  const { result, difficulty, cardsRemaining, dahanCount, blightCount, playerCount } = params
 
   // Dahan and blight are divided by player count and floored
-  const dahanScore = Math.floor(dahanCount / playerCount);
-  const blightPenalty = Math.floor(blightCount / playerCount);
+  const dahanScore = Math.floor(dahanCount / playerCount)
+  const blightPenalty = Math.floor(blightCount / playerCount)
 
-  if (result === "win") {
+  if (result === 'win') {
     // Victory formula
-    return (
-      5 * difficulty + 10 + 2 * cardsRemaining + dahanScore - blightPenalty
-    );
+    return 5 * difficulty + 10 + 2 * cardsRemaining + dahanScore - blightPenalty
   }
   // Defeat formula - cards used is 12 (standard deck) minus remaining
-  const cardsUsed = 12 - cardsRemaining;
-  return 2 * difficulty + cardsUsed + dahanScore - blightPenalty;
+  const cardsUsed = 12 - cardsRemaining
+  return 2 * difficulty + cardsUsed + dahanScore - blightPenalty
 }
 
 /**
@@ -54,5 +45,5 @@ export function calculateDifficulty(
   secondaryAdversaryLevel: number = 0,
   scenarioDifficulty: number = 0,
 ): number {
-  return adversaryLevel + secondaryAdversaryLevel + scenarioDifficulty;
+  return adversaryLevel + secondaryAdversaryLevel + scenarioDifficulty
 }
