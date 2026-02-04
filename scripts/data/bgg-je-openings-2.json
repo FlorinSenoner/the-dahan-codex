@@ -1,0 +1,157 @@
+[
+  {
+    "spiritSlug": "shifting-memory-of-ages",
+    "slug": "shifting-memory-of-ages-bgg-je-opening-1",
+    "name": "BGG JE Opening: Double Major Rush",
+    "description": "Rush to gain two Major Powers by Turn 2, then unleash them both on Turn 3 with 12 Energy available. Focus on either keeping Elements for yourself or donating via Elemental Teaching based on team composition.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain Major Power, add presence (from Energy). Card Plays: Study the Invader's Fears (2 Fear, reveal top Fear card) OR Boon of Ancient Memories (target yourself to gain Minor, or target ally to give them Power card paying 2 Energy instead of Forgetting). Choose based on team composition - Study for Fear-generating teams, Boon for high-plays Spirits. Discard whichever starter you didn't play when gaining Major. Shoot for mid-costed Major (3-6 range). Use first tier of Observe the Ever Changing World. Prepare an Element for your Major threshold or for an ally."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Gain Major Power, add presence (from Plays). Card Plays: Elemental Teachings (prepare Element marker, discard up to 3 to give target Spirit those Elements) + Share Secrets of Survival (destroy 2 fewer Dahan OR gather 2 Dahan; threshold grants both). Forget Study/Boon from discard when gaining Major. Look for another mid-costed Major that shares Elements with first. Use Secrets of Survival in a Ravaging land. Use second tier of Learn the Invader's Tactics to cover another Ravage. Consider second tier of Ever-Changing World for 2 Elements. Use Elemental Teachings to prepare Element and either give 3 away or gain threshold Elements."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain +9 Energy. Card Plays: Both Major Powers. You'll have 12 Energy total. If you haven't used it yet, your Moon Element from Setup can net you the last Element marker needed for a threshold. Even if you gave Elements away, you'll be doing more this turn than basically anyone at the table."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, add a presence (from Energy). Card Plays: Variable. You've got 2 Majors and most likely enough Energy left to play one. Supplement with one of your starters, and continue down your Energy track in subsequent turns."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2506389/openings-shifting-memory-of-ages"
+  },
+  {
+    "spiritSlug": "volcano-looming-high",
+    "slug": "volcano-looming-high-bgg-je-opening-1",
+    "name": "BGG JE Opening: Presence Stacking",
+    "description": "Build up presence for eruptions while using Badlands strategically. Timing of Explosive Eruption is key - save up for specific Adversary interactions or cascades. Choose Mountain closer to coast during Setup.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add 2 presence (both from Energy). Card Plays: Lava Flows (add 1 Badlands and 1 Wilds OR deal 1 damage). Add the Badlands wherever you'll need the damage boost next turn. This is a deep thinking turn about when to erupt."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (both from Plays). Card Plays: Rain of Ash (2 Fear if Invaders, push 2 Dahan and 2 Towns/Explorers to lands without your presence) OR Pyroclastic Bombardment (1 damage to each Town/City/Dahan, 1 damage, 1 damage to Dahan). You can do a small 2-presence eruption - you'll hit first tier of Furnace, only losing 1 presence overall, still get range boost from Volcanic Peaks. Play Bombardment for Town-sized problems or combo with Eruption; play Rain of Ash for distant Build/Explore countering."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Option 1: No Eruption/Reposition)",
+        "instructions": "If you don't want to erupt again or want to reposition: Growth: Take Growth 3, gain Minor with Fire if possible, add presence from Plays to a Mountain you'd like to occupy. Card Plays: Exaltation of Molten Stone (+1 Energy per Fire, distributed between you and target Spirit) + your Minor + remaining starter. With a Fire Minor, hit third tier of Furnace of the Earth to relocate presence. Otherwise still add presence back with Furnace."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Option 2: Erupt Again)",
+        "instructions": "If you want to erupt again or don't care about repositioning: Growth: Take Growth 2, add 1 presence from Energy and 1 from Plays. Card Plays: Exaltation + remaining starter. You still hit second tier of Furnace of the Earth and add enough presence for second tier of Explosive Eruption with a sacred site left over. Distribute Exaltation Energy as you like - giving yourself 2 allows gaining Minor with Furnace. Next turn: Reclaim All, shoot for cheap Major or dig for Minor Elements."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2508259/openings-volcano-looming-high"
+  },
+  {
+    "spiritSlug": "lure-of-the-deep-wilderness",
+    "slug": "lure-of-the-deep-wilderness-bgg-je-opening-1",
+    "name": "BGG JE Opening: Token Moshpit",
+    "description": "Spread out across the middle of the board, creating token concentrations in lands that contact as much real estate as possible. Use Softly Beckon for massive action advantage and Swallowed by the Wilderness for Major-like damage.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (from Energy), gain a Moon and +2 Energy. Card Plays: Softly Beckon Ever Inward (gather up to 2 Explorers, Towns, Beasts, and Dahan). Place presence so Softly Beckon covers maximum lands that will Build/could Explore. This card alone can delay Invaders on several fronts. The Moon from Growth lets you hit second tier of Forsake Society - use to replace a Town in a Building land or break up Coastal fortification for Fear."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (from Plays), gain a Minor Power. Card Plays: Gift of the Untamed Wild (target Spirit adds Wilds in their land OR replaces presence with Disease) + Perils of the Deepest Wild (add Badlands, add Beast within 1 range, push 2 Dahan). Gain Minor with Moon if possible. You'll hit second tier of both Forsake Society and Never Heard From. Use Never Heard From to prevent Build or eat 2 Explorers you caused to Forsake Society. Use Perils to populate midland-moshpit for Swallowed next turn or distribute tokens for Never Heard From. Wilds generally better than Disease unless problematic City brewing."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add presence (from Energy), gain a Minor Power. Card Plays: Swallowed by the Wilderness (2 Fear, 1 damage per Beast/Disease/Wilds/Badlands, max 5) + Minor Power with Moon. Try again for Moon; if you have it, try for Plant or Air with good effect. Moon + Air is ideal for next turn."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Add presence (from Energy), gain a Major Power. Card Plays: Minor Power + Major Power. Forget the Minor you played last turn, or if obsessed with it forget Gift (not recommended - that card is real good). Even a single Plant between your 2 cards nets second tier of Never Heard From Again. Next turn: Reclaim All, grab Energy/Elements for Major or gain Minor for more Plays."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2510069/openings-lure-of-the-deep-wilderness"
+  },
+  {
+    "spiritSlug": "stones-unyielding-defiance",
+    "slug": "stones-unyielding-defiance-bgg-je-opening-1",
+    "name": "BGG JE Opening: Blight Guardian",
+    "description": "Occupy Ravaging lands to add Blight from box instead of card, rebounding damage upon Invaders. Encourage allies to dump spare buildings in your lands for Let Them Break Themselves. Distribute Badlands liberally.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (from Top), gain 3 Energy. Card Plays: Jagged Shards Push from the Earth (add 1 Badlands, push up to 2 Dahan) OR Plows Shatter on Rocky Ground (deal 1 damage to each Town/City then push up to 1 Town OR destroy 1 Town). Use presence placement range to move into a land type you don't occupy, preferably with Town/City, possibly Ravaging next turn. Use Jagged Shards if you need to prep for Stubborn Solidity next turn or shuttle Dahan and set up Badlands for damage. Use Plows Shatter if Dahan already positioned and want to counteract Explore in Town land."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (from Top), gain 3 Energy. Card Plays: Stubborn Solidity (defend 1 per Dahan, Dahan cannot be changed/damaged) + Jagged Shards OR Plows Shatter (whichever you didn't play Turn 1). When uncovering +1 Card Play spot, gain Minor with Earth (Sun + Earth ideal). Add presence to Ravaging land or unoccupied type (preferably with buildings when Ravaging next turn). Use Solidity to guarantee favorable trade in Ravaging land. Hit first tier of Bulwark of Will to mitigate other Ravage for 2 Energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim All, add presence (from Bottom), gain 2 Earth. Card Plays: Variable. Add presence to distant Mountain if useful, or double up in land you control with Blight. Use Solidity in land with enough Dahan. Use Jagged Shards for Dahan repositioning or Badlands distribution for Let Them Break Themselves. Use Plows Shatter for building management or combined with Break Themselves for dense lands. Use Scarred and Stony Land to clear out already-Ravaged land. With 5 Earth total, use second tier of Let Them Break Themselves - in standard Ravaging land (Explorer + Town + City), deal 5 damage back, kill both buildings, only 1 Energy to pull Blight from box. You should have presence in every land type for Reclaim All abuse on large Ravages."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Alternative)",
+        "instructions": "If second tier of Break Themselves won't be effective/lacks valid targets: Ignore the loop and choose second Growth option instead. Add from bottom to ensure innates stay active. Next turn: Reclaim All using criteria above. After hitting 4 Energy/turn, consider Major or grab subsequent Play spot for utility role."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2512536/openings-stones-unyielding-defiance"
+  },
+  {
+    "spiritSlug": "starlight-seeks-its-form",
+    "slug": "starlight-seeks-its-form-bgg-je-opening-1",
+    "name": "BGG JE Opening: Thresholded Major Rush",
+    "description": "Draft for Element pairs to hit Major thresholds. Use Boon of Reimagining and Shape the Self Anew to accumulate cards and Energy. Track 1 is topmost track; finish Tracks 1 and 3 with opposite choices (Reclaim vs Power gain).",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (from Track 1, covering Reclaim 1/2), gain Minor Power, move presence up to 1, gain 1 Energy. Card Plays: Boon of Reimagining (target Forgets a Power card, draws 6 Minors, gains 2) + Shape the Self Anew (gain Minor, Forget to gain 3 Energy, 4 Moons = gain Major) OR your new Minor. If offered strong Turn 1 Minor with Moon, play that instead of Shape. Otherwise draft for ability you like - can trash it during Slow phase. Position presence for Peace of the Nighttime Sky next turn. Use Sidereal Guidance gather to prevent Build or concentrate Dahan. Forget Shape for Energy; use it to gain Minor BEFORE using Boon for more Forgetting options. When using Boon, Forget Gather the Scattered Light or one of gained Minors. Shoot for Element pairs, especially cards with several pairs. Moon cards for next turn are golden."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (from Track 3, gaining 1 Energy), gain Major Power, move presence up to 1, gain 1 Energy. Card Plays: Peace of the Nighttime Sky (if Terror Level I, Invaders don't Ravage in target land, Forget to repeat and gain Moon) + Minor with Moon OR Shape the Self Anew. Forget Boon of Reimagining from discard when gaining Major. Move presence before adding if needed for Peace positioning. Can swap gain 1 Energy for move presence up to 3 if you don't need the money. Throw out Nighttime Sky to use effect twice - once rolling with Major it'll be hard to work back in, and other Spirits appreciate breathing room."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain Major Power, move presence up to 1, add presence (from Track 3, choosing Element and gaining +1 Energy), gain 1 Energy. Card Plays: Major + Minor. If both Majors have pair-able Elements (1 Element needs 3, others only 2), Forget least useful Minor from hand. Forget first Major if it didn't work out. Element gained should be based on Major threshold you're using. Play whichever Major hits hardest; any innate hit will be coincidental based on Element gained."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 (Option 1: Good Major/Minor Combo)",
+        "instructions": "If you got Major/Minor combo you liked last turn (or Forgot second Major): Add from Track 5 (for income) or Track 6 (for another threshold Element). Reclaim All + gain Minor/move presence and flog that combo!"
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 (Option 2: Kept Both Majors)",
+        "instructions": "If you kept both Majors: Uncover any Elements needed for second Major threshold, reclaiming/gaining cards as needed. If threshold isn't compelling/possible, uncover Track 2 for +3 Energy option and midgame becomes more straightforward."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2518429/openings-starlight-seeks-its-form"
+  }
+]

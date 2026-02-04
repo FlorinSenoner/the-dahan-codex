@@ -1,0 +1,867 @@
+[
+  {
+    "spiritSlug": "river-surges-in-sunlight",
+    "slug": "river-surges-in-sunlight-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "It exploits River’s strong, perfect-element Uniques to reliably unlock level 3 Massive flooding from the 4th turn on.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom. Play River’s bounty and another card. 12 elements (you could have 2, but it doesn’t matter as you can’t unlock level 2 of your Innate anyway)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Reclaim River’s bounty. Play 3. 23 elements."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor. Play River’s bounty and the Minor. The Minor can be swapped as long as you keep 231 in hand."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom. Reclaim River’s bounty. Play River’s bounty and 3 more to have 341 and unlock a max-level Massive flooding."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/river-opening1/"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "From turn 2 onwards, you only need to play 1 and 2 , therefore your starting hand alone is enough to activate the Innate for 2 turns without any reclaim.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top; G3 Minor. Play 2. You can play 2 to unlock the damage part of Ranging hunt, but if you do you won’t be able to do it in the next turn unless you have found or will find a Minor."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top; G3 Minor. Play 2."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 1 and 1 . Ranging hunt damage."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom to 3 CP; G4. Play 1 and 1 . Ranging hunt damage."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "at the earliest. Can be tight in Energy in the first 3 turns. Variant: Early-reclaim top track (Minor Powers) Growth G2 top; G3, gain Minor. Play Teeth gleam (or the minor if it has ) and Too near the jungle to deal damage with Ranging hunt. Reclaim, gain Minor; G2 top. Play 1 and 1 . G2 bottom; G4. Play 1 and 1 . Reclaim, gain Minor; G2 bottom to 3 CP. Play 1 and 1 . G2 bottom; G4. Play 3. From"
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "on, select growth according to needs. Keep playing 1 and 1 every turn to activate Ranging hunt."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/fangs-opening1/"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "[Sharp Fangs Behind the Leaves] Opening: Full bottom track (Minor Powers) Apr 4, 2024 Use this opening if: Consistently using the damage threshold of Ranging hunt is not a priority.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom; G3 Minor. Play 2."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom; G4. Play 3."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor; G2 top. Play 3."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G3 Minor. Reclaim Too near the jungle or another 0-cost. Play 3."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 bottom; G4. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 5."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "on, growth is G4 + any other, according to needs (G2 should only be selected if placing presence is necessary, and not for growth)."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/fangs-opening2/"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-opening-3",
+    "name": "Opening 3: Unique Powers reminder",
+    "description": "[Sharp Fangs Behind the Leaves] Opening: Top track hybrid (Mixed Powers) Oct 20, 2023 Use this opening if: Ranging hunt is not going to be as effective, either because of Health increase or too much Blight on the island (for Base Fangs, at least).",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top; G3 Minor. Play 2."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top; G3 Minor. Play 1 and 1 . Ranging hunt damage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Major (cost 2-5); G2 top. Play 1 and 1 . Ranging hunt damage."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G4. Play the Major and another card."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "to replace it (it could be replaced with G3, but this would leave no options on what to play on"
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "on, select growth according to needs. Keep playing 1 and 1 every turn to activate Ranging hunt, except Major turns if the Major is off-element."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/fangs-opening3/"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-opening-4",
+    "name": "Opening 4: Unique Powers reminder",
+    "description": "[Sharp Fangs Behind the Leaves] Opening: Reclaim-heavy bottom track (Minor Powers) Oct 20, 2023 Use this opening if: You want to use Ranging hunt every turn.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top; G4. Play Too near the jungle and Teeth gleam."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Reclaim, gain Minor, prioritise ; G2 bottom. Play Too near the jungle and either Teeth gleam or the Minor if it has ."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor, prioritise if not found; G2 bottom. Play 3."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "in case of exceptionally bad luck, i.e. no found in 2 draws), as well as placing lots of Beasts early on to scale better. Growth"
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 4."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom to 5 CP; G4. Play 5."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "on, growth is G4 + any other, according to needs (G2 should only be selected if placing presence is necessary)."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/fangs-opening4/"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Thunderspeaker",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play 2. Sudden ambush and Manifestation is often good against BP as you’ll still have a target for next turn’s Words of warning. Manifestation and Voice of thunder is another option if Sudden ambush doesn’t solve a land, and will unlock level 2 of Lead the furious assault."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top. Play Words of Warning and the remaining card."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain 2 Minors. Play 2."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "Reclaim, gain 2 Minors. Play 3."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "G2 top. Play 3. Remarks 3 CP could be unlocked on"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/thunderspeaker-opening1/"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "Opening strategy for Thunderspeaker",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play 2 (see above)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G3 bottom. Play Words of Warning and the remaining card."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain 2 Minors. Play 2."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "Reclaim, gain 2 Minors. Play 3."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/thunderspeaker-opening2/"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-opening-3",
+    "name": "Opening 3: Unique Powers reminder",
+    "description": "[Thunderspeaker] Opening: Top track (Minor or Mixed Powers) Oct 15, 2023 This opening trade early game power for better scaling.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top. Play Sudden ambush or Voice of thunder."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top. Play Words of Warning."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G3 bottom. Play Voice of thunder/Sudden ambush and Manifestation."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Reclaim, gain 2 Minors. Play 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "(which is average), but no option to unlock before that. Variant: Early 3CP (Minors/Mixed) This variant trades getting to 3 CP earlier for fewer unlocks of Lead the furious assault (skipping in on"
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "Reclaim, gain 2 Minors. Play 3."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8",
+        "instructions": "G2 bottom. Play 4. Remarks On either or both Reclaim turns ("
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/thunderspeaker-opening3/"
+  },
+  {
+    "spiritSlug": "grinning-trickster-stirs-up-trouble",
+    "slug": "grinning-trickster-stirs-up-trouble-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3; G2 top. Priorities for the Minor are , preferably 0-cost (possible Minors) anything else Depending on what you have found, play: The following to unlock Let’s see what happens level 2, otherwise any 2: a. (if the Minor costs 0) the Minor and Overenthusiastic arson b."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top; G3 Minor. Play 112 (plus the on your top track) to unlock Let’s see what happens level 2."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim; G2 bottom. Play to unlock Let’s see what happens level 2, e.g. Impersonate authority and Incite the mob."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G4. Play 3."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim; G2 bottom. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom; G3 Minor. Play 4. Remarks A Major can be gained on turn 6, as placing presence has less of a priority and thus G1+G4 can be used on turn 7. Stats The following assumes that the card for Let’s see what happens is forgotten from hand. Higher cards in hand can be achieved by forgetting from play or discard."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/trickster-opening1/"
+  },
+  {
+    "spiritSlug": "grinning-trickster-stirs-up-trouble",
+    "slug": "grinning-trickster-stirs-up-trouble-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3; G2 bottom. Priorities for the Minor are: , preferably 0-cost (possible Minors) anything else Depending on what you have found, play: Either: a. (if the Minor costs 0) the Minor and Overenthusiastic arson b. Impersonate authority and Incite the mob Overenthusiastic arson and the Minor if it costs 0, else Impersonate authority Unexpected tigers and Overenthusiastic arson."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom; G3. Play 3 with 212 to unlock Let’s see what happens level 2. Forget, preferably from the discard, to gain the new Power."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim; G2 bottom. Play 3. Make sure you have 212 to unlock Let’s see what happens level 2."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 top; G3 Minor. Play 3, unlocking Let’s see what happens level 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, G2 bottom. Play 4."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/trickster-opening2/"
+  },
+  {
+    "spiritSlug": "grinning-trickster-stirs-up-trouble",
+    "slug": "grinning-trickster-stirs-up-trouble-opening-3",
+    "name": "Opening 3: Unique Powers reminder",
+    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3; G2 top. Play: If drawn another : Impersonate authority and Overenthusiastic arson to unlock Let’s see what happens level 1. Otherwise: substitute either with Unexpected tigers."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom; G3. Play Incite the mob and another to unlock Let’s see what happens level 2."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim; G2 bottom. Play 2. Make sure you have 212 to unlock Let’s see what happens level 2."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G3 Major, forget from discard if possible to have 5 cards in hand. Play 3, preferably unlocking Let’s see what happens level 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 top; G3 Minor. Play 3. Remarks On"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/trickster-opening3/"
+  },
+  {
+    "spiritSlug": "heart-of-the-wildfire",
+    "slug": "heart-of-the-wildfire-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "[Heart of the Wildfire] Opening: Full bottom track (Minor or Mixed Powers) Oct 15, 2023 I recommend reading Wildfire’s general concepts before continuing here.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play Asphyxiating smoke."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top, gain Minor. Play Threatening flames."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G3 bottom. Play Flame’s fury and Flash-fires/Minor."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Reclaim, gain Minor, or Major forgetting Flash-fires. Play 2."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/wildfire-opening1/"
+  },
+  {
+    "spiritSlug": "heart-of-the-wildfire",
+    "slug": "heart-of-the-wildfire-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "[Heart of the Wildfire] Opening: Early Major Oct 15, 2023 The idea of this opening is to replace the over-costed Flash-fires as soon as possible with a Major, and relying on the energy from G3 to be able to play it.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom, gain Major, forget Flash-fires. Play Threatening flames."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G3 top. Play the Major or Asphyxiating smoke."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G2 bottom, gain Minor or replace Major. Play Flame’s fury and possibly the remaining Power."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Reclaim, gain Minor. Play 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G3 bottom. Play 3. Remarks G3 can be used in"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/wildfire-opening2/"
+  },
+  {
+    "spiritSlug": "lure-of-the-deep-wilderness",
+    "slug": "lure-of-the-deep-wilderness-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Lure of the Deep Wilderness",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom; G4 Minor, prioritise () > > rest. Play Gift of the untamed wild and Perils of the deepest island. Unlock left innate level 2. And right Innate level 2."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom; G3 . Play Softly beckon ever inward and Swallowed by the wilderness. Unlock left innate level 2."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim; G3 if needing to deal with City, otherwise G4 Minor. Play 2."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G3 / or G4 Minor, the opposite of what selected in the previous turn. Play 3."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim; G4 Minor. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom; G3. Play 4."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim; G3. Play 3 or 4."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8",
+        "instructions": "G2 bottom to unlock reclaim 1; G3. Play 4 or 5."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/lure-opening1/"
+  },
+  {
+    "spiritSlug": "lure-of-the-deep-wilderness",
+    "slug": "lure-of-the-deep-wilderness-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "Opening strategy for Lure of the Deep Wilderness",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom; G3 . Play Gift of the untamed wild and Perils of the deepest island. Unlock left innate level 2 and right Innate level 1+2."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top; G4 Major, prioritise cost <= 4 and with at least one of or , forget from discard (Perils of the deepest island is recommended if cost > 3). Play Softly beckon ever inward and Swallowed by the wilderness. Optionally, if the Major is good and costs 2 or 3, it can be played instead of Softly beckon ever inward."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim; G4 Major if needing to replace, otherwise Minor to threshold. Play Major and Gift of the untamed wild."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom; G3 /. Play Softly beckon ever inward and Swallowed by the wilderness. Unlock left or right innate level 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim; G3. Play 2 so as to keep cards to threshold the Major next turn, if possible. Softly beckon ever inward and Gift of the untamed wild is a good option, unlocking left innate level 3 if picked with G3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom; G4 Minor if < 5 owned cards, else G3. Play Major and 2 more."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim; G4 Minor. Play 3."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/lure-opening2/"
+  },
+  {
+    "spiritSlug": "many-minds-move-as-one",
+    "slug": "many-minds-move-as-one-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Many Minds Move as One",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top+bottom. Play Ever-multiplying swarm and another card (Guide the way is a good default). 12 elements."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Play 3. 313 elements."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor, prioritise and cost 0. Play 3. Keep at least one 1 for next turn if planning to unlock the second level of the left innate."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "if 0-cost Minors have been found. On turn 6, G3 bottom can be used if your hand costs more than 2 (i.e. more than 1 1-cost Minors have been drafted). Reclaim-looping is an option on turn 7+, since your starting hand is enough to activate all levels of both your innates."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Minor. Pay 2 to gain a Minor. Play 3."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim, gain Minor. If Energy allows it, pay 2 to gain a Minor. Play 5 or 4."
+      },
+      {
+        "turn": 9,
+        "title": "Turn 9",
+        "instructions": "Reclaim, gain Minor. Play 5. Remarks You can easily sustain a 2-cost hand during a reclaim cycle, but more than that will require slowing down your growth. Thus, 0-cost Powers should be prioritised 4 CP can be rushed on"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/mm-opening1/"
+  },
+  {
+    "spiritSlug": "many-minds-move-as-one",
+    "slug": "many-minds-move-as-one-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "Opening strategy for Many Minds Move as One",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top+bottom. Play Ever-multiplying swarm and another card (Guide the way is a good default). 12 elements."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Play 3. 313 elements."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor. Play 3. Keep at least one 1 for next turn if planning to unlock the second level of the left innate."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "by paying 2 Energy and forgetting from discard. If Energy allows it, an extra card can be gained on"
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Major. Play 3."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim, gain Minor. Play 4."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8",
+        "instructions": "while still playing a Major. Revealing and on your tracks helps consistently unlocking Innates. Cons: 4 CP is only unlocked on"
+      },
+      {
+        "turn": 9,
+        "title": "Turn 9",
+        "instructions": "Reclaim, gain Minor. Play 4. Remarks The Major gain can be moved from"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/mm-opening2/"
+  },
+  {
+    "spiritSlug": "shroud-of-silent-mist",
+    "slug": "shroud-of-silent-mist-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Shroud of Silent Mist",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top+bottom. Play The fog closes in + Forms dart by. 222 elements (left and right Innate level 1). Try to have 2 lands with damaged Invaders by the end of the turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Reclaim, gain Minor. Play to get at least 121 elements and unlock left Innate level 1 (e.g. Unnerving pall + Forms dart by). Try to use the Dahan counterattack and/or your Innate to have a 3rd land with a damaged Invader in order to get 1 Energy via your special rule (and farm extra fear)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G3 bottom, gain Minor. Play 2."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "and possibly unlock the second level of your left Innate. However, it is usually not worth sacrificing"
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Minor. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom. Play 4. Remarks If you can afford playing only 1 card on turn 3, you can play 3 on"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/mist-opening1/"
+  },
+  {
+    "spiritSlug": "shroud-of-silent-mist",
+    "slug": "shroud-of-silent-mist-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "The idea is to take a weaker early game (namely turn 2 and 3) to scale faster into the mid game.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top+bottom. Play The fog closes in + Forms dart by. 222 elements (left and right Innate level 1). Try to have 2 lands with damaged Invaders by the end of the turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "and 3) to scale faster into the mid game. Growth"
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G2 bottom. Play Dissolving vapors and possibly a 0-cost Minor (if not played previously). 211 elements (no Innate)."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Reclaim, gain Minor. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "Reclaim, gain Minor. Play 4. Remarks On turn 5, Presence can be taken from the top track to get to 2/3 instead of 1/4+R1. This is not normally required if a 0-cost has been found, but it may be needed in case of bad luck with draws, Events or other factors. If you have not gained an extra energy by"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/mist-opening2/"
+  },
+  {
+    "spiritSlug": "downpour-drenches-the-world",
+    "slug": "downpour-drenches-the-world-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "[Downpour Drenches the World] Opening: Bottom track hybrid (Minor Powers) Oct 15, 2023 Note: the openings described below will cover more turns than usual, going as far as turn 10.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom, gain Minor. Play 1. Gift of abundance is a good default to scale better."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, gain Minor. Play 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Minor. Play 2."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G3 top, gain Minor. Play 2."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8",
+        "instructions": "Reclaim, gain Major. Play 2."
+      },
+      {
+        "turn": 10,
+        "title": "Turn 10",
+        "instructions": "is not unusual against Adversaries that keep the pressure up throughout mid and late game. Unique Powers reminder Opening The idea is to unlock 2 CP as soon as possible and then going top track while taking frequent G2s to have as much Energy and as possible to repeat your Powers. Growth"
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/downpour-opening1/"
+  },
+  {
+    "spiritSlug": "ember-eyed-behemoth",
+    "slug": "ember-eyed-behemoth-opening-1",
+    "name": "Opening 1: Unique Powers reminder",
+    "description": "Opening strategy for Ember-Eyed Behemoth",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom, gain Minor. If you gained a 1-cost, make sure to keep Grasping roots in hand, or you won’t be able to play to max CP. Play 2 with 21 to unlock Smash, stomp, and flatten. If you only consider your Uniques, since Terrifying rampage is useless on"
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top. Play 2. Depending on your draws and plays, you might be able to unlock the second level of your Innate, but you should always be able to unlock the first level."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G4, reclaiming and empowering your Incarna. Play 2."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 bottom to 3 CP. Play 2 or 3 (if you have not found a card with , you won’t have 3 cards to play, but it’s still worth getting to 3 CP to play 3 cards next turn)."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Major or Minor. Play 3."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G3 top, gain Major or Minor (whichever you didn’t in the previous turn). If you gain a Major forget from discard, and if you are planning on forgetting a card with from your hand, discard that card BEFORE gaining the Major, so that you still have 3 cards left in your hand. Play 3."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/behemoth-opening1/"
+  },
+  {
+    "spiritSlug": "ember-eyed-behemoth",
+    "slug": "ember-eyed-behemoth-opening-2",
+    "name": "Opening 2: Unique Powers reminder",
+    "description": "Opening strategy for Ember-Eyed Behemoth",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 top. Play Surging lahar to unlock your Innate."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G3 bottom, discard the card you want to forget, then gain Major forgetting from discard. Play 2. If the Major does not have , keep it in hand and play the other two cards to unlock your Innate level 2."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "and 4 if the Major has :"
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G3 top, discard the card you want to forget, then gain a Major and forget from discard. Play 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Reclaim, gain Minor. Play 2."
+      }
+    ],
+    "author": "Spirit Island Hub (latentoctopus)",
+    "sourceUrl": "https://latentoctopus.github.io/guide/behemoth-opening2/"
+  }
+]

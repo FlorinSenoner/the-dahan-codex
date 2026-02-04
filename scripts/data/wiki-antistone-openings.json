@@ -1,0 +1,162 @@
+[
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Standard",
+    "description": "Antistone's opening strategy focusing on triggering innates early through presence placement and combining Creepers Tear into Mortar with Dahan counter-attacks.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (one from each track), +1 card play this turn. Cards: Gift of Proliferation (another spirit places 1 presence), Stem the Flow of Fresh Water (1 damage to a building). The energy uncovered on top track lets you play a moon element to trigger your first innate. Use Choke the Land with Green to prevent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence from bottom track, gain a minor power, +3 energy. Cards: Overgrow in a Night (place 1 presence or 3 fear), Fields Choked with Growth (push 1 town or 3 Dahan). Overgrow triggers All-Enveloping Green for Defend 2. Coordinate with Creepers Tear into Mortar for additional building damage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim cards. If your minor power has plant+moon+water, you can activate level 2 of Creepers Tear into Mortar to destroy a town without needing a combo."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Major Rush",
+    "description": "Antistone's opening focusing on getting a major power early through Call on Midnight's Dreams while maintaining fear generation via Night Terrors innate.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 1 presence (from top), gain a minor power. Cards: Dreams of the Dahan (gather Dahan or fear), Predatory Nightmares (2 nightmare damage, push Dahan). The air element from your presence track triggers Spirits May Yet Dream (reveal a fear card) and level 2 Night Terrors (+2 fear). Use Predatory Nightmares to push a town about to ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +2 energy, place 1 presence (from top) in land with invaders/Dahan. Cards: Dread Apparitions (fear -> defense, 1 fear), Call on Midnight's Dreams (fear or major power). Order matters: use Dread Apparitions, then Night Terrors for 2 fear (defense 3), then Spirits May Yet Dream, then Call on Midnight's Dreams for a major power. Forget Call to use the major immediately if good."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If you got a good major, use Reclaim One to cast it again alongside your turn 1 minor. If both cards have moon elements, placing presence from top track gives you the third moon for the second part of Spirits May Yet Dream."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-breppert",
+    "name": "Wiki Opening: breppert's Dahan Defense",
+    "description": "breppert's opening focusing on gathering 3 Dahan to defend against a full land (Explorer + Town + City) while building up to a major power on turn 3.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place Presence (1 away, top track to uncover Air), gain minor power. Cards: Predatory Nightmares (2 Damage + Dahan Push), Dreams of the Dahan (Gather Dahan or Fear per Dahan). Use Dreams to gather 3 Dahan into a land you'll defend turn 2, ideally with Explorer + Town + City. Predatory Nightmares targets towns built during invader turn 1. Triggers level 2 Night Terrors (2 Fear) and Spirits May Yet Dream."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place Presence in Dahan land + 2 Energy. Cards: Dread Apparitions (1 Fear, defend by Fear), Call on Midnight's Dream (Gain Major or 2 Fear). Play Call for the fear. With Night Terrors (2 fear) + Dread Apparitions, you're defending 5. With 3 Dahan, you can wipe out Explorer + Town + City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim one card, use 0-range presence placement to create a sacred site, and get your major power via Call on Midnight's Dreams. You'll have at least 4 Energy before Dahan boost. Accept some blight this turn while setting up major power for board control starting turn 4."
+      }
+    ],
+    "author": "breppert (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/breppert%27s_Opening"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-wiki-thommy-mann",
+    "name": "Wiki Opening: ThommyMann's Major Power Rush",
+    "description": "ThommyMann's opening focusing on early major power acquisition by forgetting Rituals of Destruction, building holy sites with Dahan present, and reaching two major power plays per turn by turn 5.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 2nd growth option. Create holy site from energy track; gain a major power (preferably costing 3-4). Play your major power or Draw of Fruitful Earth. Forget Rituals of Destruction. Use whichever action best denies opponent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: 1st growth (reclaim) or 3rd growth if major was unuseful. Place presence from energy track on explorer about to build. Play your major power or Guard the Healing Land. Prioritize lands with Dahan present; this creates defensible holy sites."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: 2nd growth. Gain another major power; place presence to create holy site. Play your major power or Guard the Healing Land. Forget Year of Perfect Stillness, except against England. Established holy sites become mostly safe through mid-game."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: 1st growth (reclaim). Take presence from card play track; place where explorer will build with Dahan. Play cards as needed. Continue building holy site network strategically."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: 2nd growth. Gain minor power or replace weak major; add presence from card plays. You can now play two major powers per turn, positioning for mid-game dominance."
+      }
+    ],
+    "author": "ThommyMann (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth/ThommyMann's_Guide"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Standard",
+    "description": "Antistone's opening focusing on early drowning coordination with allies, using Call of the Deeps to gather explorers and Tidal Boon to support teammates while building ocean presence.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence in oceans (from bottom track), gain +1 energy. Play Call of the Deeps (gather 1 explorer, or 2 into ocean) and Tidal Boon (ally gains +2 energy and pushes 1 town + 2 Dahan). Ocean Breaks the Shore is range 0, so this turn the ONLY land you can target is wherever you placed your coastal presence during setup. Coordinate with allies so they understand they can destroy invaders and give you free energy by moving invaders into your oceans. Call of the Deeps should prevent builds or drown explorers."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Push presence from oceans, place 1 presence from bottom track, gain a minor power card. Play Grasping Tide (Defend 4, 2 fear), Swallow the Land-Dwellers (drown 1 explorer, 1 town, 1 Dahan), and one minor power. Previous drownings should provide sufficient energy. In multiplayer, consider placing presence to reach all boards. Priority minors include water+stone combinations to trigger leveled powers, or air elements. Target Swallow on lands without Dahan. Grasping Tide's range-1 allows flexible targeting on lands with Dahan for counterattacks."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. You MUST gather 1 presence into each ocean (where possible). Plan card plays carefully based on where presence remains for targeting. Avoid presence clustering by balancing pushing and gathering across turns."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-wiki-antistone",
+    "name": "Wiki Opening: Antistone's Innate Rush",
+    "description": "Antistone's opening focusing on triggering Thundering Destruction innate by turn 2, conserving cards turn 1 to enable a powerful three-card burst with innate activation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence from top track. Play only Shatter Homesteads (1 card). Placing presence from the top establishes a second sacred site for range. Despite having 2 card plays available, only play one card to trigger the innate next turn. Consider using the special rule to make Shatter Homesteads fast if it destroys a town creating out-of-range lands; otherwise play it slow before a ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy, place 1 presence from bottom track. Play Lightning's Boon, Raging Storm, and Harbingers of the Lightning. This triggers Thundering Destruction innate for additional town destruction. Combo Raging Storm with allies or use it on explorer-only locations. Position Dahan pushed by Harbingers to support other spirits or into ravaging lands where buildings were destroyed."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain minor power, +1 energy. Play Shatter Homesteads, Lightning's Boon, and Harbingers of the Lightning. You have high enough energy generation to play at least these three cards and trigger innate again. Can reclaim multiple turns to maintain three-card plays, though this sacrifices presence placement."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike/Antistone%27s_Opening"
+  }
+]

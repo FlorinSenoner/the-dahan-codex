@@ -1,0 +1,172 @@
+[
+  {
+    "spiritSlug": "fractured-days-split-the-sky",
+    "slug": "fractured-days-bgg-je-opening-1",
+    "name": "BGG JE Opening: Fractured Days Split the Sky",
+    "description": "A flexible approach leveraging Days That Never Were and Slip the Flow innate, building Time for various Turn 3 options.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain Sun, move presence, gain a Minor That Never Was, gain 3 Time (2 from Energy, 1 from Plays). Card Plays: Minor. Choose a Minor for effect, not Elements, even if that effect is just pushing an Explorer to prevent a Build or generating some marginal amount of Fear. Your presence movement should set up for using your Minor optimally, or reposition your presence in a land where you can make a sacred site next turn for Absolute Stasis."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Gain Moon, gain Minor Power, add presence from Energy, gain +2 Card Plays and 1 Time (from Plays). Card Plays: Absolute Stasis (Cost: 1 Time, target land does not exist), Blur the Arc (remove Blight if no Dahan/Invaders, if Invaders Build + Ravage, if Dahan add 1 and Push up to 2), Past Returns (for Elements). Pay 1 Time for Absolute Stasis to prevent a problematic Build or bad Ravage. Use Blur the Arc to get Dahan into defended lands. You can use all three levels of Slip the Flow - consider targeting yourself to use Visions of a Shifting Future fast, then Reclaim a played card based on Elements of your gained Minor."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Multiple Options)",
+        "instructions": "Choose based on your Turn 2 decisions: 1) Want a Major? Choose Growth 3, gain a Major That Never Was. 2) Want to let someone Reclaim? If you Reclaimed Past Returns, choose Growth 3, gain 3 Time, play any Moon card + Past Returns to hit tier 2 of Slip the Flow. 3) Reclaimed Blur the Arc? Choose Growth 2 or 3 depending on which tier of Slip the Flow your allies benefit from most. 4) Want tier 3 of Slip the Flow? If you Reclaimed Absolute Stasis, choose Growth 3 and play Sun/Air + Stasis. All options leave at least one more turn before Reclaim All."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2486927/openings-fractured-days-split-the-sky"
+  },
+  {
+    "spiritSlug": "shroud-of-silent-mist",
+    "slug": "shroud-of-silent-mist-bgg-je-opening-1",
+    "name": "BGG JE Opening: Shroud of Silent Mist",
+    "description": "Energy-focused opening ensuring innates stay active regardless of draft, establishing 3 lands with Damaged Invaders for Slow and Silent Death income.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add 2 presence from Energy. Card Plays: The Fog Closes In (deal 1 damage to different Invader per presence in adjacent land, Push 2 Dahan). The Water from your track allows first level of Lost in the Swirling Haze to save a Dahan or group Dahan for favorable trade. Ideally Fog Closes In damages 1 Town/1 City or 1 Town/1 Explorer. Use presence movement from Shift and Flow to deposit presence for Flowing and Silent Forms next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 1 presence from Energy, 1 presence from Plays. Card Plays: Flowing and Silent Forms Dart By (2 Fear if Invaders, presence protection, gather 1-2 presence of another Spirit), Dissolving Vapors (1 Fear, 1 Damage to each Invader, 1 Damage to each Dahan). Use Flowing and Silent Forms to distribute presence to farther reaches or pull another Spirit onto your board. You hit tier 1 of Suffocating Shroud and tier 2 of Swirling Haze. Between Dissolving Vapors and Suffocating Shroud, try to achieve '3 lands of yours with damaged Invaders' for extra Energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain a Minor Power, add a presence from Energy. Card Plays: Unnerving Pall, Minor Power. Elements from Energy track let you hit tier 1 of Suffocating Shroud regardless of Minor gained, so focus on gaining beneficial effects (without Fire is preferable, Water nets tier 1 of Swirling Haze). Use Unnerving Pall to protect Dahan or hold down a land your team has been filling."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain a Minor Power. Card Plays: Varies. Even if both Minors gained are weak, you can play Unnerving Pall + The Fog Closes In to hit tier 2 of Suffocating Shroud. That's 2 Powers that do damage for adjacent presence, so you can replace damaged land easily. This opening provides Elements ensuring innates stay active and surplus Energy allows choosing a cheap/mid-costed Major sooner if necessary."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2488254/openings-shroud-of-silent-mist"
+  },
+  {
+    "spiritSlug": "finder-of-paths-unseen",
+    "slug": "finder-of-paths-unseen-bgg-je-opening-1",
+    "name": "BGG JE Opening: Finder of Paths Unseen",
+    "description": "Consistency-focused opening aimed at reducing Finder's barrier to entry, leaving room for player choice after first Reclaim All.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add a presence (from Top), gain a Minor. Card Plays: A Circuitous and Wending Journey (push up to half of Invaders from target land, same for Dahan/presence/Beasts). Add presence to an inner land building a City - Wending Journey can push Town/City into your starting lands. Gain a Minor with Air (Air + Water even better). Use presence push from Wending Journey to position for targeting innates next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add a presence (from Top), +1 Card Play. Card Plays: Offer Passage Between Worlds (move up to 4 Dahan between target/your lands OR 2 fewer Dahan destroyed), Traveler's Boon (target Spirit moves up to 3 presence to your land, bringing 1 Invader/Dahan/Beast). With Sun and Water from top track plus Moon/Air on cards, use first 2 tiers of Lay Paths and tier 1 of Close the Ways. Use Traveler's Boon to help slower Spirit prevent a problematic Build or access difficult land types."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add a presence (from Bottom), +1 Card Play. Card Plays: Ways of Shore and Heartland (push up to 2 pieces from Coastal/Inland to another Coastal/Inland), Aid From Spirit Speakers (for each Dahan, push 1 piece to land 2 away with Dahan). Uncovering Earth plus these 2 cards hits tier 2 of Lay Paths and first 2 tiers of Close the Ways. Going into first Stage II Explore, try to Isolate empty Coastal lands (covers more outcomes) or inner lands whose Isolation covers multiple Explores."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Options vary based on Turn 1. Card Plays: Paths Tied By Nature (move up to 2 pieces to land within 2 of same terrain), Minor. If your first Minor lacked Air, add presence from Bottom and gain a Minor. If you have Air, either gain another Minor (planning to gain again next turn) or add presence anywhere and take 2 Energy. With an Air card, hit tier 2 of Lay Paths and tier 2 of Close the Ways. Most likely Reclaiming next turn - can grab Minor or Major based on direction you want to go."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2493091/openings-finder-of-paths-unseen"
+  },
+  {
+    "spiritSlug": "downpour-drenches-the-world",
+    "slug": "downpour-drenches-the-world-bgg-je-opening-1",
+    "name": "BGG JE Opening: Downpour Drenches the World",
+    "description": "Leveraging Pour Down Power Across the Land for Energy management and card repetition, centralizing presence for Rain and Mud defense scaling.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add a presence (from Energy), gain a Minor Power, gain +1 Energy. Card Plays: Gift of Abundance (target Spirit gains 2 Energy or Repeats a card by paying its cost). Use long-range presence placement to reach a distant Wetland. Use Pour Down Power to gain 1 Energy. More often your Gift grants Energy, but there are tons of starters worth doubling up. If unsure who to give Repeat to, look for Gift/Boon cards or strong Pushes."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (both from Plays), discard 2 cards, gain 2 Waters. Card Plays: Choose based on situation - Dark Skies (hits tier 1 Rain and Mud, good with Wetlands setup), Unbearable Deluge (costs nothing to Repeat, gives defend/push Dahan/Isolate - hits tiers 1-2 of Rain and Mud), Foundations Sink (can decimate Towns if allies stack them - hits tier 2 Rain and Mud), or your new Minor (with 4 Waters you can repeat it twice even without Water element). Keep one card for next turn."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add a presence (from Plays), gain a Minor Power, gain +1 Energy. Card Plays: Varies based on saved card. Whether you Repeat anything or gain Energy depends on which card you saved. If you gain a Minor with Water and saved card has Water, you can use Pour Down Power twice; otherwise use it once. Most likely accrue some Energy for Reclaim next turn, but if you get 2 uses you can Repeat once."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain a Minor Power, move a presence up to 2. Card Plays: 2 cards. Playing 2 cards means most likely getting 2 uses of Pour Down Power. If you have a good target for Gift of Abundance use it, but saving it for next turn guarantees hitting tier 1 of Water Nourishes Life's Growth. Next turn, choose Growth 2 and add both presence from Energy - with 2 Plays, 3 Waters on track, and 2 Waters from Growth, you can easily use Pour Down Power 3 times."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2496834/openings-dowpour-drenches-the-world"
+  },
+  {
+    "spiritSlug": "many-minds-move-as-one",
+    "slug": "many-minds-move-as-one-bgg-je-opening-1",
+    "name": "BGG JE Opening: Many Minds Move as One",
+    "description": "Building Beast distribution for Beset and Confound defense scaling and Teeming Host gathering, with options for Energy or Plays focus on Turn 3.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add a presence (from Energy) + add a Beast, gain 1 Energy, gather 1 Beast into a land. Card Plays: Ever-Multiplying Swarm (add 2 Beasts). Add presence to a land you'd like to defend next turn (preferably with Dahan, can use range to cover another Spirit's board). Gather Beast from starting land into a more central one, or pull Beast from ally's board closer. Use Ever-Multiplying Swarm in whichever of your 2 lands has more adjacent terrain for Dreadful Tide setup."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (one from Energy, 1 from Plays). Card Plays: Guide the Way on Feathered Wings (move 1 Beast up to 2 lands with up to 2 Dahan), A Dreadful Tide of Scurrying Flesh (remove up to half of Beasts, each removed skips 1 Invader action). If defending land has Dahan, add zero-range presence there. Your sacred site plus added Beast gives 2 Beasts for Beset and Confound. Use Guide the Way to shuttle Dahan to next defense land. You hit tier 2 of Teeming Host and tier 1 of Beset and Confound."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add 2 presence (options discussed below). Card Plays: Pursue with Scratches, Pecks, and Stings (1 Fear, push Town/Explorer per Beast past first), Boon of Swarming Bedevilment (target Spirit's presence grants Defend 1, Spirit may push 1 presence). Option A: Both from Energy - hits tier 2 of Beset and Confound, good if you need Defend 4 guaranteed. Option B: Both from Plays - spend 2 Energy to gain Minor and play all 3 remaining cards. Minor with Animal hits tier 2 of Beset and Confound; Air hits tier 3 of Teeming Host."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain a Power. Card Plays: Varies. If you chose Plays last turn, take Minor with Air + Animal if possible. If choosing between Air or Animal: take Air for tier 3 Teeming Host next turn, Animal for tier 3 Beset and Confound. If you chose Energy last turn, consider taking a Major - you'll have 6 Energy. Turn 5 involves adding 2 presence from whichever track you didn't choose on Turn 3, allowing robust innate hits."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2502110/openings-many-minds-move-as-one"
+  },
+  {
+    "spiritSlug": "grinning-trickster-stirs-up-trouble",
+    "slug": "grinning-trickster-stirs-up-trouble-bgg-je-opening-1",
+    "name": "BGG JE Opening: Grinning Trickster Stirs Up Trouble",
+    "description": "Reliable Authority/Mob combo for Fear generation with options to break the Reclaim cycle when Cities become scarce.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add a presence (from Plays), gain a Minor Power. Card Plays: Impersonate Authority (add 1 Strife), Incite the Mob (1 Invader with Strife deals damage to other Invaders, 1 Fear per Invader destroyed). Gain a Power with Air to hit Let's See What Happens next turn; if no Air, take Fire for tier 3 of Why Don't You and Them Fight. Push a Dahan into the land where you'll add Strife (ideally building a City). Attach Strife to City, then use Incite the Mob to kill Town/Explorer for 3 Fear total."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add a presence (from Plays), gain +1 Energy per Play. Card Plays: Overenthusiastic Arson (destroy 1 Town, discard Minor - if Fire: 1 Fear, 2 Damage, add Blight), Unexpected Tigers (1 Fear if Invaders, gather Beast/push Explorer, or add Beast), Minor Power. Push another Dahan into Strifed City land for counterattack, or consolidate lone Dahan. Arson prevents City or stops Ravage. If you have 3 Fires, use You and Them Fight to kill Explorer in Dahan land. If hitting What Happens, decide on Tigers - ditch it and the Minor for Energy if you don't need them."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim All, move a presence up to 1, add a presence (from Energy). Card Plays: Impersonate Authority, Incite the Mob, Overenthusiastic Arson. If your board lacks good Authority/Mob targets, move to another board with move + add presence combo. You have just enough Energy for these 3 cards, hitting tier 2 of You and Them Fight and tier 2 of What Happens. When using What Happens, forget Tigers or the Minor you gained. From here, take the Reclaim cycle as needed, or break it by forgetting Arson from play with What Happens (giving 3 cards in hand) or using Growth 3 for third card then Energy for Plays."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2502216/openings-grinning-trickster-stirs-up-trouble"
+  }
+]

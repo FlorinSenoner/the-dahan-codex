@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 6.2 (Fix Code Duplication) in progress
+**Current focus:** Phase 8 (Spirit & Aspect Data Scraping) in progress
 
 ## Current Position
 
-Phase: 6.2 (Fix Code Duplication)
-Plan: 7 of 7 Complete
-Status: Complete
-Last activity: 2026-02-02 - All 7 plans complete, reduced jscpd clones from 23 to 3
+Phase: 8 (Spirit & Aspect Data Scraping)
+Plan: 4 of 5 Complete (Wave 3 complete) + Opening guides scraped
+Status: In Progress
+Last activity: 2026-02-02 - Added 17 opening guides from BGG JE/Promo threads and Wiki
 
-Progress: [##################################################] 100% (82/82 plans complete)
+Progress: [#####################################-------------] 76% (87/115 plans complete)
 
 ## Performance Metrics
 
@@ -104,6 +104,7 @@ affecting current work:
 - All board fields optional to preserve backward compatibility
 - Aspects inherit board data from base spirit (no duplication)
 - getSpiritWithAspects query returns base + sorted aspects in single call
+- reseedSpirits preserves existing openings via backup/restore by spirit slug
 - URL as single source of truth for variant tab selection (no local state)
 - Parallel query preloading in route loaders (getSpiritBySlug + getSpiritWithAspects)
 - Spirit components directory: app/components/spirits/ for spirit-specific components
@@ -278,6 +279,7 @@ affecting current work:
 - Games components directory added to knip entry points
 - CSV import uses full replacement on ID match (missing fields removed from existing records)
 - Import doesn't resolve spirit IDs - uses name only (CSV format limitation)
+- Convex module directory names cannot contain hyphens (seed-data renamed to seedData)
 - CSVPreview composite key: id or date+spirit1+index for unique keys
 
 ### Pending Todos
@@ -313,6 +315,8 @@ None yet.
 - Phase 7 changed: "Admin Tools" → "Seed Data Management" (simplified scope)
 - Phase 6.1 inserted after Phase 6: Cleanup TheDahanCodex (URGENT) - SSR removal, component reuse, dead code cleanup
 - Phase 6.2 inserted after Phase 6.1: Fix Code Duplication - eliminate jscpd clones, extract shared validators/components
+- Phase 7 marked "On Hold" - admin UI for seed data management deferred
+- Phase 8 added: Spirit & Aspect Data Scraping - populate complete spirit data from wiki, Reddit, BGG, and community resources
 
 ### Blockers/Concerns
 
@@ -642,5 +646,11 @@ Phase 6.2 (Fix Code Duplication) complete:
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 06.2-07-PLAN.md - CSV Spirit Field Utilities (Phase 6.2 Complete)
+Stopped at: Added 17 opening guides (BGG JE/Promo threads + Wiki Antistone/breppert)
 Resume file: None
+
+**Opening guides added:**
+- BGG Jonah Yonker JE threads: 12 guides (Fractured Days, Shroud, Finder, Downpour, Many Minds, Grinning Trickster, Shifting Memory, Volcano, Lure, Stone's, Starlight, Vengeance)
+- BGG Jonah Yonker promo threads: 2 guides (Serpent, Wildfire)
+- Spirit Island Wiki Antistone/breppert: 3 guides (Rampant Green, Bringer x2)
+- Total openings: 51 → 68 guides from 7 sources
