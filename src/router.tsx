@@ -3,8 +3,10 @@ import { type PersistedClient, persistQueryClient } from '@tanstack/query-persis
 import { dehydrate, hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
-import { del, get, set } from 'idb-keyval'
+import { createStore, del, get, set } from 'idb-keyval'
 import { routeTree } from './routeTree.gen'
+
+export const idbStore = createStore('the-dahan-codex', 'cache')
 
 const IDB_CACHE_KEY = 'tanstack-query-cache'
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7 // 7 days
@@ -13,13 +15,13 @@ const MAX_AGE = 1000 * 60 * 60 * 24 * 7 // 7 days
 function createIDBPersister(idbKey = IDB_CACHE_KEY) {
   return {
     persistClient: async (client: PersistedClient) => {
-      await set(idbKey, client)
+      await set(idbKey, client, idbStore)
     },
     restoreClient: async () => {
-      return await get<PersistedClient>(idbKey)
+      return await get<PersistedClient>(idbKey, idbStore)
     },
     removeClient: async () => {
-      await del(idbKey)
+      await del(idbKey, idbStore)
     },
   }
 }
@@ -30,7 +32,7 @@ function createIDBPersister(idbKey = IDB_CACHE_KEY) {
  */
 async function restoreQueryCache(queryClient: QueryClient) {
   try {
-    const persistedClient = await get<PersistedClient>(IDB_CACHE_KEY)
+    const persistedClient = await get<PersistedClient>(IDB_CACHE_KEY, idbStore)
     if (persistedClient) {
       // Check if cache is still valid (not expired)
       const isExpired = Date.now() - persistedClient.timestamp > MAX_AGE
@@ -56,7 +58,7 @@ export async function persistQueryCache(queryClient: QueryClient) {
     buster: '',
     clientState: dehydratedState,
   }
-  await set(IDB_CACHE_KEY, persistedClient)
+  await set(IDB_CACHE_KEY, persistedClient, idbStore)
 }
 
 function NotFound() {
