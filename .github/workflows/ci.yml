@@ -49,6 +49,9 @@ jobs:
       - name: Deploy Convex functions
         run: pnpm exec convex deploy --cmd-url-env-var-name VITE_CONVEX_URL
 
+      - name: Build
+        run: pnpm build
+
       - name: Run E2E tests
         run: pnpm test:e2e
 
