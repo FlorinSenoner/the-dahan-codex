@@ -1,4 +1,3 @@
-import { convexQuery } from '@convex-dev/react-query'
 import { createFileRoute, getRouteApi } from '@tanstack/react-router'
 import { del } from 'idb-keyval'
 import { RefreshCw, Trash2 } from 'lucide-react'
@@ -6,8 +5,8 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
-import { api } from '../../convex/_generated/api'
-import { idbStore, persistQueryCache } from '../router'
+import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
+import { idbStore } from '../router'
 
 const routeApi = getRouteApi('/settings')
 
@@ -27,59 +26,12 @@ function SettingsPage() {
 
   async function syncData() {
     setIsSyncing(true)
-    setSyncStatus('Loading spirits...')
     try {
-      // Fetch all spirits via TanStack Query (this gets persisted to IndexedDB)
-      const spirits = await queryClient.fetchQuery(convexQuery(api.spirits.listSpirits, {}))
+      setSyncStatus('Syncing games...')
+      await syncGames(queryClient)
 
-      // Get unique base spirit slugs (filter out aspects)
-      const baseSpiritSlugs = spirits.filter((s) => !s.isAspect).map((s) => s.slug)
-
-      // Fetch each base spirit AND its aspects via getSpiritWithAspects
-      setSyncStatus(`Syncing spirits (0/${baseSpiritSlugs.length})...`)
-      for (let i = 0; i < baseSpiritSlugs.length; i++) {
-        // This fetches base spirit AND all its aspects in one query
-        await queryClient.prefetchQuery(
-          convexQuery(api.spirits.getSpiritWithAspects, {
-            slug: baseSpiritSlugs[i],
-          }),
-        )
-        setSyncStatus(`Syncing spirits (${i + 1}/${baseSpiritSlugs.length})...`)
-      }
-
-      // Also fetch individual spirit pages to cache getSpiritBySlug responses
-      for (const spirit of spirits) {
-        if (spirit.isAspect) {
-          // For aspects, need to call with aspect parameter (lowercase to match URL)
-          const baseSpirit = spirits.find((s) => s._id === spirit.baseSpirit)
-          if (baseSpirit && spirit.aspectName) {
-            await queryClient.prefetchQuery(
-              convexQuery(api.spirits.getSpiritBySlug, {
-                slug: baseSpirit.slug,
-                aspect: spirit.aspectName.toLowerCase(),
-              }),
-            )
-          }
-        } else {
-          await queryClient.prefetchQuery(
-            convexQuery(api.spirits.getSpiritBySlug, {
-              slug: spirit.slug,
-            }),
-          )
-        }
-      }
-
-      // Fetch openings for each spirit
-      setSyncStatus('Syncing openings...')
-      for (const spirit of spirits) {
-        await queryClient.prefetchQuery(
-          convexQuery(api.openings.listBySpirit, { spiritId: spirit._id }),
-        )
-      }
-
-      // Manually persist to IndexedDB to ensure data is saved
-      setSyncStatus('Saving to offline storage...')
-      await persistQueryCache(queryClient)
+      setSyncStatus('Syncing spirits & openings...')
+      await syncSpiritsAndOpenings(queryClient)
 
       setSyncStatus('Sync complete!')
       setTimeout(() => setSyncStatus(null), 3000)
@@ -125,7 +77,8 @@ function SettingsPage() {
             Cache Management
           </Heading>
           <Text className="mt-2" variant="muted">
-            Sync spirit data for offline access or clear cached data if something seems broken.
+            Data syncs automatically in the background. Use the button below to force a full sync,
+            or clear cached data if something seems broken.
           </Text>
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             <Button

@@ -1,10 +1,10 @@
 import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
-import { useMutation, useSuspenseQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import type { Id } from 'convex/_generated/dataModel'
+import type { Doc, Id } from 'convex/_generated/dataModel'
 import { format } from 'date-fns'
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Trash2, WifiOff } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
 import { GameForm, type GameFormData } from '@/components/games/game-form'
@@ -22,7 +22,10 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { useOnlineStatus } from '@/hooks'
+import { useOfflineOps } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
+import { saveOfflineOp } from '@/lib/offline-games'
 
 export const Route = createFileRoute('/_authenticated/games/$id')({
   component: GameDetailPage,
@@ -31,10 +34,21 @@ export const Route = createFileRoute('/_authenticated/games/$id')({
 function GameDetailPage() {
   const { id } = Route.useParams()
   const navigate = useNavigate()
+  const isOnline = useOnlineStatus()
+  const queryClient = useQueryClient()
   const [isEditing, setIsEditing] = React.useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false)
 
-  const { data: game } = useSuspenseQuery(convexQuery(api.games.getGame, { id: id as Id<'games'> }))
+  const {
+    data: game,
+    isPending,
+    isError,
+  } = useQuery(convexQuery(api.games.getGame, { id: id as Id<'games'> }))
+
+  // Fallback: look up game from the cached listGames data
+  const { data: gamesList } = useQuery(convexQuery(api.games.listGames, {}))
+
+  const { offlineOps, refreshOps } = useOfflineOps()
 
   const updateGame = useMutation({
     mutationFn: useConvexMutation(api.games.updateGame),
@@ -50,12 +64,49 @@ function GameDetailPage() {
     mutationFn: useConvexMutation(api.games.deleteGame),
   })
 
-  if (!game) {
+  // Resolve game: primary query → list cache fallback → null
+  const gameFromList = gamesList?.find((g) => g._id === id)
+  const baseGame = game ?? gameFromList ?? null
+
+  // Apply pending outbox operations on top of server data
+  const opsForThisGame = offlineOps.filter((op) => op.gameId === id)
+  const hasPendingDelete = opsForThisGame.some((op) => op.type === 'delete')
+  const pendingUpdate = opsForThisGame.find((op) => op.type === 'update')
+
+  // Redirect if there's a pending delete for this game
+  React.useEffect(() => {
+    if (hasPendingDelete) {
+      navigate({ to: '/games' })
+    }
+  }, [hasPendingDelete, navigate])
+
+  // Merge outbox update data over server data (cast since shapes match)
+  const resolvedGame: Doc<'games'> | null = React.useMemo(() => {
+    if (!baseGame) return null
+    if (pendingUpdate?.type === 'update') {
+      return { ...baseGame, ...pendingUpdate.data } as Doc<'games'>
+    }
+    return baseGame
+  }, [baseGame, pendingUpdate])
+
+  if (isPending && !resolvedGame) {
     return (
       <div className="min-h-screen bg-background">
-        <PageHeader backHref="/games" title="Game Not Found" />
-        <div className="p-4 text-center">
-          <p className="text-muted-foreground">Game not found</p>
+        <PageHeader backHref="/games" title="Game" />
+      </div>
+    )
+  }
+
+  if ((isError && !resolvedGame) || (!isPending && !resolvedGame)) {
+    return (
+      <div className="min-h-screen bg-background">
+        <PageHeader backHref="/games" title="Game" />
+        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+          <WifiOff className="h-16 w-16 text-muted-foreground mb-4" />
+          <h2 className="text-xl font-semibold mb-2">Game unavailable offline</h2>
+          <p className="text-muted-foreground mb-6 max-w-sm">
+            This game isn't cached yet. It will be available after your next sync.
+          </p>
           <Button asChild variant="link">
             <Link to="/games">Back to Games</Link>
           </Button>
@@ -64,42 +115,63 @@ function GameDetailPage() {
     )
   }
 
+  if (!resolvedGame) return null
+
   const handleDelete = async () => {
     setShowDeleteConfirm(false)
-    await deleteGameMutation.mutateAsync({ id: game._id })
+    if (!isOnline) {
+      await saveOfflineOp({ type: 'delete', gameId: id })
+      await refreshOps()
+      toast.success('Game deleted.')
+      navigate({ to: '/games' })
+      return
+    }
+    await deleteGameMutation.mutateAsync({ id: resolvedGame._id })
     navigate({ to: '/games' })
   }
 
   const handleSubmit = async (data: GameFormData) => {
+    const payload = transformGameFormToPayload(data)
+    if (!isOnline) {
+      await saveOfflineOp({ type: 'update', gameId: id, data: payload })
+      await refreshOps()
+      queryClient.setQueryData(convexQuery(api.games.getGame, { id: id as Id<'games'> }).queryKey, {
+        ...resolvedGame,
+        ...payload,
+      })
+      setIsEditing(false)
+      toast.success('Changes saved. Will sync when you reconnect.')
+      return
+    }
     await updateGame.mutateAsync({
-      id: game._id,
-      ...transformGameFormToPayload(data),
+      id: resolvedGame._id,
+      ...payload,
     })
   }
 
   // Transform game data to form data for editing
   const formInitialData: Partial<GameFormData> = {
-    date: game.date,
-    result: game.result,
-    spirits: game.spirits.map((s) => ({
+    date: resolvedGame.date,
+    result: resolvedGame.result,
+    spirits: resolvedGame.spirits.map((s) => ({
       spiritId: s.spiritId ?? null,
       name: s.name,
       variant: s.variant,
       player: s.player,
     })),
-    adversary: game.adversary ?? null,
-    secondaryAdversary: game.secondaryAdversary ?? null,
-    scenario: game.scenario ?? null,
-    winType: game.winType ?? '',
-    invaderStage: game.invaderStage,
-    blightCount: game.blightCount,
-    dahanCount: game.dahanCount,
-    cardsRemaining: game.cardsRemaining,
-    score: game.score,
-    notes: game.notes ?? '',
+    adversary: resolvedGame.adversary ?? null,
+    secondaryAdversary: resolvedGame.secondaryAdversary ?? null,
+    scenario: resolvedGame.scenario ?? null,
+    winType: resolvedGame.winType ?? '',
+    invaderStage: resolvedGame.invaderStage,
+    blightCount: resolvedGame.blightCount,
+    dahanCount: resolvedGame.dahanCount,
+    cardsRemaining: resolvedGame.cardsRemaining,
+    score: resolvedGame.score,
+    notes: resolvedGame.notes ?? '',
   }
 
-  const dateStr = format(new Date(game.date), 'MMMM d, yyyy')
+  const dateStr = format(new Date(resolvedGame.date), 'MMMM d, yyyy')
 
   if (isEditing) {
     return (
@@ -125,10 +197,10 @@ function GameDetailPage() {
 
   // Check if we have any stats to show
   const hasStats =
-    game.blightCount !== undefined ||
-    game.dahanCount !== undefined ||
-    game.cardsRemaining !== undefined ||
-    game.invaderStage !== undefined
+    resolvedGame.blightCount !== undefined ||
+    resolvedGame.dahanCount !== undefined ||
+    resolvedGame.cardsRemaining !== undefined ||
+    resolvedGame.invaderStage !== undefined
 
   // View mode
   return (
@@ -136,15 +208,17 @@ function GameDetailPage() {
       <PageHeader backHref="/games" title={dateStr} />
 
       <div className="p-4 space-y-6">
-        {/* Result Badge - top left with win/loss type inline */}
+        {/* Result Badge */}
         <div className="flex items-center gap-2">
           <Badge
             className="text-base px-3 py-1"
-            variant={game.result === 'win' ? 'default' : 'secondary'}
+            variant={resolvedGame.result === 'win' ? 'default' : 'secondary'}
           >
-            {game.result === 'win' ? 'Victory' : 'Defeat'}
+            {resolvedGame.result === 'win' ? 'Victory' : 'Defeat'}
           </Badge>
-          {game.winType && <span className="text-muted-foreground">- {game.winType}</span>}
+          {resolvedGame.winType && (
+            <span className="text-muted-foreground">- {resolvedGame.winType}</span>
+          )}
         </div>
 
         {/* Spirits */}
@@ -153,7 +227,7 @@ function GameDetailPage() {
             Spirits
           </h3>
           <div className="space-y-2">
-            {game.spirits.map((spirit, idx) => (
+            {resolvedGame.spirits.map((spirit, idx) => (
               <div className="flex items-center gap-2" key={spirit.spiritId ?? `spirit-${idx}`}>
                 <span className="font-medium">
                   {spirit.variant ? `${spirit.name} (${spirit.variant})` : spirit.name}
@@ -165,70 +239,71 @@ function GameDetailPage() {
         </div>
 
         {/* Adversary */}
-        {game.adversary && (
+        {resolvedGame.adversary && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Adversary
             </h3>
             <p>
-              {game.adversary.name} Level {game.adversary.level}
+              {resolvedGame.adversary.name} Level {resolvedGame.adversary.level}
             </p>
           </div>
         )}
 
         {/* Secondary Adversary */}
-        {game.secondaryAdversary && (
+        {resolvedGame.secondaryAdversary && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Secondary Adversary
             </h3>
             <p>
-              {game.secondaryAdversary.name} Level {game.secondaryAdversary.level}
+              {resolvedGame.secondaryAdversary.name} Level {resolvedGame.secondaryAdversary.level}
             </p>
           </div>
         )}
 
         {/* Scenario */}
-        {game.scenario && (
+        {resolvedGame.scenario && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Scenario
             </h3>
             <p>
-              {game.scenario.name}
-              {game.scenario.difficulty !== undefined && ` (+${game.scenario.difficulty})`}
+              {resolvedGame.scenario.name}
+              {resolvedGame.scenario.difficulty !== undefined &&
+                ` (+${resolvedGame.scenario.difficulty})`}
             </p>
           </div>
         )}
 
-        {/* Game Stats - order: Stage, Cards Left, Blight, Dahan */}
+        {/* Game Stats */}
         {hasStats && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Game Stats
             </h3>
             <div className="grid grid-cols-4 gap-4 text-center">
-              {game.invaderStage !== undefined && (
+              {resolvedGame.invaderStage !== undefined && (
                 <div>
-                  <p className="text-2xl font-bold">{stageToRoman(game.invaderStage)}</p>
+                  <p className="text-2xl font-bold">{stageToRoman(resolvedGame.invaderStage)}</p>
                   <p className="text-xs text-muted-foreground">Stage</p>
                 </div>
               )}
-              {game.cardsRemaining !== undefined && (
+              {resolvedGame.cardsRemaining !== undefined && (
                 <div>
-                  <p className="text-2xl font-bold">{game.cardsRemaining}</p>
+                  <p className="text-2xl font-bold">{resolvedGame.cardsRemaining}</p>
                   <p className="text-xs text-muted-foreground">Cards Left</p>
                 </div>
               )}
-              {game.blightCount !== undefined && (
+              {resolvedGame.blightCount !== undefined && (
                 <div>
-                  <p className="text-2xl font-bold">{game.blightCount}</p>
+                  <p className="text-2xl font-bold">{resolvedGame.blightCount}</p>
                   <p className="text-xs text-muted-foreground">Blight</p>
                 </div>
               )}
-              {game.dahanCount !== undefined && (
+              {resolvedGame.dahanCount !== undefined && (
                 <div>
-                  <p className="text-2xl font-bold">{game.dahanCount}</p>
+                  <p className="text-2xl font-bold">{resolvedGame.dahanCount}</p>
                   <p className="text-xs text-muted-foreground">Dahan</p>
                 </div>
               )}
@@ -237,30 +312,30 @@ function GameDetailPage() {
         )}
 
         {/* Score with calculation breakdown */}
-        {game.score !== undefined && (
+        {resolvedGame.score !== undefined && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Score
             </h3>
             <div className="flex items-center gap-3">
-              <p className="text-2xl font-bold">{game.score}</p>
-              <GameScoreBreakdown game={game} />
+              <p className="text-2xl font-bold">{resolvedGame.score}</p>
+              <GameScoreBreakdown game={resolvedGame} />
             </div>
           </div>
         )}
 
         {/* Notes */}
-        {game.notes && (
+        {resolvedGame.notes && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Notes
             </h3>
-            <p className="whitespace-pre-wrap">{game.notes}</p>
+            <p className="whitespace-pre-wrap">{resolvedGame.notes}</p>
           </div>
         )}
       </div>
 
-      {/* Edit and Delete buttons at bottom */}
+      {/* Edit and Delete buttons at bottom - always visible */}
       <div className="fixed bottom-20 left-0 right-0 p-4 bg-background border-t border-border">
         <div className="flex gap-2">
           <Button className="flex-1" onClick={() => setIsEditing(true)} variant="outline">
