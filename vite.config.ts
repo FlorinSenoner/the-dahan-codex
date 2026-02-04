@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import viteReact from '@vitejs/plugin-react'
@@ -6,6 +7,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
+  test: {
+    exclude: ['e2e/**', 'node_modules/**'],
+    passWithNoTests: true,
+  },
   base: '/',
   server: {
     port: 4127,
