@@ -1,0 +1,212 @@
+[
+  {
+    "spiritSlug": "rising-heat-of-stone-and-sand",
+    "slug": "rising-heat-of-stone-and-sand-bgg-opening-1",
+    "name": "BGG Opening: Minor/Plays Build",
+    "description": "2aRON's solo playthrough focusing on a Minor/Plays centered build, clearing the inland early to prevent future explores and utilizing Heat's Sacred Site special rule for reduced invader health.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Option 3 (gain Minor Power, +2 energy, place 1 presence from Plays). Pick Steam Vents (Fire+Air+Earth for innate, destroys explorer). Place presence into starting Town land to destroy it with Sandstorm combo. Cards: Steam Vents (destroy explorer in Sacred Site land to stop Build), Stinging Sandstorm (Gather presence to create Sacred Site, 1 damage destroys Town due to special rule). Hit level 1 innate to handle Explorer from upcoming Explore."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Option 3 again (gain Minor Power, +2 energy, place 1 presence from Plays for 3 plays next turn). Pick Visions of Fiery Doom (control + Fear with Fire threshold). Place presence into coastal land. Cards: Visions of Fiery Doom (push Town to consolidate invaders, prevent Blight), Call to the Dahan Herders (push remaining invaders into kill zone). Focus on consolidating invaders into one land for later destruction."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Option 2 (place 2 presence both from Plays into mountain for Sacred Site). This scales for a strong Turn 4. Cards: Sweltering Exhaustion (skip Build in problem land), Gift of Searing Heat (target self for +2 energy to fuel Turn 4). Use innate level 1 to destroy an explorer if non-coastal Explore. Weaker turn but sets up devastating reclaim."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Option 1 (Reclaim all, +1 energy, gain Minor Power). Draw Shadows of the Burning Forest but won't need it. Cards: Gift of Searing Heat (spend 1 energy to destroy Town at Sacred Site), Steam Vents with threshold (3 Earth destroys Town), Stinging Sandstorm (recover Sacred Site after Ravage, destroy new Build Town), Call to the Dahan Herders (consolidate remaining invaders). Hit innate level 3 to destroy 2 Cities. Reach Terror Level 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Option 1 (Reclaim, +1 energy, gain Major Power - Blazing Renewal for future reference). Cards: Gift of Searing Heat only needed. Spend 1 energy to destroy final Town at Sacred Site. Victory at Terror Level 2!"
+      }
+    ],
+    "author": "2aRON (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2955905/rising-heat-of-stone-and-sand-basic-strategy-and-f"
+  },
+  {
+    "spiritSlug": "fathomless-mud-of-the-swamp",
+    "slug": "fathomless-mud-of-the-swamp-bgg-opening-1",
+    "name": "BGG Opening: Major Power Build",
+    "description": "2aRON's solo playthrough showcasing Mud's versatility with Sacred Site positioning to prevent Town/City builds via the special rule, while setting up for a Major Power win.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Option 2 (place 2 presence, one from Plays one from Energy, both into adjacent land to form Sacred Site). Create Sacred Site adjacent to the big inland problem land. Cards: Open Shifting Waterways (Gather 2 Dahan for counterattack setup, 1 damage helps destroy Town with innate), Foul Vapors and Fetid Muck (push Explorer from Explored land to stop Build). Hit innate level 2 to damage Town, then Waterways finishes it. Dahan gathered for Ravage counterattack next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Option 2 (place 2 presence both from Energy track for 3 energy/turn). Spread toward potential problem areas. Cards: Intractable Thickets and Thorns (Defend 5 for the Dahan counterattack land), Exaltation of Tangled Growth (target self, pay 1 energy for Major Power draw). Defend 5 + 2 Dahan counterattack destroys City and Explorer. Draw Major Power in Slow phase - look for Pillar of Living Flame or Jungle Hungers."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Option 3 (gain Minor Power, +2 energy, place 1 presence from Energy). Draw Lure of the Unknown (0-cost control). Cards: Pillar of Living Flame (if drawn - targets the consolidated City land for the win), Lure of the Unknown (optional cleanup). Pillar destroys remaining City, generates enough Fear for Terror Level 2. Victory!"
+      }
+    ],
+    "author": "2aRON (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2959811/fathomless-mud-of-the-swamp-basic-strategy-and-ful"
+  },
+  {
+    "spiritSlug": "eyes-watch-from-the-trees",
+    "slug": "eyes-watch-from-the-trees-bgg-opening-1",
+    "name": "BGG Opening: Defend and Dahan Counterattack",
+    "description": "A minor power/plays-focused opening that leverages Eyes Watch's double presence growth option and special rule to gather Dahan with each defend. Aims to trigger innate levels progressively through rounds 1-5, building toward 3 plays and 3 energy per turn.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth 2: Place both presences from energy track. This brings you to 2 energy and 1 play per turn. Play Eerie Noises and Moving Trees to push explorers out of one of the lands they built in. You'll defend the other land next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth 2: Place one presence from plays track and one from energy track. This brings you to 2 energy and 2 plays per turn, with an extra Plant element. Put your sacred site in a land that was explored into last turn. Play Mysterious Abductions and Whispered Guidance Through the Night. This triggers the second level of your innate. Use Mysterious Abductions to clear out a land that was explored last turn and Whispered Guidance to set up a Dahan counterattack next turn."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth 3: Place presence from energy track, draft a minor with Moon, gain +1 energy. This brings you to 3 energy and 2 plays per turn, with an extra Plant. Play Boon of Watchful Guarding and the newly drafted minor. This triggers level 1 of your innate, provided you were able to draft a Moon. Defend what needs defending, using Dahan to clear out the lands during counterattack."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth 1: Reclaim all cards, draft another minor, gain +1 energy. No presence track change since you didn't place any presence. Play Eerie Noises and either of your minors, trying to trigger the second level of your innate. Sometimes you have to abandon the plan to respond to the board state, but if possible, save your other unique powers until next turn to trigger level 3 of your innate next round."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth 2: Place both presence from plays track. This brings you to 3 plays and 3 energy per turn, with an extra Plant and Air. Be sure to place presence somewhere where Mysterious Abductions will be relevant. Play (if possible) Boon of Watchful Guarding, Whispered Guidance, and Mysterious Abductions. This triggers level 3 of your innate."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6+",
+        "instructions": "From here, you're pretty much 'online'. Either reclaim next round since you ran out of powers, or use Growth 3 to draft another minor, unlock the Moon element, and extend the reclaim cycle but only play two powers."
+      }
+    ],
+    "author": "Grant Foster-Thomas (Gthomas927)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2939010/opening-eyes-watch-from-the-trees"
+  },
+  {
+    "spiritSlug": "sun-bright-whirlwind",
+    "slug": "sun-bright-whirlwind-opening-1",
+    "name": "Opening: Build-Up Strategy",
+    "description": "Lean on the special rule for turns 3-4 while underplaying to build up for a powerful turn 5 with plenty of cards to keep hitting innates.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom, gain Minor. Get the cheapest Minor with Air (or cheapest useful effect if no Air available). Play Gift of Sunlit Vigor and the Minor."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Play Gift of Wind-Sped Steps, Scatter to the Winds, and Tempest of Wings and Claws."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, draw 2 cards. Begin planning for turn 5: you need 2 Sun and 3 Air in card plays to reach Tier 3 innate."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G3 bottom, draw 2 cards from Minor power deck."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 or G3 bottom. Choose G3 if you have enough energy to play all cards in hand (to aim for Tier 4 innate); otherwise G2. Deploy cards to maximize impact."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6+",
+        "instructions": "Reclaim and continue card plays. Combo Gift of Wind-Sped Steps with innate or Scatter to the Winds to move things at fast speed. Energy is tight - prioritize Air over Sun (need about twice as much Air as Sun)."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Whirlwind---Standard"
+  },
+  {
+    "spiritSlug": "devouring-teeth-lurk-underfoot",
+    "slug": "devouring-teeth-lurk-underfoot-opening-1",
+    "name": "Opening: Standard",
+    "description": "Standard opening targeting 3 energy / 2 plays, with flexibility to aim for a major power or go full minors.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play Herd Them To Their Doom and Ferocious Assault. Grow to a location where Defend 9 provides tactical value this turn or next."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top, gain Minor. Play Gift of Furious Might and Mark Territory with Scars and Teeth."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G2 top, gain Minor. Play 2 Minors."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Reclaim. Key goal is reaching 3rd card play within about 3 more turns. Energy gain options allow flexibility to aim for a Major power or stay with Minors."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Teeth---Standard"
+  },
+  {
+    "spiritSlug": "devouring-teeth-lurk-underfoot",
+    "slug": "devouring-teeth-lurk-underfoot-opening-2",
+    "name": "Opening: Reclaim Loop",
+    "description": "A straightforward reclaim-heavy approach that cycles between two cards. Simple but effective for most games.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play Herd Them To Their Doom and Ferocious Assault."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Reclaim top track. Play Herd Them To Their Doom and Ferocious Assault again."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim top track. Play Herd Them To Their Doom and Ferocious Assault (achieving energy neutrality)."
+      },
+      {
+        "turn": 4,
+        "title": "Turns 4-6",
+        "instructions": "Three consecutive bottom track reclaims to unlock 3rd card play capability."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim top track. Gather energy for extra card slot."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8+",
+        "instructions": "Reclaim top track. Consider innate power maximization. Note: Most games end before reaching 3 card plays, making long-term setup less critical."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Teeth---Reclaim-Loop"
+  }
+]

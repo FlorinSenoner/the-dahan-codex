@@ -138,13 +138,22 @@ test.describe("Spirit Library", () => {
       page.getByRole("heading", { name: /river surges in sunlight/i }),
     ).toBeVisible({ timeout: 15000 });
 
-    // Check for strengths and weaknesses headings
-    await expect(
-      page.getByRole("heading", { name: "Strengths" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Weaknesses" }),
-    ).toBeVisible();
+    // Overview section exists (on mobile it's a collapsible, on desktop it's visible)
+    // Check for the Overview collapsible trigger (mobile) or power chart
+    // River has powerRatings but empty strengths/weaknesses arrays
+    const overviewTrigger = page.getByRole("button", { name: "Overview" });
+    const hasOverviewTrigger = await overviewTrigger.isVisible();
+    if (hasOverviewTrigger) {
+      // Mobile view - expand the collapsible
+      await overviewTrigger.click();
+    }
+
+    // Power ratings chart should be visible (River has powerRatings)
+    // The chart contains labels like "Offense", "Defense", "Control" in SVG tspan elements
+    await expect(page.getByText("Offense", { exact: true })).toBeVisible({
+      timeout: 5000,
+    });
+    await expect(page.getByText("Control", { exact: true })).toBeVisible();
   });
 
   test("spirit detail shows external links", async ({ page }) => {
