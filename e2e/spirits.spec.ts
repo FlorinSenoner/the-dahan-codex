@@ -1,177 +1,165 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from '@playwright/test'
 
-test.describe("Spirit Library", () => {
-  test("spirit list renders with spirits", async ({ page }) => {
-    await page.goto("/spirits");
+test.describe('Spirit Library', () => {
+  test('spirit list renders with spirits', async ({ page }) => {
+    await page.goto('/spirits')
 
     // Wait for page to load
-    await expect(page.getByRole("heading", { name: /spirits/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /spirits/i })).toBeVisible()
 
     // Wait for spirits to load from Convex (may take a moment)
     // Use first() because aspects also match the pattern
-    await expect(
-      page.getByRole("link", { name: /river surges in sunlight/i }).first(),
-    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
 
     // Verify Lightning is also present (first match is the base spirit)
     await expect(
-      page.getByRole("link", { name: /lightning's swift strike/i }).first(),
-    ).toBeVisible();
-  });
+      page.getByRole('link', { name: /lightning's swift strike/i }).first(),
+    ).toBeVisible()
+  })
 
-  test("filter button opens bottom sheet", async ({ page }) => {
-    await page.goto("/spirits");
+  test('filter button opens bottom sheet', async ({ page }) => {
+    await page.goto('/spirits')
 
     // Wait for page to load
-    await expect(page.getByRole("heading", { name: /spirits/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /spirits/i })).toBeVisible()
 
     // Wait for spirits to load (ensures page is fully hydrated)
-    await expect(
-      page.getByRole("link", { name: /river surges in sunlight/i }).first(),
-    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
 
     // Click filter button (has aria-label="Filter")
-    await page.getByRole("button", { name: "Filter" }).click();
+    await page.getByRole('button', { name: 'Filter' }).click()
 
     // Verify drawer opens with filter options
-    await expect(
-      page.getByRole("heading", { name: /filter spirits/i }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: /filter spirits/i })).toBeVisible()
 
     // Verify complexity options are present (filter buttons in the drawer)
-    await expect(page.getByRole("button", { name: "Low" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Moderate" })).toBeVisible();
-  });
+    await expect(page.getByRole('button', { name: 'Low' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Moderate' })).toBeVisible()
+  })
 
-  test("clicking spirit navigates to detail page", async ({ page }) => {
-    await page.goto("/spirits");
+  test('clicking spirit navigates to detail page', async ({ page }) => {
+    await page.goto('/spirits')
 
     // Wait for spirits to load
-    await expect(
-      page.getByRole("link", { name: /river surges in sunlight/i }).first(),
-    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
 
     // Click on River (first match is the base spirit, not an aspect)
     await page
-      .getByRole("link", { name: /river surges in sunlight/i })
+      .getByRole('link', { name: /river surges in sunlight/i })
       .first()
-      .click();
+      .click()
 
     // Verify URL changed
-    await expect(page).toHaveURL(/\/spirits\/river-surges-in-sunlight/);
+    await expect(page).toHaveURL(/\/spirits\/river-surges-in-sunlight/)
 
     // Verify detail page content - wait for data to load
-    await expect(
-      page.getByRole("heading", { name: /river surges in sunlight/i }),
-    ).toBeVisible({ timeout: 15000 });
-  });
+    await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
+      timeout: 15000,
+    })
+  })
 
-  test("bottom navigation is visible", async ({ page }) => {
-    await page.goto("/spirits");
+  test('bottom navigation is visible', async ({ page }) => {
+    await page.goto('/spirits')
 
     // Wait for page to load
-    await expect(page.getByRole("heading", { name: /spirits/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /spirits/i })).toBeVisible()
 
     // Verify bottom nav is present
-    await expect(page.getByRole("navigation")).toBeVisible();
+    await expect(page.getByRole('navigation')).toBeVisible()
 
     // Verify Spirits tab is present (use first() since there may be multiple links)
-    await expect(
-      page.getByRole("link", { name: /spirits/i }).first(),
-    ).toBeVisible();
-  });
+    await expect(page.getByRole('link', { name: /spirits/i }).first()).toBeVisible()
+  })
 
-  test("credits page shows disclaimer", async ({ page }) => {
-    await page.goto("/credits");
+  test('credits page shows disclaimer', async ({ page }) => {
+    await page.goto('/credits')
 
     // Verify page loads
-    await expect(page.getByRole("heading", { name: /credits/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /credits/i })).toBeVisible()
 
     // Verify legal disclaimer is present
-    await expect(
-      page.getByText(/not affiliated with greater than games/i),
-    ).toBeVisible();
+    await expect(page.getByText(/not affiliated with greater than games/i)).toBeVisible()
 
     // Verify external links are present
-    await expect(
-      page.getByRole("link", { name: /spirit island wiki/i }),
-    ).toBeVisible();
-  });
+    await expect(page.getByRole('link', { name: /spirit island wiki/i })).toBeVisible()
+  })
 
-  test("spirit detail shows variant tabs", async ({ page }) => {
-    await page.goto("/spirits/river-surges-in-sunlight");
+  test('spirit detail shows variant tabs', async ({ page }) => {
+    await page.goto('/spirits/river-surges-in-sunlight')
 
     // Wait for tabs to load (River has base + 3 aspects)
-    await expect(page.getByRole("tab", { name: "Base" })).toBeVisible({
+    await expect(page.getByRole('tab', { name: 'Base' })).toBeVisible({
       timeout: 15000,
-    });
-    await expect(page.getByRole("tab", { name: "Sunshine" })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "Travel" })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "Haven" })).toBeVisible();
-  });
+    })
+    await expect(page.getByRole('tab', { name: 'Sunshine' })).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Travel' })).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Haven' })).toBeVisible()
+  })
 
-  test("variant tabs navigate to correct URL", async ({ page }) => {
-    await page.goto("/spirits/river-surges-in-sunlight");
+  test('variant tabs navigate to correct URL', async ({ page }) => {
+    await page.goto('/spirits/river-surges-in-sunlight')
 
     // Wait for tabs to load
-    await expect(page.getByRole("tab", { name: "Base" })).toBeVisible({
+    await expect(page.getByRole('tab', { name: 'Base' })).toBeVisible({
       timeout: 15000,
-    });
+    })
 
     // Click on Sunshine tab
-    await page.getByRole("tab", { name: "Sunshine" }).click();
+    await page.getByRole('tab', { name: 'Sunshine' }).click()
 
     // URL should update
-    await expect(page).toHaveURL(/river-surges-in-sunlight\/sunshine/);
+    await expect(page).toHaveURL(/river-surges-in-sunlight\/sunshine/)
 
     // Content should update (subtitle shows "Aspect of")
-    await expect(
-      page.getByText("Aspect of River Surges in Sunlight"),
-    ).toBeVisible();
-  });
+    await expect(page.getByText('Aspect of River Surges in Sunlight')).toBeVisible()
+  })
 
-  test("spirit detail shows overview section", async ({ page }) => {
-    await page.goto("/spirits/river-surges-in-sunlight");
+  test('spirit detail shows overview section', async ({ page }) => {
+    await page.goto('/spirits/river-surges-in-sunlight')
 
     // Wait for page to load
-    await expect(
-      page.getByRole("heading", { name: /river surges in sunlight/i }),
-    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
+      timeout: 15000,
+    })
 
     // Overview section exists (on mobile it's a collapsible, on desktop it's visible)
     // Check for the Overview collapsible trigger (mobile) or power chart
     // River has powerRatings but empty strengths/weaknesses arrays
-    const overviewTrigger = page.getByRole("button", { name: "Overview" });
-    const hasOverviewTrigger = await overviewTrigger.isVisible();
+    const overviewTrigger = page.getByRole('button', { name: 'Overview' })
+    const hasOverviewTrigger = await overviewTrigger.isVisible()
     if (hasOverviewTrigger) {
       // Mobile view - expand the collapsible
-      await overviewTrigger.click();
+      await overviewTrigger.click()
     }
 
     // Power ratings chart should be visible (River has powerRatings)
     // The chart contains labels like "Offense", "Defense", "Control" in SVG tspan elements
-    await expect(page.getByText("Offense", { exact: true })).toBeVisible({
+    await expect(page.getByText('Offense', { exact: true })).toBeVisible({
       timeout: 5000,
-    });
-    await expect(page.getByText("Control", { exact: true })).toBeVisible();
-  });
+    })
+    await expect(page.getByText('Control', { exact: true })).toBeVisible()
+  })
 
-  test("spirit detail shows external links", async ({ page }) => {
-    await page.goto("/spirits/river-surges-in-sunlight");
+  test('spirit detail shows external links', async ({ page }) => {
+    await page.goto('/spirits/river-surges-in-sunlight')
 
     // Wait for page to load
-    await expect(
-      page.getByRole("heading", { name: /river surges in sunlight/i }),
-    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
+      timeout: 15000,
+    })
 
     // Check for Resources section
-    await expect(
-      page.getByRole("heading", { name: "Resources" }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Resources' })).toBeVisible()
 
     // Check for external link to wiki
-    const wikiLink = page.getByRole("link", { name: /Spirit Island Wiki/i });
-    await expect(wikiLink).toBeVisible();
-    await expect(wikiLink).toHaveAttribute("target", "_blank");
-  });
-});
+    const wikiLink = page.getByRole('link', { name: /Spirit Island Wiki/i })
+    await expect(wikiLink).toBeVisible()
+    await expect(wikiLink).toHaveAttribute('target', '_blank')
+  })
+})

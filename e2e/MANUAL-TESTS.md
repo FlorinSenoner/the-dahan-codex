@@ -5,10 +5,12 @@
 **Purpose**: Verify app loads and displays spirit library when completely offline (cold start).
 
 **Prerequisites**:
+
 - Chrome DevTools available
 - App deployed or running locally with `pnpm preview`
 
 **Steps**:
+
 1. Open app in Chrome, navigate to /spirits
 2. Wait for service worker to install (check DevTools > Application > Service Workers)
 3. Browse a few spirits to populate cache (view 2-3 spirit detail pages)
@@ -26,6 +28,7 @@
 **Expected Result**: App renders cached spirit library data without network connection.
 
 **Notes**:
+
 - First visit must be online to install SW and cache data
 - Convex data caches on first view via stale-while-revalidate strategy
 - Images cache via Workbox CacheFirst strategy

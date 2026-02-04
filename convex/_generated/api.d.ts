@@ -14,6 +14,8 @@ import type * as lib_auth from "../lib/auth.js";
 import type * as lib_scoring from "../lib/scoring.js";
 import type * as openings from "../openings.js";
 import type * as seed from "../seed.js";
+import type * as seedData_openings from "../seedData/openings.js";
+import type * as seedData_spirits from "../seedData/spirits.js";
 import type * as spirits from "../spirits.js";
 
 import type {
@@ -29,6 +31,8 @@ declare const fullApi: ApiFromModules<{
   "lib/scoring": typeof lib_scoring;
   openings: typeof openings;
   seed: typeof seed;
+  "seedData/openings": typeof seedData_openings;
+  "seedData/spirits": typeof seedData_spirits;
   spirits: typeof spirits;
 }>;
 

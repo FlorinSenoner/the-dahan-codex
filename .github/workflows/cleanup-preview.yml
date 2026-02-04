@@ -1,0 +1,32 @@
+name: Cleanup Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    name: Cleanup Preview Deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Delete preview worker
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: delete --name the-dahan-codex-pr-${{ github.event.pull_request.number }} --force
+
+      - name: Delete merged branch
+        if: github.event.pull_request.merged == true
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+            echo "Skipping deletion of protected branch: $BRANCH"
+            exit 0
+          fi
+          gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/${BRANCH}" || echo "Branch already deleted or does not exist"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

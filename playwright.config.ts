@@ -1,28 +1,28 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from '@playwright/test'
 
-const isCI = !!process.env.CI;
+const isCI = !!process.env.CI
 
 export default defineConfig({
-  testDir: "./e2e",
+  testDir: './e2e',
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
-  reporter: "html",
+  reporter: 'html',
   use: {
-    baseURL: isCI ? "http://localhost:4173" : "http://localhost:3000",
-    trace: "on-first-retry",
+    baseURL: isCI ? 'http://localhost:4227' : 'http://localhost:4127',
+    trace: 'on-first-retry',
   },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
   webServer: {
-    command: isCI ? "pnpm exec vite preview" : "pnpm dev",
-    url: isCI ? "http://localhost:4173" : "http://localhost:3000",
+    command: isCI ? 'pnpm exec vite preview' : 'pnpm dev',
+    url: isCI ? 'http://localhost:4227' : 'http://localhost:4127',
     reuseExistingServer: !isCI,
     timeout: 120 * 1000,
   },
-});
+})
