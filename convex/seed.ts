@@ -1,13 +1,8 @@
-import type { Doc, Id } from "./_generated/dataModel";
-import type { MutationCtx } from "./_generated/server";
-import { mutation } from "./_generated/server";
-import { OPENINGS } from "./seedData/openings";
-import {
-  ASPECTS,
-  EXPANSIONS,
-  type ExpansionSlug,
-  SPIRITS,
-} from "./seedData/spirits";
+import type { Doc, Id } from './_generated/dataModel'
+import type { MutationCtx } from './_generated/server'
+import { mutation } from './_generated/server'
+import { OPENINGS } from './seedData/openings'
+import { ASPECTS, EXPANSIONS, type ExpansionSlug, SPIRITS } from './seedData/spirits'
 
 // =============================================================================
 // OPENING PRESERVATION STRATEGY
@@ -52,11 +47,11 @@ import {
  */
 interface OpeningBackup {
   /** Spirit slug - used to look up new spirit ID after reseed */
-  spiritSlug: string;
+  spiritSlug: string
   /** Opening data without DB-managed fields */
-  data: Omit<Doc<"openings">, "_id" | "_creationTime" | "spiritId">;
+  data: Omit<Doc<'openings'>, '_id' | '_creationTime' | 'spiritId'>
   /** True if this is a seed opening (author: "Spirit Island Community") */
-  isSeedOpening: boolean;
+  isSeedOpening: boolean
 }
 
 /**
@@ -64,32 +59,30 @@ interface OpeningBackup {
  * Maps each opening to its spirit's slug for later restoration.
  */
 async function backupOpenings(ctx: MutationCtx): Promise<OpeningBackup[]> {
-  const openings = await ctx.db.query("openings").collect();
-  const backups: OpeningBackup[] = [];
+  const openings = await ctx.db.query('openings').collect()
+  const backups: OpeningBackup[] = []
 
   for (const opening of openings) {
     // Look up the spirit to get its slug
-    const spirit = await ctx.db.get(opening.spiritId);
+    const spirit = await ctx.db.get(opening.spiritId)
     if (!spirit) {
       // Spirit already deleted or invalid reference - skip
-      console.warn(
-        `Opening "${opening.slug}" has invalid spiritId, skipping backup`,
-      );
-      continue;
+      console.warn(`Opening "${opening.slug}" has invalid spiritId, skipping backup`)
+      continue
     }
 
     // Extract opening data without DB-managed fields
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { _id, _creationTime, spiritId, ...data } = opening;
+    const { _id, _creationTime, spiritId, ...data } = opening
 
     backups.push({
       spiritSlug: spirit.slug,
       data,
-      isSeedOpening: opening.author === "Spirit Island Community",
-    });
+      isSeedOpening: opening.author === 'Spirit Island Community',
+    })
   }
 
-  return backups;
+  return backups
 }
 
 /**
@@ -100,53 +93,53 @@ async function backupOpenings(ctx: MutationCtx): Promise<OpeningBackup[]> {
 async function restoreOpenings(
   ctx: MutationCtx,
   backups: OpeningBackup[],
-  spiritIdsBySlug: Map<string, Id<"spirits">>,
+  spiritIdsBySlug: Map<string, Id<'spirits'>>,
 ): Promise<{ restored: number; skipped: number; orphaned: number }> {
-  let restored = 0;
-  let skipped = 0;
-  let orphaned = 0;
+  let restored = 0
+  let skipped = 0
+  let orphaned = 0
 
   for (const backup of backups) {
     // Look up new spirit ID by slug
-    const spiritId = spiritIdsBySlug.get(backup.spiritSlug);
+    const spiritId = spiritIdsBySlug.get(backup.spiritSlug)
 
     // Handle spirits that no longer exist in seed data
     if (!spiritId) {
       console.warn(
         `Opening "${backup.data.slug}" orphaned: spirit "${backup.spiritSlug}" no longer exists`,
-      );
-      orphaned++;
-      continue;
+      )
+      orphaned++
+      continue
     }
 
     // Check if opening with same slug already exists (idempotency)
     // This prevents duplicates if reseed is run multiple times
     const existing = await ctx.db
-      .query("openings")
-      .withIndex("by_slug", (q) => q.eq("slug", backup.data.slug))
-      .first();
+      .query('openings')
+      .withIndex('by_slug', (q) => q.eq('slug', backup.data.slug))
+      .first()
 
     if (existing) {
-      skipped++;
-      continue;
+      skipped++
+      continue
     }
 
     // Restore the opening with the new spirit ID
-    await ctx.db.insert("openings", {
+    await ctx.db.insert('openings', {
       spiritId,
       ...backup.data,
-    });
-    restored++;
+    })
+    restored++
   }
 
-  return { restored, skipped, orphaned };
+  return { restored, skipped, orphaned }
 }
 
 // =============================================================================
 // EXPANSION IDS TYPE
 // =============================================================================
 
-type ExpansionIds = Record<ExpansionSlug, Id<"expansions">>;
+type ExpansionIds = Record<ExpansionSlug, Id<'expansions'>>
 
 // =============================================================================
 // CLEAR DATA
@@ -155,21 +148,21 @@ type ExpansionIds = Record<ExpansionSlug, Id<"expansions">>;
 // Clear all existing data (for reseed)
 async function clearExistingData(ctx: MutationCtx) {
   // Delete openings first (they reference spirits)
-  const allOpenings = await ctx.db.query("openings").collect();
+  const allOpenings = await ctx.db.query('openings').collect()
   for (const opening of allOpenings) {
-    await ctx.db.delete(opening._id);
+    await ctx.db.delete(opening._id)
   }
 
   // Delete spirits (aspects reference base spirits)
-  const allSpirits = await ctx.db.query("spirits").collect();
+  const allSpirits = await ctx.db.query('spirits').collect()
   for (const spirit of allSpirits) {
-    await ctx.db.delete(spirit._id);
+    await ctx.db.delete(spirit._id)
   }
 
   // Delete expansions
-  const allExpansions = await ctx.db.query("expansions").collect();
+  const allExpansions = await ctx.db.query('expansions').collect()
   for (const expansion of allExpansions) {
-    await ctx.db.delete(expansion._id);
+    await ctx.db.delete(expansion._id)
   }
 }
 
@@ -179,24 +172,24 @@ async function clearExistingData(ctx: MutationCtx) {
 
 // Seed expansions and return their IDs
 async function seedExpansions(ctx: MutationCtx): Promise<ExpansionIds> {
-  const ids: Partial<ExpansionIds> = {};
+  const ids: Partial<ExpansionIds> = {}
 
   for (const expansion of EXPANSIONS) {
-    const id = await ctx.db.insert("expansions", expansion);
-    ids[expansion.slug] = id;
+    const id = await ctx.db.insert('expansions', expansion)
+    ids[expansion.slug] = id
   }
 
-  return ids as ExpansionIds;
+  return ids as ExpansionIds
 }
 
 /**
  * Seed stats returned from insertSeedData for reporting.
  */
 interface SeedStats {
-  expansions: number;
-  spirits: number;
-  aspects: number;
-  openings: number;
+  expansions: number
+  spirits: number
+  aspects: number
+  openings: number
 }
 
 /**
@@ -204,9 +197,9 @@ interface SeedStats {
  */
 interface InsertSeedResult {
   /** Map of spirit slugs to their new IDs (for opening restoration) */
-  spiritIdsBySlug: Map<string, Id<"spirits">>;
+  spiritIdsBySlug: Map<string, Id<'spirits'>>
   /** Counts of seeded entities */
-  stats: SeedStats;
+  stats: SeedStats
 }
 
 // Seed all spirits and aspects, return spiritIdsBySlug map for opening restoration
@@ -214,16 +207,16 @@ async function seedSpiritsData(
   ctx: MutationCtx,
   expansionIds: ExpansionIds,
 ): Promise<{
-  spiritIdsBySlug: Map<string, Id<"spirits">>;
-  spiritCount: number;
-  aspectCount: number;
+  spiritIdsBySlug: Map<string, Id<'spirits'>>
+  spiritCount: number
+  aspectCount: number
 }> {
   // Track spirit IDs by slug for opening restoration
-  const spiritIdsBySlug = new Map<string, Id<"spirits">>();
+  const spiritIdsBySlug = new Map<string, Id<'spirits'>>()
 
   // Create all base spirits from SPIRITS array
   for (const spirit of SPIRITS) {
-    const spiritId = await ctx.db.insert("spirits", {
+    const spiritId = await ctx.db.insert('spirits', {
       name: spirit.name,
       slug: spirit.slug,
       complexity: spirit.complexity,
@@ -236,31 +229,29 @@ async function seedSpiritsData(
       weaknesses: spirit.weaknesses,
       powerRatings: spirit.powerRatings,
       wikiUrl: spirit.wikiUrl,
-    });
-    spiritIdsBySlug.set(spirit.slug, spiritId);
+    })
+    spiritIdsBySlug.set(spirit.slug, spiritId)
   }
 
   // Create all aspects from ASPECTS array
   for (const aspect of ASPECTS) {
     // Look up base spirit ID by slug
-    const baseSpiritId = spiritIdsBySlug.get(aspect.baseSpiritSlug);
+    const baseSpiritId = spiritIdsBySlug.get(aspect.baseSpiritSlug)
     if (!baseSpiritId) {
       console.warn(
         `Aspect "${aspect.name}" references unknown spirit "${aspect.baseSpiritSlug}", skipping`,
-      );
-      continue;
+      )
+      continue
     }
 
     // Get base spirit data to copy name, complexity, elements
-    const baseSpirit = SPIRITS.find((s) => s.slug === aspect.baseSpiritSlug);
+    const baseSpirit = SPIRITS.find((s) => s.slug === aspect.baseSpiritSlug)
     if (!baseSpirit) {
-      console.warn(
-        `Base spirit data not found for "${aspect.baseSpiritSlug}", skipping aspect`,
-      );
-      continue;
+      console.warn(`Base spirit data not found for "${aspect.baseSpiritSlug}", skipping aspect`)
+      continue
     }
 
-    await ctx.db.insert("spirits", {
+    await ctx.db.insert('spirits', {
       name: baseSpirit.name,
       slug: baseSpirit.slug,
       complexity: baseSpirit.complexity,
@@ -271,35 +262,35 @@ async function seedSpiritsData(
       baseSpirit: baseSpiritId,
       aspectName: aspect.name,
       complexityModifier: aspect.complexityModifier,
-    });
+    })
   }
 
   return {
     spiritIdsBySlug,
     spiritCount: SPIRITS.length,
     aspectCount: ASPECTS.length,
-  };
+  }
 }
 
 // Seed opening guides from OPENINGS data
 async function seedOpenings(
   ctx: MutationCtx,
-  spiritIdsBySlug: Map<string, Id<"spirits">>,
+  spiritIdsBySlug: Map<string, Id<'spirits'>>,
 ): Promise<number> {
-  const now = Date.now();
-  let count = 0;
+  const now = Date.now()
+  let count = 0
 
   for (const opening of OPENINGS) {
     // Look up spirit ID by slug
-    const spiritId = spiritIdsBySlug.get(opening.spiritSlug);
+    const spiritId = spiritIdsBySlug.get(opening.spiritSlug)
     if (!spiritId) {
       console.warn(
         `Spirit "${opening.spiritSlug}" not found for opening "${opening.slug}", skipping`,
-      );
-      continue;
+      )
+      continue
     }
 
-    await ctx.db.insert("openings", {
+    await ctx.db.insert('openings', {
       spiritId,
       slug: opening.slug,
       name: opening.name,
@@ -309,22 +300,19 @@ async function seedOpenings(
       sourceUrl: opening.sourceUrl,
       createdAt: now,
       updatedAt: now,
-    });
-    count++;
+    })
+    count++
   }
 
-  return count;
+  return count
 }
 
 // Shared seed logic used by both seedSpirits and reseedSpirits
 // Returns spiritIdsBySlug map for opening restoration during reseed
 async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
-  const expansionIds = await seedExpansions(ctx);
-  const { spiritIdsBySlug, spiritCount, aspectCount } = await seedSpiritsData(
-    ctx,
-    expansionIds,
-  );
-  const openingsCount = await seedOpenings(ctx, spiritIdsBySlug);
+  const expansionIds = await seedExpansions(ctx)
+  const { spiritIdsBySlug, spiritCount, aspectCount } = await seedSpiritsData(ctx, expansionIds)
+  const openingsCount = await seedOpenings(ctx, spiritIdsBySlug)
 
   return {
     spiritIdsBySlug,
@@ -334,7 +322,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
       aspects: aspectCount,
       openings: openingsCount,
     },
-  };
+  }
 }
 
 // Seed initial spirit data - run manually via Convex dashboard or CLI
@@ -343,19 +331,19 @@ export const seedSpirits = mutation({
   args: {},
   handler: async (ctx) => {
     // Check if already seeded
-    const existingSpirits = await ctx.db.query("spirits").first();
+    const existingSpirits = await ctx.db.query('spirits').first()
     if (existingSpirits) {
-      return { status: "skipped", message: "Data already seeded" };
+      return { status: 'skipped', message: 'Data already seeded' }
     }
 
-    const { stats } = await insertSeedData(ctx);
+    const { stats } = await insertSeedData(ctx)
 
     return {
-      status: "seeded",
+      status: 'seeded',
       message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, ${stats.openings} openings`,
-    };
+    }
   },
-});
+})
 
 // Reseed mutation - deletes all data and re-runs seed
 // PRESERVES existing openings (user-created and seed) during reseed
@@ -365,13 +353,13 @@ export const reseedSpirits = mutation({
   handler: async (ctx) => {
     // 1. BACKUP: Save all openings before clearing data
     // Maps openings to spirit slugs for restoration after reseed
-    const openingBackups = await backupOpenings(ctx);
+    const openingBackups = await backupOpenings(ctx)
 
     // 2. CLEAR: Delete all existing data
-    await clearExistingData(ctx);
+    await clearExistingData(ctx)
 
     // 3. SEED: Create expansions, spirits, aspects (returns spiritIdsBySlug map)
-    const { spiritIdsBySlug, stats } = await insertSeedData(ctx);
+    const { spiritIdsBySlug, stats } = await insertSeedData(ctx)
 
     // 4. RESTORE: Re-insert backed-up openings with new spirit IDs
     // Handles idempotency (skips duplicates) and orphans (spirits removed from seed)
@@ -379,13 +367,13 @@ export const reseedSpirits = mutation({
       ctx,
       openingBackups,
       spiritIdsBySlug,
-    );
+    )
 
     return {
-      status: "reseeded",
+      status: 'reseeded',
       message:
         `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects. ` +
         `Openings: ${restored} restored, ${skipped} skipped (duplicates), ${orphaned} orphaned (missing spirit)`,
-    };
+    }
   },
-});
+})

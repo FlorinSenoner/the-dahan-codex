@@ -1,5 +1,5 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server'
+import { v } from 'convex/values'
 
 export default defineSchema({
   // Minimal table for health check / connectivity test
@@ -13,28 +13,28 @@ export default defineSchema({
     name: v.string(), // "Base Game", "Branch & Claw", etc.
     slug: v.string(), // "base-game", "branch-and-claw"
     releaseYear: v.number(), // 2017, 2018, etc.
-  }).index("by_slug", ["slug"]),
+  }).index('by_slug', ['slug']),
 
   // Spirits table - spirits and their aspects
   spirits: defineTable({
     name: v.string(), // "River Surges in Sunlight"
     slug: v.string(), // "river-surges-in-sunlight"
     complexity: v.union(
-      v.literal("Low"),
-      v.literal("Moderate"),
-      v.literal("High"),
-      v.literal("Very High"),
+      v.literal('Low'),
+      v.literal('Moderate'),
+      v.literal('High'),
+      v.literal('Very High'),
     ),
     summary: v.string(), // 1-line playstyle description
     imageUrl: v.optional(v.string()), // Path to spirit panel art (optional for aspects without unique art)
-    expansionId: v.id("expansions"),
+    expansionId: v.id('expansions'),
     elements: v.array(v.string()), // ["Sun", "Water"] (primary elements)
     // For aspects: link to base spirit
-    baseSpirit: v.optional(v.id("spirits")),
+    baseSpirit: v.optional(v.id('spirits')),
     aspectName: v.optional(v.string()), // "Sunshine", "Travel", etc.
     // Aspect complexity modifier relative to base spirit (for display arrows)
     complexityModifier: v.optional(
-      v.union(v.literal("easier"), v.literal("same"), v.literal("harder")),
+      v.union(v.literal('easier'), v.literal('same'), v.literal('harder')),
     ),
     // Detailed playstyle description for detail page
     description: v.optional(v.string()),
@@ -63,14 +63,14 @@ export default defineSchema({
       ),
     ),
   })
-    .index("by_slug", ["slug"])
-    .index("by_expansion", ["expansionId"])
-    .index("by_base_spirit", ["baseSpirit"])
-    .index("by_complexity", ["complexity"]),
+    .index('by_slug', ['slug'])
+    .index('by_expansion', ['expansionId'])
+    .index('by_base_spirit', ['baseSpirit'])
+    .index('by_complexity', ['complexity']),
 
   // Openings table - text-based turn-by-turn opening guides
   openings: defineTable({
-    spiritId: v.id("spirits"), // Link to spirit (base or aspect)
+    spiritId: v.id('spirits'), // Link to spirit (base or aspect)
     slug: v.string(), // URL-friendly identifier: "standard-opening"
     name: v.string(), // Display name: "Standard Opening"
     description: v.optional(v.string()), // Brief summary of the strategy
@@ -92,15 +92,11 @@ export default defineSchema({
     // Keep optional for backward compatibility until all documents are migrated.
     // Run `npx convex run seed:reseedSpirits` on production to remove this field from data.
     difficulty: v.optional(
-      v.union(
-        v.literal("Beginner"),
-        v.literal("Intermediate"),
-        v.literal("Advanced"),
-      ),
+      v.union(v.literal('Beginner'), v.literal('Intermediate'), v.literal('Advanced')),
     ),
   })
-    .index("by_spirit", ["spiritId"])
-    .index("by_slug", ["slug"]),
+    .index('by_spirit', ['spiritId'])
+    .index('by_slug', ['slug']),
 
   // Games table - user game history for tracking plays
   games: defineTable({
@@ -109,12 +105,12 @@ export default defineSchema({
 
     // Core game info
     date: v.string(), // ISO 8601 date string "2026-01-31"
-    result: v.union(v.literal("win"), v.literal("loss")),
+    result: v.union(v.literal('win'), v.literal('loss')),
 
     // Spirits (1-6, stored as array)
     spirits: v.array(
       v.object({
-        spiritId: v.optional(v.id("spirits")), // Optional for CSV imports
+        spiritId: v.optional(v.id('spirits')), // Optional for CSV imports
         name: v.string(), // Denormalized for CSV export
         variant: v.optional(v.string()), // Aspect name if applicable
         player: v.optional(v.string()), // Player name
@@ -163,7 +159,7 @@ export default defineSchema({
     updatedAt: v.number(),
     deletedAt: v.optional(v.number()), // For soft delete
   })
-    .index("by_user", ["userId"])
-    .index("by_user_date", ["userId", "date"])
-    .index("by_user_deleted", ["userId", "deletedAt"]),
-});
+    .index('by_user', ['userId'])
+    .index('by_user_date', ['userId', 'date'])
+    .index('by_user_deleted', ['userId', 'deletedAt']),
+})

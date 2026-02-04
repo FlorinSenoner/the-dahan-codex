@@ -4,23 +4,18 @@ A companion app for the board game Spirit Island, designed for the community.
 
 ## Core Value
 
-**The Opening Scrubber** — a graphical, scrubbable visualization of spirit
-openings that re-creates the spirit board mechanics in code. Users scrub through
-turns on a timeline and see the exact board state at each turn: growth options
-with the chosen one highlighted, presence tracks updating slot by slot, and
-cards played with full previews.
+**The Opening Scrubber** — a graphical, scrubbable visualization of spirit openings that re-creates
+the spirit board mechanics in code. Users scrub through turns on a timeline and see the exact board
+state at each turn: growth options with the chosen one highlighted, presence tracks updating slot by
+slot, and cards played with full previews.
 
 ## Features
 
-- **Spirits Library** — Browse all spirits with filtering by expansion and
-  complexity
-- **Spirit Detail** — View complexity, strengths/weaknesses, power ratings radar
-  chart
+- **Spirits Library** — Browse all spirits with filtering by expansion and complexity
+- **Spirit Detail** — View complexity, strengths/weaknesses, power ratings radar chart
 - **Opening Scrubber** — Turn-by-turn graphical visualization of spirit openings
-- **Game Tracker** — Track plays with spirits, adversaries, scenarios, and
-  scores (logged-in users)
-- **Notes** — Rich-text notes with backlinks attachable to spirits, openings, or
-  games
+- **Game Tracker** — Track plays with spirits, adversaries, scenarios, and scores (logged-in users)
+- **Notes** — Rich-text notes with backlinks attachable to spirits, openings, or games
 - **PWA** — Installable, offline-capable progressive web app
 
 ## Tech Stack
@@ -59,7 +54,7 @@ cp .env.example .env.local
 ### Development
 
 ```bash
-# Start dev server (port 5173)
+# Start dev server (port 4127)
 pnpm dev
 
 # In another terminal, start Convex dev server
@@ -98,18 +93,18 @@ the-dahan-codex/
 
 ## Scripts
 
-| Command           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `pnpm dev`        | Start development server                 |
-| `pnpm build`      | Build for production                     |
-| `pnpm preview`    | Preview production build with Wrangler   |
-| `pnpm deploy`     | Deploy to Cloudflare Workers             |
-| `pnpm lint`       | Run Biome linting                        |
-| `pnpm lint:fix`   | Fix linting issues                       |
-| `pnpm format`     | Format code with Biome + Prettier        |
-| `pnpm typecheck`  | Run TypeScript type checking             |
-| `pnpm test:e2e`   | Run Playwright E2E tests                 |
-| `pnpm ci`         | Run full CI pipeline locally             |
+| Command          | Description                            |
+| ---------------- | -------------------------------------- |
+| `pnpm dev`       | Start development server               |
+| `pnpm build`     | Build for production                   |
+| `pnpm preview`   | Preview production build with Wrangler |
+| `pnpm deploy`    | Deploy to Cloudflare Workers           |
+| `pnpm lint`      | Run Biome linting                      |
+| `pnpm lint:fix`  | Fix linting issues                     |
+| `pnpm format`    | Format code with Biome + Prettier      |
+| `pnpm typecheck` | Run TypeScript type checking           |
+| `pnpm test:e2e`  | Run Playwright E2E tests               |
+| `pnpm ci`        | Run full CI pipeline locally           |
 
 ## Contributing
 
@@ -122,11 +117,11 @@ Pre-commit hooks run Biome checks automatically.
 
 ## Disclaimer
 
-The Dahan Codex is an unofficial fan project and is not affiliated with Greater
-Than Games, LLC. Spirit Island and all related materials, names, and images are
-the property of Greater Than Games, LLC.
+The Dahan Codex is an unofficial fan project and is not affiliated with Greater Than Games, LLC.
+Spirit Island and all related materials, names, and images are the property of Greater Than Games,
+LLC.
 
 ## License
 
-This project is for personal/educational use. Spirit Island content belongs to
-Greater Than Games, LLC.
+This project is for personal/educational use. Spirit Island content belongs to Greater Than Games,
+LLC.

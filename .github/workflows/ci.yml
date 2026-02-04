@@ -7,64 +7,76 @@ on:
     branches: [main]
 
 jobs:
-  ci:
+  quality:
+    name: Quality
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
+    env:
+      CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Run quality checks
+        run: pnpm check
+
+  e2e:
+    name: E2E Tests
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+      VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+      VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+      CLERK_TEST_USER_EMAIL: ${{ secrets.CLERK_TEST_USER_EMAIL }}
+      CLERK_TEST_USER_PASSWORD: ${{ secrets.CLERK_TEST_USER_PASSWORD }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Deploy Convex functions
+        run: pnpm exec convex deploy --cmd-url-env-var-name VITE_CONVEX_URL
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v6
+        if: failure()
         with:
-          version: 9
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: "pnpm"
+  build:
+    name: Build
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
 
-      - name: Run Biome checks
-        run: pnpm lint
-
-      - name: Type check
-        run: pnpm typecheck
-
-      - name: Convex typecheck
-        run: pnpm exec convex typecheck
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Build
         run: pnpm build
         env:
           VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
-
-      - name: Verify service worker generated
-        run: |
-          if [ ! -f "dist/sw.js" ]; then
-            echo "Error: Service worker not generated!"
-            exit 1
-          fi
-          echo "Service worker generated successfully"
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Run Playwright tests
-        run: pnpm test:e2e
-        env:
-          VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
-          VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v6
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
