@@ -5,9 +5,11 @@ import {
   Link,
   Outlet,
   useBlocker,
+  useLocation,
   useMatches,
   useNavigate,
   useParams,
+  useRouter,
 } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
@@ -76,8 +78,19 @@ export const Route = createFileRoute('/spirits/$slug')({
 function SpiritDetailLayout() {
   const { slug } = Route.useParams()
   const navigate = useNavigate()
+  const router = useRouter()
+  const location = useLocation()
   const matches = useMatches()
   const params = useParams({ strict: false })
+
+  const fromListing = 'fromListing' in location.state && location.state.fromListing === true
+  const goBack = useCallback(() => {
+    if (fromListing) {
+      router.history.back()
+    } else {
+      navigate({ to: '/spirits', viewTransition: true })
+    }
+  }, [fromListing, router, navigate])
 
   // Track tabs visibility for header aspect name display
   const [tabsVisible, setTabsVisible] = useState(true)
@@ -107,12 +120,7 @@ function SpiritDetailLayout() {
           <Button
             aria-label="Back to spirits"
             className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() =>
-              navigate({
-                to: '/spirits',
-                viewTransition: true,
-              })
-            }
+            onClick={goBack}
             size="icon"
             variant="ghost"
           >
@@ -156,12 +164,7 @@ function SpiritDetailLayout() {
           <Button
             aria-label="Back to spirits"
             className="min-w-[44px] min-h-[44px] cursor-pointer"
-            onClick={() =>
-              navigate({
-                to: '/spirits',
-                viewTransition: true,
-              })
-            }
+            onClick={goBack}
             size="icon"
             variant="ghost"
           >
