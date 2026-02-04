@@ -1,4 +1,4 @@
-name: Cleanup Preview
+name: Cleanup Preview Deployment
 
 on:
   pull_request:
@@ -6,27 +6,33 @@ on:
 
 jobs:
   cleanup:
-    name: Cleanup Preview Deployment
+    name: Cleanup PR
     runs-on: ubuntu-latest
-    timeout-minutes: 5
 
     steps:
-      - name: Delete preview worker
-        uses: cloudflare/wrangler-action@v3
-        continue-on-error: true
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: delete --name the-dahan-codex-pr-${{ github.event.pull_request.number }} --force
-
-      - name: Delete merged branch
+      - name: Delete PR Branch
         if: github.event.pull_request.merged == true
-        run: |
-          BRANCH="${{ github.event.pull_request.head.ref }}"
-          if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
-            echo "Skipping deletion of protected branch: $BRANCH"
-            exit 0
-          fi
-          gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/${BRANCH}" || echo "Branch already deleted or does not exist"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.payload.pull_request.head.ref;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Don't delete main or protected branches
+            if (branch === 'main' || branch === 'master') {
+              console.log(`Skipping deletion of protected branch: ${branch}`);
+              return;
+            }
+
+            try {
+              await github.rest.git.deleteRef({
+                owner,
+                repo,
+                ref: `heads/${branch}`,
+              });
+              console.log(`Deleted branch: ${branch}`);
+            } catch (error) {
+              // Branch might already be deleted or protected
+              console.log(`Could not delete branch ${branch}: ${error.message}`);
+            }
