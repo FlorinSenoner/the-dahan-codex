@@ -38,4 +38,4 @@ pre-push:
       run: pnpm jscpd
 
     test:
-      run: pnpm test:e2e
+      run: pnpm test
