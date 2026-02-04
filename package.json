@@ -11,8 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && pnpm generate-sw",
-    "generate-sw": "tsx scripts/generate-sw.ts",
+    "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "typecheck:convex": "convex typecheck",
@@ -21,11 +20,12 @@
     "format": "biome format --write . && prettier --write \"**/*.{md,mdx,yml,yaml}\"",
     "format:check": "biome format . && prettier --check \"**/*.{md,mdx,yml,yaml}\"",
     "knip": "knip",
-    "knip:fix": "knip --fix",
     "jscpd": "jscpd .",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "ci": "pnpm lint && pnpm typecheck && pnpm typecheck:convex && pnpm jscpd && pnpm build && test -f dist/sw.js && pnpm test:e2e"
+    "check": "biome check . && prettier --check \"**/*.{md,mdx,yml,yaml}\" && pnpm typecheck && pnpm typecheck:convex && pnpm knip && pnpm jscpd",
+    "ci": "pnpm check && pnpm build && pnpm test:e2e",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.33.2",
@@ -39,7 +39,6 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/query-persist-client-core": "^5.91.19",
     "@tanstack/react-query": "^5.90.20",
@@ -61,7 +60,6 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "vaul": "^1.1.2",
-    "workbox-core": "^7.4.0",
     "workbox-expiration": "^7.4.0",
     "workbox-precaching": "^7.4.0",
     "workbox-routing": "^7.4.0",
@@ -71,6 +69,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.12",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
     "@playwright/test": "^1.58.0",
     "@types/node": "^25.0.10",
     "@types/papaparse": "^5.5.2",
@@ -82,10 +82,9 @@
     "knip": "^5.82.1",
     "lefthook": "^2.0.15",
     "prettier": "^3.8.1",
-    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^6.0.5",
-    "workbox-build": "^7.4.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "vite-tsconfig-paths": "^6.0.5"
   }
 }

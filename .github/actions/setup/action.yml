@@ -1,0 +1,12 @@
+name: "Setup"
+description: "Install mise, deps, generate Convex types"
+runs:
+  using: "composite"
+  steps:
+    - uses: jdx/mise-action@v2
+    - run: pnpm install --frozen-lockfile
+      shell: bash
+    - run: pnpm convex codegen --typecheck=disable
+      shell: bash
+      env:
+        CONVEX_DEPLOY_KEY: ${{ env.CONVEX_DEPLOY_KEY }}

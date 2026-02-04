@@ -5,32 +5,29 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "09:00"
-      timezone: "UTC"
     open-pull-requests-limit: 10
+    groups:
+      dev-deps:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+      prod-deps:
+        dependency-type: "production"
+        update-types: ["minor", "patch"]
     commit-message:
       prefix: "deps"
-    groups:
-      # Group minor/patch updates to reduce PR noise
-      minor-and-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
-    # Ignore major updates for framework packages (require manual review)
-    ignore:
-      - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "@tanstack/*"
-        update-types: ["version-update:semver-major"]
+    labels:
+      - "dependencies"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
+    groups:
+      actions:
+        patterns: ["*"]
     commit-message:
       prefix: "ci"
+    labels:
+      - "dependencies"
+      - "ci"
