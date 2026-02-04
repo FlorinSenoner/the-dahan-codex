@@ -1,0 +1,227 @@
+[
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Multi-tasking",
+    "description": "Phantaskippy's approach emphasizing 'juggling' invaders across 3+ lands per turn rather than concentrating powers on single territories.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Second option (place 2 presence total, including 'Always' section). Cards: Gift of Proliferation, Stem the Flow of Fresh Water. Activate Tier 1 Creepers to destroy the back town. Prioritize unlocking your 1 energy space."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Third option (gain a card and 3 energy), take play track presence for 2 card plays. Cards: Overgrow in a Night, Fields Choked with Growth. Resolve Overgrow first to uncover the free plant element. Activate Tier 1 All-Enveloping. Aim for 6 presence on board before invaders ravage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Identify 1-4 'maintenance lands' that you'll allow to build up but prevent from ravaging through Choke the Land. Avoid wasting two powers on one land. Stack presence to 3 in built-up lands to ensure sacred sites remain available for slow powers."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Moon Unlock",
+    "description": "Phantaskippy's approach focusing on unlocking the moon element on the energy track by turn 3-4, then deciding between major power flexibility or 3-card routes.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Start with 2 plays and 2 energy. Use cards to get a flipped fear card and trigger tier 2 Night Terrors. Take growth option 3 to gain cards and spread out."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Continue with growth option 3 to gain cards and spread out. Use your cards to trigger Night Terrors and Spirits May Yet Dream innates."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Goal: Unlock moon element on energy track (turn 4 is fine if needed). If no element luck, consider reclaiming one card to build a second sacred site. After moon unlock, choose 'any element path' for major power flexibility or '3 cards route' for longer games."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Coastal Dominance",
+    "description": "Phantaskippy's approach focusing on coordinating with allies to push explorers to coasts and accumulating drowned invader HP for energy conversion.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Second option to gain 1 energy and spread influence. Cards: Call of the Deeps. Coordinate with allies - if they can push an explorer to the coast, you take out 2 explorers on that coast, preventing builds and generating extra HP for energy."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Third option to position presence in newly explored lands. Cards: Tidal Boon, Swallow the Land Dwellers. This gives you 6 drowned invader HP regardless of ally actions. Activate tier 2 Ocean Breaks the Shore (2 fear, City off board, 3 invader HP energy)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Prioritize tier 2 Ocean Breaks the Shore over Pound Ships to Splinters due to superior returns. Focus on gathering elements to fuel your innate rather than rushing card plays."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "shadows-flicker-like-flame",
+    "slug": "shadows-flicker-like-flame-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Flexible Paths",
+    "description": "Phantaskippy presents three distinct opening approaches: Balanced Growth, Aggressive Card Play Rush, and Major Power Focus.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Path 1: Balanced",
+        "instructions": "Begin playing 2 cards early, then select growth option 3 to secure second card play. By turn 4, achieve 2 card plays, 6 card hand, and 3 energy per turn for stable Dahan support or major power acquisition."
+      },
+      {
+        "turn": 2,
+        "title": "Path 2: Aggressive",
+        "instructions": "Sacrifice early card plays to accelerate power gain. Take growth option 2 for four consecutive turns, removing presence alternately from energy and play tracks. By turn 5, achieve 9 cards, 3 card plays, and 3 energy for faster Tier 2 Darkness Swallows."
+      },
+      {
+        "turn": 3,
+        "title": "Path 3: Major Focus",
+        "instructions": "Maintain just 1 card play for two turns while building energy through presence placement. Enables earlier major power acquisition (6-7 energy by turn 3). Use Shadow of the Dahan to target lands with invaders and Dahan anywhere by spending 1 energy."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Shadows_Flicker_Like_Flame/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Major Power Rush",
+    "description": "Phantaskippy's approach treating Earth as an offensive major power house rather than a minor power defender. Prioritizes replacing expensive starting cards with majors.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain 2 energy from energy track (starting with 5 total energy). Focus on building energy reserves for major power acquisition."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Acquire a card and establish a second sacred site. Begin looking for major powers that synergize with your defensive capabilities."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain second card play plus 2 bonus energy (totaling 13 energy). Target presence track: 3 energy -> 2 card play -> 6 energy -> 3 card play (by turn 7). Replace expensive starting cards with major powers. Maintain small hand size to enable frequent reclaiming."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "keeper-of-the-forbidden-wilds",
+    "slug": "keeper-of-the-forbidden-wilds-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Growth 4 Focus",
+    "description": "Phantaskippy's approach centered on Growth option 4 (place 2 presence, gain power card) as the cornerstone of successful play. Critical rule: end every turn with at least 2 energy.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Options 2 and 3. Unlock sun icon on energy track. Cards: Boon of Growing Power. End with 2 energy. This constraint takes priority over almost all other actions."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Options 3 and 4 to reach 4 energy and 2 card plays. This is the most challenging turn requiring careful power card selection. Maintain the 2 energy buffer."
+      },
+      {
+        "turn": 3,
+        "title": "Turns 3-5",
+        "instructions": "Focus on unlocking 5 energy and plant icon through dual power track advancement. Gradually unlock third card play, potentially reclaiming when necessary. Element priority: fire (highest), sun, plant, major thresholds, air (lowest)."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Keeper_of_the_Forbidden_Wilds/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Three Paths",
+    "description": "Phantaskippy presents three approaches: Destroyer of Towns (frequent reclaim), Stable Card Play (beginner-friendly), and Riding the Storm (hybrid). Power selection ignores card effects in favor of fire/air elements.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Path 1: Destroyer",
+        "instructions": "Focus on destroying two towns nearly every turn through frequent reclaiming. Avoid playing Raging Storm. Prioritize reclaiming cards with fire elements and zero costs. Sacrifices growth speed for early-game dominance."
+      },
+      {
+        "turn": 2,
+        "title": "Path 2: Stable",
+        "instructions": "Emphasize consistent hand management and energy generation. Beginner-friendly approach that prioritizes emptying hand before reclaiming. Lower overall power output but familiar playstyle. Innate activation delayed until turn 5."
+      },
+      {
+        "turn": 3,
+        "title": "Path 3: Storm",
+        "instructions": "Hybrid approach alternating weak and explosive turns. Generates maximum destruction and secures numerous sacred sites. Power priority: 0-cost fire/air cards, then 0-cost fire cards, then 1-cost fire/air. Maintain range-2 coverage with 3 sacred sites."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "river-surges-in-sunlight",
+    "slug": "river-surges-in-sunlight-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Reclaim 1 Rush",
+    "description": "Phantaskippy's approach prioritizing early Reclaim 1 space unlock for superior card play efficiency and tier 2 Massive Flooding activation nearly every turn.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place two presence from different tracks to secure two card plays and two energy. Cards: Flash Flood (enables tier-one Massive Flooding). Prioritize establishing presence in wetlands on neighboring boards."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Take a card and place additional presence, prioritizing wetlands on neighboring boards. Continue building toward Reclaim 1 space."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Rather than reclaiming, place two presence to unlock the Reclaim 1 space. This counterintuitive move provides major advantage - you'll play more cards, replay best cards more, and reclaim all less than other spirits. Enables tier 2 Flooding almost every turn."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-wiki-phantaskippy",
+    "name": "Wiki Opening: Phantaskippy's Dahan Commander",
+    "description": "Phantaskippy's approach emphasizing aggressive Dahan deployment with two paths: Conservative (accumulate energy) or Aggressive (sacrifice energy for early presence clearing).",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Conservative Path",
+        "instructions": "Accumulate energy through growth tracks to support card plays. Starting hand costs 6 energy but has limited early generation. By turn 5, reach 3 card plays plus reclaim capability."
+      },
+      {
+        "turn": 2,
+        "title": "Aggressive Path",
+        "instructions": "Sacrifice early energy to clear presence quickly. Deploy Dahan immediately with starting innates to eliminate explorers and win ravages. Reach full strength by turn 5."
+      },
+      {
+        "turn": 3,
+        "title": "Power Selection",
+        "instructions": "Prioritize elements enabling Gather the Warriors and Lead the Furious Assault innates. Don't obsess over threshold completion every turn. Seek push, gather, defense, and Dahan damage cards. Good majors: Instruments of their own Ruin, Vigor of the Breaking Dawn, Powerstorm, Wrap in Wings of Sunlight."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Thunderspeaker/Phantaskippy%27s_Guide"
+  }
+]

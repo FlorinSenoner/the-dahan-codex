@@ -1,0 +1,67 @@
+[
+  {
+    "spiritSlug": "serpent-slumbering-beneath-the-island",
+    "slug": "serpent-slumbering-beneath-the-island-bgg-opening-1",
+    "name": "BGG Opening: Multiplayer Support",
+    "description": "A multiplayer-focused opening for Serpent that emphasizes supporting allies with Gifts while building toward Majors. Rush 2 card plays for consistent innate access, manage your presence cap, and track ally reclaim cycles.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1 - Gift an Ally",
+        "instructions": "Growth: +1 Energy, gain Minor Power, place presence (from bottom). Cards: Gift of Flowing Power OR Gift of Primordial Deeps. Rush 2 card plays for consistent innate access. Take a Minor with Moon/Fire and Earth - these are more consistently useful than Plant. Place your first presence in a land touching several lands of the same type, preferably the Build land. Consider which ally benefits most from an extra play (slower Spirits) or Minor access (faster Spirits). Noteworthy plays: Bringer - use Primordial Deeps for Moon/Earth to hit max innates, choose Earth for Serpent Rouses level 2. Vital Strength - use Flowing Power for extra play with Growth 3, enables Rituals + Draw of the Fruitful Earth combo. Wildfire - use Flowing Power for Growth 3, play Flash Fires + Asphyxiating Smoke. Lightning - use Flowing Power for Fire, enables Growth 2 + Harbingers + Shatter Homesteads."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2 - Absorb and Defend",
+        "instructions": "Growth: +1 Energy, gain Minor Power, place presence (from bottom). Cards: Absorb Essence + Elemental Aegis. Continue digging for useful cards. Place presence in a land with at least one Town, or touching several Ravage lands. Absorb Essence nets +3 Energy and grants an ally an element they need. Aegis defends your land and all adjacent lands. Hit Serpent Rouses to crush or push a Town (rarely both without setup)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 - Expand Reach",
+        "instructions": "Growth: +4 Energy, place presence (from top). Cards: Remaining Gift + the Minor you like less. Spread presence across the board for better Major targeting next turn. The extra Energy can pay for expensive Events your group wants to avoid."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 - Major Power",
+        "instructions": "Growth: +1 Energy, gain Major Power, place presence (from top). Cards: Other Minor + new Major. You've uncovered the 'Any' element and should have decent Energy. Shoot for a mid-cost Major and forget the Minor in discard. Place presence to meet targeting requirements. Reclaim All next turn."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2282835/openings-serpent-slumbering-beneath-the-island"
+  },
+  {
+    "spiritSlug": "heart-of-the-wildfire",
+    "slug": "heart-of-the-wildfire-bgg-opening-1",
+    "name": "BGG Opening: Flexible Aggro",
+    "description": "A flexible opening for Wildfire focusing on early damage while managing Blight. Rush Plant elements for massive damage scaling. Plan Reclaims carefully to maintain presence placement for Blazing Presence damage.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1 - Clear Early Threats",
+        "instructions": "Growth: Add presence from Plays, gain 2 Energy +1 per Fire (3 total). Cards: Asphyxiating Smoke (1 Fear, destroy 1 Town, Push 1 Dahan). Use presence placement to eliminate an Explorer and prevent a Build. Smoke clears a Town that just built or was just Explored, potentially pushing Dahan to a land another Spirit will defend."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2 - Gain Plant Elements",
+        "instructions": "Growth: Add presence from Energy, gain a Minor Power. Cards: Threatening Flames OR new Minor. Prioritize Plant elements over Fire (your tracks provide Fire already). 3 Plant is a huge power spike. If no Plant, consider Fire/Air for Flash Fires or Firestorm combos. If new Minor has Plant, add presence to a land with Town about to Ravage or Town/Explorer about to Build. If playing Threatening Flames, add presence to a land with City + Town to destroy City and push Town."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 - Maximum Damage",
+        "instructions": "Growth: Add presence from Plays, gain 2 Energy +1 per Fire (4 total). Cards: Flame's Fury + Flash Fires. With Flame's Fury and 4 Fire showing, deal 5 damage total (2 from placement, 3 from Firestorm + Fury). Divide damage as needed - tear into a populated land OR clean your own lands. Flash Fires also benefits from Fury for another Town kill. First opportunity to remove Blight with Burned Land Regrows."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 - Setup for Reclaim",
+        "instructions": "Growth: Add presence from Energy OR Plays, gain a Minor. Cards: Threatening Flames + new Minor OR both Minors (depending on Turn 2 play). After 8 Minor draws, odds are very high you've seen at least 1 Plant. Use Growth's extra range to position for Reclaim next turn. Take from Plays if Invaders are building significant real estate (3 plays = damage spike next turn). Take from Energy if lands are inaccessible (Blighted, occupied by allies) or you already occupy affected lands."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5 - Reclaim and Major",
+        "instructions": "Growth: Reclaim All, gain 1 Energy, gain Major or Minor. Cards: TBD based on draws. If gaining Major, forget a Minor you don't like or Flash Fires (utility drops off, and forgetting a 2-cost opens budget room). Shoot for 3-4 cost Majors so Growth 3 always affords them. Alternatively, grab a Minor if initial draws lacked Plant for better mid-game scaling."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2313791/openings-heart-of-the-wildfire"
+  }
+]

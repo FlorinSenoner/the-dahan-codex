@@ -380,19 +380,21 @@ export function OpeningSection({
             onValueChange={handleTabChange}
             className="space-y-4"
           >
-            <div className="flex flex-wrap items-center gap-2">
-              <TabsList variant="line">
-                {openings.map((o) => (
-                  <TabsTrigger key={o._id} value={o._id}>
-                    {o.name}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+            <div className="flex items-center gap-2">
+              <div className="overflow-x-auto flex-1 -mx-4 px-4 scrollbar-thin">
+                <TabsList variant="line">
+                  {openings.map((o) => (
+                    <TabsTrigger key={o._id} value={o._id}>
+                      {o.name}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleCreateNew}
-                className="h-8"
+                className="h-8 flex-shrink-0"
               >
                 <Plus className="h-3 w-3 mr-1" />
                 Add Opening
@@ -436,13 +438,15 @@ export function OpeningSection({
           onValueChange={handleTabChange}
           className="space-y-4"
         >
-          <TabsList variant="line">
-            {openings.map((o) => (
-              <TabsTrigger key={o._id} value={o._id}>
-                {o.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="overflow-x-auto -mx-4 px-4 scrollbar-thin">
+            <TabsList variant="line">
+              {openings.map((o) => (
+                <TabsTrigger key={o._id} value={o._id}>
+                  {o.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
           {openings.map((o) => (
             <TabsContent key={o._id} value={o._id}>
               {renderOpeningContent(o)}

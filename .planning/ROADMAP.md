@@ -38,8 +38,9 @@ Decimal phases appear between their surrounding integers in numeric order.
       openings
 - [x] **Phase 6: User Data** - Game tracker with CSV export/import
 - [x] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
-- [ ] **Phase 6.2: Fix Code Duplication** - Eliminate jscpd clones, extract shared validators/components (INSERTED)
+- [x] **Phase 6.2: Fix Code Duplication** - Eliminate jscpd clones, extract shared validators/components (INSERTED)
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
+- [ ] **Phase 8: Spirit & Aspect Data Scraping** - Populate complete spirit data from wiki
 
 ## Phase Details
 
@@ -427,8 +428,8 @@ Plans:
 - [x] 06.2-03-PLAN.md — Seed data consolidation (seed.ts)
 - [x] 06.2-04-PLAN.md — ScoreBreakdown component extraction
 - [x] 06.2-05-PLAN.md — Game form payload utility
-- [ ] 06.2-06-PLAN.md — Opening section internal helpers (deferred)
-- [ ] 06.2-07-PLAN.md — CSV spirit field utilities (deferred)
+- [x] 06.2-06-PLAN.md — Opening section internal helpers
+- [x] 06.2-07-PLAN.md — CSV spirit field utilities
 
 ### Phase 7: Seed Data Management
 
@@ -446,6 +447,35 @@ Plans:
 Plans:
 
 - [ ] 07-01: TBD
+
+### Phase 8: Spirit & Aspect Data Scraping
+
+**Goal**: Populate complete spirit and aspect data by scraping authoritative sources
+**Depends on**: Phase 6.2 **Requirements**: Data completeness for all spirits
+**Success Criteria** (what must be TRUE):
+
+1. All spirits from base game + expansions have complete data (images, descriptions, elements, complexity, power ratings)
+2. All aspects have complete data with images and complexity modifiers
+3. Power spider chart data accurate for all spirits
+4. Seeding script is repeatable for future data updates
+5. User-created openings preserved during reseed
+
+**Data Sources**:
+- https://spiritislandwiki.com/index.php?title=List_of_Spirits
+- https://spiritislandwiki.com/index.php?title=List_of_Aspect_Cards
+
+**Note on Opening Guides**: Opening guides are manually curated from community sources (Reddit, BGG, strategy guides) using the admin tools built in Phase 5, rather than auto-scraped. The existing admin tooling supports creating text-based turn-by-turn guides. This phase focuses on spirit/aspect metadata and images only.
+
+**Plans**: 6 plans
+
+Plans:
+
+- [ ] 08-01-PLAN.md — Scrape spirit data to JSON (all 37 spirits from wiki)
+- [ ] 08-02-PLAN.md — Scrape aspect data to JSON (all 31 aspects from wiki)
+- [ ] 08-03-PLAN.md — Download spirit and aspect images
+- [ ] 08-04-PLAN.md — Update seed data with scraped information
+- [ ] 08-05-PLAN.md — Preserve openings during reseed
+- [ ] 08-06-PLAN.md — Run reseed and verify data (checkpoint)
 
 ## Cross-Cutting Requirements
 
@@ -468,7 +498,7 @@ development:
 
 ## Progress
 
-**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 6.1 > 6.2 > 7
+**Execution Order:** Phases execute in numeric order: 1 > 2 > 2.1 > 3 > 3.1 > 3.2 > 3.3 > 3.6 > 4 > 5 > 6 > 6.1 > 6.2 > 7 > 8
 
 | Phase                                | Plans Complete | Status      | Completed  |
 | ------------------------------------ | -------------- | ----------- | ---------- |
@@ -485,8 +515,9 @@ development:
 | 5. Text Opening Management           | 18/18          | Complete    | 2026-01-31 |
 | 6. User Data                         | 10/10          | Complete    | 2026-02-01 |
 | 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
-| 6.2 Fix Code Duplication             | 5/7            | In Progress | -          |
-| 7. Seed Data Management              | 0/TBD          | Pending     | -          |
+| 6.2 Fix Code Duplication             | 7/7            | Complete    | 2026-02-02 |
+| 7. Seed Data Management              | 0/TBD          | On Hold     | -          |
+| 8. Spirit & Aspect Data Scraping     | 0/6            | Planned     | -          |
 
 ---
 

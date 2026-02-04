@@ -117,8 +117,15 @@ export const getSpiritBySlug = query({
         .withIndex("by_base_spirit", (q) => q.eq("baseSpirit", baseSpirit._id))
         .collect();
 
+      // Slugify both sides for comparison (handles "spreading-hostility" matching "Spreading Hostility")
+      const slugify = (text: string) =>
+        text
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+
       const aspect = aspects.find(
-        (a) => a.aspectName?.toLowerCase() === aspectArg.toLowerCase(),
+        (a) => a.aspectName && slugify(a.aspectName) === slugify(aspectArg),
       );
       return aspect || baseSpirit;
     }

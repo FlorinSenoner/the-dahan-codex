@@ -1,0 +1,27 @@
+[
+  {
+    "spiritSlug": "vengeance-as-a-burning-plague",
+    "slug": "vengeance-as-a-burning-plague-bgg-je-opening-1",
+    "name": "BGG JE Opening: Standard",
+    "description": "jyonker13's opening for Vengeance focusing on flexible Disease placement for either Epidemics Run Rampant (utility) or Savage Revenge (tempo) innate paths.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +1 Energy, gain Minor Power, add presence from Energy track. Cards: Fetid Breath Spreads Infection (+1 Fear and add a Disease). Add presence to land with no buildings, ideally closer to an ally's board. If choosing between Fire or Animal minor, Fire is generally better as second innate scales better. Add Disease to: land with Town that just Explored (prevent City/farm Build), OR empty explored land (farm Build/push with Plaguebearers), OR land with Town+Blight for first innate next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (one from Plays, one from Energy/Plays depending on Element needed). Cards: Plaguebearers and new Minor. If using first innate (Epidemics Run Rampant): add first presence from Plays to Ravaging land, second from Energy to different board with Disease. If using second innate (Savage Revenge): add both from Plays to land about to Ravage - lose 1 presence but keep 1 for Savage Revenge. Push Disease with Plaguebearers into land Ravaging next turn to set up Sudden Fevers."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Place 2 presence (Energy/Plays for Element, one from Energy for 3 Energy/turn). Cards: Strike Low with Sudden Fevers (1 Fear, prevent Ravage in land with Disease), Fiery Vengeance (remove destroyed presence, 1 Fear + 1 damage in target Spirit's land). Add both presence to Ravaging land if using second innate. Fiery Vengeance can augment allies' abilities. Next turn: Reclaim All, shoot for Minor matching elements of first one gained."
+      }
+    ],
+    "author": "jyonker13/Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2484534/openings-vengeance-as-a-burning-plague"
+  }
+]

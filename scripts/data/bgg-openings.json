@@ -1,0 +1,412 @@
+[
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's recommended opening for A Spread of Rampant Green, focusing on early presence placement and triggering innates.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (one from each track), +1 card play this turn. Cards: Gift of Proliferation (another spirit places 1 presence), Stem the Flow of Fresh Water (1 damage to a building; combo with innate Creepers Tear into Mortar to destroy a town). Watch out for range limits! Use Choke the Land with Green to stop invaders from building."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence from bottom track, gain a power card (minor), +3 energy. Cards: Overgrow in a Night (place 1 presence or 3 fear), Fields Choked with Growth (push 1 town or 3 Dahan). Overgrow places presence from top track, uncovering a plant element for All-Enveloping Green (Defend 2)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim cards. If your minor power has plant+moon+water, you can activate level 2 of Creepers Tear into Mortar to destroy a town without needing a combo."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1965751/openings-a-spread-of-rampant-green"
+  },
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-bgg-opening-2",
+    "name": "BGG Opening: Growth Spurt",
+    "description": "Alternative opening that causes 4 presence placement in a single turn, getting temporary extra card play on turn 2 instead of turn 1.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +3 energy, gain a power (minor), place 1 presence (from top). Cards: Fields Choked with Growth (push 1 town or 3 Dahan). If you draw a minor with plant+moon (~50%), play Gift of Proliferation instead."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (from bottom), +1 card play this turn. Cards: Overgrow in a Night, Gift of Proliferation, Stem the Flow of Fresh Water. You have 2 moon and 1 water for level 2 Creepers and level 1 All-Enveloping Green."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain a power, place 1 presence (from bottom). This gets you to 3 permanent card plays while reclaiming."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1965751/openings-a-spread-of-rampant-green"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Thunderspeaker, using careful Dahan positioning to set up devastating turns.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +4 energy, place 1 presence (bottom track). Cards: Sudden Ambush (gather 1 Dahan, each Dahan destroys 1 explorer), Voice of Thunder (push 4 Dahan or 2 fear). Sudden Ambush kills an explorer before it can build. Use Gather the Warriors and Voice of Thunder to position Dahan in 3 locations for next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (top track). Cards: Words of Warning (defend 3, simultaneous damage), Manifestation of Power and Glory (presence×dahan damage). Words of Warning defends against town+explorer with Dahan present. Manifestation can deal 6 damage to destroy city+town+explorer. Lead the Furious Assault destroys an additional town."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim cards, gain 2 powers. Continue the momentum with your powerful innates and Dahan positioning."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1966212/openings-thunderspeaker"
+  },
+  {
+    "spiritSlug": "river-surges-in-sunlight",
+    "slug": "river-surges-in-sunlight-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's detailed opening for River, focusing on sacred sites in wetlands and building to the powerful third tier of Massive Flooding.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (from bottom track). Cards: Wash Away (push up to 3 towns/explorers), River's Bounty (gather 2 Dahan, add 1 Dahan, +1 energy). Focus on expanding to wetlands for sacred sites. Use Wash Away on lands where invaders just explored with a starting town."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (from bottom track), reclaim 1 (River's Bounty). Cards: Flash Floods (1 damage, +1 if coastal), Boon of Vigor (ally gains energy), River's Bounty again. This triggers the second level of Massive Flooding to destroy one town while pushing."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain a power (minor), +1 energy. Cards: varies (e.g., River's Bounty, Flash Floods, Wash Away). Focus on water and sun elements for your minor power draws."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Place 1 presence (bottom track), gain a power (minor). Cards: all available (careful what you reclaim for turn 5). You now have 6 power cards total."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Reclaim, gain a power (minor), +1 energy. Play all 4 starting cards to activate the highest tier of Massive Flooding. Make sure you have enough energy by playing River's Bounty on turns 3 and 4."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1967085/openings-river-surges-in-sunlight"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Lightning's Swift Strike, balancing presence placement with triggering the powerful Thundering Destruction innate.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 2 presence (from top). Cards: Shatter Homesteads (destroy town, 1 fear). Placing 2 presence establishes a second sacred site for range. Play only 1 card to save elements for triggering innate next turn. Use Swiftness of Lightning to make it fast if destroying a starting town creates safe lands."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy, place 1 presence (from bottom). Cards: Lightning's Boon (one ally makes 2 powers fast), Raging Storm (1 damage to all), Harbingers of the Lightning (push 2 Dahan; 1 fear if buildings). This triggers Thundering Destruction to destroy another town. Combo Raging Storm with allies."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain a power (minor), +1 energy. You have high enough energy to play Shatter Homesteads + Lightning's Boon + Harbingers and trigger your innate again."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1969985/openings-lightnings-swift-strike"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-bgg-opening-2",
+    "name": "BGG Opening: Aggressive",
+    "description": "Community alternative opening that pushes for a strong early game with innate triggers from turn 1.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 1 Presence (from bottom), 3 Energy (4 total). Cards: Shatter Homesteads, Lightning's Boon (for elements in solo or to speed an ally), Harbingers of the Lightning. Triggers innate level 1, allowing you to destroy 2 towns at range 1-2 and move Dahan. Can net 4 fear total."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Reclaim, Gain Minor Power, 1 Energy (3 total). Cards: If towns are not under control, repeat turn 1. Otherwise varies depending on the minor power gained."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: 2 Presence (from top) or 1 Presence (from bottom), 3 Energy. Cards: Everything not played turn 2, possibly except Raging Storm depending on energy/town status."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim, Gain Minor Power, 1 Energy. At this stage, you can play many powers every turn. Focus on reliably triggering Thundering Destruction."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1969985/openings-lightnings-swift-strike"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Ocean's Hungry Grasp, spreading presence to multiple boards quickly and drowning invaders.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Setup: Place presence in a coastal land with a town for Ocean Breaks the Shore targeting. Growth: 2 presence in oceans (from bottom track), +1 energy. Cards: Call of the Deeps (gather 1 explorer, or 2 into ocean), Tidal Boon (ally +2 energy and pushes 1 town + 2 Dahan). This triggers both innates at level 1."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Push presence from oceans, place 1 presence (from bottom), gain a power (minor). Cards: Grasping Tide (Defend 4, 2 fear), Swallow the Land-Dwellers (drown 1 explorer, 1 town, 1 Dahan), your new minor. In 4-player, push presence to get onto the fourth board. Look for minors with water+stone or air."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. When reclaiming, you MUST gather 1 presence into each ocean. Plan carefully for card targeting. Try to alternate pushing presence on even turns and reclaiming on odd turns."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1970506/openings-oceans-hungry-grasp"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-bgg-opening-1",
+    "name": "BGG Opening: Major Power Focus",
+    "description": "Jeremy Lennert's opening for Bringer, focusing on getting a major power early due to good energy generation and the reclaim-one growth option.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 1 presence (from top), gain a power (minor). Cards: Dreams of the Dahan (gather Dahan or fear), Predatory Nightmares (2 nightmare damage, push Dahan). The air element from your presence track triggers Spirits May Yet Dream (reveal a fear card) and level 2 Night Terrors (+2 fear). Use Predatory Nightmares to push a town that's about to ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +2 energy, place 1 presence (from top) in land with invaders/Dahan. Cards: Dread Apparitions (fear -> defense, 1 fear), Call on Midnight's Dreams (fear or a major power). Order matters: use Dread Apparitions, then Night Terrors for 2 fear (defense 3), then Spirits May Yet Dream, then Call on Midnight's Dreams for a major power. Forget Call to use the major immediately if it's good."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If you got a good major, use Reclaim One to cast it again alongside your turn 1 minor. If both cards have moon elements, placing presence from top track gives you the third moon for the second part of Spirits May Yet Dream."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971193/openings-bringer-of-dreams-and-nightmares"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-bgg-opening-2",
+    "name": "BGG Opening: Delayed Major",
+    "description": "Community alternative that delays the major power by one turn but sets up a devastating turn 2 with better board control.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place Presence (1 away, top track to uncover Air), Gain Minor Power. Cards: Predatory Nightmares (2 Damage + Dahan Push), Dreams of the Dahan (Gather Dahan or Fear per Dahan). Gather 3 Dahan into a land you'll defend turn 2. Use Predatory Nightmares to 'destroy' a town that was explored during setup. Activates level 2 Night Terrors (2 Fear) and Spirits May Yet Dream."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place Presence (in Dahan land you intend to defend) + 2 Energy. Cards: Dread Apparitions (1 Fear, defend by Fear), Call on Midnight's Dream (Gain Major or 2 Fear). Play Call for the fear. With Night Terrors (2 fear) + Dread Apparitions, you're defending 5. With 3 Dahan, you can wipe out Explorer + Town + City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim one, use 0-range presence placement to create a sacred site, and get your major power via Call on Midnight's Dreams. You'll have at least 4 Energy before Dahan boost, so you can play almost any major you draw."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971193/openings-bringer-of-dreams-and-nightmares"
+  },
+  {
+    "spiritSlug": "shadows-flicker-like-flame",
+    "slug": "shadows-flicker-like-flame-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Shadows, squeezing in presence placement early to take advantage of the excellent presence tracks.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +3 energy, place 1 presence (from bottom). Cards: Favors Called Due (gather 4 Dahan, 3 fear if they outnumber invaders), Mantle of Dread (2 fear, target spirit pushes 1 explorer and 1 town). Two plays trigger Darkness Swallows the Unwary to stop a build chain. Have an ally use Mantle of Dread to prevent blight."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence (from top), gain a power (minor). Cards: Concealing Shadows (1 fear, Dahan immune to Ravage), Crops Wither and Fade (2 fear, downgrade a building). If you draw a moon+fire minor, substitute it for Crops. Use Shadows of the Dahan (spend 1 energy) to target Concealing Shadows from any distance on the land where you gathered Dahan."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Place 1 presence (from top), gain a power (minor). Cards: 2 minors (or whatever is left). If you prioritize elements, ~65% chance of triggering your innate. This is your weak turn, but you now earn 3 energy/turn passively."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim all, gain a power. You could have up to 6 energy, making a major power reasonable. You can play 3 cards on both turn 5 and turn 6 without needing to reclaim until turn 7."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971694/openings-shadows-flicker-like-flame"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-bgg-opening-1",
+    "name": "BGG Opening: Opportunistic",
+    "description": "Jeremy Lennert's strategy guide for Vital Strength, emphasizing opportunistic play rather than a fixed opening. First 2 presence from bottom track for card plays.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: If invaders explored jungle during setup, learn a power and place presence at range 0 to create a sacred site (free defense for ravage). Otherwise, take +2 energy and place presence where invaders just explored. Cards: Draw of the Fruitful Earth (1 cost), or a minor if you learned one."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Create a sacred site in the explored land if you didn't turn 1. If you played a minor turn 1, you probably need energy to afford 2 cards. Cards: Consider Guard the Healing Land if it removes starting blight AND prevents new blight. Otherwise trigger your innate with Rituals of Destruction + Draw of the Fruitful Earth."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 onwards",
+        "instructions": "Use Draw of the Fruitful Earth to gather Dahan for defense, AND gather lone explorers from adjacent lands to stop multiple builds at once. Your 3-cost cards (Guard, Year of Perfect Stillness, Rituals) are powerful but situational - only use when conditions are favorable."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1974592/openings-vital-strength-of-the-earth"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-bgg-opening-2",
+    "name": "BGG Opening: Plays Track Focus",
+    "description": "Community opening that prioritizes card plays early, delaying majors until turn 5 when you have 6 energy generation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Growth 3 (presence from play track in explored land). Cards: Draw of the Fruitful Earth. Left with 3 energy."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Growth 2 (presence from play track in same land, pick 0-1 cost minor). Cards: Minor + one of the 3-cost cards. Left with 1 energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If explored in jungle: Growth 2 (presence from energy track in jungle), pick 0-1 cost minor. Cards: Minor + one of the 3-cost cards. Otherwise might reclaim and play same 2 cards. Left with 0 energy."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Pick from energy track, generate 4 energy. Cards: 3-cost card + minor. Left with 0 energy."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Pick from energy track, generate 6 energy. This is when you start looking for majors. Focus on setting up Dahan fights in your sacred sites rather than rushing majors."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1974592/openings-vital-strength-of-the-earth"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Sharp Fangs, focusing on the bottom presence track for card plays and reclaim-one options.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Setup: Put second presence where you want to push with Terrifying Chase, preferably non-Jungle. Growth: +1 energy, gain a power (minor); Place 1 presence (from bottom). Cards: Prey on the Builders (gather 1 beast; no build), Terrifying Chase (push 2 explorers/towns/dahan, +2 per beast). Learn a power with animal element (~87% chance). Use Ranging Hunt to reposition presence for targeting."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy; Place 1 presence (from bottom). Cards: Too Near the Jungle (destroy explorer, 1 fear), Teeth Gleam from Darkness (add beast + 1 fear, or 3 fear), minor with animal. This gives 3 animal + 2 plant for full Ranging Hunt. Place presence in new jungle for Too Near the Jungle targeting."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Pay 1 energy, reclaim all, gain a power (minor); Place 1 presence. Cards: Too Near the Jungle, Teeth Gleam from Darkness, any animal element. Choose minor so your two minors combined have at least 1 animal and 1 plant. Place presence from bottom track for 4 card plays on turn 4."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978097/openings-sharp-fangs-behind-the-leaves"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-bgg-opening-2",
+    "name": "BGG Opening: Top Track (Ranging Hunt Every Turn)",
+    "description": "Alternative opening that triggers Ranging Hunt every turn including turn 1, by drawing a plant+animal minor early.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Only use this if you draw a minor with both plant AND animal. Growth: +1 energy, gain a power (minor); Place 1 presence (from TOP). Cards: Too Near the Jungle, Teeth Gleam from Darkness. Presence uncovers animal element, so with animal+plant on both cards you have enough for Ranging Hunt damage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy; Place 1 presence (from TOP). Cards: Plant+animal minor, any other remaining power (probably Prey on the Builders). You now have animal+plant showing on your presence track, so you just need 2 animal and 1 plant from cards."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. Continue triggering Ranging Hunt every turn. This opening leaves you with fewer card plays for a long time but triggers Ranging Hunt consistently."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978097/openings-sharp-fangs-behind-the-leaves"
+  },
+  {
+    "spiritSlug": "keeper-of-the-forbidden-wilds",
+    "slug": "keeper-of-the-forbidden-wilds-bgg-opening-1",
+    "name": "BGG Opening: Standard",
+    "description": "Jeremy Lennert's opening for Keeper, using the expensive presence placement growth to quickly ramp energy generation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain a power (minor); +1 energy, place a presence (only legal spot is starting land). Cards: Boon of Growing Power (target gains a power and 1 energy). Get 2 sun + 1 plant while saving 2 energy. If you draft a 0-cost minor with sun (~45%), place presence from bottom and play both. Otherwise place from top (sun element) and play just Boon. Spreading Wilds clears a land with explorer and places a wilds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +1 energy, place a presence; Pay 3 energy, place a presence, gain a power (minor). Uncover 2 spaces on top track and 1 on bottom for 4 energy income and 2 card plays. Cards: varies. Again get 2 sun + 1 plant while saving 2 energy. The extra presence pays for itself almost instantly with +2 energy income."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: +1 energy, place presence (from bottom); Pay 3 energy, place presence (from bottom), gain minor. Cards: Towering Wrath (2 damage per sacred site, 2 fear, destroy Dahan), a minor with plant+fire, something with plant (e.g., Regrow from Roots). These elements trigger TWO levels of Punish Those Who Trespass for 4-5 damage at range 0."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim. Play cards similar to turn 3. Keeper falls behind early but catches up in stage 2 when wilds block explores."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978655/openings-keeper-of-the-forbidden-wilds"
+  }
+]
