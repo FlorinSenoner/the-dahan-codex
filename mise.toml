@@ -3,9 +3,6 @@ node = "25.2.1"
 pnpm = "10.25.0"
 
 [env]
-_.path = ["{{config_root}}/node_modules/.bin"]
 VITE_CLERK_PUBLISHABLE_KEY = "REDACTED_CLERK_KEY"
 CLOUDFLARE_ACCOUNT_ID = "REDACTED_CLOUDFLARE_ACCOUNT_ID"
-
-[settings]
-experimental = true
+VITE_CONVEX_URL = "https://REDACTED.convex.cloud"

@@ -1,17 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/jscpd.json",
-  "threshold": 5,
+  "threshold": 2,
   "reporters": ["consoleFull"],
   "ignore": [
     "**/node_modules/**",
     "**/dist/**",
-    "**/.vinxi/**",
+    "**/.wrangler/**",
     "**/convex/_generated/**",
     "**/*.d.ts",
     "**/pnpm-lock.yaml",
     "**/playwright-report/**",
     "**/.planning/**",
-    "**/e2e/**"
+    "**/e2e/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/tests/**"
   ],
   "format": ["typescript", "tsx"],
   "gitignore": true,

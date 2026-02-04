@@ -1,29 +1,35 @@
 # Dependencies
 node_modules/
+.pnpm-store/
 
-# Build outputs
+# Build
 dist/
-.vinxi/
-.output/
 .wrangler/
+.tanstack/
 
-# Environment & secrets
+# Environment
 .env
-.env.local
-
-# Local config
-*.local
-*.local.json
+.env.*
 mise.*.toml
+.dev.vars
 
-# Editor/AI settings
-.claude/settings.local.json
+# IDE
+.DS_Store
+.idea/
 
-# Playwright
+# Testing
+coverage/
 playwright-report/
+playwright-results/
 test-results/
 
-# Generated/Cache
-.tanstack/
+# Generated
+convex/_generated/
+
+# Claude
+.claude/settings.local.json
+
+# Misc
+*.log
 .playwright-mcp/
 report/
