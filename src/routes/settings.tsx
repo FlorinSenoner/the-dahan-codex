@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
 import { api } from '../../convex/_generated/api'
-import { persistQueryCache } from '../router'
+import { idbStore, persistQueryCache } from '../router'
 
 const routeApi = getRouteApi('/settings')
 
@@ -95,7 +95,7 @@ function SettingsPage() {
     setIsClearing(true)
     try {
       // Delete TanStack Query IndexedDB cache
-      await del('tanstack-query-cache')
+      await del('tanstack-query-cache', idbStore)
 
       // Delete all service worker caches
       const cacheNames = await caches.keys()

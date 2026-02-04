@@ -13,6 +13,8 @@ export interface PageHeaderProps {
   backHref?: string
   /** Optional view transition name for the header element */
   viewTransitionName?: string
+  /** Optional content rendered in the center of the header (e.g. search bar) */
+  center?: React.ReactNode
   /** Optional action elements (filter buttons, etc.) rendered on the right */
   children?: React.ReactNode
   /** Additional className for the header */
@@ -23,6 +25,7 @@ export function PageHeader({
   title,
   backHref,
   viewTransitionName,
+  center,
   children,
   className,
 }: PageHeaderProps) {
@@ -34,8 +37,8 @@ export function PageHeader({
       )}
       style={viewTransitionName ? { viewTransitionName } : undefined}
     >
-      <div className="flex items-center justify-between min-h-[44px]">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4 min-h-[44px]">
+        <div className="flex items-center gap-3 shrink-0">
           {backHref && (
             <Link to={backHref} viewTransition>
               <Button
@@ -52,7 +55,9 @@ export function PageHeader({
             {title}
           </Heading>
         </div>
-        {children && <div className="flex items-center gap-2">{children}</div>}
+        {center && <div className="flex-1 min-w-0">{center}</div>}
+        {!center && <div className="flex-1" />}
+        {children && <div className="flex items-center gap-2 shrink-0">{children}</div>}
       </div>
     </header>
   )
