@@ -40,6 +40,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
         'active:bg-muted/50 transition-colors duration-150',
         isAspect && 'pl-8 bg-muted/10', // Indent aspects
       )}
+      state={(prev) => ({ ...prev, fromListing: true })}
       to={href}
       viewTransition
     >
@@ -67,11 +68,6 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
             onError={() => setImgError(true)}
             src={spirit.imageUrl}
           />
-        )}
-        {isAspect && (
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
-            <span className="text-[10px] text-accent-foreground font-bold">A</span>
-          </div>
         )}
       </div>
 
