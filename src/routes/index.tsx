@@ -216,8 +216,12 @@ function HomePage() {
                 params={{ slug: spirit.slug }}
                 search={{ opening: undefined }}
                 to="/spirits/$slug"
+                viewTransition
               >
-                <div className="w-full aspect-square overflow-hidden bg-muted">
+                <div
+                  className="w-full aspect-square overflow-hidden bg-muted"
+                  style={{ viewTransitionName: `spirit-image-${spirit.slug}` }}
+                >
                   <img
                     alt={spirit.name}
                     className="w-full h-full object-cover"
@@ -228,7 +232,7 @@ function HomePage() {
                 <div className="p-3 md:p-4">
                   <h3
                     className="text-sm md:text-base leading-tight mb-2 text-card-foreground"
-                    style={{ fontWeight: 600 }}
+                    style={{ viewTransitionName: `spirit-name-${spirit.slug}`, fontWeight: 600 }}
                   >
                     {spirit.name}
                   </h3>
