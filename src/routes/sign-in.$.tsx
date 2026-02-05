@@ -7,15 +7,7 @@ export const Route = createFileRoute('/sign-in/$')({
 
 function SignInPage() {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-      }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4">
       <SignIn />
     </div>
   )

@@ -1,11 +1,13 @@
 import { createFileRoute, getRouteApi } from '@tanstack/react-router'
 import { del } from 'idb-keyval'
-import { RefreshCw, Trash2 } from 'lucide-react'
+import { Monitor, Moon, RefreshCw, Sun, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
+import { useTheme } from '@/contexts/theme-context'
 import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
+import { cn } from '@/lib/utils'
 import { idbStore } from '../router'
 
 const routeApi = getRouteApi('/settings')
@@ -66,11 +68,42 @@ function SettingsPage() {
     }
   }
 
+  const { theme, setTheme } = useTheme()
+
   return (
     <div className="min-h-screen bg-background pb-20">
       <PageHeader backHref="/" title="Settings" />
 
       <main className="p-4 max-w-lg mx-auto">
+        {/* Theme Section */}
+        <section className="mt-6">
+          <Heading className="text-foreground" variant="h3">
+            Theme
+          </Heading>
+          <Text className="mt-2" variant="muted">
+            Choose how The Dahan Codex looks to you.
+          </Text>
+          <div className="mt-4 flex gap-3">
+            {(
+              [
+                { value: 'light', label: 'Light', icon: Sun },
+                { value: 'dark', label: 'Dark', icon: Moon },
+                { value: 'system', label: 'System', icon: Monitor },
+              ] as const
+            ).map(({ value, label, icon: Icon }) => (
+              <Button
+                className={cn('flex-1')}
+                key={value}
+                onClick={() => setTheme(value)}
+                variant={theme === value ? 'default' : 'outline'}
+              >
+                <Icon className="h-4 w-4" />
+                {label}
+              </Button>
+            ))}
+          </div>
+        </section>
+
         {/* Cache Management Section */}
         <section className="mt-6">
           <Heading className="text-foreground" variant="h3">

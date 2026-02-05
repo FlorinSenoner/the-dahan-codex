@@ -9,7 +9,7 @@ interface ExternalLinkCardProps {
 export function ExternalLinkCard({ href, title, description }: ExternalLinkCardProps) {
   return (
     <a
-      className="flex items-start gap-3 p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors cursor-pointer"
+      className="flex items-start gap-3 p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors cursor-default"
       href={href}
       rel="noopener noreferrer"
       target="_blank"

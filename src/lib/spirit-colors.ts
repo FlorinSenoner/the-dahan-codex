@@ -4,8 +4,7 @@
  */
 
 /** Placeholder gradient for spirits without images */
-export const PLACEHOLDER_GRADIENT =
-  'linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%)'
+export const PLACEHOLDER_GRADIENT = 'linear-gradient(135deg, var(--muted) 0%, var(--accent) 100%)'
 
 /**
  * Badge colors for complexity levels (used on spirit detail and list views)
@@ -84,22 +83,22 @@ export const elementFilterColors: Record<string, { selected: string; unselected:
 export const complexityFilterColors: Record<string, { selected: string; unselected: string }> = {
   Low: {
     selected:
-      'bg-complexity-low/30 text-complexity-low border-complexity-low/50 hover:bg-complexity-low/40',
+      'bg-complexity-low/30 text-foreground border-complexity-low/50 hover:bg-complexity-low/40',
     unselected: 'bg-muted/30 text-foreground border-border hover:bg-muted/50',
   },
   Moderate: {
     selected:
-      'bg-complexity-moderate/30 text-complexity-moderate border-complexity-moderate/50 hover:bg-complexity-moderate/40',
+      'bg-complexity-moderate/30 text-foreground border-complexity-moderate/50 hover:bg-complexity-moderate/40',
     unselected: 'bg-muted/30 text-foreground border-border hover:bg-muted/50',
   },
   High: {
     selected:
-      'bg-complexity-high/30 text-complexity-high border-complexity-high/50 hover:bg-complexity-high/40',
+      'bg-complexity-high/30 text-foreground border-complexity-high/50 hover:bg-complexity-high/40',
     unselected: 'bg-muted/30 text-foreground border-border hover:bg-muted/50',
   },
   'Very High': {
     selected:
-      'bg-complexity-very-high/30 text-complexity-very-high border-complexity-very-high/50 hover:bg-complexity-very-high/40',
+      'bg-complexity-very-high/30 text-foreground border-complexity-very-high/50 hover:bg-complexity-very-high/40',
     unselected: 'bg-muted/30 text-foreground border-border hover:bg-muted/50',
   },
 }

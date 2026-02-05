@@ -6,17 +6,17 @@ const statusConfig = {
   pending: {
     label: 'Pending',
     variant: 'outline' as const,
-    className: 'border-yellow-500 text-yellow-600',
+    className: 'border-element-sun text-element-sun',
   },
   syncing: {
     label: 'Syncing',
     variant: 'outline' as const,
-    className: 'border-blue-500 text-blue-600',
+    className: 'border-element-water text-element-water',
   },
   failed: {
     label: 'Failed',
     variant: 'outline' as const,
-    className: 'border-red-500 text-red-600',
+    className: 'border-element-animal text-element-animal',
   },
 }
 
