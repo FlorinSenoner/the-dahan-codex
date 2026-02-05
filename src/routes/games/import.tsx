@@ -27,7 +27,7 @@ export const Route = createFileRoute('/games/import')({
 
 function ImportPage() {
   const navigate = useNavigate()
-  const { isAuthenticated } = useConvexAuth()
+  const { isAuthenticated, isLoading } = useConvexAuth()
   const [validatedGames, setValidatedGames] = React.useState<ValidatedGame[] | null>(null)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -43,10 +43,10 @@ function ImportPage() {
   })
 
   React.useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       navigate({ to: '/games' })
     }
-  }, [isAuthenticated, navigate])
+  }, [isLoading, isAuthenticated, navigate])
 
   if (!isAuthenticated) return null
 

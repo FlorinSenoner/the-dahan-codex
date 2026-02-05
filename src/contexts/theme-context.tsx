@@ -5,7 +5,6 @@ type Theme = 'light' | 'dark' | 'system'
 interface ThemeContextValue {
   theme: Theme
   setTheme: (theme: Theme) => void
-  resolvedTheme: 'light' | 'dark'
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
@@ -38,8 +37,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return (stored as Theme) || 'system'
   })
 
-  const resolvedTheme = theme === 'system' ? getSystemTheme() : theme
-
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme)
     localStorage.setItem(STORAGE_KEY, newTheme)
@@ -47,8 +44,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Apply theme on mount and when it changes
   useEffect(() => {
-    applyTheme(resolvedTheme)
-  }, [resolvedTheme])
+    applyTheme(theme === 'system' ? getSystemTheme() : theme)
+  }, [theme])
 
   // Listen for system preference changes when set to 'system'
   useEffect(() => {
@@ -60,11 +57,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return () => mediaQuery.removeEventListener('change', handler)
   }, [theme])
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
 }
 
 export function useTheme(): ThemeContextValue {
