@@ -1,26 +1,25 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('Game Tracker', () => {
-  // Note: These tests require authentication
-  // They will be skipped if not authenticated
-
   test.describe('unauthenticated', () => {
-    test('redirects to sign-in when accessing /games', async ({ page }) => {
+    test('shows sign-in prompt when accessing /games', async ({ page }) => {
       await page.goto('/games')
-      // Should redirect to Clerk sign-in
-      await expect(page).toHaveURL(/sign-in/)
+      // Should stay on /games and show sign-in prompt
+      await expect(page).toHaveURL(/\/games/)
+      await expect(page.getByText('Track your games')).toBeVisible()
+      await expect(page.getByRole('link', { name: /sign in/i })).toBeVisible()
     })
 
-    test('redirects to sign-in when accessing /games/new', async ({ page }) => {
+    test('redirects to /games when accessing /games/new', async ({ page }) => {
       await page.goto('/games/new')
-      // Should redirect to Clerk sign-in
-      await expect(page).toHaveURL(/sign-in/)
+      // Should redirect to /games (sign-in prompt)
+      await expect(page).toHaveURL(/\/games$/)
     })
 
-    test('redirects to sign-in when accessing /games/import', async ({ page }) => {
+    test('redirects to /games when accessing /games/import', async ({ page }) => {
       await page.goto('/games/import')
-      // Should redirect to Clerk sign-in
-      await expect(page).toHaveURL(/sign-in/)
+      // Should redirect to /games (sign-in prompt)
+      await expect(page).toHaveURL(/\/games$/)
     })
   })
 })
@@ -48,8 +47,9 @@ test.describe('Game Tracker Navigation', () => {
     const gamesLink = page.locator('nav a[href="/games"]')
     await gamesLink.click()
 
-    // Should redirect to sign-in (since not authenticated)
-    await expect(page).toHaveURL(/sign-in/)
+    // Should navigate to /games and show sign-in prompt (since not authenticated)
+    await expect(page).toHaveURL(/\/games/)
+    await expect(page.getByText('Track your games')).toBeVisible()
   })
 
   test('bottom nav shows four tabs', async ({ page }) => {
