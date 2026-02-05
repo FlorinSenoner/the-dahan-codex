@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 /*
- * Spirit Island Theme - Night Forest
- * A dark, nature-inspired palette evoking the mystical island
+ * Spirit Island Theme - The Dahan Codex
+ * Warm parchment palette with burgundy accents evoking an ancient manuscript
  */
 
 @theme inline {
@@ -19,6 +19,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-card: var(--card);
@@ -54,26 +55,27 @@
   --font-body: "Lora", serif;
 }
 
-/* Light mode (minimal, for completeness) */
+/* Light mode - Warm Parchment */
 :root {
-  --background: oklch(0.98 0.01 90);
-  --foreground: oklch(0.15 0.02 90);
-  --primary: oklch(0.45 0.14 145);
-  --primary-foreground: oklch(0.98 0.01 90);
-  --secondary: oklch(0.9 0.03 60);
-  --secondary-foreground: oklch(0.2 0.05 60);
-  --accent: oklch(0.55 0.15 30);
-  --accent-foreground: oklch(0.98 0.01 90);
-  --muted: oklch(0.92 0.02 90);
-  --muted-foreground: oklch(0.45 0.02 90);
-  --border: oklch(0.88 0.02 90);
-  --card: oklch(0.98 0.01 90);
-  --card-foreground: oklch(0.15 0.02 90);
-  --popover: oklch(0.98 0.01 90);
-  --popover-foreground: oklch(0.15 0.02 90);
-  --input: oklch(0.88 0.02 90);
+  --background: oklch(0.93 0.025 55);
+  --foreground: oklch(0.25 0.05 45);
+  --primary: oklch(0.4 0.14 25);
+  --primary-foreground: oklch(0.95 0.02 40);
+  --secondary: oklch(0.88 0.03 55);
+  --secondary-foreground: oklch(0.3 0.05 45);
+  --accent: oklch(0.7 0.12 80);
+  --accent-foreground: oklch(0.2 0.04 50);
+  --muted: oklch(0.9 0.02 55);
+  --muted-foreground: oklch(0.5 0.04 50);
+  --border: oklch(0.82 0.04 60);
+  --card: oklch(0.95 0.02 58);
+  --card-foreground: oklch(0.25 0.05 45);
+  --popover: oklch(0.95 0.02 58);
+  --popover-foreground: oklch(0.25 0.05 45);
+  --input: oklch(0.88 0.03 55);
   --destructive: oklch(0.55 0.2 25);
-  --ring: oklch(0.45 0.14 145);
+  --destructive-foreground: oklch(0.95 0.02 40);
+  --ring: oklch(0.4 0.14 25);
   --radius: 0.75rem;
 
   /* Element colors - matching official Spirit Island wiki icons */
@@ -93,26 +95,27 @@
   --complexity-very-high: oklch(0.4 0.04 15); /* Near-black with slight warmth */
 }
 
-/* Dark mode - Spirit Island Night Forest theme */
+/* Dark mode - Dark Codex */
 .dark {
-  --background: oklch(0.15 0.02 90);
-  --foreground: oklch(0.92 0.01 90);
-  --primary: oklch(0.55 0.14 145);
-  --primary-foreground: oklch(0.15 0.02 90);
-  --secondary: oklch(0.35 0.08 60);
-  --secondary-foreground: oklch(0.92 0.01 90);
-  --accent: oklch(0.6 0.15 30);
-  --accent-foreground: oklch(0.15 0.02 90);
-  --muted: oklch(0.25 0.02 90);
-  --muted-foreground: oklch(0.65 0.02 90);
-  --border: oklch(0.3 0.03 90);
-  --card: oklch(0.18 0.02 85);
-  --card-foreground: oklch(0.92 0.01 90);
-  --popover: oklch(0.18 0.02 85);
-  --popover-foreground: oklch(0.92 0.01 90);
-  --input: oklch(0.25 0.02 90);
+  --background: oklch(0.12 0.03 40);
+  --foreground: oklch(0.92 0.02 55);
+  --primary: oklch(0.5 0.16 25);
+  --primary-foreground: oklch(0.95 0.02 40);
+  --secondary: oklch(0.2 0.04 45);
+  --secondary-foreground: oklch(0.88 0.02 55);
+  --accent: oklch(0.75 0.14 80);
+  --accent-foreground: oklch(0.15 0.03 40);
+  --muted: oklch(0.2 0.03 45);
+  --muted-foreground: oklch(0.65 0.03 50);
+  --border: oklch(0.28 0.04 45);
+  --card: oklch(0.16 0.04 42);
+  --card-foreground: oklch(0.92 0.02 55);
+  --popover: oklch(0.16 0.04 42);
+  --popover-foreground: oklch(0.92 0.02 55);
+  --input: oklch(0.22 0.03 45);
   --destructive: oklch(0.55 0.2 25);
-  --ring: oklch(0.55 0.14 145);
+  --destructive-foreground: oklch(0.95 0.02 40);
+  --ring: oklch(0.5 0.16 25);
   --radius: 0.75rem;
 
   /* Element colors - matching official Spirit Island wiki icons */
@@ -156,8 +159,7 @@
 
 /* Keep navigation elements on top during view transitions */
 ::view-transition-group(bottom-nav),
-::view-transition-group(list-header),
-::view-transition-group(detail-header) {
+::view-transition-group(page-header) {
   z-index: 100;
 }
 
@@ -175,6 +177,18 @@
 /* Safe area for iOS bottom nav */
 .h-safe-area-inset-bottom {
   height: env(safe-area-inset-bottom, 0px);
+}
+
+/* Utility animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Base layer reset */

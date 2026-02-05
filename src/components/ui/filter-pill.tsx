@@ -21,10 +21,11 @@ export function FilterPill({
   return (
     <Button
       className={cn(
-        'h-auto px-3 py-1.5 rounded-full text-sm font-medium',
+        'h-auto px-3 py-1.5 rounded-sm text-sm font-medium',
         selected
           ? selectedClass || 'bg-primary text-primary-foreground border-primary'
-          : unselectedClass || 'bg-muted/30 text-foreground border-border hover:bg-muted/50',
+          : unselectedClass ||
+              'bg-muted/30 text-foreground border-border hover:bg-muted/50 hover:shadow-none',
       )}
       onClick={onClick}
       variant="outline"

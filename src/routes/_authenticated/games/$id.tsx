@@ -205,22 +205,21 @@ function GameDetailPage() {
   // View mode
   return (
     <div className="min-h-screen bg-background pb-32">
-      <PageHeader backHref="/games" title={dateStr} />
-
-      <div className="p-4 space-y-6">
-        {/* Result Badge */}
+      <PageHeader backHref="/games" title={dateStr}>
         <div className="flex items-center gap-2">
+          {resolvedGame.winType && (
+            <span className="text-muted-foreground text-sm">{resolvedGame.winType}</span>
+          )}
           <Badge
             className="text-base px-3 py-1"
             variant={resolvedGame.result === 'win' ? 'default' : 'secondary'}
           >
             {resolvedGame.result === 'win' ? 'Victory' : 'Defeat'}
           </Badge>
-          {resolvedGame.winType && (
-            <span className="text-muted-foreground">- {resolvedGame.winType}</span>
-          )}
         </div>
+      </PageHeader>
 
+      <div className="p-4 space-y-6">
         {/* Spirits */}
         <div className="space-y-2">
           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">

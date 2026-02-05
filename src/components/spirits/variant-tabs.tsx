@@ -31,7 +31,7 @@ export function VariantTabs({ base, aspects, onVisibilityChange }: VariantTabsPr
   const currentValue = aspect || 'base'
 
   const tabTriggerClassName =
-    'min-w-fit min-h-[44px] shrink-0 cursor-pointer rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-foreground text-muted-foreground hover:text-foreground transition-colors'
+    'min-w-fit min-h-[44px] shrink-0 cursor-pointer rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-foreground data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:border-transparent dark:data-[state=active]:border-b-primary text-muted-foreground hover:text-foreground transition-colors'
 
   return (
     <Tabs

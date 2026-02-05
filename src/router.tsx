@@ -63,10 +63,15 @@ export async function persistQueryCache(queryClient: QueryClient) {
 
 function NotFound() {
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you're looking for doesn't exist.</p>
-      <a href="/">Go back home</a>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-8 text-center">
+      <h1 className="text-2xl font-bold text-foreground">404 - Page Not Found</h1>
+      <p className="mt-2 text-muted-foreground">The page you're looking for doesn't exist.</p>
+      <a
+        className="mt-4 text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+        href="/"
+      >
+        Go back home
+      </a>
     </div>
   )
 }

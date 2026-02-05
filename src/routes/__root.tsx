@@ -10,6 +10,7 @@ import { OfflineIndicator } from '../components/pwa/offline-indicator'
 import { UpdateBanner } from '../components/pwa/update-banner'
 import { Toaster } from '../components/ui/sonner'
 import { EditModeProvider } from '../contexts/edit-mode-context'
+import { ThemeProvider } from '../contexts/theme-context'
 import { useServiceWorker } from '../hooks/use-service-worker'
 
 // Router context type
@@ -37,14 +38,16 @@ function RootComponent() {
       signUpUrl="/sign-in"
     >
       <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
-        <EditModeProvider>
-          <OfflineIndicator />
-          {isUpdateAvailable && <UpdateBanner onReload={triggerUpdate} />}
-          <InstallPrompt />
-          <Outlet />
-          <BottomNav />
-          <Toaster />
-        </EditModeProvider>
+        <ThemeProvider>
+          <EditModeProvider>
+            <OfflineIndicator />
+            {isUpdateAvailable && <UpdateBanner onReload={triggerUpdate} />}
+            <InstallPrompt />
+            <Outlet />
+            <BottomNav />
+            <Toaster />
+          </EditModeProvider>
+        </ThemeProvider>
       </ConvexProviderWithClerk>
     </ClerkProvider>
   )
