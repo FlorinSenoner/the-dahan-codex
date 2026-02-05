@@ -19,7 +19,7 @@ export function CSVPreview({ games }: CSVPreviewProps) {
       <div className="flex gap-4 text-sm">
         <span className="text-muted-foreground">{games.length} games in file</span>
         {validCount > 0 && (
-          <span className="text-green-600 flex items-center gap-1">
+          <span className="text-element-plant flex items-center gap-1">
             <CheckCircle className="h-4 w-4" />
             {validCount} valid
           </span>

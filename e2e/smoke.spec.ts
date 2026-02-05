@@ -3,15 +3,12 @@ import { expect, test } from '@playwright/test'
 test.describe('Smoke Tests', () => {
   test('home page loads', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('h1')).toContainText('The Dahan Codex')
+    await expect(page.getByText('he Dahan Codex', { exact: true })).toBeVisible()
   })
 
-  test('home page shows Convex connection status', async ({ page }) => {
+  test('home page shows subtitle', async ({ page }) => {
     await page.goto('/')
-    // Wait for Convex to connect (may take a moment)
-    await expect(page.locator('text=connected')).toBeVisible({
-      timeout: 10000,
-    })
+    await expect(page.getByText('A Spirit Island Companion')).toBeVisible()
   })
 
   test('sign-in page loads', async ({ page }) => {

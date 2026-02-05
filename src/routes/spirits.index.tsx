@@ -80,7 +80,6 @@ function SpiritsPage() {
         backHref="/"
         center={<SpiritSearch onChange={handleSearchChange} value={filters.search || ''} />}
         title="Spirits"
-        viewTransitionName="list-header"
       >
         <FilterSheet
           activeCount={activeFilterCount}

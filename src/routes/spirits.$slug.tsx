@@ -115,11 +115,11 @@ function SpiritDetailLayout() {
       <div className="min-h-screen bg-background">
         <header
           className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
-          style={{ viewTransitionName: 'detail-header' }}
+          style={{ viewTransitionName: 'page-header' }}
         >
           <Button
             aria-label="Back to spirits"
-            className="min-w-[44px] min-h-[44px] cursor-pointer"
+            className="min-w-[44px] min-h-[44px] cursor-pointer hover:bg-transparent hover:ring-1 hover:ring-border dark:hover:ring-muted-foreground dark:hover:text-foreground"
             onClick={goBack}
             size="icon"
             variant="ghost"
@@ -158,12 +158,12 @@ function SpiritDetailLayout() {
     <div className="min-h-screen bg-background pb-20">
       <header
         className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3"
-        style={{ viewTransitionName: 'detail-header' }}
+        style={{ viewTransitionName: 'page-header' }}
       >
         <div className="flex items-center gap-3">
           <Button
             aria-label="Back to spirits"
-            className="min-w-[44px] min-h-[44px] cursor-pointer"
+            className="min-w-[44px] min-h-[44px] cursor-pointer hover:bg-transparent hover:ring-1 hover:ring-border dark:hover:ring-muted-foreground dark:hover:text-foreground"
             onClick={goBack}
             size="icon"
             variant="ghost"

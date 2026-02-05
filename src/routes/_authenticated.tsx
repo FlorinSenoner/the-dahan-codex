@@ -29,13 +29,13 @@ function AuthenticatedLayout() {
   if (!isLoaded) {
     // When offline and Clerk can't load, show cached data anyway
     if (!isOnline) return <Outlet />
-    return <div style={{ padding: '2rem' }}>Loading...</div>
+    return <div className="p-8">Loading...</div>
   }
 
   if (!isSignedIn) {
     // When offline, show cached data instead of redirecting
     if (!isOnline) return <Outlet />
-    return <div style={{ padding: '2rem' }}>Redirecting to sign in...</div>
+    return <div className="p-8">Redirecting to sign in...</div>
   }
 
   return <Outlet />

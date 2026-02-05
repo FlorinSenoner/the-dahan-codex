@@ -36,8 +36,8 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
   return (
     <Link
       className={cn(
-        'flex items-center gap-4 p-4 cursor-pointer',
-        'active:bg-muted/50 transition-colors duration-150',
+        'flex items-center gap-4 p-4 cursor-default',
+        'hover:bg-muted/50 active:bg-muted/50 transition-colors duration-150',
         isAspect && 'pl-8 bg-muted/10', // Indent aspects
       )}
       state={(prev) => ({ ...prev, fromListing: true })}
