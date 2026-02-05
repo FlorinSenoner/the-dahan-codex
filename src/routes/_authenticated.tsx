@@ -3,6 +3,7 @@ import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useOnlineStatus } from '@/hooks'
 import { useBackgroundSync } from '@/hooks/use-background-sync'
+import { useOutboxSync } from '@/hooks/use-outbox-sync'
 
 export const Route = createFileRoute('/_authenticated')({
   component: AuthenticatedLayout,
@@ -15,6 +16,9 @@ function AuthenticatedLayout() {
 
   // Auto background sync: games on mount, spirits/openings during idle time
   useBackgroundSync(isLoaded && isSignedIn)
+
+  // Flush offline outboxes (pending games + offline ops) on reconnect
+  useOutboxSync(isLoaded && isSignedIn)
 
   useEffect(() => {
     if (isLoaded && !isSignedIn && isOnline) {
