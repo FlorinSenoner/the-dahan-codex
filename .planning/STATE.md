@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2025-01-24)
 
 **Core value:** Text-based opening guides for Spirit Island spirits
-**Current focus:** Phase 8 (Spirit & Aspect Data Scraping) in progress
+**Current focus:** All planned phases complete
 
 ## Current Position
 
 Phase: 8 (Spirit & Aspect Data Scraping)
-Plan: 4 of 5 Complete (Wave 3 complete) + Opening guides scraped
-Status: In Progress
-Last activity: 2026-02-02 - Added 17 opening guides from BGG JE/Promo threads and Wiki
+Plan: 6 of 6 Complete
+Status: Complete
+Last activity: 2026-02-04 - Verified DB matches seed data, docs cleanup
 
-Progress: [#####################################-------------] 76% (87/115 plans complete)
+Progress: [##################################################] 100% (93/93 plans complete, excl. abandoned 3.4)
 
 ## Performance Metrics
 
@@ -645,12 +645,13 @@ Phase 6.2 (Fix Code Duplication) complete:
 
 ## Session Continuity
 
-Last session: 2026-02-02
-Stopped at: Added 17 opening guides (BGG JE/Promo threads + Wiki Antistone/breppert)
+Last session: 2026-02-05
+Stopped at: Moved outbox sync to layout level so offline writes sync from any page.
 Resume file: None
 
-**Opening guides added:**
-- BGG Jonah Yonker JE threads: 12 guides (Fractured Days, Shroud, Finder, Downpour, Many Minds, Grinning Trickster, Shifting Memory, Volcano, Lure, Stone's, Starlight, Vengeance)
-- BGG Jonah Yonker promo threads: 2 guides (Serpent, Wildfire)
-- Spirit Island Wiki Antistone/breppert: 3 guides (Rampant Green, Bringer x2)
-- Total openings: 51 → 68 guides from 7 sources
+**Data status:**
+- 37 base spirits seeded from wiki scrape
+- 31 aspects seeded from wiki scrape
+- 68 spirit images downloaded
+- 85 opening guides from 7+ community sources
+- 7 expansions (Base Game through Nature Incarnate)
