@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 test.describe('Smoke Tests', () => {
   test('home page loads', async ({ page }) => {
     await page.goto('/')
-    await expect(page.getByText('he Dahan Codex')).toBeVisible()
+    await expect(page.getByText('he Dahan Codex', { exact: true })).toBeVisible()
   })
 
   test('home page shows subtitle', async ({ page }) => {
