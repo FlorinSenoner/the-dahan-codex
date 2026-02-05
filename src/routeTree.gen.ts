@@ -11,19 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpiritsRouteImport } from './routes/spirits'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as GamesRouteImport } from './routes/games'
 import { Route as CreditsRouteImport } from './routes/credits'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SpiritsIndexRouteImport } from './routes/spirits.index'
+import { Route as GamesIndexRouteImport } from './routes/games/index'
 import { Route as SpiritsSlugRouteImport } from './routes/spirits.$slug'
+import { Route as SignUpSplatRouteImport } from './routes/sign-up.$'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
-import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedGamesRouteImport } from './routes/_authenticated/games'
-import { Route as AuthenticatedGamesIndexRouteImport } from './routes/_authenticated/games/index'
+import { Route as GamesNewRouteImport } from './routes/games/new'
+import { Route as GamesImportRouteImport } from './routes/games/import'
+import { Route as GamesIdRouteImport } from './routes/games/$id'
 import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$aspect'
-import { Route as AuthenticatedGamesNewRouteImport } from './routes/_authenticated/games/new'
-import { Route as AuthenticatedGamesImportRouteImport } from './routes/_authenticated/games/import'
-import { Route as AuthenticatedGamesIdRouteImport } from './routes/_authenticated/games/$id'
 
 const SpiritsRoute = SpiritsRouteImport.update({
   id: '/spirits',
@@ -35,13 +34,14 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CreditsRoute = CreditsRouteImport.update({
   id: '/credits',
   path: '/credits',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -54,158 +54,151 @@ const SpiritsIndexRoute = SpiritsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SpiritsRoute,
 } as any)
+const GamesIndexRoute = GamesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GamesRoute,
+} as any)
 const SpiritsSlugRoute = SpiritsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => SpiritsRoute,
+} as any)
+const SignUpSplatRoute = SignUpSplatRouteImport.update({
+  id: '/sign-up/$',
+  path: '/sign-up/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const SignInSplatRoute = SignInSplatRouteImport.update({
   id: '/sign-in/$',
   path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRoute,
+const GamesNewRoute = GamesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => GamesRoute,
 } as any)
-const AuthenticatedGamesRoute = AuthenticatedGamesRouteImport.update({
-  id: '/games',
-  path: '/games',
-  getParentRoute: () => AuthenticatedRoute,
+const GamesImportRoute = GamesImportRouteImport.update({
+  id: '/import',
+  path: '/import',
+  getParentRoute: () => GamesRoute,
 } as any)
-const AuthenticatedGamesIndexRoute = AuthenticatedGamesIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthenticatedGamesRoute,
+const GamesIdRoute = GamesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => GamesRoute,
 } as any)
 const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
   id: '/$aspect',
   path: '/$aspect',
   getParentRoute: () => SpiritsSlugRoute,
 } as any)
-const AuthenticatedGamesNewRoute = AuthenticatedGamesNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => AuthenticatedGamesRoute,
-} as any)
-const AuthenticatedGamesImportRoute =
-  AuthenticatedGamesImportRouteImport.update({
-    id: '/import',
-    path: '/import',
-    getParentRoute: () => AuthenticatedGamesRoute,
-  } as any)
-const AuthenticatedGamesIdRoute = AuthenticatedGamesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AuthenticatedGamesRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
+  '/games': typeof GamesRouteWithChildren
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
-  '/games': typeof AuthenticatedGamesRouteWithChildren
-  '/profile': typeof AuthenticatedProfileRoute
+  '/games/$id': typeof GamesIdRoute
+  '/games/import': typeof GamesImportRoute
+  '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/games/': typeof GamesIndexRoute
   '/spirits/': typeof SpiritsIndexRoute
-  '/games/$id': typeof AuthenticatedGamesIdRoute
-  '/games/import': typeof AuthenticatedGamesImportRoute
-  '/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
-  '/games/': typeof AuthenticatedGamesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
   '/settings': typeof SettingsRoute
-  '/profile': typeof AuthenticatedProfileRoute
+  '/games/$id': typeof GamesIdRoute
+  '/games/import': typeof GamesImportRoute
+  '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/games': typeof GamesIndexRoute
   '/spirits': typeof SpiritsIndexRoute
-  '/games/$id': typeof AuthenticatedGamesIdRoute
-  '/games/import': typeof AuthenticatedGamesImportRoute
-  '/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
-  '/games': typeof AuthenticatedGamesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/credits': typeof CreditsRoute
+  '/games': typeof GamesRouteWithChildren
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
-  '/_authenticated/games': typeof AuthenticatedGamesRouteWithChildren
-  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/games/$id': typeof GamesIdRoute
+  '/games/import': typeof GamesImportRoute
+  '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/games/': typeof GamesIndexRoute
   '/spirits/': typeof SpiritsIndexRoute
-  '/_authenticated/games/$id': typeof AuthenticatedGamesIdRoute
-  '/_authenticated/games/import': typeof AuthenticatedGamesImportRoute
-  '/_authenticated/games/new': typeof AuthenticatedGamesNewRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
-  '/_authenticated/games/': typeof AuthenticatedGamesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/credits'
+    | '/games'
     | '/settings'
     | '/spirits'
-    | '/games'
-    | '/profile'
-    | '/sign-in/$'
-    | '/spirits/$slug'
-    | '/spirits/'
     | '/games/$id'
     | '/games/import'
     | '/games/new'
-    | '/spirits/$slug/$aspect'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/spirits/$slug'
     | '/games/'
+    | '/spirits/'
+    | '/spirits/$slug/$aspect'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/credits'
     | '/settings'
-    | '/profile'
+    | '/games/$id'
+    | '/games/import'
+    | '/games/new'
     | '/sign-in/$'
+    | '/sign-up/$'
     | '/spirits/$slug'
+    | '/games'
+    | '/spirits'
+    | '/spirits/$slug/$aspect'
+  id:
+    | '__root__'
+    | '/'
+    | '/credits'
+    | '/games'
+    | '/settings'
     | '/spirits'
     | '/games/$id'
     | '/games/import'
     | '/games/new'
-    | '/spirits/$slug/$aspect'
-    | '/games'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/credits'
-    | '/settings'
-    | '/spirits'
-    | '/_authenticated/games'
-    | '/_authenticated/profile'
     | '/sign-in/$'
+    | '/sign-up/$'
     | '/spirits/$slug'
+    | '/games/'
     | '/spirits/'
-    | '/_authenticated/games/$id'
-    | '/_authenticated/games/import'
-    | '/_authenticated/games/new'
     | '/spirits/$slug/$aspect'
-    | '/_authenticated/games/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   CreditsRoute: typeof CreditsRoute
+  GamesRoute: typeof GamesRouteWithChildren
   SettingsRoute: typeof SettingsRoute
   SpiritsRoute: typeof SpiritsRouteWithChildren
   SignInSplatRoute: typeof SignInSplatRoute
+  SignUpSplatRoute: typeof SignUpSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -224,18 +217,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/credits': {
       id: '/credits'
       path: '/credits'
       fullPath: '/credits'
       preLoaderRoute: typeof CreditsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -252,12 +245,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpiritsIndexRouteImport
       parentRoute: typeof SpiritsRoute
     }
+    '/games/': {
+      id: '/games/'
+      path: '/'
+      fullPath: '/games/'
+      preLoaderRoute: typeof GamesIndexRouteImport
+      parentRoute: typeof GamesRoute
+    }
     '/spirits/$slug': {
       id: '/spirits/$slug'
       path: '/$slug'
       fullPath: '/spirits/$slug'
       preLoaderRoute: typeof SpiritsSlugRouteImport
       parentRoute: typeof SpiritsRoute
+    }
+    '/sign-up/$': {
+      id: '/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof SignUpSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/sign-in/$': {
       id: '/sign-in/$'
@@ -266,26 +273,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/games/new': {
+      id: '/games/new'
+      path: '/new'
+      fullPath: '/games/new'
+      preLoaderRoute: typeof GamesNewRouteImport
+      parentRoute: typeof GamesRoute
     }
-    '/_authenticated/games': {
-      id: '/_authenticated/games'
-      path: '/games'
-      fullPath: '/games'
-      preLoaderRoute: typeof AuthenticatedGamesRouteImport
-      parentRoute: typeof AuthenticatedRoute
+    '/games/import': {
+      id: '/games/import'
+      path: '/import'
+      fullPath: '/games/import'
+      preLoaderRoute: typeof GamesImportRouteImport
+      parentRoute: typeof GamesRoute
     }
-    '/_authenticated/games/': {
-      id: '/_authenticated/games/'
-      path: '/'
-      fullPath: '/games/'
-      preLoaderRoute: typeof AuthenticatedGamesIndexRouteImport
-      parentRoute: typeof AuthenticatedGamesRoute
+    '/games/$id': {
+      id: '/games/$id'
+      path: '/$id'
+      fullPath: '/games/$id'
+      preLoaderRoute: typeof GamesIdRouteImport
+      parentRoute: typeof GamesRoute
     }
     '/spirits/$slug/$aspect': {
       id: '/spirits/$slug/$aspect'
@@ -294,60 +301,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpiritsSlugAspectRouteImport
       parentRoute: typeof SpiritsSlugRoute
     }
-    '/_authenticated/games/new': {
-      id: '/_authenticated/games/new'
-      path: '/new'
-      fullPath: '/games/new'
-      preLoaderRoute: typeof AuthenticatedGamesNewRouteImport
-      parentRoute: typeof AuthenticatedGamesRoute
-    }
-    '/_authenticated/games/import': {
-      id: '/_authenticated/games/import'
-      path: '/import'
-      fullPath: '/games/import'
-      preLoaderRoute: typeof AuthenticatedGamesImportRouteImport
-      parentRoute: typeof AuthenticatedGamesRoute
-    }
-    '/_authenticated/games/$id': {
-      id: '/_authenticated/games/$id'
-      path: '/$id'
-      fullPath: '/games/$id'
-      preLoaderRoute: typeof AuthenticatedGamesIdRouteImport
-      parentRoute: typeof AuthenticatedGamesRoute
-    }
   }
 }
 
-interface AuthenticatedGamesRouteChildren {
-  AuthenticatedGamesIdRoute: typeof AuthenticatedGamesIdRoute
-  AuthenticatedGamesImportRoute: typeof AuthenticatedGamesImportRoute
-  AuthenticatedGamesNewRoute: typeof AuthenticatedGamesNewRoute
-  AuthenticatedGamesIndexRoute: typeof AuthenticatedGamesIndexRoute
+interface GamesRouteChildren {
+  GamesIdRoute: typeof GamesIdRoute
+  GamesImportRoute: typeof GamesImportRoute
+  GamesNewRoute: typeof GamesNewRoute
+  GamesIndexRoute: typeof GamesIndexRoute
 }
 
-const AuthenticatedGamesRouteChildren: AuthenticatedGamesRouteChildren = {
-  AuthenticatedGamesIdRoute: AuthenticatedGamesIdRoute,
-  AuthenticatedGamesImportRoute: AuthenticatedGamesImportRoute,
-  AuthenticatedGamesNewRoute: AuthenticatedGamesNewRoute,
-  AuthenticatedGamesIndexRoute: AuthenticatedGamesIndexRoute,
+const GamesRouteChildren: GamesRouteChildren = {
+  GamesIdRoute: GamesIdRoute,
+  GamesImportRoute: GamesImportRoute,
+  GamesNewRoute: GamesNewRoute,
+  GamesIndexRoute: GamesIndexRoute,
 }
 
-const AuthenticatedGamesRouteWithChildren =
-  AuthenticatedGamesRoute._addFileChildren(AuthenticatedGamesRouteChildren)
-
-interface AuthenticatedRouteChildren {
-  AuthenticatedGamesRoute: typeof AuthenticatedGamesRouteWithChildren
-  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
-}
-
-const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedGamesRoute: AuthenticatedGamesRouteWithChildren,
-  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
-}
-
-const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
-  AuthenticatedRouteChildren,
-)
+const GamesRouteWithChildren = GamesRoute._addFileChildren(GamesRouteChildren)
 
 interface SpiritsSlugRouteChildren {
   SpiritsSlugAspectRoute: typeof SpiritsSlugAspectRoute
@@ -376,11 +347,12 @@ const SpiritsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   CreditsRoute: CreditsRoute,
+  GamesRoute: GamesRouteWithChildren,
   SettingsRoute: SettingsRoute,
   SpiritsRoute: SpiritsRouteWithChildren,
   SignInSplatRoute: SignInSplatRoute,
+  SignUpSplatRoute: SignUpSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

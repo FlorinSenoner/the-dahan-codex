@@ -19,9 +19,9 @@ test.describe('Smoke Tests', () => {
     })
   })
 
-  test('protected route redirects to sign-in when not authenticated', async ({ page }) => {
-    await page.goto('/profile')
-    // Should redirect to sign-in
-    await expect(page).toHaveURL(/\/sign-in/)
+  test('games sub-routes redirect to /games when not authenticated', async ({ page }) => {
+    await page.goto('/games/new')
+    // Should redirect to /games (sign-in prompt)
+    await expect(page).toHaveURL(/\/games$/)
   })
 })
