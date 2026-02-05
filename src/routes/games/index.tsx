@@ -3,7 +3,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
-import { Download, Gamepad2, Plus, Upload, WifiOff } from 'lucide-react'
+import { useConvexAuth } from 'convex/react'
+import { Download, Gamepad2, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
 import { useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
@@ -14,11 +15,44 @@ import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
 import { seedGameCaches } from '@/lib/sync'
 
-export const Route = createFileRoute('/_authenticated/games/')({
+export const Route = createFileRoute('/games/')({
   component: GamesIndex,
 })
 
 function GamesIndex() {
+  const { isAuthenticated } = useConvexAuth()
+
+  if (!isAuthenticated) {
+    return <GamesSignInPrompt />
+  }
+
+  return <AuthenticatedGames />
+}
+
+function GamesSignInPrompt() {
+  return (
+    <div className="min-h-screen bg-background">
+      <PageHeader backHref="/" title="Games" />
+      <main className="pb-20">
+        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+          <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
+          <h2 className="text-xl font-semibold mb-2">Track your games</h2>
+          <p className="text-muted-foreground mb-6 max-w-sm">
+            Sign in to log your Spirit Island games and sync them across devices.
+          </p>
+          <Button asChild>
+            <Link params={{ _splat: '' }} to="/sign-in/$">
+              <LogIn className="h-4 w-4 mr-2" />
+              Sign In
+            </Link>
+          </Button>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+function AuthenticatedGames() {
   const { data: games, isError } = useQuery(convexQuery(api.games.listGames, {}))
   const isOnline = useOnlineStatus()
   const { pendingGames } = usePendingGames()

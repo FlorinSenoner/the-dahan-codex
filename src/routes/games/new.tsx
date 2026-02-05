@@ -2,6 +2,8 @@ import { useConvexMutation } from '@convex-dev/react-query'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
+import { useConvexAuth } from 'convex/react'
+import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { GameForm, type GameFormData } from '@/components/games/game-form'
 import { PageHeader } from '@/components/ui/page-header'
@@ -9,12 +11,13 @@ import { useOnlineStatus } from '@/hooks'
 import { usePendingGames } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 
-export const Route = createFileRoute('/_authenticated/games/new')({
+export const Route = createFileRoute('/games/new')({
   component: NewGamePage,
 })
 
 function NewGamePage() {
   const navigate = useNavigate()
+  const { isAuthenticated } = useConvexAuth()
   const isOnline = useOnlineStatus()
   const { saveOfflineGame } = usePendingGames()
 
@@ -27,6 +30,14 @@ function NewGamePage() {
       toast.error(`Failed to save game: ${error.message}`)
     },
   })
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate({ to: '/games' })
+    }
+  }, [isAuthenticated, navigate])
+
+  if (!isAuthenticated) return null
 
   const handleSubmit = async (data: GameFormData) => {
     // Filter out spirits without a spiritId selected (new games require picking from dropdown)

@@ -35,7 +35,7 @@ function RootComponent() {
       signInFallbackRedirectUrl="/"
       signInUrl="/sign-in"
       signUpFallbackRedirectUrl="/"
-      signUpUrl="/sign-in"
+      signUpUrl="/sign-up"
     >
       <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
         <ThemeProvider>

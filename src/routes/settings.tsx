@@ -1,6 +1,7 @@
-import { createFileRoute, getRouteApi } from '@tanstack/react-router'
+import { useClerk, useUser } from '@clerk/clerk-react'
+import { createFileRoute, getRouteApi, Link, useNavigate } from '@tanstack/react-router'
 import { del } from 'idb-keyval'
-import { Monitor, Moon, RefreshCw, Sun, Trash2 } from 'lucide-react'
+import { LogIn, LogOut, Monitor, Moon, RefreshCw, Sun, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
@@ -69,12 +70,67 @@ function SettingsPage() {
   }
 
   const { theme, setTheme } = useTheme()
+  const { user, isSignedIn } = useUser()
+  const clerk = useClerk()
+  const navigate = useNavigate()
+
+  async function handleSignOut() {
+    await clerk.signOut()
+    navigate({ to: '/' })
+  }
 
   return (
     <div className="min-h-screen bg-background pb-20">
       <PageHeader backHref="/" title="Settings" />
 
       <main className="p-4 max-w-lg mx-auto">
+        {/* Account Section */}
+        <section className="mt-6">
+          <Heading className="text-foreground" variant="h3">
+            Account
+          </Heading>
+          {isSignedIn ? (
+            <>
+              <div className="mt-4 flex items-center gap-4">
+                <img
+                  alt={user.fullName ?? 'User avatar'}
+                  className="h-12 w-12 rounded-full"
+                  src={user.imageUrl}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium truncate">{user.fullName || user.firstName}</p>
+                  {user.primaryEmailAddress?.emailAddress && (
+                    <p className="text-sm text-muted-foreground truncate">
+                      {user.primaryEmailAddress.emailAddress}
+                    </p>
+                  )}
+                </div>
+                <Button onClick={handleSignOut} size="sm" variant="outline">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+              <Text className="mt-3" variant="muted">
+                Sign in is needed to save and sync your game history across devices.
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text className="mt-2" variant="muted">
+                Sign in to track your Spirit Island games and sync them across devices.
+              </Text>
+              <div className="mt-4">
+                <Button asChild>
+                  <Link params={{ _splat: '' }} to="/sign-in/$">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Link>
+                </Button>
+              </div>
+            </>
+          )}
+        </section>
+
         {/* Theme Section */}
         <section className="mt-6">
           <Heading className="text-foreground" variant="h3">

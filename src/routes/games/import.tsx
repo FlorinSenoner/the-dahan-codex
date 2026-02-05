@@ -2,6 +2,7 @@ import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
+import { useConvexAuth } from 'convex/react'
 import { Loader2, Upload } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
@@ -20,12 +21,13 @@ function getImportableCount(games: ValidatedGame[]): number {
   return games.filter((g) => g.isValid && !g.isUnchanged).length
 }
 
-export const Route = createFileRoute('/_authenticated/games/import')({
+export const Route = createFileRoute('/games/import')({
   component: ImportPage,
 })
 
 function ImportPage() {
   const navigate = useNavigate()
+  const { isAuthenticated } = useConvexAuth()
   const [validatedGames, setValidatedGames] = React.useState<ValidatedGame[] | null>(null)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -39,6 +41,14 @@ function ImportPage() {
       toast.error(`Import failed: ${error.message}`)
     },
   })
+
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      navigate({ to: '/games' })
+    }
+  }, [isAuthenticated, navigate])
+
+  if (!isAuthenticated) return null
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
