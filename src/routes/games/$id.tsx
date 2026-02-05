@@ -35,7 +35,7 @@ export const Route = createFileRoute('/games/$id')({
 function GameDetailPage() {
   const { id } = Route.useParams()
   const navigate = useNavigate()
-  const { isAuthenticated } = useConvexAuth()
+  const { isAuthenticated, isLoading } = useConvexAuth()
   const isOnline = useOnlineStatus()
   const queryClient = useQueryClient()
   const [isEditing, setIsEditing] = React.useState(false)
@@ -92,10 +92,10 @@ function GameDetailPage() {
   }, [baseGame, pendingUpdate])
 
   React.useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       navigate({ to: '/games' })
     }
-  }, [isAuthenticated, navigate])
+  }, [isLoading, isAuthenticated, navigate])
 
   if (!isAuthenticated) return null
 

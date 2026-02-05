@@ -17,7 +17,7 @@ export const Route = createFileRoute('/games/new')({
 
 function NewGamePage() {
   const navigate = useNavigate()
-  const { isAuthenticated } = useConvexAuth()
+  const { isAuthenticated, isLoading } = useConvexAuth()
   const isOnline = useOnlineStatus()
   const { saveOfflineGame } = usePendingGames()
 
@@ -32,10 +32,10 @@ function NewGamePage() {
   })
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       navigate({ to: '/games' })
     }
-  }, [isAuthenticated, navigate])
+  }, [isLoading, isAuthenticated, navigate])
 
   if (!isAuthenticated) return null
 
