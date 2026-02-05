@@ -1,5 +1,5 @@
 import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
-import { useMutation, useSuspenseQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { useConvexAuth } from 'convex/react'
@@ -32,7 +32,7 @@ function ImportPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
   // Get existing games for validation (used to detect unchanged games)
-  const { data: existingGames } = useSuspenseQuery(convexQuery(api.games.listGames, {}))
+  const { data: existingGames } = useQuery(convexQuery(api.games.listGames, {}))
 
   const importGamesMutation = useConvexMutation(api.games.importGames)
   const importGames = useMutation({
@@ -56,7 +56,7 @@ function ImportPage() {
 
     try {
       const rows = await parseGamesCSV(file)
-      const validated = rows.map((row) => validateParsedGame(row, existingGames))
+      const validated = rows.map((row) => validateParsedGame(row, existingGames ?? []))
       setValidatedGames(validated)
     } catch (error) {
       toast.error(
