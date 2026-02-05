@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc, Id } from 'convex/_generated/dataModel'
+import { useConvexAuth } from 'convex/react'
 import { format } from 'date-fns'
 import { Pencil, Trash2, WifiOff } from 'lucide-react'
 import * as React from 'react'
@@ -27,13 +28,14 @@ import { useOfflineOps } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 import { saveOfflineOp } from '@/lib/offline-games'
 
-export const Route = createFileRoute('/_authenticated/games/$id')({
+export const Route = createFileRoute('/games/$id')({
   component: GameDetailPage,
 })
 
 function GameDetailPage() {
   const { id } = Route.useParams()
   const navigate = useNavigate()
+  const { isAuthenticated } = useConvexAuth()
   const isOnline = useOnlineStatus()
   const queryClient = useQueryClient()
   const [isEditing, setIsEditing] = React.useState(false)
@@ -88,6 +90,14 @@ function GameDetailPage() {
     }
     return baseGame
   }, [baseGame, pendingUpdate])
+
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      navigate({ to: '/games' })
+    }
+  }, [isAuthenticated, navigate])
+
+  if (!isAuthenticated) return null
 
   if (isPending && !resolvedGame) {
     return (
