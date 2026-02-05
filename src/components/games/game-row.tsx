@@ -27,7 +27,7 @@ export function GameRow({ game }: GameRowProps) {
 
   return (
     <Link
-      className="flex items-center gap-3 p-3 hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
+      className="flex items-center gap-3 p-3 cursor-default hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
       params={{ id: game._id }}
       to="/games/$id"
     >

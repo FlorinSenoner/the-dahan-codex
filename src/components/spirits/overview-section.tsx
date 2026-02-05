@@ -41,7 +41,7 @@ export function OverviewSection({ spirit, description }: OverviewSectionProps) {
       <div className="space-y-4">
         {hasStrengths && (
           <div className="space-y-2">
-            <Heading as="h3" className="text-green-400" variant="h4">
+            <Heading as="h3" className="text-element-plant" variant="h4">
               Strengths
             </Heading>
             <ul className="space-y-1 pl-4">
@@ -56,7 +56,7 @@ export function OverviewSection({ spirit, description }: OverviewSectionProps) {
 
         {hasWeaknesses && (
           <div className="space-y-2">
-            <Heading as="h3" className="text-red-400" variant="h4">
+            <Heading as="h3" className="text-element-animal" variant="h4">
               Weaknesses
             </Heading>
             <ul className="space-y-1 pl-4">

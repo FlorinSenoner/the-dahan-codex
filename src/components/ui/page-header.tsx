@@ -11,8 +11,6 @@ export interface PageHeaderProps {
   title: string
   /** Optional href for back button - renders ArrowLeft icon when provided */
   backHref?: string
-  /** Optional view transition name for the header element */
-  viewTransitionName?: string
   /** Optional content rendered in the center of the header (e.g. search bar) */
   center?: React.ReactNode
   /** Optional action elements (filter buttons, etc.) rendered on the right */
@@ -21,21 +19,14 @@ export interface PageHeaderProps {
   className?: string
 }
 
-export function PageHeader({
-  title,
-  backHref,
-  viewTransitionName,
-  center,
-  children,
-  className,
-}: PageHeaderProps) {
+export function PageHeader({ title, backHref, center, children, className }: PageHeaderProps) {
   return (
     <header
       className={cn(
         'sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border px-4 py-3',
         className,
       )}
-      style={viewTransitionName ? { viewTransitionName } : undefined}
+      style={{ viewTransitionName: 'page-header' }}
     >
       <div className="flex items-center gap-4 min-h-[44px]">
         <div className="flex items-center gap-3 shrink-0">
@@ -43,7 +34,7 @@ export function PageHeader({
             <Link to={backHref} viewTransition>
               <Button
                 aria-label="Go back"
-                className="min-w-[44px] min-h-[44px]"
+                className="min-w-[44px] min-h-[44px] hover:bg-transparent hover:ring-1 hover:ring-border dark:hover:ring-muted-foreground dark:hover:text-foreground"
                 size="icon"
                 variant="ghost"
               >

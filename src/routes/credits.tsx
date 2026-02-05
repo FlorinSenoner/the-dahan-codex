@@ -14,7 +14,7 @@ function CreditsPage() {
 
       <main className="p-4 max-w-2xl mx-auto space-y-8">
         {/* Legal Disclaimer */}
-        <section className="bg-card border border-border rounded-lg p-4">
+        <section>
           <Heading className="text-foreground mb-3" variant="h3">
             Legal Disclaimer
           </Heading>
@@ -35,6 +35,11 @@ function CreditsPage() {
               description="Spirit details, strategies, and rulings"
               href="https://spiritislandwiki.com"
               title="Spirit Island Wiki"
+            />
+            <ExternalLinkCard
+              description="Opening guides and spirit strategies"
+              href="https://latentoctopus.github.io"
+              title="Spirit Island Hub"
             />
             <ExternalLinkCard
               description="Card images and search"
