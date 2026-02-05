@@ -40,7 +40,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 6.1: Cleanup TheDahanCodex** - SSR removal, component reuse, dead code cleanup (INSERTED)
 - [x] **Phase 6.2: Fix Code Duplication** - Eliminate jscpd clones, extract shared validators/components (INSERTED)
 - [ ] **Phase 7: Seed Data Management** - Admin tools for spirit seed data
-- [ ] **Phase 8: Spirit & Aspect Data Scraping** - Populate complete spirit data from wiki
+- [x] **Phase 8: Spirit & Aspect Data Scraping** - Populate complete spirit data from wiki
 
 ## Phase Details
 
@@ -470,12 +470,12 @@ Plans:
 
 Plans:
 
-- [ ] 08-01-PLAN.md — Scrape spirit data to JSON (all 37 spirits from wiki)
-- [ ] 08-02-PLAN.md — Scrape aspect data to JSON (all 31 aspects from wiki)
-- [ ] 08-03-PLAN.md — Download spirit and aspect images
-- [ ] 08-04-PLAN.md — Update seed data with scraped information
-- [ ] 08-05-PLAN.md — Preserve openings during reseed
-- [ ] 08-06-PLAN.md — Run reseed and verify data (checkpoint)
+- [x] 08-01-PLAN.md — Scrape spirit data to JSON (all 37 spirits from wiki)
+- [x] 08-02-PLAN.md — Scrape aspect data to JSON (all 31 aspects from wiki)
+- [x] 08-03-PLAN.md — Download spirit and aspect images
+- [x] 08-04-PLAN.md — Update seed data with scraped information
+- [x] 08-05-PLAN.md — Preserve openings during reseed
+- [x] 08-06-PLAN.md — Run reseed and verify data (checkpoint)
 
 ## Cross-Cutting Requirements
 
@@ -517,7 +517,7 @@ development:
 | 6.1 Cleanup TheDahanCodex            | 3/3            | Complete    | 2026-02-01 |
 | 6.2 Fix Code Duplication             | 7/7            | Complete    | 2026-02-02 |
 | 7. Seed Data Management              | 0/TBD          | On Hold     | -          |
-| 8. Spirit & Aspect Data Scraping     | 0/6            | Planned     | -          |
+| 8. Spirit & Aspect Data Scraping     | 6/6            | Complete    | 2026-02-04 |
 
 ---
 
