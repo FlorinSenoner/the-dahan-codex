@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { BookOpen, Compass, Gamepad2, WifiOff } from 'lucide-react'
+import { useRef } from 'react'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -115,6 +116,9 @@ function OrnamentDivider() {
 }
 
 function HomePage() {
+  const imageRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const nameRefs = useRef<Record<string, HTMLHeadingElement | null>>({})
+
   return (
     <div className="min-h-screen pb-20 bg-background text-foreground">
       <div className="max-w-[900px] mx-auto px-6 pt-12 md:pt-20">
@@ -213,6 +217,12 @@ function HomePage() {
               <Link
                 className="bg-card border border-border rounded-sm overflow-hidden transition-all duration-200 cursor-default hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40"
                 key={spirit.name}
+                onClick={() => {
+                  const img = imageRefs.current[spirit.slug]
+                  const name = nameRefs.current[spirit.slug]
+                  if (img) img.style.viewTransitionName = `spirit-image-${spirit.slug}`
+                  if (name) name.style.viewTransitionName = `spirit-name-${spirit.slug}`
+                }}
                 params={{ slug: spirit.slug }}
                 search={{ opening: undefined }}
                 to="/spirits/$slug"
@@ -220,7 +230,9 @@ function HomePage() {
               >
                 <div
                   className="w-full aspect-square overflow-hidden bg-muted"
-                  style={{ viewTransitionName: `spirit-image-${spirit.slug}` }}
+                  ref={(el) => {
+                    imageRefs.current[spirit.slug] = el
+                  }}
                 >
                   <img
                     alt={spirit.name}
@@ -232,7 +244,10 @@ function HomePage() {
                 <div className="p-3 md:p-4">
                   <h3
                     className="text-sm md:text-base leading-tight mb-2 text-card-foreground"
-                    style={{ viewTransitionName: `spirit-name-${spirit.slug}`, fontWeight: 600 }}
+                    ref={(el) => {
+                      nameRefs.current[spirit.slug] = el
+                    }}
+                    style={{ fontWeight: 600 }}
                   >
                     {spirit.name}
                   </h3>

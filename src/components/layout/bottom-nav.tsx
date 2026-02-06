@@ -79,7 +79,7 @@ export function BottomNav() {
               key={tab.name}
               to={tab.href as '/spirits' | '/games' | '/settings'}
             >
-              <Icon className={cn('h-5 w-5', isActive && 'text-primary')} />
+              <Icon className="h-5 w-5" />
               <span className={cn('text-xs mt-1', isActive ? 'font-medium' : '')}>{tab.name}</span>
             </Link>
           )
