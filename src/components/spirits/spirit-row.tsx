@@ -33,6 +33,8 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
     ? `spirit-image-${spirit.slug}-${aspectSlug}`
     : `spirit-image-${spirit.slug}`
 
+  const rowId = isAspect ? `spirit-${spirit.slug}-${aspectSlug}` : `spirit-${spirit.slug}`
+
   return (
     <Link
       className={cn(
@@ -40,7 +42,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
         'hover:bg-muted/50 active:bg-muted/50 transition-colors duration-150',
         isAspect && 'pl-8 bg-muted/10', // Indent aspects
       )}
-      state={(prev) => ({ ...prev, fromListing: true })}
+      id={rowId}
       to={href}
       viewTransition
     >

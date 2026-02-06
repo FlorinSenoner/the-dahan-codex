@@ -5,11 +5,9 @@ import {
   Link,
   Outlet,
   useBlocker,
-  useLocation,
   useMatches,
   useNavigate,
   useParams,
-  useRouter,
 } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
@@ -78,19 +76,12 @@ export const Route = createFileRoute('/spirits/$slug')({
 function SpiritDetailLayout() {
   const { slug } = Route.useParams()
   const navigate = useNavigate()
-  const router = useRouter()
-  const location = useLocation()
   const matches = useMatches()
   const params = useParams({ strict: false })
 
-  const fromListing = 'fromListing' in location.state && location.state.fromListing === true
   const goBack = useCallback(() => {
-    if (fromListing) {
-      router.history.back()
-    } else {
-      navigate({ to: '/spirits', viewTransition: true })
-    }
-  }, [fromListing, router, navigate])
+    navigate({ to: '/spirits', viewTransition: true })
+  }, [navigate])
 
   // Track tabs visibility for header aspect name display
   const [tabsVisible, setTabsVisible] = useState(true)
@@ -103,6 +94,13 @@ function SpiritDetailLayout() {
 
   // Get current aspect from URL params
   const currentAspect = (params as { aspect?: string }).aspect
+
+  // Store last-viewed spirit in sessionStorage for scroll restoration.
+  // If we add more navigation state, consolidate into a React context instead.
+  useEffect(() => {
+    const key = currentAspect ? `${slug}-${currentAspect}` : slug
+    sessionStorage.setItem('lastViewedSpirit', key)
+  }, [slug, currentAspect])
 
   // Get base spirit with aspects for the tabs
   const { data: spiritData } = useSuspenseQuery(
