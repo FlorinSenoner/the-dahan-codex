@@ -2,7 +2,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { z } from 'zod'
 import { FilterChips } from '@/components/spirits/filter-chips'
 import { FilterSheet } from '@/components/spirits/filter-sheet'
@@ -43,6 +43,16 @@ export const Route = createFileRoute('/spirits/')({
 })
 
 function SpiritsPage() {
+  useEffect(() => {
+    const lastViewed = sessionStorage.getItem('lastViewedSpirit')
+    if (lastViewed) {
+      sessionStorage.removeItem('lastViewedSpirit')
+      requestAnimationFrame(() => {
+        document.getElementById(`spirit-${lastViewed}`)?.scrollIntoView({ block: 'center' })
+      })
+    }
+  }, [])
+
   const filters = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
   const { data: spirits } = useSuspenseQuery(
