@@ -40,6 +40,11 @@ export function usePageMeta(title?: string, description?: string) {
 
     return () => {
       document.title = DEFAULT_TITLE
+      metaDescription?.setAttribute('content', DEFAULT_DESCRIPTION)
+      ogTitle?.setAttribute('content', DEFAULT_TITLE)
+      ogDescription?.setAttribute('content', DEFAULT_DESCRIPTION)
+      twitterTitle?.setAttribute('content', DEFAULT_TITLE)
+      twitterDescription?.setAttribute('content', DEFAULT_DESCRIPTION)
     }
   }, [title, description])
 }
