@@ -13,7 +13,7 @@ mise.*.toml
 .dev.vars
 
 # IDE
-.DS_Store
+**/.DS_Store
 .idea/
 
 # Testing
@@ -27,6 +27,9 @@ convex/_generated/
 
 # Claude
 .claude/settings.local.json
+
+# Spirit source PNGs (WebP copies are served; PNGs kept as source assets)
+public/spirits/*.png
 
 # Misc
 *.log

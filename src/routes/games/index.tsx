@@ -10,7 +10,7 @@ import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
-import { useOnlineStatus } from '@/hooks'
+import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
 import { seedGameCaches } from '@/lib/sync'
@@ -20,6 +20,8 @@ export const Route = createFileRoute('/games/')({
 })
 
 function GamesIndex() {
+  usePageMeta('Games', 'Track your Spirit Island game history and stats.')
+
   const { isAuthenticated } = useConvexAuth()
 
   if (!isAuthenticated) {

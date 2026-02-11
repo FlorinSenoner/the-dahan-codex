@@ -60,8 +60,12 @@ export function BottomNav() {
           if (tab.disabled) {
             return (
               <div
+                aria-disabled="true"
+                aria-label={`${tab.name} (coming soon)`}
                 className="flex flex-col items-center justify-center flex-1 h-full opacity-40"
                 key={tab.name}
+                role="link"
+                tabIndex={-1}
               >
                 <Icon className="h-5 w-5 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground mt-1">{tab.name}</span>
@@ -71,6 +75,7 @@ export function BottomNav() {
 
           return (
             <Link
+              aria-current={isActive ? 'page' : undefined}
               className={cn(
                 'flex flex-col items-center justify-center flex-1 h-full',
                 'transition-colors',

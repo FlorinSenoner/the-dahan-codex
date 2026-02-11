@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { GameForm, type GameFormData } from '@/components/games/game-form'
 import { PageHeader } from '@/components/ui/page-header'
-import { useOnlineStatus } from '@/hooks'
+import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { usePendingGames } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 
@@ -16,6 +16,8 @@ export const Route = createFileRoute('/games/new')({
 })
 
 function NewGamePage() {
+  usePageMeta('New Game')
+
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useConvexAuth()
   const isOnline = useOnlineStatus()

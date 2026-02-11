@@ -142,13 +142,6 @@ export function GameForm({
     formData.blightCount,
   )
 
-  // Update score when inputs change
-  React.useEffect(() => {
-    if (calculatedScore !== formData.score) {
-      setFormData((prev) => ({ ...prev, score: calculatedScore }))
-    }
-  }, [calculatedScore, formData.score])
-
   const handleSpiritChange = (
     index: number,
     spiritId: Id<'spirits'>,
@@ -196,7 +189,7 @@ export function GameForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!isValid || isSubmitting) return
-    await onSubmit(formData)
+    await onSubmit({ ...formData, score: calculatedScore })
   }
 
   return (

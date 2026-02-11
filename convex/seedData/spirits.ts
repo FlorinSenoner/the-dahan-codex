@@ -66,7 +66,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 4,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/river-surges-in-sunlight.png',
+    imageUrl: '/spirits/river-surges-in-sunlight.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight',
   },
   {
@@ -87,7 +87,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/lightnings-swift-strike.png',
+    imageUrl: '/spirits/lightnings-swift-strike.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike',
   },
   {
@@ -109,7 +109,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/shadows-flicker-like-flame.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Shadows_Flicker_Like_Flame',
   },
   {
@@ -131,7 +131,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/vital-strength-of-the-earth.png',
+    imageUrl: '/spirits/vital-strength-of-the-earth.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth',
   },
   {
@@ -153,7 +153,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 4,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/a-spread-of-rampant-green.png',
+    imageUrl: '/spirits/a-spread-of-rampant-green.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green',
   },
   {
@@ -174,7 +174,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/thunderspeaker.png',
+    imageUrl: '/spirits/thunderspeaker.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Thunderspeaker',
   },
   {
@@ -195,7 +195,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/bringer-of-dreams-and-nightmares.png',
+    imageUrl: '/spirits/bringer-of-dreams-and-nightmares.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares',
   },
   {
@@ -217,7 +217,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'base-game',
-    imageUrl: '/spirits/oceans-hungry-grasp.png',
+    imageUrl: '/spirits/oceans-hungry-grasp.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp',
   },
   // Branch & Claw (2 spirits)
@@ -239,7 +239,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'branch-and-claw',
-    imageUrl: '/spirits/keeper-of-the-forbidden-wilds.png',
+    imageUrl: '/spirits/keeper-of-the-forbidden-wilds.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Keeper_of_the_Forbidden_Wilds',
   },
   {
@@ -261,7 +261,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'branch-and-claw',
-    imageUrl: '/spirits/sharp-fangs-behind-the-leaves.png',
+    imageUrl: '/spirits/sharp-fangs-behind-the-leaves.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Sharp_Fangs_Behind_the_Leaves',
   },
   // Jagged Earth (14 spirits)
@@ -284,7 +284,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 5,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/fractured-days-split-the-sky.png',
+    imageUrl: '/spirits/fractured-days-split-the-sky.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Fractured_Days_Split_the_Sky',
   },
   {
@@ -306,7 +306,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/starlight-seeks-its-form.png',
+    imageUrl: '/spirits/starlight-seeks-its-form.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Starlight_Seeks_Its_Form',
   },
   {
@@ -328,7 +328,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/finder-of-paths-unseen.png',
+    imageUrl: '/spirits/finder-of-paths-unseen.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Finder_of_Paths_Unseen',
   },
   {
@@ -350,7 +350,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 5,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/serpent-slumbering-beneath-the-island.png',
+    imageUrl: '/spirits/serpent-slumbering-beneath-the-island.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Serpent_Slumbering_Beneath_the_Island',
   },
   {
@@ -372,7 +372,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 4,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/grinning-trickster-stirs-up-trouble.png',
+    imageUrl: '/spirits/grinning-trickster-stirs-up-trouble.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Grinning_Trickster_Stirs_Up_Trouble',
   },
   {
@@ -394,7 +394,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/lure-of-the-deep-wilderness.png',
+    imageUrl: '/spirits/lure-of-the-deep-wilderness.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Lure_of_the_Deep_Wilderness',
   },
   {
@@ -416,7 +416,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/many-minds-move-as-one.png',
+    imageUrl: '/spirits/many-minds-move-as-one.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Many_Minds_Move_as_One',
   },
   {
@@ -438,7 +438,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 5,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/shifting-memory-of-ages.png',
+    imageUrl: '/spirits/shifting-memory-of-ages.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Shifting_Memory_of_Ages',
   },
   {
@@ -460,7 +460,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/stones-unyielding-defiance.png',
+    imageUrl: '/spirits/stones-unyielding-defiance.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Stone%27s_Unyielding_Defiance',
   },
   {
@@ -482,7 +482,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/volcano-looming-high.png',
+    imageUrl: '/spirits/volcano-looming-high.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Volcano_Looming_High',
   },
   {
@@ -504,7 +504,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/shroud-of-silent-mist.png',
+    imageUrl: '/spirits/shroud-of-silent-mist.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Shroud_of_Silent_Mist',
   },
   {
@@ -526,7 +526,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'jagged-earth',
-    imageUrl: '/spirits/vengeance-as-a-burning-plague.png',
+    imageUrl: '/spirits/vengeance-as-a-burning-plague.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Vengeance_as_a_Burning_Plague',
   },
   // Feather and Flame (2 spirits)
@@ -549,7 +549,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'feather-and-flame',
-    imageUrl: '/spirits/heart-of-the-wildfire.png',
+    imageUrl: '/spirits/heart-of-the-wildfire.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Heart_of_the_Wildfire',
   },
   {
@@ -570,7 +570,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'feather-and-flame',
-    imageUrl: '/spirits/downpour-drenches-the-world.png',
+    imageUrl: '/spirits/downpour-drenches-the-world.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Downpour_Drenches_the_World',
   },
   // Horizons of Spirit Island (5 spirits)
@@ -592,7 +592,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'horizons',
-    imageUrl: '/spirits/devouring-teeth-lurk-underfoot.png',
+    imageUrl: '/spirits/devouring-teeth-lurk-underfoot.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Devouring_Teeth_Lurk_Underfoot',
   },
   {
@@ -613,7 +613,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'horizons',
-    imageUrl: '/spirits/eyes-watch-from-the-trees.png',
+    imageUrl: '/spirits/eyes-watch-from-the-trees.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Eyes_Watch_from_the_Trees',
   },
   {
@@ -634,7 +634,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'horizons',
-    imageUrl: '/spirits/fathomless-mud-of-the-swamp.png',
+    imageUrl: '/spirits/fathomless-mud-of-the-swamp.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Fathomless_Mud_of_the_Swamp',
   },
   {
@@ -655,7 +655,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'horizons',
-    imageUrl: '/spirits/rising-heat-of-stone-and-sand.png',
+    imageUrl: '/spirits/rising-heat-of-stone-and-sand.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Rising_Heat_of_Stone_and_Sand',
   },
   {
@@ -677,7 +677,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'horizons',
-    imageUrl: '/spirits/sun-bright-whirlwind.png',
+    imageUrl: '/spirits/sun-bright-whirlwind.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Sun-Bright_Whirlwind',
   },
   // Nature Incarnate (8 spirits)
@@ -700,7 +700,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/ember-eyed-behemoth.png',
+    imageUrl: '/spirits/ember-eyed-behemoth.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Ember-Eyed_Behemoth',
   },
   {
@@ -722,7 +722,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 4,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/hearth-vigil.png',
+    imageUrl: '/spirits/hearth-vigil.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Hearth-Vigil',
   },
   {
@@ -744,7 +744,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/towering-roots-of-the-jungle.png',
+    imageUrl: '/spirits/towering-roots-of-the-jungle.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Towering_Roots_of_the_Jungle',
   },
   {
@@ -766,7 +766,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/breath-of-darkness-down-your-spine.png',
+    imageUrl: '/spirits/breath-of-darkness-down-your-spine.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Breath_of_Darkness_Down_Your_Spine',
   },
   {
@@ -787,7 +787,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 3,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/relentless-gaze-of-the-sun.png',
+    imageUrl: '/spirits/relentless-gaze-of-the-sun.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Relentless_Gaze_of_the_Sun',
   },
   {
@@ -809,7 +809,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 2,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/wandering-voice-keens-delirium.png',
+    imageUrl: '/spirits/wandering-voice-keens-delirium.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Wandering_Voice_Keens_Delirium',
   },
   {
@@ -831,7 +831,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 1,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/wounded-waters-bleeding.png',
+    imageUrl: '/spirits/wounded-waters-bleeding.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Wounded_Waters_Bleeding',
   },
   {
@@ -852,7 +852,7 @@ export const SPIRITS: SpiritData[] = [
       utility: 4,
     },
     expansion: 'nature-incarnate',
-    imageUrl: '/spirits/dances-up-earthquakes.png',
+    imageUrl: '/spirits/dances-up-earthquakes.webp',
     wikiUrl: 'https://spiritislandwiki.com/index.php?title=Dances_Up_Earthquakes',
   },
 ]
@@ -882,7 +882,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Chaotic lightning that scatters invaders unpredictably.',
     expansion: 'jagged-earth',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/lightnings-swift-strike-pandemonium.png',
+    imageUrl: '/spirits/lightnings-swift-strike-pandemonium.webp',
   },
   {
     name: 'Wind',
@@ -890,7 +890,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Swift spirit that prioritizes movement and flexibility over raw damage.',
     expansion: 'jagged-earth',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/lightnings-swift-strike-wind.png',
+    imageUrl: '/spirits/lightnings-swift-strike-wind.webp',
   },
   {
     name: 'Immense',
@@ -898,7 +898,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Massive presence with devastating area attacks.',
     expansion: 'promo-pack-2',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/lightnings-swift-strike-immense.png',
+    imageUrl: '/spirits/lightnings-swift-strike-immense.webp',
   },
   {
     name: 'Sparking',
@@ -906,7 +906,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Focused on efficient, repeated small strikes.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/lightnings-swift-strike-sparking.png',
+    imageUrl: '/spirits/lightnings-swift-strike-sparking.webp',
   },
   // River Surges in Sunlight aspects (3)
   {
@@ -915,7 +915,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Emphasizes Sun and energy income, with radiant presence.',
     expansion: 'jagged-earth',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/river-surges-in-sunlight-sunshine.png',
+    imageUrl: '/spirits/river-surges-in-sunlight-sunshine.webp',
   },
   {
     name: 'Travel',
@@ -923,7 +923,7 @@ export const ASPECTS: AspectData[] = [
     summary: "Mobile spirit that flows across the island to where it's needed.",
     expansion: 'promo-pack-2',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/river-surges-in-sunlight-travel.png',
+    imageUrl: '/spirits/river-surges-in-sunlight-travel.webp',
   },
   {
     name: 'Haven',
@@ -931,7 +931,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Protective spirit focused on defending sacred sites.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/river-surges-in-sunlight-haven.png',
+    imageUrl: '/spirits/river-surges-in-sunlight-haven.webp',
   },
   // Shadows Flicker Like Flame aspects (5)
   {
@@ -940,7 +940,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Induces terror and insanity in the Invaders.',
     expansion: 'jagged-earth',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shadows-flicker-like-flame-madness.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame-madness.webp',
   },
   {
     name: 'Reach',
@@ -948,7 +948,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Extended range allows targeting distant lands with ease.',
     expansion: 'jagged-earth',
     complexityModifier: 'easier',
-    imageUrl: '/spirits/shadows-flicker-like-flame-reach.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame-reach.webp',
   },
   {
     name: 'Amorphous',
@@ -956,7 +956,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Shapeshifting presence that flows between lands.',
     expansion: 'promo-pack-2',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shadows-flicker-like-flame-amorphous.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame-amorphous.webp',
   },
   {
     name: 'Foreboding',
@@ -964,7 +964,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Builds dread and anticipation before striking.',
     expansion: 'promo-pack-2',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shadows-flicker-like-flame-foreboding.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame-foreboding.webp',
   },
   {
     name: 'Dark Fire',
@@ -972,7 +972,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Combines shadow and flame for devastating attacks.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shadows-flicker-like-flame-dark-fire.png',
+    imageUrl: '/spirits/shadows-flicker-like-flame-dark-fire.webp',
   },
   // Vital Strength of the Earth aspects (3)
   {
@@ -981,7 +981,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Endures punishment and slowly wears down the Invaders.',
     expansion: 'jagged-earth',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/vital-strength-of-the-earth-resilience.png',
+    imageUrl: '/spirits/vital-strength-of-the-earth-resilience.webp',
   },
   {
     name: 'Might',
@@ -989,7 +989,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Raw power focused on crushing the Invaders directly.',
     expansion: 'promo-pack-2',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/vital-strength-of-the-earth-might.png',
+    imageUrl: '/spirits/vital-strength-of-the-earth-might.webp',
   },
   {
     name: 'Nourishing',
@@ -997,7 +997,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Supports growth and healing across the island.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/vital-strength-of-the-earth-nourishing.png',
+    imageUrl: '/spirits/vital-strength-of-the-earth-nourishing.webp',
   },
   // A Spread of Rampant Green aspects (2)
   {
@@ -1006,7 +1006,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Focuses on healing Blight and restoring the land.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/a-spread-of-rampant-green-regrowth.png',
+    imageUrl: '/spirits/a-spread-of-rampant-green-regrowth.webp',
   },
   {
     name: 'Tangles',
@@ -1014,7 +1014,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Entangling vines that trap and slow Invaders.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/a-spread-of-rampant-green-tangles.png',
+    imageUrl: '/spirits/a-spread-of-rampant-green-tangles.webp',
   },
   // Bringer of Dreams and Nightmares aspects (2)
   {
@@ -1023,7 +1023,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Lures Invaders into dangerous situations with pleasant dreams.',
     expansion: 'nature-incarnate',
     complexityModifier: 'same',
-    imageUrl: '/spirits/bringer-of-dreams-and-nightmares-enticing.png',
+    imageUrl: '/spirits/bringer-of-dreams-and-nightmares-enticing.webp',
   },
   {
     name: 'Violence',
@@ -1031,7 +1031,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Nightmares become deadly, dealing actual damage.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/bringer-of-dreams-and-nightmares-violence.png',
+    imageUrl: '/spirits/bringer-of-dreams-and-nightmares-violence.webp',
   },
   // Heart of the Wildfire aspects (1)
   {
@@ -1040,7 +1040,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Fire that changes the land rather than just destroying.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/heart-of-the-wildfire-transforming.png',
+    imageUrl: '/spirits/heart-of-the-wildfire-transforming.webp',
   },
   // Keeper of the Forbidden Wilds aspects (1)
   {
@@ -1049,7 +1049,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Wilds spread more aggressively across the island.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/keeper-of-the-forbidden-wilds-spreading-hostility.png',
+    imageUrl: '/spirits/keeper-of-the-forbidden-wilds-spreading-hostility.webp',
   },
   // Lure of the Deep Wilderness aspects (1)
   {
@@ -1058,7 +1058,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Creates a central den that draws prey inward.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/lure-of-the-deep-wilderness-lair.png',
+    imageUrl: '/spirits/lure-of-the-deep-wilderness-lair.webp',
   },
   // Ocean's Hungry Grasp aspects (1)
   {
@@ -1067,7 +1067,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Reaches further inland with abyssal power.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/oceans-hungry-grasp-deeps.png',
+    imageUrl: '/spirits/oceans-hungry-grasp-deeps.webp',
   },
   // Serpent Slumbering Beneath the Island aspects (1)
   {
@@ -1076,7 +1076,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Awakens through a central point of power.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/serpent-slumbering-beneath-the-island-locus.png',
+    imageUrl: '/spirits/serpent-slumbering-beneath-the-island-locus.webp',
   },
   // Sharp Fangs Behind the Leaves aspects (2)
   {
@@ -1085,7 +1085,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Pack tactics that surround and trap prey.',
     expansion: 'nature-incarnate',
     complexityModifier: 'same',
-    imageUrl: '/spirits/sharp-fangs-behind-the-leaves-encircle.png',
+    imageUrl: '/spirits/sharp-fangs-behind-the-leaves-encircle.webp',
   },
   {
     name: 'Unconstrained',
@@ -1093,7 +1093,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Beasts roam freely without territorial limits.',
     expansion: 'nature-incarnate',
     complexityModifier: 'easier',
-    imageUrl: '/spirits/sharp-fangs-behind-the-leaves-unconstrained.png',
+    imageUrl: '/spirits/sharp-fangs-behind-the-leaves-unconstrained.webp',
   },
   // Shifting Memory of Ages aspects (2)
   {
@@ -1102,7 +1102,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Amplifies the power of remembered elements.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shifting-memory-of-ages-intensify.png',
+    imageUrl: '/spirits/shifting-memory-of-ages-intensify.webp',
   },
   {
     name: 'Mentor',
@@ -1110,7 +1110,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Shares ancient knowledge with other spirits.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/shifting-memory-of-ages-mentor.png',
+    imageUrl: '/spirits/shifting-memory-of-ages-mentor.webp',
   },
   // Shroud of Silent Mist aspects (1)
   {
@@ -1119,7 +1119,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Isolates Invaders in the mist, cutting them off.',
     expansion: 'nature-incarnate',
     complexityModifier: 'easier',
-    imageUrl: '/spirits/shroud-of-silent-mist-stranded.png',
+    imageUrl: '/spirits/shroud-of-silent-mist-stranded.webp',
   },
   // Thunderspeaker aspects (2)
   {
@@ -1128,7 +1128,7 @@ export const ASPECTS: AspectData[] = [
     summary: 'Strategic positioning of Dahan for maximum effect.',
     expansion: 'nature-incarnate',
     complexityModifier: 'same',
-    imageUrl: '/spirits/thunderspeaker-tactician.png',
+    imageUrl: '/spirits/thunderspeaker-tactician.webp',
   },
   {
     name: 'Warrior',
@@ -1136,6 +1136,6 @@ export const ASPECTS: AspectData[] = [
     summary: 'Leads the Dahan in direct combat against Invaders.',
     expansion: 'nature-incarnate',
     complexityModifier: 'harder',
-    imageUrl: '/spirits/thunderspeaker-warrior.png',
+    imageUrl: '/spirits/thunderspeaker-warrior.webp',
   },
 ]

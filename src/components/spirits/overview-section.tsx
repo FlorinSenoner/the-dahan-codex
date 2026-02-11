@@ -76,9 +76,9 @@ export function OverviewSection({ spirit, description }: OverviewSectionProps) {
     <>
       {/* Mobile: Collapsible */}
       <Collapsible className="lg:hidden" defaultOpen={false}>
-        <CollapsibleTrigger className="w-full flex justify-between items-center py-3 px-4 bg-muted/30 rounded-lg cursor-pointer min-h-[44px]">
+        <CollapsibleTrigger className="group w-full flex justify-between items-center py-3 px-4 bg-muted/30 rounded-lg cursor-pointer min-h-[44px]">
           <span className="font-medium">Overview</span>
-          <ChevronDown className="h-4 w-4 transition-transform duration-200 data-[state=open]:rotate-180" />
+          <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
         </CollapsibleTrigger>
         <CollapsibleContent className="pt-4">{content}</CollapsibleContent>
       </Collapsible>
