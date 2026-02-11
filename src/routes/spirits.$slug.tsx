@@ -31,7 +31,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Heading, Text } from '@/components/ui/typography'
-import { useAdmin, useEditMode } from '@/hooks'
+import { useAdmin, useEditMode, usePageMeta } from '@/hooks'
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -66,8 +66,9 @@ export const Route = createFileRoute('/spirits/$slug')({
           }),
         ),
       ])
-    } catch {
-      // Ignore fetch errors - component will use cached data or show error state
+    } catch (e) {
+      if (e instanceof Error && !e.message.includes('Failed to fetch'))
+        console.warn('Loader error:', e)
     }
   },
   component: SpiritDetailLayout,
@@ -106,6 +107,8 @@ function SpiritDetailLayout() {
   const { data: spiritData } = useSuspenseQuery(
     convexQuery(api.spirits.getSpiritWithAspects, { slug }),
   )
+
+  usePageMeta(spiritData?.base.name, spiritData?.base.summary)
 
   // Not found state
   if (spiritData === null) {

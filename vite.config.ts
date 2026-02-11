@@ -1,10 +1,25 @@
 /// <reference types="vitest/config" />
+
+import { readFileSync, writeFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import viteReact from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import tsConfigPaths from 'vite-tsconfig-paths'
+
+/** Stamps today's date into sitemap.xml `__BUILD_DATE__` placeholders after build. */
+function sitemapDate(): Plugin {
+  return {
+    name: 'sitemap-date',
+    closeBundle() {
+      const file = resolve(__dirname, 'dist/sitemap.xml')
+      const today = new Date().toISOString().slice(0, 10)
+      writeFileSync(file, readFileSync(file, 'utf-8').replaceAll('__BUILD_DATE__', today))
+    },
+  }
+}
 
 export default defineConfig({
   test: {
@@ -22,6 +37,7 @@ export default defineConfig({
     outDir: 'dist',
   },
   plugins: [
+    sitemapDate(),
     // Must be before viteReact()
     tanstackRouter({
       target: 'react',
@@ -46,6 +62,7 @@ export default defineConfig({
       },
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
+        globIgnores: ['spirits/*.png'],
       },
       manifest: {
         name: 'The Dahan Codex',
@@ -53,8 +70,8 @@ export default defineConfig({
         description: 'Spirit Island companion app - spirit library, openings, game tracker',
         start_url: '/',
         display: 'standalone',
-        background_color: '#1a1a1a',
-        theme_color: '#1a1a1a',
+        background_color: '#1f1510',
+        theme_color: '#1f1510',
         orientation: 'portrait-primary',
         icons: [
           {

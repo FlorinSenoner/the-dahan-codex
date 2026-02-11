@@ -1,6 +1,7 @@
 import { v } from 'convex/values'
 import { mutation, query } from './_generated/server'
 import { requireAdmin } from './lib/auth'
+import { validateStringLength } from './lib/validators'
 
 /**
  * Generate a URL-friendly slug from a name
@@ -55,6 +56,11 @@ export const createOpening = mutation({
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
 
+    validateStringLength(args.name, 'name', 200)
+    for (const turn of args.turns) {
+      validateStringLength(turn.instructions, 'instructions', 10000)
+    }
+
     const now = Date.now()
     const slug = generateSlug(args.name)
 
@@ -94,6 +100,13 @@ export const updateOpening = mutation({
   },
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
+
+    validateStringLength(args.name, 'name', 200)
+    if (args.turns) {
+      for (const turn of args.turns) {
+        validateStringLength(turn.instructions, 'instructions', 10000)
+      }
+    }
 
     const { id, ...updates } = args
 

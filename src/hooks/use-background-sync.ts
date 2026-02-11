@@ -15,7 +15,7 @@ export function useBackgroundSync(isAuthReady: boolean | undefined) {
     if (!isAuthReady || !isOnline) return
 
     // Immediate: sync games
-    syncGames(queryClient).catch(() => {})
+    syncGames(queryClient).catch((e) => console.warn('Background game sync failed:', e))
 
     // Idle: sync spirits and openings
     const idleCallback =
@@ -26,7 +26,9 @@ export function useBackgroundSync(isAuthReady: boolean | undefined) {
     const cancelIdle = typeof cancelIdleCallback === 'function' ? cancelIdleCallback : clearTimeout
 
     const idleId = idleCallback(() => {
-      syncSpiritsAndOpenings(queryClient).catch(() => {})
+      syncSpiritsAndOpenings(queryClient).catch((e) =>
+        console.warn('Background spirit sync failed:', e),
+      )
     })
 
     return () => cancelIdle(idleId as number)

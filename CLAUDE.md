@@ -120,9 +120,13 @@ desktop browsers.
 
 **Interactive elements MUST have:**
 
-- `cursor-pointer` for hover cursor feedback on desktop
+- `cursor-pointer` on small interactive elements (buttons, links, icons, toggles)
 - Proper hover states (color changes, opacity, etc.)
 - Minimum 44px touch targets for mobile accessibility
+
+**Exception — large-surface clickable areas:** List rows, cards, and other large tap targets with
+visible `hover:bg-*` states should use `cursor-default`. `cursor-pointer` on large surfaces creates
+a "clickbait" feel and adds no value when the hover state already signals interactivity.
 
 **Button component:** `cursor-pointer` is built into the shadcn Button component base styles. No
 need to add it manually.
@@ -133,14 +137,16 @@ need to add it manually.
 // Button - cursor-pointer is automatic
 <Button>Click me</Button>
 
-// Non-Button clickable elements - add cursor-pointer manually
-<div onClick={handleClick} className="cursor-pointer">Clickable div</div>
+// Small interactive elements - add cursor-pointer
 <CollapsibleTrigger className="cursor-pointer">Toggle</CollapsibleTrigger>
 <Label htmlFor="checkbox" className="cursor-pointer">Click to toggle</Label>
+
+// Large-surface clickable areas - cursor-default is fine with hover states
+<div onClick={handleClick} className="hover:bg-muted/50">List row</div>
 ```
 
 **Why this matters:** Desktop users expect the cursor to change to a pointer when hovering over
-clickable elements. Without this, the UI feels unresponsive and broken.
+small interactive elements. Without this, the UI feels unresponsive and broken.
 
 ## Offline-First (CRITICAL)
 

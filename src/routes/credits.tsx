@@ -2,12 +2,15 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ExternalLinkCard } from '@/components/ui/external-link-card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
+import { usePageMeta } from '@/hooks'
 
 export const Route = createFileRoute('/credits')({
   component: CreditsPage,
 })
 
 function CreditsPage() {
+  usePageMeta('Credits', 'Credits and attributions for The Dahan Codex.')
+
   return (
     <div className="min-h-screen bg-background pb-20">
       <PageHeader backHref="/spirits" title="Credits" />

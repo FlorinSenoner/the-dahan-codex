@@ -58,10 +58,9 @@ export function OpeningSection({
   const { isEditing } = useEditMode()
 
   // URL-synced tab selection
-  // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
-  const search = useSearch({ strict: false }) as any
+  const search = useSearch({ strict: false }) as { opening?: string }
   const navigate = useNavigate()
-  const openingParam = search.opening as string | undefined
+  const openingParam = search.opening
 
   // Convex mutations
   const createOpeningMutation = useMutation(api.openings.createOpening)
@@ -92,8 +91,7 @@ export function OpeningSection({
         return
       }
       navigate({
-        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
-        search: { ...search, opening: openingId } as any,
+        search: { ...search, opening: openingId } as never,
         replace: true,
         resetScroll: false,
       })
@@ -191,8 +189,7 @@ export function OpeningSection({
         // Navigate to the newly created opening
         // resetScroll: false prevents scroll jump when updating URL
         navigate({
-          // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
-          search: { ...search, opening: newId } as any,
+          search: { ...search, opening: newId } as never,
           replace: true,
           resetScroll: false,
         })
@@ -241,8 +238,7 @@ export function OpeningSection({
       // Clear URL opening param to go back to first opening, but preserve edit mode
       // resetScroll: false prevents scroll jump when updating URL
       navigate({
-        // biome-ignore lint/suspicious/noExplicitAny: TanStack Router search typing is complex with strict: false
-        search: { ...search, opening: undefined } as any,
+        search: { ...search, opening: undefined } as never,
         replace: true,
         resetScroll: false,
       })
@@ -302,6 +298,7 @@ export function OpeningSection({
               target="_blank"
             >
               Source
+              <span className="sr-only">(opens in new tab)</span>
             </a>
           )}
         </div>
