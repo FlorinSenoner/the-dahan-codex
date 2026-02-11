@@ -4,7 +4,7 @@
  * Defeat: (2 x Difficulty) + cards used + (dahan / players) - (blight / players)
  */
 
-export interface ScoreBreakdownProps {
+interface ScoreBreakdownProps {
   result: 'win' | 'loss'
   difficulty: number
   playerCount: number

@@ -44,7 +44,7 @@ export interface GameCSVRow {
   notes: string
 }
 
-export interface SpiritFieldData {
+interface SpiritFieldData {
   name: string
   variant: string
   player: string
