@@ -31,6 +31,19 @@ function RootComponent() {
   return (
     <ClerkProvider
       afterSignOutUrl="/"
+      appearance={{
+        variables: {
+          colorPrimary: 'var(--primary)',
+          colorBackground: 'var(--card)',
+          colorText: 'var(--foreground)',
+          colorInputBackground: 'var(--input)',
+          colorInputText: 'var(--foreground)',
+          colorDanger: 'var(--destructive)',
+          colorNeutral: 'var(--muted-foreground)',
+          fontFamily: '"Lora", serif',
+          borderRadius: '0.75rem',
+        },
+      }}
       publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
       signInFallbackRedirectUrl="/"
       signInUrl="/sign-in"
