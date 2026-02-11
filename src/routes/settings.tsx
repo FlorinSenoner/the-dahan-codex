@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
 import { useTheme } from '@/contexts/theme-context'
+import { usePageMeta } from '@/hooks'
 import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
 import { cn } from '@/lib/utils'
 import { idbStore } from '../router'
@@ -18,6 +19,8 @@ export const Route = createFileRoute('/settings')({
 })
 
 function SettingsPage() {
+  usePageMeta('Settings')
+
   const { queryClient } = routeApi.useRouteContext()
 
   // State for Sync Data

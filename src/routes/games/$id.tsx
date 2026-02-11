@@ -23,7 +23,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
-import { useOnlineStatus } from '@/hooks'
+import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { useOfflineOps } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 import { saveOfflineOp } from '@/lib/offline-games'
@@ -33,6 +33,8 @@ export const Route = createFileRoute('/games/$id')({
 })
 
 function GameDetailPage() {
+  usePageMeta('Game Details')
+
   const { id } = Route.useParams()
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useConvexAuth()
@@ -64,6 +66,9 @@ function GameDetailPage() {
 
   const deleteGameMutation = useMutation({
     mutationFn: useConvexMutation(api.games.deleteGame),
+    onError: (error) => {
+      toast.error(`Failed to delete: ${error.message}`)
+    },
   })
 
   // Resolve game: primary query → list cache fallback → null

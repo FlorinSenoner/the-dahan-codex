@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import { CSVPreview } from '@/components/games/csv-preview'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { usePageMeta } from '@/hooks'
 import {
   parseGamesCSV,
   rowToGameData,
@@ -26,6 +27,8 @@ export const Route = createFileRoute('/games/import')({
 })
 
 function ImportPage() {
+  usePageMeta('Import Games')
+
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useConvexAuth()
   const [validatedGames, setValidatedGames] = React.useState<ValidatedGame[] | null>(null)

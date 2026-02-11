@@ -26,43 +26,51 @@ export async function syncGames(queryClient: QueryClient) {
 }
 
 /**
+ * Process items in batches of `size` using Promise.all.
+ * Respects Convex rate limits while being ~10x faster than sequential.
+ */
+async function batchPrefetch<T>(items: T[], fn: (item: T) => Promise<unknown>, size = 10) {
+  for (let i = 0; i < items.length; i += size) {
+    await Promise.all(items.slice(i, i + size).map(fn))
+  }
+}
+
+/**
  * Sync spirits and openings data for offline access.
  * This is the heavy sync — should be run during idle time.
  */
 export async function syncSpiritsAndOpenings(queryClient: QueryClient) {
   const spirits = await queryClient.fetchQuery(convexQuery(api.spirits.listSpirits, {}))
 
-  // Fetch each base spirit with aspects
+  // Fetch each base spirit with aspects (batched)
   const baseSpiritSlugs = spirits.filter((s) => !s.isAspect).map((s) => s.slug)
-  for (const slug of baseSpiritSlugs) {
-    await queryClient.prefetchQuery(convexQuery(api.spirits.getSpiritWithAspects, { slug }))
-  }
+  await batchPrefetch(baseSpiritSlugs, (slug) =>
+    queryClient.prefetchQuery(convexQuery(api.spirits.getSpiritWithAspects, { slug })),
+  )
 
-  // Fetch individual spirit pages for getSpiritBySlug cache
-  for (const spirit of spirits) {
+  // Fetch individual spirit pages for getSpiritBySlug cache (batched)
+  await batchPrefetch(spirits, (spirit) => {
     if (spirit.isAspect) {
       const baseSpirit = spirits.find((s) => s._id === spirit.baseSpirit)
       if (baseSpirit && spirit.aspectName) {
-        await queryClient.prefetchQuery(
+        return queryClient.prefetchQuery(
           convexQuery(api.spirits.getSpiritBySlug, {
             slug: baseSpirit.slug,
             aspect: spirit.aspectName.toLowerCase(),
           }),
         )
       }
-    } else {
-      await queryClient.prefetchQuery(
-        convexQuery(api.spirits.getSpiritBySlug, { slug: spirit.slug }),
-      )
+      return Promise.resolve()
     }
-  }
-
-  // Fetch openings for each spirit
-  for (const spirit of spirits) {
-    await queryClient.prefetchQuery(
-      convexQuery(api.openings.listBySpirit, { spiritId: spirit._id }),
+    return queryClient.prefetchQuery(
+      convexQuery(api.spirits.getSpiritBySlug, { slug: spirit.slug }),
     )
-  }
+  })
+
+  // Fetch openings for each spirit (batched)
+  await batchPrefetch(spirits, (spirit) =>
+    queryClient.prefetchQuery(convexQuery(api.openings.listBySpirit, { spiritId: spirit._id })),
+  )
 
   await persistQueryCache(queryClient)
 }

@@ -10,6 +10,7 @@ import { SpiritList } from '@/components/spirits/spirit-list'
 import { SpiritSearch } from '@/components/spirits/spirit-search'
 import { PageHeader } from '@/components/ui/page-header'
 import { Text } from '@/components/ui/typography'
+import { usePageMeta } from '@/hooks'
 
 const spiritFilterSchema = z.object({
   complexity: z.array(z.string()).optional().catch([]),
@@ -35,14 +36,20 @@ export const Route = createFileRoute('/spirits/')({
           elements: deps.elements,
         }),
       )
-    } catch {
-      // Ignore fetch errors - component will use cached data or show error state
+    } catch (e) {
+      if (e instanceof Error && !e.message.includes('Failed to fetch'))
+        console.warn('Loader error:', e)
     }
   },
   component: SpiritsPage,
 })
 
 function SpiritsPage() {
+  usePageMeta(
+    'Spirits',
+    'Browse all Spirit Island spirits with filters for complexity and elements.',
+  )
+
   useEffect(() => {
     const lastViewed = sessionStorage.getItem('lastViewedSpirit')
     if (lastViewed) {

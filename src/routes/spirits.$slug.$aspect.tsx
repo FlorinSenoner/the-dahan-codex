@@ -2,6 +2,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
+import { usePageMeta } from '@/hooks'
 import { SpiritDetailContent } from './spirits.$slug'
 
 /**
@@ -22,8 +23,9 @@ export const Route = createFileRoute('/spirits/$slug/$aspect')({
           aspect: params.aspect,
         }),
       )
-    } catch {
-      // Ignore fetch errors - component will use cached data or show error state
+    } catch (e) {
+      if (e instanceof Error && !e.message.includes('Failed to fetch'))
+        console.warn('Loader error:', e)
     }
   },
   component: AspectDetailPage,
@@ -34,6 +36,11 @@ function AspectDetailPage() {
 
   const { data: spirit } = useSuspenseQuery(
     convexQuery(api.spirits.getSpiritBySlug, { slug, aspect }),
+  )
+
+  usePageMeta(
+    spirit?.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit?.name,
+    spirit?.summary,
   )
 
   // Not found state - aspect doesn't exist

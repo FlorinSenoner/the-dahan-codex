@@ -1,6 +1,6 @@
 import type { Doc, Id } from './_generated/dataModel'
 import type { MutationCtx } from './_generated/server'
-import { mutation } from './_generated/server'
+import { internalMutation } from './_generated/server'
 import { OPENINGS } from './seedData/openings'
 import { ASPECTS, EXPANSIONS, type ExpansionSlug, SPIRITS } from './seedData/spirits'
 
@@ -327,7 +327,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
 
 // Seed initial spirit data - run manually via Convex dashboard or CLI
 // Idempotent: skips if data already exists
-export const seedSpirits = mutation({
+export const seedSpirits = internalMutation({
   args: {},
   handler: async (ctx) => {
     // Check if already seeded
@@ -348,7 +348,7 @@ export const seedSpirits = mutation({
 // Reseed mutation - deletes all data and re-runs seed
 // PRESERVES existing openings (user-created and seed) during reseed
 // Use: npx convex run seed:reseedSpirits
-export const reseedSpirits = mutation({
+export const reseedSpirits = internalMutation({
   args: {},
   handler: async (ctx) => {
     // 1. BACKUP: Save all openings before clearing data

@@ -29,7 +29,13 @@ export function useServiceWorker(): UseServiceWorkerResult {
       setIsUpdateAvailable(true)
     })
 
-    wb.register()
+    wb.addEventListener('controlling', () => {
+      window.location.reload()
+    })
+
+    wb.register().catch((err) => {
+      console.error('Service worker registration failed:', err)
+    })
 
     // Check for updates every hour
     const interval = setInterval(
@@ -45,10 +51,6 @@ export function useServiceWorker(): UseServiceWorkerResult {
   const triggerUpdate = useCallback(() => {
     const wb = wbRef.current
     if (!wb) return
-
-    wb.addEventListener('controlling', () => {
-      window.location.reload()
-    })
 
     wb.messageSkipWaiting()
   }, [])

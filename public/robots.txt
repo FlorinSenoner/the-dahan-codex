@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /settings
+Disallow: /games/new
+Disallow: /games/import
+
+Sitemap: https://dahan-codex.com/sitemap.xml
