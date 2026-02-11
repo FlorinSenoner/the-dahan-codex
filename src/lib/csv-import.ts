@@ -10,7 +10,7 @@ export type ParsedGameRow = GameCSVRow
 /**
  * Existing game data for comparison during import
  */
-export interface ExistingGame {
+interface ExistingGame {
   _id: string
   date: string
   result: string
