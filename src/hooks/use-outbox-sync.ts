@@ -71,6 +71,7 @@ export function useOutboxSync(isAuthReady: boolean) {
         try {
           await updateOfflineOpStatus(op.id, 'syncing')
           if (op.type === 'update') {
+            // Cast is safe: gameId originates from a Convex document _id
             await updateGameMutation({
               id: op.gameId as Id<'games'>,
               ...op.data,

@@ -1,8 +1,9 @@
 import { v } from 'convex/values'
-import type { Id } from './_generated/dataModel'
+import type { Doc, Id } from './_generated/dataModel'
 import type { MutationCtx, QueryCtx } from './_generated/server'
 import { mutation, query } from './_generated/server'
 import { requireAuth } from './lib/auth'
+import { validateStringLength } from './lib/validators'
 
 // Reusable validators for game mutations
 const spiritEntryValidator = v.object({
@@ -99,6 +100,9 @@ export const createGame = mutation({
       throw new Error('Maximum 6 spirits allowed')
     }
 
+    validateStringLength(args.notes, 'notes', 5000)
+    validateStringLength(args.winType, 'winType', 100)
+
     return await ctx.db.insert('games', {
       ...args,
       userId: identity.tokenIdentifier,
@@ -130,6 +134,9 @@ export const updateGame = mutation({
         throw new Error('Maximum 6 spirits allowed')
       }
     }
+
+    validateStringLength(updates.notes, 'notes', 5000)
+    validateStringLength(updates.winType, 'winType', 100)
 
     await ctx.db.patch(id, {
       ...updates,
@@ -183,7 +190,13 @@ export const importGames = mutation({
 
       if (existingId) {
         // Try to find and update existing game
-        const existingGame = await ctx.db.get(existingId as Id<'games'>)
+        // CSV import uses string IDs that may not be valid Convex IDs
+        let existingGame: Doc<'games'> | null = null
+        try {
+          existingGame = await ctx.db.get(existingId as Id<'games'>)
+        } catch {
+          // Invalid ID format from CSV — treat as new game
+        }
         if (existingGame && existingGame.userId === identity.tokenIdentifier) {
           // Full replacement per CONTEXT.md
           await ctx.db.replace(existingId as Id<'games'>, {
