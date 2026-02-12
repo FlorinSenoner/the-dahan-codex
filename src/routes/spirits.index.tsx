@@ -10,7 +10,8 @@ import { SpiritList } from '@/components/spirits/spirit-list'
 import { SpiritSearch } from '@/components/spirits/spirit-search'
 import { PageHeader } from '@/components/ui/page-header'
 import { Text } from '@/components/ui/typography'
-import { usePageMeta } from '@/hooks'
+import { usePageMeta, useStructuredData } from '@/hooks'
+import { toAspectSlug } from '@/lib/slug'
 
 const spiritFilterSchema = z.object({
   complexity: z.array(z.string()).optional().catch([]),
@@ -45,10 +46,12 @@ export const Route = createFileRoute('/spirits/')({
 })
 
 function SpiritsPage() {
-  usePageMeta(
-    'Spirits',
-    'Browse all Spirit Island spirits with filters for complexity and elements.',
-  )
+  usePageMeta({
+    title: 'Spirits',
+    description: 'Browse all Spirit Island spirits with filters for complexity and elements.',
+    canonicalPath: '/spirits',
+    ogType: 'website',
+  })
 
   useEffect(() => {
     const lastViewed = sessionStorage.getItem('lastViewedSpirit')
@@ -68,6 +71,40 @@ function SpiritsPage() {
       elements: filters.elements,
     }),
   )
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  // ItemList structured data — built from query data
+  useStructuredData(
+    'ld-itemlist',
+    spirits.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: 'Spirit Island Spirits',
+          description: `Complete list of all ${spirits.length} Spirit Island spirits with complexity ratings and elemental affinities.`,
+          numberOfItems: spirits.length,
+          itemListElement: spirits.map((spirit, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: spirit.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit.name,
+            url: spirit.aspectName
+              ? `${SITE_URL}/spirits/${spirit.slug}/${toAspectSlug(spirit.aspectName)}`
+              : `${SITE_URL}/spirits/${spirit.slug}`,
+          })),
+        }
+      : null,
+  )
+
+  // BreadcrumbList structured data
+  useStructuredData('ld-breadcrumb', {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
+    ],
+  })
 
   // Search filters AFTER existing backend filters (complexity/elements)
   const filteredSpirits = useMemo(() => {
