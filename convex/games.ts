@@ -3,7 +3,97 @@ import type { Doc, Id } from './_generated/dataModel'
 import type { MutationCtx, QueryCtx } from './_generated/server'
 import { mutation, query } from './_generated/server'
 import { requireAuth } from './lib/auth'
-import { validateStringLength } from './lib/validators'
+import {
+  validateIntegerRange,
+  validateRequiredString,
+  validateStringLength,
+} from './lib/validators'
+
+const MAX_SPIRITS_PER_GAME = 6
+const MAX_IMPORT_BATCH_SIZE = 500
+const MAX_SPIRIT_NAME_LENGTH = 120
+const MAX_SPIRIT_VARIANT_LENGTH = 120
+const MAX_PLAYER_NAME_LENGTH = 120
+const MAX_NOTES_LENGTH = 5000
+const MAX_WIN_TYPE_LENGTH = 64
+const MAX_ADVERSARY_NAME_LENGTH = 100
+const MAX_SCENARIO_NAME_LENGTH = 120
+const ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
+
+type SpiritEntry = {
+  name: string
+  variant?: string
+  player?: string
+}
+
+type OptionalGameValues = {
+  adversary?: { name: string; level: number }
+  secondaryAdversary?: { name: string; level: number }
+  scenario?: { name: string; difficulty?: number }
+  winType?: string
+  invaderStage?: number
+  blightCount?: number
+  dahanCount?: number
+  cardsRemaining?: number
+  score?: number
+  notes?: string
+}
+
+function validateDate(date: string) {
+  if (!ISO_DATE_REGEX.test(date)) {
+    throw new Error('date must be in YYYY-MM-DD format')
+  }
+  if (Number.isNaN(Date.parse(`${date}T00:00:00Z`))) {
+    throw new Error('date must be a valid calendar date')
+  }
+}
+
+function validateSpirits(spirits: SpiritEntry[]) {
+  if (spirits.length === 0) {
+    throw new Error('At least one spirit is required')
+  }
+  if (spirits.length > MAX_SPIRITS_PER_GAME) {
+    throw new Error(`Maximum ${MAX_SPIRITS_PER_GAME} spirits allowed`)
+  }
+
+  for (const spirit of spirits) {
+    validateRequiredString(spirit.name, 'spirit name', MAX_SPIRIT_NAME_LENGTH)
+    validateStringLength(spirit.variant, 'spirit variant', MAX_SPIRIT_VARIANT_LENGTH)
+    validateStringLength(spirit.player, 'player name', MAX_PLAYER_NAME_LENGTH)
+  }
+}
+
+function validateOptionalFields(fields: OptionalGameValues) {
+  const adversary = fields.adversary
+  if (adversary) {
+    validateRequiredString(adversary.name, 'adversary name', MAX_ADVERSARY_NAME_LENGTH)
+    validateIntegerRange(adversary.level, 'adversary level', 0, 6)
+  }
+
+  const secondaryAdversary = fields.secondaryAdversary
+  if (secondaryAdversary) {
+    validateRequiredString(
+      secondaryAdversary.name,
+      'secondary adversary name',
+      MAX_ADVERSARY_NAME_LENGTH,
+    )
+    validateIntegerRange(secondaryAdversary.level, 'secondary adversary level', 0, 6)
+  }
+
+  const scenario = fields.scenario
+  if (scenario) {
+    validateRequiredString(scenario.name, 'scenario name', MAX_SCENARIO_NAME_LENGTH)
+    validateIntegerRange(scenario.difficulty, 'scenario difficulty', -20, 20)
+  }
+
+  validateStringLength(fields.winType, 'winType', MAX_WIN_TYPE_LENGTH)
+  validateStringLength(fields.notes, 'notes', MAX_NOTES_LENGTH)
+  validateIntegerRange(fields.invaderStage, 'invaderStage', 1, 3)
+  validateIntegerRange(fields.blightCount, 'blightCount', 0, 99)
+  validateIntegerRange(fields.dahanCount, 'dahanCount', 0, 99)
+  validateIntegerRange(fields.cardsRemaining, 'cardsRemaining', 0, 200)
+  validateIntegerRange(fields.score, 'score', -500, 1000)
+}
 
 // Reusable validators for game mutations
 const spiritEntryValidator = v.object({
@@ -92,16 +182,9 @@ export const createGame = mutation({
     const identity = await requireAuth(ctx)
     const now = Date.now()
 
-    // Validate at least one spirit
-    if (args.spirits.length === 0) {
-      throw new Error('At least one spirit is required')
-    }
-    if (args.spirits.length > 6) {
-      throw new Error('Maximum 6 spirits allowed')
-    }
-
-    validateStringLength(args.notes, 'notes', 5000)
-    validateStringLength(args.winType, 'winType', 100)
+    validateDate(args.date)
+    validateSpirits(args.spirits)
+    validateOptionalFields(args)
 
     return await ctx.db.insert('games', {
       ...args,
@@ -125,18 +208,13 @@ export const updateGame = mutation({
     await requireOwnedGame(ctx, args.id)
     const { id, ...updates } = args
 
-    // Validate spirits if provided
-    if (updates.spirits !== undefined) {
-      if (updates.spirits.length === 0) {
-        throw new Error('At least one spirit is required')
-      }
-      if (updates.spirits.length > 6) {
-        throw new Error('Maximum 6 spirits allowed')
-      }
+    if (updates.date !== undefined) {
+      validateDate(updates.date)
     }
-
-    validateStringLength(updates.notes, 'notes', 5000)
-    validateStringLength(updates.winType, 'winType', 100)
+    if (updates.spirits !== undefined) {
+      validateSpirits(updates.spirits)
+    }
+    validateOptionalFields(updates)
 
     await ctx.db.patch(id, {
       ...updates,
@@ -173,14 +251,22 @@ export const importGames = mutation({
     const identity = await requireAuth(ctx)
     const now = Date.now()
 
+    if (args.games.length > MAX_IMPORT_BATCH_SIZE) {
+      throw new Error(`Cannot import more than ${MAX_IMPORT_BATCH_SIZE} games at once`)
+    }
+
     let created = 0
     let updated = 0
 
     for (const gameData of args.games) {
       const { existingId, spirits, ...data } = gameData
 
-      // Note: Import doesn't link to spirit IDs since CSV uses names
-      // Create spirit entries with undefined spiritId (will show name but not link)
+      validateDate(data.date)
+      validateSpirits(spirits)
+      validateOptionalFields(data)
+      validateStringLength(existingId, 'existingId', 128)
+
+      // Note: Import doesn't link to spirit IDs since CSV uses names.
       const spiritsWithNullIds = spirits.map((s) => ({
         spiritId: undefined,
         name: s.name,
@@ -195,7 +281,7 @@ export const importGames = mutation({
         try {
           existingGame = await ctx.db.get(existingId as Id<'games'>)
         } catch {
-          // Invalid ID format from CSV — treat as new game
+          // Invalid ID format from CSV — treat as new game.
         }
         if (existingGame && existingGame.userId === identity.tokenIdentifier) {
           // Full replacement per CONTEXT.md

@@ -1,7 +1,40 @@
 import { v } from 'convex/values'
 import { mutation, query } from './_generated/server'
 import { requireAdmin } from './lib/auth'
-import { validateStringLength } from './lib/validators'
+import {
+  validateHttpUrl,
+  validateIntegerRange,
+  validateRequiredString,
+  validateStringLength,
+} from './lib/validators'
+
+const MAX_OPENING_NAME_LENGTH = 120
+const MAX_DESCRIPTION_LENGTH = 2000
+const MAX_AUTHOR_LENGTH = 120
+const MAX_TURNS_PER_OPENING = 20
+const MAX_TURN_TITLE_LENGTH = 120
+const MAX_TURN_INSTRUCTIONS_LENGTH = 4000
+
+type OpeningTurn = {
+  turn: number
+  title?: string
+  instructions: string
+}
+
+function validateTurns(turns: OpeningTurn[]) {
+  if (turns.length === 0) {
+    throw new Error('At least one turn is required')
+  }
+  if (turns.length > MAX_TURNS_PER_OPENING) {
+    throw new Error(`Openings are limited to ${MAX_TURNS_PER_OPENING} turns`)
+  }
+
+  for (const turn of turns) {
+    validateIntegerRange(turn.turn, 'turn number', 1, MAX_TURNS_PER_OPENING)
+    validateStringLength(turn.title, 'turn title', MAX_TURN_TITLE_LENGTH)
+    validateRequiredString(turn.instructions, 'turn instructions', MAX_TURN_INSTRUCTIONS_LENGTH)
+  }
+}
 
 /**
  * Generate a URL-friendly slug from a name
@@ -56,10 +89,11 @@ export const createOpening = mutation({
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
 
-    validateStringLength(args.name, 'name', 200)
-    for (const turn of args.turns) {
-      validateStringLength(turn.instructions, 'instructions', 10000)
-    }
+    validateRequiredString(args.name, 'name', MAX_OPENING_NAME_LENGTH)
+    validateStringLength(args.description, 'description', MAX_DESCRIPTION_LENGTH)
+    validateStringLength(args.author, 'author', MAX_AUTHOR_LENGTH)
+    validateHttpUrl(args.sourceUrl, 'sourceUrl')
+    validateTurns(args.turns)
 
     const now = Date.now()
     const slug = generateSlug(args.name)
@@ -101,11 +135,14 @@ export const updateOpening = mutation({
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
 
-    validateStringLength(args.name, 'name', 200)
-    if (args.turns) {
-      for (const turn of args.turns) {
-        validateStringLength(turn.instructions, 'instructions', 10000)
-      }
+    if (args.name !== undefined) {
+      validateRequiredString(args.name, 'name', MAX_OPENING_NAME_LENGTH)
+    }
+    validateStringLength(args.description, 'description', MAX_DESCRIPTION_LENGTH)
+    validateStringLength(args.author, 'author', MAX_AUTHOR_LENGTH)
+    validateHttpUrl(args.sourceUrl, 'sourceUrl')
+    if (args.turns !== undefined) {
+      validateTurns(args.turns)
     }
 
     const { id, ...updates } = args
