@@ -2,10 +2,10 @@ import { createServer } from 'node:http'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 import { chromium } from '@playwright/test'
+import { getPublicRoutes } from './generate-public-routes.mjs'
 
 const rootDir = resolve(import.meta.dirname, '..')
 const distDir = resolve(rootDir, 'dist')
-const publicRoutesPath = resolve(rootDir, 'public', 'public-routes.json')
 const port = Number(process.env.PRERENDER_PORT || 4174)
 const host = '127.0.0.1'
 
@@ -72,10 +72,10 @@ function writePrerenderedHtml(route, html) {
   writeFileSync(resolve(routeDir, 'index.html'), output, 'utf-8')
 }
 
-const routes = JSON.parse(readFileSync(publicRoutesPath, 'utf-8'))
+const routes = getPublicRoutes()
 
 if (!Array.isArray(routes) || routes.length === 0) {
-  throw new Error('public-routes.json is missing or empty. Run generate-public-routes first.')
+  throw new Error('No public routes found. Check scripts/data source files.')
 }
 
 const server = await startServer()
