@@ -8,11 +8,11 @@ export const Route = createFileRoute('/games')({
 })
 
 function GamesLayout() {
-  const { isLoaded, isSignedIn } = useAuth()
+  const { isLoaded, isSignedIn, userId } = useAuth()
 
   // Background sync + outbox flush for authenticated users
   useBackgroundSync(isLoaded && !!isSignedIn)
-  useOutboxSync(isLoaded && !!isSignedIn)
+  useOutboxSync({ isAuthReady: isLoaded && !!isSignedIn, ownerId: userId })
 
   return <Outlet />
 }

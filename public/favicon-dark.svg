@@ -1,9 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
 <style>
   .b{fill:#1a1108} .l{stroke:#C8A060} .c{fill:#C8A060}
-  @media(prefers-color-scheme:dark){
-    .b{fill:#E8DCC8} .l{stroke:#8B6914} .c{fill:#8B6914}
-  }
 </style>
 <rect class="b" width="512" height="512" rx="96"/>
 <line class="l" x1="256" y1="136" x2="349.8" y2="181.2" stroke-width="3" opacity="0.3"/>
