@@ -7,7 +7,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   # CSP note: style-src currently keeps 'unsafe-inline' for Tailwind/Clerk compatibility.
   # Follow-up hardening can move to nonce/hash-based styles.
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev wss://*.convex.cloud; frame-src https://*.clerk.accounts.dev https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev https://clerk.dahan-codex.com wss://*.convex.cloud; frame-src https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 /
   Cache-Control: no-cache, no-store, must-revalidate
