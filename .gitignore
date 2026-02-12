@@ -30,6 +30,7 @@ convex/_generated/
 
 # Spirit source PNGs (WebP copies are served; PNGs kept as source assets)
 public/spirits/*.png
+public/public-routes.json
 
 # Misc
 *.log

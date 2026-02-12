@@ -7,24 +7,9 @@ interface EditFabProps {
   hasChanges?: boolean
   isSaving?: boolean
   isValid?: boolean
-  showPublishButton?: boolean
-  publishStatus?: 'idle' | 'queued' | 'running' | 'succeeded' | 'failed'
-  publishError?: string
-  onPublish?: () => Promise<void> | void
-  isPublishing?: boolean
 }
 
-export function EditFab({
-  onSave,
-  hasChanges,
-  isSaving,
-  isValid,
-  showPublishButton,
-  publishStatus = 'idle',
-  publishError,
-  onPublish,
-  isPublishing,
-}: EditFabProps) {
+export function EditFab({ onSave, hasChanges, isSaving, isValid }: EditFabProps) {
   const isAdmin = useAdmin()
   const { isEditing, toggleEdit } = useEditMode()
 
@@ -33,28 +18,8 @@ export function EditFab({
     return null
   }
 
-  const publishInFlight = isPublishing || publishStatus === 'queued' || publishStatus === 'running'
-  const publishButtonText = publishInFlight
-    ? 'Publishing...'
-    : publishStatus === 'failed'
-      ? 'Retry Publish'
-      : 'Publish Site'
-
   return (
     <div className="fixed bottom-20 right-4 z-50 flex gap-2">
-      {showPublishButton && (
-        <Button
-          aria-label="Publish public site"
-          className="h-14 rounded-full shadow-lg px-5"
-          disabled={publishInFlight}
-          onClick={onPublish}
-          title={publishError || undefined}
-          variant={publishStatus === 'failed' ? 'destructive' : 'default'}
-        >
-          {publishInFlight ? <Loader2 className="h-5 w-5 animate-spin" /> : null}
-          {publishButtonText}
-        </Button>
-      )}
       {isEditing && hasChanges && (
         <Button
           aria-label="Save changes"

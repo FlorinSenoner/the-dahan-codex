@@ -11,7 +11,6 @@ import {
 } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
-import { useAction as useConvexAction, useQuery as useConvexQuery } from 'convex/react'
 import { ArrowLeft } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { EditFab } from '@/components/admin/edit-fab'
@@ -254,12 +253,9 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
   const [hasChanges, setHasChanges] = useState(false)
   const [saveHandler, setSaveHandler] = useState<(() => Promise<void>) | null>(null)
   const [isSaving, setIsSaving] = useState(false)
-  const [isPublishing, setIsPublishing] = useState(false)
   const [isValid, setIsValid] = useState(true)
   const isAdmin = useAdmin()
   const { isEditing, setEditing } = useEditMode()
-  const publishState = useConvexQuery(api.publish.getStatus, {})
-  const requestManualPublish = useConvexAction(api.publish.requestManualPublish)
 
   // Stable callback references to prevent child re-renders
   const handleHasChangesChange = useCallback((value: boolean) => {
@@ -314,18 +310,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
       setIsSaving(false)
     }
   }, [saveHandler, setEditing])
-
-  const handlePublish = useCallback(async () => {
-    if (!isAdmin) return
-    setIsPublishing(true)
-    try {
-      await requestManualPublish({})
-    } catch (error) {
-      console.error('Publish request failed:', error)
-    } finally {
-      setIsPublishing(false)
-    }
-  }, [isAdmin, requestManualPublish])
 
   const imageUrl = spirit.imageUrl
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -430,19 +414,9 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
       {isAdmin && (
         <EditFab
           hasChanges={hasChanges}
-          isPublishing={isPublishing}
           isSaving={isSaving}
           isValid={isValid}
-          onPublish={handlePublish}
           onSave={handleSave}
-          publishError={publishState?.lastError}
-          publishStatus={publishState?.publishStatus}
-          showPublishButton={Boolean(
-            publishState?.hasPendingChanges ||
-              publishState?.publishStatus === 'queued' ||
-              publishState?.publishStatus === 'running' ||
-              publishState?.publishStatus === 'failed',
-          )}
         />
       )}
 
