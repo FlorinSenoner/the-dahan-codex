@@ -22,6 +22,17 @@ test.describe('Game Tracker', () => {
       await expect(page).toHaveURL(/\/games$/)
     })
   })
+
+  test.describe('authenticated', () => {
+    test.skip('does not flash sign-in prompt on /games reload (requires authenticated storage state)', async ({
+      page,
+    }) => {
+      // Enable this assertion once we have an authenticated Playwright fixture.
+      await page.goto('/games')
+      await expect(page.getByText('Track your games')).not.toBeVisible()
+      await expect(page.getByRole('link', { name: /sign in/i })).not.toBeVisible()
+    })
+  })
 })
 
 test.describe('Game Tracker Navigation', () => {

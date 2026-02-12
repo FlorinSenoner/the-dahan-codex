@@ -4,33 +4,24 @@ import { useOnlineStatus } from '@/hooks/use-online-status'
 import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
 
 /**
- * Auto background sync hook. Syncs games immediately on auth + online,
- * spirits/openings during idle time.
+ * Auto background sync hook.
+ * - Spirits/openings sync for all online sessions (public data).
+ * - Games sync only when auth is ready.
  */
 export function useBackgroundSync(isAuthReady: boolean | undefined) {
   const queryClient = useQueryClient()
   const isOnline = useOnlineStatus()
 
   useEffect(() => {
-    if (!isAuthReady || !isOnline) return
+    if (!isOnline) return
 
-    // Immediate: sync games
-    syncGames(queryClient).catch((e) => console.warn('Background game sync failed:', e))
+    // Public content should be available offline even without auth.
+    syncSpiritsAndOpenings(queryClient).catch((e) =>
+      console.warn('Background spirit sync failed:', e),
+    )
 
-    // Idle: sync spirits and openings
-    const idleCallback =
-      typeof requestIdleCallback === 'function'
-        ? requestIdleCallback
-        : (cb: () => void) => setTimeout(cb, 2000)
-
-    const cancelIdle = typeof cancelIdleCallback === 'function' ? cancelIdleCallback : clearTimeout
-
-    const idleId = idleCallback(() => {
-      syncSpiritsAndOpenings(queryClient).catch((e) =>
-        console.warn('Background spirit sync failed:', e),
-      )
-    })
-
-    return () => cancelIdle(idleId as number)
+    if (isAuthReady) {
+      syncGames(queryClient).catch((e) => console.warn('Background game sync failed:', e))
+    }
   }, [isAuthReady, isOnline, queryClient])
 }
