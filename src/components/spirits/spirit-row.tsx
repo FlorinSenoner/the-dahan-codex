@@ -3,6 +3,7 @@ import type { Doc } from 'convex/_generated/dataModel'
 import { ArrowDown, ArrowUp, Equal } from 'lucide-react'
 import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
+import { toAspectSlug } from '@/lib/slug'
 import { complexityBadgeColors, modifierColors, PLACEHOLDER_GRADIENT } from '@/lib/spirit-colors'
 import { cn } from '@/lib/utils'
 
@@ -22,7 +23,7 @@ export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
   const [imgError, setImgError] = useState(false)
 
   // Build the URL - aspects use path-based format
-  const aspectSlug = spirit.aspectName?.toLowerCase().replace(/\s+/g, '-')
+  const aspectSlug = spirit.aspectName ? toAspectSlug(spirit.aspectName) : undefined
   const href = isAspect ? `/spirits/${spirit.slug}/${aspectSlug}` : `/spirits/${spirit.slug}`
 
   // Display name includes aspect name if applicable

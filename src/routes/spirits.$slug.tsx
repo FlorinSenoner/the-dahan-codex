@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
+import { useAction as useConvexAction, useQuery as useConvexQuery } from 'convex/react'
 import { ArrowLeft } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { EditFab } from '@/components/admin/edit-fab'
@@ -31,7 +32,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Heading, Text } from '@/components/ui/typography'
-import { useAdmin, useEditMode, usePageMeta } from '@/hooks'
+import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -108,7 +109,60 @@ function SpiritDetailLayout() {
     convexQuery(api.spirits.getSpiritWithAspects, { slug }),
   )
 
-  usePageMeta(spiritData?.base.name, spiritData?.base.summary)
+  usePageMeta({
+    title: spiritData?.base.name,
+    description: spiritData?.base.summary,
+    canonicalPath: `/spirits/${slug}`,
+    ogType: 'article',
+  })
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  // Article structured data for the base spirit
+  useStructuredData(
+    'ld-article',
+    spiritData && !hasChildRoute
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: `${spiritData.base.name} — Spirit Island Spirit Guide`,
+          description: spiritData.base.summary || '',
+          image: spiritData.base.imageUrl ? `${SITE_URL}${spiritData.base.imageUrl}` : undefined,
+          url: `${SITE_URL}/spirits/${slug}`,
+          author: { '@type': 'Organization', name: 'The Dahan Codex' },
+          publisher: { '@type': 'Organization', name: 'The Dahan Codex' },
+          mainEntityOfPage: `${SITE_URL}/spirits/${slug}`,
+          keywords: [
+            'Spirit Island',
+            spiritData.base.name,
+            `${spiritData.base.complexity} complexity`,
+            ...spiritData.base.elements,
+            'opening guide',
+          ],
+        }
+      : null,
+  )
+
+  // BreadcrumbList structured data
+  useStructuredData(
+    'ld-breadcrumb',
+    spiritData
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: spiritData.base.name,
+              item: `${SITE_URL}/spirits/${slug}`,
+            },
+          ],
+        }
+      : null,
+  )
 
   // Not found state
   if (spiritData === null) {
@@ -200,9 +254,12 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
   const [hasChanges, setHasChanges] = useState(false)
   const [saveHandler, setSaveHandler] = useState<(() => Promise<void>) | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [isPublishing, setIsPublishing] = useState(false)
   const [isValid, setIsValid] = useState(true)
   const isAdmin = useAdmin()
   const { isEditing, setEditing } = useEditMode()
+  const publishState = useConvexQuery(api.publish.getStatus, {})
+  const requestManualPublish = useConvexAction(api.publish.requestManualPublish)
 
   // Stable callback references to prevent child re-renders
   const handleHasChangesChange = useCallback((value: boolean) => {
@@ -257,6 +314,18 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
       setIsSaving(false)
     }
   }, [saveHandler, setEditing])
+
+  const handlePublish = useCallback(async () => {
+    if (!isAdmin) return
+    setIsPublishing(true)
+    try {
+      await requestManualPublish({})
+    } catch (error) {
+      console.error('Publish request failed:', error)
+    } finally {
+      setIsPublishing(false)
+    }
+  }, [isAdmin, requestManualPublish])
 
   const imageUrl = spirit.imageUrl
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -361,9 +430,19 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
       {isAdmin && (
         <EditFab
           hasChanges={hasChanges}
+          isPublishing={isPublishing}
           isSaving={isSaving}
           isValid={isValid}
+          onPublish={handlePublish}
           onSave={handleSave}
+          publishError={publishState?.lastError}
+          publishStatus={publishState?.publishStatus}
+          showPublishButton={Boolean(
+            publishState?.hasPendingChanges ||
+              publishState?.publishStatus === 'queued' ||
+              publishState?.publishStatus === 'running' ||
+              publishState?.publishStatus === 'failed',
+          )}
         />
       )}
 
