@@ -10,12 +10,10 @@
 
 import type * as games from "../games.js";
 import type * as health from "../health.js";
-import type * as http from "../http.js";
 import type * as lib_auth from "../lib/auth.js";
 import type * as lib_scoring from "../lib/scoring.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as openings from "../openings.js";
-import type * as publish from "../publish.js";
 import type * as seed from "../seed.js";
 import type * as seedData_openings from "../seedData/openings.js";
 import type * as seedData_spirits from "../seedData/spirits.js";
@@ -30,12 +28,10 @@ import type {
 declare const fullApi: ApiFromModules<{
   games: typeof games;
   health: typeof health;
-  http: typeof http;
   "lib/auth": typeof lib_auth;
   "lib/scoring": typeof lib_scoring;
   "lib/validators": typeof lib_validators;
   openings: typeof openings;
-  publish: typeof publish;
   seed: typeof seed;
   "seedData/openings": typeof seedData_openings;
   "seedData/spirits": typeof seedData_spirits;

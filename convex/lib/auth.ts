@@ -1,17 +1,17 @@
-import type { ActionCtx, MutationCtx, QueryCtx } from '../_generated/server'
+import type { MutationCtx, QueryCtx } from '../_generated/server'
 
 /**
  * Get the current user's identity from Convex auth
  * Returns null if not authenticated
  */
-export async function getIdentity(ctx: QueryCtx | MutationCtx | ActionCtx) {
+export async function getIdentity(ctx: QueryCtx | MutationCtx) {
   return await ctx.auth.getUserIdentity()
 }
 
 /**
  * Require authentication - throws if not authenticated
  */
-export async function requireAuth(ctx: QueryCtx | MutationCtx | ActionCtx) {
+export async function requireAuth(ctx: QueryCtx | MutationCtx) {
   const identity = await ctx.auth.getUserIdentity()
   if (!identity) {
     throw new Error('Not authenticated')
@@ -24,7 +24,7 @@ export async function requireAuth(ctx: QueryCtx | MutationCtx | ActionCtx) {
  * Admin claim comes from Clerk JWT template: user.public_metadata.role
  * Role can be "admin", "moderator", "contributor", etc. for future expansion
  */
-export async function isAdmin(ctx: QueryCtx | MutationCtx | ActionCtx): Promise<boolean> {
+export async function isAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
   const identity = await ctx.auth.getUserIdentity()
   if (!identity) {
     return false
@@ -37,7 +37,7 @@ export async function isAdmin(ctx: QueryCtx | MutationCtx | ActionCtx): Promise<
 /**
  * Require admin role - throws if not admin
  */
-export async function requireAdmin(ctx: QueryCtx | MutationCtx | ActionCtx) {
+export async function requireAdmin(ctx: QueryCtx | MutationCtx) {
   const identity = await requireAuth(ctx)
   const admin = await isAdmin(ctx)
   if (!admin) {
