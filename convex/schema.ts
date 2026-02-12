@@ -98,6 +98,26 @@ export default defineSchema({
     .index('by_spirit', ['spiritId'])
     .index('by_slug', ['slug']),
 
+  // Single-row state for manual publishing of prerendered public pages.
+  publishStates: defineTable({
+    key: v.string(), // Always "public-site"
+    hasPendingChanges: v.boolean(),
+    lastContentChangeAt: v.optional(v.number()),
+    lastPublishRequestedAt: v.optional(v.number()),
+    lastPublishRequestedBy: v.optional(v.string()),
+    publishStatus: v.union(
+      v.literal('idle'),
+      v.literal('queued'),
+      v.literal('running'),
+      v.literal('succeeded'),
+      v.literal('failed'),
+    ),
+    requestId: v.optional(v.string()),
+    lastError: v.optional(v.string()),
+    lastPublishedAt: v.optional(v.number()),
+    lastRunUrl: v.optional(v.string()),
+  }).index('by_key', ['key']),
+
   // Games table - user game history for tracking plays
   games: defineTable({
     // User ownership

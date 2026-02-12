@@ -2,14 +2,30 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ExternalLinkCard } from '@/components/ui/external-link-card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
-import { usePageMeta } from '@/hooks'
+import { usePageMeta, useStructuredData } from '@/hooks'
 
 export const Route = createFileRoute('/credits')({
   component: CreditsPage,
 })
 
 function CreditsPage() {
-  usePageMeta('Credits', 'Credits and attributions for The Dahan Codex.')
+  usePageMeta({
+    title: 'Credits',
+    description: 'Credits and attributions for The Dahan Codex.',
+    canonicalPath: '/credits',
+    ogType: 'website',
+  })
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  useStructuredData('ld-breadcrumb', {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Credits', item: `${SITE_URL}/credits` },
+    ],
+  })
 
   return (
     <div className="min-h-screen bg-background pb-20">
