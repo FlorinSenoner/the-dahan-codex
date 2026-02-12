@@ -34,7 +34,7 @@ jobs:
       VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
       # E2E tests run on localhost — production Clerk keys are domain-locked,
       # so we use the dev/test key here. Deployments use the prod key via vars.
-      VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_TEST_PUBLISHABLE_KEY }}
+      VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_TEST_PUBLISHABLE_KEY }}
       CLERK_TEST_USER_EMAIL: ${{ secrets.CLERK_TEST_USER_EMAIL }}
       CLERK_TEST_USER_PASSWORD: ${{ secrets.CLERK_TEST_USER_PASSWORD }}
 
