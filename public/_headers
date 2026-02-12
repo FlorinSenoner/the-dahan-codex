@@ -5,9 +5,9 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), document-domain=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  # CSP note: 'unsafe-inline' required for (a) inline theme script in index.html,
-  # (b) Tailwind v4 runtime styles. A nonce-based approach could be explored post-launch.
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://*.clerk.accounts.dev https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev wss://*.convex.cloud; frame-src https://*.clerk.accounts.dev https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  # CSP note: style-src currently keeps 'unsafe-inline' for Tailwind/Clerk compatibility.
+  # Follow-up hardening can move to nonce/hash-based styles.
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev wss://*.convex.cloud; frame-src https://*.clerk.accounts.dev https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 /
   Cache-Control: no-cache, no-store, must-revalidate

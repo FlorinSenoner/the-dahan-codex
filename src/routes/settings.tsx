@@ -1,6 +1,5 @@
 import { useClerk, useUser } from '@clerk/clerk-react'
 import { createFileRoute, getRouteApi, Link, useNavigate } from '@tanstack/react-router'
-import { del } from 'idb-keyval'
 import { LogIn, LogOut, Monitor, Moon, RefreshCw, Sun, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -8,9 +7,10 @@ import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
 import { useTheme } from '@/contexts/theme-context'
 import { usePageMeta } from '@/hooks'
+import { clearOfflineData } from '@/lib/offline-games'
 import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
 import { cn } from '@/lib/utils'
-import { idbStore } from '../router'
+import { clearPersistedQueryCache } from '../router'
 
 const routeApi = getRouteApi('/settings')
 
@@ -52,8 +52,11 @@ function SettingsPage() {
   async function clearCache() {
     setIsClearing(true)
     try {
-      // Delete TanStack Query IndexedDB cache
-      await del('tanstack-query-cache', idbStore)
+      // Delete TanStack Query cache (in-memory + IndexedDB)
+      await clearPersistedQueryCache(queryClient)
+
+      // Delete offline outbox stores
+      await clearOfflineData()
 
       // Delete all service worker caches
       const cacheNames = await caches.keys()
