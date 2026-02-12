@@ -2,7 +2,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { usePageMeta } from '@/hooks'
+import { usePageMeta, useStructuredData } from '@/hooks'
 import { SpiritDetailContent } from './spirits.$slug'
 
 /**
@@ -38,9 +38,70 @@ function AspectDetailPage() {
     convexQuery(api.spirits.getSpiritBySlug, { slug, aspect }),
   )
 
-  usePageMeta(
-    spirit?.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit?.name,
-    spirit?.summary,
+  usePageMeta({
+    title: spirit?.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit?.name,
+    description: spirit?.summary,
+    canonicalPath: `/spirits/${slug}/${aspect}`,
+    ogType: 'article',
+  })
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  // Article structured data for the aspect
+  useStructuredData(
+    'ld-article',
+    spirit?.aspectName
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: `${spirit.name} — ${spirit.aspectName} — Spirit Island Spirit Guide`,
+          description: spirit.summary || '',
+          image: spirit.imageUrl ? `${SITE_URL}${spirit.imageUrl}` : undefined,
+          url: `${SITE_URL}/spirits/${slug}/${aspect}`,
+          author: { '@type': 'Organization', name: 'The Dahan Codex' },
+          publisher: { '@type': 'Organization', name: 'The Dahan Codex' },
+          mainEntityOfPage: `${SITE_URL}/spirits/${slug}/${aspect}`,
+          keywords: [
+            'Spirit Island',
+            spirit.name,
+            spirit.aspectName,
+            `${spirit.complexity} complexity`,
+            ...spirit.elements,
+            'opening guide',
+          ],
+        }
+      : null,
+  )
+
+  // BreadcrumbList structured data
+  useStructuredData(
+    'ld-breadcrumb',
+    spirit
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: spirit.name,
+              item: `${SITE_URL}/spirits/${slug}`,
+            },
+            ...(spirit.aspectName
+              ? [
+                  {
+                    '@type': 'ListItem' as const,
+                    position: 4,
+                    name: spirit.aspectName,
+                    item: `${SITE_URL}/spirits/${slug}/${aspect}`,
+                  },
+                ]
+              : []),
+          ],
+        }
+      : null,
   )
 
   // Not found state - aspect doesn't exist

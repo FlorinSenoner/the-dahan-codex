@@ -68,8 +68,11 @@ jobs:
       - name: Deploy Convex functions
         run: pnpm exec convex deploy --cmd-url-env-var-name VITE_CONVEX_URL
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Build
-        run: pnpm build
+        run: pnpm build:public
         env:
           VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}

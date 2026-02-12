@@ -11,7 +11,10 @@
   },
   "scripts": {
     "dev": "vite",
+    "generate:public-routes": "node scripts/generate-public-routes.mjs",
+    "prerender:public": "node scripts/prerender-public-routes.mjs",
     "build": "vite build",
+    "build:public": "pnpm generate:public-routes && pnpm build && pnpm prerender:public",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "typecheck:convex": "convex typecheck",

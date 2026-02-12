@@ -8,7 +8,7 @@ test.describe('Smoke Tests', () => {
 
   test('home page shows subtitle', async ({ page }) => {
     await page.goto('/')
-    await expect(page.getByText('A Spirit Island Companion')).toBeVisible()
+    await expect(page.getByText('Know your spirit before the invaders land.')).toBeVisible()
   })
 
   test('sign-in page loads', async ({ page }) => {
