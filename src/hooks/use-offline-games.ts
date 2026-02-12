@@ -19,20 +19,35 @@ export function usePendingGames() {
       setPendingGames([])
       return
     }
-    const currentUserId = userId
-    getAllPendingGames(currentUserId).then(setPendingGames).catch(console.error)
+    let cancelled = false
+    getAllPendingGames(userId)
+      .then((games) => {
+        if (!cancelled) setPendingGames(games)
+      })
+      .catch(console.error)
+    return () => {
+      cancelled = true
+    }
   }, [isLoaded, userId])
 
   // Refresh when layout-level sync completes
   useEffect(() => {
     if (!isLoaded || !userId) return
+    let cancelled = false
     const currentUserId = userId
 
     function handleSynced() {
-      getAllPendingGames(currentUserId).then(setPendingGames).catch(console.error)
+      getAllPendingGames(currentUserId)
+        .then((games) => {
+          if (!cancelled) setPendingGames(games)
+        })
+        .catch(console.error)
     }
     window.addEventListener('outbox-synced', handleSynced)
-    return () => window.removeEventListener('outbox-synced', handleSynced)
+    return () => {
+      cancelled = true
+      window.removeEventListener('outbox-synced', handleSynced)
+    }
   }, [isLoaded, userId])
 
   const saveOfflineGame = useCallback(
@@ -60,20 +75,35 @@ export function useOfflineOps() {
       setOfflineOps([])
       return
     }
-    const currentUserId = userId
-    getAllOfflineOps(currentUserId).then(setOfflineOps).catch(console.error)
+    let cancelled = false
+    getAllOfflineOps(userId)
+      .then((ops) => {
+        if (!cancelled) setOfflineOps(ops)
+      })
+      .catch(console.error)
+    return () => {
+      cancelled = true
+    }
   }, [isLoaded, userId])
 
   // Refresh when layout-level sync completes
   useEffect(() => {
     if (!isLoaded || !userId) return
+    let cancelled = false
     const currentUserId = userId
 
     function handleSynced() {
-      getAllOfflineOps(currentUserId).then(setOfflineOps).catch(console.error)
+      getAllOfflineOps(currentUserId)
+        .then((ops) => {
+          if (!cancelled) setOfflineOps(ops)
+        })
+        .catch(console.error)
     }
     window.addEventListener('outbox-synced', handleSynced)
-    return () => window.removeEventListener('outbox-synced', handleSynced)
+    return () => {
+      cancelled = true
+      window.removeEventListener('outbox-synced', handleSynced)
+    }
   }, [isLoaded, userId])
 
   const refreshOps = useCallback(async () => {
