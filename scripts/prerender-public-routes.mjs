@@ -1,5 +1,5 @@
 import { createServer } from 'node:http'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 import { chromium } from '@playwright/test'
 import { getPublicRoutes } from './generate-public-routes.mjs'
@@ -30,15 +30,37 @@ function safeJoin(base, targetPath) {
   return target
 }
 
+function resolveStaticFilePath(requestPath) {
+  const relativePath = requestPath === '/' ? '/index.html' : requestPath
+  const candidate = safeJoin(distDir, relativePath)
+
+  if (!candidate || !existsSync(candidate)) {
+    return null
+  }
+
+  const candidateStat = statSync(candidate)
+  if (candidateStat.isFile()) {
+    return candidate
+  }
+
+  if (candidateStat.isDirectory()) {
+    const indexCandidate = join(candidate, 'index.html')
+    if (existsSync(indexCandidate) && statSync(indexCandidate).isFile()) {
+      return indexCandidate
+    }
+  }
+
+  return null
+}
+
 function startServer() {
   const indexPath = resolve(distDir, 'index.html')
 
   const server = createServer((req, res) => {
     const requestPath = req.url ? decodeURIComponent(req.url.split('?')[0]) : '/'
-    const relativePath = requestPath === '/' ? '/index.html' : requestPath
-    const filePath = safeJoin(distDir, relativePath)
+    const filePath = resolveStaticFilePath(requestPath)
 
-    if (filePath && existsSync(filePath) && !filePath.endsWith('/')) {
+    if (filePath) {
       const ext = extname(filePath).toLowerCase()
       const mimeType = mimeTypes[ext] || 'application/octet-stream'
       res.writeHead(200, { 'content-type': mimeType })
