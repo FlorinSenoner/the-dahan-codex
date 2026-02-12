@@ -1,4 +1,5 @@
 import { v } from 'convex/values'
+import { internal } from './_generated/api'
 import { mutation, query } from './_generated/server'
 import { requireAdmin } from './lib/auth'
 import {
@@ -110,6 +111,8 @@ export const createOpening = mutation({
       updatedAt: now,
     })
 
+    await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+
     return id
   },
 })
@@ -170,6 +173,7 @@ export const updateOpening = mutation({
     }
 
     await ctx.db.patch(id, patch)
+    await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
   },
 })
 
@@ -181,5 +185,6 @@ export const deleteOpening = mutation({
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
     await ctx.db.delete(args.id)
+    await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
   },
 })

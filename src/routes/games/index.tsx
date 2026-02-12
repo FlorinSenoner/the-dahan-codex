@@ -10,7 +10,7 @@ import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
-import { useOnlineStatus, usePageMeta } from '@/hooks'
+import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
 import { seedGameCaches } from '@/lib/sync'
@@ -20,7 +20,24 @@ export const Route = createFileRoute('/games/')({
 })
 
 function GamesIndex() {
-  usePageMeta('Games', 'Track your Spirit Island game history and stats.')
+  usePageMeta({
+    title: 'Games',
+    description: 'Track your Spirit Island game history and stats.',
+    canonicalPath: '/games',
+    ogType: 'website',
+    robots: 'noindex,follow',
+  })
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  useStructuredData('ld-breadcrumb', {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Games', item: `${SITE_URL}/games` },
+    ],
+  })
 
   const { isAuthenticated } = useConvexAuth()
 

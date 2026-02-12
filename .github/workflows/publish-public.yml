@@ -1,0 +1,72 @@
+name: Publish Public Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Dispatch source (for traceability)"
+        required: false
+        type: string
+      scheduled_for:
+        description: "Batch timestamp (ms) that triggered this publish"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: publish-public-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+
+    steps:
+      - name: Validate required secrets and variables
+        run: |
+          missing=()
+          if [ -z "$CONVEX_DEPLOY_KEY" ]; then missing+=("secret: CONVEX_DEPLOY_KEY"); fi
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then missing+=("secret: CLOUDFLARE_API_TOKEN"); fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then missing+=("secret: CLOUDFLARE_ACCOUNT_ID"); fi
+          if [ -z "$VITE_CONVEX_URL" ]; then missing+=("variable: VITE_CONVEX_URL"); fi
+          if [ -z "$VITE_CLERK_PUBLISHABLE_KEY" ]; then missing+=("variable: VITE_CLERK_PUBLISHABLE_KEY"); fi
+          if [ ${#missing[@]} -ne 0 ]; then
+            echo "::error::Missing required configuration:"
+            printf '  - %s\n' "${missing[@]}"
+            exit 1
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build public routes
+        run: pnpm build:public
+        env:
+          VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+      - name: Deploy to production
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command:
+            pages deploy dist --project-name=the-dahan-codex --branch=main --commit-dirty=true

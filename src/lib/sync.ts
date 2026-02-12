@@ -2,6 +2,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import type { QueryClient } from '@tanstack/react-query'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
+import { toAspectSlug } from '@/lib/slug'
 import { persistQueryCache } from '@/router'
 
 /**
@@ -56,7 +57,7 @@ export async function syncSpiritsAndOpenings(queryClient: QueryClient) {
         return queryClient.prefetchQuery(
           convexQuery(api.spirits.getSpiritBySlug, {
             slug: baseSpirit.slug,
-            aspect: spirit.aspectName.toLowerCase(),
+            aspect: toAspectSlug(spirit.aspectName),
           }),
         )
       }

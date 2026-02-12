@@ -31,7 +31,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Heading, Text } from '@/components/ui/typography'
-import { useAdmin, useEditMode, usePageMeta } from '@/hooks'
+import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -108,7 +108,60 @@ function SpiritDetailLayout() {
     convexQuery(api.spirits.getSpiritWithAspects, { slug }),
   )
 
-  usePageMeta(spiritData?.base.name, spiritData?.base.summary)
+  usePageMeta({
+    title: spiritData?.base.name,
+    description: spiritData?.base.summary,
+    canonicalPath: `/spirits/${slug}`,
+    ogType: 'article',
+  })
+
+  const SITE_URL = 'https://dahan-codex.com'
+
+  // Article structured data for the base spirit
+  useStructuredData(
+    'ld-article',
+    spiritData && !hasChildRoute
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: `${spiritData.base.name} — Spirit Island Spirit Guide`,
+          description: spiritData.base.summary || '',
+          image: spiritData.base.imageUrl ? `${SITE_URL}${spiritData.base.imageUrl}` : undefined,
+          url: `${SITE_URL}/spirits/${slug}`,
+          author: { '@type': 'Organization', name: 'The Dahan Codex' },
+          publisher: { '@type': 'Organization', name: 'The Dahan Codex' },
+          mainEntityOfPage: `${SITE_URL}/spirits/${slug}`,
+          keywords: [
+            'Spirit Island',
+            spiritData.base.name,
+            `${spiritData.base.complexity} complexity`,
+            ...spiritData.base.elements,
+            'opening guide',
+          ],
+        }
+      : null,
+  )
+
+  // BreadcrumbList structured data
+  useStructuredData(
+    'ld-breadcrumb',
+    spiritData
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: spiritData.base.name,
+              item: `${SITE_URL}/spirits/${slug}`,
+            },
+          ],
+        }
+      : null,
+  )
 
   // Not found state
   if (spiritData === null) {
