@@ -19,7 +19,9 @@ precacheAndRoute(self.__WB_MANIFEST)
 
 // SPA navigation fallback: serve precached index.html for all navigation requests
 const navigationHandler = createHandlerBoundToURL('/index.html')
-const navigationRoute = new NavigationRoute(navigationHandler)
+const navigationRoute = new NavigationRoute(navigationHandler, {
+  denylist: [/\.[^/]+$/],
+})
 registerRoute(navigationRoute)
 
 // Cache fonts with CacheFirst (1 year)
