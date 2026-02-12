@@ -98,6 +98,16 @@ export default defineSchema({
     .index('by_spirit', ['spiritId'])
     .index('by_slug', ['slug']),
 
+  // Single-row state for debounced auto-publish dispatches.
+  sitePublishStates: defineTable({
+    key: v.string(), // Always "public-site"
+    dirty: v.boolean(),
+    lastContentChangeAt: v.optional(v.number()),
+    nextDispatchAt: v.optional(v.number()),
+    lastDispatchedAt: v.optional(v.number()),
+    lastError: v.optional(v.string()),
+  }).index('by_key', ['key']),
+
   // Games table - user game history for tracking plays
   games: defineTable({
     // User ownership
