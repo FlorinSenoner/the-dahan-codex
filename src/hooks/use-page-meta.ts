@@ -9,7 +9,7 @@ const DEFAULT_CANONICAL_PATH = '/'
 const DEFAULT_OG_TYPE = 'website'
 const DEFAULT_ROBOTS = 'index,follow'
 
-export interface PageMetaOptions {
+interface PageMetaOptions {
   title?: string
   description?: string
   canonicalPath?: string
