@@ -72,7 +72,7 @@ export async function clearPersistedQueryCache(queryClient?: QueryClient) {
 
 function NotFound() {
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-8 text-center">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-8 pb-20 pt-8 text-center">
       <h1 className="text-2xl font-bold text-foreground">404 - Page Not Found</h1>
       <p className="mt-2 text-muted-foreground">The page you're looking for doesn't exist.</p>
       <a
