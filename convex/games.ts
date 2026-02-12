@@ -43,7 +43,9 @@ function validateDate(date: string) {
   if (!ISO_DATE_REGEX.test(date)) {
     throw new Error('date must be in YYYY-MM-DD format')
   }
-  if (Number.isNaN(Date.parse(`${date}T00:00:00Z`))) {
+  const [year, month, day] = date.split('-').map(Number)
+  const d = new Date(Date.UTC(year, month - 1, day))
+  if (d.getUTCFullYear() !== year || d.getUTCMonth() !== month - 1 || d.getUTCDate() !== day) {
     throw new Error('date must be a valid calendar date')
   }
 }
