@@ -43,6 +43,18 @@ function ensureMetaTag(selector: string, attrs: Record<string, string>) {
   return tag
 }
 
+function ensureLinkTag(selector: string, attrs: Record<string, string>) {
+  let tag = document.querySelector<HTMLLinkElement>(selector)
+  if (!tag) {
+    tag = document.createElement('link')
+    for (const [key, value] of Object.entries(attrs)) {
+      tag.setAttribute(key, value)
+    }
+    document.head.appendChild(tag)
+  }
+  return tag
+}
+
 /**
  * Update document title and meta tags for the current page.
  * Falls back to defaults when component unmounts.
@@ -64,15 +76,11 @@ export function usePageMeta(optionsOrTitle?: PageMetaOptions | string, legacyDes
 
     document.title = fullTitle
 
-    const metaDescription = document.querySelector('meta[name="description"]')
-    if (metaDescription) {
-      metaDescription.setAttribute('content', description)
-    }
+    const metaDescription = ensureMetaTag('meta[name="description"]', { name: 'description' })
+    metaDescription.setAttribute('content', description)
 
-    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-    if (canonical) {
-      canonical.setAttribute('href', canonicalUrl)
-    }
+    const canonical = ensureLinkTag('link[rel="canonical"]', { rel: 'canonical' })
+    canonical.setAttribute('href', canonicalUrl)
 
     const ogTitle = ensureMetaTag('meta[property="og:title"]', { property: 'og:title' })
     ogTitle.setAttribute('content', fullTitle)
