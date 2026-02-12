@@ -369,7 +369,7 @@ export function OpeningSection({
         return (
           <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
             <div className="flex items-center gap-2">
-              <div className="overflow-x-auto flex-1 -mx-4 px-4 scrollbar-thin">
+              <div className="overflow-x-auto flex-1 -mx-4 px-4">
                 <TabsList variant="line">
                   {openings.map((o) => (
                     <TabsTrigger key={o._id} value={o._id}>
@@ -422,7 +422,7 @@ export function OpeningSection({
     if (openings.length > 1 && selectedOpening) {
       return (
         <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
-          <div className="overflow-x-auto -mx-4 px-4 scrollbar-thin">
+          <div className="overflow-x-auto -mx-4 px-4">
             <TabsList variant="line">
               {openings.map((o) => (
                 <TabsTrigger key={o._id} value={o._id}>
