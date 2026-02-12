@@ -35,6 +35,12 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        appShell: resolve(__dirname, 'app-shell.html'),
+      },
+    },
   },
   plugins: [
     sitemapDate(),
