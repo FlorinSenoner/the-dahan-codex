@@ -17,8 +17,8 @@ cleanupOutdatedCaches()
 // Precache all assets injected by vite-plugin-pwa
 precacheAndRoute(self.__WB_MANIFEST)
 
-// SPA navigation fallback: serve precached index.html for all navigation requests
-const navigationHandler = createHandlerBoundToURL('/index.html')
+// App-shell fallback: serve a neutral shell for all SPA navigation requests
+const navigationHandler = createHandlerBoundToURL('/app-shell.html')
 const navigationRoute = new NavigationRoute(navigationHandler, {
   denylist: [/\.[^/]+$/],
 })
