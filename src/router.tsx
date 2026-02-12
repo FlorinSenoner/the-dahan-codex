@@ -6,7 +6,7 @@ import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import { createStore, del, get, set } from 'idb-keyval'
 import { routeTree } from './routeTree.gen'
 
-export const idbStore = createStore('the-dahan-codex', 'cache')
+const idbStore = createStore('the-dahan-codex', 'cache')
 
 const IDB_CACHE_KEY = 'tanstack-query-cache'
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7 // 7 days
@@ -59,6 +59,15 @@ export async function persistQueryCache(queryClient: QueryClient) {
     clientState: dehydratedState,
   }
   await set(IDB_CACHE_KEY, persistedClient, idbStore)
+}
+
+/**
+ * Clear both in-memory and persisted query caches.
+ * Used when auth identity changes or when users manually clear cache.
+ */
+export async function clearPersistedQueryCache(queryClient?: QueryClient) {
+  queryClient?.clear()
+  await del(IDB_CACHE_KEY, idbStore)
 }
 
 function NotFound() {

@@ -4,6 +4,7 @@ import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet, useRouter } from '@tanstack/react-router'
 import type { ConvexReactClient } from 'convex/react'
 import { ConvexProviderWithClerk } from 'convex/react-clerk'
+import { useEffect, useRef } from 'react'
 import { ErrorBoundary } from '../components/error-boundary'
 import { BottomNav } from '../components/layout/bottom-nav'
 import { InstallPrompt } from '../components/pwa/install-prompt'
@@ -14,6 +15,7 @@ import { Toaster } from '../components/ui/sonner'
 import { EditModeProvider } from '../contexts/edit-mode-context'
 import { ThemeProvider } from '../contexts/theme-context'
 import { useServiceWorker } from '../hooks/use-service-worker'
+import { clearPersistedQueryCache } from '../router'
 
 // Router context type
 interface RouterContext {
@@ -56,7 +58,7 @@ function RootErrorComponent({ error }: { error: Error }) {
 }
 
 function RootComponent() {
-  const { convexClient } = Route.useRouteContext()
+  const { convexClient, queryClient } = Route.useRouteContext()
   const { isUpdateAvailable, triggerUpdate } = useServiceWorker()
 
   return (
@@ -83,6 +85,7 @@ function RootComponent() {
         signUpUrl="/sign-up"
       >
         <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
+          <AuthCacheIsolation queryClient={queryClient} />
           <ThemeProvider>
             <EditModeProvider>
               <OfflineIndicator />
@@ -97,4 +100,25 @@ function RootComponent() {
       </ClerkProvider>
     </ErrorBoundary>
   )
+}
+
+function AuthCacheIsolation({ queryClient }: { queryClient: QueryClient }) {
+  const { isLoaded, userId } = useAuth()
+  const previousUserIdRef = useRef<string | null | undefined>(undefined)
+
+  useEffect(() => {
+    if (!isLoaded) return
+
+    const currentUserId = userId ?? null
+    const previousUserId = previousUserIdRef.current
+    previousUserIdRef.current = currentUserId
+
+    if (previousUserId === undefined || previousUserId === currentUserId) {
+      return
+    }
+
+    void clearPersistedQueryCache(queryClient)
+  }, [isLoaded, userId, queryClient])
+
+  return null
 }

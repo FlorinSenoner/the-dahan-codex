@@ -1,3 +1,4 @@
+import { useUser } from '@clerk/clerk-react'
 import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
@@ -36,6 +37,7 @@ function GameDetailPage() {
   usePageMeta('Game Details')
 
   const { id } = Route.useParams()
+  const { user } = useUser()
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useConvexAuth()
   const isOnline = useOnlineStatus()
@@ -135,7 +137,11 @@ function GameDetailPage() {
   const handleDelete = async () => {
     setShowDeleteConfirm(false)
     if (!isOnline) {
-      await saveOfflineOp({ type: 'delete', gameId: id })
+      if (!user?.id) {
+        toast.error('You must be signed in to save offline changes')
+        return
+      }
+      await saveOfflineOp(user.id, { type: 'delete', gameId: id })
       await refreshOps()
       toast.success('Game deleted.')
       navigate({ to: '/games' })
@@ -148,7 +154,11 @@ function GameDetailPage() {
   const handleSubmit = async (data: GameFormData) => {
     const payload = transformGameFormToPayload(data)
     if (!isOnline) {
-      await saveOfflineOp({ type: 'update', gameId: id, data: payload })
+      if (!user?.id) {
+        toast.error('You must be signed in to save offline changes')
+        return
+      }
+      await saveOfflineOp(user.id, { type: 'update', gameId: id, data: payload })
       await refreshOps()
       queryClient.setQueryData(convexQuery(api.games.getGame, { id: id as Id<'games'> }).queryKey, {
         ...resolvedGame,
