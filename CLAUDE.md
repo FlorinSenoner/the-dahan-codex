@@ -104,7 +104,8 @@ git checkout feat/phase-<N>-<name>
 
 ## Key Patterns
 
-- Use `useConvexAuth()` for auth state (not Clerk's `useAuth()`)
+- Game routes use `useAuth()` (Clerk) for cache-first rendering — never gate UI on `useConvexAuth()`
+- `_authenticated` layout routes still use `useConvexAuth()` where Convex auth is required
 - Service worker registration is hydration-safe (checks `document.readyState`)
 - Pre-commit hooks run Biome + typecheck automatically
 - Convex types flow from `schema.ts` → `_generated/` → app
