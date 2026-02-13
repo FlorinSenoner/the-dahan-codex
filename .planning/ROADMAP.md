@@ -521,5 +521,5 @@ development:
 
 ---
 
-_Roadmap created: 2025-01-25_ _Depth: comprehensive (7 phases)_ _Total v1
-requirements: 89_
+_Roadmap created: 2025-01-25_ _Last updated: 2026-02-13_ _Total v1
+requirements: 86_
