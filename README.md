@@ -34,7 +34,7 @@ slot, and cards played with full previews.
 
 - [Node.js](https://nodejs.org/) v22+
 - [pnpm](https://pnpm.io/) v10+
-- [mise](https://mise.jdx.dev/) (optional, for toolchain management)
+- [mise](https://mise.jdx.dev/) (toolchain and environment management)
 
 ### Installation
 
@@ -46,9 +46,9 @@ cd the-dahan-codex
 # Install dependencies
 pnpm install
 
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your Convex and Clerk credentials
+# Set up environment variables (mise manages env vars)
+cp mise.local.toml.example mise.local.toml
+# Edit mise.local.toml with your Convex and Clerk credentials
 ```
 
 ### Development
@@ -123,5 +123,5 @@ LLC.
 
 ## License
 
-This project is for personal/educational use. Spirit Island content belongs to Greater Than Games,
-LLC.
+This project is licensed under the [MIT License](LICENSE). Spirit Island and all related game
+content belong to Greater Than Games, LLC.

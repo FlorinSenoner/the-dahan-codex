@@ -33,7 +33,7 @@ key-files:
     - package.json
 
 key-decisions:
-  - "Used Convex cloud project (REDACTED_CONVEX_DEPLOYMENT)"
+  - "Used Convex cloud project"
   - "Health query returns status and timestamp for connectivity verification"
   - "Vite environment types declared in app/vite-env.d.ts for VITE_CONVEX_URL"
 
@@ -62,7 +62,7 @@ connection status on home page**
 ## Accomplishments
 
 - Convex project initialized and connected
-  (REDACTED_CONVEX_DEPLOYMENT.convex.cloud)
+  (convex.cloud)
 - Health query endpoint returning real-time connection status
 - ConvexProvider and QueryClientProvider wrapping app for reactive data
 - Home page displays live "connected" status from Convex
