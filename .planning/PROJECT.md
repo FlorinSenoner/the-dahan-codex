@@ -4,18 +4,17 @@
 
 A companion app for the board game Spirit Island, designed for the community.
 The app provides a spirits reference library with detailed overviews, and most
-importantly, a graphical turn-by-turn opening scrubber that makes spirit
+importantly, text-based turn-by-turn opening guides that make spirit
 openings understandable at a glance rather than walls of text. Logged-in users
-can track their games and take notes with backlinks.
+can track their games with CSV export/import.
 
 ## Core Value
 
-**The Opening Scrubber** — a graphical, scrubbable visualization of spirit
-openings that re-creates the spirit board mechanics in code. Users scrub through
-turns on a timeline and see the exact board state at each turn: growth options
-displayed with the chosen one highlighted, presence tracks updating slot by
-slot, and cards played shown with full previews. This is the key differentiator
-that makes openings actually learnable.
+**Text-Based Opening Guides** — structured, turn-by-turn opening guides for
+Spirit Island spirits. Users browse spirits, view power ratings and
+strengths/weaknesses, then read curated opening guides that explain growth
+choices and strategy for the first few turns. 85 opening guides cover all
+major spirits from community sources.
 
 ## Requirements
 
@@ -27,142 +26,98 @@ that makes openings actually learnable.
 
 #### Spirits Library (Public)
 
-- [ ] List/grid of all spirits with filters (expansion, complexity)
-- [ ] Each spirit has Overview: complexity label, strengths (3-6 bullets),
+- [x] List of all 37 spirits with filters (expansion, complexity, elements)
+- [x] Each spirit has Overview: complexity label, strengths (3-6 bullets),
       weaknesses (3-6 bullets)
-- [ ] Radar chart visualization for power ratings (Offense, Control, Fear,
+- [x] Radar chart visualization for power ratings (Offense, Control, Fear,
       Defense, Utility)
-- [ ] Spirit Variants as first-class: base variant + aspect variants
-- [ ] Variant selector on spirit page (Base + list of aspects)
-- [ ] Links to external sources (wiki, FAQ) rather than copying text
-- [ ] Per-spirit wiki links + global attribution page
+- [x] Spirit Variants as first-class: base variant + aspect variants
+- [x] Variant selector on spirit page (Base + list of aspects)
+- [x] Links to external sources (wiki) with credits page
+- [x] Per-spirit wiki links + global attribution page
 
-#### Spirit Data Model (Full Modeling)
+#### Opening Guides (Public)
 
-- [ ] Growth options: display all options available, highlight chosen (no
-      validation needed)
-- [ ] Presence tracks: discrete slots with typed grants (energy, card plays,
-      elements, reclaim, etc.)
-- [ ] Innate powers: element thresholds and effects
-- [ ] Special rules: structured data (e.g., River's "Massive Flooding")
-
-#### Opening Scrubber (Public)
-
-- [ ] Slider/timeline interaction to scrub to any turn
-- [ ] Board re-renders exact state at selected turn
-- [ ] Growth panel shows all options, highlights the chosen one(s)
-- [ ] Presence tracks render as discrete slots showing what each grants
-- [ ] Diffs from previous turn highlighted (presence added/removed, growth
-      choice, cards played)
-- [ ] Step forward/back one turn
-- [ ] Optional "play" mode animating through turns
-- [ ] Animated transitions between turns (respect prefers-reduced-motion)
-- [ ] Cards played shown as chips with full card preview (v1: load from
-      sick.oberien.de)
-- [ ] Card links open in in-app browser/modal
-- [ ] Optional per-turn notes (expandable, small indicator)
-- [ ] Accordion for long-form strategy text (collapsed by default, with source
-      links)
-
-#### Opening Authoring
-
-- [ ] v1: Openings authored as JSON/TS seed files for Convex
-- [ ] Strict validation at build time (fail build on invalid openings)
-- [ ] Opening metadata: name/title, tags, source/author
-- [ ] v2 (M4): Visual opening builder for admin (WYSIWYG, click growth options,
-      interactive board)
+- [x] Text-based turn-by-turn opening guides
+- [x] Multiple openings per spirit shown as tabs
+- [x] Openings display as collapsible accordions (one per turn, default open)
+- [x] Opening metadata: name, author, source URL
+- [x] Admin CRUD for creating/editing/deleting openings
+- [x] 85 opening guides seeded from community sources
 
 #### Game Tracker (Logged-in Users)
 
-- [ ] Track: date, result (win/loss), 1-6 spirits (dynamic list entry)
-- [ ] Each spirit entry: spirit variant + optional player name
-- [ ] Spirits categorized by expansion (derived)
-- [ ] Optional scenario: name + structured difficulty (base number + modifier
-      type)
-- [ ] Optional adversary with level (0-6, number only)
-- [ ] Optional secondary adversary with level
-- [ ] Official Spirit Island scoring
-- [ ] Notes field
-- [ ] CSV export: Excel-friendly, stable schema, fixed columns (spirit1-spirit6,
-      empty if unused)
-- [ ] CSV import: validates known names, allows custom/unknown
-
-#### Notes (Logged-in Users)
-
-- [ ] Rich-text notes with basic formatting (bold, italic, headers, lists) +
-      links
-- [ ] Attachable to spirits, openings, games
-- [ ] Tags
-- [ ] Full backlinks (automatic bidirectional linking)
-- [ ] Backlinks displayed on spirit/opening/game pages ("X notes mention this")
+- [x] Track: date, result (win/loss), 1-6 spirits (dynamic list entry)
+- [x] Each spirit entry: spirit variant + optional player name
+- [x] Optional scenario: name + structured difficulty
+- [x] Optional adversary with level (0-6)
+- [x] Optional secondary adversary with level
+- [x] Official Spirit Island scoring
+- [x] Notes field
+- [x] CSV export: Excel-friendly, stable schema, fixed columns (spirit1-spirit6)
+- [x] CSV import: validates known names, allows custom/unknown, preview before import
 
 #### Search & Navigation
 
-- [ ] Global client-side search across spirits, openings, games, notes (works
-      offline)
-- [ ] Bottom tabs always visible on all screens
-- [ ] Spirit detail page has sub-tabs (Overview | Openings | future: Notes)
-- [ ] Shareable URLs for spirits, variants, openings
-      (/spirits/river-surges-in-sunlight)
+- [x] Client-side search across spirits (name, description, aspect names, works offline)
+- [x] Bottom tabs always visible on all screens (Spirits / Games / Settings)
+- [x] Spirit detail page has variant tabs + openings section
+- [x] Shareable URLs for spirits, variants, openings
 
 #### Authentication & Authorization
 
-- [ ] Clerk auth from M1
-- [ ] Public read-only: spirits library, openings viewable without login
-- [ ] Logged-in users: game tracking, notes
-- [ ] Admin role (Clerk): access to visual opening builder, separate admin
-      routes
+- [x] Clerk auth
+- [x] Public read-only: spirits library, openings viewable without login
+- [x] Logged-in users: game tracking
+- [x] Admin role (Clerk): access to opening editor via edit mode
 
 #### PWA & Offline
 
-- [ ] Full Progressive Web App: installable, offline capable
-- [ ] Cache everything for native-like offline read-only experience
-- [ ] App shell + spirit reference data + images precached
-- [ ] User data (games/notes) cached from Convex for offline viewing
-- [ ] v1: Read-only offline (no writes)
-- [ ] v2: Offline writes with queue & sync
-- [ ] In-app update banner ("New version available → Reload")
-- [ ] v2: Optional push notifications after explicit opt-in
+- [x] Full Progressive Web App: installable, offline capable
+- [x] Cache everything for offline read-only experience
+- [x] Reference data cached via TanStack Query + IndexedDB
+- [x] User data (games) cached with offline write outbox
+- [x] In-app update banner ("New version available → Reload")
+- [x] Offline indicator shown only when disconnected
 
 #### UI/UX
 
-- [ ] Mobile-first design
-- [ ] Dark theme first; light theme toggle in Settings
-- [ ] Hybrid styling: clean modern UI with Spirit Island color/icon accents
-      (earthy + elemental)
-- [ ] No loading states — reserve space, be fast (3s timeout banner in v2)
-- [ ] Toast notifications for errors
-- [ ] Offline indicator shown only when disconnected
-- [ ] Touch-first (keyboard navigation secondary)
-- [ ] Respect prefers-reduced-motion for scrubber animations
-- [ ] Accessibility: touch targets, color contrast
+- [x] Mobile-first design
+- [x] Dark theme first; light theme toggle in Settings
+- [x] Modern UI with Spirit Island color accents (element + complexity colors)
+- [x] Toast notifications for errors (sonner)
+- [x] Offline indicator shown only when disconnected
+- [x] Touch-first with 44px touch targets
+- [x] Accessibility: touch targets, color contrast
 
 #### Credits & Attribution
 
-- [ ] Credits/Attribution page listing all external data sources
-- [ ] Thank contributors for their (indirect) contribution
-- [ ] Per-spirit links to wiki pages
-- [ ] Disclaimer: "The Dahan Codex is an unofficial fan project and is not
-      affiliated with Greater Than Games, LLC. Spirit Island and all related
-      materials, names, and images are the property of Greater Than Games, LLC."
+- [x] Credits/Attribution page listing all external data sources
+- [x] Per-spirit links to wiki pages
+- [x] Disclaimer: "The Dahan Codex is an unofficial fan project and is not
+      affiliated with Greater Than Games, LLC."
+
+### Future (v2+)
+
+- **Graphical Opening Scrubber** — interactive board visualization with
+  timeline slider (abandoned in v1 due to complexity, may revisit)
+- **Notes with backlinks** — rich-text notes attachable to spirits/games
+- **Favorites / Recently viewed** — per-user tracking
+- **Push notifications** — after explicit opt-in
+- **Bundled card images** — from card-katalog repo
+- **Visual opening builder** — WYSIWYG admin tool
 
 ### Out of Scope
 
-- **Favorites** — Defer to v2, not needed for initial release
-- **Recently viewed** — Defer to v2, then per-user tracking
-- **Offline writes** — v1 is read-only offline; queue & sync planned for v2
-- **Push notifications** — v1 uses in-app banner only; push in v2
-- **Bundled card images** — v1 loads from sick.oberien.de; v2 bundles from
-  card-katalog repo
+- **Offline writes** — v1 has outbox pattern for games; full offline sync
+  planned for v2
 - **Login system complexity** — No custom auth; Clerk handles everything
 - **R2 storage** — Not needed; images bundled with app
 - **i18n** — English only
-- **Visual regression tests** — Functional Playwright tests only for v1
+- **Visual regression tests** — Functional Playwright tests only
 - **Board-relative presence placement** — Track slots only, not land positions
-  on island
 - **Growth validation** — Display all options, trust author picked correctly
 - **Loading skeletons/spinners** — App should be fast enough; reserve space
-  instead
 
 ## Context
 
@@ -170,8 +125,6 @@ that makes openings actually learnable.
 
 - **Spirit Island Wiki** (authoritative names + structures):
   - Spirits list: https://spiritislandwiki.com/index.php?title=List_of_Spirits
-  - Example spirit page:
-    https://spiritislandwiki.com/index.php?title=Thunderspeaker#tab=Strategy
   - Aspects list:
     https://spiritislandwiki.com/index.php?title=List_of_Aspect_Cards
   - Scenarios list: https://spiritislandwiki.com/index.php?title=Scenarios
@@ -192,63 +145,58 @@ that makes openings actually learnable.
   labels), (c) links to sources
 - Spirit overview content: derive from wiki structure, use AI for
   summaries/ratings
-- Openings: authored by project maintainer
+- Openings: curated from community sources (Reddit, BGG, strategy guides)
 - Art: use wiki images, bundle with app
 
 ### Reference Data Scope
 
 - **Expansions**: Base Game, Branch & Claw, Jagged Earth, Feather & Flame,
   Horizons, Nature Incarnate, promos
-- **Adversaries**: All official
-- **Scenarios**: All official
-- **v1 Spirits**: River Surges in Sunlight + Lightning's Swift Strike (including
-  all their aspects)
-- **v1 Content volume**: Start small (few spirits deeply covered), expand over
-  time
+- **Spirits**: All 37 base spirits + 31 aspects
+- **Adversaries**: All official (hardcoded constants for v1)
+- **Scenarios**: All official (hardcoded constants for v1)
+- **Openings**: 85 guides from community sources
 
 ### Data Architecture
 
 - **Convex** is cloud-first source of truth
 - **Convex generates types** used by app
-- **Convex functions organized by domain**: spirits.ts, games.ts, notes.ts,
-  openings.ts
-- **Offline**: cache Convex data locally for read-only access
-- **Seeding**: JSON/TS files seed Convex on deploy (no runtime scraping)
-- **Hybrid data sourcing**: scrape wiki structure once, AI generates
-  summaries/ratings
+- **Convex functions organized by domain**: spirits.ts, games.ts, openings.ts
+- **Offline**: TanStack Query cache persisted to IndexedDB via idb-keyval
+- **Seeding**: TS files seed Convex on deploy (no runtime scraping)
+- **Scraping**: One-time scripts scrape wiki for spirit/aspect data
 
 ## Constraints
 
 - **Tech stack**: TanStack Router (React 19 + TypeScript, client-only SPA),
-  TanStack Query, Convex, Clerk, Cloudflare Pages, Tailwind CSS, Radix
-  primitives, Framer Motion, Recharts — these are fixed choices
+  TanStack Query, Convex, Clerk, Cloudflare Pages, Tailwind CSS v4, Radix
+  primitives (shadcn/ui), Recharts — these are fixed choices
 - **Package manager**: pnpm
-- **Tooling**: Biome (formatting/linting), mise (toolchain management),
-  pre-commit hooks
-- **Testing**: Playwright E2E only (Chromium), real spirit data (not mocks), no
-  visual regression
-- **Monitoring**: Sentry for error tracking
-- **Deployment**: Cloudflare Pages (client-only SPA), Cloudflare subdomain for
-  now (custom domain post-v1)
+- **Tooling**: Biome (formatting/linting), lefthook (git hooks),
+  commitlint (conventional commits), knip (unused code), jscpd (duplication)
+- **Testing**: Playwright E2E only (Chromium), real spirit data (not mocks)
+- **Deployment**: Cloudflare Pages (client-only SPA)
 - **Auth**: Clerk only, no custom auth system
 - **Licensing**: Unofficial fan project, all Spirit Island materials belong to
   Greater Than Games, LLC
 
 ## Key Decisions
 
-| Decision                             | Rationale                                                               | Outcome   |
-| ------------------------------------ | ----------------------------------------------------------------------- | --------- |
-| Clerk auth from M1                   | Easier to build with auth infrastructure than retrofit later            | — Pending |
-| Convex cloud-first (not local-first) | Simplifies v1 significantly; local-first sync is complex                | — Pending |
-| No loading states                    | Force fast performance; loading states make apps feel slower            | — Pending |
-| Radar chart for power ratings        | Shows spirit's "shape" at a glance better than bar charts               | — Pending |
-| Slider/timeline scrubber             | Most intuitive for turn-by-turn navigation on mobile                    | — Pending |
-| Full spirit data modeling            | Needed to display growth options and presence track grants accurately   | — Pending |
-| Hybrid styling                       | Modern clean UI with Spirit Island accents balances usability and theme | — Pending |
-| Bundle images (no R2)                | Simplifies architecture; images are static reference data               | — Pending |
-| Fixed CSV columns                    | Excel-friendly; spirit1-spirit6 columns easier than delimited           | — Pending |
-| Client-side search                   | Works offline; data volume manageable for in-memory search              | — Pending |
+| Decision                             | Rationale                                                            | Outcome             |
+| ------------------------------------ | -------------------------------------------------------------------- | ------------------- |
+| Client-only SPA (not SSR)            | No SEO benefit, SSR added Clerk/Convex hydration complexity          | Decided (quick-010) |
+| Clerk auth from M1                   | Easier to build with auth infrastructure than retrofit later         | Decided (Phase 1)   |
+| Convex cloud-first (not local-first) | Simplifies v1 significantly; local-first sync is complex             | Decided (Phase 1)   |
+| Text openings (not graphical scrubber) | Graphical board too complex for all spirit patterns                | Decided (Phase 3.6) |
+| Radar chart for power ratings        | Shows spirit's "shape" at a glance better than bar charts            | Decided (Phase 3)   |
+| idb-keyval (not Dexie.js)            | Simpler key-value storage sufficient for TanStack Query persistence  | Decided (Phase 4)   |
+| vite-plugin-pwa injectManifest       | Generates SW from TypeScript src/sw.ts                               | Decided (Phase 4)   |
+| No loading states                    | Force fast performance; offline-first cached data is instant         | Decided (Phase 4)   |
+| Bundle images (no R2)                | Simplifies architecture; images are static reference data            | Decided (Phase 8)   |
+| Fixed CSV columns                    | Excel-friendly; spirit1-spirit6 columns easier than delimited        | Decided (Phase 6)   |
+| Client-side search                   | Works offline; data volume manageable for in-memory search           | Decided (Phase 5)   |
+| Outbox pattern for offline writes    | Games saved to IndexedDB when offline, synced when online            | Decided (Phase 6)   |
 
 ---
 
-_Last updated: 2025-01-24 after initialization_
+_Last updated: 2026-02-13_
