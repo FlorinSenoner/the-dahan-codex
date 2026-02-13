@@ -39,7 +39,11 @@ function GamesIndex() {
     ],
   })
 
-  const { isAuthenticated } = useConvexAuth()
+  const { isAuthenticated, isLoading } = useConvexAuth()
+
+  if (isLoading) {
+    return <GamesAuthLoadingState />
+  }
 
   if (!isAuthenticated) {
     return <GamesSignInPrompt />
@@ -65,6 +69,19 @@ function GamesSignInPrompt() {
               Sign In
             </Link>
           </Button>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+function GamesAuthLoadingState() {
+  return (
+    <div className="min-h-screen bg-background">
+      <PageHeader backHref="/" title="Games" />
+      <main className="pb-20">
+        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+          <p className="text-sm text-muted-foreground">Loading your games...</p>
         </div>
       </main>
     </div>

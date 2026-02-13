@@ -8,9 +8,9 @@ import { SpiritDetailContent } from './spirits.$slug'
 /**
  * Spirit detail page
  *
- * Offline behavior: This page works offline for spirits that have been
- * synced via Settings > Sync Data. Without prior sync, the page will
- * show a loading state while waiting for Convex connection.
+ * Offline behavior: This page works offline after background spirit sync
+ * has populated local cache. Manual Settings > Sync Data can be used to
+ * force a full refresh.
  */
 export const Route = createFileRoute('/spirits/$slug/$aspect')({
   loader: async ({ context, params }) => {

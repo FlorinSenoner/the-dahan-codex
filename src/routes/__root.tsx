@@ -14,6 +14,8 @@ import { Button } from '../components/ui/button'
 import { Toaster } from '../components/ui/sonner'
 import { EditModeProvider } from '../contexts/edit-mode-context'
 import { ThemeProvider } from '../contexts/theme-context'
+import { useBackgroundSync } from '../hooks/use-background-sync'
+import { useOutboxSync } from '../hooks/use-outbox-sync'
 import { useServiceWorker } from '../hooks/use-service-worker'
 import { clearPersistedQueryCache } from '../router'
 
@@ -86,6 +88,7 @@ function RootComponent() {
       >
         <ConvexProviderWithClerk client={convexClient} useAuth={useAuth}>
           <AuthCacheIsolation queryClient={queryClient} />
+          <GlobalSync />
           <ThemeProvider>
             <EditModeProvider>
               <OfflineIndicator />
@@ -119,6 +122,16 @@ function AuthCacheIsolation({ queryClient }: { queryClient: QueryClient }) {
 
     void clearPersistedQueryCache(queryClient)
   }, [isLoaded, userId, queryClient])
+
+  return null
+}
+
+function GlobalSync() {
+  const { isLoaded, isSignedIn, userId } = useAuth()
+  const isAuthReady = isLoaded && !!isSignedIn
+
+  useBackgroundSync(isAuthReady)
+  useOutboxSync({ isAuthReady, ownerId: userId })
 
   return null
 }
