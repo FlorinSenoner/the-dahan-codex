@@ -155,11 +155,6 @@
 
 ## Missing Critical Features
 
-**Error Boundaries:**
-- Problem: No React error boundaries exist in app
-- Blocks: Graceful error recovery, production error tracking
-- Priority: High
-
 **Offline Mutation Queue:**
 - Problem: Game updates/deletes fail silently when offline
 - Blocks: True offline-first CRUD (currently only create is queued)
