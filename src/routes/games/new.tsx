@@ -1,8 +1,8 @@
+import { useAuth } from '@clerk/clerk-react'
 import { useConvexMutation } from '@convex-dev/react-query'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { useConvexAuth } from 'convex/react'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { GameForm, type GameFormData } from '@/components/games/game-form'
@@ -19,7 +19,7 @@ function NewGamePage() {
   usePageMeta('New Game')
 
   const navigate = useNavigate()
-  const { isAuthenticated, isLoading } = useConvexAuth()
+  const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
   const { saveOfflineGame } = usePendingGames()
 
@@ -34,12 +34,15 @@ function NewGamePage() {
   })
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (isOnline && isLoaded && !isSignedIn) {
       navigate({ to: '/games' })
     }
-  }, [isLoading, isAuthenticated, navigate])
+  }, [isOnline, isLoaded, isSignedIn, navigate])
 
-  if (!isAuthenticated) return null
+  // Offline: always render (saveOfflineGame handles it)
+  // Online + auth loading: brief null while Clerk loads
+  // Online + not signed in: null (redirect fires above)
+  if (isOnline && (!isLoaded || !isSignedIn)) return null
 
   const handleSubmit = async (data: GameFormData) => {
     // Filter out spirits without a spiritId selected (new games require picking from dropdown)

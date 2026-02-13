@@ -66,7 +66,7 @@ affecting current work:
 - Convex queries imported via api from convex/\_generated/api
 - Used pathless \_authenticated layout instead of (authenticated) route group
   (TanStack Router constraint)
-- Use useConvexAuth() hook for auth state sync instead of Clerk's useAuth()
+- Game routes use useAuth() (Clerk) for cache-first rendering; _authenticated layout uses useConvexAuth()
 - Admin role via Clerk JWT custom claim: user.public_metadata.isAdmin
 - ClerkProvider > ConvexProviderWithClerk > QueryClientProvider hierarchy
 - Manual Workbox generation via scripts/generate-sw.ts (vite-plugin-pwa

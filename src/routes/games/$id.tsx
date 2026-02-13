@@ -1,10 +1,9 @@
-import { useUser } from '@clerk/clerk-react'
+import { useAuth, useUser } from '@clerk/clerk-react'
 import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc, Id } from 'convex/_generated/dataModel'
-import { useConvexAuth } from 'convex/react'
 import { format } from 'date-fns'
 import { Pencil, Trash2, WifiOff } from 'lucide-react'
 import * as React from 'react'
@@ -39,7 +38,7 @@ function GameDetailPage() {
   const { id } = Route.useParams()
   const { user } = useUser()
   const navigate = useNavigate()
-  const { isAuthenticated, isLoading } = useConvexAuth()
+  const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
   const queryClient = useQueryClient()
   const [isEditing, setIsEditing] = React.useState(false)
@@ -99,12 +98,15 @@ function GameDetailPage() {
   }, [baseGame, pendingUpdate])
 
   React.useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (isOnline && isLoaded && !isSignedIn) {
       navigate({ to: '/games' })
     }
-  }, [isLoading, isAuthenticated, navigate])
+  }, [isOnline, isLoaded, isSignedIn, navigate])
 
-  if (!isAuthenticated) return null
+  // Offline: always render cached data
+  // Online + auth loading: brief null while Clerk loads
+  // Online + not signed in: null (redirect fires above)
+  if (isOnline && (!isLoaded || !isSignedIn)) return null
 
   if (isPending && !resolvedGame) {
     return (
