@@ -158,7 +158,6 @@
 }
 
 /* Keep navigation elements on top during view transitions */
-::view-transition-group(bottom-nav),
 ::view-transition-group(page-header) {
   z-index: 100;
 }
