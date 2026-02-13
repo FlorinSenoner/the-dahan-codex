@@ -1,32 +1,28 @@
 # The Dahan Codex
 
-A companion app for the board game Spirit Island, designed for the community.
+A Spirit Island companion app with an offline-first reference library and game tracker.
 
-## Core Value
-
-**The Opening Scrubber** — a graphical, scrubbable visualization of spirit openings that re-creates
-the spirit board mechanics in code. Users scrub through turns on a timeline and see the exact board
-state at each turn: growth options with the chosen one highlighted, presence tracks updating slot by
-slot, and cards played with full previews.
+**Live at [dahan-codex.com](https://dahan-codex.com)**
 
 ## Features
 
-- **Spirits Library** — Browse all spirits with filtering by expansion and complexity
-- **Spirit Detail** — View complexity, strengths/weaknesses, power ratings radar chart
-- **Opening Scrubber** — Turn-by-turn graphical visualization of spirit openings
-- **Game Tracker** — Track plays with spirits, adversaries, scenarios, and scores (logged-in users)
-- **Notes** — Rich-text notes with backlinks attachable to spirits, openings, or games
-- **PWA** — Installable, offline-capable progressive web app
+- **Spirit Library** — Browse all 37 spirits and 31 aspects with filtering by expansion, complexity,
+  and elements
+- **Spirit Detail** — View complexity, power ratings radar chart, unique/special powers, and growth
+  options
+- **Opening Guides** — 85+ text-based turn-by-turn opening guides from community sources
+- **Game Tracker** — Log plays with spirits, adversaries, scenarios, and scores (requires sign-in)
+- **Offline-First PWA** — Installable, works without internet at the game table
 
 ## Tech Stack
 
-- **Frontend**: TanStack Start (React 19 + TypeScript), TanStack Router/Query
-- **Backend**: Convex (real-time database)
+- **Frontend**: React 19, TanStack Router (file-based routing), TanStack Query
+- **Backend**: Convex (real-time database + serverless functions)
 - **Auth**: Clerk
-- **Styling**: Tailwind CSS, Radix/Ark primitives
-- **PWA**: Workbox service worker
-- **Deployment**: Cloudflare Workers
-- **Tooling**: Biome (lint/format), Playwright (E2E tests), pnpm
+- **Styling**: Tailwind CSS 4, Radix UI primitives, shadcn/ui
+- **PWA**: vite-plugin-pwa + Workbox (injectManifest strategy)
+- **Deployment**: Cloudflare Pages
+- **Tooling**: Vite 7, Biome (lint/format), Playwright (E2E tests), pnpm
 
 ## Getting Started
 
@@ -34,22 +30,29 @@ slot, and cards played with full previews.
 
 - [Node.js](https://nodejs.org/) v22+
 - [pnpm](https://pnpm.io/) v10+
-- [mise](https://mise.jdx.dev/) (toolchain and environment management)
+- [mise](https://mise.jdx.dev/) (optional — manages Node/pnpm versions)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/the-dahan-codex.git
+git clone https://github.com/FlorinSenoner/the-dahan-codex.git
 cd the-dahan-codex
 
 # Install dependencies
 pnpm install
-
-# Set up environment variables (mise manages env vars)
-cp mise.local.toml.example mise.local.toml
-# Edit mise.local.toml with your Convex and Clerk credentials
 ```
+
+### Environment Variables
+
+Create a `mise.local.toml` (if using mise) or `.env.local` with:
+
+```
+VITE_CONVEX_URL=https://<your-deployment>.convex.cloud
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
+```
+
+You'll need a [Convex](https://convex.dev) project and a [Clerk](https://clerk.com) application.
 
 ### Development
 
@@ -61,50 +64,50 @@ pnpm dev
 npx convex dev
 ```
 
-### Build & Preview
+### Build & Test
 
 ```bash
-# Build for production
-pnpm build
-
-# Preview locally with Wrangler
-pnpm preview
+pnpm build        # Production build
+pnpm preview      # Preview production build locally
+pnpm test:e2e     # Run Playwright E2E tests
+pnpm ci           # Full CI: lint, typecheck, build, test
 ```
 
 ## Project Structure
 
 ```
 the-dahan-codex/
-├── app/                  # Frontend application
+├── src/
 │   ├── routes/           # TanStack Router file-based routes
+│   ├── components/       # React components (ui/, spirits/, games/, pwa/, admin/)
+│   ├── hooks/            # Custom hooks (PWA, online status, admin)
 │   ├── lib/              # Shared utilities
-│   ├── client.tsx        # Client entry point
-│   ├── server.tsx        # Server entry point
-│   └── router.tsx        # Router configuration
-├── convex/               # Convex backend
-│   ├── schema.ts         # Database schema
-│   ├── health.ts         # Health check query
-│   └── _generated/       # Auto-generated types
+│   ├── contexts/         # React contexts
+│   ├── router.tsx        # Router configuration
+│   └── sw.ts             # Service worker source
+├── convex/               # Backend functions and schema
+│   ├── schema.ts         # Database schema (source of truth)
+│   ├── spirits.ts        # Spirit queries
+│   ├── games.ts          # Game tracker CRUD
+│   ├── openings.ts       # Opening guides queries/mutations
+│   └── seedData/         # Seed data for spirits, aspects, openings
 ├── e2e/                  # Playwright E2E tests
-├── public/               # Static assets (icons, manifest)
-├── scripts/              # Build scripts (SW generation)
+├── public/               # Static assets (spirit images, card images)
+├── scripts/              # Data scraping scripts
 └── .planning/            # Project planning docs
 ```
 
 ## Scripts
 
-| Command          | Description                            |
-| ---------------- | -------------------------------------- |
-| `pnpm dev`       | Start development server               |
-| `pnpm build`     | Build for production                   |
-| `pnpm preview`   | Preview production build with Wrangler |
-| `pnpm deploy`    | Deploy to Cloudflare Workers           |
-| `pnpm lint`      | Run Biome linting                      |
-| `pnpm lint:fix`  | Fix linting issues                     |
-| `pnpm format`    | Format code with Biome + Prettier      |
-| `pnpm typecheck` | Run TypeScript type checking           |
-| `pnpm test:e2e`  | Run Playwright E2E tests               |
-| `pnpm ci`        | Run full CI pipeline locally           |
+| Command          | Description                   |
+| ---------------- | ----------------------------- |
+| `pnpm dev`       | Start development server      |
+| `pnpm build`     | Build for production          |
+| `pnpm preview`   | Preview production build      |
+| `pnpm lint:fix`  | Fix linting issues with Biome |
+| `pnpm typecheck` | Run TypeScript type checking  |
+| `pnpm test:e2e`  | Run Playwright E2E tests      |
+| `pnpm ci`        | Run full CI pipeline locally  |
 
 ## Contributing
 
@@ -113,7 +116,7 @@ the-dahan-codex/
 3. Ensure `pnpm ci` passes (lint, typecheck, build, tests)
 4. Submit a pull request
 
-Pre-commit hooks run Biome checks automatically.
+Pre-commit hooks run Biome checks and TypeScript type checking automatically.
 
 ## Disclaimer
 
