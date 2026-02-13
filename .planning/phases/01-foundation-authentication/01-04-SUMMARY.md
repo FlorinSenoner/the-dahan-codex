@@ -162,7 +162,7 @@ requires auth, just uses underscore-prefix pathless layout pattern.
 
 4. **Set Convex Environment Variable:**
    - Go to
-     https://dashboard.convex.dev/d/REDACTED_CONVEX_DEPLOYMENT/settings/environment-variables
+     https://dashboard.convex.dev/d/<your-deployment>/settings/environment-variables
    - Set `CLERK_JWT_ISSUER_DOMAIN` to the issuer from step 3
 
 5. **Verify setup:**

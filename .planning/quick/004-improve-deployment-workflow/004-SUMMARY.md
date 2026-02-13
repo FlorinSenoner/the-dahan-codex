@@ -34,7 +34,7 @@ New dedicated deployment workflow with:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `VITE_CONVEX_URL` | Your Convex deployment URL | `https://REDACTED.convex.cloud` |
+| `VITE_CONVEX_URL` | Your Convex deployment URL | `https://<your-deployment>.convex.cloud` |
 | `VITE_CLERK_PUBLISHABLE_KEY` | Clerk publishable key | `pk_test_...` or `pk_live_...` |
 
 ---
