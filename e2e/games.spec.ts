@@ -1,4 +1,29 @@
-import { expect, test } from '@playwright/test'
+import { expect, type Page, test } from '@playwright/test'
+
+const clerkTestEmail = process.env.CLERK_TEST_USER_EMAIL
+const clerkTestPassword = process.env.CLERK_TEST_USER_PASSWORD
+
+async function signInWithClerkTestUser(page: Page) {
+  if (!clerkTestEmail || !clerkTestPassword) {
+    throw new Error('Missing Clerk test credentials')
+  }
+
+  await page.goto('/sign-in')
+
+  const emailInput = page.getByRole('textbox', { name: 'Email address' })
+  const passwordInput = page.locator('input[name="password"]')
+
+  await expect(emailInput).toBeEnabled()
+  await expect(passwordInput).toBeEnabled()
+
+  await emailInput.fill(clerkTestEmail)
+  await passwordInput.fill(clerkTestPassword)
+  await page
+    .getByRole('button', { name: /continue|sign in/i })
+    .first()
+    .click()
+  await expect(page).not.toHaveURL(/\/sign-in/)
+}
 
 test.describe('Game Tracker', () => {
   test.describe('unauthenticated', () => {
@@ -24,11 +49,11 @@ test.describe('Game Tracker', () => {
   })
 
   test.describe('authenticated', () => {
-    test.skip('does not flash sign-in prompt on /games reload (requires authenticated storage state)', async ({
-      page,
-    }) => {
-      // Enable this assertion once we have an authenticated Playwright fixture.
+    test.skip(!clerkTestEmail || !clerkTestPassword, 'requires Clerk test credentials')
+    test('does not show sign-in prompt when reloading /games while signed in', async ({ page }) => {
+      await signInWithClerkTestUser(page)
       await page.goto('/games')
+      await page.reload()
       await expect(page.getByText('Track your games')).not.toBeVisible()
       await expect(page.getByRole('link', { name: /sign in/i })).not.toBeVisible()
     })
