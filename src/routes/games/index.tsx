@@ -1,3 +1,4 @@
+import { useAuth } from '@clerk/clerk-react'
 import { convexQuery } from '@convex-dev/react-query'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -39,14 +40,21 @@ function GamesIndex() {
     ],
   })
 
+  const { isLoaded, isSignedIn } = useAuth()
   const { isAuthenticated, isLoading } = useConvexAuth()
+  const isOnline = useOnlineStatus()
 
-  if (isLoading) {
+  if (!isLoaded) {
     return <GamesAuthLoadingState />
   }
 
-  if (!isAuthenticated) {
+  if (!isSignedIn) {
     return <GamesSignInPrompt />
+  }
+
+  // Only block on Convex auth while online to avoid offline reloads getting stuck.
+  if (isOnline && isLoading && !isAuthenticated) {
+    return <GamesAuthLoadingState />
   }
 
   return <AuthenticatedGames />
