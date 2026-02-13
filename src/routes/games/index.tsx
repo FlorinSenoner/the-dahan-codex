@@ -4,7 +4,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
-import { useConvexAuth } from 'convex/react'
 import { Download, Gamepad2, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
 import { useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
@@ -41,20 +40,14 @@ function GamesIndex() {
   })
 
   const { isLoaded, isSignedIn } = useAuth()
-  const { isAuthenticated, isLoading } = useConvexAuth()
   const isOnline = useOnlineStatus()
 
-  if (!isLoaded) {
-    return <GamesAuthLoadingState />
-  }
-
-  if (!isSignedIn) {
+  // Only show sign-in prompt when we KNOW user isn't signed in.
+  // All other cases: render games view with cached data immediately.
+  // TanStack Query cache is restored from IndexedDB before the router starts,
+  // so cached game data is already available. AuthCacheIsolation clears it on user change.
+  if (isOnline && isLoaded && !isSignedIn) {
     return <GamesSignInPrompt />
-  }
-
-  // Only block on Convex auth while online to avoid offline reloads getting stuck.
-  if (isOnline && isLoading && !isAuthenticated) {
-    return <GamesAuthLoadingState />
   }
 
   return <AuthenticatedGames />
@@ -83,21 +76,8 @@ function GamesSignInPrompt() {
   )
 }
 
-function GamesAuthLoadingState() {
-  return (
-    <div className="min-h-screen bg-background">
-      <PageHeader backHref="/" title="Games" />
-      <main className="pb-20">
-        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-          <p className="text-sm text-muted-foreground">Loading your games...</p>
-        </div>
-      </main>
-    </div>
-  )
-}
-
 function AuthenticatedGames() {
-  const { data: games, isError } = useQuery(convexQuery(api.games.listGames, {}))
+  const { data: games, isPending } = useQuery(convexQuery(api.games.listGames, {}))
   const isOnline = useOnlineStatus()
   const { pendingGames } = usePendingGames()
   const { offlineOps } = useOfflineOps()
@@ -158,7 +138,7 @@ function AuthenticatedGames() {
       </PageHeader>
 
       <main className="pb-20">
-        {isError && !games ? (
+        {!isOnline && !games && pendingGames.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
             <WifiOff className="h-16 w-16 text-muted-foreground mb-4" />
             <h2 className="text-xl font-semibold mb-2">Games unavailable offline</h2>
@@ -166,7 +146,7 @@ function AuthenticatedGames() {
               Visit this page while online to cache your games for offline access.
             </p>
           </div>
-        ) : !hasGames ? (
+        ) : isPending && !games ? null : !hasGames ? (
           <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
             <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
             <h2 className="text-xl font-semibold mb-2">No games recorded yet</h2>

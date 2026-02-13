@@ -1,15 +1,15 @@
+import { useAuth } from '@clerk/clerk-react'
 import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { useConvexAuth } from 'convex/react'
 import { Loader2, Upload } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
 import { CSVPreview } from '@/components/games/csv-preview'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
-import { usePageMeta } from '@/hooks'
+import { useOnlineStatus, usePageMeta } from '@/hooks'
 import {
   parseGamesCSV,
   rowToGameData,
@@ -30,7 +30,8 @@ function ImportPage() {
   usePageMeta('Import Games')
 
   const navigate = useNavigate()
-  const { isAuthenticated, isLoading } = useConvexAuth()
+  const { isLoaded, isSignedIn } = useAuth()
+  const isOnline = useOnlineStatus()
   const [validatedGames, setValidatedGames] = React.useState<ValidatedGame[] | null>(null)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -45,13 +46,14 @@ function ImportPage() {
     },
   })
 
+  // Import requires Convex (online), redirect if offline or not signed in
   React.useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!isOnline || (isLoaded && !isSignedIn)) {
       navigate({ to: '/games' })
     }
-  }, [isLoading, isAuthenticated, navigate])
+  }, [isOnline, isLoaded, isSignedIn, navigate])
 
-  if (!isAuthenticated) return null
+  if (!isLoaded || !isSignedIn) return null
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
