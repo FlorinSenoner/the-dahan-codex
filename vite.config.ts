@@ -68,7 +68,7 @@ export default defineConfig({
       },
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
-        globIgnores: ['spirits/*.png'],
+        globIgnores: ['cards/**'],
       },
       manifest: {
         name: 'The Dahan Codex',
