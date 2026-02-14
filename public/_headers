@@ -10,10 +10,10 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com https://static.cloudflareinsights.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev https://clerk.dahan-codex.com wss://*.convex.cloud https://fonts.gstatic.com https://img.clerk.com; frame-src https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 /
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-cache
 /index.html
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-cache
 /sw.js
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-cache
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
