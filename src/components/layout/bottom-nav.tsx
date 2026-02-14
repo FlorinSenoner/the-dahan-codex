@@ -48,7 +48,10 @@ export function BottomNav() {
   const currentPath = routerState.location.pathname
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border">
+    <nav
+      className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border"
+      style={{ viewTransitionName: 'bottom-nav' }}
+    >
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
         {tabs.map((tab) => {
           const isActive = tab.matchPattern.test(currentPath)

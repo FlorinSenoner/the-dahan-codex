@@ -158,8 +158,29 @@
 }
 
 /* Keep navigation elements on top during view transitions */
-::view-transition-group(page-header) {
+::view-transition-group(page-header),
+::view-transition-group(bottom-nav) {
   z-index: 100;
+}
+
+/* Keep toast notifications above navigation during view transitions.
+   viewTransitionName is set via style prop in sonner.tsx.
+   Custom keyframe forces opacity:1 throughout, preventing the default cross-fade
+   from hiding the toast during page transitions. */
+@keyframes vt-persist {
+  from,
+  to {
+    opacity: 1;
+  }
+}
+
+::view-transition-group(toast-container) {
+  z-index: 200;
+}
+
+::view-transition-old(toast-container),
+::view-transition-new(toast-container) {
+  animation-name: vt-persist;
 }
 
 @media (prefers-reduced-motion: reduce) {
