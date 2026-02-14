@@ -33,8 +33,11 @@ function SettingsPage() {
   async function syncData() {
     setIsSyncing(true)
     try {
-      setSyncStatus('Syncing games...')
-      await syncGames(queryClient)
+      // Only sync games when signed in (listGames requires auth)
+      if (isSignedIn) {
+        setSyncStatus('Syncing games...')
+        await syncGames(queryClient)
+      }
 
       setSyncStatus('Syncing spirits & openings...')
       await syncSpiritsAndOpenings(queryClient)
