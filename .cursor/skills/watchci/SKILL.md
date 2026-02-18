@@ -9,8 +9,7 @@ allowed-tools: Bash, Read, Edit, Write, Grep, Glob
 
 Automates the full CI cycle: monitor checks, diagnose failures, fix, and merge.
 
-Current PR:
-!`gh pr view --json number,title,url -q '"\(.number) - \(.title)\n\(.url)"' 2>/dev/null || echo "No PR found for current branch"`
+Current PR: !`gh pr view --json number,title,url -q '"\(.number) - \(.title)\n\(.url)"' 2>/dev/null || echo "No PR found for current branch"`
 Current branch: !`git branch --show-current`
 
 ## Steps
@@ -20,7 +19,6 @@ Current branch: !`git branch --show-current`
    - Otherwise use the current branch's PR (shown above)
 
 2. Watch CI checks until they complete:
-
    ```bash
    gh pr checks $PR_NUMBER --watch
    ```

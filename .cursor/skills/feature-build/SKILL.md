@@ -1,12 +1,8 @@
 ---
 name: feature-build
-description:
-  Build a GitHub feature end-to-end — research, plan, implement, validate, PR. Uses git worktrees to
-  isolate work.
+description: Build a GitHub feature end-to-end — research, plan, implement, validate, PR. Uses git worktrees to isolate work.
 argument-hint: "[issue URL or number] [implementation guidance]"
-allowed-tools:
-  Bash, Read, Edit, Write, Glob, Grep, Task, AskUserQuestion, EnterPlanMode, ExitPlanMode,
-  WebSearch, WebFetch, mcp__playwright__*, mcp__claude-in-chrome__*
+allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Task, AskUserQuestion, EnterPlanMode, ExitPlanMode, WebSearch, WebFetch, mcp__playwright__*, mcp__claude-in-chrome__*
 ---
 
 # Build a Feature
@@ -14,41 +10,33 @@ allowed-tools:
 End-to-end feature implementation workflow: select → research → plan → implement → validate → PR.
 Uses git worktrees so ongoing work on the current branch is never disturbed.
 
-Repo: !`gh repo view --json nameWithOwner -q '.nameWithOwner' 2>/dev/null || echo "unknown"` Current
-branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
+Repo: !`gh repo view --json nameWithOwner -q '.nameWithOwner' 2>/dev/null || echo "unknown"`
+Current branch: !`git branch --show-current`
+Repo root: !`git rev-parse --show-toplevel`
 
 ---
 
 ## Phase 1: Select the Feature
 
 1. Parse `$ARGUMENTS` — the string may contain an issue reference AND/OR implementation guidance:
-   - **Split rule**: The first token is the issue reference if it's a number or a GitHub URL
-     (contains `github.com`). Everything after the first whitespace boundary past the issue
-     reference is the **guidance prompt**.
+   - **Split rule**: The first token is the issue reference if it's a number or a GitHub URL (contains `github.com`). Everything after the first whitespace boundary past the issue reference is the **guidance prompt**.
    - Examples:
-     - `57 use the bulk action pattern from documents list` → issue=57, guidance="use the bulk
-       action pattern from documents list"
-     - `https://github.com/org/repo/issues/57 keep it minimal, no new dependencies` → issue=57,
-       guidance="keep it minimal, no new dependencies"
+     - `57 use the bulk action pattern from documents list` → issue=57, guidance="use the bulk action pattern from documents list"
+     - `https://github.com/org/repo/issues/57 keep it minimal, no new dependencies` → issue=57, guidance="keep it minimal, no new dependencies"
      - `57` → issue=57, guidance=none
      - `reuse the tag selector component` → issue=none, guidance="reuse the tag selector component"
      - (empty) → issue=none, guidance=none
    - Store the guidance prompt (if any) — it will be used in Phases 3, 4, and 5.
 
 2. **Fetch open feature requests** when no issue is specified:
-
    ```bash
    gh issue list --label "enhancement" --state open --limit 30 --json number,title,labels,createdAt,author
    ```
-
    If no issues have the `enhancement` label, fall back to all open issues:
-
    ```bash
    gh issue list --state open --limit 30 --json number,title,labels,createdAt,author
    ```
-
-   Present the list to the user with `AskUserQuestion` — show issue numbers and titles, ask which
-   one to build.
+   Present the list to the user with `AskUserQuestion` — show issue numbers and titles, ask which one to build.
 
 3. Once the issue number is known, fetch full details:
    ```bash
@@ -71,34 +59,29 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Derive the slug from the issue title (lowercase, hyphens, max 5 words)
 
 2. Determine the worktree path:
-
    ```bash
    REPO_ROOT=$(git rev-parse --show-toplevel)
    WORKTREE_DIR="$REPO_ROOT/../dinochron-feat-<issue-number>"
    ```
 
 3. Create the worktree from `main`:
-
    ```bash
    git fetch origin main
    git worktree add -b feat/<issue-number>-<slug> "$WORKTREE_DIR" origin/main
    ```
 
 4. Install dependencies in the worktree:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm install
    ```
 
-5. **From this point on, ALL file reads, edits, writes, and commands run inside the worktree
-   directory (`$WORKTREE_DIR`)**. Never modify files in the original repo root.
+5. **From this point on, ALL file reads, edits, writes, and commands run inside the worktree directory (`$WORKTREE_DIR`)**. Never modify files in the original repo root.
 
 ---
 
 ## Phase 3: Research & Design
 
-1. **Codebase investigation** — Use the `Task` tool with `subagent_type: "Explore"` (thoroughness:
-   "very thorough") to search the worktree for code related to the feature:
+1. **Codebase investigation** — Use the `Task` tool with `subagent_type: "Explore"` (thoroughness: "very thorough") to search the worktree for code related to the feature:
    - Existing patterns for similar features (how are similar things already built?)
    - Routes, components, hooks that will be extended or serve as reference
    - Convex schema, functions, and validators relevant to the area
@@ -116,9 +99,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Auth/sharing → think about permission boundaries
    - PWA/offline → think about caching strategies
 
-4. **Apply guidance prompt** (if provided in Phase 1): Use it to focus your research. For example,
-   if the user said "reuse the tag selector component", prioritize investigating that component's
-   API and patterns before exploring alternatives.
+4. **Apply guidance prompt** (if provided in Phase 1): Use it to focus your research. For example, if the user said "reuse the tag selector component", prioritize investigating that component's API and patterns before exploring alternatives.
 
 5. Summarize findings internally before proceeding.
 
@@ -126,9 +107,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 
 ## Phase 4: Plan the Implementation
 
-1. Based on your research, draft an implementation plan. **If a guidance prompt was provided**,
-   incorporate it as a constraint or direction for the implementation approach — it represents the
-   user's intent for how the feature should be built.
+1. Based on your research, draft an implementation plan. **If a guidance prompt was provided**, incorporate it as a constraint or direction for the implementation approach — it represents the user's intent for how the feature should be built.
    - **Summary**: One-paragraph overview of what will be built
    - **Architecture**: How the feature fits into the existing codebase
    - **User guidance**: (if provided) How the guidance prompt influenced the approach
@@ -144,19 +123,16 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Show the proposed changes with file-level detail
    - Ask: "Does this plan look good, or would you like to discuss changes?"
 
-3. **Wait for user approval.** Iterate on the plan if the user has feedback. Do NOT proceed to
-   implementation until the user explicitly approves.
+3. **Wait for user approval.** Iterate on the plan if the user has feedback. Do NOT proceed to implementation until the user explicitly approves.
 
 ---
 
 ## Phase 5: Implement the Feature
 
 1. Apply the changes in the worktree (`$WORKTREE_DIR`).
-   - **If a guidance prompt was provided**, keep it in mind as you implement — it may specify
-     preferred patterns, components to reuse, constraints, or implementation priorities.
+   - **If a guidance prompt was provided**, keep it in mind as you implement — it may specify preferred patterns, components to reuse, constraints, or implementation priorities.
    - Follow TDD: write tests first (RED), implement the feature (GREEN), then refactor if needed.
-   - Follow all project code standards (strict TypeScript, Biome, no `any`, validators on Convex
-     functions, etc.)
+   - Follow all project code standards (strict TypeScript, Biome, no `any`, validators on Convex functions, etc.)
    - Build incrementally — get each layer working before moving to the next:
      1. Schema changes (if any)
      2. Backend functions (queries, mutations, actions)
@@ -165,13 +141,11 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
      5. Tests
 
 2. Run type checking after edits:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm typecheck
    ```
 
 3. Run relevant unit tests:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm test
    ```
@@ -188,8 +162,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
      cd "$WORKTREE_DIR" && npx convex dev &
      cd "$WORKTREE_DIR" && pnpm dev &
      ```
-   - Use browser automation tools (Playwright MCP / Claude-in-Chrome) to navigate to the
-     new/modified pages.
+   - Use browser automation tools (Playwright MCP / Claude-in-Chrome) to navigate to the new/modified pages.
    - Walk through the feature's user flows end-to-end.
    - Take screenshots documenting the working feature.
 
@@ -218,15 +191,12 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 2. **Wait for user approval.**
 
 3. Once approved, finalize:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm check
    ```
-
    Fix any issues that `pnpm check` surfaces.
 
 4. Commit, push, and create PR:
-
    ```bash
    cd "$WORKTREE_DIR" && git add <specific files>
    cd "$WORKTREE_DIR" && git commit -m "$(cat <<'EOF'
@@ -275,8 +245,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 
 ## Rules
 
-- **NEVER modify files outside the worktree.** The user's current working branch must remain
-  untouched.
+- **NEVER modify files outside the worktree.** The user's current working branch must remain untouched.
 - **NEVER implement without user-approved plan.** Always present the plan and wait for approval.
 - **NEVER commit to main.** Always work on a `feat/` branch.
 - Branch name format: `feat/<issue-number>-<short-slug>`

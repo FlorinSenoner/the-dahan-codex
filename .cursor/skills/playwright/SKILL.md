@@ -1,16 +1,13 @@
 ---
 name: "playwright"
-description:
-  "Use when the task requires automating a real browser from the terminal (navigation, form filling,
-  snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled
-  wrapper script."
+description: "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script."
 ---
+
 
 # Playwright CLI Skill
 
-Drive a real browser from the terminal using `playwright-cli`. Prefer the bundled wrapper script so
-the CLI works even when it is not globally installed. Treat this skill as CLI-first automation. Do
-not pivot to `@playwright/test` unless the user explicitly asks for test files.
+Drive a real browser from the terminal using `playwright-cli`. Prefer the bundled wrapper script so the CLI works even when it is not globally installed.
+Treat this skill as CLI-first automation. Do not pivot to `@playwright/test` unless the user explicitly asks for test files.
 
 ## Prerequisite check (required)
 
@@ -20,8 +17,7 @@ Before proposing commands, check whether `npx` is available (the wrapper depends
 command -v npx >/dev/null 2>&1
 ```
 
-If it is not available, pause and ask the user to install Node.js/npm (which provides `npx`).
-Provide these steps verbatim:
+If it is not available, pause and ask the user to install Node.js/npm (which provides `npx`). Provide these steps verbatim:
 
 ```bash
 # Verify Node/npm are installed
@@ -33,8 +29,7 @@ npm install -g @playwright/mcp@latest
 playwright-cli --help
 ```
 
-Once `npx` is present, proceed with the wrapper script. A global install of `playwright-cli` is
-optional.
+Once `npx` is present, proceed with the wrapper script. A global install of `playwright-cli` is optional.
 
 ## Skill path (set once)
 
@@ -126,8 +121,7 @@ Refs can go stale. When a command fails due to a missing ref, snapshot again.
 
 ## Wrapper script
 
-The wrapper script uses `npx --package @playwright/mcp playwright-cli` so the CLI can run without a
-global install:
+The wrapper script uses `npx --package @playwright/mcp playwright-cli` so the CLI can run without a global install:
 
 ```bash
 "$PWCLI" --help
@@ -147,9 +141,7 @@ Open only what you need:
 - Always snapshot before referencing element ids like `e12`.
 - Re-snapshot when refs seem stale.
 - Prefer explicit commands over `eval` and `run-code` unless needed.
-- When you do not have a fresh snapshot, use placeholder refs like `eX` and say why; do not bypass
-  refs with `run-code`.
+- When you do not have a fresh snapshot, use placeholder refs like `eX` and say why; do not bypass refs with `run-code`.
 - Use `--headed` when a visual check will help.
-- When capturing artifacts in this repo, use `output/playwright/` and avoid introducing new
-  top-level artifact folders.
+- When capturing artifacts in this repo, use `output/playwright/` and avoid introducing new top-level artifact folders.
 - Default to CLI commands and workflows, not Playwright test specs.

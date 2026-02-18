@@ -1,55 +1,42 @@
 ---
 name: bug-fix
-description:
-  Fix a GitHub bug end-to-end — triage, reproduce, plan, fix, validate, PR. Uses git worktrees to
-  isolate work.
+description: Fix a GitHub bug end-to-end — triage, reproduce, plan, fix, validate, PR. Uses git worktrees to isolate work.
 argument-hint: "[issue URL or number] [implementation guidance]"
-allowed-tools:
-  Bash, Read, Edit, Write, Glob, Grep, Task, AskUserQuestion, EnterPlanMode, ExitPlanMode,
-  WebSearch, WebFetch, mcp__playwright__*, mcp__claude-in-chrome__*
+allowed-tools: Bash, Read, Edit, Write, Glob, Grep, Task, AskUserQuestion, EnterPlanMode, ExitPlanMode, WebSearch, WebFetch, mcp__playwright__*, mcp__claude-in-chrome__*
 ---
 
 # Fix GitHub Bug
 
-End-to-end bug fixing workflow: triage → reproduce → plan → fix → validate → PR. Uses git worktrees
-so ongoing work on the current branch is never disturbed.
+End-to-end bug fixing workflow: triage → reproduce → plan → fix → validate → PR.
+Uses git worktrees so ongoing work on the current branch is never disturbed.
 
-Repo: !`gh repo view --json nameWithOwner -q '.nameWithOwner' 2>/dev/null || echo "unknown"` Current
-branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
+Repo: !`gh repo view --json nameWithOwner -q '.nameWithOwner' 2>/dev/null || echo "unknown"`
+Current branch: !`git branch --show-current`
+Repo root: !`git rev-parse --show-toplevel`
 
 ---
 
 ## Phase 1: Select the Bug
 
 1. Parse `$ARGUMENTS` — the string may contain an issue reference AND/OR implementation guidance:
-   - **Split rule**: The first token is the issue reference if it's a number or a GitHub URL
-     (contains `github.com`). Everything after the first whitespace boundary past the issue
-     reference is the **guidance prompt**.
+   - **Split rule**: The first token is the issue reference if it's a number or a GitHub URL (contains `github.com`). Everything after the first whitespace boundary past the issue reference is the **guidance prompt**.
    - Examples:
-     - `42 focus on the error handling in upload` → issue=42, guidance="focus on the error handling
-       in upload"
-     - `https://github.com/org/repo/issues/42 check the R2 cleanup path` → issue=42, guidance="check
-       the R2 cleanup path"
+     - `42 focus on the error handling in upload` → issue=42, guidance="focus on the error handling in upload"
+     - `https://github.com/org/repo/issues/42 check the R2 cleanup path` → issue=42, guidance="check the R2 cleanup path"
      - `42` → issue=42, guidance=none
-     - `look at the debounce logic in search` → issue=none, guidance="look at the debounce logic in
-       search"
+     - `look at the debounce logic in search` → issue=none, guidance="look at the debounce logic in search"
      - (empty) → issue=none, guidance=none
    - Store the guidance prompt (if any) — it will be used in Phases 3, 5, and 6.
 
 2. **Fetch open bugs** when no issue is specified:
-
    ```bash
    gh issue list --label "bug" --state open --limit 30 --json number,title,labels,createdAt,author
    ```
-
    If no issues have the `bug` label, fall back to all open issues:
-
    ```bash
    gh issue list --state open --limit 30 --json number,title,labels,createdAt,author
    ```
-
-   Present the list to the user with `AskUserQuestion` — show issue numbers and titles, ask which
-   one to fix.
+   Present the list to the user with `AskUserQuestion` — show issue numbers and titles, ask which one to fix.
 
 3. Once the issue number is known, fetch full details:
    ```bash
@@ -72,34 +59,29 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Derive the slug from the issue title (lowercase, hyphens, max 5 words)
 
 2. Determine the worktree path:
-
    ```bash
    REPO_ROOT=$(git rev-parse --show-toplevel)
    WORKTREE_DIR="$REPO_ROOT/../dinochron-fix-<issue-number>"
    ```
 
 3. Create the worktree from `main`:
-
    ```bash
    git fetch origin main
    git worktree add -b fix/<issue-number>-<slug> "$WORKTREE_DIR" origin/main
    ```
 
 4. Install dependencies in the worktree:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm install
    ```
 
-5. **From this point on, ALL file reads, edits, writes, and commands run inside the worktree
-   directory (`$WORKTREE_DIR`)**. Never modify files in the original repo root.
+5. **From this point on, ALL file reads, edits, writes, and commands run inside the worktree directory (`$WORKTREE_DIR`)**. Never modify files in the original repo root.
 
 ---
 
 ## Phase 3: Understand & Research
 
-1. **Codebase investigation** — Use the `Task` tool with `subagent_type: "Explore"` (thoroughness:
-   "very thorough") to search the worktree for code related to the bug:
+1. **Codebase investigation** — Use the `Task` tool with `subagent_type: "Explore"` (thoroughness: "very thorough") to search the worktree for code related to the bug:
    - Routes, components, hooks involved
    - Convex functions (queries/mutations/actions)
    - Related test files
@@ -116,9 +98,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Auth → think about Clerk integration, permission checks
    - PWA → think about service worker, caching
 
-4. **Apply guidance prompt** (if provided in Phase 1): Use it to focus your research. For example,
-   if the user said "check the R2 cleanup path", prioritize investigating R2-related code and
-   deletion flows over other areas.
+4. **Apply guidance prompt** (if provided in Phase 1): Use it to focus your research. For example, if the user said "check the R2 cleanup path", prioritize investigating R2-related code and deletion flows over other areas.
 
 5. Summarize findings internally before proceeding.
 
@@ -134,13 +114,11 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
      cd "$WORKTREE_DIR" && npx convex dev &
      cd "$WORKTREE_DIR" && pnpm dev &
      ```
-   - Use browser automation tools (Playwright MCP / Claude-in-Chrome) to navigate to the affected
-     page and follow the reproduction steps from the issue.
+   - Use browser automation tools (Playwright MCP / Claude-in-Chrome) to navigate to the affected page and follow the reproduction steps from the issue.
    - Take a screenshot documenting the broken state.
 
 2. **For backend/logic bugs**:
-   - Write a minimal failing test case if one doesn't exist, or run existing tests that cover the
-     affected area:
+   - Write a minimal failing test case if one doesn't exist, or run existing tests that cover the affected area:
      ```bash
      cd "$WORKTREE_DIR" && pnpm test -- --grep "<relevant pattern>"
      ```
@@ -155,9 +133,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 
 ## Phase 5: Plan the Fix
 
-1. Based on your understanding and reproduction, draft a fix plan. **If a guidance prompt was
-   provided**, incorporate it as a constraint or direction for the fix approach — it represents the
-   user's intent for how the fix should be shaped.
+1. Based on your understanding and reproduction, draft a fix plan. **If a guidance prompt was provided**, incorporate it as a constraint or direction for the fix approach — it represents the user's intent for how the fix should be shaped.
    - **Root cause**: What exactly is broken and why
    - **Fix approach**: What changes to make and where (specific files + line ranges)
    - **User guidance**: (if provided) How the guidance prompt influenced the approach
@@ -170,29 +146,23 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
    - Show the proposed fix with file-level detail
    - Ask: "Does this plan look good, or would you like to discuss changes?"
 
-3. **Wait for user approval.** Iterate on the plan if the user has feedback. Do NOT proceed to
-   implementation until the user explicitly approves.
+3. **Wait for user approval.** Iterate on the plan if the user has feedback. Do NOT proceed to implementation until the user explicitly approves.
 
 ---
 
 ## Phase 6: Implement the Fix
 
 1. Apply the changes in the worktree (`$WORKTREE_DIR`).
-   - **If a guidance prompt was provided**, keep it in mind as you implement — it may specify
-     preferred approaches, areas to focus on, or constraints to respect.
-   - Follow TDD: write/update tests first (RED), then implement the fix (GREEN), then refactor if
-     needed.
-   - Follow all project code standards (strict TypeScript, Biome, no `any`, validators on Convex
-     functions, etc.)
+   - **If a guidance prompt was provided**, keep it in mind as you implement — it may specify preferred approaches, areas to focus on, or constraints to respect.
+   - Follow TDD: write/update tests first (RED), then implement the fix (GREEN), then refactor if needed.
+   - Follow all project code standards (strict TypeScript, Biome, no `any`, validators on Convex functions, etc.)
 
 2. Run type checking after edits:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm typecheck
    ```
 
 3. Run relevant unit tests:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm test
    ```
@@ -216,8 +186,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
      cd "$WORKTREE_DIR" && pnpm test
      ```
 
-3. **If the fix doesn't work**: Go back to Phase 5, reassess, and try a different approach. Report
-   to the user what happened.
+3. **If the fix doesn't work**: Go back to Phase 5, reassess, and try a different approach. Report to the user what happened.
 
 ---
 
@@ -230,15 +199,12 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 2. **Wait for user approval.**
 
 3. Once approved, finalize:
-
    ```bash
    cd "$WORKTREE_DIR" && pnpm check
    ```
-
    Fix any issues that `pnpm check` surfaces.
 
 4. Commit, push, and create PR:
-
    ```bash
    cd "$WORKTREE_DIR" && git add <specific files>
    cd "$WORKTREE_DIR" && git commit -m "$(cat <<'EOF'
@@ -280,8 +246,7 @@ branch: !`git branch --show-current` Repo root: !`git rev-parse --show-toplevel`
 
 ## Rules
 
-- **NEVER modify files outside the worktree.** The user's current working branch must remain
-  untouched.
+- **NEVER modify files outside the worktree.** The user's current working branch must remain untouched.
 - **NEVER skip reproduction.** If you can't reproduce it, report back before attempting a fix.
 - **NEVER implement without user-approved plan.** Always present the plan and wait for approval.
 - **NEVER commit to main.** Always work on a `fix/` branch.

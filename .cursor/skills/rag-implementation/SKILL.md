@@ -1,15 +1,11 @@
 ---
 name: rag-implementation
-description:
-  Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and
-  semantic search. Use when implementing knowledge-grounded AI, building document Q&A systems, or
-  integrating LLMs with external knowledge bases.
+description: Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and semantic search. Use when implementing knowledge-grounded AI, building document Q&A systems, or integrating LLMs with external knowledge bases.
 ---
 
 # RAG Implementation
 
-Master Retrieval-Augmented Generation (RAG) to build LLM applications that provide accurate,
-grounded responses using external knowledge sources.
+Master Retrieval-Augmented Generation (RAG) to build LLM applications that provide accurate, grounded responses using external knowledge sources.
 
 ## When to Use This Skill
 
@@ -40,11 +36,15 @@ grounded responses using external knowledge sources.
 
 **Purpose**: Convert text to numerical vectors for similarity search
 
-**Models (2026):** | Model | Dimensions | Best For | |-------|------------|----------| |
-**voyage-3-large** | 1024 | Claude apps (Anthropic recommended) | | **voyage-code-3** | 1024 | Code
-search | | **text-embedding-3-large** | 3072 | OpenAI apps, high accuracy | |
-**text-embedding-3-small** | 1536 | OpenAI apps, cost-effective | | **bge-large-en-v1.5** | 1024 |
-Open source, local deployment | | **multilingual-e5-large** | 1024 | Multi-language support |
+**Models (2026):**
+| Model | Dimensions | Best For |
+|-------|------------|----------|
+| **voyage-3-large** | 1024 | Claude apps (Anthropic recommended) |
+| **voyage-code-3** | 1024 | Code search |
+| **text-embedding-3-large** | 3072 | OpenAI apps, high accuracy |
+| **text-embedding-3-small** | 1536 | OpenAI apps, cost-effective |
+| **bge-large-en-v1.5** | 1024 | Open source, local deployment |
+| **multilingual-e5-large** | 1024 | Multi-language support |
 
 ### 3. Retrieval Strategies
 
@@ -551,8 +551,7 @@ async def evaluate_rag_system(
 
 ## Best Practices
 
-1. **Chunk Size**: Balance between context (larger) and specificity (smaller) - typically 500-1000
-   tokens
+1. **Chunk Size**: Balance between context (larger) and specificity (smaller) - typically 500-1000 tokens
 2. **Overlap**: Use 10-20% overlap to preserve context at boundaries
 3. **Metadata**: Include source, page, timestamp for filtering and debugging
 4. **Hybrid Search**: Combine semantic and keyword search for best recall

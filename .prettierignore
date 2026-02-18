@@ -22,5 +22,6 @@ src/routeTree.gen.ts
 # Claude Code configuration
 .claude
 .planning
+.cursor
 
 pnpm-lock.yaml

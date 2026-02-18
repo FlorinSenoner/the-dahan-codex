@@ -65,7 +65,6 @@ Launch 3 parallel Explore agents to scan ALL .tsx/.ts files in `src/`:
 ## Output Format
 
 For each finding, report:
-
 - File path and line number
 - Category (from list above)
 - Current class string

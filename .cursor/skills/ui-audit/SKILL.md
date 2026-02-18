@@ -1,8 +1,6 @@
 ---
 name: ui-audit
-description:
-  Audit UI component consistency — find design system violations, hardcoded colors, raw HTML
-  elements, and one-off patterns
+description: Audit UI component consistency — find design system violations, hardcoded colors, raw HTML elements, and one-off patterns
 allowed-tools: Bash, Read, Glob, Grep, Task, AskUserQuestion, EnterPlanMode, ExitPlanMode, Write
 user-invocable: true
 ---
@@ -43,12 +41,10 @@ Search for violations where design system components should be used:
 
 ### Agent 2: Color & Styling Consistency
 
-- Hardcoded Tailwind colors not in design tokens —
-  `Grep: (text|bg|border)-(blue|red|green|yellow|amber|gray)-\d`
+- Hardcoded Tailwind colors not in design tokens — `Grep: (text|bg|border)-(blue|red|green|yellow|amber|gray)-\d`
 - Verify they reference `src/lib/status-colors.ts` or are justified (dynamic user colors)
 - Template literal class concatenation instead of `cn()` — `Grep: className=\{\``
-- Wrong border-radius (`rounded-md`, `rounded-lg`, `rounded` without `-none`) —
-  `Grep: rounded-(sm|md|lg|xl|2xl)`
+- Wrong border-radius (`rounded-md`, `rounded-lg`, `rounded` without `-none`) — `Grep: rounded-(sm|md|lg|xl|2xl)`
 - Inline `style=` attributes — `Grep: style=\{`
 - Arbitrary pixel sizes (`h-[`, `w-[`) that have Tailwind equivalents
 
@@ -68,8 +64,8 @@ Search for violations where design system components should be used:
 
 Produce findings as:
 
-| #   | Issue | File:Line | Severity | Fix |
-| --- | ----- | --------- | -------- | --- |
+| # | Issue | File:Line | Severity | Fix |
+|---|-------|-----------|----------|-----|
 
 Severity levels:
 

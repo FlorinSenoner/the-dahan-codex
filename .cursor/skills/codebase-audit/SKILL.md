@@ -1,20 +1,14 @@
 ---
 name: codebase-audit
-description:
-  Comprehensive codebase audit across 8 dimensions — backend, frontend, security, code quality,
-  Convex patterns, Tailwind/UI, performance, and testing
+description: Comprehensive codebase audit across 8 dimensions — backend, frontend, security, code quality, Convex patterns, Tailwind/UI, performance, and testing
 argument-hint: "[focus: all|backend|frontend|security|performance]"
-allowed-tools:
-  Bash, Read, Glob, Grep, Task, WebSearch, WebFetch, AskUserQuestion, EnterPlanMode, ExitPlanMode,
-  Write, mcp__convex__status, mcp__convex__tables, mcp__convex__functionSpec, mcp__convex__logs,
-  mcp__convex__data, mcp__convex__runOneoffQuery, mcp__plugin_context7_context7__resolve-library-id,
-  mcp__plugin_context7_context7__query-docs
+allowed-tools: Bash, Read, Glob, Grep, Task, WebSearch, WebFetch, AskUserQuestion, EnterPlanMode, ExitPlanMode, Write, mcp__convex__status, mcp__convex__tables, mcp__convex__functionSpec, mcp__convex__logs, mcp__convex__data, mcp__convex__runOneoffQuery, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
 ---
 
 # Comprehensive Codebase Audit
 
-Full-spectrum codebase review using 8 specialized parallel agents across 3 rounds. Produces a
-structured findings report with severity levels and optional fix plans.
+Full-spectrum codebase review using 8 specialized parallel agents across 3 rounds.
+Produces a structured findings report with severity levels and optional fix plans.
 
 ## Context
 
@@ -45,7 +39,6 @@ Launch these 3 agents concurrently using the Task tool:
 **Type:** `convex-specialist`
 
 **Prompt:**
-
 ```
 Audit the Convex backend for anti-patterns. Check CLAUDE.md "Convex Rules",
 "Convex Query Patterns", and "Convex Security Rules" sections for the full
@@ -80,7 +73,6 @@ Report findings as:
 **Type:** `code-reviewer`
 
 **Prompt:**
-
 ```
 Audit the frontend architecture in src/. Check CLAUDE.md "Error Handling",
 "React Performance", and "Code Standards" sections for the full checklist.
@@ -117,7 +109,6 @@ Report findings as:
 **Type:** `testing-expert`
 
 **Prompt:**
-
 ```
 Audit tests and project configuration. Check CLAUDE.md "Testing Rules" section
 for the full checklist. Focus on:
@@ -153,7 +144,6 @@ Launch after Round 1 completes:
 **Type:** `security-auth-guardian`
 
 **Prompt:**
-
 ```
 Deep security audit of the Convex backend and auth integration. Check CLAUDE.md
 "Security" and "Convex Security Rules" sections. Focus on:
@@ -192,7 +182,6 @@ Report findings as:
 **Type:** `code-reviewer`
 
 **Prompt:**
-
 ```
 Audit for code duplication, type safety, and consistency. Check CLAUDE.md
 "Code Standards" and "Type Inference" sections. Focus on:
@@ -227,7 +216,6 @@ Report findings as:
 **Type:** `convex-specialist`
 
 **Prompt:**
-
 ```
 Deep Convex-specific pattern audit. Check CLAUDE.md "Convex Query Patterns"
 and "Convex Rules" sections. Focus on:
@@ -265,7 +253,6 @@ Launch after Round 2 completes:
 **Type:** `code-reviewer`
 
 **Prompt:**
-
 ```
 Audit Tailwind CSS and UI component usage. Check CLAUDE.md "UI Component Rules"
 and "Tailwind CSS" sections. Focus on:
@@ -303,7 +290,6 @@ Report findings as:
 **Type:** `performance-profiler`
 
 **Prompt:**
-
 ```
 Audit performance patterns and bundle optimization. Check CLAUDE.md
 "React Performance" section. Focus on:
@@ -347,29 +333,23 @@ Write the report to `.claude/audit-reports/YYYY-MM-DD-audit.md` with this struct
 # Codebase Audit Report — YYYY-MM-DD
 
 ## Summary
-
 - Total findings: N
 - Critical: N | High: N | Medium: N | Low: N
 - Top 3 areas needing attention: ...
 
 ## Critical Findings (fix before going live)
-
 | # | Finding | Agent | File:Line | Fix |
 
 ## High Findings (data integrity / security)
-
 | # | Finding | Agent | File:Line | Fix |
 
 ## Medium Findings (code quality / consistency)
-
 | # | Finding | Agent | File:Line | Fix |
 
 ## Low Findings (nice to have)
-
 | # | Finding | Agent | File:Line | Fix |
 
 ## Positive Patterns (already done well)
-
 - ...
 ```
 
@@ -384,8 +364,8 @@ Write the report to `.claude/audit-reports/YYYY-MM-DD-audit.md` with this struct
 
 After presenting the report, ask the user:
 
-> Would you like me to enter plan mode to create fix plans for these findings? I can group them into
-> phases by priority (Critical first, then High, etc.)
+> Would you like me to enter plan mode to create fix plans for these findings?
+> I can group them into phases by priority (Critical first, then High, etc.)
 
-If yes, use `EnterPlanMode` to design the fix plan, grouping related findings into parallelizable
-work streams.
+If yes, use `EnterPlanMode` to design the fix plan, grouping related findings
+into parallelizable work streams.
