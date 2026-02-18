@@ -1,18 +1,40 @@
 ---
 name: convex-best-practices
-displayName: Convex Best Practices
-description:
-  Guidelines for building production-ready Convex apps covering function organization, query
-  patterns, validation, TypeScript usage, error handling, and the Zen of Convex design philosophy
-version: 1.0.0
-author: Convex
-tags: [convex, best-practices, typescript, production, error-handling]
+description: Guidelines for building production-ready Convex apps covering function organization, query patterns, validation, TypeScript usage, error handling, and the Zen of Convex design philosophy
 ---
 
 # Convex Best Practices
 
-Build production-ready Convex applications by following established patterns for function
-organization, query optimization, validation, TypeScript usage, and error handling.
+Build production-ready Convex applications by following established patterns for function organization, query optimization, validation, TypeScript usage, and error handling.
+
+## Code Quality
+
+All patterns in this skill comply with `@convex-dev/eslint-plugin`. Install it for build-time validation:
+
+```bash
+npm i @convex-dev/eslint-plugin --save-dev
+```
+
+```js
+// eslint.config.js
+import { defineConfig } from "eslint/config";
+import convexPlugin from "@convex-dev/eslint-plugin";
+
+export default defineConfig([
+  ...convexPlugin.configs.recommended,
+]);
+```
+
+The plugin enforces four rules:
+
+| Rule                                | What it enforces                  |
+| ----------------------------------- | --------------------------------- |
+| `no-old-registered-function-syntax` | Object syntax with `handler`      |
+| `require-argument-validators`       | `args: {}` on all functions       |
+| `explicit-table-ids`                | Table name in db operations       |
+| `import-wrong-runtime`              | No Node imports in Convex runtime |
+
+Docs: https://docs.convex.dev/eslint
 
 ## Documentation Sources
 
@@ -54,7 +76,7 @@ export const get = query({
     v.null(),
   ),
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.userId);
+    return await ctx.db.get("users", args.userId);
   },
 });
 ```
@@ -135,7 +157,7 @@ export const updateTask = mutation({
   },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const task = await ctx.db.get(args.taskId);
+    const task = await ctx.db.get("tasks", args.taskId);
 
     if (!task) {
       throw new ConvexError({
@@ -144,7 +166,7 @@ export const updateTask = mutation({
       });
     }
 
-    await ctx.db.patch(args.taskId, { title: args.title });
+    await ctx.db.patch("tasks", args.taskId, { title: args.title });
     return null;
   },
 });
@@ -160,14 +182,14 @@ export const completeTask = mutation({
   args: { taskId: v.id("tasks") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const task = await ctx.db.get(args.taskId);
+    const task = await ctx.db.get("tasks", args.taskId);
 
     // Early return if already complete (idempotent)
     if (!task || task.status === "completed") {
       return null;
     }
 
-    await ctx.db.patch(args.taskId, {
+    await ctx.db.patch("tasks", args.taskId, {
       status: "completed",
       completedAt: Date.now(),
     });
@@ -181,7 +203,7 @@ export const updateNote = mutation({
   returns: v.null(),
   handler: async (ctx, args) => {
     // Patch directly - ctx.db.patch throws if document doesn't exist
-    await ctx.db.patch(args.id, { content: args.content });
+    await ctx.db.patch("notes", args.id, { content: args.content });
     return null;
   },
 });
@@ -191,7 +213,9 @@ export const reorderItems = mutation({
   args: { itemIds: v.array(v.id("items")) },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const updates = args.itemIds.map((id, index) => ctx.db.patch(id, { order: index }));
+    const updates = args.itemIds.map((id, index) =>
+      ctx.db.patch("items", id, { order: index }),
+    );
     await Promise.all(updates);
     return null;
   },
@@ -300,7 +324,7 @@ export const update = mutation({
     );
 
     if (Object.keys(cleanUpdates).length > 0) {
-      await ctx.db.patch(taskId, cleanUpdates);
+      await ctx.db.patch("tasks", taskId, cleanUpdates);
     }
     return null;
   },
@@ -310,7 +334,7 @@ export const remove = mutation({
   args: { taskId: v.id("tasks") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    await ctx.db.delete(args.taskId);
+    await ctx.db.delete("tasks", args.taskId);
     return null;
   },
 });

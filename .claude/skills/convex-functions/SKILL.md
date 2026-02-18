@@ -1,9 +1,7 @@
 ---
 name: convex-functions
 displayName: Convex Functions
-description:
-  Writing queries, mutations, actions, and HTTP actions with proper argument validation, error
-  handling, internal functions, and runtime considerations
+description: Writing queries, mutations, actions, and HTTP actions with proper argument validation, error handling, internal functions, and runtime considerations
 version: 1.0.0
 author: Convex
 tags: [convex, functions, queries, mutations, actions, http]
@@ -11,8 +9,17 @@ tags: [convex, functions, queries, mutations, actions, http]
 
 # Convex Functions
 
-Master Convex functions including queries, mutations, actions, and HTTP endpoints with proper
-validation, error handling, and runtime considerations.
+Master Convex functions including queries, mutations, actions, and HTTP endpoints with proper validation, error handling, and runtime considerations.
+
+## Code Quality
+
+All examples in this skill comply with @convex-dev/eslint-plugin rules:
+
+- Object syntax with `handler` property
+- Argument validators on all functions
+- Explicit table names in database operations
+
+See the Code Quality section in [convex-best-practices](../convex-best-practices/SKILL.md) for linting setup.
 
 ## Documentation Sources
 
@@ -56,7 +63,7 @@ export const getUser = query({
     v.null(),
   ),
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.userId);
+    return await ctx.db.get("users", args.userId);
   },
 });
 
@@ -98,7 +105,7 @@ export const createTask = mutation({
   returns: v.id("tasks"),
   handler: async (ctx, args) => {
     // Validate user exists
-    const user = await ctx.db.get(args.userId);
+    const user = await ctx.db.get("users", args.userId);
     if (!user) {
       throw new ConvexError("User not found");
     }
@@ -116,7 +123,7 @@ export const deleteTask = mutation({
   args: { taskId: v.id("tasks") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    await ctx.db.delete(args.taskId);
+    await ctx.db.delete("tasks", args.taskId);
     return null;
   },
 });
@@ -243,7 +250,11 @@ export default http;
 Use internal functions for sensitive operations:
 
 ```typescript
-import { internalMutation, internalQuery, internalAction } from "./_generated/server";
+import {
+  internalMutation,
+  internalQuery,
+  internalAction,
+} from "./_generated/server";
 import { v } from "convex/values";
 
 // Only callable from other Convex functions
@@ -254,10 +265,10 @@ export const _updateUserCredits = internalMutation({
   },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const user = await ctx.db.get(args.userId);
+    const user = await ctx.db.get("users", args.userId);
     if (!user) return null;
 
-    await ctx.db.patch(args.userId, {
+    await ctx.db.patch("users", args.userId, {
       credits: (user.credits || 0) + args.amount,
     });
     return null;
@@ -300,10 +311,11 @@ export const scheduleReminder = mutation({
   },
   returns: v.id("_scheduled_functions"),
   handler: async (ctx, args) => {
-    return await ctx.scheduler.runAfter(args.delayMs, internal.notifications.sendReminder, {
-      userId: args.userId,
-      message: args.message,
-    });
+    return await ctx.scheduler.runAfter(
+      args.delayMs,
+      internal.notifications.sendReminder,
+      { userId: args.userId, message: args.message },
+    );
   },
 });
 
