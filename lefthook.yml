@@ -33,22 +33,38 @@ pre-push:
   commands:
     ci-parity:
       run: |
-        if ! command -v mise >/dev/null 2>&1; then
-          echo "ERROR: 'mise' is required to run the same toolchain as CI."
-          echo "Install mise and run: mise install"
-          exit 1
+        if command -v mise >/dev/null 2>&1; then
+          echo "Using CI toolchain from mise.toml"
+          mise exec -- node --version
+          mise exec -- pnpm --version
+
+          echo "Sync dependencies from lockfile"
+          mise exec -- pnpm install --frozen-lockfile
+
+          echo "Run CI parity checks"
+          mise exec -- pnpm check
+          mise exec -- pnpm build
+
+          echo "Run local unit tests"
+          mise exec -- pnpm test
+        else
+          echo "WARNING: 'mise' not found. Falling back to local Node/pnpm toolchain."
+
+          if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+            echo "ERROR: node and pnpm are required when mise is unavailable."
+            exit 1
+          fi
+
+          node --version
+          pnpm --version
+
+          echo "Sync dependencies from lockfile"
+          pnpm install --frozen-lockfile
+
+          echo "Run CI parity checks"
+          pnpm check
+          pnpm build
+
+          echo "Run local unit tests"
+          pnpm test
         fi
-
-        echo "Using CI toolchain from mise.toml"
-        mise exec -- node --version
-        mise exec -- pnpm --version
-
-        echo "Sync dependencies from lockfile"
-        mise exec -- pnpm install --frozen-lockfile
-
-        echo "Run CI parity checks"
-        mise exec -- pnpm check
-        mise exec -- pnpm build
-
-        echo "Run local unit tests"
-        mise exec -- pnpm test
