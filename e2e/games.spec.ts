@@ -96,24 +96,27 @@ test.describe('Game Tracker Navigation', () => {
 
     // Verify all four tabs are present in the navigation
     const nav = page.locator('nav')
+    await expect(nav.getByText('Home')).toBeVisible()
     await expect(nav.getByText('Spirits')).toBeVisible()
     await expect(nav.getByText('Games')).toBeVisible()
-    await expect(nav.getByText('Notes')).toBeVisible()
     await expect(nav.getByText('Settings')).toBeVisible()
+    await expect(nav.getByText('Notes')).toHaveCount(0)
   })
 
-  test('notes tab is disabled', async ({ page }) => {
+  test('home tab is first and navigates to home page', async ({ page }) => {
     await page.goto('/settings')
 
     // Wait for page to load
     await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible()
 
-    // Notes tab should be a div (disabled), not a link
-    const notesTab = page.locator('nav').getByText('Notes')
-    await expect(notesTab).toBeVisible()
+    const navLinks = page.locator('nav a')
+    await expect(navLinks.first()).toContainText('Home')
 
-    // It should have reduced opacity (disabled styling)
-    const parent = notesTab.locator('..')
-    await expect(parent).toHaveClass(/opacity-40/)
+    const homeLink = page.locator('nav a[href="/"]')
+    await expect(homeLink).toBeVisible()
+    await homeLink.click()
+
+    await expect(page).toHaveURL('/')
+    await expect(page.getByRole('link', { name: 'Explore Spirits' }).first()).toBeVisible()
   })
 })
