@@ -539,9 +539,5 @@ await page.pause();  // Pauses execution, opens inspector
 
 ## Resources
 
-- **references/playwright-best-practices.md**: Playwright-specific patterns
-- **references/cypress-best-practices.md**: Cypress-specific patterns
-- **references/flaky-test-debugging.md**: Debugging unreliable tests
 - **assets/e2e-testing-checklist.md**: What to test with E2E
 - **assets/selector-strategies.md**: Finding reliable selectors
-- **scripts/test-analyzer.ts**: Analyze test flakiness and duration

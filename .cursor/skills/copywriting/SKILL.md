@@ -118,9 +118,7 @@ Puns and wit make copy memorable—but only if it fits the brand and doesn't und
 - "Never {unpleasant event} again"
 - "{Question highlighting main pain point}"
 
-**For comprehensive headline formulas**: See [references/copy-frameworks.md](references/copy-frameworks.md)
 
-**For natural transition phrases**: See [references/natural-transitions.md](references/natural-transitions.md)
 
 **Subheadline**
 - Expands on headline
@@ -142,7 +140,6 @@ Puns and wit make copy memorable—but only if it fits the brand and doesn't und
 | Objection Handling | FAQ, comparisons, guarantees |
 | Final CTA | Recap value, repeat CTA, risk reversal |
 
-**For detailed section types and page templates**: See [references/copy-frameworks.md](references/copy-frameworks.md)
 
 ---
 
