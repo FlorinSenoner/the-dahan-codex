@@ -21,6 +21,7 @@ coverage/
 playwright-report/
 playwright-results/
 test-results/
+tmp_screenshots/
 
 # Generated
 convex/_generated/

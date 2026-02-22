@@ -1,10 +1,8 @@
-import type { Doc } from 'convex/_generated/dataModel'
+import type { SpiritListItem } from '@/types/convex'
 import { SpiritRow } from './spirit-row'
 
-type Spirit = Doc<'spirits'> & { isAspect: boolean }
-
 interface SpiritListProps {
-  spirits: Spirit[]
+  spirits: SpiritListItem[]
 }
 
 export function SpiritList({ spirits }: SpiritListProps) {
@@ -20,7 +18,7 @@ export function SpiritList({ spirits }: SpiritListProps) {
   return (
     <div className="divide-y divide-border">
       {spirits.map((spirit) => (
-        <SpiritRow isAspect={spirit.isAspect} key={spirit._id} spirit={spirit} />
+        <SpiritRow key={spirit._id} spirit={spirit} />
       ))}
     </div>
   )

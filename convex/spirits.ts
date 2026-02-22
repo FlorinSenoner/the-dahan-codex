@@ -1,6 +1,11 @@
 import { v } from 'convex/values'
+import { internal } from './_generated/api'
 import type { QueryCtx } from './_generated/server'
-import { query } from './_generated/server'
+import { mutation, query } from './_generated/server'
+import { requireAdmin } from './lib/auth'
+import { validateRequiredString } from './lib/validators'
+
+const MAX_SETUP_LENGTH = 4000
 
 // Helper: Get base spirit by slug (no aspect, no baseSpirit reference)
 async function getBaseSpiritBySlug(ctx: QueryCtx, slug: string) {
@@ -125,5 +130,36 @@ export const getSpiritBySlug = query({
     }
 
     return baseSpirit
+  },
+})
+
+// Update setup instructions for a spirit/aspect (admin only).
+export const updateSpiritSetup = mutation({
+  args: {
+    spiritId: v.id('spirits'),
+    setup: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await requireAdmin(ctx)
+    validateRequiredString(args.setup, 'setup', MAX_SETUP_LENGTH)
+
+    const spirit = await ctx.db.get(args.spiritId)
+    if (!spirit) {
+      throw new Error('Spirit not found')
+    }
+
+    const setup = args.setup.trim()
+    let updated = 0
+    if (spirit.setup !== setup) {
+      await ctx.db.patch(spirit._id, { setup })
+      updated++
+    }
+
+    await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+
+    return {
+      updated,
+      spiritId: spirit._id,
+    }
   },
 })
