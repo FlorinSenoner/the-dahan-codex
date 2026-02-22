@@ -1,3 +1,4 @@
+import { ConvexError } from 'convex/values'
 import type { MutationCtx, QueryCtx } from '../_generated/server'
 
 /**
@@ -14,7 +15,10 @@ export async function getIdentity(ctx: QueryCtx | MutationCtx) {
 export async function requireAuth(ctx: QueryCtx | MutationCtx) {
   const identity = await ctx.auth.getUserIdentity()
   if (!identity) {
-    throw new Error('Not authenticated')
+    throw new ConvexError({
+      code: 'NOT_AUTHENTICATED',
+      message: 'Not authenticated',
+    })
   }
   return identity
 }
@@ -39,9 +43,13 @@ export async function isAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
  */
 export async function requireAdmin(ctx: QueryCtx | MutationCtx) {
   const identity = await requireAuth(ctx)
-  const admin = await isAdmin(ctx)
-  if (!admin) {
-    throw new Error('Admin access required')
+  // biome-ignore lint/suspicious/noExplicitAny: Convex identity type doesn't include custom role claim
+  const role = (identity as any).role
+  if (role !== 'admin') {
+    throw new ConvexError({
+      code: 'ADMIN_REQUIRED',
+      message: 'Admin access required',
+    })
   }
   return identity
 }

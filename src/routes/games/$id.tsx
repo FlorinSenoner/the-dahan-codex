@@ -3,7 +3,6 @@ import { convexQuery, useConvexMutation } from '@convex-dev/react-query'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import type { Doc, Id } from 'convex/_generated/dataModel'
 import { format } from 'date-fns'
 import { Pencil, Trash2, WifiOff } from 'lucide-react'
 import * as React from 'react'
@@ -27,6 +26,7 @@ import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { useOfflineOps } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 import { saveOfflineOp } from '@/lib/offline-games'
+import { asGameId, type GameDoc } from '@/types/convex'
 
 export const Route = createFileRoute('/games/$id')({
   component: GameDetailPage,
@@ -48,7 +48,7 @@ function GameDetailPage() {
     data: game,
     isPending,
     isError,
-  } = useQuery(convexQuery(api.games.getGame, { id: id as Id<'games'> }))
+  } = useQuery(convexQuery(api.games.getGame, { id: asGameId(id) }))
 
   // Fallback: look up game from the cached listGames data
   const { data: gamesList } = useQuery(convexQuery(api.games.listGames, {}))
@@ -88,11 +88,11 @@ function GameDetailPage() {
     }
   }, [hasPendingDelete, navigate])
 
-  // Merge outbox update data over server data (cast since shapes match)
-  const resolvedGame: Doc<'games'> | null = React.useMemo(() => {
+  // Merge outbox update data over server data.
+  const resolvedGame: GameDoc | null = React.useMemo(() => {
     if (!baseGame) return null
     if (pendingUpdate?.type === 'update') {
-      return { ...baseGame, ...pendingUpdate.data } as Doc<'games'>
+      return { ...baseGame, ...pendingUpdate.data }
     }
     return baseGame
   }, [baseGame, pendingUpdate])
@@ -143,7 +143,7 @@ function GameDetailPage() {
         toast.error('You must be signed in to save offline changes')
         return
       }
-      await saveOfflineOp(user.id, { type: 'delete', gameId: id })
+      await saveOfflineOp(user.id, { type: 'delete', gameId: asGameId(id) })
       await refreshOps()
       toast.success('Game deleted.')
       navigate({ to: '/games' })
@@ -160,9 +160,9 @@ function GameDetailPage() {
         toast.error('You must be signed in to save offline changes')
         return
       }
-      await saveOfflineOp(user.id, { type: 'update', gameId: id, data: payload })
+      await saveOfflineOp(user.id, { type: 'update', gameId: asGameId(id), data: payload })
       await refreshOps()
-      queryClient.setQueryData(convexQuery(api.games.getGame, { id: id as Id<'games'> }).queryKey, {
+      queryClient.setQueryData(convexQuery(api.games.getGame, { id: asGameId(id) }).queryKey, {
         ...resolvedGame,
         ...payload,
       })

@@ -66,6 +66,7 @@ export default defineSchema({
     ),
   })
     .index('by_slug', ['slug'])
+    .index('by_slug_and_base_spirit', ['slug', 'baseSpirit'])
     .index('by_expansion', ['expansionId'])
     .index('by_base_spirit', ['baseSpirit'])
     .index('by_complexity', ['complexity']),
@@ -98,7 +99,7 @@ export default defineSchema({
     ),
   })
     .index('by_spirit', ['spiritId'])
-    .index('by_slug', ['slug']),
+    .index('by_spirit_and_slug', ['spiritId', 'slug']),
 
   // Single-row state for debounced auto-publish dispatches.
   sitePublishStates: defineTable({

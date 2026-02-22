@@ -63,7 +63,10 @@ or have significant implications. For detailed per-phase decisions, see phase SU
 - 31 aspects seeded from wiki scrape
 - 68 spirit images downloaded
 - 85 opening guides from 7+ community sources
+- Raw opening source datasets preserved under `scripts/data/*openings*.json`
+- Consolidated raw opening lookup archive at `scripts/data/openings-raw-by-source.json`
 - 7 expansions (Base Game through Nature Incarnate)
+
 
 ## Pending Todos
 
@@ -113,4 +116,4 @@ Resume file: None
 
 ---
 
-_Updated: 2026-02-13_
+_Updated: 2026-02-22_

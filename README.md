@@ -90,10 +90,11 @@ the-dahan-codex/
 │   ├── spirits.ts        # Spirit queries
 │   ├── games.ts          # Game tracker CRUD
 │   ├── openings.ts       # Opening guides queries/mutations
-│   └── seedData/         # Seed data for spirits, aspects, openings
+│   └── seed.ts           # Seed and backfill mutations (from scripts/data JSON)
 ├── e2e/                  # Playwright E2E tests
 ├── public/               # Static assets (spirit images, card images)
-├── scripts/              # Data scraping scripts
+├── scripts/              # Data scraping scripts and canonical seed JSON
+│   └── data/             # canonical seed JSON + raw source opening archives and lookup index
 └── .planning/            # Project planning docs
 ```
 
