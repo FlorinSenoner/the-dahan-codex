@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -45,6 +45,17 @@
     "rules": {
       "recommended": true,
       "correctness": {
+        "noUnknownPseudoElement": {
+          "level": "error",
+          "options": {
+            "ignore": [
+              "view-transition-group",
+              "view-transition-old",
+              "view-transition-new",
+              "view-transition-image-pair"
+            ]
+          }
+        },
         "noUnusedVariables": "warn",
         "noUnusedImports": "warn",
         "useExhaustiveDependencies": "warn"

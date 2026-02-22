@@ -133,8 +133,6 @@ Prefer the wrapper unless the repository already standardizes on a global instal
 
 Open only what you need:
 
-- CLI command reference: `references/cli.md`
-- Practical workflows and troubleshooting: `references/workflows.md`
 
 ## Guardrails
 
