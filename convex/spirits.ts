@@ -1,4 +1,4 @@
-import { v } from 'convex/values'
+import { ConvexError, v } from 'convex/values'
 import { internal } from './_generated/api'
 import type { QueryCtx } from './_generated/server'
 import { mutation, query } from './_generated/server'
@@ -7,63 +7,121 @@ import { validateRequiredString } from './lib/validators'
 
 const MAX_SETUP_LENGTH = 4000
 
-// Helper: Get base spirit by slug (no aspect, no baseSpirit reference)
+const complexityValidator = v.union(
+  v.literal('Low'),
+  v.literal('Moderate'),
+  v.literal('High'),
+  v.literal('Very High'),
+)
+
+const complexityModifierValidator = v.union(
+  v.literal('easier'),
+  v.literal('same'),
+  v.literal('harder'),
+)
+
+const powerRatingsValidator = v.object({
+  offense: v.number(),
+  defense: v.number(),
+  control: v.number(),
+  fear: v.number(),
+  utility: v.number(),
+})
+
+const spiritFields = {
+  name: v.string(),
+  slug: v.string(),
+  complexity: complexityValidator,
+  summary: v.string(),
+  imageUrl: v.optional(v.string()),
+  expansionId: v.id('expansions'),
+  elements: v.array(v.string()),
+  baseSpirit: v.optional(v.id('spirits')),
+  aspectName: v.optional(v.string()),
+  complexityModifier: v.optional(complexityModifierValidator),
+  description: v.optional(v.string()),
+  setup: v.optional(v.string()),
+  strengths: v.optional(v.array(v.string())),
+  weaknesses: v.optional(v.array(v.string())),
+  powerRatings: v.optional(powerRatingsValidator),
+  wikiUrl: v.optional(v.string()),
+  specialRules: v.optional(
+    v.array(
+      v.object({
+        name: v.string(),
+        description: v.string(),
+      }),
+    ),
+  ),
+}
+
+const spiritValidator = v.object({
+  _id: v.id('spirits'),
+  _creationTime: v.number(),
+  ...spiritFields,
+})
+
+const spiritListItemValidator = v.object({
+  _id: v.id('spirits'),
+  _creationTime: v.number(),
+  ...spiritFields,
+  isAspect: v.boolean(),
+})
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+// Helper: get base spirit by slug (no baseSpirit reference)
 async function getBaseSpiritBySlug(ctx: QueryCtx, slug: string) {
   return ctx.db
     .query('spirits')
-    .withIndex('by_slug', (q) => q.eq('slug', slug))
-    .filter((q) => q.eq(q.field('baseSpirit'), undefined))
+    .withIndex('by_slug_and_base_spirit', (q) => q.eq('slug', slug).eq('baseSpirit', undefined))
     .first()
 }
 
-// List all spirits with optional filtering
 export const listSpirits = query({
   args: {
     complexity: v.optional(v.array(v.string())),
-    expansionSlug: v.optional(v.array(v.string())),
     elements: v.optional(v.array(v.string())),
   },
+  returns: v.array(spiritListItemValidator),
   handler: async (ctx, args) => {
     let spirits = await ctx.db.query('spirits').collect()
 
-    // Filter by complexity if specified
-    const complexityFilter = args.complexity
-    if (complexityFilter && complexityFilter.length > 0) {
-      spirits = spirits.filter((s) => complexityFilter.includes(s.complexity))
+    if (args.complexity && args.complexity.length > 0) {
+      spirits = spirits.filter((spirit) => args.complexity?.includes(spirit.complexity))
     }
 
-    // Filter by elements (AND logic - spirit must have ALL specified elements)
-    const elementsFilter = args.elements
-    if (elementsFilter && elementsFilter.length > 0) {
-      spirits = spirits.filter((s) => elementsFilter.every((el) => s.elements.includes(el)))
+    if (args.elements && args.elements.length > 0) {
+      spirits = spirits.filter((spirit) =>
+        args.elements?.every((el) => spirit.elements.includes(el)),
+      )
     }
 
-    // Sort alphabetically
     spirits.sort((a, b) => a.name.localeCompare(b.name))
 
-    // Group: base spirits first, then aspects indented under them
-    const baseSpirits = spirits.filter((s) => !s.baseSpirit)
+    const baseSpirits = spirits.filter((spirit) => !spirit.baseSpirit)
     const aspectMap = new Map<string, typeof spirits>()
-
-    for (const spirit of spirits.filter((s) => s.baseSpirit)) {
-      const baseId = spirit.baseSpirit
-      if (baseId) {
-        const existing = aspectMap.get(baseId.toString())
-        if (existing) {
-          existing.push(spirit)
-        } else {
-          aspectMap.set(baseId.toString(), [spirit])
-        }
+    for (const spirit of spirits.filter((entry) => entry.baseSpirit)) {
+      if (!spirit.baseSpirit) continue
+      const key = spirit.baseSpirit.toString()
+      const existing = aspectMap.get(key)
+      if (existing) {
+        existing.push(spirit)
+      } else {
+        aspectMap.set(key, [spirit])
       }
     }
 
-    // Build result with aspects after their base
     const result: Array<(typeof spirits)[0] & { isAspect: boolean }> = []
-    for (const base of baseSpirits) {
-      result.push({ ...base, isAspect: false })
-      const aspects = aspectMap.get(base._id.toString()) || []
-      // Sort aspects alphabetically within base
-      aspects.sort((a, b) => (a.aspectName || '').localeCompare(b.aspectName || ''))
+    for (const baseSpirit of baseSpirits) {
+      result.push({ ...baseSpirit, isAspect: false })
+      const aspects = aspectMap.get(baseSpirit._id.toString()) ?? []
+      aspects.sort((a, b) => (a.aspectName ?? '').localeCompare(b.aspectName ?? ''))
       for (const aspect of aspects) {
         result.push({ ...aspect, isAspect: true })
       }
@@ -73,24 +131,27 @@ export const listSpirits = query({
   },
 })
 
-// Get base spirit with all aspects for variant selector
 export const getSpiritWithAspects = query({
   args: {
     slug: v.string(),
   },
+  returns: v.union(
+    v.object({
+      base: spiritValidator,
+      aspects: v.array(spiritValidator),
+    }),
+    v.null(),
+  ),
   handler: async (ctx, args) => {
     const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug)
     if (!baseSpirit) return null
 
-    // Get all aspects
     const aspects = await ctx.db
       .query('spirits')
       .withIndex('by_base_spirit', (q) => q.eq('baseSpirit', baseSpirit._id))
       .collect()
 
-    // Sort aspects alphabetically by aspectName
-    aspects.sort((a, b) => (a.aspectName || '').localeCompare(b.aspectName || ''))
-
+    aspects.sort((a, b) => (a.aspectName ?? '').localeCompare(b.aspectName ?? ''))
     return {
       base: baseSpirit,
       aspects,
@@ -98,68 +159,86 @@ export const getSpiritWithAspects = query({
   },
 })
 
-// Get a single spirit by slug
 export const getSpiritBySlug = query({
   args: {
     slug: v.string(),
     aspect: v.optional(v.string()),
   },
+  returns: v.union(spiritValidator, v.null()),
   handler: async (ctx, args) => {
     const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug)
     if (!baseSpirit) return null
 
-    // If aspect requested, find it
-    const aspectArg = args.aspect
-    if (aspectArg) {
-      const aspects = await ctx.db
-        .query('spirits')
-        .withIndex('by_base_spirit', (q) => q.eq('baseSpirit', baseSpirit._id))
-        .collect()
-
-      // Slugify both sides for comparison (handles "spreading-hostility" matching "Spreading Hostility")
-      const slugify = (text: string) =>
-        text
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '')
-
-      const aspect = aspects.find(
-        (a) => a.aspectName && slugify(a.aspectName) === slugify(aspectArg),
-      )
-      return aspect || baseSpirit
+    if (!args.aspect) {
+      return baseSpirit
     }
 
-    return baseSpirit
+    const aspects = await ctx.db
+      .query('spirits')
+      .withIndex('by_base_spirit', (q) => q.eq('baseSpirit', baseSpirit._id))
+      .collect()
+
+    const requestedAspect = slugify(args.aspect)
+    const matchingAspect = aspects.find(
+      (aspect) => aspect.aspectName && slugify(aspect.aspectName) === requestedAspect,
+    )
+
+    return matchingAspect ?? baseSpirit
   },
 })
 
-// Update setup instructions for a spirit/aspect (admin only).
 export const updateSpiritSetup = mutation({
   args: {
     spiritId: v.id('spirits'),
     setup: v.string(),
   },
+  returns: v.object({
+    updated: v.number(),
+    spiritId: v.id('spirits'),
+  }),
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
     validateRequiredString(args.setup, 'setup', MAX_SETUP_LENGTH)
 
-    const spirit = await ctx.db.get(args.spiritId)
-    if (!spirit) {
-      throw new Error('Spirit not found')
+    const requestedSpirit = await ctx.db.get(args.spiritId)
+    if (!requestedSpirit) {
+      throw new ConvexError({
+        code: 'SPIRIT_NOT_FOUND',
+        message: 'Spirit not found',
+      })
+    }
+
+    const baseSpirit = requestedSpirit.baseSpirit
+      ? await ctx.db.get(requestedSpirit.baseSpirit)
+      : requestedSpirit
+    if (!baseSpirit) {
+      throw new ConvexError({
+        code: 'BASE_SPIRIT_NOT_FOUND',
+        message: 'Base spirit not found',
+      })
     }
 
     const setup = args.setup.trim()
+    const aspects = await ctx.db
+      .query('spirits')
+      .withIndex('by_base_spirit', (q) => q.eq('baseSpirit', baseSpirit._id))
+      .collect()
+
     let updated = 0
-    if (spirit.setup !== setup) {
+    const spiritsToPatch = [baseSpirit, ...aspects]
+    for (const spirit of spiritsToPatch) {
+      if (spirit.setup === setup) continue
       await ctx.db.patch(spirit._id, { setup })
       updated++
     }
 
-    await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+    if (updated > 0) {
+      await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+    }
 
     return {
       updated,
-      spiritId: spirit._id,
+      spiritId: baseSpirit._id,
     }
   },
 })

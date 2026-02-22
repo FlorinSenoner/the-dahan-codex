@@ -1,7 +1,7 @@
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
-import { Wrench } from 'lucide-react'
+import { ClipboardList } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '@/components/admin/editable-text'
 import { Heading, Text } from '@/components/ui/typography'
@@ -80,7 +80,7 @@ export function SetupSection({
   return (
     <section className="space-y-4">
       <Heading as="h2" className="flex items-center gap-2" variant="h2">
-        <Wrench className="h-5 w-5" />
+        <ClipboardList className="h-5 w-5" />
         Setup
       </Heading>
 

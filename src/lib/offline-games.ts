@@ -1,5 +1,6 @@
 import { clear, createStore, del, entries, get, set } from 'idb-keyval'
 import type { GameFormData } from '@/components/games/game-form'
+import type { GameId, GameUpdatePatch } from '@/types/convex'
 
 export type SyncStatus = 'pending' | 'syncing' | 'failed'
 
@@ -73,8 +74,8 @@ export type OfflineOperation =
       id: string
       ownerId: string
       type: 'update'
-      gameId: string
-      data: Record<string, unknown>
+      gameId: GameId
+      data: GameUpdatePatch
       createdAt: number
       syncStatus: SyncStatus
     }
@@ -82,14 +83,14 @@ export type OfflineOperation =
       id: string
       ownerId: string
       type: 'delete'
-      gameId: string
+      gameId: GameId
       createdAt: number
       syncStatus: SyncStatus
     }
 
 type NewOfflineOp =
-  | { type: 'update'; gameId: string; data: Record<string, unknown> }
-  | { type: 'delete'; gameId: string }
+  | { type: 'update'; gameId: GameId; data: GameUpdatePatch }
+  | { type: 'delete'; gameId: GameId }
 
 const offlineOpsStore = createStore('dahan-codex-offline-ops', 'operations')
 

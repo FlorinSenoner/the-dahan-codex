@@ -163,8 +163,10 @@ major spirits from community sources.
 - **Convex generates types** used by app
 - **Convex functions organized by domain**: spirits.ts, games.ts, openings.ts
 - **Offline**: TanStack Query cache persisted to IndexedDB via idb-keyval
-- **Seeding**: TS files seed Convex on deploy (no runtime scraping)
-- **Scraping**: One-time scripts scrape wiki for spirit/aspect data
+- **Seeding**: canonical JSON in `scripts/data` is consumed by `convex/seed.ts`
+- **Scraping**: one-time scripts scrape and normalize spirit/aspect/opening data
+- **Raw opening archive**: all scraped source variants are preserved and consolidated in
+  `scripts/data/openings-raw-by-source.json`
 
 ## Constraints
 
@@ -199,4 +201,4 @@ major spirits from community sources.
 
 ---
 
-_Last updated: 2026-02-13_
+_Last updated: 2026-02-22_

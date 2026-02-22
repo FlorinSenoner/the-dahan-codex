@@ -2,28 +2,28 @@
   {
     "spiritSlug": "river-surges-in-sunlight",
     "slug": "river-surges-in-sunlight-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "It exploits River’s strong, perfect-element Uniques to reliably unlock level 3 Massive flooding from the 4th turn on.",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Exploits River's strong, perfect-element Uniques to reliably unlock level 3 Massive Flooding from turn 4 onwards.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 bottom. Play River’s bounty and another card. 12 elements (you could have 2, but it doesn’t matter as you can’t unlock level 2 of your Innate anyway)."
+        "instructions": "G2 bottom. Play River's Bounty and another card. 1 Sun, 2 Water elements."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom. Reclaim River’s bounty. Play 3. 23 elements."
+        "instructions": "G2 bottom. Reclaim River's Bounty. Play 3 cards. 2 Sun, 3 Water elements."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor. Play River’s bounty and the Minor. The Minor can be swapped as long as you keep 231 in hand."
+        "instructions": "Reclaim, gain Minor. Play River's Bounty and the Minor. Keep 2 Sun, 3 Water, 1 Earth in hand."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom. Reclaim River’s bounty. Play River’s bounty and 3 more to have 341 and unlock a max-level Massive flooding."
+        "instructions": "G2 bottom. Reclaim River's Bounty. Play River's Bounty and 3 more cards to unlock max-level Massive Flooding (3 Sun, 4 Water, 1 Earth)."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -32,38 +32,33 @@
   {
     "spiritSlug": "sharp-fangs-behind-the-leaves",
     "slug": "sharp-fangs-behind-the-leaves-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "From turn 2 onwards, you only need to play 1 and 2 , therefore your starting hand alone is enough to activate the Innate for 2 turns without any reclaim.",
+    "name": "Top Track Hybrid (Minor Powers)",
+    "description": "Focuses on consistent Ranging Hunt use with minimal reclaiming. Starting hand provides 2 turns of innate activation without reclaim.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top; G3 Minor. Play 2. You can play 2 to unlock the damage part of Ranging hunt, but if you do you won’t be able to do it in the next turn unless you have found or will find a Minor."
+        "instructions": "G2 top; G3 Minor. Play 2 cards. Optional: play Plant+Animal to unlock Ranging Hunt damage."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top; G3 Minor. Play 2."
+        "instructions": "G2 top; G3 Minor. Play 2 cards."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor; G2 bottom. Play 1 and 1 . Ranging hunt damage."
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play Plant and Animal. Ranging Hunt with damage."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom to 3 CP; G4. Play 1 and 1 . Ranging hunt damage."
+        "instructions": "G2 bottom to 3 CP; G4. Play Plant and Animal. Ranging Hunt with damage."
       },
       {
         "turn": 5,
-        "title": "Turn 5",
-        "instructions": "at the earliest. Can be tight in Energy in the first 3 turns. Variant: Early-reclaim top track (Minor Powers) Growth G2 top; G3, gain Minor. Play Teeth gleam (or the minor if it has ) and Too near the jungle to deal damage with Ranging hunt. Reclaim, gain Minor; G2 top. Play 1 and 1 . G2 bottom; G4. Play 1 and 1 . Reclaim, gain Minor; G2 bottom to 3 CP. Play 1 and 1 . G2 bottom; G4. Play 3. From"
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "on, select growth according to needs. Keep playing 1 and 1 every turn to activate Ranging hunt."
+        "title": "Turn 5+",
+        "instructions": "G2 bottom; G4 or G3 Minor. Play 3 cards. Continue Plant+Animal for Ranging Hunt."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -72,43 +67,33 @@
   {
     "spiritSlug": "sharp-fangs-behind-the-leaves",
     "slug": "sharp-fangs-behind-the-leaves-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "[Sharp Fangs Behind the Leaves] Opening: Full bottom track (Minor Powers) Apr 4, 2024 Use this opening if: Consistently using the damage threshold of Ranging hunt is not a priority.",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Use when consistently activating Ranging Hunt damage threshold isn't a priority. Provides high card plays and early presence spread.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 bottom; G3 Minor. Play 2."
+        "instructions": "G2 bottom; G3 Minor. Play 2 cards."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom; G4. Play 3."
+        "instructions": "G2 bottom; G4. Play 3 cards."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor; G2 top. Play 3."
+        "instructions": "Reclaim, gain Minor; G2 top. Play 3 cards."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G3 Minor. Reclaim Too near the jungle or another 0-cost. Play 3."
+        "instructions": "G2 bottom; G3 Minor. Reclaim Too Near the Jungle or another 0-cost. Play 3 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "G2 bottom; G4. Play 3."
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "Reclaim, gain Minor; G2 bottom. Play 5."
-      },
-      {
-        "turn": 7,
-        "title": "Turn 7",
-        "instructions": "on, growth is G4 + any other, according to needs (G2 should only be selected if placing presence is necessary, and not for growth)."
+        "instructions": "G2 bottom; G4. Play 4 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -117,38 +102,33 @@
   {
     "spiritSlug": "sharp-fangs-behind-the-leaves",
     "slug": "sharp-fangs-behind-the-leaves-opening-3",
-    "name": "Opening 3: Unique Powers reminder",
-    "description": "[Sharp Fangs Behind the Leaves] Opening: Top track hybrid (Mixed Powers) Oct 20, 2023 Use this opening if: Ranging hunt is not going to be as effective, either because of Health increase or too much Blight on the island (for Base Fangs, at least).",
+    "name": "Top Track Hybrid (Mixed Powers)",
+    "description": "Maintains Ranging Hunt activation while incorporating a Major Power. Gets Major on turn 3 while keeping element requirements met.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top; G3 Minor. Play 2."
+        "instructions": "G2 top; G3 Minor. Play 2 cards."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top; G3 Minor. Play 1 and 1 . Ranging hunt damage."
+        "instructions": "G2 top; G3 Minor. Play Plant/Animal combo + Animal card to activate Ranging Hunt."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Major (cost 2-5); G2 top. Play 1 and 1 . Ranging hunt damage."
+        "instructions": "Reclaim, gain Major (cost 2-5); G2 top. Play Plant and Animal for Ranging Hunt."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G4. Play the Major and another card."
+        "instructions": "G2 bottom; G4. Play the Major + 1 additional card."
       },
       {
         "turn": 5,
-        "title": "Turn 5",
-        "instructions": "to replace it (it could be replaced with G3, but this would leave no options on what to play on"
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "on, select growth according to needs. Keep playing 1 and 1 every turn to activate Ranging hunt, except Major turns if the Major is off-element."
+        "title": "Turn 5+",
+        "instructions": "G2 bottom to 3 CP; G3 Minor. Play 3 cards. Continue activating Ranging Hunt each turn."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -157,43 +137,38 @@
   {
     "spiritSlug": "sharp-fangs-behind-the-leaves",
     "slug": "sharp-fangs-behind-the-leaves-opening-4",
-    "name": "Opening 4: Unique Powers reminder",
-    "description": "[Sharp Fangs Behind the Leaves] Opening: Reclaim-heavy bottom track (Minor Powers) Oct 20, 2023 Use this opening if: You want to use Ranging hunt every turn.",
+    "name": "Reclaim-Heavy Bottom Track (Minor Powers)",
+    "description": "Reclaims Uniques early to play both signature powers consistently. Enables Ranging Hunt each turn while accumulating Beasts for scaling.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top; G4. Play Too near the jungle and Teeth gleam."
+        "instructions": "G2 top; G4. Play Too Near the Jungle and Teeth Gleam from Darkness."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "Reclaim, gain Minor, prioritise ; G2 bottom. Play Too near the jungle and either Teeth gleam or the Minor if it has ."
+        "instructions": "Reclaim, gain Minor (prioritize Plant); G2 bottom. Play Too Near the Jungle and Teeth Gleam (or Minor with Plant+Animal)."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor, prioritise if not found; G2 bottom. Play 3."
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 3 cards."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "in case of exceptionally bad luck, i.e. no found in 2 draws), as well as placing lots of Beasts early on to scale better. Growth"
+        "instructions": "G2 bottom; G4. Play 3 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Minor; G2 bottom. Play 4."
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 4 cards."
       },
       {
         "turn": 6,
-        "title": "Turn 6",
-        "instructions": "G2 bottom to 5 CP; G4. Play 5."
-      },
-      {
-        "turn": 7,
-        "title": "Turn 7",
-        "instructions": "on, growth is G4 + any other, according to needs (G2 should only be selected if placing presence is necessary)."
+        "title": "Turn 6+",
+        "instructions": "G2 bottom to 5 CP; G4. Play 5 cards. Adjust G4 usage as needed."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -202,33 +177,33 @@
   {
     "spiritSlug": "thunderspeaker",
     "slug": "thunderspeaker-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Thunderspeaker",
+    "name": "Hybrid (Minor Powers)",
+    "description": "Balanced opening with strong turn 1 defense. Builds toward consistent Dahan-based damage and control.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3 bottom. Play 2. Sudden ambush and Manifestation is often good against BP as you’ll still have a target for next turn’s Words of warning. Manifestation and Voice of thunder is another option if Sudden ambush doesn’t solve a land, and will unlock level 2 of Lead the furious assault."
+        "instructions": "G3 bottom. Play 2 cards. Sudden Ambush + Manifestation works well. Voice of Thunder + Manifestation unlocks level 2 innate."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top. Play Words of Warning and the remaining card."
+        "instructions": "G2 top. Play Words of Warning and one remaining card."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain 2 Minors. Play 2."
+        "instructions": "Reclaim, gain 2 Minors. Play 2 cards."
       },
       {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "Reclaim, gain 2 Minors. Play 3."
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G3 bottom. Play 2 cards."
       },
       {
-        "turn": 7,
-        "title": "Turn 7",
-        "instructions": "G2 top. Play 3. Remarks 3 CP could be unlocked on"
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 bottom. Play 3 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -237,28 +212,28 @@
   {
     "spiritSlug": "thunderspeaker",
     "slug": "thunderspeaker-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "Opening strategy for Thunderspeaker",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Maximizes Dahan mobility and presence spread. Good for multiplayer where you can support allies.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3 bottom. Play 2 (see above)."
+        "instructions": "G3 bottom. Play 2 cards. Focus on positioning Dahan near invaders."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G3 bottom. Play Words of Warning and the remaining card."
+        "instructions": "G3 bottom; G4. Play 2 cards."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain 2 Minors. Play 2."
+        "instructions": "Reclaim, gain Minor; G2 bottom. Play 2-3 cards with Dahan movement."
       },
       {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "Reclaim, gain 2 Minors. Play 3."
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Continue presence spread and Minor acquisition. Maintain Dahan army of 3-4."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -267,13 +242,13 @@
   {
     "spiritSlug": "thunderspeaker",
     "slug": "thunderspeaker-opening-3",
-    "name": "Opening 3: Unique Powers reminder",
-    "description": "[Thunderspeaker] Opening: Top track (Minor or Mixed Powers) Oct 15, 2023 This opening trade early game power for better scaling.",
+    "name": "Top Track (Minor or Mixed Powers)",
+    "description": "Trades early power for better late-game scaling. Particularly effective against slower adversaries like England. Can optionally gain Major on reclaim turns.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top. Play Sudden ambush or Voice of thunder."
+        "instructions": "G2 top. Play Sudden Ambush or Voice of Thunder."
       },
       {
         "turn": 2,
@@ -283,27 +258,17 @@
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G3 bottom. Play Voice of thunder/Sudden ambush and Manifestation."
+        "instructions": "G3 bottom. Play Voice of Thunder/Sudden Ambush and Manifestation of Power and Glory."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "Reclaim, gain 2 Minors. Play 2."
+        "instructions": "Reclaim, gain 2 Minors. Play 2 cards."
       },
       {
         "turn": 5,
-        "title": "Turn 5",
-        "instructions": "(which is average), but no option to unlock before that. Variant: Early 3CP (Minors/Mixed) This variant trades getting to 3 CP earlier for fewer unlocks of Lead the furious assault (skipping in on"
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "Reclaim, gain 2 Minors. Play 3."
-      },
-      {
-        "turn": 8,
-        "title": "Turn 8",
-        "instructions": "G2 bottom. Play 4. Remarks On either or both Reclaim turns ("
+        "title": "Turn 5+",
+        "instructions": "G2 bottom. Play 3 cards. Continue cycle with reclaims to build to 4 card plays. Can gain Major instead of Minors on reclaim turns."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -312,38 +277,38 @@
   {
     "spiritSlug": "grinning-trickster-stirs-up-trouble",
     "slug": "grinning-trickster-stirs-up-trouble-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "name": "Hybrid (Minor Powers)",
+    "description": "Comfortable energy management with mid/late-game Major acquisition option. Unlocks 3 CP turn 4, 4 CP turn 6.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3; G2 top. Priorities for the Minor are , preferably 0-cost (possible Minors) anything else Depending on what you have found, play: The following to unlock Let’s see what happens level 2, otherwise any 2: a. (if the Minor costs 0) the Minor and Overenthusiastic arson b."
+        "instructions": "G3; G2 top. Gain Minor (prioritize Moon/Air, 0-cost). Play to unlock Let's See What Happens level 1-2."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top; G3 Minor. Play 112 (plus the on your top track) to unlock Let’s see what happens level 2."
+        "instructions": "G2 top; G3 Minor. Play 1 Moon, 1 Fire, 2 Air for Let's See What Happens level 2."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim; G2 bottom. Play to unlock Let’s see what happens level 2, e.g. Impersonate authority and Incite the mob."
+        "instructions": "Reclaim; G2 bottom. Play Impersonate Authority and Incite the Mob for level 2 innate."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G4. Play 3."
+        "instructions": "G2 bottom; G4. Play 3 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim; G2 bottom. Play 3."
+        "instructions": "Reclaim; G2 bottom. Play 3 cards."
       },
       {
         "turn": 6,
-        "title": "Turn 6",
-        "instructions": "G2 bottom; G3 Minor. Play 4. Remarks A Major can be gained on turn 6, as placing presence has less of a priority and thus G1+G4 can be used on turn 7. Stats The following assumes that the card for Let’s see what happens is forgotten from hand. Higher cards in hand can be achieved by forgetting from play or discard."
+        "title": "Turn 6+",
+        "instructions": "G2 bottom; G3 Minor. Play 4 cards. Can acquire Major here due to lower placement priority."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -352,33 +317,38 @@
   {
     "spiritSlug": "grinning-trickster-stirs-up-trouble",
     "slug": "grinning-trickster-stirs-up-trouble-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "name": "Bottom Track (Minor Powers)",
+    "description": "Prioritizes card plays over energy. Gets Let's See What Happens level 1 on turn 1 with the right Minor draw.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3; G2 bottom. Priorities for the Minor are: , preferably 0-cost (possible Minors) anything else Depending on what you have found, play: Either: a. (if the Minor costs 0) the Minor and Overenthusiastic arson b. Impersonate authority and Incite the mob Overenthusiastic arson and the Minor if it costs 0, else Impersonate authority Unexpected tigers and Overenthusiastic arson."
+        "instructions": "G3; G2 bottom. Gain Minor (Moon/Air, 0-cost preferred). Play 0-cost Minor + Arson, or Authority + Mob."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom; G3. Play 3 with 212 to unlock Let’s see what happens level 2. Forget, preferably from the discard, to gain the new Power."
+        "instructions": "G2 bottom; G3. Play 3 cards with 2 Moon, 1 Fire, 2 Air for level 2 innate. Forget a card for new power."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim; G2 bottom. Play 3. Make sure you have 212 to unlock Let’s see what happens level 2."
+        "instructions": "Reclaim; G2 bottom. Play 3 cards maintaining 2 Moon, 1 Fire, 2 Air."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 top; G3 Minor. Play 3, unlocking Let’s see what happens level 2."
+        "instructions": "G2 top; G3 Minor. Play 3 cards for level 2 innate."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, G2 bottom. Play 4."
+        "instructions": "Reclaim; G2 bottom. Play 4 cards."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6+",
+        "instructions": "Enter reclaim loop with G1 each turn plus G4 or G2 as needed."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -387,33 +357,33 @@
   {
     "spiritSlug": "grinning-trickster-stirs-up-trouble",
     "slug": "grinning-trickster-stirs-up-trouble-opening-3",
-    "name": "Opening 3: Unique Powers reminder",
-    "description": "Opening strategy for Grinning Trickster Stirs Up Trouble",
+    "name": "Top Track Hybrid (Major Powers)",
+    "description": "Acquires Major on turn 4 while maintaining innate activation. Starts top track then switches to bottom.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3; G2 top. Play: If drawn another : Impersonate authority and Overenthusiastic arson to unlock Let’s see what happens level 1. Otherwise: substitute either with Unexpected tigers."
+        "instructions": "G3; G2 top. Play Impersonate Authority + Overenthusiastic Arson (or Unexpected Tigers if no Air) for level 1 innate."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom; G3. Play Incite the mob and another to unlock Let’s see what happens level 2."
+        "instructions": "G2 bottom; G3. Play Incite the Mob + Air card for level 2 innate."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim; G2 bottom. Play 2. Make sure you have 212 to unlock Let’s see what happens level 2."
+        "instructions": "Reclaim; G2 bottom. Play 2 cards with 2 Moon, 1 Fire, 2 Air for level 2 innate."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G3 Major, forget from discard if possible to have 5 cards in hand. Play 3, preferably unlocking Let’s see what happens level 2."
+        "instructions": "G2 bottom; G3 Major (forget from discard if needed). Play 3 cards for level 2 innate."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "G2 top; G3 Minor. Play 3. Remarks On"
+        "instructions": "G2 top; G3 Minor. Play 3 cards. Alternative: G2+G4 if energy needed (limits plays to 2)."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -422,28 +392,28 @@
   {
     "spiritSlug": "heart-of-the-wildfire",
     "slug": "heart-of-the-wildfire-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "[Heart of the Wildfire] Opening: Full bottom track (Minor or Mixed Powers) Oct 15, 2023 I recommend reading Wildfire’s general concepts before continuing here.",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Maximizes presence damage and fire element generation. Accepts blight for aggressive early game.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3 bottom. Play Asphyxiating smoke."
+        "instructions": "G3 bottom. Play Asphyxiating Smoke. Use presence placement damage."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top, gain Minor. Play Threatening flames."
+        "instructions": "G2 top; gain Minor. Play Threatening Flames."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G3 bottom. Play Flame’s fury and Flash-fires/Minor."
+        "instructions": "G3 bottom. Play Flame's Fury and Flash-fires or Minor. Build fire elements."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "Reclaim, gain Minor, or Major forgetting Flash-fires. Play 2."
+        "instructions": "Reclaim, gain Minor or Major (forget Flash-fires). Play 2 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -452,33 +422,33 @@
   {
     "spiritSlug": "heart-of-the-wildfire",
     "slug": "heart-of-the-wildfire-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "[Heart of the Wildfire] Opening: Early Major Oct 15, 2023 The idea of this opening is to replace the over-costed Flash-fires as soon as possible with a Major, and relying on the energy from G3 to be able to play it.",
+    "name": "Early Major",
+    "description": "Replaces the over-costed Flash-fires with a Major as soon as possible. Risky gamble particularly useful against damage-resistant adversaries like England.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 bottom, gain Major, forget Flash-fires. Play Threatening flames."
+        "instructions": "G2 bottom. Gain Major, forget Flash-fires. Play Threatening Flames."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G3 top. Play the Major or Asphyxiating smoke."
+        "instructions": "G3 top. Play the Major or Asphyxiating Smoke based on board state."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G2 bottom, gain Minor or replace Major. Play Flame’s fury and possibly the remaining Power."
+        "instructions": "G2 bottom. Gain Minor or replace Major if it didn't work out. Play Flame's Fury."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "Reclaim, gain Minor. Play 2."
+        "instructions": "Reclaim, gain Minor. Play 2 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "G3 bottom. Play 3. Remarks G3 can be used in"
+        "instructions": "G3 bottom. Play 3 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -487,48 +457,33 @@
   {
     "spiritSlug": "lure-of-the-deep-wilderness",
     "slug": "lure-of-the-deep-wilderness-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Lure of the Deep Wilderness",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Uses G3 for elements and energy while placing presence from bottom for card plays. High CP focus.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 bottom; G4 Minor, prioritise () > > rest. Play Gift of the untamed wild and Perils of the deepest island. Unlock left innate level 2. And right Innate level 2."
+        "instructions": "G2 bottom; G3 gain 4 Minors. Play Gift of the Untamed Wild and Perils of the Deepest Island. Unlock left+right innate level 2."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom; G3 . Play Softly beckon ever inward and Swallowed by the wilderness. Unlock left innate level 2."
+        "instructions": "G2 bottom; G3 gain 3 Moon. Play Softly Beckon Ever Inward and Swallowed by the Wilderness."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim; G3 if needing to deal with City, otherwise G4 Minor. Play 2."
+        "instructions": "Reclaim; G3 gain elements based on threats. Play 2 cards."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G3 / or G4 Minor, the opposite of what selected in the previous turn. Play 3."
+        "instructions": "G2 bottom; G3 gain opposite of turn 3. Play 3 cards."
       },
       {
         "turn": 5,
-        "title": "Turn 5",
-        "instructions": "Reclaim; G4 Minor. Play 3."
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "G2 bottom; G3. Play 4."
-      },
-      {
-        "turn": 7,
-        "title": "Turn 7",
-        "instructions": "Reclaim; G3. Play 3 or 4."
-      },
-      {
-        "turn": 8,
-        "title": "Turn 8",
-        "instructions": "G2 bottom to unlock reclaim 1; G3. Play 4 or 5."
+        "title": "Turn 5+",
+        "instructions": "Alternate reclaim and growth. Increase card plays to 4-5. Select 0-cost Minors to preserve energy."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -537,43 +492,43 @@
   {
     "spiritSlug": "lure-of-the-deep-wilderness",
     "slug": "lure-of-the-deep-wilderness-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "Opening strategy for Lure of the Deep Wilderness",
+    "name": "Hybrid (Major Powers)",
+    "description": "Gain an early Major and alternate playing it with Softly Beckon each reclaim cycle.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 bottom; G3 . Play Gift of the untamed wild and Perils of the deepest island. Unlock left innate level 2 and right Innate level 1+2."
+        "instructions": "G2 bottom; G3 Plant. Play Gift of the Untamed Wild + Perils of the Deepest Island. Unlocks left innate level 2, right innate levels 1+2."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top; G4 Major, prioritise cost <= 4 and with at least one of or , forget from discard (Perils of the deepest island is recommended if cost > 3). Play Softly beckon ever inward and Swallowed by the wilderness. Optionally, if the Major is good and costs 2 or 3, it can be played instead of Softly beckon ever inward."
+        "instructions": "G2 top; G4 Major (cost ≤4, prioritize Moon/Plant). Play Softly Beckon + Swallowed by the Wilderness."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim; G4 Major if needing to replace, otherwise Minor to threshold. Play Major and Gift of the untamed wild."
+        "instructions": "Reclaim; G4 Major if replacing, otherwise Minor. Play Major + Gift of the Untamed Wild."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom; G3 /. Play Softly beckon ever inward and Swallowed by the wilderness. Unlock left or right innate level 2."
+        "instructions": "G2 bottom; G3 Moon/Plant. Play Softly Beckon + Swallowed. Unlocks left or right innate level 2."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim; G3. Play 2 so as to keep cards to threshold the Major next turn, if possible. Softly beckon ever inward and Gift of the untamed wild is a good option, unlocking left innate level 3 if picked with G3."
+        "instructions": "Reclaim; G3. Play 2 cards (recommended: Softly + Gift)."
       },
       {
         "turn": 6,
         "title": "Turn 6",
-        "instructions": "G2 bottom; G4 Minor if < 5 owned cards, else G3. Play Major and 2 more."
+        "instructions": "G2 bottom; G4 Minor (if <5 owned cards) or G3. Play Major + 2 more."
       },
       {
         "turn": 7,
         "title": "Turn 7",
-        "instructions": "Reclaim; G4 Minor. Play 3."
+        "instructions": "Reclaim; G4 Minor. Play 3 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -582,43 +537,38 @@
   {
     "spiritSlug": "many-minds-move-as-one",
     "slug": "many-minds-move-as-one-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Many Minds Move as One",
+    "name": "Full Bottom Track (Minor Powers)",
+    "description": "Leverages cheap Uniques and double presence placement to rush high card plays. Strong card advantage.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top+bottom. Play Ever-multiplying swarm and another card (Guide the way is a good default). 12 elements."
+        "instructions": "G2 (top+bottom). Play Ever-Multiplying Swarm and Guide the Way. 1 Air, 2 Animal elements."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom. Play 3. 313 elements."
+        "instructions": "G2 bottom. Play 3 cards. 3 Air, 1 Water, 3 Animal."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor, prioritise and cost 0. Play 3. Keep at least one 1 for next turn if planning to unlock the second level of the left innate."
+        "instructions": "Reclaim, gain Minor (prioritize Animal, 0-cost). Play 3 cards."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "if 0-cost Minors have been found. On turn 6, G3 bottom can be used if your hand costs more than 2 (i.e. more than 1 1-cost Minors have been drafted). Reclaim-looping is an option on turn 7+, since your starting hand is enough to activate all levels of both your innates."
+        "instructions": "G3 bottom. Play 3 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Minor. Pay 2 to gain a Minor. Play 3."
+        "instructions": "Reclaim, gain Minor. Pay 2 energy for additional Minor. Play 3 cards."
       },
       {
-        "turn": 7,
-        "title": "Turn 7",
-        "instructions": "Reclaim, gain Minor. If Energy allows it, pay 2 to gain a Minor. Play 5 or 4."
-      },
-      {
-        "turn": 9,
-        "title": "Turn 9",
-        "instructions": "Reclaim, gain Minor. Play 5. Remarks You can easily sustain a 2-cost hand during a reclaim cycle, but more than that will require slowing down your growth. Thus, 0-cost Powers should be prioritised 4 CP can be rushed on"
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G2 bottom. Play 5 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -627,48 +577,43 @@
   {
     "spiritSlug": "many-minds-move-as-one",
     "slug": "many-minds-move-as-one-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "Opening strategy for Many Minds Move as One",
+    "name": "Hybrid (Mixed Powers)",
+    "description": "Fast-starting strategy with early 3 CP unlock and flexible energy. Gets a Major on turn 5 while maintaining consistent innate unlocking.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top+bottom. Play Ever-multiplying swarm and another card (Guide the way is a good default). 12 elements."
+        "instructions": "G2 (top+bottom). Play Ever-Multiplying Swarm + Guide the Way. 1 Air, 2 Animal elements."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 bottom. Play 3. 313 elements."
+        "instructions": "G2 bottom. Play 3 cards. 3 Air, 1 Water, 3 Animal."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor. Play 3. Keep at least one 1 for next turn if planning to unlock the second level of the left innate."
+        "instructions": "Reclaim, gain Minor. Play 3 cards. Keep 1 Water for left innate level 2."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "by paying 2 Energy and forgetting from discard. If Energy allows it, an extra card can be gained on"
+        "instructions": "G3 top. Play 3 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Major. Play 3."
+        "instructions": "Reclaim, gain Major. Play 3 cards."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6",
+        "instructions": "G3 top. Play 3 cards."
       },
       {
         "turn": 7,
         "title": "Turn 7",
-        "instructions": "Reclaim, gain Minor. Play 4."
-      },
-      {
-        "turn": 8,
-        "title": "Turn 8",
-        "instructions": "while still playing a Major. Revealing and on your tracks helps consistently unlocking Innates. Cons: 4 CP is only unlocked on"
-      },
-      {
-        "turn": 9,
-        "title": "Turn 9",
-        "instructions": "Reclaim, gain Minor. Play 4. Remarks The Major gain can be moved from"
+        "instructions": "Reclaim, gain Minor. Play 4 cards."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -677,38 +622,38 @@
   {
     "spiritSlug": "shroud-of-silent-mist",
     "slug": "shroud-of-silent-mist-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Shroud of Silent Mist",
+    "name": "Early-Reclaim Bottom Track (Minor Powers)",
+    "description": "Strong opening turn with early reclaim. Creates damaged invaders for energy generation.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top+bottom. Play The fog closes in + Forms dart by. 222 elements (left and right Innate level 1). Try to have 2 lands with damaged Invaders by the end of the turn."
+        "instructions": "G2 (top+bottom). Play The Fog Closes In and Forms Dart By. 2 Moon, 2 Air, 2 Water. Damage invaders in 2 lands."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "Reclaim, gain Minor. Play to get at least 121 elements and unlock left Innate level 1 (e.g. Unnerving pall + Forms dart by). Try to use the Dahan counterattack and/or your Innate to have a 3rd land with a damaged Invader in order to get 1 Energy via your special rule (and farm extra fear)."
+        "instructions": "Reclaim, gain Minor. Play cards for 1 Moon, 2 Air, 1 Water to unlock left innate. Damage invaders in 3 lands."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G3 bottom, gain Minor. Play 2."
+        "instructions": "G3 bottom; gain Minor. Play 2 cards."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "and possibly unlock the second level of your left Innate. However, it is usually not worth sacrificing"
+        "instructions": "G2 bottom. Play 2 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Minor. Play 3."
+        "instructions": "Reclaim, gain Minor. Play 3 cards."
       },
       {
         "turn": 6,
         "title": "Turn 6",
-        "instructions": "G2 bottom. Play 4. Remarks If you can afford playing only 1 card on turn 3, you can play 3 on"
+        "instructions": "G2 bottom. Play 4 cards. Strong late-game scaling."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -717,33 +662,33 @@
   {
     "spiritSlug": "shroud-of-silent-mist",
     "slug": "shroud-of-silent-mist-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "The idea is to take a weaker early game (namely turn 2 and 3) to scale faster into the mid game.",
+    "name": "Greedy Bottom Track (Minor Powers)",
+    "description": "Takes a weaker early game (turns 2-3) to scale faster into the mid game with more presence.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top+bottom. Play The fog closes in + Forms dart by. 222 elements (left and right Innate level 1). Try to have 2 lands with damaged Invaders by the end of the turn."
+        "instructions": "G2 (top+bottom). Play The Fog Closes In + Forms Dart By. 2 Moon, 2 Air, 2 Water. Left and right innate level 1. Aim for 2 lands with damaged Invaders."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "and 3) to scale faster into the mid game. Growth"
+        "instructions": "G3 bottom, gain Minor. Play Unnerving Pall (and 0-cost Minor if available). 1 Moon, 1 Air. Use Dahan counterattack for 3rd damaged Invader land to gain 1 Energy."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G2 bottom. Play Dissolving vapors and possibly a 0-cost Minor (if not played previously). 211 elements (no Innate)."
+        "instructions": "G2 bottom. Play Dissolving Vapors (and 0-cost Minor if available). 2 Moon, 1 Air, 1 Water."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "Reclaim, gain Minor. Play 3."
+        "instructions": "Reclaim, gain Minor. Play 3 cards. Continue presence placement with G2 bottom."
       },
       {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "Reclaim, gain Minor. Play 4. Remarks On turn 5, Presence can be taken from the top track to get to 2/3 instead of 1/4+R1. This is not normally required if a 0-cost has been found, but it may be needed in case of bad luck with draws, Events or other factors. If you have not gained an extra energy by"
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 bottom; G3 Minor. Play 3-4 cards. Alternate reclaim cycles with presence growth."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -752,38 +697,38 @@
   {
     "spiritSlug": "downpour-drenches-the-world",
     "slug": "downpour-drenches-the-world-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "[Downpour Drenches the World] Opening: Bottom track hybrid (Minor Powers) Oct 15, 2023 Note: the openings described below will cover more turns than usual, going as far as turn 10.",
+    "name": "Bottom Track Hybrid (Minor Powers)",
+    "description": "Unlocks 2 CP early then goes top track with frequent G2s. Strong water element generation.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3 bottom, gain Minor. Play 1. Gift of abundance is a good default to scale better."
+        "instructions": "G3 bottom; gain Minor. Play Gift of Abundance."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Play 2 cards."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "Reclaim, gain Minor. Play 2."
+        "instructions": "Reclaim, gain Minor. Play 2 cards."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G2 top. Play 2 cards."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Minor. Play 2."
+        "instructions": "Reclaim, gain Minor. Play 2 cards."
       },
       {
         "turn": 6,
         "title": "Turn 6",
-        "instructions": "G3 top, gain Minor. Play 2."
-      },
-      {
-        "turn": 8,
-        "title": "Turn 8",
-        "instructions": "Reclaim, gain Major. Play 2."
-      },
-      {
-        "turn": 10,
-        "title": "Turn 10",
-        "instructions": "is not unusual against Adversaries that keep the pressure up throughout mid and late game. Unique Powers reminder Opening The idea is to unlock 2 CP as soon as possible and then going top track while taking frequent G2s to have as much Energy and as possible to repeat your Powers. Growth"
+        "instructions": "G3 top; gain Minor. Play 2 cards. Continue building water elements."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -792,38 +737,33 @@
   {
     "spiritSlug": "ember-eyed-behemoth",
     "slug": "ember-eyed-behemoth-opening-1",
-    "name": "Opening 1: Unique Powers reminder",
-    "description": "Opening strategy for Ember-Eyed Behemoth",
+    "name": "Hybrid (Mixed Powers)",
+    "description": "Balanced fire and earth elements. Focuses on unlocking Smash, Stomp, and Flatten innate.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G3 bottom, gain Minor. If you gained a 1-cost, make sure to keep Grasping roots in hand, or you won’t be able to play to max CP. Play 2 with 21 to unlock Smash, stomp, and flatten. If you only consider your Uniques, since Terrifying rampage is useless on"
+        "instructions": "G3 bottom; gain Minor. Play 2 cards with Fire+Earth to unlock Smash, Stomp, and Flatten. Surging Lahar + Grasping Roots or Blazing Intimidation + Grasping Roots."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G2 top. Play 2. Depending on your draws and plays, you might be able to unlock the second level of your Innate, but you should always be able to unlock the first level."
+        "instructions": "G2 bottom. Play 2 cards. May unlock second innate level depending on draws."
       },
       {
         "turn": 3,
         "title": "Turn 3",
-        "instructions": "G4, reclaiming and empowering your Incarna. Play 2."
+        "instructions": "G4 (reclaim+empower Incarna). Play 2 cards. Use Incarna ability."
       },
       {
         "turn": 4,
         "title": "Turn 4",
-        "instructions": "G2 bottom to 3 CP. Play 2 or 3 (if you have not found a card with , you won’t have 3 cards to play, but it’s still worth getting to 3 CP to play 3 cards next turn)."
+        "instructions": "G2 bottom to 3 CP. Play 2-3 cards based on element availability."
       },
       {
         "turn": 5,
         "title": "Turn 5",
-        "instructions": "Reclaim, gain Major or Minor. Play 3."
-      },
-      {
-        "turn": 6,
-        "title": "Turn 6",
-        "instructions": "G3 top, gain Major or Minor (whichever you didn’t in the previous turn). If you gain a Major forget from discard, and if you are planning on forgetting a card with from your hand, discard that card BEFORE gaining the Major, so that you still have 3 cards left in your hand. Play 3."
+        "instructions": "Reclaim, gain Major or Minor. Play 3 cards. Manage energy carefully."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
@@ -832,36 +772,1826 @@
   {
     "spiritSlug": "ember-eyed-behemoth",
     "slug": "ember-eyed-behemoth-opening-2",
-    "name": "Opening 2: Unique Powers reminder",
-    "description": "Opening strategy for Ember-Eyed Behemoth",
+    "name": "Early Major",
+    "description": "Acquires Major power on turn 2 by discarding and forgetting from discard. Strategy adapts based on whether Major has Fire element.",
     "turns": [
       {
         "turn": 1,
         "title": "Turn 1",
-        "instructions": "G2 top. Play Surging lahar to unlock your Innate."
+        "instructions": "G2 top. Play Surging Lahar to unlock innate."
       },
       {
         "turn": 2,
         "title": "Turn 2",
-        "instructions": "G3 bottom, discard the card you want to forget, then gain Major forgetting from discard. Play 2. If the Major does not have , keep it in hand and play the other two cards to unlock your Innate level 2."
+        "instructions": "G3 bottom, discard unwanted card, gain Major (forget from discard). Play 2 cards. If Major lacks Fire, keep it and play other cards for innate level 2."
       },
       {
         "turn": 3,
-        "title": "Turn 3",
-        "instructions": "and 4 if the Major has :"
+        "title": "Turn 3 (Fire Major)",
+        "instructions": "G4, empower Incarna. Play 2 cards."
       },
       {
         "turn": 4,
-        "title": "Turn 4",
-        "instructions": "G3 top, discard the card you want to forget, then gain a Major and forget from discard. Play 2."
+        "title": "Turn 3 (Non-Fire Major)",
+        "instructions": "G3 top, gain second Major (forget from discard). Play both Majors."
       },
       {
         "turn": 5,
-        "title": "Turn 5",
-        "instructions": "Reclaim, gain Minor. Play 2."
+        "title": "Turn 4+",
+        "instructions": "Paths reconverge. G3 top or G4 based on prior path. Then Reclaim, gain Minor. G2 bottom for 3 plays."
       }
     ],
     "author": "Spirit Island Hub (latentoctopus)",
     "sourceUrl": "https://latentoctopus.github.io/guide/behemoth-opening2/"
+  },
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-bgg-opening-1",
+    "name": "Balanced Presence (Minor Powers)",
+    "description": "Focus on early presence placement from both tracks and triggering both innates consistently. Strong multi-purpose opening.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (one from each track), +1 card play. Cards: Gift of Proliferation, Stem the Flow. Combo with Creepers Tear into Mortar to destroy a town. Use Choke the Land to stop builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence (bottom), gain Minor, +3 energy. Cards: Overgrow in a Night, Fields Choked. Overgrow places presence from top to uncover Plant for All-Enveloping Green (Defend 2)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. If Minor has Plant+Moon+Water, activate level 2 Creepers to destroy a town standalone."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1965751/openings-a-spread-of-rampant-green"
+  },
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-bgg-opening-2",
+    "name": "Turn 2 Growth Spurt",
+    "description": "Delays your burst turn to turn 2 for 4 presence placements at once. Gets temporary extra card play on turn 2 instead of turn 1.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +3 energy, gain Minor, place 1 presence (top). Cards: Fields Choked. If Minor has Plant+Moon, play Gift of Proliferation instead."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (bottom), +1 card play. Cards: Overgrow, Gift of Proliferation, Stem the Flow. Hits level 2 Creepers and level 1 All-Enveloping."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain Minor, place 1 presence (bottom). Reaches 3 permanent card plays."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1965751/openings-a-spread-of-rampant-green"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-bgg-opening-1",
+    "name": "Dahan Positioning Focus",
+    "description": "Use careful Dahan positioning to set up devastating multi-land attacks. Prioritizes gathering Dahan before big damage turns.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +4 energy, place 1 presence (bottom). Cards: Sudden Ambush, Voice of Thunder. Kill an explorer before Build. Position Dahan in 3 locations for next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (top). Cards: Words of Warning, Manifestation. Defend lands with Dahan. Manifestation deals 6 damage to clear city+town+explorer."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain 2 powers. Continue with innates and Dahan positioning."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1966212/openings-thunderspeaker"
+  },
+  {
+    "spiritSlug": "river-surges-in-sunlight",
+    "slug": "river-surges-in-sunlight-bgg-opening-1",
+    "name": "Wetland Sacred Sites",
+    "description": "Expand into wetlands for sacred sites while building toward tier 3 Massive Flooding by turn 5. Best when wetlands are accessible.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (bottom). Cards: Wash Away, River's Bounty. Expand to wetlands for sacred sites."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (bottom), reclaim River's Bounty. Cards: Flash Floods, Boon of Vigor, River's Bounty. Triggers level 2 Massive Flooding."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Prioritize Water+Sun elements on Minor draws."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Place 1 presence (bottom), gain Minor. Play all available cards. 6 power cards total now."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Play all 4 starting cards to hit tier 3 Massive Flooding."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1967085/openings-river-surges-in-sunlight"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-bgg-opening-1",
+    "name": "Innate Rush (Presence First)",
+    "description": "Establish two sacred sites turn 1 for range, then burst with all cards turn 2 to trigger Thundering Destruction. Balances presence placement with innate activation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 2 presence (top). Cards: Shatter Homesteads only. Establishes second sacred site for range. Save elements for innate next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy, place 1 presence (bottom). Cards: Lightning's Boon, Raging Storm, Harbingers. Triggers Thundering Destruction."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Play Shatter + Boon + Harbingers to trigger innate again."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1969985/openings-lightnings-swift-strike"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-bgg-opening-2",
+    "name": "Turn 1 Innate Aggro",
+    "description": "Trigger Thundering Destruction from turn 1 by playing 3 cards immediately. Aggressive early game that can net 4 fear and 2 town kills turn 1.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 1 presence (bottom), +3 energy. Cards: Shatter, Lightning's Boon, Harbingers. Triggers innate - destroy 2 towns, 4 fear total."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Repeat turn 1 if towns need control, otherwise adapt to Minor gained."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: 2 presence (top) or 1 presence (bottom) + 3 energy. Play remaining cards except maybe Raging Storm."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Reliably trigger Thundering Destruction each turn now."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1969985/openings-lightnings-swift-strike"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-bgg-opening-1",
+    "name": "Multi-Board Drowning",
+    "description": "Spread presence across multiple boards quickly while drowning invaders for energy. Maximizes Ocean's unique board coverage ability.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G2 bottom (2 presence in oceans), +1 energy. Play Call of the Deeps and Tidal Boon. Triggers both innates level 1."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Push presence from oceans, place 1 presence (bottom), gain Minor. Cards: Grasping Tide, Swallow the Land-Dwellers, Minor. Prioritize Water+Earth or Air minors."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim (must gather 1 presence into each ocean). Alternate pushing on even turns, reclaiming on odd turns."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1970506/openings-oceans-hungry-grasp"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-bgg-opening-1",
+    "name": "Early Major Rush",
+    "description": "Get a major power by turn 2 using Call on Midnight's Dreams. Leverages good energy generation and reclaim-one to spam the major repeatedly.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 1 presence (top), gain Minor. Cards: Dreams of the Dahan, Predatory Nightmares. Triggers Spirits May Yet Dream and level 2 Night Terrors."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +2 energy, place 1 presence (top). Cards: Dread Apparitions, Call on Midnight's Dreams. Use Call to gain Major; forget Call to play Major immediately."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim One to replay Major + turn 1 Minor. Moon elements from cards + top track unlock full Spirits May Yet Dream."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971193/openings-bringer-of-dreams-and-nightmares"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-bgg-opening-2",
+    "name": "Dahan Defense First",
+    "description": "Gather 3 Dahan turn 1 for a devastating defended counterattack turn 2, then get major turn 3. Better early board control at cost of delayed major.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place presence (top for Air), gain Minor. Cards: Predatory Nightmares, Dreams of the Dahan. Gather 3 Dahan to defend turn 2. Triggers level 2 Night Terrors."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place presence (in Dahan land), +2 energy. Cards: Dread Apparitions, Call on Midnight's Dream (for fear). Defend 5 total. 3 Dahan wipe Explorer+Town+City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim One, place presence for sacred site, use Call to gain Major. 4+ energy available for most Majors."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971193/openings-bringer-of-dreams-and-nightmares"
+  },
+  {
+    "spiritSlug": "shadows-flicker-like-flame",
+    "slug": "shadows-flicker-like-flame-bgg-opening-1",
+    "name": "Presence Track Balance",
+    "description": "Squeeze in early presence placement to unlock excellent track bonuses. Reaches 3 energy/turn passively by turn 3 for sustained power.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +3 energy, place 1 presence (bottom). Cards: Favors Called Due, Mantle of Dread. 2 plays triggers Darkness Swallows to stop a build."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence (top), gain Minor. Cards: Concealing Shadows, Crops Wither. If Minor has Moon+Fire, swap it for Crops."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Place 1 presence (top), gain Minor. Cards: 2 Minors. Weak turn but now earn 3 energy/turn passively."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim, gain power. Up to 6 energy for Major. Can play 3 cards turns 5-6 without reclaim."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1971694/openings-shadows-flicker-like-flame"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-bgg-opening-1",
+    "name": "Opportunistic Defense",
+    "description": "Flexible opening that adapts to board state rather than following a fixed sequence. Create sacred sites where invaders explore for free defense.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: If jungle explored, gain power + place presence at range 0 for sacred site defense. Otherwise +2 energy + presence where explored. Cards: Draw of the Fruitful Earth or Minor."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Create sacred site in explored land if not done. Cards: Guard the Healing Land (if removes+prevents blight) or Rituals + Draw for innate."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Use Draw to gather Dahan for defense AND gather lone explorers to stop multiple builds. 3-cost cards are situational—use when conditions favor them."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1974592/openings-vital-strength-of-the-earth"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-bgg-opening-2",
+    "name": "Card Plays Priority",
+    "description": "Rush card plays from bottom track early. Delays majors until turn 5 when you have 6 energy generation to afford them comfortably.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth 3: Presence from plays track in explored land. Cards: Draw of the Fruitful Earth. 3 energy left."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth 2: Presence from plays track, pick 0-1 cost Minor. Cards: Minor + 3-cost card. 1 energy left."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If jungle explored: Growth 2 (energy track presence). Cards: Minor + 3-cost. Otherwise reclaim. 0 energy."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Pick from energy track, 4 energy/turn now. Cards: 3-cost + Minor."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Energy track, 6 energy/turn now. Start looking for Majors. Focus on Dahan fights in sacred sites."
+      }
+    ],
+    "author": "BGG Community",
+    "sourceUrl": "https://boardgamegeek.com/thread/1974592/openings-vital-strength-of-the-earth"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-bgg-opening-1",
+    "name": "Bottom Track (Reclaim Loop)",
+    "description": "Focus on bottom track for card plays and early reclaim-one access. More card plays but less consistent Ranging Hunt damage threshold.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 Minor (+1 energy, gain Minor); G2 bottom. Play Prey on the Builders and Terrifying Chase. Learn Minor with Animal element. Use Ranging Hunt to reposition presence."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy; Place 1 presence (bottom). Cards: Too Near the Jungle, Teeth Gleam, minor with animal. Gives 3 animal + 2 plant for full Ranging Hunt. Place presence in new jungle for targeting."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Pay 1 energy, reclaim all, gain minor; Place 1 presence. Cards: Too Near the Jungle, Teeth Gleam, any animal element. Choose minor so two minors combined have 1 animal + 1 plant. Place presence from bottom for 4 card plays on turn 4."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978097/openings-sharp-fangs-behind-the-leaves"
+  },
+  {
+    "spiritSlug": "sharp-fangs-behind-the-leaves",
+    "slug": "sharp-fangs-behind-the-leaves-bgg-opening-2",
+    "name": "Top Track (Ranging Hunt T1)",
+    "description": "Trigger Ranging Hunt damage from turn 1 by prioritizing top track animal elements. Requires drafting a minor with plant+animal.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Only use if you draw a minor with plant AND animal. Growth: +1 energy, gain minor; Place 1 presence (top). Cards: Too Near the Jungle, Teeth Gleam. Presence uncovers animal, so with animal+plant on cards you reach Ranging Hunt threshold."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy; Place 1 presence (top). Cards: Plant+animal minor, any other power (likely Prey on the Builders). Now have animal+plant on track, need just 2 animal + 1 plant from cards."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. Continue triggering Ranging Hunt every turn. Fewer card plays long-term but consistent Ranging Hunt damage."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978097/openings-sharp-fangs-behind-the-leaves"
+  },
+  {
+    "spiritSlug": "keeper-of-the-forbidden-wilds",
+    "slug": "keeper-of-the-forbidden-wilds-bgg-opening-1",
+    "name": "Energy Ramp (Major Powers)",
+    "description": "Use expensive presence placement growth to quickly ramp energy generation. Enables early major power plays while building wilds defense.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain minor; +1 energy, place presence (only legal spot is starting land). Cards: Boon of Growing Power. Get 2 sun + 1 plant while saving 2 energy. If minor is 0-cost with sun, place from bottom and play both. Otherwise place from top and play just Boon."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +1 energy, place presence; Pay 3 energy, place presence, gain minor. Uncover 2 top + 1 bottom for 4 energy and 2 card plays. Cards: varies. Get 2 sun + 1 plant while saving 2 energy. Extra presence pays for itself with +2 energy income."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: +1 energy, place presence (bottom); Pay 3 energy, place presence (bottom), gain minor. Cards: Towering Wrath, minor with plant+fire, something with plant. These elements trigger 2 levels of Punish Those Who Trespass for 4-5 damage."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim. Play cards similar to turn 3. Keeper falls behind early but catches up in stage 2 when wilds block explores."
+      }
+    ],
+    "author": "Jeremy Lennert (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/1978655/openings-keeper-of-the-forbidden-wilds"
+  },
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-wiki-phantaskippy",
+    "name": "Multi-tasking",
+    "description": "Emphasize 'juggling' invaders across 3+ lands per turn rather than concentrating powers on single territories. Spreads control wide.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Second option (place 2 presence total, including 'Always' section). Cards: Gift of Proliferation, Stem the Flow of Fresh Water. Activate Tier 1 Creepers to destroy the back town. Prioritize unlocking your 1 energy space."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Third option (gain a card and 3 energy), take play track presence for 2 card plays. Cards: Overgrow in a Night, Fields Choked with Growth. Resolve Overgrow first to uncover the free plant element. Activate Tier 1 All-Enveloping. Aim for 6 presence on board before invaders ravage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Identify 1-4 'maintenance lands' that you'll allow to build up but prevent from ravaging through Choke the Land. Avoid wasting two powers on one land. Stack presence to 3 in built-up lands to ensure sacred sites remain available for slow powers."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-phantaskippy",
+    "name": "Moon Unlock",
+    "description": "Unlock the moon element on energy track by turn 3-4, then choose between major power flexibility or 3-card plays. Adaptive mid-game decision.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Start with 2 plays and 2 energy. Use cards to get a flipped fear card and trigger tier 2 Night Terrors. Take growth option 3 to gain cards and spread out."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Continue with growth option 3 to gain cards and spread out. Use your cards to trigger Night Terrors and Spirits May Yet Dream innates."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Goal: Unlock moon element on energy track (turn 4 is fine if needed). If no element luck, consider reclaiming one card to build a second sacred site. After moon unlock, choose 'any element path' for major power flexibility or '3 cards route' for longer games."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-wiki-phantaskippy",
+    "name": "Coastal Dominance",
+    "description": "Coordinate with allies to push explorers to coasts. Accumulate drowned invader HP for energy conversion. Best in multiplayer.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Second option to gain 1 energy and spread influence. Cards: Call of the Deeps. Coordinate with allies - if they can push an explorer to the coast, you take out 2 explorers on that coast, preventing builds and generating extra HP for energy."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Third option to position presence in newly explored lands. Cards: Tidal Boon, Swallow the Land Dwellers. This gives you 6 drowned invader HP regardless of ally actions. Activate tier 2 Ocean Breaks the Shore (2 fear, City off board, 3 invader HP energy)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Prioritize tier 2 Ocean Breaks the Shore over Pound Ships to Splinters due to superior returns. Focus on gathering elements to fuel your innate rather than rushing card plays."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "shadows-flicker-like-flame",
+    "slug": "shadows-flicker-like-flame-wiki-phantaskippy",
+    "name": "Flexible Paths",
+    "description": "Phantaskippy presents three distinct opening approaches: Balanced Growth, Aggressive Card Play Rush, and Major Power Focus.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Path 1: Balanced",
+        "instructions": "Begin playing 2 cards early, then select growth option 3 to secure second card play. By turn 4, achieve 2 card plays, 6 card hand, and 3 energy per turn for stable Dahan support or major power acquisition."
+      },
+      {
+        "turn": 2,
+        "title": "Path 2: Aggressive",
+        "instructions": "Sacrifice early card plays to accelerate power gain. Take growth option 2 for four consecutive turns, removing presence alternately from energy and play tracks. By turn 5, achieve 9 cards, 3 card plays, and 3 energy for faster Tier 2 Darkness Swallows."
+      },
+      {
+        "turn": 3,
+        "title": "Path 3: Major Focus",
+        "instructions": "Maintain just 1 card play for two turns while building energy through presence placement. Enables earlier major power acquisition (6-7 energy by turn 3). Use Shadow of the Dahan to target lands with invaders and Dahan anywhere by spending 1 energy."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Shadows_Flicker_Like_Flame/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-wiki-phantaskippy",
+    "name": "Major Power Rush",
+    "description": "Treat Earth as an offensive major power house rather than a minor power defender. Replace expensive starting cards with majors early.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain 2 energy from energy track (starting with 5 total energy). Focus on building energy reserves for major power acquisition."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Acquire a card and establish a second sacred site. Begin looking for major powers that synergize with your defensive capabilities."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain second card play plus 2 bonus energy (totaling 13 energy). Target presence track: 3 energy -> 2 card play -> 6 energy -> 3 card play (by turn 7). Replace expensive starting cards with major powers. Maintain small hand size to enable frequent reclaiming."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "keeper-of-the-forbidden-wilds",
+    "slug": "keeper-of-the-forbidden-wilds-wiki-phantaskippy",
+    "name": "Growth 4 Focus",
+    "description": "Center on Growth 4 (place 2 presence, gain power card) as the cornerstone. Critical rule: end every turn with at least 2 energy.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Options 2 and 3. Unlock sun icon on energy track. Cards: Boon of Growing Power. End with 2 energy. This constraint takes priority over almost all other actions."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Options 3 and 4 to reach 4 energy and 2 card plays. This is the most challenging turn requiring careful power card selection. Maintain the 2 energy buffer."
+      },
+      {
+        "turn": 3,
+        "title": "Turns 3-5",
+        "instructions": "Focus on unlocking 5 energy and plant icon through dual power track advancement. Gradually unlock third card play, potentially reclaiming when necessary. Element priority: fire (highest), sun, plant, major thresholds, air (lowest)."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Keeper_of_the_Forbidden_Wilds/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-wiki-phantaskippy",
+    "name": "Three Paths",
+    "description": "Phantaskippy presents three approaches: Destroyer of Towns (frequent reclaim), Stable Card Play (beginner-friendly), and Riding the Storm (hybrid). Power selection ignores card effects in favor of fire/air elements.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Path 1: Destroyer",
+        "instructions": "Focus on destroying two towns nearly every turn through frequent reclaiming. Avoid playing Raging Storm. Prioritize reclaiming cards with fire elements and zero costs. Sacrifices growth speed for early-game dominance."
+      },
+      {
+        "turn": 2,
+        "title": "Path 2: Stable",
+        "instructions": "Emphasize consistent hand management and energy generation. Beginner-friendly approach that prioritizes emptying hand before reclaiming. Lower overall power output but familiar playstyle. Innate activation delayed until turn 5."
+      },
+      {
+        "turn": 3,
+        "title": "Path 3: Storm",
+        "instructions": "Hybrid approach alternating weak and explosive turns. Generates maximum destruction and secures numerous sacred sites. Power priority: 0-cost fire/air cards, then 0-cost fire cards, then 1-cost fire/air. Maintain range-2 coverage with 3 sacred sites."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "river-surges-in-sunlight",
+    "slug": "river-surges-in-sunlight-wiki-phantaskippy",
+    "name": "Reclaim 1 Rush",
+    "description": "Rush the Reclaim 1 space for superior card play efficiency. Enables tier 2 Massive Flooding activation nearly every turn.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place two presence from different tracks to secure two card plays and two energy. Cards: Flash Flood (enables tier-one Massive Flooding). Prioritize establishing presence in wetlands on neighboring boards."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Take a card and place additional presence, prioritizing wetlands on neighboring boards. Continue building toward Reclaim 1 space."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Rather than reclaiming, place two presence to unlock the Reclaim 1 space. This counterintuitive move provides major advantage - you'll play more cards, replay best cards more, and reclaim all less than other spirits. Enables tier 2 Flooding almost every turn."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=River_Surges_in_Sunlight/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "thunderspeaker",
+    "slug": "thunderspeaker-wiki-phantaskippy",
+    "name": "Dahan Commander",
+    "description": "Aggressive Dahan deployment with two paths: Conservative (accumulate energy) or Aggressive (sacrifice energy for early clearing). Choose based on game state.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Conservative Path",
+        "instructions": "Accumulate energy through growth tracks to support card plays. Starting hand costs 6 energy but has limited early generation. By turn 5, reach 3 card plays plus reclaim capability."
+      },
+      {
+        "turn": 2,
+        "title": "Aggressive Path",
+        "instructions": "Sacrifice early energy to clear presence quickly. Deploy Dahan immediately with starting innates to eliminate explorers and win ravages. Reach full strength by turn 5."
+      },
+      {
+        "turn": 3,
+        "title": "Power Selection",
+        "instructions": "Prioritize elements enabling Gather the Warriors and Lead the Furious Assault innates. Don't obsess over threshold completion every turn. Seek push, gather, defense, and Dahan damage cards. Good majors: Instruments of their own Ruin, Vigor of the Breaking Dawn, Powerstorm, Wrap in Wings of Sunlight."
+      }
+    ],
+    "author": "Phantaskippy (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Thunderspeaker/Phantaskippy%27s_Guide"
+  },
+  {
+    "spiritSlug": "fractured-days-split-the-sky",
+    "slug": "fractured-days-split-the-sky-bgg-je-opening-1",
+    "name": "Flexible Time Build",
+    "description": "A flexible approach leveraging Days That Never Were and Slip the Flow innate, building Time for various Turn 3 options.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain Sun, move presence, gain Minor That Never Was, gain 3 Time. Cards: Minor. Choose minor for effect, not elements. Position presence for sacred site next turn (for Absolute Stasis targeting)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Gain Moon, gain Minor, add presence (energy), gain +2 Card Plays + 1 Time. Cards: Absolute Stasis, Blur the Arc, Past Returns. Pay 1 Time for Stasis on problematic Build/Ravage. Use Blur to position Dahan. All 3 tiers of Slip the Flow available - target yourself for fast Visions, then Reclaim based on minor's elements."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Multiple Options)",
+        "instructions": "Choose based on Turn 2: 1) Major? Growth 3 for Major That Never Was. 2) Help ally Reclaim? Growth 3 + Moon card + Past Returns for tier 2 Slip the Flow. 3) Reclaimed Blur? Growth 2 or 3 based on ally needs. 4) Tier 3 Slip the Flow? Growth 3 + Sun/Air + Stasis. All options leave 1+ turns before Reclaim All."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2486927/openings-fractured-days-split-the-sky"
+  },
+  {
+    "spiritSlug": "shroud-of-silent-mist",
+    "slug": "shroud-of-silent-mist-bgg-je-opening-1",
+    "name": "Damaged Invaders Engine",
+    "description": "Energy-focused opening ensuring innates stay active regardless of draft, establishing 3 lands with Damaged Invaders for Slow and Silent Death income.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add 2 presence (energy). Cards: The Fog Closes In. Water enables tier 1 Swirling Haze to save Dahan. Ideally damage 1 Town + 1 City or Town + Explorer. Use Shift and Flow to position for Flowing and Silent Forms next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 1 presence (energy), 1 presence (plays). Cards: Flowing and Silent Forms, Dissolving Vapors. Use Forms to distribute presence or pull ally onto your board. Hits tier 1 Suffocating Shroud + tier 2 Swirling Haze. Aim for 3 lands with damaged Invaders for extra energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain Minor, add presence (energy). Cards: Unnerving Pall, Minor. Track elements hit tier 1 Suffocating Shroud regardless of minor (avoid Fire; Water adds tier 1 Swirling Haze). Use Pall to protect Dahan or control a concentrated land."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain Minor. Cards: Varies. Even with weak minors, Unnerving Pall + Fog Closes In hits tier 2 Suffocating Shroud. Both do adjacent damage, making it easy to maintain damaged Invader lands. Surplus energy allows early Major if needed."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2488254/openings-shroud-of-silent-mist"
+  },
+  {
+    "spiritSlug": "finder-of-paths-unseen",
+    "slug": "finder-of-paths-unseen-bgg-je-opening-1",
+    "name": "Consistency Focus",
+    "description": "Consistency-focused opening aimed at reducing Finder's barrier to entry, leaving room for player choice after first Reclaim All.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (top), gain Minor. Cards: A Circuitous and Wending Journey. Add presence to inner land building City - push Town/City into starting lands. Gain Minor with Air (Air+Water ideal). Position presence for innates next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (top), +1 Card Play. Cards: Offer Passage Between Worlds, Traveler's Boon. Sun+Water from track + Moon/Air from cards = tier 1-2 Lay Paths + tier 1 Close the Ways. Use Boon to help slower spirit reach problem lands."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add presence (bottom), +1 Card Play. Cards: Ways of Shore and Heartland, Aid From Spirit Speakers. Uncovered Earth + cards = tier 2 Lay Paths + tier 1-2 Close the Ways. Isolate empty Coastal lands or inner lands covering multiple Stage II Explores."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Varies based on Turn 1. Cards: Paths Tied By Nature, Minor. If first minor lacked Air, add presence (bottom) + gain Minor. If you have Air, gain another Minor or add presence + 2 Energy. Air card enables tier 2 Lay Paths + tier 2 Close the Ways. Reclaim next turn; grab Minor or Major."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2493091/openings-finder-of-paths-unseen"
+  },
+  {
+    "spiritSlug": "downpour-drenches-the-world",
+    "slug": "downpour-drenches-the-world-bgg-je-opening-1",
+    "name": "Pour Down Power Engine",
+    "description": "Leveraging Pour Down Power Across the Land for Energy management and card repetition, centralizing presence for Rain and Mud defense scaling.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (energy), gain Minor, +1 Energy. Cards: Gift of Abundance. Place presence in distant Wetland. Use Pour Down Power for 1 Energy. Usually grant Energy via Gift, but Repeating Gift/Boon cards or strong Pushes is valuable."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (plays), discard 2, gain 2 Waters. Cards: Dark Skies (tier 1 Rain and Mud), Unbearable Deluge (free Repeat, tier 1-2), Foundations Sink (tier 2, decimates stacked Towns), or Minor. With 4 Waters you can Repeat twice. Keep one card for Turn 3."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add presence (plays), gain Minor, +1 Energy. Cards: Varies by saved card. If Minor + saved card both have Water, use Pour Down Power twice; otherwise once. Build Energy for Reclaim next turn; with 2 uses you can also Repeat once."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain Minor, move presence up to 2. Cards: 2 cards for 2 Pour Down uses. Save Gift of Abundance for Turn 5 to guarantee tier 1 Water Nourishes. Next turn Growth 2, both presence from Energy - with 3 track Waters + 2 Growth Waters, use Pour Down 3 times."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2496834/openings-dowpour-drenches-the-world"
+  },
+  {
+    "spiritSlug": "many-minds-move-as-one",
+    "slug": "many-minds-move-as-one-bgg-je-opening-1",
+    "name": "Beast Distribution",
+    "description": "Building Beast distribution for Beset and Confound defense scaling and Teeming Host gathering, with options for Energy or Plays focus on Turn 3.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (energy) + Beast, gain 1 Energy, gather 1 Beast. Cards: Ever-Multiplying Swarm. Place presence in land to defend next turn (with Dahan, or cover ally's board). Gather Beast centrally. Use Swarm where more adjacent terrain for Dreadful Tide setup."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (1 energy, 1 plays). Cards: Guide the Way on Feathered Wings, Dreadful Tide. Add zero-range presence in defending land with Dahan. Sacred site + Beast = 2 Beasts for Beset. Guide shuttles Dahan to next defense. Hits tier 2 Teeming Host + tier 1 Beset and Confound."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add 2 presence. Cards: Pursue with Scratches, Boon of Swarming Bedevilment. Option A: Both from Energy for guaranteed Defend 4 (tier 2 Beset). Option B: Both from Plays, spend 2 Energy for Minor, play all 3 cards. Animal Minor = tier 2 Beset; Air = tier 3 Teeming Host."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, gain Power. Cards: Varies. If chose Plays T3, take Air+Animal Minor. Air = tier 3 Teeming Host; Animal = tier 3 Beset. If chose Energy T3, consider Major with 6 Energy. Turn 5 add 2 presence from other track for strong innates."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2502110/openings-many-minds-move-as-one"
+  },
+  {
+    "spiritSlug": "grinning-trickster-stirs-up-trouble",
+    "slug": "grinning-trickster-stirs-up-trouble-bgg-je-opening-1",
+    "name": "Authority/Mob Combo",
+    "description": "Reliable Authority/Mob combo for Fear generation with options to break the Reclaim cycle when Cities become scarce.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (plays), gain Minor. Cards: Impersonate Authority, Incite the Mob. Gain Minor with Air for What Happens; else Fire for tier 3 Fight. Push Dahan into Strife land (ideally with City building). Strife City, then Mob kills Town/Explorer for 3 Fear."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (plays), +1 Energy per Play. Cards: Overenthusiastic Arson, Unexpected Tigers, Minor. Push Dahan into Strifed City for counterattack. Arson prevents City or stops Ravage. With 3 Fire, Fight kills Explorer in Dahan land. For What Happens, ditch Tigers + Minor for Energy if unneeded."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim All, move presence up to 1, add presence (energy). Cards: Authority, Mob, Arson. Move to another board if yours lacks targets. Just enough Energy for 3 cards = tier 2 Fight + tier 2 What Happens. Forget Tigers/Minor via What Happens. Break Reclaim cycle by forgetting Arson via What Happens or Growth 3 for third card."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2502216/openings-grinning-trickster-stirs-up-trouble"
+  },
+  {
+    "spiritSlug": "shifting-memory-of-ages",
+    "slug": "shifting-memory-of-ages-bgg-je-opening-1",
+    "name": "Double Major Rush",
+    "description": "Rush to gain two Major Powers by Turn 2, then unleash them both on Turn 3 with 12 Energy available. Focus on either keeping Elements for yourself or donating via Elemental Teaching based on team composition.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Gain Major, add presence (energy). Cards: Study the Invader's Fears OR Boon of Ancient Memories (Study for Fear teams, Boon for high-plays Spirits). Discard unused starter when gaining Major. Target 3-6 cost Major. Use tier 1 Observe. Prepare Element for Major threshold or ally."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Gain Major, add presence (plays). Cards: Elemental Teachings, Share Secrets of Survival. Forget Study/Boon when gaining Major. Look for mid-cost Major sharing elements with first. Use Secrets in Ravaging land. Tier 2 Tactics covers another Ravage. Teachings: prepare Element, give 3 to ally or keep for thresholds."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain +9 Energy. Cards: Both Majors (12 Energy total). Setup Moon Element can provide last Element for threshold. Even giving Elements away, this turn outpaces most other Spirits."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim All, add presence (energy). Cards: Variable. Play one Major with leftover Energy plus a starter. Continue down Energy track in subsequent turns."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2506389/openings-shifting-memory-of-ages"
+  },
+  {
+    "spiritSlug": "volcano-looming-high",
+    "slug": "volcano-looming-high-bgg-je-opening-1",
+    "name": "Presence Stacking",
+    "description": "Build up presence for eruptions while using Badlands strategically. Timing of Explosive Eruption is key - save up for specific Adversary interactions or cascades. Choose Mountain closer to coast during Setup.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add 2 presence (both energy). Cards: Lava Flows. Add Badlands where you'll need damage boost next turn. Plan when to erupt."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add 2 presence (both plays). Cards: Rain of Ash OR Pyroclastic Bombardment. Can do small 2-presence eruption - hits tier 1 Furnace, lose only 1 presence, keep range boost. Bombardment for Town problems or eruption combo; Rain for distant Build/Explore countering."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 (Option 1: No Eruption/Reposition)",
+        "instructions": "Growth: Growth 3, gain Fire Minor if possible, add presence (plays) to target Mountain. Cards: Exaltation + Minor + remaining starter. Fire Minor hits tier 3 Furnace to relocate presence; otherwise still add presence back."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 3 (Option 2: Erupt Again)",
+        "instructions": "Growth: Growth 2, add presence (1 energy, 1 plays). Cards: Exaltation + starter. Hits tier 2 Furnace + tier 2 Eruption with sacred site remaining. Give yourself 2 Exaltation Energy for Furnace Minor gain. Next turn: Reclaim All, aim for cheap Major or Minor elements."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2508259/openings-volcano-looming-high"
+  },
+  {
+    "spiritSlug": "lure-of-the-deep-wilderness",
+    "slug": "lure-of-the-deep-wilderness-bgg-je-opening-1",
+    "name": "Token Moshpit",
+    "description": "Spread out across the middle of the board, creating token concentrations in lands that contact as much real estate as possible. Use Softly Beckon for massive action advantage and Swallowed by the Wilderness for Major-like damage.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (energy), gain Moon + 2 Energy. Cards: Softly Beckon. Place presence for Beckon to cover maximum Build/Explore lands. Delays Invaders on several fronts. Moon hits tier 2 Forsake Society - replace Town in Building land or break Coastal fortification for Fear."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (plays), gain Minor. Cards: Gift of the Untamed Wild, Perils of the Deepest Wild. Gain Moon Minor if possible. Hits tier 2 Forsake Society + tier 2 Never Heard From. Use Never Heard to prevent Build or eat Forsaked Explorers. Perils populates moshpit for Swallowed. Wilds > Disease unless problematic City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Add presence (energy), gain Minor. Cards: Swallowed by the Wilderness, Moon Minor. Try for Moon again; if achieved, seek Plant/Air with good effect. Moon + Air ideal for Turn 4."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Add presence (energy), gain Major. Cards: Minor + Major. Forget last turn's Minor (or Gift, though Gift is excellent). Single Plant between 2 cards = tier 2 Never Heard From. Next turn: Reclaim All for Major Energy/Elements or Minor for more Plays."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2510069/openings-lure-of-the-deep-wilderness"
+  },
+  {
+    "spiritSlug": "stones-unyielding-defiance",
+    "slug": "stones-unyielding-defiance-bgg-je-opening-1",
+    "name": "Blight Guardian",
+    "description": "Occupy Ravaging lands to add Blight from box instead of card, rebounding damage upon Invaders. Encourage allies to dump spare buildings in your lands for Let Them Break Themselves. Distribute Badlands liberally.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (top), gain 3 Energy. Cards: Jagged Shards OR Plows Shatter. Place presence in unoccupied land type with Town/City, ideally Ravaging next turn. Shards if prepping Solidity or need Dahan shuttle + Badlands. Plows if Dahan positioned and countering Explore in Town land."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (top), gain 3 Energy. Cards: Stubborn Solidity + other starter. Gain Earth Minor (Sun+Earth ideal) with +1 Card Play. Add presence to Ravaging land or unoccupied type with buildings. Solidity guarantees favorable trade. Tier 1 Bulwark mitigates another Ravage for 2 Energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim All, add presence (bottom), gain 2 Earth. Cards: Variable. Add presence to distant Mountain or double in Blighted land. With 5 Earth, tier 2 Break Themselves in standard Ravage (Explorer+Town+City) = 5 damage back, kill both buildings, 1 Energy for Blight from box. Presence in every type enables Reclaim All abuse on large Ravages."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2512536/openings-stones-unyielding-defiance"
+  },
+  {
+    "spiritSlug": "starlight-seeks-its-form",
+    "slug": "starlight-seeks-its-form-bgg-je-opening-1",
+    "name": "Thresholded Major Rush",
+    "description": "Draft for Element pairs to hit Major thresholds. Use Boon of Reimagining and Shape the Self Anew to accumulate cards and Energy. Track 1 is topmost track; finish Tracks 1 and 3 with opposite choices (Reclaim vs Power gain).",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Add presence (Track 1, covers Reclaim 1/2), gain Minor, move presence up to 1, +1 Energy. Cards: Boon of Reimagining + Shape the Self Anew (or strong Moon Minor). Position for Peace next turn. Use Sidereal gather to prevent Build. Forget Shape for Energy. Use Shape BEFORE Boon for more Forget options. Draft Element pairs; Moon cards are golden."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Add presence (Track 3, +1 Energy), gain Major, move presence up to 1, +1 Energy. Cards: Peace of the Nighttime Sky + Moon Minor or Shape. Forget Boon when gaining Major. Move before adding if needed for Peace. Swap +1 Energy for move 3 if energy not needed. Forget Peace to use twice - hard to reuse once rolling with Major."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain Major, move presence up to 1, add presence (Track 3, choose Element, +1 Energy), +1 Energy. Cards: Major + Minor. Forget least useful Minor if Majors have pairable Elements. Choose Element based on Major threshold. Forget first Major if it didn't work out. Play whichever Major hits hardest."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 (Good Major/Minor Combo)",
+        "instructions": "If good Major/Minor combo (or Forgot second Major): Add from Track 5 (income) or Track 6 (threshold Element). Reclaim All + gain Minor, then repeat that combo."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 4 (Kept Both Majors)",
+        "instructions": "If kept both Majors: Uncover Elements for second Major threshold. If threshold not compelling, uncover Track 2 for +3 Energy and simpler midgame."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2518429/openings-starlight-seeks-its-form"
+  },
+  {
+    "spiritSlug": "vengeance-as-a-burning-plague",
+    "slug": "vengeance-as-a-burning-plague-bgg-je-opening-1",
+    "name": "Flexible Disease Paths",
+    "description": "Flexible Disease placement to enable either Epidemics Run Rampant (utility) or Savage Revenge (tempo) innate paths depending on board state.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: +1 Energy, gain Minor, add presence (energy). Cards: Fetid Breath. Add presence in buildingless land near ally's board. Fire Minor > Animal (second innate scales better). Disease targets: Town that just Explored (prevent City), empty explored land (farm Build), or Town+Blight for innate next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 2 presence (1 plays, 1 energy/plays based on Element). Cards: Plaguebearers + Minor. For Epidemics: presence (plays) in Ravaging land, (energy) on different board with Disease. For Savage Revenge: both (plays) in land about to Ravage - lose 1 presence, keep 1. Push Disease with Plaguebearers to next Ravage for Sudden Fevers."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Place 2 presence (energy/plays for Element, energy for 3 Energy/turn). Cards: Sudden Fevers, Fiery Vengeance. Both presence in Ravaging land if using Savage Revenge. Fiery augments allies. Next turn: Reclaim All, seek Minor matching first one's elements."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2484534/openings-vengeance-as-a-burning-plague"
+  },
+  {
+    "spiritSlug": "serpent-slumbering-beneath-the-island",
+    "slug": "serpent-slumbering-beneath-the-island-bgg-opening-1",
+    "name": "Multiplayer Support",
+    "description": "A multiplayer-focused opening for Serpent that emphasizes supporting allies with Gifts while building toward Majors. Rush 2 card plays for consistent innate access, manage your presence cap, and track ally reclaim cycles.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1 - Gift an Ally",
+        "instructions": "Growth: +1 Energy, gain Minor, place presence (bottom). Cards: Gift of Flowing Power OR Primordial Deeps. Rush 2 card plays for innate access. Take Moon/Fire+Earth Minor. Place presence touching several same-type lands, ideally Build land. Gift slower Spirits extra play; faster Spirits get Minor access. Notable combos: Bringer (Deeps for Moon/Earth), Vital Strength (Flowing for Growth 3), Wildfire (Flowing for Flash+Smoke), Lightning (Flowing for Fire)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2 - Absorb and Defend",
+        "instructions": "Growth: +1 Energy, gain Minor, place presence (bottom). Cards: Absorb Essence + Elemental Aegis. Place in land with Town or touching several Ravage lands. Absorb = +3 Energy + ally Element. Aegis defends your land + adjacent. Serpent Rouses crushes or pushes a Town."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 - Expand Reach",
+        "instructions": "Growth: +4 Energy, place presence (top). Cards: Remaining Gift + weaker Minor. Spread presence for Major targeting next turn. Extra Energy can pay for expensive Events."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 - Major Power",
+        "instructions": "Growth: +1 Energy, gain Major, place presence (top). Cards: Other Minor + Major. 'Any' element unlocked with decent Energy. Target mid-cost Major, forget Minor from discard. Place presence for targeting. Reclaim All next turn."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2282835/openings-serpent-slumbering-beneath-the-island"
+  },
+  {
+    "spiritSlug": "heart-of-the-wildfire",
+    "slug": "heart-of-the-wildfire-bgg-promo-opening-1",
+    "name": "Flexible Aggro",
+    "description": "A flexible opening for Wildfire focusing on early damage while managing Blight. Rush Plant elements for massive damage scaling. Plan Reclaims carefully to maintain presence placement for Blazing Presence damage.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1 - Clear Early Threats",
+        "instructions": "Growth: Add presence (plays), gain 3 Energy (2 + 1 per Fire). Cards: Asphyxiating Smoke. Place presence to eliminate Explorer and prevent Build. Smoke clears a Town, pushing Dahan to ally's defended land."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2 - Gain Plant Elements",
+        "instructions": "Growth: Add presence (energy), gain Minor. Cards: Threatening Flames OR Minor. Prioritize Plant over Fire (tracks provide Fire). 3 Plant = huge spike. No Plant? Take Fire/Air for Flash/Firestorm combos. Plant Minor: place in Town Ravage or Build land. Flames: City+Town land to destroy City and push Town."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3 - Maximum Damage",
+        "instructions": "Growth: Add presence (plays), gain 4 Energy. Cards: Flame's Fury + Flash Fires. With Fury + 4 Fire = 5 damage (2 placement + 3 Firestorm/Fury). Tear into populated land or clean your lands. Flash also benefits from Fury. First chance to remove Blight via Burned Land Regrows."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4 - Setup for Reclaim",
+        "instructions": "Growth: Add presence (energy or plays), gain Minor. Cards: Flames + Minor or both Minors. After 8 draws, likely have Plant. Position for Reclaim. Take from Plays if Invaders building up (3 plays = damage spike). Take from Energy if lands inaccessible or already occupied."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5 - Reclaim and Major",
+        "instructions": "Growth: Reclaim All, +1 Energy, gain Major or Minor. Cards: Based on draws. For Major, forget a weak Minor or Flash Fires. Target 3-4 cost Majors for Growth 3 affordability. Or grab Minor if lacking Plant for mid-game scaling."
+      }
+    ],
+    "author": "Jonah Yonker (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2313791/openings-heart-of-the-wildfire"
+  },
+  {
+    "spiritSlug": "a-spread-of-rampant-green",
+    "slug": "a-spread-of-rampant-green-wiki-antistone",
+    "name": "Innate Combo Focus",
+    "description": "Trigger innates early through presence placement and combine Creepers Tear into Mortar with Dahan counter-attacks for efficient building destruction.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (one each track), +1 card play. Cards: Gift of Proliferation, Stem the Flow. Energy track unlocks moon for first innate. Use Choke the Land to prevent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place 1 presence (bottom), gain Minor, +3 energy. Cards: Overgrow in a Night, Fields Choked with Growth. Overgrow triggers All-Enveloping Green for Defend 2. Coordinate with Creepers Tear for building damage."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. If minor has plant+moon+water, activate level 2 Creepers Tear to destroy Town without combo."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=A_Spread_of_Rampant_Green/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-antistone",
+    "name": "Major Rush",
+    "description": "Antistone's opening focusing on getting a major power early through Call on Midnight's Dreams while maintaining fear generation via Night Terrors innate.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 1 presence (top), gain Minor. Cards: Dreams of the Dahan, Predatory Nightmares. Air from track triggers Spirits May Yet Dream + level 2 Night Terrors. Use Predatory Nightmares on Town about to Ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +2 energy, place presence (top) in land with invaders/Dahan. Cards: Dread Apparitions, Call on Midnight's Dreams. Order: Dread → Night Terrors (2 fear = Defend 3) → Spirits May Yet Dream → Call for Major. Forget Call to use Major immediately if good."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "If good Major, Reclaim One to recast it + Turn 1 Minor. If both cards have Moon, presence from top track gives third Moon for Spirits May Yet Dream level 2."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "bringer-of-dreams-and-nightmares",
+    "slug": "bringer-of-dreams-and-nightmares-wiki-breppert",
+    "name": "Dahan Defense",
+    "description": "Gather 3 Dahan to defend a full land (Explorer + Town + City) on turn 2, then get major power turn 3. Strong early board control.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place presence (1 away, top for Air), gain Minor. Cards: Predatory Nightmares, Dreams of the Dahan. Gather 3 Dahan to land you'll defend Turn 2 (ideally Explorer+Town+City). Nightmares targets Turn 1 builds. Triggers level 2 Night Terrors + Spirits May Yet Dream."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Place presence in Dahan land, +2 Energy. Cards: Dread Apparitions, Call on Midnight's Dream (for Fear). Night Terrors (2 fear) + Dread = Defend 5. 3 Dahan wipe out Explorer+Town+City."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim One, 0-range presence for Sacred Site, get Major via Call. At least 4 Energy before Dahan boost. Accept some Blight while setting up Major for Turn 4 board control."
+      }
+    ],
+    "author": "breppert (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Bringer_of_Dreams_and_Nightmares/breppert%27s_Opening"
+  },
+  {
+    "spiritSlug": "vital-strength-of-the-earth",
+    "slug": "vital-strength-of-the-earth-wiki-thommy-mann",
+    "name": "Major Power Rush",
+    "description": "ThommyMann's opening focusing on early major power acquisition by forgetting Rituals of Destruction, building holy sites with Dahan present, and reaching two major power plays per turn by turn 5.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: 2nd option. Create Sacred Site (energy track); gain Major (prefer 3-4 cost). Cards: Major or Draw of Fruitful Earth. Forget Rituals of Destruction. Deny opponent builds."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: 1st (Reclaim) or 3rd if Major was weak. Place presence (energy) on Explorer about to Build. Cards: Major or Guard the Healing Land. Prioritize lands with Dahan for defensible Sacred Sites."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: 2nd. Gain another Major; place presence for Sacred Site. Cards: Major or Guard. Forget Year of Perfect Stillness (keep vs England). Established Sacred Sites stay safe through mid-game."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: 1st (Reclaim). Take presence from plays track; place where Explorer will Build with Dahan. Cards: As needed. Continue building Sacred Site network."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: 2nd. Gain Minor or replace weak Major; add presence (plays). Now can play two Majors per turn for mid-game dominance."
+      }
+    ],
+    "author": "ThommyMann (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Vital_Strength_of_the_Earth/ThommyMann's_Guide"
+  },
+  {
+    "spiritSlug": "oceans-hungry-grasp",
+    "slug": "oceans-hungry-grasp-wiki-antistone",
+    "name": "Ally Coordination",
+    "description": "Focus on drowning coordination with allies using Call of the Deeps to gather and Tidal Boon to support teammates. Best in multiplayer where allies can push invaders to you.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence in oceans (bottom), +1 energy. Cards: Call of the Deeps, Tidal Boon. Ocean Breaks is range 0 - only coastal setup land targetable. Coordinate with allies: moving invaders to oceans destroys them and gives you energy. Call prevents builds or drowns explorers."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Push presence from oceans, place 1 presence (bottom), gain Minor. Cards: Grasping Tide, Swallow the Land-Dwellers, Minor. Drownings fund energy. Place presence to reach all boards in multiplayer. Priority: Water+Earth or Air Minors. Target Swallow on Dahan-less lands. Grasping Tide range-1 for Dahan counterattack lands."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim. MUST gather 1 presence into each ocean. Plan cards based on remaining presence locations. Avoid clustering by balancing push/gather across turns."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Ocean%27s_Hungry_Grasp/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "lightnings-swift-strike",
+    "slug": "lightnings-swift-strike-wiki-antistone",
+    "name": "Innate Rush",
+    "description": "Antistone's opening focusing on triggering Thundering Destruction innate by turn 2, conserving cards turn 1 to enable a powerful three-card burst with innate activation.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Place 2 presence (top). Cards: Only Shatter Homesteads. Top track establishes second Sacred Site for range. Play only 1 card to enable innate next turn. Consider making Shatter fast if destroying Town creates out-of-range lands; otherwise slow before Ravage."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: +3 energy, place 1 presence (bottom). Cards: Lightning's Boon, Raging Storm, Harbingers. Triggers Thundering Destruction for extra Town kill. Combo Storm with allies or on Explorer-only lands. Position Harbingers' pushed Dahan for support or Ravage counterattack."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Reclaim, gain Minor, +1 energy. Cards: Shatter, Boon, Harbingers. Energy covers 3 cards + innate. Can Reclaim multiple turns for 3-card plays (sacrifices presence placement)."
+      }
+    ],
+    "author": "Antistone (Wiki)",
+    "sourceUrl": "https://spiritislandwiki.com/index.php?title=Lightning%27s_Swift_Strike/Antistone%27s_Opening"
+  },
+  {
+    "spiritSlug": "rising-heat-of-stone-and-sand",
+    "slug": "rising-heat-of-stone-and-sand-bgg-opening-1",
+    "name": "Minor/Plays Build",
+    "description": "2aRON's solo playthrough focusing on a Minor/Plays centered build, clearing the inland early to prevent future explores and utilizing Heat's Sacred Site special rule for reduced invader health.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Option 3 (gain Minor, +2 energy, place 1 presence from plays). Pick Steam Vents (Fire+Air+Earth for innate). Place presence in starting Town land. Cards: Steam Vents (destroy Explorer to stop Build), Stinging Sandstorm (gather presence for Sacred Site, 1 damage destroys Town via special rule). Level 1 innate handles Explore."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Option 3 (gain Minor, +2 energy, place presence from plays for 3 plays next turn). Pick Visions of Fiery Doom. Place presence in coastal land. Cards: Visions (push Town, prevent Blight), Call to Dahan Herders (push invaders into kill zone). Consolidate invaders for destruction."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Option 2 (place 2 presence from plays into Mountain for Sacred Site). Scales for strong Turn 4. Cards: Sweltering Exhaustion (skip Build), Gift of Searing Heat (self for +2 energy). Level 1 innate destroys Explorer if non-coastal Explore. Weaker turn, devastating reclaim setup."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Option 1 (Reclaim, +1 energy, gain Minor). Cards: Gift (spend 1 to destroy Town at Sacred Site), Steam Vents with threshold (3 Earth destroys Town), Sandstorm (recover Sacred Site, destroy new Town), Dahan Herders. Level 3 innate destroys 2 Cities. Reach Terror Level 2."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: Option 1 (Reclaim, +1 energy, gain Major). Cards: Gift only needed. Spend 1 energy to destroy final Town at Sacred Site. Victory at Terror Level 2!"
+      }
+    ],
+    "author": "2aRON (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2955905/rising-heat-of-stone-and-sand-basic-strategy-and-f"
+  },
+  {
+    "spiritSlug": "fathomless-mud-of-the-swamp",
+    "slug": "fathomless-mud-of-the-swamp-bgg-opening-1",
+    "name": "Major Power Build",
+    "description": "2aRON's solo playthrough showcasing Mud's versatility with Sacred Site positioning to prevent Town/City builds via the special rule, while setting up for a Major Power win.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Option 2 (place 2 presence, 1 plays + 1 energy, both adjacent for Sacred Site). Create Sacred Site adjacent to big inland problem. Cards: Open Shifting Waterways (gather 2 Dahan, 1 damage), Foul Vapors (push Explorer to stop Build). Level 2 innate damages Town, Waterways finishes it. Dahan positioned for Ravage counterattack."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Option 2 (place 2 presence from energy for 3 energy/turn). Spread toward problems. Cards: Intractable Thickets (Defend 5), Exaltation of Tangled Growth (target self, pay 1 for Major). Defend 5 + 2 Dahan destroys City+Explorer. Draw Major in Slow phase (Pillar of Living Flame or Jungle Hungers ideal)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Option 3 (gain Minor, +2 energy, place presence from energy). Draw Lure of the Unknown. Cards: Pillar of Living Flame (targets consolidated City), Lure (cleanup). Pillar destroys City, generates Fear for Terror Level 2. Victory!"
+      }
+    ],
+    "author": "2aRON (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2959811/fathomless-mud-of-the-swamp-basic-strategy-and-ful"
+  },
+  {
+    "spiritSlug": "eyes-watch-from-the-trees",
+    "slug": "eyes-watch-from-the-trees-bgg-opening-1",
+    "name": "Defend and Dahan Counterattack",
+    "description": "A minor power/plays-focused opening that leverages Eyes Watch's double presence growth option and special rule to gather Dahan with each defend. Aims to trigger innate levels progressively through rounds 1-5, building toward 3 plays and 3 energy per turn.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth 2: Place both presence from energy track (2 energy, 1 play). Cards: Eerie Noises and Moving Trees. Push explorers out of one built land. Defend the other next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth 2: Place 1 presence from plays, 1 from energy (2 energy, 2 plays, extra Plant). Sacred Site in last Explored land. Cards: Mysterious Abductions, Whispered Guidance. Triggers level 2 innate. Abductions clears Explored land; Guidance sets up Dahan counterattack."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth 3: Place presence (energy), gain Moon Minor, +1 energy (3 energy, 2 plays, extra Plant). Cards: Boon of Watchful Guarding + Minor. Triggers level 1 innate with Moon. Defend as needed; Dahan counterattack clears lands."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth 1: Reclaim all, gain Minor, +1 energy. No presence change. Cards: Eerie Noises + Minor for level 2 innate. Save other Uniques for Turn 5 level 3 innate if board allows."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth 2: Place both presence (plays) for 3 plays, 3 energy, extra Plant+Air. Place where Abductions relevant. Cards: Boon, Whispered Guidance, Mysterious Abductions. Triggers level 3 innate."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6+",
+        "instructions": "Now 'online'. Reclaim next turn if out of powers, or G3 for Minor + Moon element to extend cycle (but only 2 plays)."
+      }
+    ],
+    "author": "Grant Foster-Thomas (Gthomas927)",
+    "sourceUrl": "https://boardgamegeek.com/thread/2939010/opening-eyes-watch-from-the-trees"
+  },
+  {
+    "spiritSlug": "sun-bright-whirlwind",
+    "slug": "sun-bright-whirlwind-opening-1",
+    "name": "Build-Up Strategy",
+    "description": "Lean on the special rule for turns 3-4 while underplaying to build up for a powerful turn 5 with plenty of cards to keep hitting innates.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom, gain Minor. Get the cheapest Minor with Air (or cheapest useful effect if no Air available). Play Gift of Sunlit Vigor and the Minor."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 bottom. Play Gift of Wind-Sped Steps, Scatter to the Winds, and Tempest of Wings and Claws."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim, draw 2 cards. Begin planning for turn 5: you need 2 Sun and 3 Air in card plays to reach Tier 3 innate."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "G3 bottom, draw 2 cards from Minor power deck."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "G2 or G3 bottom. Choose G3 if you have enough energy to play all cards in hand (to aim for Tier 4 innate); otherwise G2. Deploy cards to maximize impact."
+      },
+      {
+        "turn": 6,
+        "title": "Turn 6+",
+        "instructions": "Reclaim and continue. Combo Gift with innate or Scatter for fast-speed movement. Energy tight - prioritize Air over Sun (need ~2x Air as Sun)."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Whirlwind---Standard"
+  },
+  {
+    "spiritSlug": "devouring-teeth-lurk-underfoot",
+    "slug": "devouring-teeth-lurk-underfoot-opening-1",
+    "name": "Balanced Build (Minor/Major Flex)",
+    "description": "Target 3 energy / 2 plays as your baseline. Flexible to pivot into majors or stay with minors depending on your drafts.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Cards: Herd Them To Their Doom, Ferocious Assault. Grow where Defend 9 provides tactical value this/next turn."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "G2 top, gain Minor. Play Gift of Furious Might and Mark Territory with Scars and Teeth."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "G2 top, gain Minor. Play 2 Minors."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Reclaim. Goal: reach 3rd card play within ~3 turns. Energy options allow Major or Minor flexibility."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Teeth---Standard"
+  },
+  {
+    "spiritSlug": "devouring-teeth-lurk-underfoot",
+    "slug": "devouring-teeth-lurk-underfoot-opening-2",
+    "name": "Reclaim Loop",
+    "description": "A straightforward reclaim-heavy approach that cycles between two cards. Simple but effective for most games.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "G3 bottom. Play Herd Them To Their Doom and Ferocious Assault."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Reclaim top track. Play Herd Them To Their Doom and Ferocious Assault again."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Reclaim top track. Play Herd Them To Their Doom and Ferocious Assault (achieving energy neutrality)."
+      },
+      {
+        "turn": 4,
+        "title": "Turns 4-6",
+        "instructions": "Three consecutive bottom track reclaims to unlock 3rd card play capability."
+      },
+      {
+        "turn": 7,
+        "title": "Turn 7",
+        "instructions": "Reclaim top track. Gather energy for extra card slot."
+      },
+      {
+        "turn": 8,
+        "title": "Turn 8+",
+        "instructions": "Reclaim top. Consider innate maximization. Most games end before 3 plays, so long-term setup less critical."
+      }
+    ],
+    "author": "ACupofMeck (via thetaurunti)",
+    "sourceUrl": "https://thetaurunti.github.io/obsidian-spiritisland/Guides/Teeth---Reclaim-Loop"
+  },
+  {
+    "spiritSlug": "breath-of-darkness-down-your-spine",
+    "slug": "breath-of-darkness-bgg-bottom-track",
+    "name": "Bottom Track Rush",
+    "description": "Community opening from BGG focusing on getting to 3 plays quickly via the bottom presence track, enabling powerful fear generation through maxed innates.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 bottom (gain card, place presence). Play drafted card to stop Build. Prioritize Incarna positioning."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 bottom. Now 2 plays. Aim for tier 2 Leave a Trail + tier 1-2 Swallowed by the Endless Dark."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 bottom. Now 3 plays with Moon. Triggers 4 moon + 3 air + 2 beast (level 3 left innate, all right innate levels). 10+ fear/turn possible."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim. Spam maxed innates. Goal: Reclaim 1 space on bottom track for unstoppable high fear output."
+      }
+    ],
+    "author": "BGG Community (DonKidic, Aminar)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin"
+  },
+  {
+    "spiritSlug": "breath-of-darkness-down-your-spine",
+    "slug": "breath-of-darkness-bgg-hybrid",
+    "name": "Top-to-Bottom Hybrid",
+    "description": "Hybrid approach that grabs energy and moon from top track before switching to bottom track for plays. Balances early stability with mid-game power.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 top (gain card, place presence). Get 2 energy space. Uniques cost 3 total, so energy helps."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 top for Moon element. Moon > Move-1 (extra Leave A Trail level gives more than just movement)."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 bottom toward 3 plays. Accumulated cards from G2 delay first reclaim significantly."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Continue bottom or G3 for energy. Goal: Empower or 3 plays before first reclaim. Good 0-cost minors can reach Empower first."
+      }
+    ],
+    "author": "BGG Community (Schattenn, Steve Haas)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin"
+  },
+  {
+    "spiritSlug": "breath-of-darkness-down-your-spine",
+    "slug": "breath-of-darkness-bgg-threshold-rush",
+    "name": "Turn 2 Threshold",
+    "description": "Aggressive opening that skips turn 1 plays to threshold Swallowed by the Endless Dark on turn 2, capable of clearing double-city lands early.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 bottom. Play nothing or drafted card + strife card if excellent. Saving cards sets up massive Turn 2."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 or G3 bottom. Threshold Swallowed + hit innates. Clears major land including double-city lands, often creating a pocket."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Continue bottom track. Minimize reclaim impact: underplay when needed, take cheap minors, work toward Reclaim 1. Excellent vs Scotland (eliminates coastal city adjacency builds)."
+      }
+    ],
+    "author": "BGG Community (Ian Goth)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin"
+  },
+  {
+    "spiritSlug": "breath-of-darkness-down-your-spine",
+    "slug": "breath-of-darkness-bgg-adversary-adaptive",
+    "name": "Adversary-Adaptive",
+    "description": "Flexible approach that adapts presence track choice to the adversary type: top track for 'tall' adversaries like England, bottom track for 'wide' adversaries.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Tall Adversaries (England)",
+        "instructions": "Pure top track for heavy-build adversaries. Majors easy to get; empowered Incarna handles built-up lands. Spam G2 to reach empowered Incarna before first reclaim."
+      },
+      {
+        "turn": 2,
+        "title": "Wide Adversaries",
+        "instructions": "Pure bottom track for strong-start/wide adversaries. Fastest path to level 2-3 left innate for strong early position. Fast presence move great for Incarna."
+      },
+      {
+        "turn": 3,
+        "title": "Moderate Adversaries",
+        "instructions": "Hybrid: G2 top first, then switch to bottom. Flexible card options with 2 moons on tracks (air/animal easier). Max innates as fast as pure bottom while adding Major plays."
+      }
+    ],
+    "author": "BGG Community (T. Ips)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140699/breath-of-darkness-down-your-spine-analysis-openin"
+  },
+  {
+    "spiritSlug": "wandering-voice-keens-delirium",
+    "slug": "wandering-voice-bgg-air-focus",
+    "name": "Air Element Focus",
+    "description": "Community opening prioritizing early air elements on top track to maximize Incarna movement and innate consistency. Delays card plays to reach the air element faster.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 top/top. Cards: Twist Perceptions or Frightful Keening (Keening if needed to solve a land)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 bottom. Prioritize Air Minor. Play two Air cards. Pay energy for Turmoil's Touch rather than discarding. Solo: delay Turmoil to Turn 3 to pay 2 energy."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 top/top if gained Air card Turn 2. If no Air and need tempo, G3 either track (but weaker next turn)."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Growth: Reclaim. Sets up strong mid-game with consistent Air and Incarna movement."
+      },
+      {
+        "turn": 5,
+        "title": "Turn 5",
+        "instructions": "Growth: G2 top/top for Incarna push, or bottom/bottom for 3 plays. Top/top = excess energy (10+) but delays Major/3 plays by ~3 turns."
+      }
+    ],
+    "author": "CelestialSpark (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3139454/wandering-voice-keens-delirium-discussion-analysis"
+  },
+  {
+    "spiritSlug": "relentless-gaze-of-the-sun",
+    "slug": "relentless-gaze-bgg-standard",
+    "name": "Standard Minor Build",
+    "description": "Community opening focusing on building up minors before expanding to 3 plays. Emphasizes acquiring moon cards for the second innate and using G2 to accumulate card options.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 top. Cards: Focus the Sun's Rays (combo with level 1 innate for big kill) or Unbearable Gaze (clear 2 lands) based on board."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 bottom. Cards: Other Unique from Turn 1. Build Minor supply - prioritize Moon for second innate."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 bottom. Continue acquiring Minors. Support cards less valuable (limited plays). Blight-adding powers considerably better for this spirit."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Build toward 3 plays + 3 energy. Clearing improves significantly. Shift from G2 to G1/G3 for repeat shenanigans. Focus = best nuke; Wither Bodies builds Badlands."
+      }
+    ],
+    "author": "Steve Haas (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140073/relentless-gaze-of-the-sun-discussion-analysis-ope"
+  },
+  {
+    "spiritSlug": "relentless-gaze-of-the-sun",
+    "slug": "relentless-gaze-bgg-top-track-major",
+    "name": "Top Track Major Rush",
+    "description": "Alternative opening focusing on pure top track progression, grabbing a major turn 1 and forgetting Wither Bodies. Builds toward the 4 energy/Any element spot for massive repeat plays.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 top. Gain Major, forget Wither Bodies. Play around drafted Major while taking mostly G3s for energy stockpile."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 top toward Any element spot. Move presence with G3's presence move as needed."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G3 top. Reach 4 energy/Any element spot. Any element helps hit innate thresholds regardless of drafts."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Continue G3 for energy stockpiling. Repeat Major multiple times per turn with enough energy. Devastating effect (18 fear in one turn possible)."
+      }
+    ],
+    "author": "BGG Community (Schaden, rchandra)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3140073/relentless-gaze-of-the-sun-discussion-analysis-ope"
+  },
+  {
+    "spiritSlug": "wounded-waters-bleeding",
+    "slug": "wounded-waters-bgg-standard",
+    "name": "Standard Healing Path",
+    "description": "Community opening following the spirit's natural progression: minor/minor/major to see your options before choosing the first healing card. Splits healing tokens between R1 and R2 for flexibility.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Forced (gain Minor, place presence). Take Water or Animal Minor for healing card support. Place bleeding token on R1."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Forced (gain Minor, place presence). Take another Minor. Place bleeding token on R2 to keep both healing options open."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Gain Major. Use draft to inform healing card choice - Beast majors → Roiling Waters; control majors → Serene Waters. Choose first healing card based on draft."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Unlock G3, prefer over G2 (gives energy). Go for 3 plays once track splits. Second healing card based on power synergy: Roiling = more fear; Serene = better control."
+      }
+    ],
+    "author": "Steve Haas (BGG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3141249/wounded-waters-bleeding-analysis-openings-strategy"
+  },
+  {
+    "spiritSlug": "dances-up-earthquakes",
+    "slug": "dances-up-earthquakes-bgg-t4-earthquake",
+    "name": "Turn 4 Earthquake",
+    "description": "The signature Dances Up Earthquakes opening that builds to a massive Turn 4 right innate activation with 7+ cards resolving at once. Proven effective against all level 6 adversaries.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Top track for energy. Make all cards Impending, starting with expensive Uniques. Position quake tokens strategically (most quake powers are Range 0)."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Continue top track. Keep making cards Impending. Impending cards accumulate energy each turn via Rhythmic Power. Plan timing around resolution."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Top track. Multiple impending cards about to resolve. Position presence for max quake coverage. Left innate (Gift of Seismic Energy) provides defense/shields based on impending cards."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4",
+        "instructions": "Explosion turn: resolve 7+ Powers including thresholded Majors. Fully activate right innate (Earth Shudders, Buildings Fall). This turn often decides the game."
+      }
+    ],
+    "author": "Jason Y (JasonILTG)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3107804/opening-strategy-guide-for-dances-up-earthquakes"
+  },
+  {
+    "spiritSlug": "dances-up-earthquakes",
+    "slug": "dances-up-earthquakes-bgg-sustained-pressure",
+    "name": "Sustained Pressure",
+    "description": "Alternative to the T4 explosion that maintains constant impending cards for regular medium earthquakes and bigger shields. More controlled but requires experienced planning.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: Top track. Start impending but don't commit to single massive turn. Keep 2-3 impending always for consistent left innate shields."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: Top track. Balance resolving cards vs adding impending. Triggers level 1-2 earthquakes regularly rather than one huge level 3+."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: Top track to Majors. At 2 energy/impending/round, need expensive cards to keep things impending. Presence move vital for spreading quake tokens."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Maintain impending/resolving rhythm. Less late-game bog-down than T4 strategies. Draft Majors aggressively - powerful even on 'wrong' turn."
+      }
+    ],
+    "author": "Steve Haas (Steve496)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3141722/dances-up-earthquakes-analysis-openings-strategy"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-g3-mobility",
+    "name": "G3 Mobility Focus",
+    "description": "Opening that prioritizes G3 for Incarna mobility and energy over rushing to empower. Uses proactive control and explorer sniping to stall until mid-game dominance.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G3 bottom (presence + 1 energy + move Incarna). Cards: Radiant Hallowed Grove + Bloom of Rocks = level 2 left innate + level 1 right. Remove explorers in 1-2 Exploring lands fast, another slow."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G3 top (gain card + Major via Boon). Cards: Entwine + Boon for innates. Entwine = Defend 2 (or 4 with threshold). Draft Major for win condition."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3+",
+        "instructions": "Track depends on drafts. Cheap minors = bottom for plays. Expensive Major = top for energy, unlock 4 energy before switching to bottom for 3 plays. Level 2 left innate critical for stopping builds in Explored lands."
+      }
+    ],
+    "author": "Schaden",
+    "sourceUrl": "https://boardgamegeek.com/thread/3137601/towering-roots-of-the-jungle-discussion-analysis-o"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-standard-opening",
+    "name": "Standard G2/G3 Hybrid",
+    "description": "Flexible opening that uses G2 for early growth then transitions to G3 for mobility. Early empower is often a trap - vitality is better placed in lands where you'll use it.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "Turn 1",
+        "instructions": "Growth: G2 top (gain Plant card or good effect). Cards: Blooming of Rocks (vitality to building land) OR Hallowed Grove (remove invaders) based on adversary/draft."
+      },
+      {
+        "turn": 2,
+        "title": "Turn 2",
+        "instructions": "Growth: G2 bottom for 2 plays. Play 2 cards meeting innate requirements. Focus on stopping builds and generating fear."
+      },
+      {
+        "turn": 3,
+        "title": "Turn 3",
+        "instructions": "Growth: G2 to empower OR G3 bottom to reposition Incarna. Continue 2 plays. Note: Early empower can trap - G3 mobility often more valuable."
+      },
+      {
+        "turn": 4,
+        "title": "Turn 4+",
+        "instructions": "Growth: G3 or Reclaim as needed. Blooming + Entwine strong for defense while growing to 4 plays or digging Majors. Spirit excels at stalling until late-game domination."
+      }
+    ],
+    "author": "JF (iamJFD)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3137601/towering-roots-of-the-jungle-discussion-analysis-o"
+  },
+  {
+    "spiritSlug": "towering-roots-of-the-jungle",
+    "slug": "towering-roots-bgg-adversary-adaptive",
+    "name": "Adversary-Adaptive",
+    "description": "Opening that adapts to specific adversaries. Russia favors empowering; Scotland requires coastal positioning. The three key tools are empowering, invader removal, and vitality placement.",
+    "turns": [
+      {
+        "turn": 1,
+        "title": "vs Russia",
+        "instructions": "Park Incarna in Beast land as Russia 6/escalation target. G3 top with explorer removal, or G3 bottom with removal + vitality to prevent blight. Then spam G2 to add vitality at Incarna for empower."
+      },
+      {
+        "turn": 2,
+        "title": "vs Scotland",
+        "instructions": "Set up Incarna on land 2. Must solve coastal town adds quickly. G3, move to coast, presence from bottom. Play re-add card + Major via Boon + vitality. Need Major for coastal builds OR fast bottom track for slow-phase town gathering."
+      },
+      {
+        "turn": 3,
+        "title": "General Principles",
+        "instructions": "Three core tools: (1) Empower Incarna - powerful but situational, (2) Invader removal - main control, (3) Vitality placement - flexible defense. Each addresses different problems. Empower ~50/50 vs Scotland."
+      }
+    ],
+    "author": "Andrew Plassard (aplassard)",
+    "sourceUrl": "https://boardgamegeek.com/thread/3136487/towering-roots-openingstrategy"
   }
 ]

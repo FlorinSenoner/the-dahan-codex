@@ -1,5 +1,4 @@
 import { api } from 'convex/_generated/api'
-import type { Id } from 'convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
 import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
@@ -77,13 +76,12 @@ export function useOutboxSync({ isAuthReady, ownerId }: UseOutboxSyncOptions) {
           try {
             await updateOfflineOpStatus(op.id, currentOwnerId, 'syncing')
             if (op.type === 'update') {
-              // Cast is safe: gameId originates from a Convex document _id
               await updateGameMutation({
-                id: op.gameId as Id<'games'>,
+                id: op.gameId,
                 ...op.data,
               })
             } else if (op.type === 'delete') {
-              await deleteGameMutation({ id: op.gameId as Id<'games'> })
+              await deleteGameMutation({ id: op.gameId })
             }
             await removeOfflineOp(op.id, currentOwnerId)
             opsSynced++

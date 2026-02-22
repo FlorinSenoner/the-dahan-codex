@@ -1,10 +1,11 @@
 import type { GameFormData } from '@/components/games/game-form'
+import type { GameUpdatePatch } from '@/types/convex'
 
 /**
  * Transform GameFormData to Convex mutation payload format
  * Shared between new game creation and game updates
  */
-export function transformGameFormToPayload(data: GameFormData) {
+export function transformGameFormToPayload(data: GameFormData): GameUpdatePatch {
   // Include spirits with either a spiritId (picked from dropdown) or a name (imported from CSV)
   const validSpirits = data.spirits.filter((s) => s.spiritId !== null || s.name)
 

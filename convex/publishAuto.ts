@@ -6,8 +6,27 @@ const PUBLISH_KEY = 'public-site'
 const DEBOUNCE_MS = 5 * 60 * 1000
 const RETRY_MS = 5 * 60 * 1000
 
+const publishStateValidator = v.object({
+  _id: v.id('sitePublishStates'),
+  _creationTime: v.number(),
+  key: v.string(),
+  dirty: v.boolean(),
+  lastContentChangeAt: v.optional(v.number()),
+  nextDispatchAt: v.optional(v.number()),
+  lastDispatchedAt: v.optional(v.number()),
+  lastError: v.optional(v.string()),
+})
+
+const flushResultValidator = v.object({
+  skipped: v.optional(v.boolean()),
+  dispatched: v.optional(v.boolean()),
+  reason: v.optional(v.union(v.literal('stale-or-clean'), v.literal('missing-config'))),
+  error: v.optional(v.string()),
+})
+
 export const getStateInternal = internalQuery({
   args: {},
+  returns: v.union(publishStateValidator, v.null()),
   handler: async (ctx) => {
     return await ctx.db
       .query('sitePublishStates')
@@ -18,6 +37,7 @@ export const getStateInternal = internalQuery({
 
 export const markDirtyInternal = internalMutation({
   args: {},
+  returns: v.null(),
   handler: async (ctx) => {
     const now = Date.now()
     const scheduledFor = now + DEBOUNCE_MS
@@ -42,6 +62,7 @@ export const markDirtyInternal = internalMutation({
     }
 
     await ctx.scheduler.runAfter(DEBOUNCE_MS, internal.publishAuto.flushInternal, { scheduledFor })
+    return null
   },
 })
 
@@ -49,6 +70,7 @@ export const markDispatchSucceededInternal = internalMutation({
   args: {
     scheduledFor: v.number(),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     const state = await ctx.db
       .query('sitePublishStates')
@@ -56,7 +78,7 @@ export const markDispatchSucceededInternal = internalMutation({
       .first()
 
     if (!state || state.nextDispatchAt !== args.scheduledFor) {
-      return
+      return null
     }
 
     await ctx.db.patch(state._id, {
@@ -65,6 +87,7 @@ export const markDispatchSucceededInternal = internalMutation({
       lastDispatchedAt: Date.now(),
       lastError: undefined,
     })
+    return null
   },
 })
 
@@ -73,6 +96,7 @@ export const markDispatchFailedInternal = internalMutation({
     scheduledFor: v.number(),
     error: v.string(),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     const state = await ctx.db
       .query('sitePublishStates')
@@ -80,7 +104,7 @@ export const markDispatchFailedInternal = internalMutation({
       .first()
 
     if (!state || state.nextDispatchAt !== args.scheduledFor) {
-      return
+      return null
     }
 
     const retryAt = Date.now() + RETRY_MS
@@ -94,6 +118,7 @@ export const markDispatchFailedInternal = internalMutation({
     await ctx.scheduler.runAfter(RETRY_MS, internal.publishAuto.flushInternal, {
       scheduledFor: retryAt,
     })
+    return null
   },
 })
 
@@ -101,6 +126,7 @@ export const flushInternal = internalAction({
   args: {
     scheduledFor: v.number(),
   },
+  returns: flushResultValidator,
   handler: async (ctx, args) => {
     const state = await ctx.runQuery(internal.publishAuto.getStateInternal, {})
 

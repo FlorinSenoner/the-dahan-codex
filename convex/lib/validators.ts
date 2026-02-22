@@ -6,7 +6,11 @@ import { ConvexError } from 'convex/values'
  */
 export function validateStringLength(value: string | undefined, field: string, max: number) {
   if (value && value.length > max) {
-    throw new ConvexError(`${field} must be ${max} characters or fewer`)
+    throw new ConvexError({
+      code: 'VALIDATION_MAX_LENGTH',
+      field,
+      message: `${field} must be ${max} characters or fewer`,
+    })
   }
 }
 
@@ -15,7 +19,11 @@ export function validateStringLength(value: string | undefined, field: string, m
  */
 export function validateRequiredString(value: string, field: string, max: number) {
   if (value.trim().length === 0) {
-    throw new ConvexError(`${field} is required`)
+    throw new ConvexError({
+      code: 'VALIDATION_REQUIRED',
+      field,
+      message: `${field} is required`,
+    })
   }
   validateStringLength(value, field, max)
 }
@@ -31,7 +39,11 @@ export function validateIntegerRange(
 ) {
   if (value === undefined) return
   if (!Number.isInteger(value) || value < min || value > max) {
-    throw new ConvexError(`${field} must be an integer between ${min} and ${max}`)
+    throw new ConvexError({
+      code: 'VALIDATION_RANGE',
+      field,
+      message: `${field} must be an integer between ${min} and ${max}`,
+    })
   }
 }
 
@@ -44,9 +56,17 @@ export function validateHttpUrl(value: string | undefined, field: string, max = 
   try {
     const url = new URL(value)
     if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-      throw new ConvexError(`${field} must use http or https`)
+      throw new ConvexError({
+        code: 'VALIDATION_URL_PROTOCOL',
+        field,
+        message: `${field} must use http or https`,
+      })
     }
   } catch {
-    throw new ConvexError(`${field} must be a valid URL`)
+    throw new ConvexError({
+      code: 'VALIDATION_URL_FORMAT',
+      field,
+      message: `${field} must be a valid URL`,
+    })
   }
 }

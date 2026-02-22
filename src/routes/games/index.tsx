@@ -3,7 +3,6 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import type { Doc } from 'convex/_generated/dataModel'
 import { Download, Gamepad2, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
 import { useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
@@ -104,7 +103,7 @@ function AuthenticatedGames() {
       .map((g) => {
         const update = updatesByGameId.get(g._id)
         if (update?.type === 'update') {
-          return { ...g, ...update.data } as Doc<'games'>
+          return { ...g, ...update.data }
         }
         return g
       })

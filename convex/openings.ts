@@ -1,4 +1,4 @@
-import { v } from 'convex/values'
+import { ConvexError, v } from 'convex/values'
 import { internal } from './_generated/api'
 import { mutation, query } from './_generated/server'
 import { requireAdmin } from './lib/auth'
@@ -16,18 +16,46 @@ const MAX_TURNS_PER_OPENING = 20
 const MAX_TURN_TITLE_LENGTH = 120
 const MAX_TURN_INSTRUCTIONS_LENGTH = 4000
 
-type OpeningTurn = {
-  turn: number
-  title?: string
-  instructions: string
+const openingTurnValidator = v.object({
+  turn: v.number(),
+  title: v.optional(v.string()),
+  instructions: v.string(),
+})
+
+const openingFields = {
+  spiritId: v.id('spirits'),
+  slug: v.string(),
+  name: v.string(),
+  description: v.optional(v.string()),
+  turns: v.array(openingTurnValidator),
+  author: v.optional(v.string()),
+  sourceUrl: v.optional(v.string()),
+  createdAt: v.optional(v.number()),
+  updatedAt: v.optional(v.number()),
+  difficulty: v.optional(
+    v.union(v.literal('Beginner'), v.literal('Intermediate'), v.literal('Advanced')),
+  ),
 }
 
-function validateTurns(turns: OpeningTurn[]) {
+const openingValidator = v.object({
+  _id: v.id('openings'),
+  _creationTime: v.number(),
+  ...openingFields,
+})
+
+function validateTurns(turns: Array<{ turn: number; title?: string; instructions: string }>) {
   if (turns.length === 0) {
-    throw new Error('At least one turn is required')
+    throw new ConvexError({
+      code: 'OPENING_TURNS_REQUIRED',
+      message: 'At least one turn is required',
+    })
   }
+
   if (turns.length > MAX_TURNS_PER_OPENING) {
-    throw new Error(`Openings are limited to ${MAX_TURNS_PER_OPENING} turns`)
+    throw new ConvexError({
+      code: 'OPENING_TURNS_TOO_MANY',
+      message: `Openings are limited to ${MAX_TURNS_PER_OPENING} turns`,
+    })
   }
 
   for (const turn of turns) {
@@ -37,9 +65,6 @@ function validateTurns(turns: OpeningTurn[]) {
   }
 }
 
-/**
- * Generate a URL-friendly slug from a name
- */
 function generateSlug(name: string): string {
   return name
     .toLowerCase()
@@ -49,44 +74,27 @@ function generateSlug(name: string): string {
     .trim()
 }
 
-// List all openings for a specific spirit
 export const listBySpirit = query({
   args: { spiritId: v.id('spirits') },
+  returns: v.array(openingValidator),
   handler: async (ctx, args) => {
-    return await ctx.db
+    return ctx.db
       .query('openings')
       .withIndex('by_spirit', (q) => q.eq('spiritId', args.spiritId))
       .collect()
   },
 })
 
-// Get a single opening by slug
-export const getBySlug = query({
-  args: { slug: v.string() },
-  handler: async (ctx, args) => {
-    return await ctx.db
-      .query('openings')
-      .withIndex('by_slug', (q) => q.eq('slug', args.slug))
-      .first()
-  },
-})
-
-// Create a new opening (admin only)
 export const createOpening = mutation({
   args: {
     spiritId: v.id('spirits'),
     name: v.string(),
     description: v.optional(v.string()),
-    turns: v.array(
-      v.object({
-        turn: v.number(),
-        title: v.optional(v.string()),
-        instructions: v.string(),
-      }),
-    ),
+    turns: v.array(openingTurnValidator),
     author: v.optional(v.string()),
     sourceUrl: v.optional(v.string()),
   },
+  returns: v.id('openings'),
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
 
@@ -98,7 +106,6 @@ export const createOpening = mutation({
 
     const now = Date.now()
     const slug = generateSlug(args.name)
-
     const id = await ctx.db.insert('openings', {
       spiritId: args.spiritId,
       slug,
@@ -112,29 +119,20 @@ export const createOpening = mutation({
     })
 
     await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
-
     return id
   },
 })
 
-// Update an existing opening (admin only)
 export const updateOpening = mutation({
   args: {
     id: v.id('openings'),
     name: v.optional(v.string()),
     description: v.optional(v.string()),
-    turns: v.optional(
-      v.array(
-        v.object({
-          turn: v.number(),
-          title: v.optional(v.string()),
-          instructions: v.string(),
-        }),
-      ),
-    ),
+    turns: v.optional(v.array(openingTurnValidator)),
     author: v.optional(v.string()),
     sourceUrl: v.optional(v.string()),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
 
@@ -149,8 +147,6 @@ export const updateOpening = mutation({
     }
 
     const { id, ...updates } = args
-
-    // Build patch object with only provided fields
     const patch: Record<string, unknown> = {
       updatedAt: Date.now(),
     }
@@ -159,32 +155,26 @@ export const updateOpening = mutation({
       patch.name = updates.name
       patch.slug = generateSlug(updates.name)
     }
-    if (updates.description !== undefined) {
-      patch.description = updates.description
-    }
-    if (updates.turns !== undefined) {
-      patch.turns = updates.turns
-    }
-    if (updates.author !== undefined) {
-      patch.author = updates.author
-    }
-    if (updates.sourceUrl !== undefined) {
-      patch.sourceUrl = updates.sourceUrl
-    }
+    if (updates.description !== undefined) patch.description = updates.description
+    if (updates.turns !== undefined) patch.turns = updates.turns
+    if (updates.author !== undefined) patch.author = updates.author
+    if (updates.sourceUrl !== undefined) patch.sourceUrl = updates.sourceUrl
 
     await ctx.db.patch(id, patch)
     await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+    return null
   },
 })
 
-// Delete an opening (admin only)
 export const deleteOpening = mutation({
   args: {
     id: v.id('openings'),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     await requireAdmin(ctx)
     await ctx.db.delete(args.id)
     await ctx.scheduler.runAfter(0, internal.publishAuto.markDirtyInternal, {})
+    return null
   },
 })
