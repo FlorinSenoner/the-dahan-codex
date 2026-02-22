@@ -45,7 +45,17 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnknownPseudoElement": "off",
+        "noUnknownPseudoElement": {
+          "level": "error",
+          "options": {
+            "ignore": [
+              "view-transition-group",
+              "view-transition-old",
+              "view-transition-new",
+              "view-transition-image-pair"
+            ]
+          }
+        },
         "noUnusedVariables": "warn",
         "noUnusedImports": "warn",
         "useExhaustiveDependencies": "warn"
