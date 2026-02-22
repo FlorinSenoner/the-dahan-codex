@@ -9,6 +9,8 @@ license: Complete terms in LICENSE.txt
 To test local web applications, write native Python Playwright scripts.
 
 **Helper Scripts Available**:
+- Use a helper executable that accepts `--server ... --port ... -- python your_automation.py`.
+- Set it once in your shell as `WITH_SERVER_CMD` (absolute path recommended).
 
 **Always run scripts with `--help` first** to see usage. DO NOT read the source until you try running the script first and find that a customized solution is abslutely necessary. These scripts can be very large and thus pollute your context window. They exist to be called directly as black-box scripts rather than ingested into your context window.
 
@@ -21,6 +23,7 @@ User task → Is it static HTML?
     │         └─ Fails/Incomplete → Treat as dynamic (below)
     │
     └─ No (dynamic webapp) → Is the server already running?
+        ├─ No → Start server(s) with your helper command (examples below)
         │        Then use the helper + write simplified Playwright script
         │
         └─ Yes → Reconnaissance-then-action:
@@ -35,10 +38,14 @@ To start a server, run `--help` first, then use the helper:
 
 **Single server:**
 ```bash
+WITH_SERVER_CMD="python /absolute/path/to/with_server.py"
+$WITH_SERVER_CMD --server "npm run dev" --port 5173 -- python your_automation.py
 ```
 
 **Multiple servers (e.g., backend + frontend):**
 ```bash
+WITH_SERVER_CMD="python /absolute/path/to/with_server.py"
+$WITH_SERVER_CMD \
   --server "cd backend && python server.py" --port 3000 \
   --server "cd frontend && npm run dev" --port 5173 \
   -- python your_automation.py
