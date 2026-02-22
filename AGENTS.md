@@ -15,3 +15,8 @@ Examples:
 
 - `feat(nav): replace Notes tab with Home`
 - `fix(hooks): add non-mise fallback for pre-push ci-parity`
+
+## Testing Artifacts
+
+- Never commit screenshots captured during testing (manual, Playwright, or headless).
+- Keep testing screenshots in temporary/untracked paths only.

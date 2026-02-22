@@ -41,7 +41,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Sparking",
-    "imagePattern": "Sparking (ni).png"
+    "imagePattern": "Sparking (ni).png",
+    "setup": "Put 2 Presence on your starting board, in the highest-numbered Sands. You start with your 4 Unique Power Cards and 0 Energy. Replace Raging Storm with Smite the Land with Fulmination."
   },
   {
     "name": "Sunshine",
@@ -52,7 +53,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Sunshine",
-    "imagePattern": "River Surges in Sunlight (Sunshine).png"
+    "imagePattern": "River Surges in Sunlight (Sunshine).png",
+    "setup": "Put 1 Presence on your starting board, in the highest-numbered Wetland. You start with your 4 Unique Power Cards and 0 Energy. Return Boon of Vigor to the box. Gain 1 Energy."
   },
   {
     "name": "Travel",
@@ -129,7 +131,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Dark_Fire",
-    "imagePattern": "Dark Fire (ni).png"
+    "imagePattern": "Dark Fire (ni).png",
+    "setup": "Put 3 Presence on your starting board: 2 in the highest-numbered Jungle and 1 in land #5. You start with your 4 Unique Power Cards and 0 Energy. Gain Unquenchable Flames (Minor Power)."
   },
   {
     "name": "Resilience",
@@ -162,7 +165,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Nourishing",
-    "imagePattern": "Nourishing (ni).png"
+    "imagePattern": "Nourishing (ni).png",
+    "setup": "Put 3 Presence on your starting board: 2 in the highest-numbered Mountain, 1 in the highest-numbered Jungle. You start with your 4 Unique Power Cards and 0 Energy. Replace A Year of Perfect Stillness with Voracious Growth (Minor Power)."
   },
   {
     "name": "Regrowth",
@@ -173,7 +177,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Regrowth",
-    "imagePattern": "Regrowth (ni).png"
+    "imagePattern": "Regrowth (ni).png",
+    "setup": "Put 2 Presence on your starting board: 1 in the highest-numbered Wetland and 1 in a Jungle without any Blight. You start with your 4 Unique Power Cards and 0 Energy. Take 13 Destroyed Presence. (Use Scenario Markers or Presence of another color.)"
   },
   {
     "name": "Tangles",
@@ -184,7 +189,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Tangles",
-    "imagePattern": "Tangles (ni).png"
+    "imagePattern": "Tangles (ni).png",
+    "setup": "Put 2 Presence on your starting board: 1 in the highest-numbered Wetland and 1 in a Jungle without any Blight. You start with your 4 Unique Power Cards and 0 Energy. Replace Gift of Proliferation with Belligerent and Aggressive Crops."
   },
   {
     "name": "Enticing",
@@ -206,7 +212,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Violence",
-    "imagePattern": "Violence (ni).png"
+    "imagePattern": "Violence (ni).png",
+    "setup": "Put 2 Presence on your starting board, in the highest-numbered Sands. You start with your 4 Unique Power Cards and 0 Energy. Gain 1 Energy. Replace Dreams of the Dahan with Bats Scout for Raids by Darkness."
   },
   {
     "name": "Transforming",
@@ -228,7 +235,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Spreading_Hostility",
-    "imagePattern": "Spreading Hostility (ni).png"
+    "imagePattern": "Spreading Hostility (ni).png",
+    "setup": "Put 1 Presence and 1 Wilds on your starting board, in the highest-numbered Jungle. You start with your 4 Unique Power Cards and 0 Energy. Gain 1 Energy."
   },
   {
     "name": "Lair",
@@ -239,7 +247,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Lair",
-    "imagePattern": "Lure of the Deep Wilderness Incarna (Lair).png"
+    "imagePattern": "Lure of the Deep Wilderness Incarna (Lair).png",
+    "setup": "Put 3 Presence on your starting board: 2 in land #8 and 1 in land #7. Add 1 Badlands to land #8. You start with your 4 Unique Power Cards and 0 Energy. Put your Incarna in an Inland land on your starting board. Remove 3 of your Presence (from the Island)."
   },
   {
     "name": "Deeps",
@@ -261,7 +270,8 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Locus",
-    "imagePattern": "Locus 2 (ni).png"
+    "imagePattern": "Locus 2 (ni).png",
+    "setup": "Put 1 Presence on your starting board, in land #5. You start with your 4 Unique Power Cards and 0 Energy. Replace Elemental Aegis with Pull Beneath the Hungry Earth (Minor Power). Put your Incarna and the Presence from the Fire Element space of your Presence track on your starting board in land #5."
   },
   {
     "name": "Encircle",
@@ -283,7 +293,8 @@
     "complexityModifier": "easier",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Unconstrained",
-    "imagePattern": "Unconstrained (ni).png"
+    "imagePattern": "Unconstrained (ni).png",
+    "setup": "Put 1 Presence and 1 Beasts on your starting board, in the highest-numbered Jungle. Put 1 Beasts in a land of your choice with Dahan anywhere on the island. You start with your 4 Unique Power Cards and 0 Energy. Do not Add a Beasts as part of Spirit Setup."
   },
   {
     "name": "Intensify",
@@ -338,6 +349,7 @@
     "complexityModifier": "harder",
     "hasUniqueImage": true,
     "wikiUrl": "https://spiritislandwiki.com/index.php?title=Warrior",
-    "imagePattern": "Thunderspeaker Incarna (Warrior).png"
+    "imagePattern": "Thunderspeaker Incarna (Warrior).png",
+    "setup": "Put 2 Presence on your starting board: 1 in each of the 2 lands with the most Dahan. You start with your 4 Unique Power Cards and 0 Energy. Replace 1 of your Presence with your Incarna and 1 Dahan. Replace Manifestation of Power and Glory with Call to Bloodshed."
   }
 ]

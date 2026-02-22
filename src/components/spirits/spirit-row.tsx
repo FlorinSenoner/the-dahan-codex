@@ -1,15 +1,14 @@
 import { Link } from '@tanstack/react-router'
-import type { Doc } from 'convex/_generated/dataModel'
 import { ArrowDown, ArrowUp, Equal } from 'lucide-react'
 import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { toAspectSlug } from '@/lib/slug'
 import { complexityBadgeColors, modifierColors, PLACEHOLDER_GRADIENT } from '@/lib/spirit-colors'
 import { cn } from '@/lib/utils'
+import type { SpiritListItem } from '@/types/convex'
 
 interface SpiritRowProps {
-  spirit: Doc<'spirits'> & { isAspect: boolean }
-  isAspect: boolean
+  spirit: SpiritListItem
 }
 
 // Map complexity modifier to icon (icons kept here to avoid lucide-react in lib/)
@@ -19,7 +18,8 @@ const modifierIcons: Record<string, typeof ArrowUp> = {
   harder: ArrowUp,
 }
 
-export function SpiritRow({ spirit, isAspect }: SpiritRowProps) {
+export function SpiritRow({ spirit }: SpiritRowProps) {
+  const isAspect = spirit.isAspect
   const [imgError, setImgError] = useState(false)
 
   // Build the URL - aspects use path-based format

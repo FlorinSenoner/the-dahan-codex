@@ -17,6 +17,7 @@ import { EditFab } from '@/components/admin/edit-fab'
 import { ExternalLinks } from '@/components/spirits/external-links'
 import { OpeningSection } from '@/components/spirits/opening-section'
 import { OverviewSection } from '@/components/spirits/overview-section'
+import { SetupSection } from '@/components/spirits/setup-section'
 import { VariantTabs } from '@/components/spirits/variant-tabs'
 import {
   AlertDialog,
@@ -250,24 +251,41 @@ interface SpiritDetailContentProps {
 
 export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailContentProps) {
   const [imgError, setImgError] = useState(false)
-  const [hasChanges, setHasChanges] = useState(false)
-  const [saveHandler, setSaveHandler] = useState<(() => Promise<void>) | null>(null)
+  const [setupHasChanges, setSetupHasChanges] = useState(false)
+  const [openingHasChanges, setOpeningHasChanges] = useState(false)
+  const [setupSaveHandler, setSetupSaveHandler] = useState<(() => Promise<void>) | null>(null)
+  const [openingSaveHandler, setOpeningSaveHandler] = useState<(() => Promise<void>) | null>(null)
   const [isSaving, setIsSaving] = useState(false)
-  const [isValid, setIsValid] = useState(true)
+  const [setupIsValid, setSetupIsValid] = useState(true)
+  const [openingIsValid, setOpeningIsValid] = useState(true)
   const isAdmin = useAdmin()
   const { isEditing, setEditing } = useEditMode()
+  const hasChanges = setupHasChanges || openingHasChanges
+  const isValid = (!setupHasChanges || setupIsValid) && (!openingHasChanges || openingIsValid)
 
   // Stable callback references to prevent child re-renders
-  const handleHasChangesChange = useCallback((value: boolean) => {
-    setHasChanges(value)
+  const handleSetupHasChangesChange = useCallback((value: boolean) => {
+    setSetupHasChanges(value)
   }, [])
 
-  const handleSaveHandlerReady = useCallback((handler: (() => Promise<void>) | null) => {
-    setSaveHandler(() => handler)
+  const handleOpeningHasChangesChange = useCallback((value: boolean) => {
+    setOpeningHasChanges(value)
   }, [])
 
-  const handleIsValidChange = useCallback((value: boolean) => {
-    setIsValid(value)
+  const handleSetupSaveHandlerReady = useCallback((handler: (() => Promise<void>) | null) => {
+    setSetupSaveHandler(() => handler)
+  }, [])
+
+  const handleOpeningSaveHandlerReady = useCallback((handler: (() => Promise<void>) | null) => {
+    setOpeningSaveHandler(() => handler)
+  }, [])
+
+  const handleSetupIsValidChange = useCallback((value: boolean) => {
+    setSetupIsValid(value)
+  }, [])
+
+  const handleOpeningIsValidChange = useCallback((value: boolean) => {
+    setOpeningIsValid(value)
   }, [])
 
   // Block navigation when there are unsaved changes in edit mode
@@ -300,16 +318,28 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
 
   // Wrap save handler to track saving state and exit edit mode on success
   const handleSave = useCallback(async () => {
-    if (!saveHandler) return
+    if (!hasChanges) return
     setIsSaving(true)
     try {
-      await saveHandler()
+      if (setupHasChanges && setupSaveHandler) {
+        await setupSaveHandler()
+      }
+      if (openingHasChanges && openingSaveHandler) {
+        await openingSaveHandler()
+      }
       // Exit edit mode after successful save
       setEditing(false)
     } finally {
       setIsSaving(false)
     }
-  }, [saveHandler, setEditing])
+  }, [
+    hasChanges,
+    setupHasChanges,
+    setupSaveHandler,
+    openingHasChanges,
+    openingSaveHandler,
+    setEditing,
+  ])
 
   const imageUrl = spirit.imageUrl
   // biome-ignore lint/correctness/useExhaustiveDependencies: imageUrl triggers reset intentionally
@@ -391,15 +421,22 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
           </Text>
         </div>
 
+        <SetupSection
+          onHasChangesChange={handleSetupHasChangesChange}
+          onIsValidChange={handleSetupIsValidChange}
+          onSaveHandlerReady={handleSetupSaveHandlerReady}
+          spirit={spirit}
+        />
+
         {/* Mobile: Overview section appears here */}
         <div className="lg:hidden">
           <OverviewSection description={spirit.description} spirit={spirit} />
         </div>
 
         <OpeningSection
-          onHasChangesChange={handleHasChangesChange}
-          onIsValidChange={handleIsValidChange}
-          onSaveHandlerReady={handleSaveHandlerReady}
+          onHasChangesChange={handleOpeningHasChangesChange}
+          onIsValidChange={handleOpeningIsValidChange}
+          onSaveHandlerReady={handleOpeningSaveHandlerReady}
           spiritId={spirit._id}
         />
 

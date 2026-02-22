@@ -38,6 +38,8 @@ export default defineSchema({
     ),
     // Detailed playstyle description for detail page
     description: v.optional(v.string()),
+    // Setup instructions from setup cards
+    setup: v.optional(v.string()),
     // Board data fields
     strengths: v.optional(v.array(v.string())),
     weaknesses: v.optional(v.array(v.string())),
