@@ -3,8 +3,6 @@ import { useEffect } from 'react'
 import { useOnlineStatus } from '@/hooks/use-online-status'
 import { syncGames } from '@/lib/sync'
 
-const DISABLE_BACKGROUND_SYNC = import.meta.env.VITE_DISABLE_BACKGROUND_SYNC === '1'
-
 /**
  * Auto background sync hook.
  * Games background sync for authenticated users.
@@ -15,7 +13,7 @@ export function useBackgroundSync(isAuthReady: boolean | undefined) {
   const isOnline = useOnlineStatus()
 
   useEffect(() => {
-    if (!isOnline || DISABLE_BACKGROUND_SYNC) return
+    if (!isOnline) return
 
     // Games sync is lightweight — run eagerly when auth is ready.
     if (isAuthReady) {
