@@ -1,5 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
+import { api } from 'convex/_generated/api'
 import type { Doc, Id } from 'convex/_generated/dataModel'
+import { ConvexHttpClient } from 'convex/browser'
 import { toAspectSlug } from '@/lib/slug'
 
 interface SnapshotSpirit extends Doc<'spirits'> {
@@ -19,6 +21,9 @@ interface SpiritFilters {
 }
 
 let snapshotPromise: Promise<PublicSnapshot> | null = null
+const USE_CONVEX_PUBLIC_DATA = import.meta.env.DEV
+let convexSnapshotClient: ConvexHttpClient | null = null
+let convexSnapshotClientUrl: string | null = null
 
 async function loadPublicSnapshot(): Promise<PublicSnapshot> {
   if (!snapshotPromise) {
@@ -32,7 +37,30 @@ async function loadPublicSnapshot(): Promise<PublicSnapshot> {
   return snapshotPromise
 }
 
+async function loadPublicSnapshotFromConvex(): Promise<PublicSnapshot> {
+  const convexUrl = import.meta.env.VITE_CONVEX_URL
+  if (!convexUrl) {
+    throw new Error('Missing VITE_CONVEX_URL in dev mode')
+  }
+
+  if (!convexSnapshotClient || convexSnapshotClientUrl !== convexUrl) {
+    convexSnapshotClient = new ConvexHttpClient(convexUrl)
+    convexSnapshotClientUrl = convexUrl
+  }
+
+  return await convexSnapshotClient.query(api.publicSnapshot.get, {})
+}
+
 export function publicSnapshotQueryOptions() {
+  if (USE_CONVEX_PUBLIC_DATA) {
+    return queryOptions({
+      queryKey: ['publicSnapshot', 'convex', import.meta.env.VITE_CONVEX_URL ?? ''],
+      queryFn: loadPublicSnapshotFromConvex,
+      staleTime: 0,
+      gcTime: 5 * 60 * 1000,
+    })
+  }
+
   return queryOptions({
     queryKey: ['publicSnapshot'],
     queryFn: loadPublicSnapshot,
