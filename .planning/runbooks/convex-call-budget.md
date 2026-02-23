@@ -7,8 +7,8 @@ Keep `build:public` within `<= 10` Convex function completions.
 ## Command
 
 ```bash
-# Use `--deployment dev` for local dev URLs, `--deployment prod` for production URLs.
-pnpm measure:convex-calls -- --deployment prod --budget 10 -- pnpm build:public
+# Measure against an isolated dev deployment URL/key when possible.
+pnpm measure:convex-calls -- --deployment dev --budget 10 -- pnpm build:public
 ```
 
 ## Expected Output
@@ -20,6 +20,7 @@ pnpm measure:convex-calls -- --deployment prod --budget 10 -- pnpm build:public
 ## Notes
 
 - Requires `VITE_CONVEX_URL` and Convex auth context to be configured.
+- CI can use `VITE_CONVEX_URL_CALL_BUDGET` + `CONVEX_CALL_BUDGET_DEPLOY_KEY` for isolation.
 - CI sets `VITE_DISABLE_BACKGROUND_SYNC=1` to prevent background sync noise.
 - If budget fails, inspect:
   - Public spirit routes for accidental Convex queries

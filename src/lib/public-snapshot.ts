@@ -27,12 +27,18 @@ let convexSnapshotClientUrl: string | null = null
 
 async function loadPublicSnapshot(): Promise<PublicSnapshot> {
   if (!snapshotPromise) {
-    snapshotPromise = fetch('/public-snapshot.json', { cache: 'force-cache' }).then(async (res) => {
-      if (!res.ok) {
-        throw new Error(`Failed to load public snapshot (${res.status})`)
-      }
-      return (await res.json()) as PublicSnapshot
-    })
+    snapshotPromise = fetch('/public-snapshot.json', { cache: 'force-cache' })
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to load public snapshot (${res.status})`)
+        }
+        return (await res.json()) as PublicSnapshot
+      })
+      .catch((error) => {
+        // Allow retries after transient bootstrap/network failures.
+        snapshotPromise = null
+        throw error
+      })
   }
   return snapshotPromise
 }
