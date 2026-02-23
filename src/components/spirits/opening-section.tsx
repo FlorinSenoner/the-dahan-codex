@@ -1,16 +1,17 @@
-import { convexQuery } from '@convex-dev/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc, Id } from 'convex/_generated/dataModel'
-import { useMutation } from 'convex/react'
+import { useQuery as useConvexQuery, useMutation } from 'convex/react'
 import { BookOpen, Plus } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { EditableOpening, type OpeningFormData } from '@/components/admin/editable-opening'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Heading, Text } from '@/components/ui/typography'
+import { useAdmin } from '@/hooks/use-admin'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import { publicSnapshotQueryOptions, selectOpeningsBySpirit } from '@/lib/public-snapshot'
 import { TurnAccordion } from './turn-accordion'
 
 // Helper to create form data from an opening document
@@ -52,10 +53,23 @@ export function OpeningSection({
   onHasChangesChange,
   onIsValidChange,
 }: OpeningSectionProps) {
-  const { data: openings, isLoading } = useQuery(
-    convexQuery(api.openings.listBySpirit, { spiritId }),
-  )
+  const isAdmin = useAdmin()
   const { isEditing } = useEditMode()
+  const useLiveOpenings = isAdmin && isEditing
+
+  const { data: snapshot } = useQuery(publicSnapshotQueryOptions())
+  const liveOpenings = useConvexQuery(
+    api.openings.listBySpirit,
+    useLiveOpenings ? { spiritId } : 'skip',
+  )
+  const isLiveOpeningsLoading = useLiveOpenings && liveOpenings === undefined
+
+  const openings = useMemo(() => {
+    if (useLiveOpenings) return liveOpenings
+    if (!snapshot) return undefined
+    return selectOpeningsBySpirit(snapshot, spiritId)
+  }, [useLiveOpenings, liveOpenings, snapshot, spiritId])
+  const isLoading = useLiveOpenings ? isLiveOpeningsLoading : !snapshot
 
   // URL-synced tab selection
   const search = useSearch({ strict: false }) as { opening?: string }

@@ -8,7 +8,7 @@ import { Heading, Text } from '@/components/ui/typography'
 import { useTheme } from '@/contexts/theme-context'
 import { usePageMeta } from '@/hooks'
 import { clearOfflineData } from '@/lib/offline-games'
-import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
+import { syncGames } from '@/lib/sync'
 import { cn } from '@/lib/utils'
 import { clearPersistedQueryCache } from '../router'
 
@@ -23,29 +23,28 @@ function SettingsPage() {
 
   const { queryClient } = routeApi.useRouteContext()
 
-  // State for Sync Data
+  // State for game sync
   const [isSyncing, setIsSyncing] = useState(false)
   const [syncStatus, setSyncStatus] = useState<string | null>(null)
 
   // State for Clear Cache
   const [isClearing, setIsClearing] = useState(false)
 
-  async function syncData() {
+  async function syncGamesData() {
     setIsSyncing(true)
     try {
-      // Only sync games when signed in (listGames requires auth)
-      if (isSignedIn) {
-        setSyncStatus('Syncing games...')
-        await syncGames(queryClient)
+      if (!isSignedIn) {
+        setSyncStatus('Sign in to sync game data.')
+        return
       }
 
-      setSyncStatus('Syncing spirits & openings...')
-      await syncSpiritsAndOpenings(queryClient)
+      setSyncStatus('Syncing games...')
+      await syncGames(queryClient)
 
-      setSyncStatus('Sync complete!')
+      setSyncStatus('Game sync complete!')
       setTimeout(() => setSyncStatus(null), 3000)
     } catch (error) {
-      console.error('Failed to sync data:', error)
+      console.error('Failed to sync games:', error)
       setSyncStatus('Sync failed. Check your connection.')
     } finally {
       setIsSyncing(false)
@@ -175,18 +174,18 @@ function SettingsPage() {
             Cache Management
           </Heading>
           <Text className="mt-2" variant="muted">
-            Data syncs automatically in the background. Use the button below to force a full sync,
+            Game data syncs automatically when signed in. Use the button below to force a game sync,
             or clear cached data if something seems broken.
           </Text>
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             <Button
               className="flex-1 cursor-pointer"
               disabled={isSyncing || isClearing}
-              onClick={syncData}
+              onClick={syncGamesData}
               variant="outline"
             >
               <RefreshCw className={`h-4 w-4 ${isSyncing ? 'animate-spin' : ''}`} />
-              {isSyncing ? syncStatus || 'Syncing...' : 'Sync Data'}
+              {isSyncing ? syncStatus || 'Syncing...' : 'Sync Games'}
             </Button>
             <Button
               className="flex-1 cursor-pointer"

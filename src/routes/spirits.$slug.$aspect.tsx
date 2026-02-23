@@ -1,28 +1,23 @@
-import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { usePageMeta, useStructuredData } from '@/hooks'
+import { useQuery as useConvexQuery } from 'convex/react'
+import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
+import { publicSnapshotQueryOptions, selectSpiritBySlug } from '@/lib/public-snapshot'
 import { SpiritDetailContent } from './spirits.$slug'
 
 /**
  * Spirit detail page
  *
- * Offline behavior: This page works offline after background spirit sync
- * has populated local cache. Manual Settings > Sync Data can be used to
- * force a full refresh.
+ * Offline behavior: This page works offline after the public snapshot
+ * has been downloaded and cached by the service worker.
  */
 export const Route = createFileRoute('/spirits/$slug/$aspect')({
-  loader: async ({ context, params }) => {
+  loader: async ({ context }) => {
     // Use prefetchQuery to avoid blocking when offline
     // The component's useSuspenseQuery will use cached data if available
     try {
-      await context.queryClient.prefetchQuery(
-        convexQuery(api.spirits.getSpiritBySlug, {
-          slug: params.slug,
-          aspect: params.aspect,
-        }),
-      )
+      await context.queryClient.prefetchQuery(publicSnapshotQueryOptions())
     } catch (e) {
       if (e instanceof Error && !e.message.includes('Failed to fetch'))
         console.warn('Loader error:', e)
@@ -33,10 +28,18 @@ export const Route = createFileRoute('/spirits/$slug/$aspect')({
 
 function AspectDetailPage() {
   const { slug, aspect } = Route.useParams()
+  const isAdmin = useAdmin()
+  const { isEditing } = useEditMode()
+  const useLiveSpiritData = isAdmin && isEditing
 
-  const { data: spirit } = useSuspenseQuery(
-    convexQuery(api.spirits.getSpiritBySlug, { slug, aspect }),
+  const { data: snapshot } = useSuspenseQuery(publicSnapshotQueryOptions())
+  const snapshotSpirit = selectSpiritBySlug(snapshot, slug, aspect)
+
+  const liveSpirit = useConvexQuery(
+    api.spirits.getSpiritBySlug,
+    useLiveSpiritData ? { slug, aspect } : 'skip',
   )
+  const spirit = useLiveSpiritData ? (liveSpirit ?? snapshotSpirit) : snapshotSpirit
 
   usePageMeta({
     title: spirit?.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit?.name,

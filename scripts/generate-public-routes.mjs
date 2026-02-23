@@ -1,10 +1,10 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
 const rootDir = resolve(import.meta.dirname, '..')
-const dataDir = resolve(rootDir, 'scripts', 'data')
 const publicDir = resolve(rootDir, 'public')
+const publicSnapshotPath = resolve(publicDir, 'public-snapshot.json')
 const siteUrl = 'https://dahan-codex.com'
 
 function toSlugSegment(text) {
@@ -23,14 +23,22 @@ function unique(array) {
 }
 
 export function getPublicRoutes() {
-  const spirits = loadJson(resolve(dataDir, 'spirits.json'))
-  const aspects = loadJson(resolve(dataDir, 'aspects.json'))
+  if (!existsSync(publicSnapshotPath)) {
+    throw new Error(
+      `Missing ${publicSnapshotPath}. Run "pnpm generate:public-snapshot" before generating routes.`,
+    )
+  }
+
+  const snapshot = loadJson(publicSnapshotPath)
+  const spirits = Array.isArray(snapshot.spirits) ? snapshot.spirits : []
 
   const baseRoutes = ['/', '/spirits', '/credits']
-  const spiritRoutes = spirits.map((spirit) => `/spirits/${spirit.slug}`)
-  const aspectRoutes = aspects.map(
-    (aspect) => `/spirits/${aspect.baseSpiritSlug}/${toSlugSegment(aspect.name)}`,
-  )
+  const spiritRoutes = spirits
+    .filter((spirit) => !spirit.isAspect)
+    .map((spirit) => `/spirits/${spirit.slug}`)
+  const aspectRoutes = spirits
+    .filter((spirit) => spirit.isAspect && spirit.aspectName)
+    .map((aspect) => `/spirits/${aspect.slug}/${toSlugSegment(String(aspect.aspectName))}`)
 
   return unique([...baseRoutes, ...spiritRoutes, ...aspectRoutes]).sort((a, b) =>
     a.localeCompare(b),

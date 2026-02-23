@@ -32,6 +32,7 @@ jobs:
     env:
       CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
       VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+      VITE_DISABLE_BACKGROUND_SYNC: "1"
       # E2E tests run on localhost — production Clerk keys are domain-locked,
       # so we use the dev/test key here. Deployments use the prod key via vars.
       VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_TEST_PUBLISHABLE_KEY }}
@@ -85,3 +86,33 @@ jobs:
         env:
           VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+  public-call-budget:
+    name: Public Call Budget
+    needs: quality
+    if:
+      github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref,
+      'refs/heads/release/'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+      VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
+      VITE_DISABLE_BACKGROUND_SYNC: "1"
+      VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Deploy Convex functions
+        run: pnpm exec convex deploy --cmd-url-env-var-name VITE_CONVEX_URL
+
+      - name: Measure and enforce public call budget
+        run: pnpm measure:convex-calls -- --deployment prod --budget 10 -- pnpm build:public

@@ -97,7 +97,7 @@ function writePrerenderedHtml(route, html) {
 const routes = getPublicRoutes()
 
 if (!Array.isArray(routes) || routes.length === 0) {
-  throw new Error('No public routes found. Check scripts/data source files.')
+  throw new Error('No public routes found. Check public/public-snapshot.json and route generation.')
 }
 
 const server = await startServer()

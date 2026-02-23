@@ -1,4 +1,3 @@
-import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import {
   createFileRoute,
@@ -11,6 +10,7 @@ import {
 } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
+import { useQuery as useConvexQuery } from 'convex/react'
 import { ArrowLeft } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { EditFab } from '@/components/admin/edit-fab'
@@ -33,6 +33,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Heading, Text } from '@/components/ui/typography'
 import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
+import { publicSnapshotQueryOptions, selectSpiritWithAspects } from '@/lib/public-snapshot'
 import {
   complexityBadgeColors,
   elementBadgeColors,
@@ -43,30 +44,18 @@ import { cn } from '@/lib/utils'
 /**
  * Spirit detail page
  *
- * Offline behavior: This page works offline after background spirit sync
- * has populated local cache. Manual Settings > Sync Data can be used to
- * force a full refresh.
+ * Offline behavior: This page works offline after the public snapshot
+ * has been downloaded and cached by the service worker.
  */
 export const Route = createFileRoute('/spirits/$slug')({
   validateSearch: (search: Record<string, unknown>) => ({
     opening: typeof search.opening === 'string' ? search.opening : undefined,
   }),
-  loader: async ({ context, params }) => {
+  loader: async ({ context }) => {
     // Use prefetchQuery to avoid blocking when offline
     // The component's useSuspenseQuery will use cached data if available
     try {
-      await Promise.all([
-        context.queryClient.prefetchQuery(
-          convexQuery(api.spirits.getSpiritBySlug, {
-            slug: params.slug,
-          }),
-        ),
-        context.queryClient.prefetchQuery(
-          convexQuery(api.spirits.getSpiritWithAspects, {
-            slug: params.slug,
-          }),
-        ),
-      ])
+      await context.queryClient.prefetchQuery(publicSnapshotQueryOptions())
     } catch (e) {
       if (e instanceof Error && !e.message.includes('Failed to fetch'))
         console.warn('Loader error:', e)
@@ -77,6 +66,9 @@ export const Route = createFileRoute('/spirits/$slug')({
 
 function SpiritDetailLayout() {
   const { slug } = Route.useParams()
+  const isAdmin = useAdmin()
+  const { isEditing } = useEditMode()
+  const useLiveSpiritData = isAdmin && isEditing
   const navigate = useNavigate()
   const matches = useMatches()
   const params = useParams({ strict: false })
@@ -104,10 +96,16 @@ function SpiritDetailLayout() {
     sessionStorage.setItem('lastViewedSpirit', key)
   }, [slug, currentAspect])
 
-  // Get base spirit with aspects for the tabs
-  const { data: spiritData } = useSuspenseQuery(
-    convexQuery(api.spirits.getSpiritWithAspects, { slug }),
+  // Public spirit data comes from the published snapshot.
+  const { data: snapshot } = useSuspenseQuery(publicSnapshotQueryOptions())
+  const snapshotSpiritData = selectSpiritWithAspects(snapshot, slug)
+
+  // Admin edit mode uses live Convex reads for immediate post-save feedback.
+  const liveSpiritData = useConvexQuery(
+    api.spirits.getSpiritWithAspects,
+    useLiveSpiritData ? { slug } : 'skip',
   )
+  const spiritData = useLiveSpiritData ? (liveSpiritData ?? snapshotSpiritData) : snapshotSpiritData
 
   usePageMeta({
     title: spiritData?.base.name,

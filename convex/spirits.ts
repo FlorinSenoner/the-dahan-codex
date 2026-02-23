@@ -143,6 +143,8 @@ export const getSpiritWithAspects = query({
     v.null(),
   ),
   handler: async (ctx, args) => {
+    await requireAdmin(ctx)
+
     const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug)
     if (!baseSpirit) return null
 
@@ -166,6 +168,8 @@ export const getSpiritBySlug = query({
   },
   returns: v.union(spiritValidator, v.null()),
   handler: async (ctx, args) => {
+    await requireAdmin(ctx)
+
     const baseSpirit = await getBaseSpiritBySlug(ctx, args.slug)
     if (!baseSpirit) return null
 

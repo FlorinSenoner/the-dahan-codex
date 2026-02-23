@@ -20,8 +20,8 @@ test.describe('Settings Page', () => {
     // Verify cache management section exists
     await expect(page.getByRole('heading', { name: /cache management/i })).toBeVisible()
 
-    // Verify Sync Data and Clear Cache buttons are present
-    await expect(page.getByRole('button', { name: /sync data/i })).toBeVisible()
+    // Verify Sync Games and Clear Cache buttons are present
+    await expect(page.getByRole('button', { name: /sync games/i })).toBeVisible()
     await expect(page.getByRole('button', { name: /clear cache/i })).toBeVisible()
   })
 

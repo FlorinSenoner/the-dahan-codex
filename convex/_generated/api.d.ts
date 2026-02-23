@@ -14,6 +14,7 @@ import type * as lib_auth from "../lib/auth.js";
 import type * as lib_scoring from "../lib/scoring.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as openings from "../openings.js";
+import type * as publicSnapshot from "../publicSnapshot.js";
 import type * as publishAuto from "../publishAuto.js";
 import type * as seed from "../seed.js";
 import type * as spirits from "../spirits.js";
@@ -31,6 +32,7 @@ declare const fullApi: ApiFromModules<{
   "lib/scoring": typeof lib_scoring;
   "lib/validators": typeof lib_validators;
   openings: typeof openings;
+  publicSnapshot: typeof publicSnapshot;
   publishAuto: typeof publishAuto;
   seed: typeof seed;
   spirits: typeof spirits;

@@ -1,7 +1,5 @@
-import { convexQuery } from '@convex-dev/react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { api } from 'convex/_generated/api'
 import { useEffect, useMemo } from 'react'
 import { z } from 'zod'
 import { FilterChips } from '@/components/spirits/filter-chips'
@@ -11,6 +9,7 @@ import { SpiritSearch } from '@/components/spirits/spirit-search'
 import { PageHeader } from '@/components/ui/page-header'
 import { Text } from '@/components/ui/typography'
 import { usePageMeta, useStructuredData } from '@/hooks'
+import { publicSnapshotQueryOptions, selectSpiritList } from '@/lib/public-snapshot'
 import { toAspectSlug } from '@/lib/slug'
 
 const spiritFilterSchema = z.object({
@@ -23,20 +22,11 @@ const spiritFilterSchema = z.object({
 
 export const Route = createFileRoute('/spirits/')({
   validateSearch: spiritFilterSchema,
-  loaderDeps: ({ search }) => ({
-    complexity: search.complexity,
-    elements: search.elements,
-  }),
-  loader: async ({ context, deps }) => {
+  loader: async ({ context }) => {
     // Use prefetchQuery instead of ensureQueryData to avoid blocking when offline
     // The component's useSuspenseQuery will use cached data if available
     try {
-      await context.queryClient.prefetchQuery(
-        convexQuery(api.spirits.listSpirits, {
-          complexity: deps.complexity,
-          elements: deps.elements,
-        }),
-      )
+      await context.queryClient.prefetchQuery(publicSnapshotQueryOptions())
     } catch (e) {
       if (e instanceof Error && !e.message.includes('Failed to fetch'))
         console.warn('Loader error:', e)
@@ -65,11 +55,14 @@ function SpiritsPage() {
 
   const filters = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
-  const { data: spirits } = useSuspenseQuery(
-    convexQuery(api.spirits.listSpirits, {
-      complexity: filters.complexity,
-      elements: filters.elements,
-    }),
+  const { data: snapshot } = useSuspenseQuery(publicSnapshotQueryOptions())
+  const spirits = useMemo(
+    () =>
+      selectSpiritList(snapshot, {
+        complexity: filters.complexity,
+        elements: filters.elements,
+      }),
+    [snapshot, filters.complexity, filters.elements],
   )
 
   const SITE_URL = 'https://dahan-codex.com'

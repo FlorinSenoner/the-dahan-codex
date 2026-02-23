@@ -78,6 +78,8 @@ export const listBySpirit = query({
   args: { spiritId: v.id('spirits') },
   returns: v.array(openingValidator),
   handler: async (ctx, args) => {
+    await requireAdmin(ctx)
+
     return ctx.db
       .query('openings')
       .withIndex('by_spirit', (q) => q.eq('spiritId', args.spiritId))
