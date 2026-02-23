@@ -1,17 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import type { Doc, Id } from 'convex/_generated/dataModel'
-import { useQuery as useConvexQuery, useMutation } from 'convex/react'
+import { useMutation } from 'convex/react'
 import { BookOpen, Plus } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { EditableOpening, type OpeningFormData } from '@/components/admin/editable-opening'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Heading, Text } from '@/components/ui/typography'
-import { useAdmin } from '@/hooks/use-admin'
 import { useEditMode } from '@/hooks/use-edit-mode'
-import { publicSnapshotQueryOptions, selectOpeningsBySpirit } from '@/lib/public-snapshot'
+import {
+  publicSnapshotQueryKey,
+  publicSnapshotQueryOptions,
+  selectOpeningsBySpirit,
+} from '@/lib/public-snapshot'
 import { TurnAccordion } from './turn-accordion'
 
 // Helper to create form data from an opening document
@@ -53,23 +56,15 @@ export function OpeningSection({
   onHasChangesChange,
   onIsValidChange,
 }: OpeningSectionProps) {
-  const isAdmin = useAdmin()
   const { isEditing } = useEditMode()
-  const useLiveOpenings = isAdmin && isEditing
+  const queryClient = useQueryClient()
 
   const { data: snapshot } = useQuery(publicSnapshotQueryOptions())
-  const liveOpenings = useConvexQuery(
-    api.openings.listBySpirit,
-    useLiveOpenings ? { spiritId } : 'skip',
+  const openings = useMemo(
+    () => (snapshot ? selectOpeningsBySpirit(snapshot, spiritId) : undefined),
+    [snapshot, spiritId],
   )
-  const isLiveOpeningsLoading = useLiveOpenings && liveOpenings === undefined
-
-  const openings = useMemo(() => {
-    if (useLiveOpenings) return liveOpenings
-    if (!snapshot) return undefined
-    return selectOpeningsBySpirit(snapshot, spiritId)
-  }, [useLiveOpenings, liveOpenings, snapshot, spiritId])
-  const isLoading = useLiveOpenings ? isLiveOpeningsLoading : !snapshot
+  const isLoading = !snapshot
 
   // URL-synced tab selection
   const search = useSearch({ strict: false }) as { opening?: string }
@@ -217,6 +212,7 @@ export function OpeningSection({
           sourceUrl: formData.sourceUrl || undefined,
         })
       }
+      await queryClient.invalidateQueries({ queryKey: publicSnapshotQueryKey() })
       // Data will refresh via query invalidation
       setIsCreatingNew(false)
       // Reset form state to trigger re-initialization from query data.
@@ -240,6 +236,7 @@ export function OpeningSection({
     selectedOpening,
     createOpeningMutation,
     updateOpeningMutation,
+    queryClient,
     navigate,
     search,
   ])
@@ -249,6 +246,7 @@ export function OpeningSection({
     if (!selectedOpening) return
     try {
       await deleteOpeningMutation({ id: selectedOpening._id })
+      await queryClient.invalidateQueries({ queryKey: publicSnapshotQueryKey() })
       // Clear URL opening param to go back to first opening, but preserve edit mode
       // resetScroll: false prevents scroll jump when updating URL
       navigate({
@@ -261,7 +259,7 @@ export function OpeningSection({
     } catch (error) {
       console.error('Delete failed:', error)
     }
-  }, [selectedOpening, deleteOpeningMutation, navigate, search])
+  }, [selectedOpening, deleteOpeningMutation, queryClient, navigate, search])
 
   // Expose save handler to parent when there are changes (isValid controls disabled state in EditFab)
   useEffect(() => {

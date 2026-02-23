@@ -20,46 +20,25 @@ interface SpiritFilters {
   elements?: string[]
 }
 
-let snapshotPromise: Promise<PublicSnapshot> | null = null
-const USE_CONVEX_PUBLIC_DATA = import.meta.env.DEV
 let convexSnapshotClient: ConvexHttpClient | null = null
 let convexSnapshotClientUrl: string | null = null
-const PRODUCTION_SNAPSHOT_STALE_TIME_MS = 5 * 60 * 1000
-const PRODUCTION_SNAPSHOT_GC_TIME_MS = 24 * 60 * 60 * 1000
+const SNAPSHOT_STALE_TIME_MS = 60 * 1000
+const SNAPSHOT_GC_TIME_MS = 5 * 60 * 1000
 
-async function fetchPublicSnapshot(cacheMode: RequestCache): Promise<PublicSnapshot> {
-  const response = await fetch('/public-snapshot.json', { cache: cacheMode })
-  if (!response.ok) {
-    throw new Error(`Failed to load public snapshot (${response.status})`)
+function getConvexUrl() {
+  const convexUrl = import.meta.env.VITE_CONVEX_URL
+  if (!convexUrl) {
+    throw new Error('Missing VITE_CONVEX_URL')
   }
-  return (await response.json()) as PublicSnapshot
+  return convexUrl
 }
 
-async function loadPublicSnapshot(): Promise<PublicSnapshot> {
-  if (!snapshotPromise) {
-    snapshotPromise = fetchPublicSnapshot('no-cache')
-      .catch(async (error) => {
-        try {
-          return await fetchPublicSnapshot('force-cache')
-        } catch {
-          throw error
-        }
-      })
-      .catch((error) => {
-        // Allow retries after transient bootstrap/network failures.
-        snapshotPromise = null
-        throw error
-      })
-  }
-  return snapshotPromise
+export function publicSnapshotQueryKey() {
+  return ['publicSnapshot', getConvexUrl()] as const
 }
 
 async function loadPublicSnapshotFromConvex(): Promise<PublicSnapshot> {
-  const convexUrl = import.meta.env.VITE_CONVEX_URL
-  if (!convexUrl) {
-    throw new Error('Missing VITE_CONVEX_URL in dev mode')
-  }
-
+  const convexUrl = getConvexUrl()
   if (!convexSnapshotClient || convexSnapshotClientUrl !== convexUrl) {
     convexSnapshotClient = new ConvexHttpClient(convexUrl)
     convexSnapshotClientUrl = convexUrl
@@ -69,20 +48,11 @@ async function loadPublicSnapshotFromConvex(): Promise<PublicSnapshot> {
 }
 
 export function publicSnapshotQueryOptions() {
-  if (USE_CONVEX_PUBLIC_DATA) {
-    return queryOptions({
-      queryKey: ['publicSnapshot', 'convex', import.meta.env.VITE_CONVEX_URL ?? ''],
-      queryFn: loadPublicSnapshotFromConvex,
-      staleTime: 0,
-      gcTime: 5 * 60 * 1000,
-    })
-  }
-
   return queryOptions({
-    queryKey: ['publicSnapshot'],
-    queryFn: loadPublicSnapshot,
-    staleTime: PRODUCTION_SNAPSHOT_STALE_TIME_MS,
-    gcTime: PRODUCTION_SNAPSHOT_GC_TIME_MS,
+    queryKey: publicSnapshotQueryKey(),
+    queryFn: loadPublicSnapshotFromConvex,
+    staleTime: SNAPSHOT_STALE_TIME_MS,
+    gcTime: SNAPSHOT_GC_TIME_MS,
   })
 }
 

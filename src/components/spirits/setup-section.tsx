@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
@@ -6,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '@/components/admin/editable-text'
 import { Heading, Text } from '@/components/ui/typography'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import { publicSnapshotQueryKey } from '@/lib/public-snapshot'
 
 const MAX_SETUP_LENGTH = 4000
 
@@ -23,6 +25,7 @@ export function SetupSection({
   onIsValidChange,
 }: SetupSectionProps) {
   const { isEditing } = useEditMode()
+  const queryClient = useQueryClient()
   const updateSetupMutation = useMutation(api.spirits.updateSpiritSetup)
   const [baselineSetup, setBaselineSetup] = useState(spirit.setup || '')
   const [setupText, setSetupText] = useState(spirit.setup || '')
@@ -65,9 +68,10 @@ export function SetupSection({
       spiritId: spirit._id,
       setup: trimmed,
     })
+    await queryClient.invalidateQueries({ queryKey: publicSnapshotQueryKey() })
     setBaselineSetup(trimmed)
     setSetupText(trimmed)
-  }, [setupText, spirit._id, updateSetupMutation])
+  }, [setupText, spirit._id, updateSetupMutation, queryClient])
 
   useEffect(() => {
     onSaveHandlerReady?.(hasChanges && isValid ? handleSave : null)

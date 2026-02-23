@@ -11,11 +11,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "generate:public-snapshot": "node scripts/generate-public-snapshot.mjs",
     "generate:public-routes": "node scripts/generate-public-routes.mjs",
     "prerender:public": "node scripts/prerender-public-routes.mjs",
     "build": "vite build",
-    "build:public": "pnpm generate:public-snapshot && pnpm generate:public-routes && pnpm build && pnpm prerender:public",
+    "build:public": "pnpm generate:public-routes && pnpm build && pnpm prerender:public",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "typecheck:convex": "convex typecheck",

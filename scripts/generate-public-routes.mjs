@@ -1,10 +1,11 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { ConvexHttpClient } from 'convex/browser'
+import { api } from '../convex/_generated/api.js'
 
 const rootDir = resolve(import.meta.dirname, '..')
 const publicDir = resolve(rootDir, 'public')
-const publicSnapshotPath = resolve(publicDir, 'public-snapshot.json')
 const siteUrl = 'https://dahan-codex.com'
 
 function toSlugSegment(text) {
@@ -14,22 +15,40 @@ function toSlugSegment(text) {
     .replace(/^-|-$/g, '')
 }
 
-function loadJson(path) {
-  return JSON.parse(readFileSync(path, 'utf-8'))
+function validateConvexUrl(urlString) {
+  let parsed
+  try {
+    parsed = new URL(urlString)
+  } catch {
+    throw new Error(`Invalid VITE_CONVEX_URL: "${urlString}"`)
+  }
+
+  const host = parsed.hostname
+  const match = host.match(/^([a-z0-9-]+)\.convex\.cloud$/)
+  if (!match) {
+    throw new Error(
+      `VITE_CONVEX_URL must match https://<deployment>.convex.cloud. Received "${urlString}"`,
+    )
+  }
 }
 
 function unique(array) {
   return [...new Set(array)]
 }
 
-export function getPublicRoutes() {
-  if (!existsSync(publicSnapshotPath)) {
-    throw new Error(
-      `Missing ${publicSnapshotPath}. Run "pnpm generate:public-snapshot" before generating routes.`,
-    )
+async function loadPublicSnapshotFromConvex() {
+  const convexUrl = process.env.VITE_CONVEX_URL
+  if (!convexUrl) {
+    throw new Error('Missing VITE_CONVEX_URL')
   }
+  validateConvexUrl(convexUrl)
 
-  const snapshot = loadJson(publicSnapshotPath)
+  const client = new ConvexHttpClient(convexUrl)
+  return await client.query(api.publicSnapshot.get, {})
+}
+
+export async function getPublicRoutes() {
+  const snapshot = await loadPublicSnapshotFromConvex()
   const spirits = Array.isArray(snapshot.spirits) ? snapshot.spirits : []
 
   const baseRoutes = ['/', '/spirits', '/credits']
@@ -45,13 +64,14 @@ export function getPublicRoutes() {
   )
 }
 
-export function writeSitemap(routes = getPublicRoutes()) {
+export async function writeSitemap(routes) {
+  const routeList = routes ?? (await getPublicRoutes())
   const sitemapLines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ]
 
-  for (const route of routes) {
+  for (const route of routeList) {
     sitemapLines.push(
       `  <url><loc>${siteUrl}${route}</loc><lastmod>__BUILD_DATE__</lastmod></url>`,
     )
@@ -65,7 +85,7 @@ export function writeSitemap(routes = getPublicRoutes()) {
 const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href
 
 if (isDirectRun) {
-  const routes = getPublicRoutes()
-  writeSitemap(routes)
+  const routes = await getPublicRoutes()
+  await writeSitemap(routes)
   console.log(`Generated ${routes.length} public routes and sitemap.xml`)
 }

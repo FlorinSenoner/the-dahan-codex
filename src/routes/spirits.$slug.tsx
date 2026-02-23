@@ -8,9 +8,7 @@ import {
   useNavigate,
   useParams,
 } from '@tanstack/react-router'
-import { api } from 'convex/_generated/api'
 import type { Doc } from 'convex/_generated/dataModel'
-import { useQuery as useConvexQuery } from 'convex/react'
 import { ArrowLeft } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { EditFab } from '@/components/admin/edit-fab'
@@ -44,8 +42,7 @@ import { cn } from '@/lib/utils'
 /**
  * Spirit detail page
  *
- * Offline behavior: This page works offline after the public snapshot
- * has been downloaded and cached by the service worker.
+ * Data source: unified Convex public snapshot query.
  */
 export const Route = createFileRoute('/spirits/$slug')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -66,9 +63,6 @@ export const Route = createFileRoute('/spirits/$slug')({
 
 function SpiritDetailLayout() {
   const { slug } = Route.useParams()
-  const isAdmin = useAdmin()
-  const { isEditing } = useEditMode()
-  const useLiveSpiritData = isAdmin && isEditing
   const navigate = useNavigate()
   const matches = useMatches()
   const params = useParams({ strict: false })
@@ -96,16 +90,9 @@ function SpiritDetailLayout() {
     sessionStorage.setItem('lastViewedSpirit', key)
   }, [slug, currentAspect])
 
-  // Public spirit data comes from the published snapshot.
+  // Spirit data comes from the aggregated Convex snapshot query.
   const { data: snapshot } = useSuspenseQuery(publicSnapshotQueryOptions())
-  const snapshotSpiritData = selectSpiritWithAspects(snapshot, slug)
-
-  // Admin edit mode uses live Convex reads for immediate post-save feedback.
-  const liveSpiritData = useConvexQuery(
-    api.spirits.getSpiritWithAspects,
-    useLiveSpiritData ? { slug } : 'skip',
-  )
-  const spiritData = useLiveSpiritData ? (liveSpiritData ?? snapshotSpiritData) : snapshotSpiritData
+  const spiritData = selectSpiritWithAspects(snapshot, slug)
 
   usePageMeta({
     title: spiritData?.base.name,

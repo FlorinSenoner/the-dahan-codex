@@ -94,10 +94,10 @@ function writePrerenderedHtml(route, html) {
   writeFileSync(resolve(routeDir, 'index.html'), output, 'utf-8')
 }
 
-const routes = getPublicRoutes()
+const routes = await getPublicRoutes()
 
 if (!Array.isArray(routes) || routes.length === 0) {
-  throw new Error('No public routes found. Check public/public-snapshot.json and route generation.')
+  throw new Error('No public routes found. Check Convex connectivity and route generation.')
 }
 
 const server = await startServer()
