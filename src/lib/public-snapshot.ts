@@ -24,15 +24,26 @@ let snapshotPromise: Promise<PublicSnapshot> | null = null
 const USE_CONVEX_PUBLIC_DATA = import.meta.env.DEV
 let convexSnapshotClient: ConvexHttpClient | null = null
 let convexSnapshotClientUrl: string | null = null
+const PRODUCTION_SNAPSHOT_STALE_TIME_MS = 5 * 60 * 1000
+const PRODUCTION_SNAPSHOT_GC_TIME_MS = 24 * 60 * 60 * 1000
+
+async function fetchPublicSnapshot(cacheMode: RequestCache): Promise<PublicSnapshot> {
+  const response = await fetch('/public-snapshot.json', { cache: cacheMode })
+  if (!response.ok) {
+    throw new Error(`Failed to load public snapshot (${response.status})`)
+  }
+  return (await response.json()) as PublicSnapshot
+}
 
 async function loadPublicSnapshot(): Promise<PublicSnapshot> {
   if (!snapshotPromise) {
-    snapshotPromise = fetch('/public-snapshot.json', { cache: 'force-cache' })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Failed to load public snapshot (${res.status})`)
+    snapshotPromise = fetchPublicSnapshot('no-cache')
+      .catch(async (error) => {
+        try {
+          return await fetchPublicSnapshot('force-cache')
+        } catch {
+          throw error
         }
-        return (await res.json()) as PublicSnapshot
       })
       .catch((error) => {
         // Allow retries after transient bootstrap/network failures.
@@ -70,8 +81,8 @@ export function publicSnapshotQueryOptions() {
   return queryOptions({
     queryKey: ['publicSnapshot'],
     queryFn: loadPublicSnapshot,
-    staleTime: Number.POSITIVE_INFINITY,
-    gcTime: Number.POSITIVE_INFINITY,
+    staleTime: PRODUCTION_SNAPSHOT_STALE_TIME_MS,
+    gcTime: PRODUCTION_SNAPSHOT_GC_TIME_MS,
   })
 }
 
