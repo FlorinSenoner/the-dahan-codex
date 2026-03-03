@@ -6,7 +6,7 @@
 
 **Large Seed Data Files:**
 - Issue: Seed data files are extremely large with manual entry patterns
-- Files: `convex/seedData/openings.ts` (3,242 lines), `convex/seedData/spirits.ts` (1,141 lines)
+- Files: `scripts/data/openings.json`, `scripts/data/spirits.json`, `scripts/data/openings-raw-by-source.json`
 - Impact: Difficult to maintain, error-prone manual editing, slow to parse during development
 - Fix approach: Consider extracting to JSON files and loading at runtime, or implementing admin UI for bulk editing (Phase 7 planned)
 
@@ -55,11 +55,11 @@
 - Current mitigation: Links open with `rel="noopener noreferrer"` per Phase 3 implementation
 - Recommendations: Add URL validation/sanitization in mutations to prevent javascript: or data: URIs
 
-**No CSP Implementation:**
-- Risk: App lacks Content Security Policy headers
-- Files: No CSP configuration in build or deployment
-- Current mitigation: Cloudflare Pages provides some default protections
-- Recommendations: Add CSP headers via `_headers` file for Cloudflare Pages deployment (restrict script-src, style-src, img-src)
+**CSP Hardened with Remaining Inline Style Allowance:**
+- Risk: Current policy still allows `style-src 'unsafe-inline'`, which limits strict XSS hardening.
+- Files: `public/_headers`
+- Current mitigation: A full Content Security Policy is configured, including restrictive script/frame/connect/object directives.
+- Recommendations: Move style handling to nonce/hash-based patterns where feasible and remove `style-src 'unsafe-inline'`.
 
 **IndexedDB User Isolation:**
 - Risk: Offline games stored in IndexedDB could leak between users on shared devices

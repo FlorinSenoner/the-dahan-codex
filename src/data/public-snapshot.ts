@@ -54,9 +54,11 @@ export function usePublicSnapshot(): PublicSnapshot | undefined {
     queryFn: () => fetchPublicSnapshot(),
     staleTime: isDev ? 0 : PUBLIC_SNAPSHOT_STALE_TIME,
     gcTime: PUBLIC_SNAPSHOT_GC_TIME,
-    refetchOnMount: isDev ? 'always' : false,
-    refetchOnReconnect: isDev,
-    refetchOnWindowFocus: isDev,
+    // In production keep cache-first behavior, but recover automatically
+    // when the last attempt failed.
+    refetchOnMount: isDev ? 'always' : (query) => query.state.status === 'error',
+    refetchOnReconnect: isDev ? true : (query) => query.state.status === 'error',
+    refetchOnWindowFocus: isDev ? true : (query) => query.state.status === 'error',
   })
 
   return query.data as PublicSnapshot | undefined

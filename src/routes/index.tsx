@@ -329,7 +329,7 @@ function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {spirits.map((spirit) => (
               <Link
-                className="bg-card border border-border rounded-sm overflow-hidden transition-all duration-200 cursor-default hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40"
+                className="bg-card border border-border rounded-sm overflow-hidden transition-[box-shadow,filter,border-color] duration-200 cursor-default hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40"
                 key={spirit.name}
                 onClick={() => {
                   const img = imageRefs.current[spirit.slug]
@@ -389,7 +389,7 @@ function HomePage() {
             ))}
 
             <Link
-              className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-all duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
+              className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
               to="/spirits"
             >
               <BookOpen className="w-8 h-8 text-accent" />

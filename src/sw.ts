@@ -2,11 +2,7 @@
 
 import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
-import {
-  cleanupOutdatedCaches,
-  createHandlerBoundToURL,
-  precacheAndRoute,
-} from 'workbox-precaching'
+import { cleanupOutdatedCaches, matchPrecache, precacheAndRoute } from 'workbox-precaching'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 
@@ -19,8 +15,14 @@ clientsClaim()
 // Precache all assets injected by vite-plugin-pwa
 precacheAndRoute(self.__WB_MANIFEST)
 
-// App-shell fallback: serve a neutral shell for all SPA navigation requests
-const navigationHandler = createHandlerBoundToURL('/app-shell.html')
+// App-shell fallback: serve a neutral shell for all SPA navigation requests.
+// Cloudflare may redirect /app-shell.html -> /app-shell, so prefer precache and
+// only fall back to fetching the canonical extensionless path.
+const navigationHandler = async () => {
+  const precached = await matchPrecache('/app-shell.html')
+  if (precached) return precached
+  return fetch('/app-shell')
+}
 const navigationRoute = new NavigationRoute(navigationHandler, {
   denylist: [/\.[^/]+$/],
 })

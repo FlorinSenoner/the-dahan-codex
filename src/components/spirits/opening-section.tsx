@@ -2,7 +2,7 @@ import { useNavigate, useSearch } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { useMutation } from 'convex/react'
 import { BookOpen, Plus } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableOpening, type OpeningFormData } from '@/components/admin/editable-opening'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -64,12 +64,42 @@ export function OpeningSection({
     [snapshot, spiritId],
   )
   const [openings, setOpenings] = useState<PublicOpening[]>(snapshotOpenings)
+  const isEditingRef = useRef(isEditing)
+  const pendingSnapshotOpeningsRef = useRef<PublicOpening[] | null>(null)
+  const hasLocalMutationRef = useRef(false)
 
   useEffect(() => {
-    if (!isEditing) {
-      setOpenings(snapshotOpenings)
+    const wasEditing = isEditingRef.current
+    isEditingRef.current = isEditing
+
+    if (!wasEditing && isEditing) {
+      hasLocalMutationRef.current = false
+      return
     }
-  }, [snapshotOpenings, isEditing])
+
+    if (wasEditing && !isEditing) {
+      if (hasLocalMutationRef.current) {
+        pendingSnapshotOpeningsRef.current = null
+        hasLocalMutationRef.current = false
+        return
+      }
+      if (!pendingSnapshotOpeningsRef.current) return
+      setOpenings(pendingSnapshotOpeningsRef.current)
+      pendingSnapshotOpeningsRef.current = null
+      hasLocalMutationRef.current = false
+    }
+  }, [isEditing])
+
+  useEffect(() => {
+    if (isEditingRef.current) {
+      pendingSnapshotOpeningsRef.current = snapshotOpenings
+      return
+    }
+
+    pendingSnapshotOpeningsRef.current = null
+    hasLocalMutationRef.current = false
+    setOpenings(snapshotOpenings)
+  }, [snapshotOpenings])
 
   const search = useSearch({ strict: false }) as { opening?: string }
   const navigate = useNavigate()
@@ -201,6 +231,7 @@ export function OpeningSection({
             },
           ].sort((a, b) => a.name.localeCompare(b.name)),
         )
+        hasLocalMutationRef.current = true
 
         navigate({
           search: { ...search, opening: newId } as never,
@@ -235,6 +266,7 @@ export function OpeningSection({
             )
             .sort((a, b) => a.name.localeCompare(b.name)),
         )
+        hasLocalMutationRef.current = true
       }
 
       setIsCreatingNew(false)
@@ -260,6 +292,7 @@ export function OpeningSection({
     try {
       await deleteOpeningMutation({ id: selectedOpening._id })
       setOpenings((previous) => previous.filter((opening) => opening._id !== selectedOpening._id))
+      hasLocalMutationRef.current = true
       navigate({
         search: { ...search, opening: undefined } as never,
         replace: true,

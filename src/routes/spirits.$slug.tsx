@@ -322,8 +322,10 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
               <img
                 alt={displayName}
                 className="w-full h-full object-cover"
+                height={300}
                 onError={() => setImgError(true)}
                 src={spirit.imageUrl}
+                width={450}
               />
             )}
           </div>

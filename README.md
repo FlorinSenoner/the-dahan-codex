@@ -8,8 +8,8 @@ A Spirit Island companion app with an offline-first reference library and game t
 
 - **Spirit Library** — Browse all 37 spirits and 31 aspects with filtering by expansion, complexity,
   and elements
-- **Spirit Detail** — View complexity, power ratings radar chart, unique/special powers, and growth
-  options
+- **Spirit Detail** — View complexity, elements, setup guidance, strengths/weaknesses, and power
+  ratings
 - **Opening Guides** — 85+ text-based turn-by-turn opening guides from community sources
 - **Game Tracker** — Log plays with spirits, adversaries, scenarios, and scores (requires sign-in)
 - **Offline-First PWA** — Installable, works without internet at the game table

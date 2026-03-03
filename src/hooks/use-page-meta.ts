@@ -23,7 +23,7 @@ function normalizeCanonicalPath(path?: string) {
 
   const normalizePathname = (pathname: string) => {
     if (!pathname || pathname === '/') return '/'
-    return pathname.replace(/\/+$/, '') + '/'
+    return pathname.replace(/\/+$/, '')
   }
 
   if (path.startsWith('http://') || path.startsWith('https://')) {
