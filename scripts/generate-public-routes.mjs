@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 
 const rootDir = resolve(import.meta.dirname, '..')
 const publicDir = resolve(rootDir, 'public')
-const siteUrl = 'https://dahan-codex.com'
+const siteUrl = getSiteUrl()
 const appShellRoutes = ['/games', '/sign-in', '/sign-up']
 
 function toAspectSlug(text) {
@@ -14,6 +14,10 @@ function toAspectSlug(text) {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
+}
+
+function getSiteUrl() {
+  return (process.env.VITE_SITE_URL?.trim() || 'https://dahan-codex.com').replace(/\/+$/, '')
 }
 
 function getConvexSiteUrl() {
@@ -61,8 +65,9 @@ function normalizePublicRoute(route) {
 export async function getPublicRoutes() {
   const snapshot = await fetchPublicSnapshot()
 
-  const baseRoutes = ['/', '/credits', '/settings', '/spirits']
+  const baseRoutes = ['/', '/credits', '/settings', '/spirits', '/adversaries']
   const baseSpirits = snapshot.spirits.filter((spirit) => !spirit.isAspect)
+  const adversaries = snapshot.adversaries ?? []
 
   const spiritRoutes = baseSpirits.map((spirit) => `/spirits/${spirit.slug}`)
 
@@ -75,7 +80,11 @@ export async function getPublicRoutes() {
     })
     .filter(Boolean)
 
-  return uniqueSorted([...baseRoutes, ...spiritRoutes, ...aspectRoutes]).map(normalizePublicRoute)
+  const adversaryRoutes = adversaries.map((adversary) => `/adversaries/${adversary.slug}`)
+
+  return uniqueSorted([...baseRoutes, ...spiritRoutes, ...aspectRoutes, ...adversaryRoutes]).map(
+    normalizePublicRoute,
+  )
 }
 
 export function writeSitemap(routes) {
@@ -109,6 +118,8 @@ export function writeRedirects(routes) {
     // Keep spirit art requests as files and recover bad cached `*.webp/` URLs.
     '/spirits/*.webp/ /spirits/:splat.webp 301',
     '/spirits/*.webp /spirits/:splat.webp 200',
+    '/adversaries/*.webp/ /adversaries/:splat.webp 301',
+    '/adversaries/*.webp /adversaries/:splat.webp 200',
   ]
 
   // Serve top-level prerendered public routes.
@@ -119,6 +130,7 @@ export function writeRedirects(routes) {
   // Serve spirit routes without capturing arbitrary `index`/`.html` suffixes.
   redirectLines.push('/spirits/:spirit /spirits/:spirit/index.html 200')
   redirectLines.push('/spirits/:spirit/:aspect /spirits/:spirit/:aspect/index.html 200')
+  redirectLines.push('/adversaries/:adversary /adversaries/:adversary/index.html 200')
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {

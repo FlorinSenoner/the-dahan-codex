@@ -1,0 +1,2615 @@
+[
+  {
+    "name": "Brandenburg-Prussia",
+    "slug": "brandenburg-prussia",
+    "wikiTitle": "Brandenburg-Prussia",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Brandenburg-Prussia",
+    "displayOrder": 1,
+    "aliases": [],
+    "imageUrl": "/adversaries/brandenburg-prussia.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Brandenburg-Prussia",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "None",
+    "escalation": "Land Rush: On each board with town/city, add 1 town to a land without town.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 2,
+        "fearCards": "9 (3/3/3)",
+        "effectName": "Fast Start",
+        "effectText": "During Setup, on each board add 1 town to land #3.",
+        "phases": {
+          "setup": ["During Setup, on each board add 1 town to land #3."],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": ["During Setup, on each board add 1 town to land #3."],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 4,
+        "fearCards": "9 (3/3/3)",
+        "effectName": "Surge of Colonists",
+        "effectText": "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 town to land #3.",
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 6,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Efficient",
+        "effectText": "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 town to land #3.",
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 7,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Aggressive Timetable",
+        "effectText": "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 town to land #3.",
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Ruthlessly Efficient",
+        "effectText": "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 town to land #3.",
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 10,
+        "fearCards": "12 (4/4/4)",
+        "effectName": "Terrifyingly Efficient",
+        "effectText": "When making the Invader Deck, remove all Stage I cards. (New Deck Order:3-222-3333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, remove all Stage I cards. (New Deck Order:3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, remove all Stage I cards. (New Deck Order:3-222-3333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 town to land #3.",
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)",
+            "When making the Invader Deck, remove all Stage I cards. (New Deck Order:3-222-3333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 of the Stage III cards between Stage I and Stage II. (New Deck Order:111-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:11-3-2222-3333)",
+            "When making the Invader Deck, remove an additional Stage II card. (New Deck Order:11-3-222-3333)",
+            "When making the Invader Deck, remove an additional Stage I card. (New Deck Order:1-3-222-3333)",
+            "When making the Invader Deck, remove all Stage I cards. (New Deck Order:3-222-3333)"
+          ],
+          "other": []
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Compressed deck timing creates a fast game where early tempo decisions matter more than perfect board cleanup.",
+      "tips": [
+        {
+          "id": "brandenburg-prussia-focused-tip-1",
+          "title": "Signature Rule Pressure",
+          "summary": "Level 2 is the defining breakpoint because the early Stage III insert changes your pacing model immediately.",
+          "levelFocus": [2],
+          "phaseFocus": ["setup", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.76
+        },
+        {
+          "id": "brandenburg-prussia-focused-tip-2",
+          "title": "Tempo First",
+          "summary": "Treat some early blight as acceptable if it buys stronger positioning. Use cheap control and reliable minor-driven turns to stabilize by Stage II.",
+          "levelFocus": [2, 6],
+          "phaseFocus": ["setup", "build", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.78
+        },
+        {
+          "id": "brandenburg-prussia-focused-tip-3",
+          "title": "Prioritize High-Throughput Turns",
+          "summary": "Prefer high-throughput turns with strong card plays, frequent minor picks, and immediate board-impact actions over slow major setup lines.",
+          "levelFocus": [1, 2, 4, 6],
+          "phaseFocus": ["build", "ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.74
+        },
+        {
+          "id": "brandenburg-prussia-focused-tip-4",
+          "title": "Prepare For Deck Swing Turns",
+          "summary": "Prussia tempo spikes get volatile when invader cards cluster. Keep opening lines flexible so repeated terrain pressure does not collapse one board.",
+          "levelFocus": [2, 5, 6],
+          "phaseFocus": ["setup", "build", "ravage"],
+          "sourceIds": ["reddit-thread-18pins2"],
+          "confidence": 0.67
+        },
+        {
+          "id": "brandenburg-prussia-focused-tip-5",
+          "title": "Plan For Shorter Games",
+          "summary": "At higher levels, Prussia often threatens a time-out loss. Favor lines that solve lands now over slow long-ramp plans.",
+          "levelFocus": [5, 6],
+          "phaseFocus": ["fearInvaderDeck", "build", "ravage"],
+          "sourceIds": ["reddit-thread-18pins2", "reddit-thread-1foin82"],
+          "confidence": 0.74
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "England",
+    "slug": "england",
+    "wikiTitle": "England",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=England",
+    "displayOrder": 2,
+    "aliases": [],
+    "imageUrl": "/adversaries/england.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=England",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "Proud & Mighty Capital: If 7 or more town/city are ever in a single land, the Invaders win.",
+    "escalation": "Building Boom: On each board with town/city, Build in the land with the most town/city.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Indentured Servants Earn Land",
+        "effectText": "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 4,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Criminals and Malcontents",
+        "effectText": "During Setup, on each board add 1 city to land #1 and 1 town to land #2.",
+        "phases": {
+          "setup": ["During Setup, on each board add 1 city to land #1 and 1 town to land #2."],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": ["During Setup, on each board add 1 city to land #1 and 1 town to land #2."],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 6,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "High Immigration (I)",
+        "effectText": "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "ravage": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": ["During Setup, on each board add 1 city to land #1 and 1 town to land #2."],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city.",
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "ravage": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 7,
+        "fearCards": "14 (4/5/5)",
+        "effectName": "High Immigration (full)",
+        "effectText": "The extra Build tile remains out the entire game.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": ["The extra Build tile remains out the entire game."],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": ["During Setup, on each board add 1 city to land #1 and 1 town to land #2."],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city.",
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard.",
+            "The extra Build tile remains out the entire game."
+          ],
+          "ravage": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "14 (4/5/5)",
+        "effectName": "Local Autonomy",
+        "effectText": "town/city have +1 Health.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": ["town/city have +1 Health."]
+        },
+        "cumulativePhases": {
+          "setup": ["During Setup, on each board add 1 city to land #1 and 1 town to land #2."],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city.",
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard.",
+            "The extra Build tile remains out the entire game."
+          ],
+          "ravage": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "other": ["town/city have +1 Health."]
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 11,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "Independent Resolve",
+        "effectText": "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)",
+        "phases": {
+          "setup": [
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "explore": [],
+          "build": [
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #1 and 1 town to land #2.",
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "explore": [],
+          "build": [
+            "Invader Build Cards affect matching lands without Invaders if they are adjacent to at least 2 town/city.",
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard.",
+            "The extra Build tile remains out the entire game.",
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "ravage": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard.",
+            "During Setup, add an additional fear to the Fear Pool per player in the game. During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (This has no effect if no card is on the extra Build slot.)"
+          ],
+          "other": ["town/city have +1 Health."]
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Build pressure plus building durability rewards scaling plans, while punishing passive control lines.",
+      "tips": [
+        {
+          "id": "england-focused-tip-1",
+          "title": "Signature Rule Breakpoints",
+          "summary": "Level 1 is the core signature rule, while Level 3 High Immigration and Level 5 durability are major pivot points.",
+          "levelFocus": [1, 3, 5],
+          "phaseFocus": ["build", "other"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.72
+        },
+        {
+          "id": "england-focused-tip-2",
+          "title": "Scale Into Midgame",
+          "summary": "You can leak a bit early because blight pressure is slower than Sweden, but you must ramp intentionally. Prioritize stronger majors, anti-building tools, and fear pacing as difficulty rises.",
+          "levelFocus": [1, 3, 5],
+          "phaseFocus": ["build", "ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.78
+        },
+        {
+          "id": "england-focused-tip-3",
+          "title": "Track The Loss Condition Early",
+          "summary": "The land-cap loss condition can spike unexpectedly in Stage II. Keep explicit headroom and plan destruction one turn ahead.",
+          "levelFocus": [2, 3, 5],
+          "phaseFocus": ["build", "other", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.73
+        },
+        {
+          "id": "england-focused-tip-4",
+          "title": "Fear And Blight Removal Scale Better",
+          "summary": "Classic explorer-control lines underperform here. As levels rise, fear pacing, anti-building tools, and selective blight cleanup become higher value than raw damage racing.",
+          "levelFocus": [3, 5, 6],
+          "phaseFocus": ["build", "ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.71
+        },
+        {
+          "id": "england-focused-tip-5",
+          "title": "Use A Build-Phase Checklist",
+          "summary": "Invader-phase misses are a common failure mode against England. Explicitly check High Immigration, empty-land builds, and no-fear double-build windows every turn.",
+          "levelFocus": [1, 3, 4, 6],
+          "phaseFocus": ["build", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-18pins2"],
+          "confidence": 0.68
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "Sweden",
+    "slug": "sweden",
+    "wikiTitle": "Sweden",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Sweden",
+    "displayOrder": 3,
+    "aliases": [],
+    "imageUrl": "/adversaries/sweden.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Sweden",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "None",
+    "escalation": "Swayed by the Invaders: After Invaders Explore into each land this Phase, if that land has at least as many Invaders as dahan, replace 1 dahan with 1 town.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 2,
+        "fearCards": "9 (3/3/3)",
+        "effectName": "Heavy Mining",
+        "effectText": "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 3,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Population Pressure at Home",
+        "effectText": "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead.",
+        "phases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 5,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Fine Steel for Tools and Guns",
+        "effectText": "town deal 3 Damage. city deal 5 Damage.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": ["town deal 3 Damage. city deal 5 Damage."]
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": ["town deal 3 Damage. city deal 5 Damage."]
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 6,
+        "fearCards": "11 (3/4/4)",
+        "effectName": "Royal Backing",
+        "effectText": "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders.",
+        "phases": {
+          "setup": [
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead.",
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "other": ["town deal 3 Damage. city deal 5 Damage."]
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 7,
+        "fearCards": "12 (4/4/4)",
+        "effectName": "Mining Rush",
+        "effectText": "When Ravaging adds at least 1 blight to a land, also add 1 town to an adjacent land without town/city. Cascading blight does not cause this effect.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": [
+            "When Ravaging adds at least 1 blight to a land, also add 1 town to an adjacent land without town/city. Cascading blight does not cause this effect."
+          ]
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead.",
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "other": [
+            "town deal 3 Damage. city deal 5 Damage.",
+            "When Ravaging adds at least 1 blight to a land, also add 1 town to an adjacent land without town/city. Cascading blight does not cause this effect."
+          ]
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 8,
+        "fearCards": "13 (4/4/5)",
+        "effectName": "Prospecting Outpost",
+        "effectText": "During setup, on each board add 1 town and 1 blight to land #8. The blight comes from the box, not the Blight Card.",
+        "phases": {
+          "setup": [
+            "During setup, on each board add 1 town and 1 blight to land #8. The blight comes from the box, not the Blight Card."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board add 1 city to land #4. On boards where land #4 starts with blight, put that blight in land #5 instead.",
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders.",
+            "During setup, on each board add 1 town and 1 blight to land #8. The blight comes from the box, not the Blight Card."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "If the Invaders do at least 6 Damage to the land during Ravage, add an extra blight. The additional blight does not destroy Presence or cause cascades."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, after adding all other Invaders, Accelerate the Invader Deck. On each board, add 1 town to the land of that terrain with the fewest Invaders."
+          ],
+          "other": [
+            "town deal 3 Damage. city deal 5 Damage.",
+            "When Ravaging adds at least 1 blight to a land, also add 1 town to an adjacent land without town/city. Cascading blight does not cause this effect."
+          ]
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Sweden is a ravage-focused pressure test where preventing blight from ravages is usually the central objective.",
+      "tips": [
+        {
+          "id": "sweden-focused-tip-1",
+          "title": "Signature Rule Consensus",
+          "summary": "Level 3 is Sweden's defining rule because boosted building damage flips priorities away from standard defend plans.",
+          "levelFocus": [3],
+          "phaseFocus": ["ravage"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.8
+        },
+        {
+          "id": "sweden-focused-tip-2",
+          "title": "Prevent Blight, Not Just Damage",
+          "summary": "Strife and ravage skips are premium. Plain defend numbers are less reliable because Sweden hits too hard, so the practical goal is stopping blight outcomes.",
+          "levelFocus": [3],
+          "phaseFocus": ["ravage", "escalation"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.8
+        },
+        {
+          "id": "sweden-focused-tip-3",
+          "title": "Protect Dahan Positioning",
+          "summary": "Move Dahan early to reduce escalation blowouts. Losing too many Dahan early narrows your counterattack lines.",
+          "levelFocus": [0, 1, 3],
+          "phaseFocus": ["escalation", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-198bws1"],
+          "confidence": 0.75
+        },
+        {
+          "id": "sweden-focused-tip-4",
+          "title": "Triage Lands Aggressively",
+          "summary": "Choose which lands to lose rather than trying to defend everything. Prioritize lands that prevent chained blight and preserve future counterattacks.",
+          "levelFocus": [1, 3, 4, 5],
+          "phaseFocus": ["ravage", "build", "escalation"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.71
+        },
+        {
+          "id": "sweden-focused-tip-5",
+          "title": "Respect Early Swing Potential",
+          "summary": "Sweden is front-loaded and can swing on early card order. Stabilize by turn 2-3 with consistent ravage answers before pivoting to cleanup.",
+          "levelFocus": [0, 1, 3, 4],
+          "phaseFocus": ["setup", "ravage", "escalation"],
+          "sourceIds": ["reddit-thread-18pins2"],
+          "confidence": 0.67
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "France (Plantation Colony)",
+    "slug": "france-plantation-colony",
+    "wikiTitle": "France (Plantation Colony)",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=France_(Plantation_Colony)",
+    "displayOrder": 4,
+    "aliases": ["France"],
+    "imageUrl": "/adversaries/france-plantation-colony.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=France_(Plantation_Colony)",
+    "baseDifficulty": 2,
+    "additionalLossCondition": "Sprawling Plantations: Before Setup, return all but 7 town per player to the box. Invaders win if you ever cannot place a town.",
+    "escalation": "Demand for New Cash Crops: After Exploring, on each board, pick a land of the shown terrain. If it has town/city, add 1 blight. Otherwise, add 1 town.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "9 (3/3/3)",
+        "effectName": "Frontier Explorers",
+        "effectText": "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+        "phases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 5,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Slave Labor",
+        "effectText": "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+        "phases": {
+          "setup": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "explore": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 7,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Early Plantation",
+        "effectText": "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1.",
+        "phases": {
+          "setup": [
+            "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1."
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 8,
+        "fearCards": "12 (4/4/4)",
+        "effectName": "Triangle Trade",
+        "effectText": "Whenever Invaders Build a Coastal city, add 1 town to the adjacent land with the fewest town.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "Whenever Invaders Build a Coastal city, add 1 town to the adjacent land with the fewest town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "Whenever Invaders Build a Coastal city, add 1 town to the adjacent land with the fewest town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "Slow-Healing Ecosystem",
+        "effectText": "When you remove blight from the board, put it here instead of onto the Blight Card. As soon as you have 3 blight per player here, move it all back to the Blight Card.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": [
+            "When you remove blight from the board, put it here instead of onto the Blight Card. As soon as you have 3 blight per player here, move it all back to the Blight Card."
+          ]
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "Whenever Invaders Build a Coastal city, add 1 town to the adjacent land with the fewest town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": [
+            "When you remove blight from the board, put it here instead of onto the Blight Card. As soon as you have 3 blight per player here, move it all back to the Blight Card."
+          ]
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 10,
+        "fearCards": "14 (4/5/5)",
+        "effectName": "Persistent Explorers",
+        "effectText": "After resolving an Explore Card, on each board add 1 explorer to a land without any. Fear Card effects never remove explorer. If one would, you may instead Push that explorer.",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "After resolving an Explore Card, on each board add 1 explorer to a land without any. Fear Card effects never remove explorer. If one would, you may instead Push that explorer."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "After resolving an Explore Card, on each board add 1 explorer to a land without any. Fear Card effects never remove explorer. If one would, you may instead Push that explorer."
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "During Setup, on each board add 1 town to the highest-numbered land without town. Add 1 town to land #1."
+          ],
+          "explore": [
+            "Except during Setup: After Invaders successfully Explore into a land which had no town/city, add 1 explorer there.",
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "After resolving an Explore Card, on each board add 1 explorer to a land without any. Fear Card effects never remove explorer. If one would, you may instead Push that explorer."
+          ],
+          "build": [
+            "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 explorer or more, replace all but 1 explorer there with an equal number of town.",
+            "Whenever Invaders Build a Coastal city, add 1 town to the adjacent land with the fewest town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "After resolving an Explore Card, on each board add 1 explorer to a land without any. Fear Card effects never remove explorer. If one would, you may instead Push that explorer."
+          ],
+          "other": [
+            "When you remove blight from the board, put it here instead of onto the Blight Card. As soon as you have 3 blight per player here, move it all back to the Blight Card."
+          ]
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "France pressure comes from town conversion spikes and town-cap loss checks, so build forecasting becomes the core skill.",
+      "tips": [
+        {
+          "id": "france-plantation-colony-focused-tip-1",
+          "title": "Signature Rule Consensus",
+          "summary": "Level 2 is the defining rule that makes France feel like France.",
+          "levelFocus": [2],
+          "phaseFocus": ["build", "other"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.8
+        },
+        {
+          "id": "france-plantation-colony-focused-tip-2",
+          "title": "Forecast Town Count Every Turn",
+          "summary": "Track projected town count for the next invader phase, not just current board state. Include escalation and event swing cases in that forecast.",
+          "levelFocus": [2],
+          "phaseFocus": ["explore", "build", "escalation", "other"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.79
+        },
+        {
+          "id": "france-plantation-colony-focused-tip-3",
+          "title": "Play Around Slave Rebellion",
+          "summary": "Set up Dahan and strife to convert Slave Rebellion into upside when possible. Also pre-plan worst-case escalation terrains to avoid accidental loss spikes.",
+          "levelFocus": [1, 2, 3],
+          "phaseFocus": ["escalation", "other", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.76
+        },
+        {
+          "id": "france-plantation-colony-focused-tip-4",
+          "title": "Pre-Commit Escalation Terrain Plans",
+          "summary": "Name likely escalation-trouble terrains in advance and reserve tools for the worst-case branch instead of reacting after the town spike appears.",
+          "levelFocus": [1, 2, 3, 4],
+          "phaseFocus": ["escalation", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.72
+        },
+        {
+          "id": "france-plantation-colony-focused-tip-5",
+          "title": "Track Town Supply As A Timer",
+          "summary": "France applies dual pressure through escalating towns and loss-condition checks. Keep visible town-supply accounting so sudden losses do not come from bookkeeping misses.",
+          "levelFocus": [1, 2, 4, 5, 6],
+          "phaseFocus": ["build", "escalation", "other"],
+          "sourceIds": ["reddit-thread-18pins2"],
+          "confidence": 0.69
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "Habsburg Monarchy (Livestock Colony)",
+    "slug": "habsburg-monarchy-livestock-colony",
+    "wikiTitle": "Habsburg Monarchy",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Habsburg_Monarchy",
+    "displayOrder": 5,
+    "aliases": ["Habsburg Monarchy"],
+    "imageUrl": "/adversaries/habsburg-monarchy-livestock-colony.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Habsburg_Monarchy",
+    "baseDifficulty": 2,
+    "additionalLossCondition": "Irreparable Damage: Track how many blight come off the Blight Card during Ravages that do 8+ Damage to the land. If that number ever exceeds players, the Invaders win.",
+    "escalation": "Seek Prime Territory: After the Explore Step: On each board with 4 or fewer blight, add 1 town to a land without town/blight. On each board with 2 or fewer blight, do so again.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Migratory Herders",
+        "effectText": "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)"
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)"
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 5,
+        "fearCards": "11 (4/5/2)",
+        "effectName": "More Rural Than Urban",
+        "effectText": "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town.",
+        "phases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "explore": [],
+          "build": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "explore": [],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 6,
+        "fearCards": "12 (4/5/3)",
+        "effectName": "Fast Spread",
+        "effectText": "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town.",
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "explore": [],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 8,
+        "fearCards": "12 (4/5/3)",
+        "effectName": "Herds Thrive in Verdant Lands",
+        "effectText": "town in lands without blight are Durable: they have +2 Health, and \"Destroy town \" effects instead deal 2 Damage (to those town only) per town they could Destroy. (\"Destroy all town \" works normally.)",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": [
+            "town in lands without blight are Durable: they have +2 Health, and \"Destroy town \" effects instead deal 2 Damage (to those town only) per town they could Destroy. (\"Destroy all town \" works normally.)"
+          ]
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town.",
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "explore": [],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "other": [
+            "town in lands without blight are Durable: they have +2 Health, and \"Destroy town \" effects instead deal 2 Damage (to those town only) per town they could Destroy. (\"Destroy all town \" works normally.)"
+          ]
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "13 (4/6/3)",
+        "effectName": "Wave of Immigration",
+        "effectText": "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight.",
+        "phases": {
+          "setup": [
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "explore": [
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town.",
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)",
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "explore": [
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "other": [
+            "town in lands without blight are Durable: they have +2 Health, and \"Destroy town \" effects instead deal 2 Damage (to those town only) per town they could Destroy. (\"Destroy all town \" works normally.)"
+          ]
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 10,
+        "fearCards": "14 (5/6/3)",
+        "effectName": "Far-Flung Herds",
+        "effectText": "Ravages do +2 Damage (total) if any adjacent lands have town. (This does not cause lands without Invaders to Ravage.)",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "Ravages do +2 Damage (total) if any adjacent lands have town. (This does not cause lands without Invaders to Ravage.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town.",
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)",
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "explore": [
+            "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 city to a Coastal land without city and 1 town to the 3 Inland lands with the fewest blight."
+          ],
+          "build": [
+            "After the normal Build Step: In each land matching a Build Card, Gather 1 town from a land not matching a Build Card. (In board/land order.)",
+            "During Setup, on each board, add 1 town to land #2 and 1 town to the highest-numbered land without Setup symbols. During Play, when Invaders would Build 1 city in an Inland land, they instead Build 2 town."
+          ],
+          "ravage": [
+            "Ravages do +2 Damage (total) if any adjacent lands have town. (This does not cause lands without Invaders to Ravage.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
+          ],
+          "other": [
+            "town in lands without blight are Durable: they have +2 Health, and \"Destroy town \" effects instead deal 2 Damage (to those town only) per town they could Destroy. (\"Destroy all town \" works normally.)"
+          ]
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Town gathers plus durability create concentrated ravage pressure, and selective blight acceptance is often correct.",
+      "tips": [
+        {
+          "id": "habsburg-monarchy-livestock-colony-focused-tip-1",
+          "title": "Signature Rule Split",
+          "summary": "The defining pressure comes from Level 1 gathers and Level 4 durable towns.",
+          "levelFocus": [1, 4],
+          "phaseFocus": ["build", "ravage"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.7
+        },
+        {
+          "id": "habsburg-monarchy-livestock-colony-focused-tip-2",
+          "title": "Choose Which Ravages To Lose",
+          "summary": "Allow some small ravages while prioritizing build denial and loss-condition-safe lands. Do not try to solve every land equally.",
+          "levelFocus": [1, 4],
+          "phaseFocus": ["build", "ravage", "escalation"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.74
+        },
+        {
+          "id": "habsburg-monarchy-livestock-colony-focused-tip-3",
+          "title": "Use Blight As A Tactical Resource",
+          "summary": "Controlled blight can reduce future escalation pressure and open durable-town counterplay windows. Spend blight intentionally where it protects the loss condition.",
+          "levelFocus": [1, 3, 4],
+          "phaseFocus": ["ravage", "escalation", "other"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-18pins2"],
+          "confidence": 0.69
+        },
+        {
+          "id": "habsburg-monarchy-livestock-colony-focused-tip-4",
+          "title": "Use Isolate To Break Gather Chains",
+          "summary": "Use Isolate to stop town gathers before they create oversized ravages and loss-condition-risk lands.",
+          "levelFocus": [1, 2, 4],
+          "phaseFocus": ["explore", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.74
+        },
+        {
+          "id": "habsburg-monarchy-livestock-colony-focused-tip-5",
+          "title": "Use Isolate And City Kill Win Paths",
+          "summary": "City destruction plus Terror Level III is a common closing route because Livestock often over-indexes on towns.",
+          "levelFocus": [1, 4, 6],
+          "phaseFocus": ["explore", "build", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.75
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "Russia",
+    "slug": "russia",
+    "wikiTitle": "Russia",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Russia",
+    "displayOrder": 6,
+    "aliases": [],
+    "imageUrl": "/adversaries/russia.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Russia",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "Hunters Swarm the Island: Put beasts Destroyed by Adversary rules on this panel. If there are ever more beasts on this panel than on the island, the Invaders win.",
+    "escalation": "Stalk the Predators: On each board: Add 2 explorer (total) among lands with beasts. If you can't, instead add 2 explorer among lands with beasts on a different board.",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "10 (3/3/4)",
+        "effectName": "Hunters Bring Home Shell and Hide",
+        "effectText": "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+        "phases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "build": [],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "build": [],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 4,
+        "fearCards": "11 (4/3/4)",
+        "effectName": "A Sense for Impending Disaster",
+        "effectText": "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so.",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so."
+          ],
+          "build": [],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 6,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Competition Among Hunters",
+        "effectText": "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "build": [],
+          "ravage": [
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land."
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "build": [],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 7,
+        "fearCards": "12 (4/4/4)",
+        "effectName": "Accelerated Exploitation",
+        "effectText": "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)",
+        "phases": {
+          "setup": [
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "build": [],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "Entrench in the Face of Fear",
+        "effectText": "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up).",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "build": [
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)"
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)",
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 11,
+        "fearCards": "14 (5/5/4)",
+        "effectName": "Pressure for Fast Profit",
+        "effectText": "After the Ravage Step of turn 2+, on each board where it added no blight: In the land with the most explorer (min. 1), add 1 explorer and 1 town.",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "After the Ravage Step of turn 2+, on each board where it added no blight: In the land with the most explorer (min. 1), add 1 explorer and 1 town."
+          ],
+          "build": [],
+          "ravage": [
+            "After the Ravage Step of turn 2+, on each board where it added no blight: In the land with the most explorer (min. 1), add 1 explorer and 1 town."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)"
+          ],
+          "explore": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "The first time each Action would Destroy explorer: If possible, 1 of those explorer is instead Pushed; 1 fear when you do so.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)",
+            "After the Ravage Step of turn 2+, on each board where it added no blight: In the land with the most explorer (min. 1), add 1 explorer and 1 town."
+          ],
+          "build": [
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "ravage": [
+            "During Setup, on each board, add 1 beasts and 1 explorer to the highest-numbered land without town/city. During Play, explorer do +1 Damage. When Ravage adds blight to a land (including cascades), Destroy 1 beasts in that land.",
+            "Ravage Cards also match lands with 3 or more explorer. (If the land already matched the Ravage Card, it still Ravages just once.)",
+            "After the Ravage Step of turn 2+, on each board where it added no blight: In the land with the most explorer (min. 1), add 1 explorer and 1 town."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "When making the Invader Deck, put 1 Stage III Card after each Stage II Card. (New Deck Order: 111-2-3-2-3-2-3-2-33)",
+            "Put an unused Stage II Invader Card under the top 3 Fear Cards, and an unused Stage III Card under the top 7 Fear Cards. When one is revealed, immediately place it in the Build space (face-up)."
+          ],
+          "other": []
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Russia is defined by explorer mechanics; unmanaged explorer clusters become the primary loss driver.",
+      "tips": [
+        {
+          "id": "russia-focused-tip-1",
+          "title": "Signature Rule Debate",
+          "summary": "Level 2 and Level 3 define the core identity, with Level 5 acting as the amplifier that sharpens the matchup.",
+          "levelFocus": [2, 3, 5],
+          "phaseFocus": ["explore", "ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.73
+        },
+        {
+          "id": "russia-focused-tip-2",
+          "title": "Always Have An Explorer Plan",
+          "summary": "Repeated explorer culling, gathers, and strategic skips are central. Decide early whether you are concentrating explorers for skip lines or pruning them every turn.",
+          "levelFocus": [2, 3, 5],
+          "phaseFocus": ["explore", "ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.78
+        },
+        {
+          "id": "russia-focused-tip-3",
+          "title": "Pick One Explorer Control Line",
+          "summary": "Commit to one explorer-control line: either gather explorers into controlled skip lands or keep culling them every round. Half-committing to both usually fails as Russia ramps.",
+          "levelFocus": [2, 3, 4, 5],
+          "phaseFocus": ["explore", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.74
+        },
+        {
+          "id": "russia-focused-tip-4",
+          "title": "Time Fear Bursts Intentionally",
+          "summary": "Fear timing is critical at Level 5+. At Level 6, taking blight can be the better timing choice on specific turns.",
+          "levelFocus": [5, 6],
+          "phaseFocus": ["fearInvaderDeck", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-198bws1"],
+          "confidence": 0.76
+        },
+        {
+          "id": "russia-focused-tip-5",
+          "title": "Expect A Slow Start Then A Spike",
+          "summary": "Russia can look manageable early but rapidly accelerates once explorer engines are online. Use early turns to pre-position answers instead of chasing perfect cleanup.",
+          "levelFocus": [1, 2, 3, 5],
+          "phaseFocus": ["explore", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-18pins2"],
+          "confidence": 0.7
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "Scotland",
+    "slug": "scotland",
+    "wikiTitle": "Scotland",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Scotland",
+    "displayOrder": 7,
+    "aliases": [],
+    "imageUrl": "/adversaries/scotland.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Scotland",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "Trade Hub: If the number of Coastal lands with city is ever greater than (2 x # of boards), the Invaders win.",
+    "escalation": "Ports Sprawl Outward: On the single board with the most Coastal town/city, add 1 town to the N lands with the fewest town (N = # of players.)",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "10 (3/4/3)",
+        "effectName": "Trading Port",
+        "effectText": "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+        "phases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 4,
+        "fearCards": "11 (4/4/3)",
+        "effectName": "Seize Opportunity",
+        "effectText": "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+        "phases": {
+          "setup": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 6,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "Chart the Coastline",
+        "effectText": "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [
+            "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [
+            "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 7,
+        "fearCards": "14 (5/5/4)",
+        "effectName": "Ambition of a Minor Nation",
+        "effectText": "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))",
+        "phases": {
+          "setup": [
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [
+            "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 8,
+        "fearCards": "15 (5/6/4)",
+        "effectName": "Runoff and Bilgewater",
+        "effectText": "After a Ravage Action adds blight to a Coastal Land, add 1 blight to that board's Ocean (without cascading). Treat the Ocean as a Coastal Wetland for this rule and for blight removal/movement.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "After a Ravage Action adds blight to a Coastal Land, add 1 blight to that board's Ocean (without cascading). Treat the Ocean as a Coastal Wetland for this rule and for blight removal/movement."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [
+            "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city."
+          ],
+          "ravage": [
+            "After a Ravage Action adds blight to a Coastal Land, add 1 blight to that board's Ocean (without cascading). Treat the Ocean as a Coastal Wetland for this rule and for blight removal/movement."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 10,
+        "fearCards": "16 (6/6/4)",
+        "effectName": "Exports Fuel Inward Growth",
+        "effectText": "After the Ravage step, add 1 town to each Inland land that matches a Ravage card and is within 1 range of town/city.",
+        "phases": {
+          "setup": [],
+          "explore": [],
+          "build": [],
+          "ravage": [
+            "After the Ravage step, add 1 town to each Inland land that matches a Ravage card and is within 1 range of town/city."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board.",
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "explore": [
+            "After Setup, in Coastal lands, Explore Cards add 1 town instead of 1 explorer. \"Coastal Lands\" Invader cards do this for maximum 2 lands per board."
+          ],
+          "build": [
+            "In Coastal lands, Build Cards affect lands without Invaders, so long as there is an adjacent city."
+          ],
+          "ravage": [
+            "After a Ravage Action adds blight to a Coastal Land, add 1 blight to that board's Ocean (without cascading). Treat the Ocean as a Coastal Wetland for this rule and for blight removal/movement.",
+            "After the Ravage step, add 1 town to each Inland land that matches a Ravage card and is within 1 range of town/city."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [
+            "During Setup, add 1 city to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)",
+            "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333))"
+          ],
+          "other": []
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Scotland combines coast-focused pressure with aggressive timing, rewarding early coastal triage and support planning.",
+      "tips": [
+        {
+          "id": "scotland-focused-tip-1",
+          "title": "Signature Rule Focus",
+          "summary": "Level 2 is the signature pressure point for Scotland’s coast-centric identity.",
+          "levelFocus": [2],
+          "phaseFocus": ["setup", "explore"],
+          "sourceIds": ["reddit-thread-198bws1"],
+          "confidence": 0.69
+        },
+        {
+          "id": "scotland-focused-tip-2",
+          "title": "Contain The Coastline Early",
+          "summary": "Prevent early coastal city buildup before it snowballs. Clear inland first, then concentrate on coast control.",
+          "levelFocus": [1, 2, 3, 6],
+          "phaseFocus": ["explore", "build", "escalation", "other"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.74
+        },
+        {
+          "id": "scotland-focused-tip-3",
+          "title": "Support The Escalation Board",
+          "summary": "In multiplayer, one board often absorbs most escalation pressure. Provide explicit teammate support instead of purely local board play.",
+          "levelFocus": [3, 4, 6],
+          "phaseFocus": ["escalation", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.72
+        },
+        {
+          "id": "scotland-focused-tip-4",
+          "title": "Use The Inland-Pocket Plan Carefully",
+          "summary": "Below Level 6, clear inland and funnel remaining pressure to selected coast lands. At Level 6 this is still possible but much less forgiving.",
+          "levelFocus": [2, 4, 5, 6],
+          "phaseFocus": ["build", "ravage", "other"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.7
+        },
+        {
+          "id": "scotland-focused-tip-5",
+          "title": "Plan For Longer Ramps",
+          "summary": "Scotland games often run longer than faster adversaries. Build paths with stronger mid-late scaling, major access, and explicit loss-condition checks.",
+          "levelFocus": [3, 4, 5, 6],
+          "phaseFocus": ["build", "fearInvaderDeck", "other"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-18pins2"],
+          "confidence": 0.68
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  },
+  {
+    "name": "Habsburg Mining Expedition",
+    "slug": "habsburg-mining-expedition",
+    "wikiTitle": "Habsburg Mining Expedition",
+    "wikiUrl": "https://spiritislandwiki.com/index.php?title=Habsburg_Mining_Expedition",
+    "displayOrder": 8,
+    "aliases": [],
+    "imageUrl": "/adversaries/habsburg-mining-expedition.webp",
+    "imageSourceUrl": "https://spiritislandwiki.com/index.php?title=Habsburg_Mining_Expedition",
+    "baseDifficulty": 1,
+    "additionalLossCondition": "Land Stripped Bare: At the end of the fast Phase, the Invaders win if any land has at least 8 total Invaders/blight (combined).",
+    "escalation": "Mining Tunnels: After Advancing Invader Cards: On each board, Explore in 2 lands whose terrains don't match a Ravage or Build Card (no source required).",
+    "levels": [
+      {
+        "level": 1,
+        "difficulty": 3,
+        "fearCards": "9 (3/3/3)",
+        "effectName": "Avarice Rewarded",
+        "effectText": "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 2,
+        "difficulty": 4,
+        "fearCards": "10 (3/3/4)",
+        "effectName": "Miners Come From Far and Wide",
+        "effectText": "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+        "phases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol."
+          ],
+          "explore": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol."
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol."
+          ],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol."
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 3,
+        "difficulty": 5,
+        "fearCards": "11 (3/4/4)",
+        "effectName": "Mining Boom (I)",
+        "effectText": "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there.",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "build": [
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol."
+          ],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        }
+      },
+      {
+        "level": 4,
+        "difficulty": 7,
+        "fearCards": "12 (4/4/4)",
+        "effectName": "Untapped Salt Deposits",
+        "effectText": "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)",
+        "phases": {
+          "setup": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "explore": [],
+          "build": [],
+          "ravage": [],
+          "escalation": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "fearInvaderDeck": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there."
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "fearInvaderDeck": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 5,
+        "difficulty": 9,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "Mining Boom (II)",
+        "effectText": "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)"
+          ],
+          "build": [
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)"
+          ],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there.",
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)"
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there.",
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)"
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "fearInvaderDeck": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "other": []
+        }
+      },
+      {
+        "level": 6,
+        "difficulty": 10,
+        "fearCards": "13 (4/5/4)",
+        "effectName": "The Empire Ascendant",
+        "effectText": "Setup and During the Explore Step: On boards with 3 or fewer blight: Add +1 explorer in each land successfully explored. (Max. 2 lands per board per Explore Card.)",
+        "phases": {
+          "setup": [],
+          "explore": [
+            "Setup and During the Explore Step: On boards with 3 or fewer blight: Add +1 explorer in each land successfully explored. (Max. 2 lands per board per Explore Card.)"
+          ],
+          "build": [],
+          "ravage": [],
+          "escalation": [],
+          "fearInvaderDeck": [],
+          "other": []
+        },
+        "cumulativePhases": {
+          "setup": [
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "explore": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "Setup: Add 1 explorer in each land with no dahan. Add 1 disease and 1 city in the highest-numbered land with a town Setup symbol.",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there.",
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)",
+            "Setup and During the Explore Step: On boards with 3 or fewer blight: Add +1 explorer in each land successfully explored. (Max. 2 lands per board per Explore Card.)"
+          ],
+          "build": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions).",
+            "After the Build Step, on each board: Choose a land with explorer. Upgrade 1 explorer there.",
+            "Instead of Mining Boom (I), after the Build Step, on each board: Choose a land with explorer. Build there, then Upgrade 1 explorer. (Build normally in a Mining land.)"
+          ],
+          "ravage": [
+            "When blight added by a Ravage Action would cascade, instead Upgrade 1 explorer/town (before dahan counterattack.) Ceaseless Mining: Lands with 3 or more Invaders are Mining lands. In Mining lands: • disease and modifiers to disease affect Ravage Actions as though they were Build Actions. • During the Build Step, Build Cards cause Ravage Actions (instead of Build Actions)."
+          ],
+          "escalation": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "fearInvaderDeck": [
+            "Setup: Remove the Stage II 'Coastal Lands' card before randomly choosing Stage II cards. Place the 'Salt Deposits' card in place of the 2nd Stage II card. (New Deck Order: 111-2S22-33333, where S is the Salt Deposits card. Escalation ignores S.)"
+          ],
+          "other": []
+        }
+      }
+    ],
+    "strategy": {
+      "overview": "Mining Lands and Salt Deposits create a scripted midgame spike that rewards advance planning more than reactive play.",
+      "tips": [
+        {
+          "id": "habsburg-mining-expedition-focused-tip-1",
+          "title": "Signature Rule: Salt Timeline",
+          "summary": "Treat Salt Deposits as a timer: explore around turn 4, build around turn 5, ravage around turn 6. Use that schedule to pre-position before the spike.",
+          "levelFocus": [3, 4],
+          "phaseFocus": ["explore", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.76
+        },
+        {
+          "id": "habsburg-mining-expedition-focused-tip-2",
+          "title": "Trim Explore And Build Density Before Salt",
+          "summary": "Turns 4-5 set up the decisive turn-6 Salt ravage. Prioritize reducing explores and builds in likely Mining Lands before that breakpoint.",
+          "levelFocus": [3, 4, 6],
+          "phaseFocus": ["explore", "build", "ravage"],
+          "sourceIds": ["reddit-thread-1foin82"],
+          "confidence": 0.75
+        },
+        {
+          "id": "habsburg-mining-expedition-focused-tip-3",
+          "title": "Use Defensive Counterplay",
+          "summary": "Defend, Dahan counterattacks, and disease are strong because many HME threats are frequent smaller ravages rather than one giant hit.",
+          "levelFocus": [3, 4],
+          "phaseFocus": ["ravage", "build"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-198bws1"],
+          "confidence": 0.72
+        },
+        {
+          "id": "habsburg-mining-expedition-focused-tip-4",
+          "title": "Track Mining Boom Every Invader Phase",
+          "summary": "HME rules are coherent but easy to mis-sequence if you autopilot invaders. Keep a turn checklist so extra ravages/builds are never missed.",
+          "levelFocus": [1, 3, 4, 6],
+          "phaseFocus": ["build", "ravage", "other"],
+          "sourceIds": ["reddit-thread-18pins2"],
+          "confidence": 0.68
+        },
+        {
+          "id": "habsburg-mining-expedition-focused-tip-5",
+          "title": "End The Game Before Repeat Salt Cycles",
+          "summary": "The first Salt ravage is the main decision point and later Salt cycles compound risk. Convert tempo into a close shortly after stabilization.",
+          "levelFocus": [4, 5, 6],
+          "phaseFocus": ["ravage", "fearInvaderDeck"],
+          "sourceIds": ["reddit-thread-1foin82", "reddit-thread-18pins2"],
+          "confidence": 0.71
+        }
+      ],
+      "sources": [
+        {
+          "id": "reddit-thread-18pins2",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/18pins2/adversaries_and_how_they_are_put_together_is_a/",
+          "title": "Adversaries and how they are put together is a real highlight of the game",
+          "author": "Tables61",
+          "publishedAt": "2023-12-24T00:04:18.000Z",
+          "confidence": 0.92,
+          "excerpt": "Across both (co-operative) board and video games, difficulty options are common. But I don't think I've seen a game pull it off as well as Spirit Island's adversary design does - and I wanted to make a post really calling it out."
+        },
+        {
+          "id": "reddit-thread-1foin82",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/1foin82/adversaries_summary/",
+          "title": "Adversaries summary",
+          "author": "Tables61",
+          "publishedAt": "2024-09-24T20:18:54.000Z",
+          "confidence": 0.86,
+          "excerpt": "**Brandenburg Prussia**: Fast! Be prepared to take an early blight or two, but take control in stage II. Control is very strong here, it's often better to have higher plays and go minors than to go majors. **England**: They build and build."
+        },
+        {
+          "id": "reddit-thread-198bws1",
+          "sourceType": "reddit",
+          "url": "https://www.reddit.com/r/spiritisland/comments/198bws1/adversaries_and_their_signature_levels/",
+          "title": "Adversaries and their signature levels",
+          "author": "leftylink",
+          "publishedAt": "2024-01-16T19:45:06.000Z",
+          "confidence": 0.86,
+          "excerpt": "This is just an idle thought. I do not know if anything useful will come out of it. I was thinking about adversary levels. It seems clear that some levels are more game-changing than others (rules changes vs adding buildings in setup)."
+        }
+      ],
+      "coverage": {
+        "totalSources": 3,
+        "bySourceType": {
+          "reddit": 3
+        }
+      }
+    }
+  }
+]

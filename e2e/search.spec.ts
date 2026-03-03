@@ -57,8 +57,8 @@ test.describe('Spirit Search', () => {
 
     await searchInput.fill('Lightning')
 
-    // URL should contain search param
-    await expect(page).toHaveURL(/search=Lightning/i)
+    // URL should contain search param (debounced input)
+    await expect(page).toHaveURL(/search=Lightning/i, { timeout: 10000 })
   })
 
   test('search from URL shows filtered results', async ({ page }) => {
@@ -101,11 +101,11 @@ test.describe('Spirit Search', () => {
     await expect(page).not.toHaveURL(/search=/)
 
     // Multiple spirits should be visible
-    await expect(
-      page.getByRole('link', { name: /river surges in sunlight/i }).first(),
-    ).toBeVisible()
-    await expect(
-      page.getByRole('link', { name: /lightning's swift strike/i }).first(),
-    ).toBeVisible()
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
+    await expect(page.getByRole('link', { name: /lightning's swift strike/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
   })
 })

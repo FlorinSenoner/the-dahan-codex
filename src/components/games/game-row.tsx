@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router'
-import type { Doc } from 'convex/_generated/dataModel'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
+import type { GameListItem } from '@/types/convex'
 
 interface GameRowProps {
-  game: Doc<'games'>
+  game: GameListItem
 }
 
 export function GameRow({ game }: GameRowProps) {
@@ -23,7 +23,10 @@ export function GameRow({ game }: GameRowProps) {
   const moreSpirits = game.spirits.length > 1 ? ` +${game.spirits.length - 1} more` : ''
 
   // Adversary display
-  const adversaryDisplay = game.adversary ? `${game.adversary.name} L${game.adversary.level}` : null
+  const adversaryDisplay =
+    game.adversaryRef || game.adversary
+      ? `${game.adversaryRef?.nameSnapshot ?? game.adversary?.name} L${game.adversaryRef?.level ?? game.adversary?.level ?? 0}`
+      : null
 
   return (
     <Link

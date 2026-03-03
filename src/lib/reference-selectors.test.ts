@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
+  selectAdversaryByName,
+  selectAdversaryBySlug,
+  selectAdversaryLevelDifficulty,
+  selectAdversaryList,
   selectOpeningsBySpiritId,
   selectSpiritBySlug,
   selectSpiritList,
@@ -68,6 +72,109 @@ const snapshot = {
       turns: [{ turn: 1, instructions: 'Do A first.' }],
     },
   ],
+  adversaries: [
+    {
+      _id: 'adv_bp',
+      _creationTime: 1,
+      name: 'Brandenburg-Prussia',
+      slug: 'brandenburg-prussia',
+      wikiUrl: 'https://spiritislandwiki.com/index.php?title=Brandenburg-Prussia',
+      displayOrder: 1,
+      aliases: [],
+      imageUrl: '/adversaries/brandenburg-prussia.png',
+      imageSourceUrl: 'https://spiritislandwiki.com/images/2/24/Brandenburg-Prussia_Map.png',
+      baseDifficulty: 1,
+      additionalLossCondition: 'None',
+      escalation: 'Land Rush',
+      levels: [
+        {
+          level: 1,
+          difficulty: 2,
+          fearCards: '9 (3/3/3)',
+          effectName: 'Fast Start',
+          effectText: 'Setup effect.',
+          phases: {
+            setup: ['Setup effect.'],
+            explore: [],
+            build: [],
+            ravage: [],
+            escalation: [],
+            fearInvaderDeck: [],
+            other: [],
+          },
+          cumulativePhases: {
+            setup: ['Setup effect.'],
+            explore: [],
+            build: [],
+            ravage: [],
+            escalation: [],
+            fearInvaderDeck: [],
+            other: [],
+          },
+        },
+      ],
+      strategy: {
+        overview: 'Fast adversary.',
+        tips: [],
+        sources: [],
+        coverage: {
+          totalSources: 0,
+          bySourceType: {},
+        },
+      },
+    },
+    {
+      _id: 'adv_fr',
+      _creationTime: 2,
+      name: 'France (Plantation Colony)',
+      slug: 'france-plantation-colony',
+      wikiUrl: 'https://spiritislandwiki.com/index.php?title=France_(Plantation_Colony)',
+      displayOrder: 4,
+      aliases: ['France'],
+      imageUrl: '/adversaries/france-plantation-colony.png',
+      imageSourceUrl:
+        'https://spiritislandwiki.com/images/8/81/France_%28Plantation_Colony%29_Map.png',
+      baseDifficulty: 2,
+      additionalLossCondition: 'Town cap.',
+      escalation: 'Demand for cash crops.',
+      levels: [
+        {
+          level: 1,
+          difficulty: 3,
+          fearCards: '9 (3/3/3)',
+          effectName: 'Frontier Explorers',
+          effectText: 'Explore effect.',
+          phases: {
+            setup: [],
+            explore: ['Explore effect.'],
+            build: [],
+            ravage: [],
+            escalation: [],
+            fearInvaderDeck: [],
+            other: [],
+          },
+          cumulativePhases: {
+            setup: [],
+            explore: ['Explore effect.'],
+            build: [],
+            ravage: [],
+            escalation: [],
+            fearInvaderDeck: [],
+            other: [],
+          },
+        },
+      ],
+      strategy: {
+        overview: 'Town pressure.',
+        tips: [],
+        sources: [],
+        coverage: {
+          totalSources: 0,
+          bySourceType: {},
+        },
+      },
+    },
+  ],
 } as unknown as PublicSnapshot
 
 describe('reference-selectors', () => {
@@ -104,5 +211,24 @@ describe('reference-selectors', () => {
 
     expect(openings).toHaveLength(2)
     expect(openings.map((opening) => opening.name)).toEqual(['A Opening', 'B Opening'])
+  })
+
+  it('selects adversaries in display order and resolves by slug/name aliases', () => {
+    const list = selectAdversaryList(snapshot)
+    const bySlug = selectAdversaryBySlug(snapshot, 'france-plantation-colony')
+    const byAlias = selectAdversaryByName(snapshot, 'France')
+
+    expect(list.map((item) => item.slug)).toEqual([
+      'brandenburg-prussia',
+      'france-plantation-colony',
+    ])
+    expect(bySlug?.name).toBe('France (Plantation Colony)')
+    expect(byAlias?.slug).toBe('france-plantation-colony')
+  })
+
+  it('reads level difficulty from adversary data', () => {
+    const adversary = selectAdversaryBySlug(snapshot, 'brandenburg-prussia')
+    expect(selectAdversaryLevelDifficulty(adversary, 1)).toBe(2)
+    expect(selectAdversaryLevelDifficulty(adversary, 6)).toBeNull()
   })
 })

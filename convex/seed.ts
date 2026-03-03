@@ -1,7 +1,7 @@
 import { v } from 'convex/values'
-import rawAspects from '../scripts/data/aspects.json'
+import rawAdversaries from '../scripts/data/adversaries.json'
 import rawOpenings from '../scripts/data/openings.json'
-import rawSpirits from '../scripts/data/spirits.json'
+import rawSpiritCatalog from '../scripts/data/spirits.json'
 import type { Doc, Id } from './_generated/dataModel'
 import type { MutationCtx } from './_generated/server'
 import { internalMutation } from './_generated/server'
@@ -59,6 +59,7 @@ type SeedStats = {
   spirits: number
   aspects: number
   openings: number
+  adversaries: number
 }
 
 type InsertSeedResult = {
@@ -66,9 +67,17 @@ type InsertSeedResult = {
   stats: SeedStats
 }
 
-const SPIRITS = rawSpirits as SpiritSeed[]
-const ASPECTS = rawAspects as AspectSeed[]
+type SpiritCatalogSeed = {
+  spirits: SpiritSeed[]
+  aspects: AspectSeed[]
+}
+
+const SPIRIT_CATALOG = rawSpiritCatalog as SpiritCatalogSeed
+const SPIRITS = SPIRIT_CATALOG.spirits
+const ASPECTS = SPIRIT_CATALOG.aspects
 const OPENINGS = rawOpenings as OpeningSeed[]
+type AdversarySeed = Omit<Doc<'adversaries'>, '_id' | '_creationTime'>
+const ADVERSARIES = rawAdversaries as AdversarySeed[]
 
 const seedResultValidator = v.object({
   status: v.union(v.literal('skipped'), v.literal('seeded')),
@@ -254,11 +263,30 @@ async function seedOpenings(ctx: MutationCtx, spiritIdsBySlug: Map<string, Id<'s
   return count
 }
 
+async function seedAdversariesUpsert(ctx: MutationCtx) {
+  let count = 0
+  for (const adversary of ADVERSARIES) {
+    const existing = await ctx.db
+      .query('adversaries')
+      .withIndex('by_slug', (q) => q.eq('slug', adversary.slug))
+      .first()
+
+    if (existing) {
+      await ctx.db.patch(existing._id, adversary)
+    } else {
+      await ctx.db.insert('adversaries', adversary)
+    }
+    count++
+  }
+  return count
+}
+
 async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
   const expansionIds = await seedExpansions(ctx)
   const spiritIdsBySlug = await seedBaseSpirits(ctx, expansionIds)
   const aspectCount = await seedAspects(ctx, expansionIds, spiritIdsBySlug)
   const openingsCount = await seedOpenings(ctx, spiritIdsBySlug)
+  const adversariesCount = await seedAdversariesUpsert(ctx)
 
   return {
     spiritIdsBySlug,
@@ -267,6 +295,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
       spirits: SPIRITS.length,
       aspects: aspectCount,
       openings: openingsCount,
+      adversaries: adversariesCount,
     },
   }
 }
@@ -277,16 +306,17 @@ export const seedSpirits = internalMutation({
   handler: async (ctx) => {
     const existingSpirits = await ctx.db.query('spirits').first()
     if (existingSpirits) {
+      const adversariesCount = await seedAdversariesUpsert(ctx)
       return {
-        status: 'skipped' as const,
-        message: 'Data already seeded',
+        status: 'seeded' as const,
+        message: `Spirits already seeded. Upserted ${adversariesCount} adversaries.`,
       }
     }
 
     const { stats } = await insertSeedData(ctx)
     return {
       status: 'seeded' as const,
-      message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, ${stats.openings} openings`,
+      message: `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects, ${stats.openings} openings, ${stats.adversaries} adversaries`,
     }
   },
 })
@@ -309,7 +339,8 @@ export const reseedSpirits = internalMutation({
       status: 'reseeded' as const,
       message:
         `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects. ` +
-        `Openings: ${restored} restored, ${skipped} skipped (duplicates), ${orphaned} orphaned (missing spirit)`,
+        `Openings: ${restored} restored, ${skipped} skipped (duplicates), ${orphaned} orphaned (missing spirit). ` +
+        `Adversaries upserted: ${stats.adversaries}.`,
     }
   },
 })

@@ -1,11 +1,11 @@
-import type { Doc } from 'convex/_generated/dataModel'
 import Papa from 'papaparse'
+import type { GameListItem } from '@/types/convex'
 import { type GameCSVRow, getSpiritAtIndex } from './csv-spirits'
 
 /**
  * Convert games to CSV rows with fixed column structure
  */
-function gamesToCSVRows(games: Doc<'games'>[]): GameCSVRow[] {
+function gamesToCSVRows(games: GameListItem[]): GameCSVRow[] {
   return games.map((game) => {
     const s1 = getSpiritAtIndex(game.spirits, 0)
     const s2 = getSpiritAtIndex(game.spirits, 1)
@@ -13,6 +13,13 @@ function gamesToCSVRows(games: Doc<'games'>[]): GameCSVRow[] {
     const s4 = getSpiritAtIndex(game.spirits, 3)
     const s5 = getSpiritAtIndex(game.spirits, 4)
     const s6 = getSpiritAtIndex(game.spirits, 5)
+
+    const adversaryName = game.adversaryRef?.nameSnapshot ?? game.adversary?.name ?? ''
+    const adversaryLevel = game.adversaryRef?.level ?? game.adversary?.level
+    const secondaryAdversaryName =
+      game.secondaryAdversaryRef?.nameSnapshot ?? game.secondaryAdversary?.name ?? ''
+    const secondaryAdversaryLevel =
+      game.secondaryAdversaryRef?.level ?? game.secondaryAdversary?.level
 
     return {
       id: game._id,
@@ -36,10 +43,10 @@ function gamesToCSVRows(games: Doc<'games'>[]): GameCSVRow[] {
       spirit6: s6.name,
       spirit6_variant: s6.variant,
       spirit6_player: s6.player,
-      adversary: game.adversary?.name ?? '',
-      adversary_level: game.adversary?.level?.toString() ?? '',
-      secondary_adversary: game.secondaryAdversary?.name ?? '',
-      secondary_adversary_level: game.secondaryAdversary?.level?.toString() ?? '',
+      adversary: adversaryName,
+      adversary_level: adversaryLevel?.toString() ?? '',
+      secondary_adversary: secondaryAdversaryName,
+      secondary_adversary_level: secondaryAdversaryLevel?.toString() ?? '',
       scenario: game.scenario?.name ?? '',
       scenario_difficulty: game.scenario?.difficulty?.toString() ?? '',
       win_type: game.winType ?? '',
@@ -74,7 +81,7 @@ function downloadCSV(csvContent: string, filename: string): void {
 /**
  * Export games to CSV and trigger browser download
  */
-export function exportGamesToCSV(games: Doc<'games'>[]): void {
+export function exportGamesToCSV(games: GameListItem[]): void {
   const rows = gamesToCSVRows(games)
 
   const csv = Papa.unparse(rows, {

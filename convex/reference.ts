@@ -79,12 +79,85 @@ const openingSnapshotValidator = v.object({
   ),
 })
 
+const phaseRulesValidator = v.object({
+  setup: v.array(v.string()),
+  explore: v.array(v.string()),
+  build: v.array(v.string()),
+  ravage: v.array(v.string()),
+  escalation: v.array(v.string()),
+  fearInvaderDeck: v.array(v.string()),
+  other: v.array(v.string()),
+})
+
+const adversaryLevelValidator = v.object({
+  level: v.number(),
+  difficulty: v.number(),
+  fearCards: v.optional(v.string()),
+  effectName: v.string(),
+  effectText: v.string(),
+  phases: phaseRulesValidator,
+  cumulativePhases: phaseRulesValidator,
+})
+
+const adversaryTipValidator = v.object({
+  id: v.string(),
+  title: v.string(),
+  summary: v.string(),
+  levelFocus: v.array(v.number()),
+  phaseFocus: v.array(v.string()),
+  sourceIds: v.array(v.string()),
+  confidence: v.number(),
+})
+
+const adversarySourceValidator = v.object({
+  id: v.string(),
+  sourceType: v.string(),
+  url: v.string(),
+  title: v.string(),
+  author: v.optional(v.string()),
+  publishedAt: v.optional(v.string()),
+  confidence: v.number(),
+  excerpt: v.string(),
+})
+
+const adversarySnapshotValidator = v.object({
+  _id: v.id('adversaries'),
+  _creationTime: v.number(),
+  name: v.string(),
+  slug: v.string(),
+  wikiTitle: v.optional(v.string()),
+  wikiUrl: v.string(),
+  displayOrder: v.number(),
+  aliases: v.array(v.string()),
+  imageUrl: v.string(),
+  imageSourceUrl: v.string(),
+  baseDifficulty: v.number(),
+  additionalLossCondition: v.string(),
+  escalation: v.string(),
+  levels: v.array(adversaryLevelValidator),
+  strategy: v.object({
+    overview: v.string(),
+    tips: v.array(adversaryTipValidator),
+    sources: v.array(adversarySourceValidator),
+    coverage: v.object({
+      totalSources: v.number(),
+      bySourceType: v.object({
+        reddit: v.optional(v.number()),
+        bgg: v.optional(v.number()),
+        github: v.optional(v.number()),
+        web: v.optional(v.number()),
+      }),
+    }),
+  }),
+})
+
 export const getPublicSnapshot = query({
   args: {},
   returns: v.object({
     generatedAt: v.number(),
     spirits: v.array(spiritSnapshotValidator),
     openings: v.array(openingSnapshotValidator),
+    adversaries: v.array(adversarySnapshotValidator),
   }),
   handler: async (ctx) => {
     const spirits = await ctx.db.query('spirits').collect()
@@ -127,10 +200,18 @@ export const getPublicSnapshot = query({
       return a.slug.localeCompare(b.slug)
     })
 
+    const adversaries = await ctx.db.query('adversaries').collect()
+    adversaries.sort((a, b) => {
+      const orderDiff = a.displayOrder - b.displayOrder
+      if (orderDiff !== 0) return orderDiff
+      return a.name.localeCompare(b.name)
+    })
+
     return {
       generatedAt: Date.now(),
       spirits: orderedSpirits,
       openings,
+      adversaries,
     }
   },
 })

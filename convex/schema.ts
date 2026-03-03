@@ -1,6 +1,33 @@
 import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 
+const adversaryPhaseRulesValidator = v.object({
+  setup: v.array(v.string()),
+  explore: v.array(v.string()),
+  build: v.array(v.string()),
+  ravage: v.array(v.string()),
+  escalation: v.array(v.string()),
+  fearInvaderDeck: v.array(v.string()),
+  other: v.array(v.string()),
+})
+
+const adversaryLevelValidator = v.object({
+  level: v.number(),
+  difficulty: v.number(),
+  fearCards: v.optional(v.string()),
+  effectName: v.string(),
+  effectText: v.string(),
+  phases: adversaryPhaseRulesValidator,
+  cumulativePhases: adversaryPhaseRulesValidator,
+})
+
+const gameAdversaryRefValidator = v.object({
+  adversaryId: v.id('adversaries'),
+  level: v.number(),
+  difficulty: v.number(),
+  nameSnapshot: v.string(),
+})
+
 export default defineSchema({
   // Expansions table - Spirit Island game expansions
   expansions: defineTable({
@@ -95,6 +122,60 @@ export default defineSchema({
     .index('by_spirit', ['spiritId'])
     .index('by_spirit_and_slug', ['spiritId', 'slug']),
 
+  // Adversaries table - canonical adversary rules, levels, and strategy references
+  adversaries: defineTable({
+    name: v.string(),
+    slug: v.string(),
+    wikiTitle: v.optional(v.string()),
+    wikiUrl: v.string(),
+    displayOrder: v.number(),
+    aliases: v.array(v.string()),
+    imageUrl: v.string(),
+    imageSourceUrl: v.string(),
+    baseDifficulty: v.number(),
+    additionalLossCondition: v.string(),
+    escalation: v.string(),
+    levels: v.array(adversaryLevelValidator),
+    strategy: v.object({
+      overview: v.string(),
+      tips: v.array(
+        v.object({
+          id: v.string(),
+          title: v.string(),
+          summary: v.string(),
+          levelFocus: v.array(v.number()),
+          phaseFocus: v.array(v.string()),
+          sourceIds: v.array(v.string()),
+          confidence: v.number(),
+        }),
+      ),
+      sources: v.array(
+        v.object({
+          id: v.string(),
+          sourceType: v.string(),
+          url: v.string(),
+          title: v.string(),
+          author: v.optional(v.string()),
+          publishedAt: v.optional(v.string()),
+          confidence: v.number(),
+          excerpt: v.string(),
+        }),
+      ),
+      coverage: v.object({
+        totalSources: v.number(),
+        bySourceType: v.object({
+          reddit: v.optional(v.number()),
+          bgg: v.optional(v.number()),
+          github: v.optional(v.number()),
+          web: v.optional(v.number()),
+        }),
+      }),
+    }),
+  })
+    .index('by_slug', ['slug'])
+    .index('by_name', ['name'])
+    .index('by_display_order', ['displayOrder']),
+
   // Single-row state for debounced auto-publish dispatches.
   sitePublishStates: defineTable({
     key: v.string(), // Always "public-site"
@@ -132,6 +213,11 @@ export default defineSchema({
       }),
     ),
 
+    // Canonical adversary reference (new shape, additive migration)
+    adversaryRef: v.optional(
+      gameAdversaryRefValidator, // 0-6, with denormalized snapshot name
+    ),
+
     // Optional secondary adversary
     secondaryAdversary: v.optional(
       v.object({
@@ -139,6 +225,9 @@ export default defineSchema({
         level: v.number(),
       }),
     ),
+
+    // Canonical secondary adversary reference (new shape, additive migration)
+    secondaryAdversaryRef: v.optional(gameAdversaryRefValidator),
 
     // Optional scenario
     scenario: v.optional(

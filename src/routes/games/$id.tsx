@@ -50,9 +50,6 @@ function GameDetailPage() {
     isError,
   } = useQuery(convexQuery(api.games.getGame, { id: asGameId(id) }))
 
-  // Fallback: look up game from the cached listGames data
-  const { data: gamesList } = useQuery(convexQuery(api.games.listGames, {}))
-
   const { offlineOps, refreshOps } = useOfflineOps()
 
   const updateGame = useMutation({
@@ -72,9 +69,7 @@ function GameDetailPage() {
     },
   })
 
-  // Resolve game: primary query → list cache fallback → null
-  const gameFromList = gamesList?.find((g) => g._id === id)
-  const baseGame = game ?? gameFromList ?? null
+  const baseGame = game ?? null
 
   // Apply pending outbox operations on top of server data
   const opsForThisGame = offlineOps.filter((op) => op.gameId === id)
@@ -186,8 +181,32 @@ function GameDetailPage() {
       variant: s.variant,
       player: s.player,
     })),
-    adversary: resolvedGame.adversary ?? null,
-    secondaryAdversary: resolvedGame.secondaryAdversary ?? null,
+    adversary: resolvedGame.adversaryRef
+      ? {
+          adversaryId: resolvedGame.adversaryRef.adversaryId,
+          name: resolvedGame.adversaryRef.nameSnapshot,
+          level: resolvedGame.adversaryRef.level,
+          difficulty: resolvedGame.adversaryRef.difficulty,
+        }
+      : resolvedGame.adversary
+        ? {
+            name: resolvedGame.adversary.name,
+            level: resolvedGame.adversary.level,
+          }
+        : null,
+    secondaryAdversary: resolvedGame.secondaryAdversaryRef
+      ? {
+          adversaryId: resolvedGame.secondaryAdversaryRef.adversaryId,
+          name: resolvedGame.secondaryAdversaryRef.nameSnapshot,
+          level: resolvedGame.secondaryAdversaryRef.level,
+          difficulty: resolvedGame.secondaryAdversaryRef.difficulty,
+        }
+      : resolvedGame.secondaryAdversary
+        ? {
+            name: resolvedGame.secondaryAdversary.name,
+            level: resolvedGame.secondaryAdversary.level,
+          }
+        : null,
     scenario: resolvedGame.scenario ?? null,
     winType: resolvedGame.winType ?? '',
     invaderStage: resolvedGame.invaderStage,
@@ -265,25 +284,31 @@ function GameDetailPage() {
         </div>
 
         {/* Adversary */}
-        {resolvedGame.adversary && (
+        {(resolvedGame.adversary || resolvedGame.adversaryRef) && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Adversary
             </h3>
             <p>
-              {resolvedGame.adversary.name} Level {resolvedGame.adversary.level}
+              {resolvedGame.adversaryRef?.nameSnapshot ?? resolvedGame.adversary?.name} Level{' '}
+              {resolvedGame.adversaryRef?.level ?? resolvedGame.adversary?.level ?? 0}
             </p>
           </div>
         )}
 
         {/* Secondary Adversary */}
-        {resolvedGame.secondaryAdversary && (
+        {(resolvedGame.secondaryAdversary || resolvedGame.secondaryAdversaryRef) && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Secondary Adversary
             </h3>
             <p>
-              {resolvedGame.secondaryAdversary.name} Level {resolvedGame.secondaryAdversary.level}
+              {resolvedGame.secondaryAdversaryRef?.nameSnapshot ??
+                resolvedGame.secondaryAdversary?.name}{' '}
+              Level{' '}
+              {resolvedGame.secondaryAdversaryRef?.level ??
+                resolvedGame.secondaryAdversary?.level ??
+                0}
             </p>
           </div>
         )}

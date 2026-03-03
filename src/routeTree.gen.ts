@@ -13,15 +13,18 @@ import { Route as SpiritsRouteImport } from './routes/spirits'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as CreditsRouteImport } from './routes/credits'
+import { Route as AdversariesRouteImport } from './routes/adversaries'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SpiritsIndexRouteImport } from './routes/spirits.index'
 import { Route as GamesIndexRouteImport } from './routes/games/index'
+import { Route as AdversariesIndexRouteImport } from './routes/adversaries.index'
 import { Route as SpiritsSlugRouteImport } from './routes/spirits.$slug'
 import { Route as SignUpSplatRouteImport } from './routes/sign-up.$'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as GamesNewRouteImport } from './routes/games/new'
 import { Route as GamesImportRouteImport } from './routes/games/import'
 import { Route as GamesIdRouteImport } from './routes/games/$id'
+import { Route as AdversariesSlugRouteImport } from './routes/adversaries.$slug'
 import { Route as SpiritsSlugAspectRouteImport } from './routes/spirits.$slug.$aspect'
 
 const SpiritsRoute = SpiritsRouteImport.update({
@@ -44,6 +47,11 @@ const CreditsRoute = CreditsRouteImport.update({
   path: '/credits',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdversariesRoute = AdversariesRouteImport.update({
+  id: '/adversaries',
+  path: '/adversaries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -58,6 +66,11 @@ const GamesIndexRoute = GamesIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => GamesRoute,
+} as any)
+const AdversariesIndexRoute = AdversariesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdversariesRoute,
 } as any)
 const SpiritsSlugRoute = SpiritsSlugRouteImport.update({
   id: '/$slug',
@@ -89,6 +102,11 @@ const GamesIdRoute = GamesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => GamesRoute,
 } as any)
+const AdversariesSlugRoute = AdversariesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => AdversariesRoute,
+} as any)
 const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
   id: '/$aspect',
   path: '/$aspect',
@@ -97,16 +115,19 @@ const SpiritsSlugAspectRoute = SpiritsSlugAspectRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adversaries': typeof AdversariesRouteWithChildren
   '/credits': typeof CreditsRoute
   '/games': typeof GamesRouteWithChildren
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
+  '/adversaries/$slug': typeof AdversariesSlugRoute
   '/games/$id': typeof GamesIdRoute
   '/games/import': typeof GamesImportRoute
   '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/adversaries/': typeof AdversariesIndexRoute
   '/games/': typeof GamesIndexRoute
   '/spirits/': typeof SpiritsIndexRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
@@ -115,12 +136,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credits': typeof CreditsRoute
   '/settings': typeof SettingsRoute
+  '/adversaries/$slug': typeof AdversariesSlugRoute
   '/games/$id': typeof GamesIdRoute
   '/games/import': typeof GamesImportRoute
   '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/adversaries': typeof AdversariesIndexRoute
   '/games': typeof GamesIndexRoute
   '/spirits': typeof SpiritsIndexRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
@@ -128,16 +151,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adversaries': typeof AdversariesRouteWithChildren
   '/credits': typeof CreditsRoute
   '/games': typeof GamesRouteWithChildren
   '/settings': typeof SettingsRoute
   '/spirits': typeof SpiritsRouteWithChildren
+  '/adversaries/$slug': typeof AdversariesSlugRoute
   '/games/$id': typeof GamesIdRoute
   '/games/import': typeof GamesImportRoute
   '/games/new': typeof GamesNewRoute
   '/sign-in/$': typeof SignInSplatRoute
   '/sign-up/$': typeof SignUpSplatRoute
   '/spirits/$slug': typeof SpiritsSlugRouteWithChildren
+  '/adversaries/': typeof AdversariesIndexRoute
   '/games/': typeof GamesIndexRoute
   '/spirits/': typeof SpiritsIndexRoute
   '/spirits/$slug/$aspect': typeof SpiritsSlugAspectRoute
@@ -146,16 +172,19 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/adversaries'
     | '/credits'
     | '/games'
     | '/settings'
     | '/spirits'
+    | '/adversaries/$slug'
     | '/games/$id'
     | '/games/import'
     | '/games/new'
     | '/sign-in/$'
     | '/sign-up/$'
     | '/spirits/$slug'
+    | '/adversaries/'
     | '/games/'
     | '/spirits/'
     | '/spirits/$slug/$aspect'
@@ -164,28 +193,33 @@ export interface FileRouteTypes {
     | '/'
     | '/credits'
     | '/settings'
+    | '/adversaries/$slug'
     | '/games/$id'
     | '/games/import'
     | '/games/new'
     | '/sign-in/$'
     | '/sign-up/$'
     | '/spirits/$slug'
+    | '/adversaries'
     | '/games'
     | '/spirits'
     | '/spirits/$slug/$aspect'
   id:
     | '__root__'
     | '/'
+    | '/adversaries'
     | '/credits'
     | '/games'
     | '/settings'
     | '/spirits'
+    | '/adversaries/$slug'
     | '/games/$id'
     | '/games/import'
     | '/games/new'
     | '/sign-in/$'
     | '/sign-up/$'
     | '/spirits/$slug'
+    | '/adversaries/'
     | '/games/'
     | '/spirits/'
     | '/spirits/$slug/$aspect'
@@ -193,6 +227,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdversariesRoute: typeof AdversariesRouteWithChildren
   CreditsRoute: typeof CreditsRoute
   GamesRoute: typeof GamesRouteWithChildren
   SettingsRoute: typeof SettingsRoute
@@ -231,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreditsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/adversaries': {
+      id: '/adversaries'
+      path: '/adversaries'
+      fullPath: '/adversaries'
+      preLoaderRoute: typeof AdversariesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -251,6 +293,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/games/'
       preLoaderRoute: typeof GamesIndexRouteImport
       parentRoute: typeof GamesRoute
+    }
+    '/adversaries/': {
+      id: '/adversaries/'
+      path: '/'
+      fullPath: '/adversaries/'
+      preLoaderRoute: typeof AdversariesIndexRouteImport
+      parentRoute: typeof AdversariesRoute
     }
     '/spirits/$slug': {
       id: '/spirits/$slug'
@@ -294,6 +343,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesIdRouteImport
       parentRoute: typeof GamesRoute
     }
+    '/adversaries/$slug': {
+      id: '/adversaries/$slug'
+      path: '/$slug'
+      fullPath: '/adversaries/$slug'
+      preLoaderRoute: typeof AdversariesSlugRouteImport
+      parentRoute: typeof AdversariesRoute
+    }
     '/spirits/$slug/$aspect': {
       id: '/spirits/$slug/$aspect'
       path: '/$aspect'
@@ -303,6 +359,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdversariesRouteChildren {
+  AdversariesSlugRoute: typeof AdversariesSlugRoute
+  AdversariesIndexRoute: typeof AdversariesIndexRoute
+}
+
+const AdversariesRouteChildren: AdversariesRouteChildren = {
+  AdversariesSlugRoute: AdversariesSlugRoute,
+  AdversariesIndexRoute: AdversariesIndexRoute,
+}
+
+const AdversariesRouteWithChildren = AdversariesRoute._addFileChildren(
+  AdversariesRouteChildren,
+)
 
 interface GamesRouteChildren {
   GamesIdRoute: typeof GamesIdRoute
@@ -347,6 +417,7 @@ const SpiritsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdversariesRoute: AdversariesRouteWithChildren,
   CreditsRoute: CreditsRoute,
   GamesRoute: GamesRouteWithChildren,
   SettingsRoute: SettingsRoute,

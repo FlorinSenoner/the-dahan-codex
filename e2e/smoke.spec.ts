@@ -11,6 +11,18 @@ test.describe('Smoke Tests', () => {
     await expect(page.getByText('Know your spirit before the invaders land.')).toBeVisible()
   })
 
+  test('home page shows adversary section and updated table-help content', async ({ page }) => {
+    await page.goto('/')
+
+    await expect(page.getByRole('heading', { name: 'The Adversaries of the Island' })).toBeVisible()
+    const overviewLink = page.getByRole('link', { name: 'Explore all adversaries' }).first()
+    await expect(overviewLink).toBeVisible()
+    await expect(overviewLink).toHaveAttribute('href', '/adversaries')
+
+    await expect(page.getByRole('heading', { name: 'How It Helps at the Table' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Common Questions' })).toBeVisible()
+  })
+
   test('sign-in page loads', async ({ page }) => {
     await page.goto('/sign-in')
     // Clerk v5 renders a heading with the app name in the sign-in form

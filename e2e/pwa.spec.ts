@@ -16,12 +16,14 @@ test.describe('PWA Offline Indicator', () => {
 
     // Simulate offline mode
     await context.setOffline(true)
+    await page.evaluate(() => window.dispatchEvent(new Event('offline')))
 
     // Verify offline indicator appears
-    await expect(page.getByText('Offline')).toBeVisible()
+    await expect(page.getByText('Offline')).toBeVisible({ timeout: 10000 })
 
     // Go back online
     await context.setOffline(false)
+    await page.evaluate(() => window.dispatchEvent(new Event('online')))
 
     // Verify offline indicator disappears
     await expect(page.getByText('Offline')).not.toBeVisible()

@@ -13,6 +13,7 @@ import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
 import { shouldRenderAuthenticatedGames } from '@/lib/games-auth-gate'
+import { SITE_URL } from '@/lib/site-url'
 import { seedGameCaches } from '@/lib/sync'
 
 export const Route = createFileRoute('/games/')({
@@ -27,8 +28,6 @@ function GamesIndex() {
     ogType: 'website',
     robots: 'noindex,follow',
   })
-
-  const SITE_URL = 'https://dahan-codex.com'
 
   useStructuredData('ld-breadcrumb', {
     '@context': 'https://schema.org',

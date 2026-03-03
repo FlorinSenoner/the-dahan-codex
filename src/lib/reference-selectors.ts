@@ -1,5 +1,10 @@
 import { toAspectSlug } from '@/lib/slug'
-import type { PublicOpening, PublicSnapshot, PublicSpirit } from '@/types/reference'
+import type {
+  PublicAdversary,
+  PublicOpening,
+  PublicSnapshot,
+  PublicSpirit,
+} from '@/types/reference'
 
 interface SpiritFilters {
   complexity?: string[]
@@ -63,4 +68,43 @@ export function selectOpeningsBySpiritId(
   return snapshot.openings
     .filter((opening) => opening.spiritId === spiritId)
     .sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export function selectAdversaryList(snapshot: PublicSnapshot): PublicAdversary[] {
+  return snapshot.adversaries.slice().sort((a, b) => {
+    const orderDiff = a.displayOrder - b.displayOrder
+    if (orderDiff !== 0) return orderDiff
+    return a.name.localeCompare(b.name)
+  })
+}
+
+export function selectAdversaryBySlug(
+  snapshot: PublicSnapshot,
+  slug: string,
+): PublicAdversary | null {
+  return snapshot.adversaries.find((adversary) => adversary.slug === slug) ?? null
+}
+
+export function selectAdversaryByName(
+  snapshot: PublicSnapshot,
+  name: string,
+): PublicAdversary | null {
+  const normalized = name.trim().toLowerCase()
+  if (!normalized) return null
+
+  return (
+    snapshot.adversaries.find((adversary) => {
+      if (adversary.name.toLowerCase() === normalized) return true
+      return adversary.aliases.some((alias) => alias.toLowerCase() === normalized)
+    }) ?? null
+  )
+}
+
+export function selectAdversaryLevelDifficulty(
+  adversary: PublicAdversary | null | undefined,
+  level: number,
+): number | null {
+  if (!adversary) return null
+  const match = adversary.levels.find((item) => item.level === level)
+  return match?.difficulty ?? null
 }

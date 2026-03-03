@@ -1,4 +1,3 @@
-import type { Id } from 'convex/_generated/dataModel'
 import { Loader2, Plus, Trash2 } from 'lucide-react'
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
@@ -14,31 +13,35 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { LOSS_TYPES, WIN_TYPES } from '@/lib/game-data'
-import { AdversaryPicker } from './adversary-picker'
+import type { GameCreateInput } from '@/types/convex'
+import { AdversaryPicker, type AdversarySelection } from './adversary-picker'
 import { ScenarioPicker } from './scenario-picker'
 import { ScoreBreakdown } from './score-breakdown'
 import { SpiritPicker } from './spirit-picker'
 
+type GameSpiritInput = GameCreateInput['spirits'][number]
+type GameScenarioInput = NonNullable<GameCreateInput['scenario']>
+
 export interface SpiritEntry {
-  spiritId: Id<'spirits'> | null
-  name: string
-  variant?: string
-  player?: string
+  spiritId: NonNullable<GameSpiritInput['spiritId']> | null
+  name: GameSpiritInput['name']
+  variant?: GameSpiritInput['variant']
+  player?: GameSpiritInput['player']
 }
 
 export interface GameFormData {
-  date: string
-  result: 'win' | 'loss'
+  date: GameCreateInput['date']
+  result: GameCreateInput['result']
   spirits: SpiritEntry[]
-  adversary: { name: string; level: number } | null
-  secondaryAdversary: { name: string; level: number } | null
-  scenario: { name: string; difficulty?: number } | null
+  adversary: AdversarySelection | null
+  secondaryAdversary: AdversarySelection | null
+  scenario: GameScenarioInput | null
   winType: string
-  invaderStage?: number
-  blightCount?: number
-  dahanCount?: number
-  cardsRemaining?: number
-  score?: number
+  invaderStage?: GameCreateInput['invaderStage']
+  blightCount?: GameCreateInput['blightCount']
+  dahanCount?: GameCreateInput['dahanCount']
+  cardsRemaining?: GameCreateInput['cardsRemaining']
+  score?: GameCreateInput['score']
   notes: string
 }
 
@@ -76,7 +79,7 @@ const defaultFormData: GameFormData = {
  * Standard invader deck has 12 cards (3 per stage)
  */
 function calculateScore(
-  result: 'win' | 'loss',
+  result: GameCreateInput['result'],
   difficulty: number,
   playerCount: number,
   cardsRemaining?: number,
@@ -102,11 +105,11 @@ function calculateScore(
 }
 
 function calculateDifficulty(
-  adversaryLevel: number = 0,
-  secondaryAdversaryLevel: number = 0,
+  adversaryDifficulty: number = 0,
+  secondaryAdversaryDifficulty: number = 0,
   scenarioDifficulty: number = 0,
 ): number {
-  return adversaryLevel + secondaryAdversaryLevel + scenarioDifficulty
+  return adversaryDifficulty + secondaryAdversaryDifficulty + scenarioDifficulty
 }
 
 export function GameForm({
@@ -128,8 +131,8 @@ export function GameForm({
 
   // Calculate difficulty and score
   const difficulty = calculateDifficulty(
-    formData.adversary?.level,
-    formData.secondaryAdversary?.level,
+    formData.adversary?.difficulty ?? formData.adversary?.level,
+    formData.secondaryAdversary?.difficulty ?? formData.secondaryAdversary?.level,
     formData.scenario?.difficulty,
   )
 
@@ -144,7 +147,7 @@ export function GameForm({
 
   const handleSpiritChange = (
     index: number,
-    spiritId: Id<'spirits'>,
+    spiritId: NonNullable<GameSpiritInput['spiritId']>,
     name: string,
     variant?: string,
   ) => {

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectSpiritBySlug } from '@/lib/reference-selectors'
+import { SITE_URL } from '@/lib/site-url'
 import { SpiritDetailContent } from './spirits.$slug'
 
 export const Route = createFileRoute('/spirits/$slug/$aspect')({
@@ -20,8 +21,6 @@ function AspectDetailPage() {
     canonicalPath: `/spirits/${slug}/${aspect}`,
     ogType: 'article',
   })
-
-  const SITE_URL = 'https://dahan-codex.com'
 
   useStructuredData(
     'ld-article',

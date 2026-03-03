@@ -3,6 +3,7 @@ import { ExternalLinkCard } from '@/components/ui/external-link-card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
 import { usePageMeta, useStructuredData } from '@/hooks'
+import { SITE_URL } from '@/lib/site-url'
 
 export const Route = createFileRoute('/credits')({
   component: CreditsPage,
@@ -15,8 +16,6 @@ function CreditsPage() {
     canonicalPath: '/credits',
     ogType: 'website',
   })
-
-  const SITE_URL = 'https://dahan-codex.com'
 
   useStructuredData('ld-breadcrumb', {
     '@context': 'https://schema.org',

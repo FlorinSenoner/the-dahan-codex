@@ -1,18 +1,4 @@
 /**
- * Spirit Island adversary reference data
- * Hardcoded for v1 - can be moved to Convex later if needed
- */
-export const ADVERSARIES = [
-  { name: 'Brandenburg-Prussia', maxLevel: 6 },
-  { name: 'England', maxLevel: 6 },
-  { name: 'Sweden', maxLevel: 6 },
-  { name: 'France', maxLevel: 6 },
-  { name: 'Habsburg Monarchy', maxLevel: 6 },
-  { name: 'Russia', maxLevel: 6 },
-  { name: 'Scotland', maxLevel: 6 },
-] as const
-
-/**
  * Spirit Island scenario reference data
  */
 export const SCENARIOS = [
