@@ -1,14 +1,6 @@
-/credits /credits/ 301
-/settings /settings/ 301
-/spirits /spirits/ 301
-/games /games/ 301
-/sign-in /sign-in/ 301
-/sign-up /sign-up/ 301
-/games/ /app-shell 200
-/sign-in/ /app-shell 200
-/sign-up/ /app-shell 200
-/spirits/:slug /spirits/:slug/ 301
-/spirits/:slug/:aspect /spirits/:slug/:aspect/ 301
+/games /app-shell 200
 /games/* /app-shell 200
+/sign-in /app-shell 200
 /sign-in/* /app-shell 200
+/sign-up /app-shell 200
 /sign-up/* /app-shell 200

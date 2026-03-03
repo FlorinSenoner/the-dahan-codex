@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url'
 const rootDir = resolve(import.meta.dirname, '..')
 const publicDir = resolve(rootDir, 'public')
 const siteUrl = 'https://dahan-codex.com'
+const appShellRoutes = ['/games', '/sign-in', '/sign-up']
 
 function toAspectSlug(text) {
   return text
@@ -54,24 +55,23 @@ function normalizePublicRoute(route) {
   }
 
   const withLeadingSlash = route.startsWith('/') ? route : `/${route}`
-  const withoutTrailingSlashes = withLeadingSlash.replace(/\/+$/, '')
-  return `${withoutTrailingSlashes}/`
+  return withLeadingSlash.replace(/\/+$/, '')
 }
 
 export async function getPublicRoutes() {
   const snapshot = await fetchPublicSnapshot()
 
-  const baseRoutes = ['/', '/credits/', '/settings/', '/spirits/']
+  const baseRoutes = ['/', '/credits', '/settings', '/spirits']
   const baseSpirits = snapshot.spirits.filter((spirit) => !spirit.isAspect)
 
-  const spiritRoutes = baseSpirits.map((spirit) => `/spirits/${spirit.slug}/`)
+  const spiritRoutes = baseSpirits.map((spirit) => `/spirits/${spirit.slug}`)
 
   const aspectRoutes = snapshot.spirits
     .filter((spirit) => spirit.isAspect && spirit.baseSpirit && spirit.aspectName)
     .map((aspect) => {
       const base = snapshot.spirits.find((candidate) => candidate._id === aspect.baseSpirit)
       if (!base) return null
-      return `/spirits/${base.slug}/${toAspectSlug(aspect.aspectName)}/`
+      return `/spirits/${base.slug}/${toAspectSlug(aspect.aspectName)}`
     })
     .filter(Boolean)
 
@@ -95,10 +95,23 @@ export async function writeSitemap(routes) {
   writeFileSync(resolve(publicDir, 'sitemap.xml'), `${sitemapLines.join('\n')}\n`, 'utf-8')
 }
 
+export async function writeRedirects() {
+  const redirectLines = []
+
+  // Client-only app routes served from app shell.
+  for (const route of appShellRoutes) {
+    redirectLines.push(`${route} /app-shell 200`)
+    redirectLines.push(`${route}/* /app-shell 200`)
+  }
+
+  writeFileSync(resolve(publicDir, '_redirects'), `${redirectLines.join('\n')}\n`, 'utf-8')
+}
+
 const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href
 
 if (isDirectRun) {
   const routes = await getPublicRoutes()
   await writeSitemap(routes)
-  console.log(`Generated ${routes.length} public routes and sitemap.xml`)
+  await writeRedirects()
+  console.log(`Generated ${routes.length} public routes, sitemap.xml, and _redirects`)
 }
