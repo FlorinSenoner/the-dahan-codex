@@ -1,4 +1,4 @@
-export type GamesAuthGateInput = {
+type GamesAuthGateInput = {
   isLoaded: boolean
   isOnline: boolean
   isSignedIn: boolean | undefined
