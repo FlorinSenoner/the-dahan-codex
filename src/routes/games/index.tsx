@@ -12,6 +12,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
+import { shouldRenderAuthenticatedGames } from '@/lib/games-auth-gate'
 import { seedGameCaches } from '@/lib/sync'
 
 export const Route = createFileRoute('/games/')({
@@ -39,9 +40,9 @@ function GamesIndex() {
   })
 
   const { isLoaded, isSignedIn } = useAuth()
-  const isAuthenticated = isLoaded && isSignedIn === true
+  const isOnline = useOnlineStatus()
 
-  if (!isAuthenticated) {
+  if (!shouldRenderAuthenticatedGames({ isLoaded, isOnline, isSignedIn })) {
     return <GamesSignInPrompt />
   }
 
