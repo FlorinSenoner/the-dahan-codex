@@ -65,13 +65,34 @@ export function OpeningSection({
   )
   const [openings, setOpenings] = useState<PublicOpening[]>(snapshotOpenings)
   const isEditingRef = useRef(isEditing)
+  const pendingSnapshotOpeningsRef = useRef<PublicOpening[] | null>(null)
+  const hasLocalMutationRef = useRef(false)
 
   useEffect(() => {
+    const wasEditing = isEditingRef.current
     isEditingRef.current = isEditing
+
+    if (!wasEditing && isEditing) {
+      hasLocalMutationRef.current = false
+      return
+    }
+
+    if (wasEditing && !isEditing) {
+      if (hasLocalMutationRef.current) return
+      if (!pendingSnapshotOpeningsRef.current) return
+      setOpenings(pendingSnapshotOpeningsRef.current)
+      pendingSnapshotOpeningsRef.current = null
+    }
   }, [isEditing])
 
   useEffect(() => {
-    if (isEditingRef.current) return
+    if (isEditingRef.current) {
+      pendingSnapshotOpeningsRef.current = snapshotOpenings
+      return
+    }
+
+    pendingSnapshotOpeningsRef.current = null
+    hasLocalMutationRef.current = false
     setOpenings(snapshotOpenings)
   }, [snapshotOpenings])
 
@@ -205,6 +226,7 @@ export function OpeningSection({
             },
           ].sort((a, b) => a.name.localeCompare(b.name)),
         )
+        hasLocalMutationRef.current = true
 
         navigate({
           search: { ...search, opening: newId } as never,
@@ -239,6 +261,7 @@ export function OpeningSection({
             )
             .sort((a, b) => a.name.localeCompare(b.name)),
         )
+        hasLocalMutationRef.current = true
       }
 
       setIsCreatingNew(false)
@@ -264,6 +287,7 @@ export function OpeningSection({
     try {
       await deleteOpeningMutation({ id: selectedOpening._id })
       setOpenings((previous) => previous.filter((opening) => opening._id !== selectedOpening._id))
+      hasLocalMutationRef.current = true
       navigate({
         search: { ...search, opening: undefined } as never,
         replace: true,
