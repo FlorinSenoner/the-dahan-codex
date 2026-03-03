@@ -77,13 +77,49 @@ jobs:
           VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
 
-      - name: Create Pages project
-        uses: cloudflare/wrangler-action@v3
-        continue-on-error: true
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages project create the-dahan-codex --production-branch main
+      - name: Ensure Pages project exists
+        run: |
+          set -euo pipefail
+
+          readonly PROJECT_NAME="the-dahan-codex"
+          readonly BASE_URL="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects"
+
+          auth_header="Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+          content_header="Content-Type: application/json"
+
+          project_status="$(curl -sS -o /tmp/cf-project-get.json -w '%{http_code}' \
+            -H "${auth_header}" \
+            -H "${content_header}" \
+            "${BASE_URL}/${PROJECT_NAME}")"
+
+          if [ "${project_status}" = "200" ]; then
+            echo "Pages project '${PROJECT_NAME}' already exists."
+            exit 0
+          fi
+
+          if [ "${project_status}" != "404" ]; then
+            echo "::error::Failed to query Pages project '${PROJECT_NAME}' (HTTP ${project_status})."
+            cat /tmp/cf-project-get.json
+            exit 1
+          fi
+
+          create_status="$(curl -sS -o /tmp/cf-project-create.json -w '%{http_code}' \
+            -X POST \
+            -H "${auth_header}" \
+            -H "${content_header}" \
+            -d "{\"name\":\"${PROJECT_NAME}\",\"production_branch\":\"main\"}" \
+            "${BASE_URL}")"
+
+          if [ "${create_status}" != "200" ]; then
+            echo "::error::Failed to create Pages project '${PROJECT_NAME}' (HTTP ${create_status})."
+            cat /tmp/cf-project-create.json
+            exit 1
+          fi
+
+          echo "Pages project '${PROJECT_NAME}' created."
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy to production
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
