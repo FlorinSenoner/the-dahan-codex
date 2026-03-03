@@ -41,15 +41,25 @@ function GamesIndex() {
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
 
-  // Only show sign-in prompt when we KNOW user isn't signed in.
-  // All other cases: render games view with cached data immediately.
-  // TanStack Query cache is restored from IndexedDB before the router starts,
-  // so cached game data is already available. AuthCacheIsolation clears it on user change.
-  if (isOnline && isLoaded && !isSignedIn) {
+  // Avoid flashing cached authenticated data before Clerk resolves auth.
+  if (isOnline && !isLoaded) {
+    return <GamesAuthLoading />
+  }
+
+  if (isOnline && !isSignedIn) {
     return <GamesSignInPrompt />
   }
 
   return <AuthenticatedGames />
+}
+
+function GamesAuthLoading() {
+  return (
+    <div className="min-h-screen bg-background">
+      <PageHeader backHref="/" title="Games" />
+      <main className="pb-20" />
+    </div>
+  )
 }
 
 function GamesSignInPrompt() {
