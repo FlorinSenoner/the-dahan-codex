@@ -96,18 +96,23 @@ export async function writeSitemap(routes) {
 }
 
 export async function writeRedirects() {
-  const publicRoutes = await getPublicRoutes()
-  const redirectLines = []
+  const redirectLines = [
+    // Canonicalize trailing slash public routes to slashless URLs.
+    '/credits/ /credits 301',
+    '/settings/ /settings 301',
+    '/spirits/ /spirits 301',
+    '/spirits/*/ /spirits/:splat 301',
 
-  // Recover from stale client-side cached redirects that may still request
-  // spirit art with a trailing slash.
-  redirectLines.push('/spirits/*.webp/ /spirits/:splat.webp 200')
+    // Keep spirit art requests as files and recover bad cached `*.webp/` URLs.
+    '/spirits/*.webp/ /spirits/:splat.webp 301',
+    '/spirits/*.webp /spirits/:splat.webp 200',
 
-  // Serve slashless public routes directly from prerendered HTML files.
-  for (const route of publicRoutes) {
-    if (route === '/') continue
-    redirectLines.push(`${route} ${route}/index.html 200`)
-  }
+    // Public prerendered routes.
+    '/credits /credits/index.html 200',
+    '/settings /settings/index.html 200',
+    '/spirits /spirits/index.html 200',
+    '/spirits/* /spirits/:splat/index.html 200',
+  ]
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {
