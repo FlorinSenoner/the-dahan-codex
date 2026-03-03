@@ -3,7 +3,7 @@ import { useMutation } from 'convex/react'
 import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 import { useOnlineStatus } from '@/hooks/use-online-status'
-import { transformGameFormToPayload } from '@/lib/game-form-utils'
+import { sanitizeGamePayload, transformGameFormToPayload } from '@/lib/game-form-utils'
 import {
   getAllOfflineOps,
   getAllPendingGames,
@@ -78,7 +78,7 @@ export function useOutboxSync({ isAuthReady, ownerId }: UseOutboxSyncOptions) {
             if (op.type === 'update') {
               await updateGameMutation({
                 id: op.gameId,
-                ...op.data,
+                ...sanitizeGamePayload(op.data),
               })
             } else if (op.type === 'delete') {
               await deleteGameMutation({ id: op.gameId })

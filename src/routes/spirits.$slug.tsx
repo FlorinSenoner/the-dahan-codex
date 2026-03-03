@@ -1,5 +1,3 @@
-import { convexQuery } from '@convex-dev/react-query'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import {
   createFileRoute,
   Link,
@@ -9,8 +7,6 @@ import {
   useNavigate,
   useParams,
 } from '@tanstack/react-router'
-import { api } from 'convex/_generated/api'
-import type { Doc } from 'convex/_generated/dataModel'
 import { ArrowLeft } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { EditFab } from '@/components/admin/edit-fab'
@@ -32,46 +28,22 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Heading, Text } from '@/components/ui/typography'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
+import { selectSpiritWithAspects } from '@/lib/reference-selectors'
+import { toAspectSlug } from '@/lib/slug'
 import {
   complexityBadgeColors,
   elementBadgeColors,
   PLACEHOLDER_GRADIENT,
 } from '@/lib/spirit-colors'
 import { cn } from '@/lib/utils'
+import type { PublicSpirit } from '@/types/reference'
 
-/**
- * Spirit detail page
- *
- * Offline behavior: This page works offline after background spirit sync
- * has populated local cache. Manual Settings > Sync Data can be used to
- * force a full refresh.
- */
 export const Route = createFileRoute('/spirits/$slug')({
   validateSearch: (search: Record<string, unknown>) => ({
     opening: typeof search.opening === 'string' ? search.opening : undefined,
   }),
-  loader: async ({ context, params }) => {
-    // Use prefetchQuery to avoid blocking when offline
-    // The component's useSuspenseQuery will use cached data if available
-    try {
-      await Promise.all([
-        context.queryClient.prefetchQuery(
-          convexQuery(api.spirits.getSpiritBySlug, {
-            slug: params.slug,
-          }),
-        ),
-        context.queryClient.prefetchQuery(
-          convexQuery(api.spirits.getSpiritWithAspects, {
-            slug: params.slug,
-          }),
-        ),
-      ])
-    } catch (e) {
-      if (e instanceof Error && !e.message.includes('Failed to fetch'))
-        console.warn('Loader error:', e)
-    }
-  },
   component: SpiritDetailLayout,
 })
 
@@ -80,34 +52,26 @@ function SpiritDetailLayout() {
   const navigate = useNavigate()
   const matches = useMatches()
   const params = useParams({ strict: false })
+  const snapshot = usePublicSnapshot()
 
   const goBack = useCallback(() => {
     navigate({ to: '/spirits', viewTransition: true })
   }, [navigate])
 
-  // Track tabs visibility for header aspect name display
   const [tabsVisible, setTabsVisible] = useState(true)
   const handleVisibilityChange = useCallback((visible: boolean) => {
     setTabsVisible(visible)
   }, [])
 
-  // Check if we have a child route (aspect)
   const hasChildRoute = matches.some((m) => m.routeId === '/spirits/$slug/$aspect')
-
-  // Get current aspect from URL params
   const currentAspect = (params as { aspect?: string }).aspect
 
-  // Store last-viewed spirit in sessionStorage for scroll restoration.
-  // If we add more navigation state, consolidate into a React context instead.
   useEffect(() => {
     const key = currentAspect ? `${slug}-${currentAspect}` : slug
     sessionStorage.setItem('lastViewedSpirit', key)
   }, [slug, currentAspect])
 
-  // Get base spirit with aspects for the tabs
-  const { data: spiritData } = useSuspenseQuery(
-    convexQuery(api.spirits.getSpiritWithAspects, { slug }),
-  )
+  const spiritData = snapshot ? selectSpiritWithAspects(snapshot, slug) : undefined
 
   usePageMeta({
     title: spiritData?.base.name,
@@ -118,7 +82,6 @@ function SpiritDetailLayout() {
 
   const SITE_URL = 'https://dahan-codex.com'
 
-  // Article structured data for the base spirit
   useStructuredData(
     'ld-article',
     spiritData && !hasChildRoute
@@ -143,7 +106,6 @@ function SpiritDetailLayout() {
       : null,
   )
 
-  // BreadcrumbList structured data
   useStructuredData(
     'ld-breadcrumb',
     spiritData
@@ -164,7 +126,10 @@ function SpiritDetailLayout() {
       : null,
   )
 
-  // Not found state
+  if (!snapshot || spiritData === undefined) {
+    return null
+  }
+
   if (spiritData === null) {
     return (
       <div className="min-h-screen bg-background">
@@ -200,13 +165,13 @@ function SpiritDetailLayout() {
   const { base, aspects } = spiritData
   const hasAspects = aspects.length > 0
 
-  // Find current aspect display name
   const currentAspectData = currentAspect
-    ? aspects.find((a) => a.aspectName?.toLowerCase() === currentAspect)
+    ? aspects.find(
+        (aspect) => aspect.aspectName && toAspectSlug(aspect.aspectName) === currentAspect,
+      )
     : null
   const aspectDisplayName = currentAspectData?.aspectName
 
-  // Show aspect name in header when tabs are scrolled out of view
   const showAspectInHeader = !tabsVisible && aspectDisplayName
 
   return (
@@ -244,7 +209,7 @@ function SpiritDetailLayout() {
 }
 
 interface SpiritDetailContentProps {
-  spirit: Doc<'spirits'>
+  spirit: PublicSpirit
   slug: string
   aspect?: string
 }
@@ -263,7 +228,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
   const hasChanges = setupHasChanges || openingHasChanges
   const isValid = (!setupHasChanges || setupIsValid) && (!openingHasChanges || openingIsValid)
 
-  // Stable callback references to prevent child re-renders
   const handleSetupHasChangesChange = useCallback((value: boolean) => {
     setSetupHasChanges(value)
   }, [])
@@ -288,26 +252,16 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
     setOpeningIsValid(value)
   }, [])
 
-  // Block navigation when there are unsaved changes in edit mode
-  // Uses withResolver pattern for AlertDialog integration
-  // Only block when isEditing AND hasChanges AND not currently saving
-  // The !isSaving check prevents the blocker from firing during save operations
-  // (e.g., when creating a new opening navigates to the new ID)
-  //
-  // IMPORTANT: Use ref pattern to avoid stale closure issues with shouldBlockFn.
-  // TanStack Router's beforeunload listener may not re-register on every render,
-  // so we need to ensure shouldBlockFn always reads the latest values via ref.
-  //
-  // CRITICAL: enableBeforeUnload must also use the same condition. By default it's
-  // true, which causes the browser's "Changes may not be saved" dialog to ALWAYS
-  // appear on reload, regardless of shouldBlockFn. We must explicitly disable it
-  // when there are no unsaved changes.
   const blockerConditionRef = useRef({ isEditing, hasChanges, isSaving })
   blockerConditionRef.current = { isEditing, hasChanges, isSaving }
 
   const shouldBlock = () => {
-    const { isEditing, hasChanges, isSaving } = blockerConditionRef.current
-    return isEditing && hasChanges && !isSaving
+    const {
+      isEditing: editMode,
+      hasChanges: hasUnsavedChanges,
+      isSaving: saving,
+    } = blockerConditionRef.current
+    return editMode && hasUnsavedChanges && !saving
   }
 
   const blocker = useBlocker({
@@ -316,7 +270,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
     withResolver: true,
   })
 
-  // Wrap save handler to track saving state and exit edit mode on success
   const handleSave = useCallback(async () => {
     if (!hasChanges) return
     setIsSaving(true)
@@ -327,7 +280,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
       if (openingHasChanges && openingSaveHandler) {
         await openingSaveHandler()
       }
-      // Exit edit mode after successful save
       setEditing(false)
     } finally {
       setIsSaving(false)
@@ -348,13 +300,11 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
   }, [imageUrl])
 
   const displayName = spirit.aspectName || spirit.name
-  // Use aspect-specific view transition name if aspect, otherwise base
   const viewTransitionName = aspect ? `spirit-image-${slug}-${aspect}` : `spirit-image-${slug}`
   const nameTransitionName = aspect ? `spirit-name-${slug}-${aspect}` : `spirit-name-${slug}`
 
   return (
     <main className="p-4 lg:grid lg:grid-cols-[1fr_340px] lg:gap-8 lg:max-w-6xl lg:mx-auto">
-      {/* Left column: Main board content */}
       <div className="space-y-6">
         <div className="flex justify-center">
           <div
@@ -397,7 +347,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
             </Text>
           )}
 
-          {/* Pills below name - always visible */}
           <div className="flex flex-wrap justify-center gap-2 mt-2 mb-4">
             <Badge
               className={cn('text-sm', complexityBadgeColors[spirit.complexity] || '')}
@@ -428,7 +377,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
           spirit={spirit}
         />
 
-        {/* Mobile: Overview section appears here */}
         <div className="lg:hidden">
           <OverviewSection description={spirit.description} spirit={spirit} />
         </div>
@@ -443,7 +391,6 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
         <ExternalLinks spiritName={spirit.name} wikiUrl={spirit.wikiUrl} />
       </div>
 
-      {/* Right column: Sidebar (overview) - desktop only */}
       <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
         <OverviewSection description={spirit.description} spirit={spirit} />
       </aside>

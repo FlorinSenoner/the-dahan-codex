@@ -8,6 +8,7 @@ const rootDir = resolve(import.meta.dirname, '..')
 const distDir = resolve(rootDir, 'dist')
 const port = Number(process.env.PRERENDER_PORT || 4174)
 const host = '127.0.0.1'
+const concurrency = Math.max(1, Number(process.env.PRERENDER_CONCURRENCY || 6))
 
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',
@@ -94,27 +95,45 @@ function writePrerenderedHtml(route, html) {
   writeFileSync(resolve(routeDir, 'index.html'), output, 'utf-8')
 }
 
-const routes = getPublicRoutes()
+const routes = await getPublicRoutes()
 
 if (!Array.isArray(routes) || routes.length === 0) {
-  throw new Error('No public routes found. Check scripts/data source files.')
+  throw new Error('No public routes found. Check snapshot endpoint and route generation script.')
 }
 
 const server = await startServer()
 const browser = await chromium.launch({ headless: true })
 const context = await browser.newContext()
-const page = await context.newPage()
+let routeIndex = 0
+
+async function runWorker(workerId) {
+  const page = await context.newPage()
+  try {
+    while (true) {
+      const currentIndex = routeIndex
+      routeIndex += 1
+      const route = routes[currentIndex]
+      if (!route) {
+        return
+      }
+
+      const url = `http://${host}:${port}${route}`
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 })
+      await page.waitForTimeout(500)
+      const html = await page.content()
+      writePrerenderedHtml(route, html)
+      console.log(`Prerendered ${route} (worker ${workerId})`)
+    }
+  } finally {
+    await page.close()
+  }
+}
 
 try {
-  for (const route of routes) {
-    const url = `http://${host}:${port}${route}`
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 })
-    await page.waitForTimeout(500)
-    const html = await page.content()
-    writePrerenderedHtml(route, html)
-    console.log(`Prerendered ${route}`)
-  }
+  const workerCount = Math.min(concurrency, routes.length)
+  await Promise.all(Array.from({ length: workerCount }, (_, i) => runWorker(i + 1)))
 } finally {
+  await context.close()
   await browser.close()
   await new Promise((resolveServerClose) => server.close(resolveServerClose))
 }

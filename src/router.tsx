@@ -1,6 +1,6 @@
 import { ConvexQueryClient } from '@convex-dev/react-query'
 import { type PersistedClient, persistQueryClient } from '@tanstack/query-persist-client-core'
-import { dehydrate, hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import { createStore, del, get, set } from 'idb-keyval'
@@ -10,6 +10,12 @@ const idbStore = createStore('the-dahan-codex', 'cache')
 
 const IDB_CACHE_KEY = 'tanstack-query-cache'
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7 // 7 days
+const REMOVED_QUERY_MARKERS = [
+  `openings:${'listBySpirit'}`,
+  `spirits:${'listSpirits'}`,
+  `spirits:${'getSpiritWithAspects'}`,
+  `spirits:${'getSpiritBySlug'}`,
+]
 
 // IndexedDB persister for TanStack Query
 function createIDBPersister(idbKey = IDB_CACHE_KEY) {
@@ -37,28 +43,19 @@ async function restoreQueryCache(queryClient: QueryClient) {
       // Check if cache is still valid (not expired)
       const isExpired = Date.now() - persistedClient.timestamp > MAX_AGE
       if (!isExpired && persistedClient.clientState) {
+        // Drop legacy query keys removed from Convex public API.
+        persistedClient.clientState.queries = persistedClient.clientState.queries.filter(
+          (query) => {
+            const key = JSON.stringify(query.queryKey)
+            return !REMOVED_QUERY_MARKERS.some((marker) => key.includes(marker))
+          },
+        )
         hydrate(queryClient, persistedClient.clientState)
       }
     }
   } catch (error) {
     console.warn('Failed to restore query cache:', error)
   }
-}
-
-/**
- * Manually persist the query cache to IndexedDB.
- * Call this after bulk data fetching to ensure persistence.
- */
-export async function persistQueryCache(queryClient: QueryClient) {
-  const dehydratedState = dehydrate(queryClient, {
-    shouldDehydrateQuery: (query) => query.state.status === 'success',
-  })
-  const persistedClient: PersistedClient = {
-    timestamp: Date.now(),
-    buster: '',
-    clientState: dehydratedState,
-  }
-  await set(IDB_CACHE_KEY, persistedClient, idbStore)
 }
 
 /**

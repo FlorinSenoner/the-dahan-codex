@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from '@tanstack/react-router'
-import type { Doc } from 'convex/_generated/dataModel'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { slugify } from '@/lib/utils'
+import type { PublicSpirit } from '@/types/reference'
 
 interface VariantTabsProps {
-  base: Doc<'spirits'>
-  aspects: Doc<'spirits'>[]
+  base: PublicSpirit
+  aspects: PublicSpirit[]
   onVisibilityChange?: (visible: boolean) => void
 }
 

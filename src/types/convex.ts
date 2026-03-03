@@ -1,7 +1,8 @@
 import type { api } from 'convex/_generated/api'
 import type { FunctionArgs, FunctionReturnType } from 'convex/server'
+import type { PublicSnapshot } from './reference'
 
-export type SpiritListItem = FunctionReturnType<typeof api.spirits.listSpirits>[number]
+export type SpiritListItem = PublicSnapshot['spirits'][number]
 
 export type GameDoc = NonNullable<FunctionReturnType<typeof api.games.getGame>>
 export type GameId = FunctionArgs<typeof api.games.getGame>['id']

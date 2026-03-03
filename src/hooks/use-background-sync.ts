@@ -1,37 +1,38 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useOnlineStatus } from '@/hooks/use-online-status'
-import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
+import { syncGames, syncPublicReferenceData } from '@/lib/sync'
 
 /**
  * Auto background sync hook.
- * - Spirits/openings sync for all online sessions (public data).
- * - Games sync only when auth is ready.
+ * - Public snapshot sync runs whenever online (cache-aware).
+ * - Games sync runs only when auth is ready.
  */
 export function useBackgroundSync(isAuthReady: boolean | undefined) {
   const queryClient = useQueryClient()
   const isOnline = useOnlineStatus()
+  const isPublicSyncingRef = useRef(false)
+  const isGamesSyncingRef = useRef(false)
 
   useEffect(() => {
     if (!isOnline) return
 
-    // Games sync is lightweight — run eagerly when auth is ready.
-    if (isAuthReady) {
-      syncGames(queryClient).catch((e) => console.warn('Background game sync failed:', e))
+    if (!isPublicSyncingRef.current) {
+      isPublicSyncingRef.current = true
+      syncPublicReferenceData(queryClient)
+        .catch((error) => console.warn('Background public sync failed:', error))
+        .finally(() => {
+          isPublicSyncingRef.current = false
+        })
     }
 
-    // Spirit/openings sync is heavy (many batched queries) — defer to idle time
-    // so it doesn't contend with initial route data fetches.
-    const scheduleIdle = window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 2000))
-    const id = scheduleIdle(() => {
-      syncSpiritsAndOpenings(queryClient).catch((e) =>
-        console.warn('Background spirit sync failed:', e),
-      )
-    })
-
-    return () => {
-      const cancelIdle = window.cancelIdleCallback ?? clearTimeout
-      cancelIdle(id)
+    if (isAuthReady && !isGamesSyncingRef.current) {
+      isGamesSyncingRef.current = true
+      syncGames(queryClient)
+        .catch((error) => console.warn('Background game sync failed:', error))
+        .finally(() => {
+          isGamesSyncingRef.current = false
+        })
     }
   }, [isAuthReady, isOnline, queryClient])
 }

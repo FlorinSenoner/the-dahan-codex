@@ -1,16 +1,16 @@
 import { api } from 'convex/_generated/api'
-import type { Doc } from 'convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
 import { ClipboardList } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '@/components/admin/editable-text'
 import { Heading, Text } from '@/components/ui/typography'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import type { PublicSpirit } from '@/types/reference'
 
 const MAX_SETUP_LENGTH = 4000
 
 interface SetupSectionProps {
-  spirit: Doc<'spirits'>
+  spirit: PublicSpirit
   onSaveHandlerReady?: (saveHandler: (() => Promise<void>) | null) => void
   onHasChangesChange?: (hasChanges: boolean) => void
   onIsValidChange?: (isValid: boolean) => void

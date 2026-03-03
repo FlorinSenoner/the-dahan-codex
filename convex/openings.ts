@@ -1,6 +1,6 @@
 import { ConvexError, v } from 'convex/values'
 import { internal } from './_generated/api'
-import { mutation, query } from './_generated/server'
+import { mutation } from './_generated/server'
 import { requireAdmin } from './lib/auth'
 import {
   validateHttpUrl,
@@ -20,27 +20,6 @@ const openingTurnValidator = v.object({
   turn: v.number(),
   title: v.optional(v.string()),
   instructions: v.string(),
-})
-
-const openingFields = {
-  spiritId: v.id('spirits'),
-  slug: v.string(),
-  name: v.string(),
-  description: v.optional(v.string()),
-  turns: v.array(openingTurnValidator),
-  author: v.optional(v.string()),
-  sourceUrl: v.optional(v.string()),
-  createdAt: v.optional(v.number()),
-  updatedAt: v.optional(v.number()),
-  difficulty: v.optional(
-    v.union(v.literal('Beginner'), v.literal('Intermediate'), v.literal('Advanced')),
-  ),
-}
-
-const openingValidator = v.object({
-  _id: v.id('openings'),
-  _creationTime: v.number(),
-  ...openingFields,
 })
 
 function validateTurns(turns: Array<{ turn: number; title?: string; instructions: string }>) {
@@ -73,17 +52,6 @@ function generateSlug(name: string): string {
     .replace(/-+/g, '-')
     .trim()
 }
-
-export const listBySpirit = query({
-  args: { spiritId: v.id('spirits') },
-  returns: v.array(openingValidator),
-  handler: async (ctx, args) => {
-    return ctx.db
-      .query('openings')
-      .withIndex('by_spirit', (q) => q.eq('spiritId', args.spiritId))
-      .collect()
-  },
-})
 
 export const createOpening = mutation({
   args: {

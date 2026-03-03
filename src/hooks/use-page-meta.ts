@@ -20,15 +20,26 @@ interface PageMetaOptions {
 
 function normalizeCanonicalPath(path?: string) {
   if (!path) return DEFAULT_CANONICAL_PATH
+
+  const normalizePathname = (pathname: string) => {
+    if (!pathname || pathname === '/') return '/'
+    return pathname.replace(/\/+$/, '') + '/'
+  }
+
   if (path.startsWith('http://') || path.startsWith('https://')) {
     try {
       const parsed = new URL(path)
-      return `${parsed.pathname}${parsed.search}`
+      return `${normalizePathname(parsed.pathname)}${parsed.search}`
     } catch {
       return DEFAULT_CANONICAL_PATH
     }
   }
-  return path.startsWith('/') ? path : `/${path}`
+
+  const withLeadingSlash = path.startsWith('/') ? path : `/${path}`
+  const [pathname = '/', search = ''] = withLeadingSlash.split('?')
+  const normalizedPathname = normalizePathname(pathname)
+
+  return search ? `${normalizedPathname}?${search}` : normalizedPathname
 }
 
 function ensureMetaTag(selector: string, attrs: Record<string, string>) {
