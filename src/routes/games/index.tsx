@@ -3,7 +3,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { Download, Gamepad2, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
+import { Download, Gamepad2, LoaderCircle, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
 import { useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
@@ -57,7 +57,18 @@ function GamesAuthLoading() {
   return (
     <div className="min-h-screen bg-background">
       <PageHeader backHref="/" title="Games" />
-      <main className="pb-20" />
+      <main className="pb-20">
+        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+          <LoaderCircle aria-hidden className="h-10 w-10 text-muted-foreground mb-4 animate-spin" />
+          <h2 className="text-xl font-semibold mb-2">Loading your account</h2>
+          <p className="text-muted-foreground mb-6 max-w-sm">
+            We are verifying your sign-in state before loading games.
+          </p>
+          <Button onClick={() => window.location.reload()} variant="outline">
+            Retry
+          </Button>
+        </div>
+      </main>
     </div>
   )
 }
