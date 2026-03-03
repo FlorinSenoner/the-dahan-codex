@@ -87,9 +87,12 @@ export function SetupSection({
       {isEditing ? (
         <div className="bg-card border border-primary/30 rounded-lg p-4 ring-1 ring-primary/20">
           <EditableText
+            ariaLabel="Setup instructions"
+            autoComplete="off"
             className="min-h-[140px]"
             isEditing={true}
             multiline
+            name="spirit-setup"
             onChange={setSetupText}
             placeholder="Spirit setup instructions..."
             required

@@ -91,8 +91,11 @@ export function EditableOpening({
           Opening Name *
         </Text>
         <EditableText
+          ariaLabel="Opening name"
+          autoComplete="off"
           className="font-semibold text-lg"
           isEditing={true}
+          name="opening-name"
           onChange={(v) => updateField('name', v)}
           placeholder="e.g., Standard Opening"
           required
@@ -106,8 +109,11 @@ export function EditableOpening({
           Description
         </Text>
         <EditableText
+          ariaLabel="Opening description"
+          autoComplete="off"
           isEditing={true}
           multiline
+          name="opening-description"
           onChange={(v) => updateField('description', v)}
           placeholder="Brief strategy overview..."
           value={formData.description}
@@ -161,16 +167,22 @@ export function EditableOpening({
               )}
             </div>
             <EditableText
+              ariaLabel={`Turn ${turn.turn} title`}
+              autoComplete="off"
               className="text-sm"
               isEditing={true}
+              name={`opening-turn-${turn.turn}-title`}
               onChange={(v) => updateTurn(index, { title: v })}
               placeholder="Turn title *"
               required
               value={turn.title || ''}
             />
             <EditableText
+              ariaLabel={`Turn ${turn.turn} instructions`}
+              autoComplete="off"
               isEditing={true}
               multiline
+              name={`opening-turn-${turn.turn}-instructions`}
               onChange={(v) => updateTurn(index, { instructions: v })}
               placeholder="Instructions for this turn..."
               required
@@ -191,7 +203,10 @@ export function EditableOpening({
             Author
           </Text>
           <EditableText
+            ariaLabel="Opening author"
+            autoComplete="off"
             isEditing={true}
+            name="opening-author"
             onChange={(v) => updateField('author', v)}
             placeholder="Author name"
             value={formData.author}
@@ -202,7 +217,10 @@ export function EditableOpening({
             Source URL
           </Text>
           <EditableText
+            ariaLabel="Opening source URL"
+            autoComplete="url"
             isEditing={true}
+            name="opening-source-url"
             onChange={(v) => updateField('sourceUrl', v)}
             placeholder="https://..."
             value={formData.sourceUrl}

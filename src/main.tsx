@@ -10,6 +10,44 @@ if (!rootElement) {
   throw new Error('Root element not found')
 }
 
+function renderBootstrapError(container: HTMLElement) {
+  const outer = document.createElement('div')
+  outer.style.display = 'flex'
+  outer.style.alignItems = 'center'
+  outer.style.justifyContent = 'center'
+  outer.style.minHeight = '100vh'
+  outer.style.fontFamily = 'system-ui'
+  outer.style.textAlign = 'center'
+  outer.style.padding = '2rem'
+
+  const inner = document.createElement('div')
+
+  const title = document.createElement('h1')
+  title.textContent = 'App failed to load'
+  title.style.fontSize = '1.25rem'
+  title.style.marginBottom = '0.5rem'
+
+  const description = document.createElement('p')
+  description.textContent = 'An unexpected error occurred during initialization.'
+  description.style.color = '#888'
+  description.style.marginBottom = '1rem'
+
+  const reloadButton = document.createElement('button')
+  reloadButton.type = 'button'
+  reloadButton.textContent = 'Reload'
+  reloadButton.style.padding = '0.5rem 1rem'
+  reloadButton.style.borderRadius = '0.375rem'
+  reloadButton.style.border = '1px solid #ccc'
+  reloadButton.style.cursor = 'pointer'
+  reloadButton.addEventListener('click', () => {
+    window.location.reload()
+  })
+
+  inner.append(title, description, reloadButton)
+  outer.append(inner)
+  container.replaceChildren(outer)
+}
+
 // Initialize router async to restore cached data before first render
 createRouter()
   .then((router) => {
@@ -21,9 +59,5 @@ createRouter()
   })
   .catch((error) => {
     console.error('Failed to initialize app:', error)
-    rootElement.innerHTML =
-      '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:system-ui;text-align:center;padding:2rem">' +
-      '<div><h1 style="font-size:1.25rem;margin-bottom:0.5rem">App failed to load</h1>' +
-      '<p style="color:#888;margin-bottom:1rem">An unexpected error occurred during initialization.</p>' +
-      '<button onclick="location.reload()" style="padding:0.5rem 1rem;border-radius:0.375rem;border:1px solid #ccc;cursor:pointer">Reload</button></div></div>'
+    renderBootstrapError(rootElement)
   })

@@ -9,6 +9,9 @@ interface EditableTextProps {
   className?: string
   displayClassName?: string
   required?: boolean
+  ariaLabel?: string
+  name?: string
+  autoComplete?: string
 }
 
 export function EditableText({
@@ -20,6 +23,9 @@ export function EditableText({
   className,
   displayClassName,
   required = false,
+  ariaLabel,
+  name,
+  autoComplete,
 }: EditableTextProps) {
   if (!isEditing) {
     return (
@@ -44,7 +50,10 @@ export function EditableText({
   if (multiline) {
     return (
       <textarea
+        aria-label={ariaLabel ?? placeholder ?? 'Editable text'}
+        autoComplete={autoComplete}
         className={cn(inputClassName, 'min-h-[100px] resize-y')}
+        name={name}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
@@ -55,7 +64,10 @@ export function EditableText({
 
   return (
     <input
+      aria-label={ariaLabel ?? placeholder ?? 'Editable text'}
+      autoComplete={autoComplete}
       className={inputClassName}
+      name={name}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       required={required}

@@ -68,8 +68,10 @@ export function SpiritRow({ spirit }: SpiritRowProps) {
           <img
             alt={spirit.name}
             className="w-full h-full object-cover"
+            height={isAspect ? 80 : 100}
             onError={() => setImgError(true)}
             src={spirit.imageUrl}
+            width={isAspect ? 80 : 100}
           />
         )}
       </div>
