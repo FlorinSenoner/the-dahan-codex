@@ -3,7 +3,8 @@
 /credits /credits/index.html 200
 /settings /settings/index.html 200
 /spirits /spirits/index.html 200
-/spirits/* /spirits/:splat/index.html 200
+/spirits/:spirit /spirits/:spirit/index.html 200
+/spirits/:spirit/:aspect /spirits/:spirit/:aspect/index.html 200
 /games /app-shell 200
 /games/* /app-shell 200
 /sign-in /app-shell 200

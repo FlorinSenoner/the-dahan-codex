@@ -116,8 +116,9 @@ export function writeRedirects(routes) {
     redirectLines.push(`${route} ${route}/index.html 200`)
   }
 
-  // Serve nested prerendered spirit routes.
-  redirectLines.push('/spirits/* /spirits/:splat/index.html 200')
+  // Serve spirit routes without capturing arbitrary `index`/`.html` suffixes.
+  redirectLines.push('/spirits/:spirit /spirits/:spirit/index.html 200')
+  redirectLines.push('/spirits/:spirit/:aspect /spirits/:spirit/:aspect/index.html 200')
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {
