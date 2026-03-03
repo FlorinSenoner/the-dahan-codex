@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { Download, Gamepad2, LoaderCircle, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
@@ -40,10 +40,30 @@ function GamesIndex() {
 
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
+  const [authLoadTimedOut, setAuthLoadTimedOut] = useState(false)
+
+  useEffect(() => {
+    if (!isOnline || isLoaded) {
+      setAuthLoadTimedOut(false)
+      return
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setAuthLoadTimedOut(true)
+    }, 5000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [isOnline, isLoaded])
 
   // Avoid flashing cached authenticated data before Clerk resolves auth.
-  if (isOnline && !isLoaded) {
+  if (isOnline && !isLoaded && !authLoadTimedOut) {
     return <GamesAuthLoading />
+  }
+
+  if (isOnline && !isLoaded && authLoadTimedOut) {
+    return <GamesAuthRecovery />
   }
 
   if (isOnline && !isSignedIn) {
@@ -67,6 +87,36 @@ function GamesAuthLoading() {
           <Button onClick={() => window.location.reload()} variant="outline">
             Retry
           </Button>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+function GamesAuthRecovery() {
+  return (
+    <div className="min-h-screen bg-background">
+      <PageHeader backHref="/" title="Games" />
+      <main className="pb-20">
+        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+          <LogIn className="h-16 w-16 text-muted-foreground mb-4" />
+          <h2 className="text-xl font-semibold mb-2">
+            Sign-in check is taking longer than expected
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-sm">
+            Continue to sign in, or reload and try again.
+          </p>
+          <div className="flex gap-2">
+            <Button asChild>
+              <Link params={{ _splat: '' }} to="/sign-in/$">
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </Link>
+            </Button>
+            <Button onClick={() => window.location.reload()} variant="outline">
+              Retry
+            </Button>
+          </div>
         </div>
       </main>
     </div>
