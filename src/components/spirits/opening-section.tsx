@@ -2,7 +2,7 @@ import { useNavigate, useSearch } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { useMutation } from 'convex/react'
 import { BookOpen, Plus } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableOpening, type OpeningFormData } from '@/components/admin/editable-opening'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -64,12 +64,16 @@ export function OpeningSection({
     [snapshot, spiritId],
   )
   const [openings, setOpenings] = useState<PublicOpening[]>(snapshotOpenings)
+  const isEditingRef = useRef(isEditing)
 
   useEffect(() => {
-    if (!isEditing) {
-      setOpenings(snapshotOpenings)
-    }
-  }, [snapshotOpenings, isEditing])
+    isEditingRef.current = isEditing
+  }, [isEditing])
+
+  useEffect(() => {
+    if (isEditingRef.current) return
+    setOpenings(snapshotOpenings)
+  }, [snapshotOpenings])
 
   const search = useSearch({ strict: false }) as { opening?: string }
   const navigate = useNavigate()
