@@ -78,10 +78,15 @@ export function OpeningSection({
     }
 
     if (wasEditing && !isEditing) {
-      if (hasLocalMutationRef.current) return
+      if (hasLocalMutationRef.current) {
+        pendingSnapshotOpeningsRef.current = null
+        hasLocalMutationRef.current = false
+        return
+      }
       if (!pendingSnapshotOpeningsRef.current) return
       setOpenings(pendingSnapshotOpeningsRef.current)
       pendingSnapshotOpeningsRef.current = null
+      hasLocalMutationRef.current = false
     }
   }, [isEditing])
 
