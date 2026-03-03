@@ -10,14 +10,6 @@ if (!rootElement) {
   throw new Error('Root element not found')
 }
 
-function normalizeInitialPathname() {
-  const { pathname, search, hash } = window.location
-  if (pathname === '/' || !pathname.endsWith('/')) return
-  const normalizedPathname = pathname.replace(/\/+$/, '')
-  if (!normalizedPathname) return
-  window.history.replaceState(window.history.state, '', `${normalizedPathname}${search}${hash}`)
-}
-
 function renderBootstrapError(container: HTMLElement) {
   const outer = document.createElement('div')
   outer.style.display = 'flex'
@@ -55,9 +47,6 @@ function renderBootstrapError(container: HTMLElement) {
   outer.append(inner)
   container.replaceChildren(outer)
 }
-
-// Initialize router async to restore cached data before first render
-normalizeInitialPathname()
 
 createRouter()
   .then((router) => {
