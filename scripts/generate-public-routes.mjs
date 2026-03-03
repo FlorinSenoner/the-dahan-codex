@@ -78,14 +78,17 @@ export async function getPublicRoutes() {
   return uniqueSorted([...baseRoutes, ...spiritRoutes, ...aspectRoutes]).map(normalizePublicRoute)
 }
 
-export async function writeSitemap(routes) {
-  const resolvedRoutes = routes ?? (await getPublicRoutes())
+export function writeSitemap(routes) {
+  if (!Array.isArray(routes) || routes.length === 0) {
+    throw new Error('writeSitemap requires a non-empty routes array')
+  }
+
   const sitemapLines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ]
 
-  for (const route of resolvedRoutes) {
+  for (const route of routes) {
     sitemapLines.push(
       `  <url><loc>${siteUrl}${route}</loc><lastmod>__BUILD_DATE__</lastmod></url>`,
     )
@@ -95,8 +98,27 @@ export async function writeSitemap(routes) {
   writeFileSync(resolve(publicDir, 'sitemap.xml'), `${sitemapLines.join('\n')}\n`, 'utf-8')
 }
 
-export async function writeRedirects() {
-  const redirectLines = []
+export function writeRedirects(routes) {
+  if (!Array.isArray(routes) || routes.length === 0) {
+    throw new Error('writeRedirects requires a non-empty routes array')
+  }
+
+  const topLevelPublicRoutes = routes.filter((route) => /^\/[^/]+$/.test(route))
+
+  const redirectLines = [
+    // Keep spirit art requests as files and recover bad cached `*.webp/` URLs.
+    '/spirits/*.webp/ /spirits/:splat.webp 301',
+    '/spirits/*.webp /spirits/:splat.webp 200',
+  ]
+
+  // Serve top-level prerendered public routes.
+  for (const route of topLevelPublicRoutes) {
+    redirectLines.push(`${route} ${route}/index.html 200`)
+  }
+
+  // Serve spirit routes without capturing arbitrary `index`/`.html` suffixes.
+  redirectLines.push('/spirits/:spirit /spirits/:spirit/index.html 200')
+  redirectLines.push('/spirits/:spirit/:aspect /spirits/:spirit/:aspect/index.html 200')
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {
@@ -111,7 +133,7 @@ const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process
 
 if (isDirectRun) {
   const routes = await getPublicRoutes()
-  await writeSitemap(routes)
-  await writeRedirects()
+  writeSitemap(routes)
+  writeRedirects(routes)
   console.log(`Generated ${routes.length} public routes, sitemap.xml, and _redirects`)
 }

@@ -3,7 +3,7 @@ import { convexQuery } from '@convex-dev/react-query'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import { Download, Gamepad2, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
+import { Download, Gamepad2, LoaderCircle, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
 import { useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
@@ -12,6 +12,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
+import { shouldRenderAuthenticatedGames } from '@/lib/games-auth-gate'
 import { seedGameCaches } from '@/lib/sync'
 
 export const Route = createFileRoute('/games/')({
@@ -41,11 +42,7 @@ function GamesIndex() {
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
 
-  // Only show sign-in prompt when we KNOW user isn't signed in.
-  // All other cases: render games view with cached data immediately.
-  // TanStack Query cache is restored from IndexedDB before the router starts,
-  // so cached game data is already available. AuthCacheIsolation clears it on user change.
-  if (isOnline && isLoaded && !isSignedIn) {
+  if (!shouldRenderAuthenticatedGames({ isLoaded, isOnline, isSignedIn })) {
     return <GamesSignInPrompt />
   }
 
@@ -145,7 +142,16 @@ function AuthenticatedGames() {
               Visit this page while online to cache your games for offline access.
             </p>
           </div>
-        ) : isPending && !games ? null : !hasGames ? (
+        ) : isPending && !games ? (
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+            <LoaderCircle
+              aria-hidden
+              className="h-10 w-10 text-muted-foreground mb-4 animate-spin"
+            />
+            <h2 className="text-xl font-semibold mb-2">Loading games</h2>
+            <p className="text-muted-foreground max-w-sm">Fetching your latest game data.</p>
+          </div>
+        ) : !hasGames ? (
           <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
             <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
             <h2 className="text-xl font-semibold mb-2">No games recorded yet</h2>

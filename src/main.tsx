@@ -48,7 +48,6 @@ function renderBootstrapError(container: HTMLElement) {
   container.replaceChildren(outer)
 }
 
-// Initialize router async to restore cached data before first render
 createRouter()
   .then((router) => {
     createRoot(rootElement).render(
