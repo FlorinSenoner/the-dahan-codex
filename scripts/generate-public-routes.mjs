@@ -103,29 +103,21 @@ export function writeRedirects(routes) {
     throw new Error('writeRedirects requires a non-empty routes array')
   }
 
-  const topLevelPublicRoutes = routes.filter(
-    (route) => /^\/[^/]+$/.test(route) && route !== '/spirits',
-  )
+  const topLevelPublicRoutes = routes.filter((route) => /^\/[^/]+$/.test(route))
 
   const redirectLines = [
-    // Canonicalize trailing slash public spirit routes to slashless URLs.
-    '/spirits/ /spirits 301',
-    '/spirits/*/ /spirits/:splat 301',
-
     // Keep spirit art requests as files and recover bad cached `*.webp/` URLs.
     '/spirits/*.webp/ /spirits/:splat.webp 301',
     '/spirits/*.webp /spirits/:splat.webp 200',
-
-    // Public prerendered spirit routes.
-    '/spirits /spirits/index.html 200',
-    '/spirits/* /spirits/:splat/index.html 200',
   ]
 
-  // Canonicalize and serve top-level prerendered public routes.
+  // Serve top-level prerendered public routes.
   for (const route of topLevelPublicRoutes) {
-    redirectLines.push(`${route}/ ${route} 301`)
     redirectLines.push(`${route} ${route}/index.html 200`)
   }
+
+  // Serve nested prerendered spirit routes.
+  redirectLines.push('/spirits/* /spirits/:splat/index.html 200')
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {

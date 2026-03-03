@@ -1,13 +1,9 @@
-/spirits/ /spirits 301
-/spirits/*/ /spirits/:splat 301
 /spirits/*.webp/ /spirits/:splat.webp 301
 /spirits/*.webp /spirits/:splat.webp 200
+/credits /credits/index.html 200
+/settings /settings/index.html 200
 /spirits /spirits/index.html 200
 /spirits/* /spirits/:splat/index.html 200
-/credits/ /credits 301
-/credits /credits/index.html 200
-/settings/ /settings 301
-/settings /settings/index.html 200
 /games /app-shell 200
 /games/* /app-shell 200
 /sign-in /app-shell 200
