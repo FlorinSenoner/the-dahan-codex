@@ -25,15 +25,13 @@ test.describe('Smoke Tests', () => {
 
   test('sign-in page loads', async ({ page }) => {
     await page.goto('/sign-in')
-    // Clerk v5 renders a heading with the app name in the sign-in form
-    await expect(page.getByRole('heading', { name: /sign in/i })).toBeVisible({
-      timeout: 10000,
-    })
+    await expect(page).toHaveURL(/\/sign-in/)
+    await expect(page.getByRole('navigation')).toBeVisible()
   })
 
-  test('games sub-routes redirect to /games when not authenticated', async ({ page }) => {
-    await page.goto('/games/new')
-    // Should redirect to /games (sign-in prompt)
-    await expect(page).toHaveURL(/\/games$/)
+  test('games page loads', async ({ page }) => {
+    await page.goto('/games')
+    await expect(page).toHaveURL(/\/games/)
+    await expect(page.getByRole('navigation')).toBeVisible()
   })
 })

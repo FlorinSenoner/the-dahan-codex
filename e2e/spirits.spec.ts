@@ -120,12 +120,18 @@ test.describe('Spirit Library', () => {
   test('variant tabs navigate to correct URL', async ({ page }) => {
     await goToRiverDetail(page)
 
-    await expect(page.getByRole('tab', { name: 'Base' })).toBeVisible({
+    const variantTabs = page.getByRole('tablist').first()
+    const baseTab = variantTabs.getByRole('tab', { name: 'Base' })
+    const sunshineTab = variantTabs.getByRole('tab', { name: 'Sunshine' })
+
+    await expect(baseTab).toBeVisible({
       timeout: 15000,
     })
+    await expect(sunshineTab).toBeVisible()
 
     // Click on Sunshine tab
-    await page.getByRole('tab', { name: 'Sunshine' }).click({ force: true })
+    await sunshineTab.click()
+    await expect(sunshineTab).toHaveAttribute('data-state', 'active')
 
     // URL should update
     await expect(page).toHaveURL(/river-surges-in-sunlight\/sunshine/)
