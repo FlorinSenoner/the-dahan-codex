@@ -8,7 +8,7 @@ import { Heading, Text } from '@/components/ui/typography'
 import { useTheme } from '@/contexts/theme-context'
 import { usePageMeta } from '@/hooks'
 import { clearOfflineData } from '@/lib/offline-games'
-import { syncGames, syncSpiritsAndOpenings } from '@/lib/sync'
+import { syncGames, syncPublicReferenceData } from '@/lib/sync'
 import { cn } from '@/lib/utils'
 import { clearPersistedQueryCache } from '../router'
 
@@ -33,16 +33,16 @@ function SettingsPage() {
   async function syncData() {
     setIsSyncing(true)
     try {
-      // Only sync games when signed in (listGames requires auth)
+      setSyncStatus('Refreshing public reference data...')
+      await syncPublicReferenceData(queryClient, { force: true })
+
       if (isSignedIn) {
         setSyncStatus('Syncing games...')
         await syncGames(queryClient)
+        setSyncStatus('Public + games sync complete!')
+      } else {
+        setSyncStatus('Public reference refresh complete!')
       }
-
-      setSyncStatus('Syncing spirits & openings...')
-      await syncSpiritsAndOpenings(queryClient)
-
-      setSyncStatus('Sync complete!')
       setTimeout(() => setSyncStatus(null), 3000)
     } catch (error) {
       console.error('Failed to sync data:', error)

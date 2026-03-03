@@ -1,42 +1,18 @@
-import { convexQuery } from '@convex-dev/react-query'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { api } from 'convex/_generated/api'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
+import { selectSpiritBySlug } from '@/lib/reference-selectors'
 import { SpiritDetailContent } from './spirits.$slug'
 
-/**
- * Spirit detail page
- *
- * Offline behavior: This page works offline after background spirit sync
- * has populated local cache. Manual Settings > Sync Data can be used to
- * force a full refresh.
- */
 export const Route = createFileRoute('/spirits/$slug/$aspect')({
-  loader: async ({ context, params }) => {
-    // Use prefetchQuery to avoid blocking when offline
-    // The component's useSuspenseQuery will use cached data if available
-    try {
-      await context.queryClient.prefetchQuery(
-        convexQuery(api.spirits.getSpiritBySlug, {
-          slug: params.slug,
-          aspect: params.aspect,
-        }),
-      )
-    } catch (e) {
-      if (e instanceof Error && !e.message.includes('Failed to fetch'))
-        console.warn('Loader error:', e)
-    }
-  },
   component: AspectDetailPage,
 })
 
 function AspectDetailPage() {
   const { slug, aspect } = Route.useParams()
+  const snapshot = usePublicSnapshot()
 
-  const { data: spirit } = useSuspenseQuery(
-    convexQuery(api.spirits.getSpiritBySlug, { slug, aspect }),
-  )
+  const spirit = snapshot ? selectSpiritBySlug(snapshot, slug, aspect) : undefined
 
   usePageMeta({
     title: spirit?.aspectName ? `${spirit.name} — ${spirit.aspectName}` : spirit?.name,
@@ -47,7 +23,6 @@ function AspectDetailPage() {
 
   const SITE_URL = 'https://dahan-codex.com'
 
-  // Article structured data for the aspect
   useStructuredData(
     'ld-article',
     spirit?.aspectName
@@ -73,7 +48,6 @@ function AspectDetailPage() {
       : null,
   )
 
-  // BreadcrumbList structured data
   useStructuredData(
     'ld-breadcrumb',
     spirit
@@ -104,7 +78,10 @@ function AspectDetailPage() {
       : null,
   )
 
-  // Not found state - aspect doesn't exist
+  if (!snapshot || spirit === undefined) {
+    return null
+  }
+
   if (spirit === null || (spirit && !spirit.aspectName)) {
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center min-h-[60vh]">

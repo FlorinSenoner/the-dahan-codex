@@ -1,8 +1,5 @@
-import { convexQuery } from '@convex-dev/react-query'
-import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
-import type { Doc, Id } from 'convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
 import { BookOpen, Plus } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -10,11 +7,13 @@ import { EditableOpening, type OpeningFormData } from '@/components/admin/editab
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Heading, Text } from '@/components/ui/typography'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import { selectOpeningsBySpiritId } from '@/lib/reference-selectors'
+import type { PublicOpening, PublicSpirit } from '@/types/reference'
 import { TurnAccordion } from './turn-accordion'
 
-// Helper to create form data from an opening document
-function createFormDataFromOpening(opening: Doc<'openings'>): OpeningFormData {
+function createFormDataFromOpening(opening: PublicOpening): OpeningFormData {
   return {
     name: opening.name,
     description: opening.description || '',
@@ -28,7 +27,6 @@ function createFormDataFromOpening(opening: Doc<'openings'>): OpeningFormData {
   }
 }
 
-// Helper to transform turns for save (converts empty strings to undefined)
 function transformTurnsForSave(turns: OpeningFormData['turns']) {
   return turns.map((t) => ({
     turn: t.turn,
@@ -37,37 +35,50 @@ function transformTurnsForSave(turns: OpeningFormData['turns']) {
   }))
 }
 
+function toSlug(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim()
+}
+
 interface OpeningSectionProps {
-  spiritId: Id<'spirits'>
+  spiritId: PublicSpirit['_id']
   onSaveHandlerReady?: (saveHandler: (() => Promise<void>) | null) => void
   onHasChangesChange?: (hasChanges: boolean) => void
   onIsValidChange?: (isValid: boolean) => void
 }
 
-// Design: Each spirit (base or aspect) queries openings by its own _id.
-// Aspects never inherit openings from their base spirit.
 export function OpeningSection({
   spiritId,
   onSaveHandlerReady,
   onHasChangesChange,
   onIsValidChange,
 }: OpeningSectionProps) {
-  const { data: openings, isLoading } = useQuery(
-    convexQuery(api.openings.listBySpirit, { spiritId }),
-  )
   const { isEditing } = useEditMode()
+  const snapshot = usePublicSnapshot()
+  const snapshotOpenings = useMemo(
+    () => (snapshot ? selectOpeningsBySpiritId(snapshot, spiritId) : []),
+    [snapshot, spiritId],
+  )
+  const [openings, setOpenings] = useState<PublicOpening[]>(snapshotOpenings)
 
-  // URL-synced tab selection
+  useEffect(() => {
+    if (!isEditing) {
+      setOpenings(snapshotOpenings)
+    }
+  }, [snapshotOpenings, isEditing])
+
   const search = useSearch({ strict: false }) as { opening?: string }
   const navigate = useNavigate()
   const openingParam = search.opening
 
-  // Convex mutations
   const createOpeningMutation = useMutation(api.openings.createOpening)
   const updateOpeningMutation = useMutation(api.openings.updateOpening)
   const deleteOpeningMutation = useMutation(api.openings.deleteOpening)
 
-  // Find selected opening from URL or default to first
   const selectedOpening = useMemo(() => {
     if (!openings || openings.length === 0) return null
     if (openingParam) {
@@ -77,17 +88,12 @@ export function OpeningSection({
     return openings[0]
   }, [openings, openingParam])
 
-  // Form data state for edit mode
   const [formData, setFormData] = useState<OpeningFormData | null>(null)
   const [isCreatingNew, setIsCreatingNew] = useState(false)
-  const [_isSaving, setIsSaving] = useState(false)
 
-  // Handle tab change - update URL
-  // resetScroll: false prevents TanStack Router from scrolling to top on URL change
   const handleTabChange = useCallback(
     (openingId: string) => {
       if (openingId === 'new') {
-        // Don't update URL for new opening tab, it's handled separately
         return
       }
       navigate({
@@ -99,7 +105,6 @@ export function OpeningSection({
     [navigate, search],
   )
 
-  // Create empty form data for new opening
   const createEmptyFormData = useCallback((): OpeningFormData => {
     return {
       name: '',
@@ -110,18 +115,15 @@ export function OpeningSection({
     }
   }, [])
 
-  // Initialize form data from selected opening when entering edit mode
   useEffect(() => {
     if (isEditing && selectedOpening && !isCreatingNew) {
       setFormData(createFormDataFromOpening(selectedOpening))
     } else if (!isEditing) {
-      // Reset form data when exiting edit mode
       setFormData(null)
       setIsCreatingNew(false)
     }
   }, [isEditing, selectedOpening, isCreatingNew])
 
-  // Calculate if form is valid (all required fields filled)
   const isValid = useMemo(() => {
     if (!formData) return false
     if (!formData.name.trim()) return false
@@ -133,16 +135,13 @@ export function OpeningSection({
     return true
   }, [formData])
 
-  // Calculate if there are changes
   const hasChanges = useMemo(() => {
     if (!formData) return false
 
-    // New opening - has changes if name is filled
     if (isCreatingNew) {
       return formData.name.trim().length > 0
     }
 
-    // Existing opening - compare with original
     if (!selectedOpening) return false
 
     if (formData.name !== selectedOpening.name) return true
@@ -153,31 +152,28 @@ export function OpeningSection({
 
     for (let i = 0; i < formData.turns.length; i++) {
       const formTurn = formData.turns[i]
-      const origTurn = selectedOpening.turns[i]
-      if (formTurn.turn !== origTurn.turn) return true
-      if (formTurn.title !== (origTurn.title || '')) return true
-      if (formTurn.instructions !== origTurn.instructions) return true
+      const originalTurn = selectedOpening.turns[i]
+      if (formTurn.turn !== originalTurn.turn) return true
+      if (formTurn.title !== (originalTurn.title || '')) return true
+      if (formTurn.instructions !== originalTurn.instructions) return true
     }
 
     return false
   }, [formData, selectedOpening, isCreatingNew])
 
-  // Notify parent of changes
   useEffect(() => {
     onHasChangesChange?.(hasChanges)
   }, [hasChanges, onHasChangesChange])
 
-  // Notify parent of validity changes
   useEffect(() => {
     onIsValidChange?.(isValid)
   }, [isValid, onIsValidChange])
 
-  // Save handler for creating or updating opening
   const handleSave = useCallback(async () => {
     if (!formData) return
-    setIsSaving(true)
     try {
       if (isCreatingNew) {
+        const now = Date.now()
         const newId = await createOpeningMutation({
           spiritId,
           name: formData.name,
@@ -186,8 +182,26 @@ export function OpeningSection({
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
         })
-        // Navigate to the newly created opening
-        // resetScroll: false prevents scroll jump when updating URL
+
+        setOpenings((previous) =>
+          [
+            ...previous,
+            {
+              _id: newId,
+              _creationTime: now,
+              spiritId,
+              slug: toSlug(formData.name),
+              name: formData.name,
+              description: formData.description || undefined,
+              turns: transformTurnsForSave(formData.turns),
+              author: formData.author || undefined,
+              sourceUrl: formData.sourceUrl || undefined,
+              createdAt: now,
+              updatedAt: now,
+            },
+          ].sort((a, b) => a.name.localeCompare(b.name)),
+        )
+
         navigate({
           search: { ...search, opening: newId } as never,
           replace: true,
@@ -202,22 +216,33 @@ export function OpeningSection({
           author: formData.author || undefined,
           sourceUrl: formData.sourceUrl || undefined,
         })
+
+        setOpenings((previous) =>
+          previous
+            .map((opening) =>
+              opening._id === selectedOpening._id
+                ? {
+                    ...opening,
+                    slug: toSlug(formData.name),
+                    name: formData.name,
+                    description: formData.description || undefined,
+                    turns: transformTurnsForSave(formData.turns),
+                    author: formData.author || undefined,
+                    sourceUrl: formData.sourceUrl || undefined,
+                    updatedAt: Date.now(),
+                  }
+                : opening,
+            )
+            .sort((a, b) => a.name.localeCompare(b.name)),
+        )
       }
-      // Data will refresh via query invalidation
+
       setIsCreatingNew(false)
-      // Reset form state to trigger re-initialization from query data.
-      // Setting formData to null causes the useEffect (lines ~91-109) to detect
-      // that formData is null while selectedOpening exists, which re-initializes
-      // formData from the query-refetched selectedOpening. This ensures hasChanges
-      // becomes false (since formData will match the saved data) and prevents
-      // false "unsaved changes" warnings after save.
       if (!isCreatingNew && selectedOpening) {
         setFormData(null)
       }
     } catch (error) {
       console.error('Save failed:', error)
-    } finally {
-      setIsSaving(false)
     }
   }, [
     formData,
@@ -230,13 +255,11 @@ export function OpeningSection({
     search,
   ])
 
-  // Delete handler for removing opening
   const handleDelete = useCallback(async () => {
     if (!selectedOpening) return
     try {
       await deleteOpeningMutation({ id: selectedOpening._id })
-      // Clear URL opening param to go back to first opening, but preserve edit mode
-      // resetScroll: false prevents scroll jump when updating URL
+      setOpenings((previous) => previous.filter((opening) => opening._id !== selectedOpening._id))
       navigate({
         search: { ...search, opening: undefined } as never,
         replace: true,
@@ -249,34 +272,28 @@ export function OpeningSection({
     }
   }, [selectedOpening, deleteOpeningMutation, navigate, search])
 
-  // Expose save handler to parent when there are changes (isValid controls disabled state in EditFab)
   useEffect(() => {
     onSaveHandlerReady?.(formData && hasChanges ? handleSave : null)
   }, [formData, hasChanges, handleSave, onSaveHandlerReady])
 
-  // Handle form data change
   const handleFormDataChange = useCallback((data: OpeningFormData) => {
     setFormData(data)
   }, [])
 
-  // Handle creating new opening
   const handleCreateNew = useCallback(() => {
     setIsCreatingNew(true)
     setFormData(createEmptyFormData())
   }, [createEmptyFormData])
 
-  // Cancel creating new opening
   const handleCancelNew = useCallback(() => {
     setIsCreatingNew(false)
     setFormData(null)
-    // Re-initialize form data for selected opening
     if (selectedOpening) {
       setFormData(createFormDataFromOpening(selectedOpening))
     }
   }, [selectedOpening])
 
-  // Render opening content (shared between tabs and single opening display)
-  const renderOpeningContent = (opening: Doc<'openings'>) => (
+  const renderOpeningContent = (opening: PublicOpening) => (
     <div className="bg-card border border-border rounded-lg p-4 space-y-4">
       <Heading as="h3" variant="h3">
         {opening.name}
@@ -306,9 +323,8 @@ export function OpeningSection({
     </div>
   )
 
-  // Render opening editor
   const renderOpeningEditor = (
-    opening: Doc<'openings'> | null,
+    opening: PublicOpening | null,
     isNew: boolean,
     data: OpeningFormData,
   ) => (
@@ -321,36 +337,27 @@ export function OpeningSection({
     />
   )
 
-  // Render content based on state
-  // Use single section wrapper to prevent layout shifts when toggling edit mode
   const renderContent = () => {
-    // Loading state
-    if (isLoading) {
-      return <div className="animate-pulse bg-muted/30 rounded-lg h-32" />
-    }
+    const hasOpenings = openings.length > 0
 
-    const hasOpenings = openings && openings.length > 0
-
-    // Edit mode
     if (isEditing) {
-      // Creating new opening
       if (isCreatingNew) {
         return (
           <div className="space-y-4">
             {hasOpenings && (
               <div className="flex flex-wrap gap-2">
-                {openings.map((o) => (
+                {openings.map((opening) => (
                   <Button
                     className="opacity-50"
-                    key={o._id}
+                    key={opening._id}
                     onClick={() => {
                       handleCancelNew()
-                      handleTabChange(o._id)
+                      handleTabChange(opening._id)
                     }}
                     size="sm"
                     variant="outline"
                   >
-                    {o.name}
+                    {opening.name}
                   </Button>
                 ))}
                 <Button disabled size="sm" variant="default">
@@ -364,16 +371,15 @@ export function OpeningSection({
         )
       }
 
-      // Has openings - show tabs with editor
       if (hasOpenings && selectedOpening && formData) {
         return (
           <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
             <div className="flex items-center gap-2">
               <div className="overflow-x-auto flex-1 -mx-4 px-4">
                 <TabsList variant="line">
-                  {openings.map((o) => (
-                    <TabsTrigger key={o._id} value={o._id}>
-                      {o.name}
+                  {openings.map((opening) => (
+                    <TabsTrigger key={opening._id} value={opening._id}>
+                      {opening.name}
                     </TabsTrigger>
                   ))}
                 </TabsList>
@@ -388,18 +394,17 @@ export function OpeningSection({
                 Add Opening
               </Button>
             </div>
-            {openings.map((o) => (
-              <TabsContent key={o._id} value={o._id}>
-                {o._id === selectedOpening._id
-                  ? renderOpeningEditor(o, false, formData)
-                  : renderOpeningContent(o)}
+            {openings.map((opening) => (
+              <TabsContent key={opening._id} value={opening._id}>
+                {opening._id === selectedOpening._id
+                  ? renderOpeningEditor(opening, false, formData)
+                  : renderOpeningContent(opening)}
               </TabsContent>
             ))}
           </Tabs>
         )
       }
 
-      // No openings - show create button
       return (
         <div className="bg-card border border-dashed border-border rounded-lg p-8 text-center">
           <Text className="mb-4" variant="muted">
@@ -413,34 +418,31 @@ export function OpeningSection({
       )
     }
 
-    // Read-only mode: no content if no openings exist
     if (!hasOpenings) {
       return null
     }
 
-    // Read-only mode with multiple openings - show tabs
     if (openings.length > 1 && selectedOpening) {
       return (
         <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
           <div className="overflow-x-auto -mx-4 px-4">
             <TabsList variant="line">
-              {openings.map((o) => (
-                <TabsTrigger key={o._id} value={o._id}>
-                  {o.name}
+              {openings.map((opening) => (
+                <TabsTrigger key={opening._id} value={opening._id}>
+                  {opening.name}
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
-          {openings.map((o) => (
-            <TabsContent key={o._id} value={o._id}>
-              {renderOpeningContent(o)}
+          {openings.map((opening) => (
+            <TabsContent key={opening._id} value={opening._id}>
+              {renderOpeningContent(opening)}
             </TabsContent>
           ))}
         </Tabs>
       )
     }
 
-    // Read-only mode with single opening - show without tabs
     if (selectedOpening) {
       return renderOpeningContent(selectedOpening)
     }
@@ -450,9 +452,7 @@ export function OpeningSection({
 
   const content = renderContent()
 
-  // In read-only mode with no openings, don't render the section at all
-  // But always render when editing (to show create button) or loading
-  if (!isEditing && !isLoading && (!openings || openings.length === 0)) {
+  if (!isEditing && openings.length === 0) {
     return null
   }
 

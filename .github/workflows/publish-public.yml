@@ -57,7 +57,7 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Build public routes
+      - name: Build app
         run: pnpm build:public
         env:
           VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}

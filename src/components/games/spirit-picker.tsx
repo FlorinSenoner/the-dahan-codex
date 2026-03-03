@@ -1,6 +1,3 @@
-import { convexQuery } from '@convex-dev/react-query'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { api } from 'convex/_generated/api'
 import type { Id } from 'convex/_generated/dataModel'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import * as React from 'react'
@@ -14,6 +11,8 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { usePublicSnapshot } from '@/data/public-snapshot'
+import { selectSpiritList } from '@/lib/reference-selectors'
 import { cn } from '@/lib/utils'
 
 interface SpiritPickerProps {
@@ -27,12 +26,11 @@ export function SpiritPicker({
   onChange,
   placeholder = 'Select spirit...',
 }: SpiritPickerProps) {
+  const snapshot = usePublicSnapshot()
+  const spirits = React.useMemo(() => (snapshot ? selectSpiritList(snapshot) : []), [snapshot])
   const [open, setOpen] = React.useState(false)
 
-  // Fetch all spirits for the picker
-  const { data: spirits } = useSuspenseQuery(convexQuery(api.spirits.listSpirits, {}))
-
-  const selected = spirits.find((s) => s._id === value)
+  const selected = spirits.find((spirit) => spirit._id === value)
 
   const getDisplayName = (spirit: (typeof spirits)[number]) => {
     if (spirit.aspectName) {

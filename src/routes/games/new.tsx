@@ -45,8 +45,8 @@ function NewGamePage() {
   if (isOnline && (!isLoaded || !isSignedIn)) return null
 
   const handleSubmit = async (data: GameFormData) => {
-    // Filter out spirits without a spiritId selected (new games require picking from dropdown)
-    const hasValidSpirits = data.spirits.some((s) => s.spiritId !== null)
+    // Accept any spirit entry with either an id or a resolved name.
+    const hasValidSpirits = data.spirits.some((s) => s.spiritId !== null || !!s.name?.trim())
     if (!hasValidSpirits) {
       toast.error('Please select at least one spirit')
       return

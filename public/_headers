@@ -7,11 +7,23 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   # CSP note: style-src currently keeps 'unsafe-inline' for Tailwind/Clerk compatibility.
   # Follow-up hardening can move to nonce/hash-based styles.
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com https://static.cloudflareinsights.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.convex.cloud https://*.clerk.accounts.dev https://clerk.dahan-codex.com wss://*.convex.cloud https://fonts.gstatic.com https://img.clerk.com; frame-src https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com https://static.cloudflareinsights.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.convex.cloud https://*.convex.site https://*.clerk.accounts.dev https://clerk.dahan-codex.com wss://*.convex.cloud https://fonts.gstatic.com https://img.clerk.com; frame-src https://*.clerk.accounts.dev https://clerk.dahan-codex.com https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 /
-  Cache-Control: no-cache
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+/credits
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+/spirits
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+/spirits/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+/settings
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 /index.html
+  Cache-Control: no-cache
+/app-shell.html
+  Cache-Control: no-cache
+/app-shell
   Cache-Control: no-cache
 /sw.js
   Cache-Control: no-cache

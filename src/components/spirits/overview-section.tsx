@@ -1,11 +1,11 @@
-import type { Doc } from 'convex/_generated/dataModel'
 import { ChevronDown } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Heading, Text } from '@/components/ui/typography'
+import type { PublicSpirit } from '@/types/reference'
 import { PowerRadarChart } from './power-radar-chart'
 
 interface OverviewSectionProps {
-  spirit: Doc<'spirits'>
+  spirit: PublicSpirit
   description?: string
 }
 

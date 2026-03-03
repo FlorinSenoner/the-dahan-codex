@@ -2,12 +2,6 @@ import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 
 export default defineSchema({
-  // Minimal table for health check / connectivity test
-  healthCheck: defineTable({
-    message: v.string(),
-    timestamp: v.number(),
-  }),
-
   // Expansions table - Spirit Island game expansions
   expansions: defineTable({
     name: v.string(), // "Base Game", "Branch & Claw", etc.

@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 
+import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
   cleanupOutdatedCaches,
@@ -13,6 +14,7 @@ declare const self: ServiceWorkerGlobalScope
 
 // Clean up old caches from previous versions
 cleanupOutdatedCaches()
+clientsClaim()
 
 // Precache all assets injected by vite-plugin-pwa
 precacheAndRoute(self.__WB_MANIFEST)
@@ -47,6 +49,24 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 60,
         maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+      }),
+    ],
+  }),
+)
+
+// Cache public snapshot API for offline public-route hydration.
+registerRoute(
+  ({ request, url }) => {
+    if (request.method !== 'GET') return false
+    if (url.pathname === '/public-snapshot') return true
+    return url.hostname.endsWith('.convex.site') && url.pathname === '/public-snapshot'
+  },
+  new StaleWhileRevalidate({
+    cacheName: 'public-snapshot',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 4,
+        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
       }),
     ],
   }),
