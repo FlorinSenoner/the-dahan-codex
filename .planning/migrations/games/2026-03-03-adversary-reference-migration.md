@@ -50,7 +50,7 @@ No destructive field removal is performed in this release.
 
 - Write path (`createGame`, `updateGame`, `importGames`):
   - Accept both legacy and `*Ref` adversary payloads.
-  - Normalize/hydrate to maintain both representations during transition.
+  - Persist whichever representation the client provides (legacy, ref, or both).
 
 - Read path:
   - Prefer `*Ref` fields when present.
