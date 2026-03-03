@@ -1,8 +1,8 @@
 import { ConvexError, v } from 'convex/values'
-import type { Doc, Id } from './_generated/dataModel'
+import type { Id } from './_generated/dataModel'
 import type { MutationCtx, QueryCtx } from './_generated/server'
 import { mutation, query } from './_generated/server'
-import { requireAdmin, requireAuth } from './lib/auth'
+import { requireAuth } from './lib/auth'
 import {
   validateIntegerRange,
   validateRequiredString,
@@ -51,9 +51,6 @@ type OptionalGameValues = {
   score?: number
   notes?: string
 }
-
-type AdversaryRefValue = NonNullable<OptionalGameValues['adversaryRef']>
-type AdversaryLookup = Map<string, Doc<'adversaries'>>
 
 const gameResultValidator = v.union(v.literal('win'), v.literal('loss'))
 
@@ -213,94 +210,6 @@ function validateOptionalFields(fields: OptionalGameValues) {
   validateIntegerRange(fields.score, 'score', -500, 1000)
 }
 
-function normalizeAdversaryName(name: string) {
-  return name.trim().toLowerCase()
-}
-
-async function loadAdversaryLookup(ctx: QueryCtx | MutationCtx) {
-  const adversaries = await ctx.db.query('adversaries').collect()
-  const byName: AdversaryLookup = new Map()
-
-  for (const adversary of adversaries) {
-    byName.set(normalizeAdversaryName(adversary.name), adversary)
-    for (const alias of adversary.aliases) {
-      byName.set(normalizeAdversaryName(alias), adversary)
-    }
-  }
-
-  return byName
-}
-
-function toLegacyAdversaryFromRef(ref?: OptionalGameValues['adversaryRef']) {
-  if (!ref) return undefined
-  return {
-    name: ref.nameSnapshot,
-    level: ref.level,
-  }
-}
-
-function toAdversaryRefFromLegacy(
-  adversary: OptionalGameValues['adversary'] | undefined,
-  lookup: AdversaryLookup,
-): AdversaryRefValue | undefined {
-  if (!adversary) return undefined
-
-  const matched = lookup.get(normalizeAdversaryName(adversary.name))
-  if (!matched) return undefined
-
-  const level = Math.max(0, Math.min(6, adversary.level))
-  const levelData = matched.levels.find((item) => item.level === level)
-
-  return {
-    adversaryId: matched._id,
-    level,
-    difficulty: level === 0 ? matched.baseDifficulty : (levelData?.difficulty ?? level),
-    nameSnapshot: matched.name,
-  }
-}
-
-async function hydrateAdversaryFields(
-  ctx: QueryCtx | MutationCtx,
-  fields: Pick<
-    OptionalGameValues,
-    'adversary' | 'adversaryRef' | 'secondaryAdversary' | 'secondaryAdversaryRef'
-  >,
-  lookup?: AdversaryLookup,
-) {
-  const adversaryLookup = lookup ?? (await loadAdversaryLookup(ctx))
-
-  const adversaryRef =
-    fields.adversaryRef ?? toAdversaryRefFromLegacy(fields.adversary, adversaryLookup)
-  const secondaryAdversaryRef =
-    fields.secondaryAdversaryRef ??
-    toAdversaryRefFromLegacy(fields.secondaryAdversary, adversaryLookup)
-
-  const adversary = fields.adversary ?? toLegacyAdversaryFromRef(adversaryRef)
-  const secondaryAdversary =
-    fields.secondaryAdversary ?? toLegacyAdversaryFromRef(secondaryAdversaryRef)
-
-  return {
-    adversary,
-    adversaryRef,
-    secondaryAdversary,
-    secondaryAdversaryRef,
-  }
-}
-
-type AdversaryFieldInput = Pick<
-  OptionalGameValues,
-  'adversary' | 'adversaryRef' | 'secondaryAdversary' | 'secondaryAdversaryRef'
->
-
-function hasAdversaryFieldInput(fields: AdversaryFieldInput) {
-  return (
-    fields.adversary !== undefined ||
-    fields.adversaryRef !== undefined ||
-    fields.secondaryAdversary !== undefined ||
-    fields.secondaryAdversaryRef !== undefined
-  )
-}
-
 async function requireOwnedGame(ctx: QueryCtx | MutationCtx, id: Id<'games'>) {
   const identity = await requireAuth(ctx)
   const game = await ctx.db.get(id)
@@ -357,19 +266,8 @@ export const createGame = mutation({
     validateSpirits(args.spirits)
     validateOptionalFields(args)
 
-    const adversaryInput: AdversaryFieldInput = {
-      adversary: args.adversary,
-      adversaryRef: args.adversaryRef,
-      secondaryAdversary: args.secondaryAdversary,
-      secondaryAdversaryRef: args.secondaryAdversaryRef,
-    }
-    const adversaryFields = hasAdversaryFieldInput(adversaryInput)
-      ? await hydrateAdversaryFields(ctx, adversaryInput)
-      : {}
-
     return ctx.db.insert('games', {
       ...args,
-      ...adversaryFields,
       userId: identity.tokenIdentifier,
       createdAt: now,
       updatedAt: now,
@@ -398,32 +296,8 @@ export const updateGame = mutation({
     }
     validateOptionalFields(updates)
 
-    let normalizedAdversaryFields: Partial<
-      Pick<
-        OptionalGameValues,
-        'adversary' | 'adversaryRef' | 'secondaryAdversary' | 'secondaryAdversaryRef'
-      >
-    > = {}
-
-    const adversaryInput: AdversaryFieldInput = {
-      adversary: updates.adversary,
-      adversaryRef: updates.adversaryRef,
-      secondaryAdversary: updates.secondaryAdversary,
-      secondaryAdversaryRef: updates.secondaryAdversaryRef,
-    }
-
-    if (hasAdversaryFieldInput(adversaryInput)) {
-      normalizedAdversaryFields = await hydrateAdversaryFields(ctx, {
-        adversary: adversaryInput.adversary,
-        adversaryRef: adversaryInput.adversaryRef,
-        secondaryAdversary: adversaryInput.secondaryAdversary,
-        secondaryAdversaryRef: adversaryInput.secondaryAdversaryRef,
-      })
-    }
-
     await ctx.db.patch(id, {
       ...updates,
-      ...normalizedAdversaryFields,
       updatedAt: Date.now(),
     })
 
@@ -470,7 +344,6 @@ export const importGames = mutation({
 
     let created = 0
     let updated = 0
-    let adversaryLookup: AdversaryLookup | undefined
 
     for (const gameData of args.games) {
       const { existingId, spirits, ...data } = gameData
@@ -486,22 +359,6 @@ export const importGames = mutation({
         player: spirit.player,
       }))
 
-      const adversaryInput: AdversaryFieldInput = {
-        adversary: data.adversary,
-        adversaryRef: data.adversaryRef,
-        secondaryAdversary: data.secondaryAdversary,
-        secondaryAdversaryRef: data.secondaryAdversaryRef,
-      }
-
-      const hasAdversaryInput = hasAdversaryFieldInput(adversaryInput)
-      if (hasAdversaryInput && !adversaryLookup) {
-        adversaryLookup = await loadAdversaryLookup(ctx)
-      }
-
-      const adversaryFields = hasAdversaryInput
-        ? await hydrateAdversaryFields(ctx, adversaryInput, adversaryLookup)
-        : {}
-
       if (existingId) {
         const normalizedId = ctx.db.normalizeId('games', existingId)
         if (normalizedId) {
@@ -509,7 +366,6 @@ export const importGames = mutation({
           if (existingGame && existingGame.userId === identity.tokenIdentifier) {
             await ctx.db.replace(normalizedId, {
               ...data,
-              ...adversaryFields,
               spirits: spiritsWithNullIds,
               userId: identity.tokenIdentifier,
               createdAt: existingGame.createdAt,
@@ -523,7 +379,6 @@ export const importGames = mutation({
 
       await ctx.db.insert('games', {
         ...data,
-        ...adversaryFields,
         spirits: spiritsWithNullIds,
         userId: identity.tokenIdentifier,
         createdAt: now,
@@ -533,96 +388,5 @@ export const importGames = mutation({
     }
 
     return { created, updated }
-  },
-})
-
-const adversaryMigrationResultValidator = v.object({
-  status: v.literal('migrated'),
-  scanned: v.number(),
-  updated: v.number(),
-  unresolved: v.number(),
-  message: v.string(),
-})
-
-function refsEqual(a: AdversaryRefValue | undefined, b: AdversaryRefValue | undefined) {
-  if (!a && !b) return true
-  if (!a || !b) return false
-  return (
-    a.adversaryId === b.adversaryId &&
-    a.level === b.level &&
-    a.difficulty === b.difficulty &&
-    a.nameSnapshot === b.nameSnapshot
-  )
-}
-
-function legacyAdversariesEqual(
-  a: OptionalGameValues['adversary'] | undefined,
-  b: OptionalGameValues['adversary'] | undefined,
-) {
-  return a?.name === b?.name && a?.level === b?.level
-}
-
-// Use: npx convex run games:migrateAdversaryRefs
-export const migrateAdversaryRefs = mutation({
-  args: {},
-  returns: adversaryMigrationResultValidator,
-  handler: async (ctx) => {
-    await requireAdmin(ctx)
-
-    const games = await ctx.db.query('games').collect()
-    const adversaryLookup = await loadAdversaryLookup(ctx)
-
-    let scanned = 0
-    let updated = 0
-    let unresolved = 0
-
-    for (const game of games) {
-      scanned++
-
-      const normalized = await hydrateAdversaryFields(
-        ctx,
-        {
-          adversary: game.adversary,
-          adversaryRef: game.adversaryRef,
-          secondaryAdversary: game.secondaryAdversary,
-          secondaryAdversaryRef: game.secondaryAdversaryRef,
-        },
-        adversaryLookup,
-      )
-
-      if (game.adversary && !normalized.adversaryRef) {
-        unresolved++
-      }
-      if (game.secondaryAdversary && !normalized.secondaryAdversaryRef) {
-        unresolved++
-      }
-
-      const needsPatch =
-        !refsEqual(game.adversaryRef, normalized.adversaryRef) ||
-        !refsEqual(game.secondaryAdversaryRef, normalized.secondaryAdversaryRef) ||
-        !legacyAdversariesEqual(game.adversary, normalized.adversary) ||
-        !legacyAdversariesEqual(game.secondaryAdversary, normalized.secondaryAdversary)
-
-      if (!needsPatch) {
-        continue
-      }
-
-      await ctx.db.patch(game._id, {
-        adversary: normalized.adversary,
-        adversaryRef: normalized.adversaryRef,
-        secondaryAdversary: normalized.secondaryAdversary,
-        secondaryAdversaryRef: normalized.secondaryAdversaryRef,
-        updatedAt: Date.now(),
-      })
-      updated++
-    }
-
-    return {
-      status: 'migrated' as const,
-      scanned,
-      updated,
-      unresolved,
-      message: `Scanned ${scanned} games, updated ${updated}, unresolved legacy mappings ${unresolved}.`,
-    }
   },
 })

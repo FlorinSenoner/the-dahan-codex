@@ -3,7 +3,7 @@
 - Date: 2026-03-03
 - Scope: `games` table adversary fields
 - Type: Backward-compatible additive migration
-- Status: Implemented in code, safe to run incrementally
+- Status: Schema and read/write compatibility implemented; no bulk backfill mutation included
 
 ## Goal
 
@@ -62,31 +62,22 @@ No destructive field removal is performed in this release.
 
 ## Backfill Procedure
 
-Mutation: `games:migrateAdversaryRefs`
+No dedicated backfill mutation is included in this release. Existing rows continue to work via legacy-field fallback in read paths.
 
-- Admin-gated.
-- Scans all `games` records.
-- Hydrates refs from legacy fields where possible.
-- Preserves and mirrors legacy fields.
-- Idempotent: repeated runs only patch records that differ.
-- Returns summary counters:
-  - `scanned`
-  - `updated`
-  - `unresolved` (legacy names not mapped)
+If bulk normalization is needed later, implement a separate admin migration mutation in a follow-up change.
 
 ## Rollout Steps
 
 1. Deploy schema and adversary seed.
 2. Deploy read/write compatibility code.
-3. Run `npx convex run games:migrateAdversaryRefs` in production.
-4. Verify unresolved mappings and add aliases if needed.
-5. Re-run migration until unresolved count is acceptable.
+3. Monitor new writes to confirm `adversaryRef`/`secondaryAdversaryRef` are populated by updated clients.
+4. If historical normalization is required, schedule a follow-up migration release.
 
 ## Validation Checklist
 
 - New games created with adversary selection persist `adversaryRef`/`secondaryAdversaryRef`.
 - Legacy games still readable/editable.
-- Re-running migration does not produce churn on already migrated rows.
+- Existing legacy records remain readable/editable without backfill.
 - Difficulty shown for selected adversary level in game UI and adversary detail UI.
 
 ## Risk and Rollback
