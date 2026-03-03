@@ -95,11 +95,14 @@ export async function writeSitemap(routes) {
   writeFileSync(resolve(publicDir, 'sitemap.xml'), `${sitemapLines.join('\n')}\n`, 'utf-8')
 }
 
-export async function writeRedirects() {
+export async function writeRedirects(routes) {
+  const resolvedRoutes = routes ?? (await getPublicRoutes())
+  const topLevelPublicRoutes = resolvedRoutes.filter(
+    (route) => /^\/[^/]+$/.test(route) && route !== '/spirits',
+  )
+
   const redirectLines = [
-    // Canonicalize trailing slash public routes to slashless URLs.
-    '/credits/ /credits 301',
-    '/settings/ /settings 301',
+    // Canonicalize trailing slash public spirit routes to slashless URLs.
     '/spirits/ /spirits 301',
     '/spirits/*/ /spirits/:splat 301',
 
@@ -107,12 +110,16 @@ export async function writeRedirects() {
     '/spirits/*.webp/ /spirits/:splat.webp 301',
     '/spirits/*.webp /spirits/:splat.webp 200',
 
-    // Public prerendered routes.
-    '/credits /credits/index.html 200',
-    '/settings /settings/index.html 200',
+    // Public prerendered spirit routes.
     '/spirits /spirits/index.html 200',
     '/spirits/* /spirits/:splat/index.html 200',
   ]
+
+  // Canonicalize and serve top-level prerendered public routes.
+  for (const route of topLevelPublicRoutes) {
+    redirectLines.push(`${route}/ ${route} 301`)
+    redirectLines.push(`${route} ${route}/index.html 200`)
+  }
 
   // Client-only app routes served from app shell.
   for (const route of appShellRoutes) {
@@ -128,6 +135,6 @@ const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process
 if (isDirectRun) {
   const routes = await getPublicRoutes()
   await writeSitemap(routes)
-  await writeRedirects()
+  await writeRedirects(routes)
   console.log(`Generated ${routes.length} public routes, sitemap.xml, and _redirects`)
 }
