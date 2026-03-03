@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { Download, Gamepad2, LoaderCircle, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
@@ -40,13 +40,31 @@ function GamesIndex() {
 
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
+  const isAuthenticated = isLoaded && isSignedIn === true
+  const [showAuthLoading, setShowAuthLoading] = useState(true)
 
-  // Avoid flashing cached authenticated data before Clerk resolves auth.
-  if (isOnline && !isLoaded) {
+  useEffect(() => {
+    if (isLoaded || !isOnline) {
+      setShowAuthLoading(false)
+      return
+    }
+
+    setShowAuthLoading(true)
+    const timeoutId = window.setTimeout(() => {
+      setShowAuthLoading(false)
+    }, 5000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [isLoaded, isOnline])
+
+  // Never render authenticated content until Clerk auth is fully resolved.
+  if (!isLoaded && showAuthLoading) {
     return <GamesSignInPrompt isLoading />
   }
 
-  if (isOnline && !isSignedIn) {
+  if (!isAuthenticated) {
     return <GamesSignInPrompt />
   }
 
@@ -164,7 +182,16 @@ function AuthenticatedGames() {
               Visit this page while online to cache your games for offline access.
             </p>
           </div>
-        ) : isPending && !games ? null : !hasGames ? (
+        ) : isPending && !games ? (
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+            <LoaderCircle
+              aria-hidden
+              className="h-10 w-10 text-muted-foreground mb-4 animate-spin"
+            />
+            <h2 className="text-xl font-semibold mb-2">Loading games</h2>
+            <p className="text-muted-foreground max-w-sm">Fetching your latest game data.</p>
+          </div>
+        ) : !hasGames ? (
           <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
             <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
             <h2 className="text-xl font-semibold mb-2">No games recorded yet</h2>
