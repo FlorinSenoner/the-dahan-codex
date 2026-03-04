@@ -69,6 +69,11 @@ const scenarioValidator = v.object({
   difficulty: v.optional(v.number()),
 })
 
+const legacyAdversaryValueValidator = v.object({
+  name: v.string(),
+  level: v.number(),
+})
+
 const optionalGameFieldValidators = {
   adversaryRef: v.optional(adversaryRefValidator),
   secondaryAdversaryRef: v.optional(adversaryRefValidator),
@@ -90,6 +95,8 @@ const gameDocValidator = v.object({
   result: gameResultValidator,
   spirits: v.array(spiritEntryValidator),
   ...optionalGameFieldValidators,
+  adversary: v.optional(legacyAdversaryValueValidator),
+  secondaryAdversary: v.optional(legacyAdversaryValueValidator),
   createdAt: v.number(),
   updatedAt: v.number(),
   deletedAt: v.optional(v.number()),
