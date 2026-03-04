@@ -1,91 +1,122 @@
-# Games Migration Spec: Adversary Reference Backfill
+# Games Migration Spec: Adversary Reference Cutover
 
 - Date: 2026-03-03
 - Scope: `games` table adversary fields
-- Type: Backward-compatible additive migration
-- Status: Schema and read/write compatibility implemented; no bulk backfill mutation included
+- Type: Latest-only schema cutover
+- Status: Implemented
 
 ## Goal
 
-Move `games` adversary linkage from name-only records to ID-backed references while preserving full compatibility with existing clients and existing exports in this release.
+Use canonical adversary references only for all game writes and reads.
 
-## Current vs Target
+## Final Shape
 
-### Existing fields (kept in this release)
+- `adversaryRef?: { adversaryId: Id<'adversaries'>; level: number }`
+- `secondaryAdversaryRef?: { adversaryId: Id<'adversaries'>; level: number }`
 
-- `adversary?: { name: string; level: number }`
-- `secondaryAdversary?: { name: string; level: number }`
+Legacy name-only adversary fields are removed from schema and runtime payload handling.
 
-### New additive fields
+## Runtime Rules
 
-- `adversaryRef?: { adversaryId: Id<'adversaries'>; level: number; difficulty: number; nameSnapshot: string }`
-- `secondaryAdversaryRef?: { adversaryId: Id<'adversaries'>; level: number; difficulty: number; nameSnapshot: string }`
+- Write path (`createGame`, `updateGame`, `importGames`): accepts only `adversaryRef` and `secondaryAdversaryRef`.
+- Read path (`listGames`, `getGame`): consumers read only canonical ref fields.
+- UI: game list/detail/edit and score breakdown use canonical ref fields only.
+- CSV import: resolves adversary names to canonical refs via public snapshot.
 
-No destructive field removal is performed in this release.
+## Mapping Rules
 
-## Schema Changes
+- Name matching: normalize by existing selector behavior (`name` + `aliases`).
+- Level: parsed from CSV as `0..6`.
+- Difficulty and display name are resolved from canonical adversary data at read time.
+- Persisted game shape stores no adversary snapshots; only `{ adversaryId, level }` is stored.
 
-- Add `adversaries` reference table and seed data.
-- Add `adversaryRef` and `secondaryAdversaryRef` as optional fields on `games`.
-- Keep legacy adversary fields unchanged.
+## Canonical Data Assumption
 
-## Data Mapping Rules
+- Canonical adversary names and level difficulties are treated as stable application data.
+- Historical game rendering intentionally uses current canonical adversary data + stored level.
 
-1. Name matching:
-- Normalize legacy adversary names with trim + lowercase.
-- Match against canonical adversary `name` and `aliases`.
+## Rollout Assumption
 
-2. Level handling:
-- Clamp legacy level into `0..6` before writing refs.
+This cutover assumes active clients are on the latest app version and data written going forward follows the canonical ref shape.
 
-3. Difficulty:
-- Resolve from canonical adversary level difficulty.
-- For level `0`, use canonical adversary `baseDifficulty`.
-- Fallback to level value only if canonical level difficulty is missing.
+## Deployment Preflight
 
-4. Snapshot name:
-- `nameSnapshot` is copied from canonical adversary name at migration time.
+Run:
 
-## Runtime Compatibility Strategy
+`npx convex run games:preflightAdversaryRefCoverage`
 
-- Write path (`createGame`, `updateGame`, `importGames`):
-  - Accept both legacy and `*Ref` adversary payloads.
-  - Persist whichever representation the client provides (legacy, ref, or both).
+Safe cutover requires:
 
-- Read path:
-  - Prefer `*Ref` fields when present.
-  - Fallback to legacy fields when refs are absent.
+- `primaryWithLegacyOnly = 0`
+- `secondaryWithLegacyOnly = 0`
 
-- UI compatibility:
-  - Game forms write ID-backed refs.
-  - Existing records without refs still render via fallback.
+## Reproducible Production Procedure
 
-## Backfill Procedure
+This sequence is intentionally copy/paste friendly and should be run in order.
 
-No dedicated backfill mutation is included in this release. Existing rows continue to work via legacy-field fallback in read paths.
+1. Deploy backend code (includes migration utilities and latest schema/functions):
 
-If bulk normalization is needed later, implement a separate admin migration mutation in a follow-up change.
+`pnpm exec convex deploy --yes`
 
-## Rollout Steps
+2. Ensure canonical adversary data is present/up-to-date:
 
-1. Deploy schema and adversary seed.
-2. Deploy read/write compatibility code.
-3. Monitor new writes to confirm `adversaryRef`/`secondaryAdversaryRef` are populated by updated clients.
-4. If historical normalization is required, schedule a follow-up migration release.
+`pnpm exec convex run --prod seed:seedSpirits`
+
+3. Capture baseline preflight:
+
+`pnpm exec convex run --prod games:preflightAdversaryRefCoverage`
+
+4. Dry-run backfill (no writes):
+
+`pnpm exec convex run --prod games:backfillLegacyAdversaryRefs '{"dryRun": true}'`
+
+5. Apply backfill:
+
+`pnpm exec convex run --prod games:backfillLegacyAdversaryRefs '{"dryRun": false}'`
+
+6. Dry-run ref-shape normalization (no writes):
+
+`pnpm exec convex run --prod games:normalizeAdversaryRefShape '{"dryRun": true}'`
+
+7. Apply ref-shape normalization:
+
+`pnpm exec convex run --prod games:normalizeAdversaryRefShape '{"dryRun": false}'`
+
+8. Dry-run cleanup (no writes):
+
+`pnpm exec convex run --prod games:cleanupLegacyAdversaryFields '{"dryRun": true}'`
+
+9. Apply cleanup:
+
+`pnpm exec convex run --prod games:cleanupLegacyAdversaryFields '{"dryRun": false}'`
+
+10. Final preflight (must be zero):
+
+`pnpm exec convex run --prod games:preflightAdversaryRefCoverage`
+
+Safe completion criteria:
+
+- `primaryWithLegacyOnly = 0`
+- `secondaryWithLegacyOnly = 0`
+
+Optional raw verification:
+
+`pnpm exec convex data games --prod --format jsonLines | rg '"adversary":|"secondaryAdversary":'`
+
+Expected: no matches.
+
+## Stop Conditions
+
+Stop and investigate before proceeding if any apply:
+
+- `unresolvedPrimary > 0` or `unresolvedSecondary > 0` in backfill result.
+- `normalized = 0` while legacy rows still contain derived ref fields.
+- `skippedLegacyOnly > 0` after cleanup.
+- Final preflight has non-zero legacy-only counts.
 
 ## Validation Checklist
 
-- New games created with adversary selection persist `adversaryRef`/`secondaryAdversaryRef`.
-- Legacy games still readable/editable.
-- Existing legacy records remain readable/editable without backfill.
-- Difficulty shown for selected adversary level in game UI and adversary detail UI.
-
-## Risk and Rollback
-
-- Risk level: low (additive fields + compatibility fallback).
-- Rollback: deploy previous app version; legacy fields remain intact.
-- No destructive `games` rewrite or field removal in this release.
-
-## Deferred Follow-up
-
-- After one or more stable releases, evaluate removal of legacy name-only adversary fields in a separate approved migration.
+- New and edited games persist only `adversaryRef` / `secondaryAdversaryRef`.
+- Game list/detail/edit render adversary data from refs only.
+- Score difficulty is resolved from canonical adversary data + stored level.
+- CSV import correctly maps adversary names to canonical refs.

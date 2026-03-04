@@ -3,6 +3,8 @@
  * Victory: (5 x Difficulty) + 10 + (2 x cards) + (dahan / players) - (blight / players)
  * Defeat: (2 x Difficulty) + cards used + (dahan / players) - (blight / players)
  */
+import { usePublicSnapshot } from '@/data/public-snapshot'
+import { selectAdversaryById, selectAdversaryLevelDifficulty } from '@/lib/reference-selectors'
 
 interface ScoreBreakdownProps {
   result: 'win' | 'loss'
@@ -61,7 +63,7 @@ export function ScoreBreakdown({
 
 /**
  * Convenience wrapper for game objects
- * Calculates difficulty from adversary, secondaryAdversary, and scenario
+ * Calculates difficulty from adversary refs and scenario
  */
 export function GameScoreBreakdown({
   game,
@@ -69,18 +71,26 @@ export function GameScoreBreakdown({
   game: {
     result: 'win' | 'loss'
     spirits: unknown[]
-    adversary?: { level: number } | null
-    secondaryAdversary?: { level: number } | null
+    adversaryRef?: { adversaryId: string; level: number } | null
+    secondaryAdversaryRef?: { adversaryId: string; level: number } | null
     scenario?: { difficulty?: number } | null
     cardsRemaining?: number
     dahanCount?: number
     blightCount?: number
   }
 }) {
+  const snapshot = usePublicSnapshot()
   const playerCount = game.spirits.length || 1
+  const resolveDifficulty = (ref?: { adversaryId: string; level: number } | null) => {
+    if (!ref || !snapshot) return ref?.level ?? 0
+    const adversary = selectAdversaryById(snapshot, ref.adversaryId)
+    if (!adversary) return ref.level
+    if (ref.level === 0) return adversary.baseDifficulty
+    return selectAdversaryLevelDifficulty(adversary, ref.level) ?? ref.level
+  }
   const difficulty =
-    (game.adversary?.level ?? 0) +
-    (game.secondaryAdversary?.level ?? 0) +
+    resolveDifficulty(game.adversaryRef) +
+    resolveDifficulty(game.secondaryAdversaryRef) +
     (game.scenario?.difficulty ?? 0)
 
   return (

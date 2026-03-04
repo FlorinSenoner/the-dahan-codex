@@ -9,6 +9,7 @@ import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
@@ -73,6 +74,7 @@ function GamesSignInPrompt() {
 
 function AuthenticatedGames() {
   const { data: games, isPending } = useQuery(convexQuery(api.games.listGames, {}))
+  const snapshot = usePublicSnapshot()
   const isOnline = useOnlineStatus()
   const { pendingGames } = usePendingGames()
   const { offlineOps } = useOfflineOps()
@@ -119,7 +121,12 @@ function AuthenticatedGames() {
           </Button>
         )}
         {games && games.length > 0 && (
-          <Button onClick={() => exportGamesToCSV(games)} size="sm" variant="outline">
+          <Button
+            disabled={!snapshot}
+            onClick={() => exportGamesToCSV(games, snapshot)}
+            size="sm"
+            variant="outline"
+          >
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>

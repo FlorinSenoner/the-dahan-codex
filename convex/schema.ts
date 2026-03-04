@@ -24,8 +24,6 @@ const adversaryLevelValidator = v.object({
 const gameAdversaryRefValidator = v.object({
   adversaryId: v.id('adversaries'),
   level: v.number(),
-  difficulty: v.number(),
-  nameSnapshot: v.string(),
 })
 
 export default defineSchema({
@@ -205,28 +203,12 @@ export default defineSchema({
       }),
     ),
 
-    // Optional adversary
-    adversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(), // 0-6
-      }),
-    ),
-
-    // Canonical adversary reference (new shape, additive migration)
+    // Optional canonical adversary reference
     adversaryRef: v.optional(
-      gameAdversaryRefValidator, // 0-6, with denormalized snapshot name
+      gameAdversaryRefValidator, // 0-6
     ),
 
-    // Optional secondary adversary
-    secondaryAdversary: v.optional(
-      v.object({
-        name: v.string(),
-        level: v.number(),
-      }),
-    ),
-
-    // Canonical secondary adversary reference (new shape, additive migration)
+    // Optional canonical secondary adversary reference
     secondaryAdversaryRef: v.optional(gameAdversaryRefValidator),
 
     // Optional scenario

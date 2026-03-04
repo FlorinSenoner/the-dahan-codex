@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import {
+  selectAdversaryById,
   selectAdversaryByName,
   selectAdversaryLevelDifficulty,
   selectAdversaryList,
@@ -17,14 +18,13 @@ import type { GameCreateInput } from '@/types/convex'
 
 const ADVERSARY_LEVELS = [0, 1, 2, 3, 4, 5, 6] as const
 
-type LegacyAdversaryInput = NonNullable<GameCreateInput['adversary']>
 type AdversaryRefInput = NonNullable<GameCreateInput['adversaryRef']>
 
 export interface AdversarySelection {
   adversaryId?: AdversaryRefInput['adversaryId'] | null
-  name: LegacyAdversaryInput['name']
-  level: LegacyAdversaryInput['level']
-  difficulty?: AdversaryRefInput['difficulty']
+  name: string
+  level: AdversaryRefInput['level']
+  difficulty?: number
 }
 
 interface AdversaryPickerProps {
@@ -41,20 +41,25 @@ export function AdversaryPicker({
   const snapshot = usePublicSnapshot()
   const adversaries = snapshot ? selectAdversaryList(snapshot) : []
   const selectedAdversary =
-    snapshot && value?.name ? selectAdversaryByName(snapshot, value.name) : null
+    snapshot && value?.adversaryId
+      ? selectAdversaryById(snapshot, value.adversaryId)
+      : snapshot && value?.name
+        ? selectAdversaryByName(snapshot, value.name)
+        : null
   const selectedName = selectedAdversary?.name ?? value?.name ?? ''
 
   const buildSelection = (
     name: string,
     level: number,
     currentId?: AdversaryRefInput['adversaryId'] | null,
+    currentDifficulty?: number,
   ): AdversarySelection => {
     const selected = snapshot ? selectAdversaryByName(snapshot, name) : null
     const difficulty = selected
       ? level === 0
         ? selected.baseDifficulty
-        : (selectAdversaryLevelDifficulty(selected, level) ?? level)
-      : level
+        : (selectAdversaryLevelDifficulty(selected, level) ?? currentDifficulty ?? level)
+      : (currentDifficulty ?? level)
 
     return {
       adversaryId: selected?._id ?? currentId ?? null,
@@ -65,12 +70,12 @@ export function AdversaryPicker({
   }
 
   const handleNameChange = (name: string) => {
-    onChange(buildSelection(name, value?.level ?? 0))
+    onChange(buildSelection(name, value?.level ?? 0, value?.adversaryId, value?.difficulty))
   }
 
   const handleLevelChange = (levelStr: string) => {
-    if (!selectedName) return
-    onChange(buildSelection(selectedName, Number(levelStr), value?.adversaryId))
+    const name = selectedName || value?.name || ''
+    onChange(buildSelection(name, Number(levelStr), value?.adversaryId, value?.difficulty))
   }
 
   return (
@@ -98,7 +103,7 @@ export function AdversaryPicker({
         </SelectContent>
       </Select>
 
-      {value?.name && (
+      {(value?.adversaryId || value?.name) && (
         <>
           <Select onValueChange={handleLevelChange} value={String(value.level)}>
             <SelectTrigger className="w-20">

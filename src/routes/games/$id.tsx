@@ -22,10 +22,12 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { useOfflineOps } from '@/hooks/use-offline-games'
 import { transformGameFormToPayload } from '@/lib/game-form-utils'
 import { saveOfflineOp } from '@/lib/offline-games'
+import { selectAdversaryById, selectAdversaryLevelDifficulty } from '@/lib/reference-selectors'
 import { asGameId, type GameDoc } from '@/types/convex'
 
 export const Route = createFileRoute('/games/$id')({
@@ -40,6 +42,7 @@ function GameDetailPage() {
   const navigate = useNavigate()
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
+  const snapshot = usePublicSnapshot()
   const queryClient = useQueryClient()
   const [isEditing, setIsEditing] = React.useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false)
@@ -49,6 +52,10 @@ function GameDetailPage() {
     isPending,
     isError,
   } = useQuery(convexQuery(api.games.getGame, { id: asGameId(id) }))
+  const { data: gamesList } = useQuery({
+    ...convexQuery(api.games.listGames, {}),
+    enabled: false,
+  })
 
   const { offlineOps, refreshOps } = useOfflineOps()
 
@@ -69,7 +76,9 @@ function GameDetailPage() {
     },
   })
 
-  const baseGame = game ?? null
+  // Resolve game: primary query -> list cache fallback -> null
+  const gameFromList = gamesList?.find((g) => g._id === id)
+  const baseGame = game ?? gameFromList ?? null
 
   // Apply pending outbox operations on top of server data
   const opsForThisGame = offlineOps.filter((op) => op.gameId === id)
@@ -172,6 +181,31 @@ function GameDetailPage() {
   }
 
   // Transform game data to form data for editing
+  const resolveAdversaryDetails = (ref?: {
+    adversaryId: string
+    level: number
+  }): { name: string; difficulty: number } => {
+    if (!ref || !snapshot) {
+      return { name: '', difficulty: ref?.level ?? 0 }
+    }
+    const adversary = selectAdversaryById(snapshot, ref.adversaryId)
+    if (!adversary) {
+      return { name: '', difficulty: ref.level }
+    }
+    const difficulty =
+      ref.level === 0
+        ? adversary.baseDifficulty
+        : (selectAdversaryLevelDifficulty(adversary, ref.level) ?? ref.level)
+
+    return {
+      name: adversary.name,
+      difficulty,
+    }
+  }
+
+  const primaryAdversaryDetails = resolveAdversaryDetails(resolvedGame.adversaryRef)
+  const secondaryAdversaryDetails = resolveAdversaryDetails(resolvedGame.secondaryAdversaryRef)
+
   const formInitialData: Partial<GameFormData> = {
     date: resolvedGame.date,
     result: resolvedGame.result,
@@ -184,29 +218,19 @@ function GameDetailPage() {
     adversary: resolvedGame.adversaryRef
       ? {
           adversaryId: resolvedGame.adversaryRef.adversaryId,
-          name: resolvedGame.adversaryRef.nameSnapshot,
+          name: primaryAdversaryDetails.name,
           level: resolvedGame.adversaryRef.level,
-          difficulty: resolvedGame.adversaryRef.difficulty,
+          difficulty: primaryAdversaryDetails.difficulty,
         }
-      : resolvedGame.adversary
-        ? {
-            name: resolvedGame.adversary.name,
-            level: resolvedGame.adversary.level,
-          }
-        : null,
+      : null,
     secondaryAdversary: resolvedGame.secondaryAdversaryRef
       ? {
           adversaryId: resolvedGame.secondaryAdversaryRef.adversaryId,
-          name: resolvedGame.secondaryAdversaryRef.nameSnapshot,
+          name: secondaryAdversaryDetails.name,
           level: resolvedGame.secondaryAdversaryRef.level,
-          difficulty: resolvedGame.secondaryAdversaryRef.difficulty,
+          difficulty: secondaryAdversaryDetails.difficulty,
         }
-      : resolvedGame.secondaryAdversary
-        ? {
-            name: resolvedGame.secondaryAdversary.name,
-            level: resolvedGame.secondaryAdversary.level,
-          }
-        : null,
+      : null,
     scenario: resolvedGame.scenario ?? null,
     winType: resolvedGame.winType ?? '',
     invaderStage: resolvedGame.invaderStage,
@@ -284,31 +308,27 @@ function GameDetailPage() {
         </div>
 
         {/* Adversary */}
-        {(resolvedGame.adversary || resolvedGame.adversaryRef) && (
+        {resolvedGame.adversaryRef && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Adversary
             </h3>
             <p>
-              {resolvedGame.adversaryRef?.nameSnapshot ?? resolvedGame.adversary?.name} Level{' '}
-              {resolvedGame.adversaryRef?.level ?? resolvedGame.adversary?.level ?? 0}
+              {primaryAdversaryDetails.name || 'Unknown adversary'} Level{' '}
+              {resolvedGame.adversaryRef.level}
             </p>
           </div>
         )}
 
         {/* Secondary Adversary */}
-        {(resolvedGame.secondaryAdversary || resolvedGame.secondaryAdversaryRef) && (
+        {resolvedGame.secondaryAdversaryRef && (
           <div className="space-y-2">
             <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
               Secondary Adversary
             </h3>
             <p>
-              {resolvedGame.secondaryAdversaryRef?.nameSnapshot ??
-                resolvedGame.secondaryAdversary?.name}{' '}
-              Level{' '}
-              {resolvedGame.secondaryAdversaryRef?.level ??
-                resolvedGame.secondaryAdversary?.level ??
-                0}
+              {secondaryAdversaryDetails.name || 'Unknown adversary'} Level{' '}
+              {resolvedGame.secondaryAdversaryRef.level}
             </p>
           </div>
         )}

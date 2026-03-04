@@ -37,18 +37,6 @@ export function sanitizeGamePayload<TPayload extends GamePayload>(payload: TPayl
 export function transformGameFormToPayload(data: GameFormData): GameCreateInput {
   // Include spirits with either a spiritId (picked from dropdown) or a name (imported from CSV)
   const validSpirits = data.spirits.filter((s) => s.spiritId !== null || s.name)
-  const adversary = data.adversary
-    ? {
-        name: data.adversary.name,
-        level: data.adversary.level,
-      }
-    : undefined
-  const secondaryAdversary = data.secondaryAdversary
-    ? {
-        name: data.secondaryAdversary.name,
-        level: data.secondaryAdversary.level,
-      }
-    : undefined
 
   return sanitizeGamePayload({
     date: data.date,
@@ -59,22 +47,16 @@ export function transformGameFormToPayload(data: GameFormData): GameCreateInput 
       variant: s.variant,
       player: s.player,
     })),
-    adversary,
     adversaryRef: data.adversary?.adversaryId
       ? {
           adversaryId: data.adversary.adversaryId,
           level: data.adversary.level,
-          difficulty: data.adversary.difficulty ?? data.adversary.level,
-          nameSnapshot: data.adversary.name,
         }
       : undefined,
-    secondaryAdversary,
     secondaryAdversaryRef: data.secondaryAdversary?.adversaryId
       ? {
           adversaryId: data.secondaryAdversary.adversaryId,
           level: data.secondaryAdversary.level,
-          difficulty: data.secondaryAdversary.difficulty ?? data.secondaryAdversary.level,
-          nameSnapshot: data.secondaryAdversary.name,
         }
       : undefined,
     scenario: data.scenario ?? undefined,

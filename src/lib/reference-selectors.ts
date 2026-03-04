@@ -85,6 +85,10 @@ export function selectAdversaryBySlug(
   return snapshot.adversaries.find((adversary) => adversary.slug === slug) ?? null
 }
 
+export function selectAdversaryById(snapshot: PublicSnapshot, id: string): PublicAdversary | null {
+  return snapshot.adversaries.find((adversary) => adversary._id === id) ?? null
+}
+
 export function selectAdversaryByName(
   snapshot: PublicSnapshot,
   name: string,

@@ -1,11 +1,16 @@
 import Papa from 'papaparse'
 import type { GameListItem } from '@/types/convex'
+import type { PublicSnapshot } from '@/types/reference'
 import { type GameCSVRow, getSpiritAtIndex } from './csv-spirits'
 
 /**
  * Convert games to CSV rows with fixed column structure
  */
-function gamesToCSVRows(games: GameListItem[]): GameCSVRow[] {
+function gamesToCSVRows(games: GameListItem[], snapshot?: PublicSnapshot): GameCSVRow[] {
+  const namesById = snapshot
+    ? new Map(snapshot.adversaries.map((adversary) => [adversary._id, adversary.name]))
+    : undefined
+
   return games.map((game) => {
     const s1 = getSpiritAtIndex(game.spirits, 0)
     const s2 = getSpiritAtIndex(game.spirits, 1)
@@ -14,12 +19,14 @@ function gamesToCSVRows(games: GameListItem[]): GameCSVRow[] {
     const s5 = getSpiritAtIndex(game.spirits, 4)
     const s6 = getSpiritAtIndex(game.spirits, 5)
 
-    const adversaryName = game.adversaryRef?.nameSnapshot ?? game.adversary?.name ?? ''
-    const adversaryLevel = game.adversaryRef?.level ?? game.adversary?.level
-    const secondaryAdversaryName =
-      game.secondaryAdversaryRef?.nameSnapshot ?? game.secondaryAdversary?.name ?? ''
-    const secondaryAdversaryLevel =
-      game.secondaryAdversaryRef?.level ?? game.secondaryAdversary?.level
+    const adversaryName = game.adversaryRef
+      ? (namesById?.get(game.adversaryRef.adversaryId) ?? '')
+      : ''
+    const adversaryLevel = game.adversaryRef?.level
+    const secondaryAdversaryName = game.secondaryAdversaryRef
+      ? (namesById?.get(game.secondaryAdversaryRef.adversaryId) ?? '')
+      : ''
+    const secondaryAdversaryLevel = game.secondaryAdversaryRef?.level
 
     return {
       id: game._id,
@@ -81,8 +88,8 @@ function downloadCSV(csvContent: string, filename: string): void {
 /**
  * Export games to CSV and trigger browser download
  */
-export function exportGamesToCSV(games: GameListItem[]): void {
-  const rows = gamesToCSVRows(games)
+export function exportGamesToCSV(games: GameListItem[], snapshot?: PublicSnapshot): void {
+  const rows = gamesToCSVRows(games, snapshot)
 
   const csv = Papa.unparse(rows, {
     quotes: true, // Quote all fields for Excel compatibility
