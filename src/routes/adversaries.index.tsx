@@ -5,6 +5,7 @@ import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectAdversaryList } from '@/lib/reference-selectors'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 
 export const Route = createFileRoute('/adversaries/')({
   component: AdversariesPage,
@@ -39,14 +40,13 @@ function AdversariesPage() {
       : null,
   )
 
-  useStructuredData('ld-breadcrumb-adversaries', {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Adversaries', item: `${SITE_URL}/adversaries` },
-    ],
-  })
+  useStructuredData(
+    'ld-breadcrumb-adversaries',
+    createBreadcrumbStructuredData([
+      { name: 'Home', item: SITE_URL },
+      { name: 'Adversaries', item: `${SITE_URL}/adversaries` },
+    ]),
+  )
 
   return (
     <div className="min-h-screen bg-background">

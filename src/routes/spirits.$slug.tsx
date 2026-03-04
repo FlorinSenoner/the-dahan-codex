@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { EmptyState } from '@/components/ui/empty-state'
 import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
@@ -38,6 +39,7 @@ import {
   elementBadgeColors,
   PLACEHOLDER_GRADIENT,
 } from '@/lib/spirit-colors'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 import { cn } from '@/lib/utils'
 import type { PublicSpirit } from '@/types/reference'
 
@@ -108,20 +110,11 @@ function SpiritDetailLayout() {
   useStructuredData(
     'ld-breadcrumb',
     spiritData
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-            { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: spiritData.base.name,
-              item: `${SITE_URL}/spirits/${slug}`,
-            },
-          ],
-        }
+      ? createBreadcrumbStructuredData([
+          { name: 'Home', item: SITE_URL },
+          { name: 'Spirits', item: `${SITE_URL}/spirits` },
+          { name: spiritData.base.name, item: `${SITE_URL}/spirits/${slug}` },
+        ])
       : null,
   )
 
@@ -146,17 +139,28 @@ function SpiritDetailLayout() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </header>
-        <div className="flex flex-col items-center justify-center p-8 text-center min-h-[60vh]">
-          <p className="text-xl font-serif text-foreground mb-2">Spirit Not Found</p>
-          <p className="text-muted-foreground mb-4">The spirit "{slug}" doesn't exist.</p>
-          <Link
-            className="text-primary hover:underline cursor-pointer"
-            to="/spirits"
-            viewTransition
-          >
-            Back to Spirits
-          </Link>
-        </div>
+        <EmptyState
+          action={
+            <Link
+              className="text-primary hover:underline cursor-pointer"
+              to="/spirits"
+              viewTransition
+            >
+              Back to Spirits
+            </Link>
+          }
+          className="p-8 min-h-[60vh]"
+          description={
+            <Text as="p" className="text-muted-foreground mb-4">
+              The spirit "{slug}" doesn&apos;t exist.
+            </Text>
+          }
+          title={
+            <Heading as="h1" className="text-xl text-foreground mb-2" variant="h2">
+              Spirit Not Found
+            </Heading>
+          }
+        />
       </div>
     )
   }

@@ -21,7 +21,11 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/ui/page-header'
+import { SectionLabel } from '@/components/ui/section-label'
+import { StatTile } from '@/components/ui/stat-tile'
+import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta } from '@/hooks'
 import { useOfflineOps } from '@/hooks/use-offline-games'
@@ -124,16 +128,24 @@ function GameDetailPage() {
     return (
       <div className="min-h-screen bg-background">
         <PageHeader backHref="/games" title="Game" />
-        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-          <WifiOff className="h-16 w-16 text-muted-foreground mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Game unavailable offline</h2>
-          <p className="text-muted-foreground mb-6 max-w-sm">
-            This game isn't cached yet. It will be available after your next sync.
-          </p>
-          <Button asChild variant="link">
-            <Link to="/games">Back to Games</Link>
-          </Button>
-        </div>
+        <EmptyState
+          action={
+            <Button asChild variant="link">
+              <Link to="/games">Back to Games</Link>
+            </Button>
+          }
+          description={
+            <Text as="p" className="text-muted-foreground mb-6 max-w-sm">
+              This game isn&apos;t cached yet. It will be available after your next sync.
+            </Text>
+          }
+          icon={<WifiOff className="h-16 w-16 text-muted-foreground mb-4" />}
+          title={
+            <Heading as="h2" className="text-xl mb-2" variant="h2">
+              Game unavailable offline
+            </Heading>
+          }
+        />
       </div>
     )
   }
@@ -292,9 +304,7 @@ function GameDetailPage() {
       <div className="p-4 space-y-6">
         {/* Spirits */}
         <div className="space-y-2">
-          <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-            Spirits
-          </h3>
+          <SectionLabel>Spirits</SectionLabel>
           <div className="space-y-2">
             {resolvedGame.spirits.map((spirit, idx) => (
               <div className="flex items-center gap-2" key={spirit.spiritId ?? `spirit-${idx}`}>
@@ -310,73 +320,53 @@ function GameDetailPage() {
         {/* Adversary */}
         {resolvedGame.adversaryRef && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Adversary
-            </h3>
-            <p>
+            <SectionLabel>Adversary</SectionLabel>
+            <Text as="p">
               {primaryAdversaryDetails.name || 'Unknown adversary'} Level{' '}
               {resolvedGame.adversaryRef.level}
-            </p>
+            </Text>
           </div>
         )}
 
         {/* Secondary Adversary */}
         {resolvedGame.secondaryAdversaryRef && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Secondary Adversary
-            </h3>
-            <p>
+            <SectionLabel>Secondary Adversary</SectionLabel>
+            <Text as="p">
               {secondaryAdversaryDetails.name || 'Unknown adversary'} Level{' '}
               {resolvedGame.secondaryAdversaryRef.level}
-            </p>
+            </Text>
           </div>
         )}
 
         {/* Scenario */}
         {resolvedGame.scenario && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Scenario
-            </h3>
-            <p>
+            <SectionLabel>Scenario</SectionLabel>
+            <Text as="p">
               {resolvedGame.scenario.name}
               {resolvedGame.scenario.difficulty !== undefined &&
                 ` (+${resolvedGame.scenario.difficulty})`}
-            </p>
+            </Text>
           </div>
         )}
 
         {/* Game Stats */}
         {hasStats && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Game Stats
-            </h3>
+            <SectionLabel>Game Stats</SectionLabel>
             <div className="grid grid-cols-4 gap-4 text-center">
               {resolvedGame.invaderStage !== undefined && (
-                <div>
-                  <p className="text-2xl font-bold">{stageToRoman(resolvedGame.invaderStage)}</p>
-                  <p className="text-xs text-muted-foreground">Stage</p>
-                </div>
+                <StatTile label="Stage" value={stageToRoman(resolvedGame.invaderStage)} />
               )}
               {resolvedGame.cardsRemaining !== undefined && (
-                <div>
-                  <p className="text-2xl font-bold">{resolvedGame.cardsRemaining}</p>
-                  <p className="text-xs text-muted-foreground">Cards Left</p>
-                </div>
+                <StatTile label="Cards Left" value={resolvedGame.cardsRemaining} />
               )}
               {resolvedGame.blightCount !== undefined && (
-                <div>
-                  <p className="text-2xl font-bold">{resolvedGame.blightCount}</p>
-                  <p className="text-xs text-muted-foreground">Blight</p>
-                </div>
+                <StatTile label="Blight" value={resolvedGame.blightCount} />
               )}
               {resolvedGame.dahanCount !== undefined && (
-                <div>
-                  <p className="text-2xl font-bold">{resolvedGame.dahanCount}</p>
-                  <p className="text-xs text-muted-foreground">Dahan</p>
-                </div>
+                <StatTile label="Dahan" value={resolvedGame.dahanCount} />
               )}
             </div>
           </div>
@@ -385,11 +375,11 @@ function GameDetailPage() {
         {/* Score with calculation breakdown */}
         {resolvedGame.score !== undefined && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Score
-            </h3>
+            <SectionLabel>Score</SectionLabel>
             <div className="flex items-center gap-3">
-              <p className="text-2xl font-bold">{resolvedGame.score}</p>
+              <Text as="p" className="text-2xl font-bold">
+                {resolvedGame.score}
+              </Text>
               <GameScoreBreakdown game={resolvedGame} />
             </div>
           </div>
@@ -398,10 +388,10 @@ function GameDetailPage() {
         {/* Notes */}
         {resolvedGame.notes && (
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-              Notes
-            </h3>
-            <p className="whitespace-pre-wrap">{resolvedGame.notes}</p>
+            <SectionLabel>Notes</SectionLabel>
+            <Text as="p" className="whitespace-pre-wrap">
+              {resolvedGame.notes}
+            </Text>
           </div>
         )}
       </div>

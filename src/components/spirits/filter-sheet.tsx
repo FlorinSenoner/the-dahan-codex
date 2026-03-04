@@ -12,6 +12,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { FilterPill } from '@/components/ui/filter-pill'
+import { Heading, Text } from '@/components/ui/typography'
 import { complexityFilterColors, elementFilterColors } from '@/lib/spirit-colors'
 
 // Filter options
@@ -113,7 +114,13 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
         <div className="px-4 py-6 space-y-6 overflow-y-auto" data-vaul-no-drag>
           {/* Complexity filter */}
           <div>
-            <h3 className="font-headline font-medium text-sm text-foreground mb-3">Complexity</h3>
+            <Heading
+              as="h3"
+              className="font-headline font-medium text-sm text-foreground mb-3"
+              variant="h4"
+            >
+              Complexity
+            </Heading>
             <div className="flex flex-wrap gap-2">
               {COMPLEXITY_OPTIONS.map((option) => (
                 <FilterPill
@@ -130,10 +137,16 @@ export function FilterSheet({ currentFilters, activeCount }: FilterSheetProps) {
 
           {/* Elements filter */}
           <div>
-            <h3 className="font-headline font-medium text-sm text-foreground mb-3">Elements</h3>
-            <p className="text-xs text-muted-foreground mb-3">
+            <Heading
+              as="h3"
+              className="font-headline font-medium text-sm text-foreground mb-3"
+              variant="h4"
+            >
+              Elements
+            </Heading>
+            <Text as="p" className="text-xs text-muted-foreground mb-3">
               Spirit must have ALL selected elements
-            </p>
+            </Text>
             <div className="flex flex-wrap gap-2">
               {ELEMENT_OPTIONS.map((option) => (
                 <FilterPill

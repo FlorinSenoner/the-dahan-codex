@@ -1,8 +1,11 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { EmptyState } from '@/components/ui/empty-state'
+import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectSpiritBySlug } from '@/lib/reference-selectors'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 import { SpiritDetailContent } from './spirits.$slug'
 
 export const Route = createFileRoute('/spirits/$slug/$aspect')({
@@ -50,30 +53,14 @@ function AspectDetailPage() {
   useStructuredData(
     'ld-breadcrumb',
     spirit
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-            { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: spirit.name,
-              item: `${SITE_URL}/spirits/${slug}`,
-            },
-            ...(spirit.aspectName
-              ? [
-                  {
-                    '@type': 'ListItem' as const,
-                    position: 4,
-                    name: spirit.aspectName,
-                    item: `${SITE_URL}/spirits/${slug}/${aspect}`,
-                  },
-                ]
-              : []),
-          ],
-        }
+      ? createBreadcrumbStructuredData([
+          { name: 'Home', item: SITE_URL },
+          { name: 'Spirits', item: `${SITE_URL}/spirits` },
+          { name: spirit.name, item: `${SITE_URL}/spirits/${slug}` },
+          ...(spirit.aspectName
+            ? [{ name: spirit.aspectName, item: `${SITE_URL}/spirits/${slug}/${aspect}` }]
+            : []),
+        ])
       : null,
   )
 
@@ -83,21 +70,30 @@ function AspectDetailPage() {
 
   if (spirit === null || (spirit && !spirit.aspectName)) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 text-center min-h-[60vh]">
-        <p className="text-xl font-serif text-foreground mb-2">Aspect Not Found</p>
-        <p className="text-muted-foreground mb-4">
-          The aspect "{aspect}" of "{slug}" doesn't exist.
-        </p>
-        <Link
-          className="text-primary hover:underline cursor-pointer"
-          params={{ slug }}
-          search={{ opening: undefined }}
-          to="/spirits/$slug"
-          viewTransition
-        >
-          Back to Base Spirit
-        </Link>
-      </div>
+      <EmptyState
+        action={
+          <Link
+            className="text-primary hover:underline cursor-pointer"
+            params={{ slug }}
+            search={{ opening: undefined }}
+            to="/spirits/$slug"
+            viewTransition
+          >
+            Back to Base Spirit
+          </Link>
+        }
+        className="p-8 min-h-[60vh]"
+        description={
+          <Text as="p" className="text-muted-foreground mb-4">
+            The aspect "{aspect}" of "{slug}" doesn&apos;t exist.
+          </Text>
+        }
+        title={
+          <Heading as="h1" className="text-xl text-foreground mb-2" variant="h2">
+            Aspect Not Found
+          </Heading>
+        }
+      />
     )
   }
 

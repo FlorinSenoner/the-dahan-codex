@@ -4,22 +4,56 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { Download, Gamepad2, LoaderCircle, LogIn, Plus, Upload, WifiOff } from 'lucide-react'
-import { useEffect, useMemo } from 'react'
+import { type ReactNode, useEffect, useMemo } from 'react'
 import { GameRow } from '@/components/games/game-row'
 import { PendingGameRow } from '@/components/games/pending-game-row'
 import { Button } from '@/components/ui/button'
+import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/ui/page-header'
+import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta, useStructuredData } from '@/hooks'
 import { useOfflineOps, usePendingGames } from '@/hooks/use-offline-games'
 import { exportGamesToCSV } from '@/lib/csv-export'
 import { shouldRenderAuthenticatedGames } from '@/lib/games-auth-gate'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 import { seedGameCaches } from '@/lib/sync'
 
 export const Route = createFileRoute('/games/')({
   component: GamesIndex,
 })
+
+function GamesEmptyState({
+  icon,
+  title,
+  description,
+  action,
+  descriptionClassName = 'text-muted-foreground max-w-sm',
+}: {
+  icon: ReactNode
+  title: string
+  description: string
+  action?: ReactNode
+  descriptionClassName?: string
+}) {
+  return (
+    <EmptyState
+      action={action}
+      description={
+        <Text as="p" className={descriptionClassName}>
+          {description}
+        </Text>
+      }
+      icon={icon}
+      title={
+        <Heading as="h2" className="text-xl mb-2" variant="h2">
+          {title}
+        </Heading>
+      }
+    />
+  )
+}
 
 function GamesIndex() {
   usePageMeta({
@@ -30,14 +64,13 @@ function GamesIndex() {
     robots: 'noindex,follow',
   })
 
-  useStructuredData('ld-breadcrumb', {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Games', item: `${SITE_URL}/games` },
-    ],
-  })
+  useStructuredData(
+    'ld-breadcrumb',
+    createBreadcrumbStructuredData([
+      { name: 'Home', item: SITE_URL },
+      { name: 'Games', item: `${SITE_URL}/games` },
+    ]),
+  )
 
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
@@ -54,19 +87,20 @@ function GamesSignInPrompt() {
     <div className="min-h-screen bg-background">
       <PageHeader backHref="/" title="Games" />
       <main className="pb-20">
-        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-          <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Track your games</h2>
-          <p className="text-muted-foreground mb-6 max-w-sm">
-            Sign in to log your Spirit Island games and sync them across devices.
-          </p>
-          <Button asChild>
-            <Link params={{ _splat: '' }} to="/sign-in/$">
-              <LogIn className="h-4 w-4 mr-2" />
-              Sign In
-            </Link>
-          </Button>
-        </div>
+        <GamesEmptyState
+          action={
+            <Button asChild>
+              <Link params={{ _splat: '' }} to="/sign-in/$">
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </Link>
+            </Button>
+          }
+          description="Sign in to log your Spirit Island games and sync them across devices."
+          descriptionClassName="text-muted-foreground mb-6 max-w-sm"
+          icon={<Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />}
+          title="Track your games"
+        />
       </main>
     </div>
   )
@@ -141,30 +175,30 @@ function AuthenticatedGames() {
 
       <main className="pb-20">
         {!isOnline && !games && pendingGames.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-            <WifiOff className="h-16 w-16 text-muted-foreground mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Games unavailable offline</h2>
-            <p className="text-muted-foreground mb-6 max-w-sm">
-              Visit this page while online to cache your games for offline access.
-            </p>
-          </div>
+          <GamesEmptyState
+            description="Visit this page while online to cache your games for offline access."
+            descriptionClassName="text-muted-foreground mb-6 max-w-sm"
+            icon={<WifiOff className="h-16 w-16 text-muted-foreground mb-4" />}
+            title="Games unavailable offline"
+          />
         ) : isPending && !games ? (
-          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-            <LoaderCircle
-              aria-hidden
-              className="h-10 w-10 text-muted-foreground mb-4 animate-spin"
-            />
-            <h2 className="text-xl font-semibold mb-2">Loading games</h2>
-            <p className="text-muted-foreground max-w-sm">Fetching your latest game data.</p>
-          </div>
+          <GamesEmptyState
+            description="Fetching your latest game data."
+            icon={
+              <LoaderCircle
+                aria-hidden
+                className="h-10 w-10 text-muted-foreground mb-4 animate-spin"
+              />
+            }
+            title="Loading games"
+          />
         ) : !hasGames ? (
-          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-            <Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />
-            <h2 className="text-xl font-semibold mb-2">No games recorded yet</h2>
-            <p className="text-muted-foreground mb-6 max-w-sm">
-              Start tracking your Spirit Island games to see your history and stats.
-            </p>
-          </div>
+          <GamesEmptyState
+            description="Start tracking your Spirit Island games to see your history and stats."
+            descriptionClassName="text-muted-foreground mb-6 max-w-sm"
+            icon={<Gamepad2 className="h-16 w-16 text-muted-foreground mb-4" />}
+            title="No games recorded yet"
+          />
         ) : (
           <div className="divide-y divide-border">
             {pendingGames.map((game) => (

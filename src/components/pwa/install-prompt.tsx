@@ -1,6 +1,7 @@
 import { Share, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Text } from '@/components/ui/typography'
 import { useInstallPrompt } from '@/hooks'
 
 const DISMISSED_KEY = 'pwa-install-dismissed'
@@ -57,28 +58,8 @@ export function InstallPrompt() {
     return null
   }
 
-  // Chromium install prompt
-  if (isInstallable) {
-    return (
-      <div className="fixed bottom-20 left-4 right-4 z-40 rounded-lg border bg-card p-4 shadow-lg animate-in slide-in-from-bottom">
-        <Button
-          aria-label="Dismiss install prompt"
-          className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
-          onClick={handleDismiss}
-          size="icon"
-          variant="ghost"
-        >
-          <X className="h-4 w-4" />
-        </Button>
-        <div className="flex items-center justify-between gap-4 pr-6">
-          <p className="text-sm text-foreground">Install for offline access</p>
-          <Button onClick={promptInstall}>Install</Button>
-        </div>
-      </div>
-    )
-  }
+  const isChromiumInstall = isInstallable
 
-  // iOS manual instructions
   return (
     <div className="fixed bottom-20 left-4 right-4 z-40 rounded-lg border bg-card p-4 shadow-lg animate-in slide-in-from-bottom">
       <Button
@@ -90,12 +71,24 @@ export function InstallPrompt() {
       >
         <X className="h-4 w-4" />
       </Button>
-      <div className="pr-6">
-        <p className="font-medium text-foreground">Install this app</p>
-        <p className="mt-1 flex items-center gap-1 text-sm text-muted-foreground">
-          Tap <Share aria-label="Share icon" className="inline h-4 w-4" /> then "Add to Home Screen"
-        </p>
-      </div>
+      {isChromiumInstall ? (
+        <div className="flex items-center justify-between gap-4 pr-6">
+          <Text as="p" className="text-sm text-foreground">
+            Install for offline access
+          </Text>
+          <Button onClick={promptInstall}>Install</Button>
+        </div>
+      ) : (
+        <div className="pr-6">
+          <Text as="p" className="font-medium text-foreground">
+            Install this app
+          </Text>
+          <Text as="p" className="mt-1 flex items-center gap-1 text-sm text-muted-foreground">
+            Tap <Share aria-label="Share icon" className="inline h-4 w-4" /> then "Add to Home
+            Screen"
+          </Text>
+        </div>
+      )}
     </div>
   )
 }

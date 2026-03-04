@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { selectAdversaryById } from '@/lib/reference-selectors'
 import type { GameListItem } from '@/types/convex'
+import { GameSummary } from './game-summary'
 
 interface GameRowProps {
   game: GameListItem
@@ -44,16 +45,11 @@ export function GameRow({ game }: GameRowProps) {
       {/* Date column */}
       <div className="w-24 shrink-0 text-sm text-muted-foreground">{dateStr}</div>
 
-      {/* Spirit info - grows to fill */}
-      <div className="flex-1 min-w-0">
-        <div className="truncate font-medium">
-          {spiritDisplay}
-          {moreSpirits && <span className="text-muted-foreground font-normal">{moreSpirits}</span>}
-        </div>
-        {adversaryDisplay && (
-          <div className="text-sm text-muted-foreground truncate">vs {adversaryDisplay}</div>
-        )}
-      </div>
+      <GameSummary
+        adversaryDisplay={adversaryDisplay}
+        moreSpirits={moreSpirits}
+        spiritDisplay={spiritDisplay}
+      />
 
       {/* Result badge */}
       <Badge variant={game.result === 'win' ? 'default' : 'secondary'}>

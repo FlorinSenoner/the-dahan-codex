@@ -5,6 +5,7 @@
  */
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { selectAdversaryById, selectAdversaryLevelDifficulty } from '@/lib/reference-selectors'
+import { Text } from '../ui/typography'
 
 interface ScoreBreakdownProps {
   result: 'win' | 'loss'
@@ -43,7 +44,11 @@ export function ScoreBreakdown({
     let formula = parts.join(' + ')
     if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`
 
-    return <p className="text-sm text-muted-foreground">= {formula}</p>
+    return (
+      <Text as="p" className="text-sm text-muted-foreground">
+        = {formula}
+      </Text>
+    )
   }
 
   // Defeat: (2 x Difficulty) + cards used + dahanScore - blightPenalty
@@ -58,7 +63,11 @@ export function ScoreBreakdown({
   let formula = parts.length > 0 ? parts.join(' + ') : '0'
   if (blightPenalty > 0) formula += ` − ${blightPenalty} (blight)`
 
-  return <p className="text-sm text-muted-foreground">= {formula}</p>
+  return (
+    <Text as="p" className="text-sm text-muted-foreground">
+      = {formula}
+    </Text>
+  )
 }
 
 /**

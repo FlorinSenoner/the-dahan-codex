@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { BookOpen, Compass, Gamepad2, Ghost, Shield, WifiOff } from 'lucide-react'
+import { BookOpen, Compass, Gamepad2, Ghost, type LucideIcon, Shield, WifiOff } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { AdversaryImage } from '@/components/adversaries/adversary-image'
 import {
@@ -8,10 +8,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectAdversaryList } from '@/lib/reference-selectors'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -158,9 +160,81 @@ function OrnamentDivider() {
   )
 }
 
+function HomeActionLinks() {
+  return (
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <Link
+        className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 bg-primary text-primary-foreground hover:shadow-[0_4px_16px_oklch(0.35_0.12_25_/_0.4)]"
+        style={{ fontWeight: 600, letterSpacing: '0.04em' }}
+        to="/spirits"
+      >
+        <BookOpen style={{ width: 18, height: 18 }} />
+        Explore Spirits
+      </Link>
+      <Link
+        className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 border border-border text-muted-foreground hover:shadow-[0_4px_16px_oklch(0.7_0.1_70_/_0.15)]"
+        style={{ fontWeight: 600, letterSpacing: '0.04em' }}
+        to="/games"
+      >
+        <Gamepad2 style={{ width: 18, height: 18 }} />
+        Track Games
+      </Link>
+    </div>
+  )
+}
+
+function FeaturedSectionHeader({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <>
+      <Heading
+        as="h2"
+        className="text-center text-2xl md:text-3xl mb-3 tracking-wide text-foreground"
+        style={{ fontWeight: 600 }}
+        variant="h2"
+      >
+        {title}
+      </Heading>
+      <Text
+        as="p"
+        className="text-center text-sm md:text-base mb-10 font-body italic text-muted-foreground"
+      >
+        {subtitle}
+      </Text>
+    </>
+  )
+}
+
+function ExploreCollectionCard({
+  icon: Icon,
+  label,
+  to,
+}: {
+  icon: LucideIcon
+  label: string
+  to: '/spirits' | '/adversaries'
+}) {
+  return (
+    <Link
+      className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
+      to={to}
+    >
+      <Icon className="w-8 h-8 text-accent" />
+      <Text
+        as="span"
+        className="text-sm md:text-base text-center px-4 text-muted-foreground"
+        style={{ fontWeight: 600 }}
+      >
+        {label}
+      </Text>
+    </Link>
+  )
+}
+
 function HomePage() {
   const imageRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const nameRefs = useRef<Record<string, HTMLHeadingElement | null>>({})
+  const adversaryImageRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const adversaryNameRefs = useRef<Record<string, HTMLHeadingElement | null>>({})
   const snapshot = usePublicSnapshot()
   const featuredAdversaries = useMemo(
     () => (snapshot ? selectAdversaryList(snapshot).slice(0, 5) : []),
@@ -206,24 +280,18 @@ function HomePage() {
     })),
   })
 
-  useStructuredData('ld-breadcrumb', {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: SITE_URL,
-      },
-    ],
-  })
+  useStructuredData(
+    'ld-breadcrumb',
+    createBreadcrumbStructuredData([{ name: 'Home', item: SITE_URL }]),
+  )
 
   return (
     <div className="min-h-screen pb-20 bg-background text-foreground">
       <div className="max-w-[900px] mx-auto px-6 pt-12 md:pt-20">
         <header className="text-center mb-4">
-          <h1 className="sr-only">The Dahan Codex — Spirit Island Companion App</h1>
+          <Heading as="h1" className="sr-only" variant="h1">
+            The Dahan Codex — Spirit Island Companion App
+          </Heading>
           <div className="flex items-start justify-center mb-6">
             <span
               className="font-headline leading-none mr-1 md:mr-2 select-none bg-gradient-to-br from-accent to-accent/70 bg-clip-text"
@@ -249,43 +317,33 @@ function HomePage() {
             </span>
           </div>
 
-          <p className="font-headline italic text-lg md:text-xl tracking-wide text-muted-foreground">
+          <Text
+            as="p"
+            className="font-headline italic text-lg md:text-xl tracking-wide text-muted-foreground"
+          >
             Know your spirit before the invaders land.
-          </p>
-          <p className="text-sm md:text-base mt-2 text-muted-foreground max-w-xl mx-auto">
+          </Text>
+          <Text as="p" className="text-sm md:text-base mt-2 text-muted-foreground max-w-xl mx-auto">
             Reference spirits quickly, follow practical opening lines, and track games across
             devices.
-          </p>
+          </Text>
 
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 bg-primary text-primary-foreground hover:shadow-[0_4px_16px_oklch(0.35_0.12_25_/_0.4)]"
-              style={{ fontWeight: 600, letterSpacing: '0.04em' }}
-              to="/spirits"
-            >
-              <BookOpen style={{ width: 18, height: 18 }} />
-              Explore Spirits
-            </Link>
-            <Link
-              className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 border border-border text-muted-foreground hover:shadow-[0_4px_16px_oklch(0.7_0.1_70_/_0.15)]"
-              style={{ fontWeight: 600, letterSpacing: '0.04em' }}
-              to="/games"
-            >
-              <Gamepad2 style={{ width: 18, height: 18 }} />
-              Track Games
-            </Link>
+          <div className="mt-6">
+            <HomeActionLinks />
           </div>
         </header>
 
         <OrnamentDivider />
 
         <section className="mb-4">
-          <h2
+          <Heading
+            as="h2"
             className="text-center text-2xl md:text-3xl mb-10 tracking-wide text-foreground"
             style={{ fontWeight: 600 }}
+            variant="h2"
           >
             Chapters of the Codex
-          </h2>
+          </Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature, i) => {
               const Icon = feature.icon
@@ -305,15 +363,20 @@ function HomePage() {
                       <Icon className="mt-2 w-5 h-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3
+                      <Heading
+                        as="h3"
                         className="text-lg md:text-xl mb-1 text-card-foreground"
                         style={{ fontWeight: 600 }}
+                        variant="h3"
                       >
                         {feature.title}
-                      </h3>
-                      <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
+                      </Heading>
+                      <Text
+                        as="p"
+                        className="text-sm md:text-base leading-relaxed text-muted-foreground"
+                      >
                         {feature.description}
-                      </p>
+                      </Text>
                     </div>
                   </div>
                 </div>
@@ -325,15 +388,10 @@ function HomePage() {
         <OrnamentDivider />
 
         <section className="mb-4">
-          <h2
-            className="text-center text-2xl md:text-3xl mb-3 tracking-wide text-foreground"
-            style={{ fontWeight: 600 }}
-          >
-            The Spirits of the Island
-          </h2>
-          <p className="text-center text-sm md:text-base mb-10 font-body italic text-muted-foreground">
-            Featuring 8 spirits from the full roster
-          </p>
+          <FeaturedSectionHeader
+            subtitle="Featuring 8 spirits from the full roster"
+            title="The Spirits of the Island"
+          />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {spirits.map((spirit) => (
               <Link
@@ -367,15 +425,17 @@ function HomePage() {
                   />
                 </div>
                 <div className="p-3 md:p-4">
-                  <h3
+                  <Heading
+                    as="h3"
                     className="text-sm md:text-base leading-tight mb-2 text-card-foreground"
                     ref={(el) => {
                       nameRefs.current[spirit.slug] = el
                     }}
                     style={{ fontWeight: 600 }}
+                    variant="h4"
                   >
                     {spirit.name}
-                  </h3>
+                  </Heading>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">{spirit.complexity}</span>
                     <div className="flex gap-1">
@@ -395,41 +455,26 @@ function HomePage() {
                 </div>
               </Link>
             ))}
-
-            <Link
-              className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
-              to="/spirits"
-            >
-              <Ghost className="w-8 h-8 text-accent" />
-              <span
-                className="text-sm md:text-base text-center px-4 text-muted-foreground"
-                style={{ fontWeight: 600 }}
-              >
-                Explore all spirits
-              </span>
-            </Link>
+            <ExploreCollectionCard icon={Ghost} label="Explore all spirits" to="/spirits" />
           </div>
         </section>
 
         <OrnamentDivider />
 
         <section className="mb-4">
-          <h2
-            className="text-center text-2xl md:text-3xl mb-3 tracking-wide text-foreground"
-            style={{ fontWeight: 600 }}
-          >
-            The Adversaries of the Island
-          </h2>
-          <p className="text-center text-sm md:text-base mb-10 font-body italic text-muted-foreground">
-            Featuring 5 adversaries from the full roster
-          </p>
+          <FeaturedSectionHeader
+            subtitle="Featuring 5 adversaries from the full roster"
+            title="The Adversaries of the Island"
+          />
 
           {snapshot === undefined ? (
-            <p className="text-center text-sm mb-6 text-muted-foreground">Loading adversaries...</p>
+            <Text as="p" className="text-center text-sm mb-6 text-muted-foreground">
+              Loading adversaries...
+            </Text>
           ) : featuredAdversaries.length === 0 ? (
-            <p className="text-center text-sm mb-6 text-muted-foreground">
+            <Text as="p" className="text-center text-sm mb-6 text-muted-foreground">
               No adversaries available.
-            </p>
+            </Text>
           ) : null}
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -437,6 +482,12 @@ function HomePage() {
               <Link
                 className="bg-card border border-border rounded-sm overflow-hidden transition-[box-shadow,filter,border-color] duration-200 cursor-default hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40"
                 key={adversary._id}
+                onClick={() => {
+                  const img = adversaryImageRefs.current[adversary.slug]
+                  const name = adversaryNameRefs.current[adversary.slug]
+                  if (img) img.style.viewTransitionName = `adversary-image-${adversary.slug}`
+                  if (name) name.style.viewTransitionName = `adversary-name-${adversary.slug}`
+                }}
                 params={{ slug: adversary.slug }}
                 to="/adversaries/$slug"
                 viewTransition
@@ -444,6 +495,10 @@ function HomePage() {
                 <AdversaryImage
                   adversaryName={adversary.name}
                   className="w-full aspect-square rounded-none"
+                  containerRef={(el) => {
+                    adversaryImageRefs.current[adversary.slug] = el
+                  }}
+                  enableViewTransition={false}
                   height={512}
                   imageUrl={adversary.imageUrl}
                   imgClassName="sepia-[0.15] contrast-[0.95]"
@@ -451,56 +506,53 @@ function HomePage() {
                   width={512}
                 />
                 <div className="p-3 md:p-4">
-                  <h3
+                  <Heading
+                    as="h3"
                     className="text-sm md:text-base leading-tight mb-2 text-card-foreground"
-                    style={{
-                      fontWeight: 600,
-                      viewTransitionName: `adversary-name-${adversary.slug}`,
+                    ref={(el) => {
+                      adversaryNameRefs.current[adversary.slug] = el
                     }}
+                    style={{ fontWeight: 600 }}
+                    variant="h4"
                   >
                     {adversary.name}
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
+                  </Heading>
+                  <Text as="p" className="text-xs md:text-sm text-muted-foreground line-clamp-2">
                     {adversary.strategy.overview}
-                  </p>
+                  </Text>
                 </div>
               </Link>
             ))}
 
-            <Link
-              className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
+            <ExploreCollectionCard
+              icon={Shield}
+              label="Explore all adversaries"
               to="/adversaries"
-            >
-              <Shield className="w-8 h-8 text-accent" />
-              <span
-                className="text-sm md:text-base text-center px-4 text-muted-foreground"
-                style={{ fontWeight: 600 }}
-              >
-                Explore all adversaries
-              </span>
-            </Link>
+            />
           </div>
         </section>
 
         <OrnamentDivider />
 
         <section className="mb-4">
-          <h2
+          <Heading
+            as="h2"
             className="text-center text-2xl md:text-3xl mb-6 tracking-wide text-foreground"
             style={{ fontWeight: 600 }}
+            variant="h2"
           >
             How It Helps at the Table
-          </h2>
+          </Heading>
           <div className="max-w-[680px] mx-auto space-y-4 text-sm md:text-base leading-relaxed text-muted-foreground">
-            <p>
+            <Text as="p">
               Spirit Island rewards planning, and your first decisions are usually spirit plus
               adversary pressure. The Codex is organized so you can compare both quickly instead of
               bouncing between long notes.
-            </p>
-            <p>
+            </Text>
+            <Text as="p">
               Most players use it as a table loop: pick spirit and adversary level, check escalation
               and loss conditions, run an opening line, then return for quick reminders during play.
-            </p>
+            </Text>
             <ul className="list-disc pl-6 space-y-2">
               <li>Choose your spirit plan and confirm the adversary level pressure up front.</li>
               <li>Check escalation and additional loss conditions before turn one surprises.</li>
@@ -513,12 +565,14 @@ function HomePage() {
         <OrnamentDivider />
 
         <section className="mb-4">
-          <h2
+          <Heading
+            as="h2"
             className="text-center text-2xl md:text-3xl mb-8 tracking-wide text-foreground"
             style={{ fontWeight: 600 }}
+            variant="h2"
           >
             Common Questions
-          </h2>
+          </Heading>
           <div className="max-w-[680px] mx-auto">
             <Accordion collapsible type="single">
               {faqItems.map((item, i) => (
@@ -539,42 +593,27 @@ function HomePage() {
 
         <section className="text-center">
           <div className="inline-block bg-card border-2 border-accent/40 rounded-sm px-8 py-10 md:px-16 md:py-14 mx-auto shadow-sm">
-            <h2
+            <Heading
+              as="h2"
               className="text-2xl md:text-3xl mb-3 tracking-wide text-card-foreground"
               style={{ fontWeight: 700 }}
+              variant="h2"
             >
               Ready for Your Next Game Night
-            </h2>
-            <p className="text-xs mb-8 text-muted-foreground">
+            </Heading>
+            <Text as="p" className="text-xs mb-8 text-muted-foreground">
               Free to use. No account needed for reference and openings.
-            </p>
+            </Text>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 bg-primary text-primary-foreground hover:shadow-[0_4px_16px_oklch(0.35_0.12_25_/_0.4)]"
-                style={{ fontWeight: 600, letterSpacing: '0.04em' }}
-                to="/spirits"
-              >
-                <BookOpen style={{ width: 18, height: 18 }} />
-                Explore Spirits
-              </Link>
-              <Link
-                className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 font-headline text-sm md:text-base px-6 py-3 rounded-sm transition-shadow duration-200 border border-border text-muted-foreground hover:shadow-[0_4px_16px_oklch(0.7_0.1_70_/_0.15)]"
-                style={{ fontWeight: 600, letterSpacing: '0.04em' }}
-                to="/games"
-              >
-                <Gamepad2 style={{ width: 18, height: 18 }} />
-                Track Games
-              </Link>
-            </div>
+            <HomeActionLinks />
           </div>
         </section>
 
         <footer className="mt-16 border-t border-border/50 pt-8 pb-4 text-center text-xs text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} The Dahan Codex</p>
-          <p className="mt-1">
+          <Text as="p">&copy; {new Date().getFullYear()} The Dahan Codex</Text>
+          <Text as="p" className="mt-1">
             Unofficial fan project. Spirit Island is a trademark of Greater Than Games, LLC.
-          </p>
+          </Text>
           <Link
             className="mt-2 inline-block underline underline-offset-2 hover:text-foreground transition-colors cursor-pointer"
             to="/credits"
