@@ -49,6 +49,22 @@ Executed on 2026-03-04.
 - Final preflight: `primaryWithLegacyOnly = 0`, `secondaryWithLegacyOnly = 0`.
 - Raw data verification showed no legacy top-level adversary fields.
 
+### Revalidation Run (Production)
+
+Re-executed on 2026-03-04 (Europe/Rome) to confirm rollout state and reproducibility.
+
+- Backup export captured: `backups/prod-20260304-101641-pre-migration.zip`.
+- Preflight before run: `primaryWithLegacyOnly = 0`, `secondaryWithLegacyOnly = 0`, `totalGames = 24`.
+- Dry runs:
+  - `games:backfillLegacyAdversaryRefs` -> `updatedGames = 0`, `unresolvedPrimary = 0`, `unresolvedSecondary = 0`
+  - `games:normalizeAdversaryRefShape` -> `normalized = 0`
+  - `games:cleanupLegacyAdversaryFields` -> `cleaned = 0`, `skippedLegacyOnly = 0`
+- Live runs (non-dry-run) were no-op with the same zero-change results.
+- Adversary seed sync run: `seed:seedSpirits` -> `"Spirits already seeded. Upserted 8 adversaries."`
+- Post-run verification:
+  - `games:preflightAdversaryRefCoverage` unchanged (`0/0`, `totalGames = 24`)
+  - Raw `games` scan: no `adversary`/`secondaryAdversary` fields and no extra keys in `adversaryRef` / `secondaryAdversaryRef` beyond `{ adversaryId, level }`.
+
 ## Post-Migration Cleanup
 
 - Temporary migration functions were removed from `convex/games.ts` after successful rollout.
