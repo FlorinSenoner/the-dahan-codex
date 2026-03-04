@@ -1,45 +1,50 @@
 import { useAuth } from '@clerk/clerk-react'
 import { useCallback, useEffect, useState } from 'react'
 import type { GameFormData } from '@/components/games/game-form'
-import {
-  getAllOfflineOps,
-  getAllPendingGames,
-  type OfflineOperation,
-  type PendingGame,
-  savePendingGame,
-} from '@/lib/offline-games'
+import type { OfflineOperation, PendingGame } from '@/lib/offline-games'
+import { getAllOfflineOps, getAllPendingGames, savePendingGame } from '@/lib/offline-games'
 
-export function usePendingGames() {
-  const { isLoaded, userId } = useAuth()
-  const [pendingGames, setPendingGames] = useState<PendingGame[]>([])
+function useUserScopedOutboxList<T>(
+  isLoaded: boolean,
+  userId: string | null | undefined,
+  loadByUser: (ownerId: string) => Promise<T[]>,
+) {
+  const [items, setItems] = useState<T[]>([])
 
-  // Load pending games for current user.
+  const loadCurrentUser = useCallback(
+    async (ownerId: string) => {
+      const next = await loadByUser(ownerId)
+      setItems(next)
+      return next
+    },
+    [loadByUser],
+  )
+
   useEffect(() => {
     if (!isLoaded || !userId) {
-      setPendingGames([])
+      setItems([])
       return
     }
     let cancelled = false
-    getAllPendingGames(userId)
-      .then((games) => {
-        if (!cancelled) setPendingGames(games)
+    loadByUser(userId)
+      .then((next) => {
+        if (!cancelled) setItems(next)
       })
       .catch(console.error)
     return () => {
       cancelled = true
     }
-  }, [isLoaded, userId])
+  }, [isLoaded, userId, loadByUser])
 
-  // Refresh when layout-level sync completes
   useEffect(() => {
     if (!isLoaded || !userId) return
     let cancelled = false
     const currentUserId = userId
 
     function handleSynced() {
-      getAllPendingGames(currentUserId)
-        .then((games) => {
-          if (!cancelled) setPendingGames(games)
+      loadByUser(currentUserId)
+        .then((next) => {
+          if (!cancelled) setItems(next)
         })
         .catch(console.error)
     }
@@ -48,7 +53,26 @@ export function usePendingGames() {
       cancelled = true
       window.removeEventListener('outbox-synced', handleSynced)
     }
-  }, [isLoaded, userId])
+  }, [isLoaded, userId, loadByUser])
+
+  const refresh = useCallback(async () => {
+    if (!userId) {
+      setItems([])
+      return []
+    }
+    return loadCurrentUser(userId)
+  }, [userId, loadCurrentUser])
+
+  return { items, setItems, refresh }
+}
+
+export function usePendingGames() {
+  const { isLoaded, userId } = useAuth()
+  const { items: pendingGames, setItems: setPendingGames } = useUserScopedOutboxList<PendingGame>(
+    isLoaded,
+    userId,
+    getAllPendingGames,
+  )
 
   const saveOfflineGame = useCallback(
     async (formData: GameFormData) => {
@@ -59,7 +83,7 @@ export function usePendingGames() {
       setPendingGames((prev) => [game, ...prev])
       return game
     },
-    [userId],
+    [userId, setPendingGames],
   )
 
   return { pendingGames, saveOfflineGame }
@@ -67,53 +91,11 @@ export function usePendingGames() {
 
 export function useOfflineOps() {
   const { isLoaded, userId } = useAuth()
-  const [offlineOps, setOfflineOps] = useState<OfflineOperation[]>([])
-
-  // Load offline ops for current user.
-  useEffect(() => {
-    if (!isLoaded || !userId) {
-      setOfflineOps([])
-      return
-    }
-    let cancelled = false
-    getAllOfflineOps(userId)
-      .then((ops) => {
-        if (!cancelled) setOfflineOps(ops)
-      })
-      .catch(console.error)
-    return () => {
-      cancelled = true
-    }
-  }, [isLoaded, userId])
-
-  // Refresh when layout-level sync completes
-  useEffect(() => {
-    if (!isLoaded || !userId) return
-    let cancelled = false
-    const currentUserId = userId
-
-    function handleSynced() {
-      getAllOfflineOps(currentUserId)
-        .then((ops) => {
-          if (!cancelled) setOfflineOps(ops)
-        })
-        .catch(console.error)
-    }
-    window.addEventListener('outbox-synced', handleSynced)
-    return () => {
-      cancelled = true
-      window.removeEventListener('outbox-synced', handleSynced)
-    }
-  }, [isLoaded, userId])
-
-  const refreshOps = useCallback(async () => {
-    if (!userId) {
-      setOfflineOps([])
-      return
-    }
-    const ops = await getAllOfflineOps(userId)
-    setOfflineOps(ops)
-  }, [userId])
+  const { items: offlineOps, refresh: refreshOps } = useUserScopedOutboxList<OfflineOperation>(
+    isLoaded,
+    userId,
+    getAllOfflineOps,
+  )
 
   return { offlineOps, refreshOps }
 }

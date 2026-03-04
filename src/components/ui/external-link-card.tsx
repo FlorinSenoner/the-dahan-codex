@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react'
+import { Text } from './typography'
 
 interface ExternalLinkCardProps {
   href: string
@@ -19,7 +20,9 @@ export function ExternalLinkCard({ href, title, description }: ExternalLinkCardP
           <span className="font-medium text-foreground">{title}</span>
           <ExternalLink className="h-3 w-3 text-muted-foreground" />
         </div>
-        <p className="text-sm text-muted-foreground mt-0.5">{description}</p>
+        <Text as="p" className="text-sm text-muted-foreground mt-0.5">
+          {description}
+        </Text>
       </div>
     </a>
   )

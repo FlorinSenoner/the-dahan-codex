@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import { CSVPreview } from '@/components/games/csv-preview'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta } from '@/hooks'
 import {
@@ -105,10 +106,10 @@ function ImportPage() {
       <PageHeader backHref="/games" title="Import Games" />
 
       <div className="p-4 space-y-6">
-        <p className="text-muted-foreground">
+        <Text as="p" className="text-muted-foreground">
           Upload a CSV file exported from The Dahan Codex or a compatible format. Games with
           matching IDs will be replaced; new IDs will create new games.
-        </p>
+        </Text>
 
         {/* File upload */}
         <div className="space-y-4">
@@ -128,7 +129,9 @@ function ImportPage() {
         {/* Preview */}
         {validatedGames && (
           <div className="space-y-4">
-            <h3 className="font-semibold">Preview</h3>
+            <Heading as="h3" className="font-semibold" variant="h3">
+              Preview
+            </Heading>
             <CSVPreview games={validatedGames} />
 
             <div className="flex gap-2">

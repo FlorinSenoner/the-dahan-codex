@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import type { PendingGame } from '@/lib/offline-games'
+import { GameSummary } from './game-summary'
 
 const statusConfig = {
   pending: {
@@ -44,15 +45,11 @@ export function PendingGameRow({ game }: PendingGameRowProps) {
   return (
     <div className="flex items-center gap-3 p-3 border-b border-border last:border-b-0 bg-muted/30">
       <div className="w-24 shrink-0 text-sm text-muted-foreground">{dateStr}</div>
-      <div className="flex-1 min-w-0">
-        <div className="truncate font-medium">
-          {spiritDisplay}
-          {moreSpirits && <span className="text-muted-foreground font-normal">{moreSpirits}</span>}
-        </div>
-        {adversaryDisplay && (
-          <div className="text-sm text-muted-foreground truncate">vs {adversaryDisplay}</div>
-        )}
-      </div>
+      <GameSummary
+        adversaryDisplay={adversaryDisplay}
+        moreSpirits={moreSpirits}
+        spiritDisplay={spiritDisplay}
+      />
       <Badge className={status.className} variant={status.variant}>
         {status.label}
       </Badge>

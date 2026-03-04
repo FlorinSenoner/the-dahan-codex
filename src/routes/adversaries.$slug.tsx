@@ -6,6 +6,7 @@ import { TurnAccordion } from '@/components/spirits/turn-accordion'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { EmptyState } from '@/components/ui/empty-state'
 import { ExternalLinkCard } from '@/components/ui/external-link-card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
@@ -13,6 +14,7 @@ import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectAdversaryBySlug } from '@/lib/reference-selectors'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 
 type AdversaryRulePhaseKey =
   | 'setup'
@@ -100,25 +102,11 @@ function AdversaryDetailPage() {
   useStructuredData(
     'ld-breadcrumb-adversary-detail',
     adversary
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Adversaries',
-              item: `${SITE_URL}/adversaries`,
-            },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: adversary.name,
-              item: `${SITE_URL}/adversaries/${adversary.slug}`,
-            },
-          ],
-        }
+      ? createBreadcrumbStructuredData([
+          { name: 'Home', item: SITE_URL },
+          { name: 'Adversaries', item: `${SITE_URL}/adversaries` },
+          { name: adversary.name, item: `${SITE_URL}/adversaries/${adversary.slug}` },
+        ])
       : null,
   )
 
@@ -136,19 +124,26 @@ function AdversaryDetailPage() {
     return (
       <div className="min-h-screen bg-background">
         <PageHeader backHref="/adversaries" title="Adversaries" />
-        <div className="flex min-h-[60vh] flex-col items-center justify-center p-8 text-center">
-          <Heading as="h1" className="mb-2" variant="h2">
-            Adversary Not Found
-          </Heading>
-          <Text className="mb-3" variant="muted">
-            The adversary "{slug}" doesn&apos;t exist.
-          </Text>
-          <Button asChild variant="link">
-            <Link to="/adversaries" viewTransition>
-              Back to Adversaries
-            </Link>
-          </Button>
-        </div>
+        <EmptyState
+          action={
+            <Button asChild variant="link">
+              <Link to="/adversaries" viewTransition>
+                Back to Adversaries
+              </Link>
+            </Button>
+          }
+          className="min-h-[60vh] p-8"
+          description={
+            <Text className="mb-3" variant="muted">
+              The adversary "{slug}" doesn&apos;t exist.
+            </Text>
+          }
+          title={
+            <Heading as="h1" className="mb-2" variant="h2">
+              Adversary Not Found
+            </Heading>
+          }
+        />
       </div>
     )
   }
@@ -197,6 +192,7 @@ function AdversaryDetailPage() {
             <Heading
               as="h1"
               className="mx-auto mb-2 w-fit text-center text-foreground"
+              style={{ viewTransitionName: `adversary-name-${adversary.slug}` }}
               variant="h1"
             >
               {adversary.name}

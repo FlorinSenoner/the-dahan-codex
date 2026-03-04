@@ -107,11 +107,13 @@ function SettingsPage() {
                   src={user.imageUrl}
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium truncate">{user.fullName || user.firstName}</p>
+                  <Text as="p" className="font-medium truncate">
+                    {user.fullName || user.firstName}
+                  </Text>
                   {user.primaryEmailAddress?.emailAddress && (
-                    <p className="text-sm text-muted-foreground truncate">
+                    <Text as="p" className="text-sm text-muted-foreground truncate">
                       {user.primaryEmailAddress.emailAddress}
-                    </p>
+                    </Text>
                   )}
                 </div>
                 <Button onClick={handleSignOut} size="sm" variant="outline">

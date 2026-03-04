@@ -1,3 +1,4 @@
+import { EmptyState } from '@/components/ui/empty-state'
 import { Text } from '@/components/ui/typography'
 import type { PublicAdversary } from '@/types/reference'
 import { AdversaryRow } from './adversary-row'
@@ -9,9 +10,7 @@ interface AdversaryListProps {
 export function AdversaryList({ adversaries }: AdversaryListProps) {
   if (adversaries.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 text-center">
-        <Text variant="muted">No adversaries found</Text>
-      </div>
+      <EmptyState className="p-8" description={<Text variant="muted">No adversaries found</Text>} />
     )
   }
 

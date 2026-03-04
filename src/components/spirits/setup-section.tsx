@@ -3,8 +3,10 @@ import { useMutation } from 'convex/react'
 import { ClipboardList } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '@/components/admin/editable-text'
-import { Heading, Text } from '@/components/ui/typography'
+import { SectionHeading } from '@/components/ui/section-heading'
+import { Text } from '@/components/ui/typography'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import { useEditSectionStateSync } from '@/hooks/use-edit-section-state-sync'
 import type { PublicSpirit } from '@/types/reference'
 
 const MAX_SETUP_LENGTH = 4000
@@ -51,13 +53,12 @@ export function SetupSection({
     return trimmed.length > 0 && trimmed.length <= MAX_SETUP_LENGTH
   }, [setupText])
 
-  useEffect(() => {
-    onHasChangesChange?.(hasChanges)
-  }, [hasChanges, onHasChangesChange])
-
-  useEffect(() => {
-    onIsValidChange?.(isValid)
-  }, [isValid, onIsValidChange])
+  useEditSectionStateSync({
+    hasChanges,
+    isValid,
+    onHasChangesChange,
+    onIsValidChange,
+  })
 
   const handleSave = useCallback(async () => {
     const trimmed = setupText.trim()
@@ -79,10 +80,7 @@ export function SetupSection({
 
   return (
     <section className="space-y-4">
-      <Heading as="h2" className="flex items-center gap-2" variant="h2">
-        <ClipboardList className="h-5 w-5" />
-        Setup
-      </Heading>
+      <SectionHeading icon={<ClipboardList className="h-5 w-5" />} title="Setup" />
 
       {isEditing ? (
         <div className="bg-card border border-primary/30 rounded-lg p-4 ring-1 ring-primary/20">

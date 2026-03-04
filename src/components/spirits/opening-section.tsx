@@ -5,10 +5,12 @@ import { BookOpen, Plus } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableOpening, type OpeningFormData } from '@/components/admin/editable-opening'
 import { Button } from '@/components/ui/button'
+import { SectionHeading } from '@/components/ui/section-heading'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useEditMode } from '@/hooks/use-edit-mode'
+import { useEditSectionStateSync } from '@/hooks/use-edit-section-state-sync'
 import { selectOpeningsBySpiritId } from '@/lib/reference-selectors'
 import type { PublicOpening, PublicSpirit } from '@/types/reference'
 import { TurnAccordion } from './turn-accordion'
@@ -42,6 +44,62 @@ function toSlug(name: string) {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .trim()
+}
+
+function createOpeningDraft(formData: OpeningFormData) {
+  return {
+    name: formData.name,
+    description: formData.description || undefined,
+    turns: transformTurnsForSave(formData.turns),
+    author: formData.author || undefined,
+    sourceUrl: formData.sourceUrl || undefined,
+  }
+}
+
+function createStoredOpening({
+  id,
+  spiritId,
+  createdAt,
+  draft,
+}: {
+  id: PublicOpening['_id']
+  spiritId: PublicSpirit['_id']
+  createdAt: number
+  draft: ReturnType<typeof createOpeningDraft>
+}): PublicOpening {
+  return {
+    _id: id,
+    _creationTime: createdAt,
+    spiritId,
+    slug: toSlug(draft.name),
+    createdAt,
+    updatedAt: createdAt,
+    ...draft,
+  }
+}
+
+function sortOpeningsByName(openings: PublicOpening[]) {
+  return openings.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+function OpeningTabsNavigation({
+  openings,
+  className,
+}: {
+  openings: PublicOpening[]
+  className?: string
+}) {
+  return (
+    <div className={['overflow-x-auto -mx-4 px-4', className].filter(Boolean).join(' ')}>
+      <TabsList variant="line">
+        {openings.map((opening) => (
+          <TabsTrigger key={opening._id} value={opening._id}>
+            {opening.name}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </div>
+  )
 }
 
 interface OpeningSectionProps {
@@ -191,45 +249,32 @@ export function OpeningSection({
     return false
   }, [formData, selectedOpening, isCreatingNew])
 
-  useEffect(() => {
-    onHasChangesChange?.(hasChanges)
-  }, [hasChanges, onHasChangesChange])
-
-  useEffect(() => {
-    onIsValidChange?.(isValid)
-  }, [isValid, onIsValidChange])
+  useEditSectionStateSync({
+    hasChanges,
+    isValid,
+    onHasChangesChange,
+    onIsValidChange,
+  })
 
   const handleSave = useCallback(async () => {
     if (!formData) return
+    const draft = createOpeningDraft(formData)
+
     try {
       if (isCreatingNew) {
         const now = Date.now()
-        const newId = await createOpeningMutation({
-          spiritId,
-          name: formData.name,
-          description: formData.description || undefined,
-          turns: transformTurnsForSave(formData.turns),
-          author: formData.author || undefined,
-          sourceUrl: formData.sourceUrl || undefined,
-        })
+        const newId = await createOpeningMutation({ spiritId, ...draft })
 
         setOpenings((previous) =>
-          [
+          sortOpeningsByName([
             ...previous,
-            {
-              _id: newId,
-              _creationTime: now,
+            createStoredOpening({
+              id: newId,
               spiritId,
-              slug: toSlug(formData.name),
-              name: formData.name,
-              description: formData.description || undefined,
-              turns: transformTurnsForSave(formData.turns),
-              author: formData.author || undefined,
-              sourceUrl: formData.sourceUrl || undefined,
               createdAt: now,
-              updatedAt: now,
-            },
-          ].sort((a, b) => a.name.localeCompare(b.name)),
+              draft,
+            }),
+          ]),
         )
         hasLocalMutationRef.current = true
 
@@ -239,32 +284,22 @@ export function OpeningSection({
           resetScroll: false,
         })
       } else if (selectedOpening) {
-        await updateOpeningMutation({
-          id: selectedOpening._id,
-          name: formData.name,
-          description: formData.description || undefined,
-          turns: transformTurnsForSave(formData.turns),
-          author: formData.author || undefined,
-          sourceUrl: formData.sourceUrl || undefined,
-        })
+        await updateOpeningMutation({ id: selectedOpening._id, ...draft })
+        const now = Date.now()
 
         setOpenings((previous) =>
-          previous
-            .map((opening) =>
+          sortOpeningsByName(
+            previous.map((opening) =>
               opening._id === selectedOpening._id
                 ? {
                     ...opening,
-                    slug: toSlug(formData.name),
-                    name: formData.name,
-                    description: formData.description || undefined,
-                    turns: transformTurnsForSave(formData.turns),
-                    author: formData.author || undefined,
-                    sourceUrl: formData.sourceUrl || undefined,
-                    updatedAt: Date.now(),
+                    ...draft,
+                    slug: toSlug(draft.name),
+                    updatedAt: now,
                   }
                 : opening,
-            )
-            .sort((a, b) => a.name.localeCompare(b.name)),
+            ),
+          ),
         )
         hasLocalMutationRef.current = true
       }
@@ -408,15 +443,7 @@ export function OpeningSection({
         return (
           <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
             <div className="flex items-center gap-2">
-              <div className="overflow-x-auto flex-1 -mx-4 px-4">
-                <TabsList variant="line">
-                  {openings.map((opening) => (
-                    <TabsTrigger key={opening._id} value={opening._id}>
-                      {opening.name}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </div>
+              <OpeningTabsNavigation className="flex-1" openings={openings} />
               <Button
                 className="h-8 flex-shrink-0"
                 onClick={handleCreateNew}
@@ -458,15 +485,7 @@ export function OpeningSection({
     if (openings.length > 1 && selectedOpening) {
       return (
         <Tabs className="space-y-4" onValueChange={handleTabChange} value={selectedOpening._id}>
-          <div className="overflow-x-auto -mx-4 px-4">
-            <TabsList variant="line">
-              {openings.map((opening) => (
-                <TabsTrigger key={opening._id} value={opening._id}>
-                  {opening.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
+          <OpeningTabsNavigation openings={openings} />
           {openings.map((opening) => (
             <TabsContent key={opening._id} value={opening._id}>
               {renderOpeningContent(opening)}
@@ -491,10 +510,7 @@ export function OpeningSection({
 
   return (
     <section className="space-y-4">
-      <Heading as="h2" className="flex items-center gap-2" variant="h2">
-        <BookOpen className="h-5 w-5" />
-        Openings
-      </Heading>
+      <SectionHeading icon={<BookOpen className="h-5 w-5" />} title="Openings" />
       {content}
     </section>
   )

@@ -12,6 +12,7 @@ import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectSpiritList } from '@/lib/reference-selectors'
 import { SITE_URL } from '@/lib/site-url'
 import { toAspectSlug } from '@/lib/slug'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 
 const spiritFilterSchema = z.object({
   complexity: z.array(z.string()).optional().catch([]),
@@ -75,14 +76,13 @@ function SpiritsPage() {
       : null,
   )
 
-  useStructuredData('ld-breadcrumb', {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Spirits', item: `${SITE_URL}/spirits` },
-    ],
-  })
+  useStructuredData(
+    'ld-breadcrumb',
+    createBreadcrumbStructuredData([
+      { name: 'Home', item: SITE_URL },
+      { name: 'Spirits', item: `${SITE_URL}/spirits` },
+    ]),
+  )
 
   const filteredSpirits = useMemo(() => {
     if (!filters.search) return spirits

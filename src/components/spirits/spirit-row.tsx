@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { ArrowDown, ArrowUp, Equal } from 'lucide-react'
 import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
+import { Heading, Text } from '@/components/ui/typography'
 import { toAspectSlug } from '@/lib/slug'
 import { complexityBadgeColors, modifierColors, PLACEHOLDER_GRADIENT } from '@/lib/spirit-colors'
 import { cn } from '@/lib/utils'
@@ -80,7 +81,8 @@ export function SpiritRow({ spirit }: SpiritRowProps) {
       <div className="flex-1 min-w-0">
         {/* Name row with complexity indicator */}
         <div className="flex items-center gap-2">
-          <h3
+          <Heading
+            as="h3"
             className={cn(
               'font-headline font-semibold text-foreground truncate',
               isAspect ? 'text-base' : 'text-lg',
@@ -90,9 +92,10 @@ export function SpiritRow({ spirit }: SpiritRowProps) {
                 ? `spirit-name-${spirit.slug}-${aspectSlug}`
                 : `spirit-name-${spirit.slug}`,
             }}
+            variant="h4"
           >
             {displayName}
-          </h3>
+          </Heading>
 
           {/* Complexity badge for base spirits, modifier icon for aspects */}
           {isAspect && spirit.complexityModifier ? (
@@ -125,7 +128,9 @@ export function SpiritRow({ spirit }: SpiritRowProps) {
           ) : null}
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-2 mt-0.5">{spirit.summary}</p>
+        <Text as="p" className="text-sm text-muted-foreground line-clamp-2 mt-0.5">
+          {spirit.summary}
+        </Text>
       </div>
     </Link>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type Ref, useEffect, useState } from 'react'
 import { PLACEHOLDER_GRADIENT } from '@/lib/spirit-colors'
 import { cn } from '@/lib/utils'
 
@@ -11,6 +11,8 @@ interface AdversaryImageProps {
   className?: string
   imgClassName?: string
   fallbackInitialClassName?: string
+  containerRef?: Ref<HTMLDivElement>
+  enableViewTransition?: boolean
 }
 
 export function AdversaryImage({
@@ -22,6 +24,8 @@ export function AdversaryImage({
   className,
   imgClassName,
   fallbackInitialClassName,
+  containerRef,
+  enableViewTransition = true,
 }: AdversaryImageProps) {
   const [imgError, setImgError] = useState(false)
 
@@ -34,7 +38,8 @@ export function AdversaryImage({
   return (
     <div
       className={cn('relative contain-[layout] overflow-hidden rounded-lg', className)}
-      style={{ viewTransitionName: `adversary-image-${slug}` }}
+      ref={containerRef}
+      style={enableViewTransition ? { viewTransitionName: `adversary-image-${slug}` } : undefined}
     >
       {imgError || !imageUrl ? (
         <div

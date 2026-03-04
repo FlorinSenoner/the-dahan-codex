@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { Heading, Text } from '@/components/ui/typography'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { SITE_URL } from '@/lib/site-url'
+import { createBreadcrumbStructuredData } from '@/lib/structured-data'
 
 export const Route = createFileRoute('/credits')({
   component: CreditsPage,
@@ -17,14 +18,13 @@ function CreditsPage() {
     ogType: 'website',
   })
 
-  useStructuredData('ld-breadcrumb', {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Credits', item: `${SITE_URL}/credits` },
-    ],
-  })
+  useStructuredData(
+    'ld-breadcrumb',
+    createBreadcrumbStructuredData([
+      { name: 'Home', item: SITE_URL },
+      { name: 'Credits', item: `${SITE_URL}/credits` },
+    ]),
+  )
 
   return (
     <div className="min-h-screen bg-background pb-20">

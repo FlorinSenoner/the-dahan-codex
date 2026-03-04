@@ -4,6 +4,8 @@ import { hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import { del, get, set } from 'idb-keyval'
+import { EmptyState } from '@/components/ui/empty-state'
+import { Heading, Text } from '@/components/ui/typography'
 import { IDB_CACHE_KEY, idbStore } from '@/lib/query-cache'
 import { routeTree } from './routeTree.gen'
 
@@ -58,15 +60,27 @@ async function restoreQueryCache(queryClient: QueryClient) {
 
 function NotFound() {
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-8 pb-20 pt-8 text-center">
-      <h1 className="text-2xl font-bold text-foreground">404 - Page Not Found</h1>
-      <p className="mt-2 text-muted-foreground">The page you're looking for doesn't exist.</p>
-      <a
-        className="mt-4 text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
-        href="/"
-      >
-        Go back home
-      </a>
+    <div className="min-h-screen bg-background px-8 pb-20 pt-8">
+      <EmptyState
+        action={
+          <a
+            className="mt-4 text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+            href="/"
+          >
+            Go back home
+          </a>
+        }
+        description={
+          <Text as="p" className="mt-2 text-muted-foreground">
+            The page you&apos;re looking for doesn&apos;t exist.
+          </Text>
+        }
+        title={
+          <Heading as="h1" className="text-2xl text-foreground" variant="h1">
+            404 - Page Not Found
+          </Heading>
+        }
+      />
     </div>
   )
 }

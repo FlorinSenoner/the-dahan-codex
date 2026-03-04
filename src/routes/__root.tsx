@@ -12,7 +12,9 @@ import { InstallPrompt } from '../components/pwa/install-prompt'
 import { OfflineIndicator } from '../components/pwa/offline-indicator'
 import { UpdateBanner } from '../components/pwa/update-banner'
 import { Button } from '../components/ui/button'
+import { EmptyState } from '../components/ui/empty-state'
 import { Toaster } from '../components/ui/sonner'
+import { Heading, Text } from '../components/ui/typography'
 import { EditModeProvider } from '../contexts/edit-mode-context'
 import { ThemeProvider } from '../contexts/theme-context'
 import { useBackgroundSync } from '../hooks/use-background-sync'
@@ -36,25 +38,33 @@ function RootErrorComponent({ error }: { error: Error }) {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <div className="text-center max-w-md">
-        <h1 className="text-2xl font-serif font-semibold text-foreground mb-2">
-          Something went wrong
-        </h1>
-        <p className="text-muted-foreground mb-6">
-          An unexpected error occurred. Try again or reload the page.
-        </p>
-        {import.meta.env.DEV && error?.message && (
-          <pre className="text-xs text-left bg-muted p-3 rounded-md mb-6 overflow-auto max-h-32">
-            {error.message}
-          </pre>
-        )}
-        <div className="flex gap-3 justify-center">
-          <Button onClick={() => router.invalidate()} variant="outline">
-            Try Again
-          </Button>
-          <Button onClick={() => window.location.reload()}>Reload Page</Button>
-        </div>
-      </div>
+      <EmptyState
+        action={
+          <div className="flex gap-3 justify-center">
+            <Button onClick={() => router.invalidate()} variant="outline">
+              Try Again
+            </Button>
+            <Button onClick={() => window.location.reload()}>Reload Page</Button>
+          </div>
+        }
+        content={
+          import.meta.env.DEV && error?.message ? (
+            <pre className="text-xs text-left bg-muted p-3 rounded-md mb-6 overflow-auto max-h-32">
+              {error.message}
+            </pre>
+          ) : null
+        }
+        description={
+          <Text as="p" className="text-muted-foreground mb-6">
+            An unexpected error occurred. Try again or reload the page.
+          </Text>
+        }
+        title={
+          <Heading as="h1" className="text-2xl text-foreground mb-2" variant="h1">
+            Something went wrong
+          </Heading>
+        }
+      />
     </div>
   )
 }

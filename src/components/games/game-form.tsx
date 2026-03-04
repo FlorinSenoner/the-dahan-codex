@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { Text } from '@/components/ui/typography'
 import { LOSS_TYPES, WIN_TYPES } from '@/lib/game-data'
 import type { GameCreateInput } from '@/types/convex'
 import { AdversaryPicker, type AdversarySelection } from './adversary-picker'
@@ -369,9 +370,9 @@ export function GameForm({
       {/* Outcome Details Section */}
       <div className="space-y-4">
         <Label className="text-base">Game Stats (optional)</Label>
-        <p className="text-sm text-muted-foreground -mt-2">
+        <Text as="p" className="text-sm text-muted-foreground -mt-2">
           Fill in these values to calculate your score
-        </p>
+        </Text>
 
         <div className="grid grid-cols-2 gap-4">
           {/* Invader Stage */}
@@ -444,10 +445,16 @@ export function GameForm({
         <div className="p-4 bg-muted rounded-lg space-y-2">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Calculated Score</p>
-              <p className="text-sm text-muted-foreground">Difficulty: {difficulty}</p>
+              <Text as="p" className="text-sm text-muted-foreground">
+                Calculated Score
+              </Text>
+              <Text as="p" className="text-sm text-muted-foreground">
+                Difficulty: {difficulty}
+              </Text>
             </div>
-            <p className="text-3xl font-bold">{calculatedScore}</p>
+            <Text as="p" className="text-3xl font-bold">
+              {calculatedScore}
+            </Text>
           </div>
           <ScoreBreakdown
             blightCount={formData.blightCount}
