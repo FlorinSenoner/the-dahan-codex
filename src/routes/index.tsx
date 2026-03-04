@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { BookOpen, Compass, Gamepad2, Shield, WifiOff } from 'lucide-react'
+import { BookOpen, Compass, Gamepad2, Ghost, Shield, WifiOff } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { AdversaryImage } from '@/components/adversaries/adversary-image'
 import {
@@ -400,7 +400,7 @@ function HomePage() {
               className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
               to="/spirits"
             >
-              <BookOpen className="w-8 h-8 text-accent" />
+              <Ghost className="w-8 h-8 text-accent" />
               <span
                 className="text-sm md:text-base text-center px-4 text-muted-foreground"
                 style={{ fontWeight: 600 }}
@@ -460,12 +460,9 @@ function HomePage() {
                   >
                     {adversary.name}
                   </h3>
-                  <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground">Base {adversary.baseDifficulty}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
-                      {adversary.strategy.overview}
-                    </p>
-                  </div>
+                  <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
+                    {adversary.strategy.overview}
+                  </p>
                 </div>
               </Link>
             ))}

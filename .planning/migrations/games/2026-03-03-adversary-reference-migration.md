@@ -3,7 +3,7 @@
 - Date: 2026-03-03
 - Scope: `games` table adversary fields
 - Type: Latest-only schema cutover
-- Status: Implemented
+- Status: Completed (including post-migration cleanup)
 
 ## Goal
 
@@ -39,80 +39,37 @@ Legacy name-only adversary fields are removed from schema and runtime payload ha
 
 This cutover assumes active clients are on the latest app version and data written going forward follows the canonical ref shape.
 
-## Deployment Preflight
+## Production Rollout Record
 
-Run:
+Executed on 2026-03-04.
 
-`npx convex run games:preflightAdversaryRefCoverage`
+- Baseline preflight: `primaryWithLegacyOnly = 8`, `secondaryWithLegacyOnly = 5`.
+- Backfill applied with zero unresolved matches.
+- Cleanup applied with `skippedLegacyOnly = 0`.
+- Final preflight: `primaryWithLegacyOnly = 0`, `secondaryWithLegacyOnly = 0`.
+- Raw data verification showed no legacy top-level adversary fields.
 
-Safe cutover requires:
+### Revalidation Run (Production)
 
-- `primaryWithLegacyOnly = 0`
-- `secondaryWithLegacyOnly = 0`
+Re-executed on 2026-03-04 (Europe/Rome) to confirm rollout state and reproducibility.
 
-## Reproducible Production Procedure
+- Backup export captured: `backups/prod-20260304-101641-pre-migration.zip`.
+- Preflight before run: `primaryWithLegacyOnly = 0`, `secondaryWithLegacyOnly = 0`, `totalGames = 24`.
+- Dry runs:
+  - `games:backfillLegacyAdversaryRefs` -> `updatedGames = 0`, `unresolvedPrimary = 0`, `unresolvedSecondary = 0`
+  - `games:normalizeAdversaryRefShape` -> `normalized = 0`
+  - `games:cleanupLegacyAdversaryFields` -> `cleaned = 0`, `skippedLegacyOnly = 0`
+- Live runs (non-dry-run) were no-op with the same zero-change results.
+- Adversary seed sync run: `seed:seedSpirits` -> `"Spirits already seeded. Upserted 8 adversaries."`
+- Post-run verification:
+  - `games:preflightAdversaryRefCoverage` unchanged (`0/0`, `totalGames = 24`)
+  - Raw `games` scan: no `adversary`/`secondaryAdversary` fields and no extra keys in `adversaryRef` / `secondaryAdversaryRef` beyond `{ adversaryId, level }`.
 
-This sequence is intentionally copy/paste friendly and should be run in order.
+## Post-Migration Cleanup
 
-1. Deploy backend code (includes migration utilities and latest schema/functions):
-
-`pnpm exec convex deploy --yes`
-
-2. Ensure canonical adversary data is present/up-to-date:
-
-`pnpm exec convex run --prod seed:seedSpirits`
-
-3. Capture baseline preflight:
-
-`pnpm exec convex run --prod games:preflightAdversaryRefCoverage`
-
-4. Dry-run backfill (no writes):
-
-`pnpm exec convex run --prod games:backfillLegacyAdversaryRefs '{"dryRun": true}'`
-
-5. Apply backfill:
-
-`pnpm exec convex run --prod games:backfillLegacyAdversaryRefs '{"dryRun": false}'`
-
-6. Dry-run ref-shape normalization (no writes):
-
-`pnpm exec convex run --prod games:normalizeAdversaryRefShape '{"dryRun": true}'`
-
-7. Apply ref-shape normalization:
-
-`pnpm exec convex run --prod games:normalizeAdversaryRefShape '{"dryRun": false}'`
-
-8. Dry-run cleanup (no writes):
-
-`pnpm exec convex run --prod games:cleanupLegacyAdversaryFields '{"dryRun": true}'`
-
-9. Apply cleanup:
-
-`pnpm exec convex run --prod games:cleanupLegacyAdversaryFields '{"dryRun": false}'`
-
-10. Final preflight (must be zero):
-
-`pnpm exec convex run --prod games:preflightAdversaryRefCoverage`
-
-Safe completion criteria:
-
-- `primaryWithLegacyOnly = 0`
-- `secondaryWithLegacyOnly = 0`
-
-Optional raw verification:
-
-`pnpm exec convex data games --prod --format jsonLines | rg '"adversary":|"secondaryAdversary":'`
-
-Expected: no matches.
-
-## Stop Conditions
-
-Stop and investigate before proceeding if any apply:
-
-- `unresolvedPrimary > 0` or `unresolvedSecondary > 0` in backfill result.
-- `normalized = 0` while legacy rows still contain derived ref fields.
-- `skippedLegacyOnly > 0` after cleanup.
-- Final preflight has non-zero legacy-only counts.
+- Temporary migration functions were removed from `convex/games.ts` after successful rollout.
+- Temporary schema bridge fields (`games.adversary`, `games.secondaryAdversary`) were removed from `convex/schema.ts`.
+- Runtime shape is now strictly canonical ref-only.
 
 ## Validation Checklist
 

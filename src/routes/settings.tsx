@@ -8,9 +8,9 @@ import { Heading, Text } from '@/components/ui/typography'
 import { useTheme } from '@/contexts/theme-context'
 import { usePageMeta } from '@/hooks'
 import { clearOfflineData } from '@/lib/offline-games'
+import { clearPersistedQueryCache } from '@/lib/query-cache'
 import { syncGames, syncPublicReferenceData } from '@/lib/sync'
 import { cn } from '@/lib/utils'
-import { clearPersistedQueryCache } from '../router'
 
 const routeApi = getRouteApi('/settings')
 

@@ -80,14 +80,19 @@ const defaultFormData: GameFormData = {
  */
 function calculateScore(
   result: GameCreateInput['result'],
-  difficulty: number,
+  difficulty: number | undefined,
   playerCount: number,
   cardsRemaining?: number,
   dahanCount?: number,
   blightCount?: number,
 ): number | undefined {
   // All required values must be present to calculate score
-  if (cardsRemaining === undefined || dahanCount === undefined || blightCount === undefined) {
+  if (
+    difficulty === undefined ||
+    cardsRemaining === undefined ||
+    dahanCount === undefined ||
+    blightCount === undefined
+  ) {
     return undefined
   }
 
@@ -105,11 +110,17 @@ function calculateScore(
 }
 
 function calculateDifficulty(
-  adversaryDifficulty: number = 0,
-  secondaryAdversaryDifficulty: number = 0,
+  adversaryDifficulty?: number,
+  secondaryAdversaryDifficulty?: number,
   scenarioDifficulty: number = 0,
 ): number {
-  return adversaryDifficulty + secondaryAdversaryDifficulty + scenarioDifficulty
+  return (adversaryDifficulty ?? 0) + (secondaryAdversaryDifficulty ?? 0) + scenarioDifficulty
+}
+
+function hasPendingAdversaryDifficulty(selection: AdversarySelection | null): boolean {
+  if (!selection) return false
+  if (!selection.adversaryId && !selection.name) return false
+  return selection.difficulty === undefined
 }
 
 export function GameForm({
@@ -129,12 +140,18 @@ export function GameForm({
   // Count spirits with either ID or name as players
   const playerCount = formData.spirits.filter((s) => s.spiritId !== null || s.name).length
 
+  const hasPendingDifficulty =
+    hasPendingAdversaryDifficulty(formData.adversary) ||
+    hasPendingAdversaryDifficulty(formData.secondaryAdversary)
+
   // Calculate difficulty and score
-  const difficulty = calculateDifficulty(
-    formData.adversary?.difficulty ?? formData.adversary?.level,
-    formData.secondaryAdversary?.difficulty ?? formData.secondaryAdversary?.level,
-    formData.scenario?.difficulty,
-  )
+  const difficulty = hasPendingDifficulty
+    ? undefined
+    : calculateDifficulty(
+        formData.adversary?.difficulty,
+        formData.secondaryAdversary?.difficulty,
+        formData.scenario?.difficulty,
+      )
 
   const calculatedScore = calculateScore(
     formData.result,
@@ -192,7 +209,10 @@ export function GameForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!isValid || isSubmitting) return
-    await onSubmit({ ...formData, score: calculatedScore })
+    await onSubmit({
+      ...formData,
+      score: hasPendingDifficulty ? formData.score : calculatedScore,
+    })
   }
 
   return (
@@ -420,7 +440,7 @@ export function GameForm({
       </div>
 
       {/* Calculated Score Display */}
-      {calculatedScore !== undefined && (
+      {calculatedScore !== undefined && difficulty !== undefined && (
         <div className="p-4 bg-muted rounded-lg space-y-2">
           <div className="flex items-center justify-between">
             <div>

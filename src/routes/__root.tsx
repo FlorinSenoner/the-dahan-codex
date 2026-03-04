@@ -5,6 +5,7 @@ import { createRootRouteWithContext, Outlet, useRouter } from '@tanstack/react-r
 import type { ConvexReactClient } from 'convex/react'
 import { ConvexProviderWithClerk } from 'convex/react-clerk'
 import { useEffect, useRef } from 'react'
+import { clearPersistedQueryCache } from '@/lib/query-cache'
 import { ErrorBoundary } from '../components/error-boundary'
 import { BottomNav } from '../components/layout/bottom-nav'
 import { InstallPrompt } from '../components/pwa/install-prompt'
@@ -17,7 +18,6 @@ import { ThemeProvider } from '../contexts/theme-context'
 import { useBackgroundSync } from '../hooks/use-background-sync'
 import { useOutboxSync } from '../hooks/use-outbox-sync'
 import { useServiceWorker } from '../hooks/use-service-worker'
-import { clearPersistedQueryCache } from '../router'
 
 // Router context type
 interface RouterContext {

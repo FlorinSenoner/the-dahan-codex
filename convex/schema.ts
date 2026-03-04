@@ -26,11 +26,6 @@ const gameAdversaryRefValidator = v.object({
   level: v.number(),
 })
 
-const legacyGameAdversaryValidator = v.object({
-  name: v.string(),
-  level: v.number(),
-})
-
 export default defineSchema({
   // Expansions table - Spirit Island game expansions
   expansions: defineTable({
@@ -215,11 +210,6 @@ export default defineSchema({
 
     // Optional canonical secondary adversary reference
     secondaryAdversaryRef: v.optional(gameAdversaryRefValidator),
-
-    // TEMPORARY: legacy name-only adversary fields kept until production migration
-    // utilities complete and old documents are rewritten.
-    adversary: v.optional(legacyGameAdversaryValidator),
-    secondaryAdversary: v.optional(legacyGameAdversaryValidator),
 
     // Optional scenario
     scenario: v.optional(

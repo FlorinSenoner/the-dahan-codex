@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Workbox } from 'workbox-window'
+import { clearPersistedQueryCache } from '@/lib/query-cache'
 
 interface UseServiceWorkerResult {
   /** Whether a new service worker is waiting to activate */
@@ -15,6 +16,13 @@ interface UseServiceWorkerResult {
 export function useServiceWorker(): UseServiceWorkerResult {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false)
   const wbRef = useRef<Workbox | null>(null)
+  const shouldResetCachesRef = useRef(false)
+
+  const clearRuntimeCaches = useCallback(async () => {
+    const cacheNames = await caches.keys()
+    const runtimeCaches = cacheNames.filter((name) => !name.startsWith('workbox-precache'))
+    await Promise.all(runtimeCaches.map((name) => caches.delete(name)))
+  }, [])
 
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return
@@ -30,7 +38,21 @@ export function useServiceWorker(): UseServiceWorkerResult {
     })
 
     wb.addEventListener('controlling', () => {
-      window.location.reload()
+      if (!shouldResetCachesRef.current) {
+        window.location.reload()
+        return
+      }
+
+      shouldResetCachesRef.current = false
+      void (async () => {
+        try {
+          await Promise.all([clearPersistedQueryCache(), clearRuntimeCaches()])
+        } catch (error) {
+          console.error('Failed to clear stale caches during service worker update:', error)
+        } finally {
+          window.location.reload()
+        }
+      })()
     })
 
     wb.register().catch((err) => {
@@ -46,12 +68,14 @@ export function useServiceWorker(): UseServiceWorkerResult {
     )
 
     return () => clearInterval(interval)
-  }, [])
+  }, [clearRuntimeCaches])
 
   const triggerUpdate = useCallback(() => {
     const wb = wbRef.current
     if (!wb) return
 
+    shouldResetCachesRef.current = true
+    setIsUpdateAvailable(false)
     wb.messageSkipWaiting()
   }, [])
 

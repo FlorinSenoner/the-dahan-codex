@@ -3,12 +3,10 @@ import { type PersistedClient, persistQueryClient } from '@tanstack/query-persis
 import { hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
-import { createStore, del, get, set } from 'idb-keyval'
+import { del, get, set } from 'idb-keyval'
+import { IDB_CACHE_KEY, idbStore } from '@/lib/query-cache'
 import { routeTree } from './routeTree.gen'
 
-const idbStore = createStore('the-dahan-codex', 'cache')
-
-const IDB_CACHE_KEY = 'tanstack-query-cache'
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7 // 7 days
 const REMOVED_QUERY_MARKERS = [
   `openings:${'listBySpirit'}`,
@@ -56,15 +54,6 @@ async function restoreQueryCache(queryClient: QueryClient) {
   } catch (error) {
     console.warn('Failed to restore query cache:', error)
   }
-}
-
-/**
- * Clear both in-memory and persisted query caches.
- * Used when auth identity changes or when users manually clear cache.
- */
-export async function clearPersistedQueryCache(queryClient?: QueryClient) {
-  queryClient?.clear()
-  await del(IDB_CACHE_KEY, idbStore)
 }
 
 function NotFound() {
