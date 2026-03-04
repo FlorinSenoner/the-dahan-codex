@@ -1,7 +1,7 @@
 import { ConvexError, v } from 'convex/values'
-import type { Id } from './_generated/dataModel'
+import type { Doc, Id } from './_generated/dataModel'
 import type { MutationCtx, QueryCtx } from './_generated/server'
-import { mutation, query } from './_generated/server'
+import { internalMutation, internalQuery, mutation, query } from './_generated/server'
 import { requireAuth } from './lib/auth'
 import {
   validateIntegerRange,
@@ -16,7 +16,6 @@ const MAX_SPIRIT_VARIANT_LENGTH = 120
 const MAX_PLAYER_NAME_LENGTH = 120
 const MAX_NOTES_LENGTH = 5000
 const MAX_WIN_TYPE_LENGTH = 64
-const MAX_ADVERSARY_NAME_LENGTH = 100
 const MAX_SCENARIO_NAME_LENGTH = 120
 const ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
 
@@ -27,8 +26,14 @@ type SpiritEntry = {
 }
 
 type OptionalGameValues = {
-  adversary?: { name: string; level: number }
-  secondaryAdversary?: { name: string; level: number }
+  adversaryRef?: {
+    adversaryId: Id<'adversaries'>
+    level: number
+  }
+  secondaryAdversaryRef?: {
+    adversaryId: Id<'adversaries'>
+    level: number
+  }
   scenario?: { name: string; difficulty?: number }
   winType?: string
   invaderStage?: number
@@ -54,8 +59,8 @@ const spiritEntryImportValidator = v.object({
   player: v.optional(v.string()),
 })
 
-const adversaryValidator = v.object({
-  name: v.string(),
+const adversaryRefValidator = v.object({
+  adversaryId: v.id('adversaries'),
   level: v.number(),
 })
 
@@ -64,9 +69,14 @@ const scenarioValidator = v.object({
   difficulty: v.optional(v.number()),
 })
 
+const legacyAdversaryValueValidator = v.object({
+  name: v.string(),
+  level: v.number(),
+})
+
 const optionalGameFieldValidators = {
-  adversary: v.optional(adversaryValidator),
-  secondaryAdversary: v.optional(adversaryValidator),
+  adversaryRef: v.optional(adversaryRefValidator),
+  secondaryAdversaryRef: v.optional(adversaryRefValidator),
   scenario: v.optional(scenarioValidator),
   winType: v.optional(v.string()),
   invaderStage: v.optional(v.number()),
@@ -85,6 +95,8 @@ const gameDocValidator = v.object({
   result: gameResultValidator,
   spirits: v.array(spiritEntryValidator),
   ...optionalGameFieldValidators,
+  adversary: v.optional(legacyAdversaryValueValidator),
+  secondaryAdversary: v.optional(legacyAdversaryValueValidator),
   createdAt: v.number(),
   updatedAt: v.number(),
   deletedAt: v.optional(v.number()),
@@ -135,18 +147,12 @@ function validateSpirits(spirits: SpiritEntry[]) {
 }
 
 function validateOptionalFields(fields: OptionalGameValues) {
-  if (fields.adversary) {
-    validateRequiredString(fields.adversary.name, 'adversary name', MAX_ADVERSARY_NAME_LENGTH)
-    validateIntegerRange(fields.adversary.level, 'adversary level', 0, 6)
+  if (fields.adversaryRef) {
+    validateIntegerRange(fields.adversaryRef.level, 'adversaryRef level', 0, 6)
   }
 
-  if (fields.secondaryAdversary) {
-    validateRequiredString(
-      fields.secondaryAdversary.name,
-      'secondary adversary name',
-      MAX_ADVERSARY_NAME_LENGTH,
-    )
-    validateIntegerRange(fields.secondaryAdversary.level, 'secondary adversary level', 0, 6)
+  if (fields.secondaryAdversaryRef) {
+    validateIntegerRange(fields.secondaryAdversaryRef.level, 'secondaryAdversaryRef level', 0, 6)
   }
 
   if (fields.scenario) {
@@ -175,6 +181,52 @@ async function requireOwnedGame(ctx: QueryCtx | MutationCtx, id: Id<'games'>) {
   return { identity, game }
 }
 
+type GameDocForReplace = Omit<Doc<'games'>, '_id' | '_creationTime'>
+type LegacyAdversaryValue = { name: string; level: number }
+
+function normalizeAdversaryName(value: string) {
+  return value.trim().toLowerCase()
+}
+
+function clampAdversaryLevel(value: number) {
+  return Math.max(0, Math.min(6, value))
+}
+
+function toReplaceDoc(game: Doc<'games'>): GameDocForReplace {
+  const replacement: GameDocForReplace = {
+    userId: game.userId,
+    date: game.date,
+    result: game.result,
+    spirits: game.spirits,
+    createdAt: game.createdAt,
+    updatedAt: game.updatedAt,
+  }
+
+  if (game.adversaryRef) {
+    replacement.adversaryRef = {
+      adversaryId: game.adversaryRef.adversaryId,
+      level: game.adversaryRef.level,
+    }
+  }
+  if (game.secondaryAdversaryRef) {
+    replacement.secondaryAdversaryRef = {
+      adversaryId: game.secondaryAdversaryRef.adversaryId,
+      level: game.secondaryAdversaryRef.level,
+    }
+  }
+  if (game.scenario) replacement.scenario = game.scenario
+  if (game.winType) replacement.winType = game.winType
+  if (game.invaderStage !== undefined) replacement.invaderStage = game.invaderStage
+  if (game.blightCount !== undefined) replacement.blightCount = game.blightCount
+  if (game.dahanCount !== undefined) replacement.dahanCount = game.dahanCount
+  if (game.cardsRemaining !== undefined) replacement.cardsRemaining = game.cardsRemaining
+  if (game.score !== undefined) replacement.score = game.score
+  if (game.notes) replacement.notes = game.notes
+  if (game.deletedAt !== undefined) replacement.deletedAt = game.deletedAt
+
+  return replacement
+}
+
 export const listGames = query({
   args: {},
   returns: v.array(gameDocValidator),
@@ -200,6 +252,244 @@ export const getGame = query({
       return null
     }
     return game
+  },
+})
+
+/**
+ * Deployment preflight for ref-only adversary cutover.
+ * Safe to deploy only when legacy-only counts are 0.
+ */
+export const preflightAdversaryRefCoverage = internalQuery({
+  args: {},
+  returns: v.object({
+    totalGames: v.number(),
+    primaryWithLegacyOnly: v.number(),
+    secondaryWithLegacyOnly: v.number(),
+  }),
+  handler: async (ctx) => {
+    const games = await ctx.db.query('games').collect()
+
+    let primaryWithLegacyOnly = 0
+    let secondaryWithLegacyOnly = 0
+
+    for (const game of games) {
+      const legacy = game as typeof game & {
+        adversary?: { name: string; level: number }
+        secondaryAdversary?: { name: string; level: number }
+      }
+
+      if (legacy.adversary && !game.adversaryRef) {
+        primaryWithLegacyOnly += 1
+      }
+      if (legacy.secondaryAdversary && !game.secondaryAdversaryRef) {
+        secondaryWithLegacyOnly += 1
+      }
+    }
+
+    return {
+      totalGames: games.length,
+      primaryWithLegacyOnly,
+      secondaryWithLegacyOnly,
+    }
+  },
+})
+
+/**
+ * Dev migration utility: backfill canonical adversary refs from legacy name-only fields.
+ */
+export const backfillLegacyAdversaryRefs = internalMutation({
+  args: { dryRun: v.optional(v.boolean()) },
+  returns: v.object({
+    dryRun: v.boolean(),
+    scanned: v.number(),
+    migratedPrimary: v.number(),
+    migratedSecondary: v.number(),
+    unresolvedPrimary: v.number(),
+    unresolvedSecondary: v.number(),
+    updatedGames: v.number(),
+  }),
+  handler: async (ctx, args) => {
+    const dryRun = args.dryRun ?? false
+    const games = await ctx.db.query('games').collect()
+    const adversaries = await ctx.db.query('adversaries').collect()
+
+    const adversaryByName = new Map<string, Doc<'adversaries'>>()
+    for (const adversary of adversaries) {
+      adversaryByName.set(normalizeAdversaryName(adversary.name), adversary)
+      for (const alias of adversary.aliases) {
+        adversaryByName.set(normalizeAdversaryName(alias), adversary)
+      }
+    }
+
+    let migratedPrimary = 0
+    let migratedSecondary = 0
+    let unresolvedPrimary = 0
+    let unresolvedSecondary = 0
+    let updatedGames = 0
+
+    for (const game of games) {
+      const legacy = game as typeof game & {
+        adversary?: LegacyAdversaryValue
+        secondaryAdversary?: LegacyAdversaryValue
+      }
+
+      let nextPrimary = game.adversaryRef
+      let nextSecondary = game.secondaryAdversaryRef
+      let changed = false
+
+      if (!nextPrimary && legacy.adversary) {
+        const match = adversaryByName.get(normalizeAdversaryName(legacy.adversary.name))
+        if (!match) {
+          unresolvedPrimary++
+        } else {
+          const level = clampAdversaryLevel(legacy.adversary.level)
+          nextPrimary = {
+            adversaryId: match._id,
+            level,
+          }
+          migratedPrimary++
+          changed = true
+        }
+      }
+
+      if (!nextSecondary && legacy.secondaryAdversary) {
+        const match = adversaryByName.get(normalizeAdversaryName(legacy.secondaryAdversary.name))
+        if (!match) {
+          unresolvedSecondary++
+        } else {
+          const level = clampAdversaryLevel(legacy.secondaryAdversary.level)
+          nextSecondary = {
+            adversaryId: match._id,
+            level,
+          }
+          migratedSecondary++
+          changed = true
+        }
+      }
+
+      if (!changed) continue
+
+      if (!dryRun) {
+        await ctx.db.patch(game._id, {
+          adversaryRef: nextPrimary,
+          secondaryAdversaryRef: nextSecondary,
+          updatedAt: Date.now(),
+        })
+      }
+      updatedGames++
+    }
+
+    return {
+      dryRun,
+      scanned: games.length,
+      migratedPrimary,
+      migratedSecondary,
+      unresolvedPrimary,
+      unresolvedSecondary,
+      updatedGames,
+    }
+  },
+})
+
+/**
+ * Dev migration utility: strip derived adversaryRef fields (difficulty/nameSnapshot)
+ * and keep canonical shape { adversaryId, level }.
+ */
+export const normalizeAdversaryRefShape = internalMutation({
+  args: { dryRun: v.optional(v.boolean()) },
+  returns: v.object({
+    dryRun: v.boolean(),
+    scanned: v.number(),
+    normalized: v.number(),
+  }),
+  handler: async (ctx, args) => {
+    const dryRun = args.dryRun ?? false
+    const games = await ctx.db.query('games').collect()
+    let normalized = 0
+
+    for (const game of games) {
+      const primary = game.adversaryRef as Record<string, unknown> | undefined
+      const secondary = game.secondaryAdversaryRef as Record<string, unknown> | undefined
+      const hasPrimaryDerived = !!primary && ('difficulty' in primary || 'nameSnapshot' in primary)
+      const hasSecondaryDerived =
+        !!secondary && ('difficulty' in secondary || 'nameSnapshot' in secondary)
+
+      if (!hasPrimaryDerived && !hasSecondaryDerived) continue
+
+      if (!dryRun) {
+        await ctx.db.replace(game._id, toReplaceDoc(game))
+      }
+      normalized++
+    }
+
+    return {
+      dryRun,
+      scanned: games.length,
+      normalized,
+    }
+  },
+})
+
+/**
+ * Dev migration utility: remove legacy name-only adversary fields from documents
+ * that already have canonical adversary refs.
+ */
+export const cleanupLegacyAdversaryFields = internalMutation({
+  args: { dryRun: v.optional(v.boolean()) },
+  returns: v.object({
+    dryRun: v.boolean(),
+    scanned: v.number(),
+    cleaned: v.number(),
+    skippedLegacyOnly: v.number(),
+    primaryLegacyRemoved: v.number(),
+    secondaryLegacyRemoved: v.number(),
+  }),
+  handler: async (ctx, args) => {
+    const dryRun = args.dryRun ?? false
+    const games = await ctx.db.query('games').collect()
+
+    let cleaned = 0
+    let skippedLegacyOnly = 0
+    let primaryLegacyRemoved = 0
+    let secondaryLegacyRemoved = 0
+
+    for (const game of games) {
+      const legacy = game as typeof game & {
+        adversary?: { name: string; level: number }
+        secondaryAdversary?: { name: string; level: number }
+      }
+
+      const hasLegacyPrimary = legacy.adversary !== undefined
+      const hasLegacySecondary = legacy.secondaryAdversary !== undefined
+      if (!hasLegacyPrimary && !hasLegacySecondary) continue
+
+      const hasPrimaryRef = game.adversaryRef !== undefined
+      const hasSecondaryRef = game.secondaryAdversaryRef !== undefined
+      const hasLegacyOnly =
+        (hasLegacyPrimary && !hasPrimaryRef) || (hasLegacySecondary && !hasSecondaryRef)
+
+      if (hasLegacyOnly) {
+        skippedLegacyOnly++
+        continue
+      }
+
+      if (!dryRun) {
+        await ctx.db.replace(game._id, toReplaceDoc(game))
+      }
+
+      cleaned++
+      if (hasLegacyPrimary) primaryLegacyRemoved++
+      if (hasLegacySecondary) secondaryLegacyRemoved++
+    }
+
+    return {
+      dryRun,
+      scanned: games.length,
+      cleaned,
+      skippedLegacyOnly,
+      primaryLegacyRemoved,
+      secondaryLegacyRemoved,
+    }
   },
 })
 

@@ -1,19 +1,19 @@
 import { convexQuery } from '@convex-dev/react-query'
 import type { QueryClient } from '@tanstack/react-query'
 import { api } from 'convex/_generated/api'
-import type { Doc } from 'convex/_generated/dataModel'
 import {
   fetchPublicSnapshot,
   PUBLIC_SNAPSHOT_GC_TIME,
   PUBLIC_SNAPSHOT_QUERY_KEY,
   PUBLIC_SNAPSHOT_STALE_TIME,
 } from '@/data/public-snapshot'
+import type { GameListItem } from '@/types/convex'
 
 /**
  * Seed individual getGame cache entries from a list of game documents.
  * This makes every game detail page work offline without requiring prior visits.
  */
-export function seedGameCaches(queryClient: QueryClient, games: Doc<'games'>[]) {
+export function seedGameCaches(queryClient: QueryClient, games: GameListItem[]) {
   for (const game of games) {
     queryClient.setQueryData(convexQuery(api.games.getGame, { id: game._id }).queryKey, game)
   }

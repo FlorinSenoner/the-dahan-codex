@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
+import { SITE_URL } from '@/lib/site-url'
 
-const SITE_URL = 'https://dahan-codex.com'
 const DEFAULT_TITLE =
   'The Dahan Codex — Spirit Island Companion App | Opening Guides, Spirit Reference & Game Tracker'
 const DEFAULT_DESCRIPTION =

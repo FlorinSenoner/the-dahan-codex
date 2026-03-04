@@ -10,6 +10,7 @@ import { Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
 import { selectSpiritList } from '@/lib/reference-selectors'
+import { SITE_URL } from '@/lib/site-url'
 import { toAspectSlug } from '@/lib/slug'
 
 const spiritFilterSchema = z.object({
@@ -52,8 +53,6 @@ function SpiritsPage() {
       elements: filters.elements,
     })
   }, [snapshot, filters.complexity, filters.elements])
-
-  const SITE_URL = 'https://dahan-codex.com'
 
   useStructuredData(
     'ld-itemlist',

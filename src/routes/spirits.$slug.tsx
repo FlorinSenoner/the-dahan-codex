@@ -31,6 +31,7 @@ import { Heading, Text } from '@/components/ui/typography'
 import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useAdmin, useEditMode, usePageMeta, useStructuredData } from '@/hooks'
 import { selectSpiritWithAspects } from '@/lib/reference-selectors'
+import { SITE_URL } from '@/lib/site-url'
 import { toAspectSlug } from '@/lib/slug'
 import {
   complexityBadgeColors,
@@ -79,8 +80,6 @@ function SpiritDetailLayout() {
     canonicalPath: `/spirits/${slug}`,
     ogType: 'article',
   })
-
-  const SITE_URL = 'https://dahan-codex.com'
 
   useStructuredData(
     'ld-article',
@@ -372,16 +371,16 @@ export function SpiritDetailContent({ spirit, slug, aspect }: SpiritDetailConten
           </Text>
         </div>
 
+        <div className="lg:hidden">
+          <OverviewSection description={spirit.description} spirit={spirit} />
+        </div>
+
         <SetupSection
           onHasChangesChange={handleSetupHasChangesChange}
           onIsValidChange={handleSetupIsValidChange}
           onSaveHandlerReady={handleSetupSaveHandlerReady}
           spirit={spirit}
         />
-
-        <div className="lg:hidden">
-          <OverviewSection description={spirit.description} spirit={spirit} />
-        </div>
 
         <OpeningSection
           onHasChangesChange={handleOpeningHasChangesChange}

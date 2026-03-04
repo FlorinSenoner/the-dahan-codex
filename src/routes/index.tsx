@@ -1,13 +1,17 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { BookOpen, Compass, Gamepad2, WifiOff } from 'lucide-react'
-import { useRef } from 'react'
+import { BookOpen, Compass, Gamepad2, Shield, WifiOff } from 'lucide-react'
+import { useMemo, useRef } from 'react'
+import { AdversaryImage } from '@/components/adversaries/adversary-image'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { usePageMeta, useStructuredData } from '@/hooks'
+import { selectAdversaryList } from '@/lib/reference-selectors'
+import { SITE_URL } from '@/lib/site-url'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -77,25 +81,25 @@ const features = [
     icon: BookOpen,
     title: 'Spirit Library',
     description:
-      'Find spirit details fast: complexity, elements, special rules, and quick summaries in one place.',
+      'Find spirit details fast: complexity, elements, special rules, and quick setup summaries in one place.',
   },
   {
-    icon: Gamepad2,
-    title: 'Game Tracker',
+    icon: Shield,
+    title: 'Adversary Dossiers',
     description:
-      'Log results, spirits, and matchups so you can spot patterns between sessions and across tables.',
+      'Review escalation, loss conditions, and level-by-level pressure so you can pick the right challenge.',
   },
   {
     icon: Compass,
     title: 'Opening Guides',
     description:
-      'Follow practical turn-by-turn openings with clear growth, card, and energy decisions.',
+      'Follow practical turn-by-turn openings and adapt them to the adversary matchup at your table.',
   },
   {
     icon: WifiOff,
-    title: 'Table-Ready Offline',
+    title: 'Tracker + Offline Play',
     description:
-      'Install once, then keep core references available even when the room has no signal.',
+      'Log outcomes when you want long-term notes, and keep core references available when your room has no signal.',
   },
 ]
 
@@ -103,31 +107,30 @@ const faqItems = [
   {
     question: 'What is The Dahan Codex?',
     answer:
-      'The Dahan Codex is a fan-made Spirit Island companion focused on quick in-game decisions. It combines spirit reference pages, practical opening guides, and optional game tracking in one place.',
+      'The Dahan Codex is a fan-made Spirit Island companion for table-speed decisions. It brings together spirits, aspects, adversaries, opening guides, and optional game tracking in one place.',
   },
   {
-    question: 'Which expansions are covered?',
+    question: 'What do adversary pages include?',
     answer:
-      'Coverage includes the base game, Branch & Claw, Jagged Earth, Nature Incarnate, and promo spirit content. Aspects and spirit pages are organized so you can jump straight to the version you are playing.',
+      'Each adversary page includes base difficulty, escalation, additional loss condition, and level-by-level rules. You also get practical strategy notes so you can prep for the pressure points that matter most.',
+  },
+  {
+    question: 'Are adversary strategy notes official rulings?',
+    answer:
+      'No. Strategy notes are player-facing guidance, not official rulings. Official rulebooks, FAQs, and published content remain the final authority for gameplay interpretation.',
   },
   {
     question: 'Does it work offline?',
     answer:
-      'Yes. After your first visit, the app caches core spirit data and guides so you can keep using it with limited or no connection. It is built as a Progressive Web App, so you can install it on mobile or desktop.',
+      'Yes. After your first visit, the app caches core reference content, including spirits and adversaries, so you can keep using it with limited or no connection. It is built as a Progressive Web App and can be installed on mobile or desktop.',
   },
   {
     question: 'Do I need an account?',
     answer:
-      'No account is required for spirit reference pages or opening guides. Sign in is only needed if you want to save and sync game tracking data between devices.',
-  },
-  {
-    question: 'Is this official?',
-    answer:
-      'No. The Dahan Codex is an unofficial fan project and is not affiliated with Greater Than Games, LLC. It is designed to support play, not replace official rulebooks or published game content.',
+      'No account is required for spirits, adversaries, or opening guides. Sign in is only needed if you want to save and sync game tracking data between devices.',
   },
 ]
 
-const SITE_URL = 'https://dahan-codex.com'
 const romanNumerals = ['I', 'II', 'III', 'IV']
 
 const elementColors: Record<string, string> = {
@@ -158,11 +161,16 @@ function OrnamentDivider() {
 function HomePage() {
   const imageRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const nameRefs = useRef<Record<string, HTMLHeadingElement | null>>({})
+  const snapshot = usePublicSnapshot()
+  const featuredAdversaries = useMemo(
+    () => (snapshot ? selectAdversaryList(snapshot).slice(0, 5) : []),
+    [snapshot],
+  )
 
   usePageMeta({
     title: 'Spirit Island Companion App',
     description:
-      'Reference every spirit and aspect, follow turn-by-turn openings, and track games across devices in The Dahan Codex.',
+      'Reference spirits, aspects, and adversaries, follow turn-by-turn openings, and track games across devices in The Dahan Codex.',
     canonicalPath: '/',
     ogType: 'website',
   })
@@ -173,13 +181,13 @@ function HomePage() {
     name: 'The Dahan Codex',
     url: SITE_URL,
     description:
-      'Spirit Island companion app with spirit reference, opening guides, game tracking, and offline support.',
+      'Spirit Island companion app with spirit and adversary reference, opening guides, game tracking, and offline support.',
     applicationCategory: 'GameApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     featureList: [
-      'Reference all 37 spirits and 31 aspects',
-      'Turn-by-turn opening guides',
+      'Reference spirits, aspects, and adversaries',
+      'Turn-by-turn openings with matchup context',
       'Game tracker with cross-device sync',
       'Offline-ready Progressive Web App',
     ],
@@ -407,6 +415,80 @@ function HomePage() {
 
         <section className="mb-4">
           <h2
+            className="text-center text-2xl md:text-3xl mb-3 tracking-wide text-foreground"
+            style={{ fontWeight: 600 }}
+          >
+            The Adversaries of the Island
+          </h2>
+          <p className="text-center text-sm md:text-base mb-10 font-body italic text-muted-foreground">
+            Featuring 5 adversaries from the full roster
+          </p>
+
+          {snapshot === undefined ? (
+            <p className="text-center text-sm mb-6 text-muted-foreground">Loading adversaries...</p>
+          ) : featuredAdversaries.length === 0 ? (
+            <p className="text-center text-sm mb-6 text-muted-foreground">
+              No adversaries available.
+            </p>
+          ) : null}
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {featuredAdversaries.map((adversary) => (
+              <Link
+                className="bg-card border border-border rounded-sm overflow-hidden transition-[box-shadow,filter,border-color] duration-200 cursor-default hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40"
+                key={adversary._id}
+                params={{ slug: adversary.slug }}
+                to="/adversaries/$slug"
+                viewTransition
+              >
+                <AdversaryImage
+                  adversaryName={adversary.name}
+                  className="w-full aspect-square rounded-none"
+                  height={512}
+                  imageUrl={adversary.imageUrl}
+                  imgClassName="sepia-[0.15] contrast-[0.95]"
+                  slug={adversary.slug}
+                  width={512}
+                />
+                <div className="p-3 md:p-4">
+                  <h3
+                    className="text-sm md:text-base leading-tight mb-2 text-card-foreground"
+                    style={{
+                      fontWeight: 600,
+                      viewTransitionName: `adversary-name-${adversary.slug}`,
+                    }}
+                  >
+                    {adversary.name}
+                  </h3>
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Base {adversary.baseDifficulty}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
+                      {adversary.strategy.overview}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+
+            <Link
+              className="bg-card border border-border col-span-2 md:col-span-1 rounded-sm flex flex-col items-center justify-center gap-3 cursor-default transition-[box-shadow,filter,border-color] duration-200 hover:shadow-lg hover:brightness-105 dark:hover:brightness-125 dark:hover:border-accent/40 min-h-[120px] md:min-h-0"
+              to="/adversaries"
+            >
+              <Shield className="w-8 h-8 text-accent" />
+              <span
+                className="text-sm md:text-base text-center px-4 text-muted-foreground"
+                style={{ fontWeight: 600 }}
+              >
+                Explore all adversaries
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        <OrnamentDivider />
+
+        <section className="mb-4">
+          <h2
             className="text-center text-2xl md:text-3xl mb-6 tracking-wide text-foreground"
             style={{ fontWeight: 600 }}
           >
@@ -414,18 +496,19 @@ function HomePage() {
           </h2>
           <div className="max-w-[680px] mx-auto space-y-4 text-sm md:text-base leading-relaxed text-muted-foreground">
             <p>
-              Spirit Island rewards planning, but every spirit asks different questions. The Codex
-              is organized so you can find key information in a few taps instead of digging through
-              long notes.
+              Spirit Island rewards planning, and your first decisions are usually spirit plus
+              adversary pressure. The Codex is organized so you can compare both quickly instead of
+              bouncing between long notes.
             </p>
             <p>
-              Most players use it as a quick loop: check the spirit page, follow an opening line for
-              the first turns, then return when they need a rules or element reminder.
+              Most players use it as a table loop: pick spirit and adversary level, check escalation
+              and loss conditions, run an opening line, then return for quick reminders during play.
             </p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Start with a spirit snapshot: complexity, elements, and special rules.</li>
-              <li>Use opening steps to reduce early-turn guesswork.</li>
-              <li>Track finished games when you want long-term matchup notes.</li>
+              <li>Choose your spirit plan and confirm the adversary level pressure up front.</li>
+              <li>Check escalation and additional loss conditions before turn one surprises.</li>
+              <li>Pair opening steps with the matchup so early turns stay intentional.</li>
+              <li>Track finished games when you want long-term spirit-versus-adversary notes.</li>
             </ul>
           </div>
         </section>

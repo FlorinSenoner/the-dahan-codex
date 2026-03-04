@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import { CSVPreview } from '@/components/games/csv-preview'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page-header'
+import { usePublicSnapshot } from '@/data/public-snapshot'
 import { useOnlineStatus, usePageMeta } from '@/hooks'
 import {
   parseGamesCSV,
@@ -32,6 +33,7 @@ function ImportPage() {
   const navigate = useNavigate()
   const { isLoaded, isSignedIn } = useAuth()
   const isOnline = useOnlineStatus()
+  const snapshot = usePublicSnapshot()
   const [validatedGames, setValidatedGames] = React.useState<ValidatedGame[] | null>(null)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -58,10 +60,14 @@ function ImportPage() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+    if (!snapshot) {
+      toast.error('Reference data is still loading. Please try again in a moment.')
+      return
+    }
 
     try {
       const rows = await parseGamesCSV(file)
-      const validated = rows.map((row) => validateParsedGame(row, existingGames ?? []))
+      const validated = rows.map((row) => validateParsedGame(row, existingGames ?? [], snapshot))
       setValidatedGames(validated)
     } catch (error) {
       toast.error(
@@ -72,11 +78,15 @@ function ImportPage() {
 
   const handleImport = async () => {
     if (!validatedGames) return
+    if (!snapshot) {
+      toast.error('Reference data is still loading. Please try again in a moment.')
+      return
+    }
 
     // Only import games that are valid AND have changes (skip unchanged)
     const gamesToImport = validatedGames
       .filter((g) => g.isValid && !g.isUnchanged)
-      .map((g) => rowToGameData(g.row))
+      .map((g) => rowToGameData(g.row, snapshot))
 
     if (gamesToImport.length === 0) {
       // All games are unchanged, just navigate back

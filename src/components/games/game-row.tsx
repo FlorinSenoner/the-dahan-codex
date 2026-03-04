@@ -1,13 +1,17 @@
 import { Link } from '@tanstack/react-router'
-import type { Doc } from 'convex/_generated/dataModel'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
+import { usePublicSnapshot } from '@/data/public-snapshot'
+import { selectAdversaryById } from '@/lib/reference-selectors'
+import type { GameListItem } from '@/types/convex'
 
 interface GameRowProps {
-  game: Doc<'games'>
+  game: GameListItem
 }
 
 export function GameRow({ game }: GameRowProps) {
+  const snapshot = usePublicSnapshot()
+
   // Format date as "Jan 31, 2026"
   const dateStr = format(new Date(game.date), 'MMM d, yyyy')
 
@@ -23,7 +27,13 @@ export function GameRow({ game }: GameRowProps) {
   const moreSpirits = game.spirits.length > 1 ? ` +${game.spirits.length - 1} more` : ''
 
   // Adversary display
-  const adversaryDisplay = game.adversary ? `${game.adversary.name} L${game.adversary.level}` : null
+  const adversaryName =
+    snapshot && game.adversaryRef
+      ? selectAdversaryById(snapshot, game.adversaryRef.adversaryId)?.name
+      : null
+  const adversaryDisplay = game.adversaryRef
+    ? `${adversaryName ?? 'Unknown adversary'} L${game.adversaryRef.level}`
+    : null
 
   return (
     <Link

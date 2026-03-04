@@ -30,16 +30,16 @@ test.describe('Spirit Search', () => {
     const searchInput = page.getByPlaceholder('Search spirits...')
 
     // Type search term
-    await searchInput.fill('River')
+    await searchInput.fill('Lightning')
 
-    // Should show River spirit
+    // Should show Lightning spirit
     await expect(
-      page.getByRole('link', { name: /river surges in sunlight/i }).first(),
+      page.getByRole('link', { name: /lightning's swift strike/i }).first(),
     ).toBeVisible()
 
-    // Should filter out non-matching spirits (Lightning should be hidden)
+    // Should filter out non-matching spirits (River should be hidden)
     // Use count assertion since not.toBeVisible requires single element and aspects match the pattern
-    await expect(page.getByRole('link', { name: /lightning's swift strike/i })).toHaveCount(0)
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i })).toHaveCount(0)
   })
 
   test('search term persists in URL', async ({ page }) => {
@@ -57,28 +57,28 @@ test.describe('Spirit Search', () => {
 
     await searchInput.fill('Lightning')
 
-    // URL should contain search param
-    await expect(page).toHaveURL(/search=Lightning/i)
+    // URL should contain search param (debounced input)
+    await expect(page).toHaveURL(/search=Lightning/i, { timeout: 10000 })
   })
 
   test('search from URL shows filtered results', async ({ page }) => {
     // Navigate directly with search param
-    await page.goto('/spirits?search=River')
+    await page.goto('/spirits?search=Lightning')
 
     // Wait for page to load
     await expect(page.getByRole('heading', { name: /spirits/i })).toBeVisible()
 
     // Search input should have value
     const searchInput = page.getByPlaceholder('Search spirits...')
-    await expect(searchInput).toHaveValue('River', { timeout: 15000 })
+    await expect(searchInput).toHaveValue('Lightning', { timeout: 15000 })
 
     // Results should be filtered - wait for page to load
-    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+    await expect(page.getByRole('link', { name: /lightning's swift strike/i }).first()).toBeVisible(
       { timeout: 15000 },
     )
 
-    // Lightning should be hidden (use count since aspects also match the pattern)
-    await expect(page.getByRole('link', { name: /lightning's swift strike/i })).toHaveCount(0)
+    // River should be hidden (use count since aspects also match the pattern)
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i })).toHaveCount(0)
   })
 
   test('clearing search shows all spirits', async ({ page }) => {
@@ -101,11 +101,11 @@ test.describe('Spirit Search', () => {
     await expect(page).not.toHaveURL(/search=/)
 
     // Multiple spirits should be visible
-    await expect(
-      page.getByRole('link', { name: /river surges in sunlight/i }).first(),
-    ).toBeVisible()
-    await expect(
-      page.getByRole('link', { name: /lightning's swift strike/i }).first(),
-    ).toBeVisible()
+    await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
+    await expect(page.getByRole('link', { name: /lightning's swift strike/i }).first()).toBeVisible(
+      { timeout: 15000 },
+    )
   })
 })

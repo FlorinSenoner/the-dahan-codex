@@ -131,14 +131,9 @@ Before shipping substantial changes, run:
 ## Seed and Scraped Data Rules
 
 - Canonical runtime seed inputs:
-  - `scripts/data/spirits.json`
-  - `scripts/data/aspects.json`
+  - `scripts/data/spirits.json` (contains both base spirits and aspects)
   - `scripts/data/openings.json`
-- Raw opening sources must remain available for future lookup.
-- Consolidated raw archive:
-  - `scripts/data/openings-raw-by-source.json`
-- Rebuild consolidated raw archive:
-  - `node scripts/build-openings-raw-archive.mjs`
+  - `scripts/data/adversaries.json`
 
 ## UI/UX Rules
 

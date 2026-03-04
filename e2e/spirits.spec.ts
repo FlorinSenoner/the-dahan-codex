@@ -1,5 +1,21 @@
 import { expect, test } from '@playwright/test'
 
+async function goToRiverDetail(page: import('@playwright/test').Page) {
+  await page.goto('/spirits')
+  await expect(page.getByRole('heading', { name: /spirits/i })).toBeVisible()
+  await expect(page.getByRole('link', { name: /river surges in sunlight/i }).first()).toBeVisible({
+    timeout: 15000,
+  })
+  await page
+    .getByRole('link', { name: /river surges in sunlight/i })
+    .first()
+    .click()
+  await expect(page).toHaveURL(/\/spirits\/river-surges-in-sunlight/)
+  await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
+    timeout: 15000,
+  })
+}
+
 test.describe('Spirit Library', () => {
   test('spirit list renders with spirits', async ({ page }) => {
     await page.goto('/spirits')
@@ -91,9 +107,8 @@ test.describe('Spirit Library', () => {
   })
 
   test('spirit detail shows variant tabs', async ({ page }) => {
-    await page.goto('/spirits/river-surges-in-sunlight')
+    await goToRiverDetail(page)
 
-    // Wait for tabs to load (River has base + 3 aspects)
     await expect(page.getByRole('tab', { name: 'Base' })).toBeVisible({
       timeout: 15000,
     })
@@ -103,15 +118,20 @@ test.describe('Spirit Library', () => {
   })
 
   test('variant tabs navigate to correct URL', async ({ page }) => {
-    await page.goto('/spirits/river-surges-in-sunlight')
+    await goToRiverDetail(page)
 
-    // Wait for tabs to load
-    await expect(page.getByRole('tab', { name: 'Base' })).toBeVisible({
+    const variantTabs = page.getByRole('tablist').first()
+    const baseTab = variantTabs.getByRole('tab', { name: 'Base' })
+    const sunshineTab = variantTabs.getByRole('tab', { name: 'Sunshine' })
+
+    await expect(baseTab).toBeVisible({
       timeout: 15000,
     })
+    await expect(sunshineTab).toBeVisible()
 
     // Click on Sunshine tab
-    await page.getByRole('tab', { name: 'Sunshine' }).click()
+    await sunshineTab.click()
+    await expect(sunshineTab).toHaveAttribute('data-state', 'active')
 
     // URL should update
     await expect(page).toHaveURL(/river-surges-in-sunlight\/sunshine/)
@@ -121,12 +141,7 @@ test.describe('Spirit Library', () => {
   })
 
   test('spirit detail shows overview section', async ({ page }) => {
-    await page.goto('/spirits/river-surges-in-sunlight')
-
-    // Wait for page to load
-    await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
-      timeout: 15000,
-    })
+    await goToRiverDetail(page)
 
     // Overview section exists (on mobile it's a collapsible, on desktop it's visible)
     // Check for the Overview collapsible trigger (mobile) or power chart
@@ -147,12 +162,7 @@ test.describe('Spirit Library', () => {
   })
 
   test('spirit detail shows external links', async ({ page }) => {
-    await page.goto('/spirits/river-surges-in-sunlight')
-
-    // Wait for page to load
-    await expect(page.getByRole('heading', { name: /river surges in sunlight/i })).toBeVisible({
-      timeout: 15000,
-    })
+    await goToRiverDetail(page)
 
     // Check for Resources section
     await expect(page.getByRole('heading', { name: 'Resources' })).toBeVisible()

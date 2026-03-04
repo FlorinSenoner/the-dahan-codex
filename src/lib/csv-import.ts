@@ -1,4 +1,7 @@
 import Papa from 'papaparse'
+import { selectAdversaryById, selectAdversaryByName } from '@/lib/reference-selectors'
+import type { GameImportInput, GameListItem } from '@/types/convex'
+import type { PublicSnapshot } from '@/types/reference'
 import { extractSpiritsFromRow, type GameCSVRow } from './csv-spirits'
 
 /**
@@ -6,26 +9,6 @@ import { extractSpiritsFromRow, type GameCSVRow } from './csv-spirits'
  * Re-exported as ParsedGameRow for backwards compatibility
  */
 export type ParsedGameRow = GameCSVRow
-
-/**
- * Existing game data for comparison during import
- */
-interface ExistingGame {
-  _id: string
-  date: string
-  result: string
-  spirits: Array<{ name: string; variant?: string; player?: string }>
-  adversary?: { name: string; level: number }
-  secondaryAdversary?: { name: string; level: number }
-  scenario?: { name: string; difficulty?: number }
-  winType?: string
-  invaderStage?: number
-  blightCount?: number
-  dahanCount?: number
-  cardsRemaining?: number
-  score?: number
-  notes?: string
-}
 
 /**
  * Validated game ready for import
@@ -38,10 +21,32 @@ export interface ValidatedGame {
   isUnchanged: boolean // true if all fields match existing game
 }
 
+type GameAdversaryRefInput = NonNullable<GameImportInput['adversaryRef']>
+
+function buildAdversaryRef(
+  snapshot: PublicSnapshot,
+  name: string,
+  levelRaw: string,
+): GameAdversaryRefInput | undefined {
+  const selected = selectAdversaryByName(snapshot, name)
+  if (!selected) return undefined
+
+  const level = parseInt(levelRaw, 10) || 0
+
+  return {
+    adversaryId: selected._id,
+    level,
+  }
+}
+
 /**
  * Compare a CSV row with an existing game to check if they're identical
  */
-function areGamesEqual(row: ParsedGameRow, existing: ExistingGame): boolean {
+function areGamesEqual(
+  row: ParsedGameRow,
+  existing: GameListItem,
+  snapshot: PublicSnapshot,
+): boolean {
   // Compare required fields
   if (row.date !== existing.date) return false
   if (row.result !== existing.result) return false
@@ -59,21 +64,29 @@ function areGamesEqual(row: ParsedGameRow, existing: ExistingGame): boolean {
   }
 
   // Compare adversary
+  const existingAdversaryName = existing.adversaryRef
+    ? selectAdversaryById(snapshot, existing.adversaryRef.adversaryId)?.name
+    : undefined
+  const existingAdversaryLevel = existing.adversaryRef?.level
   const rowHasAdversary = !!row.adversary
-  const existingHasAdversary = !!existing.adversary
+  const existingHasAdversary = !!existingAdversaryName
   if (rowHasAdversary !== existingHasAdversary) return false
-  if (rowHasAdversary && existing.adversary) {
-    if (row.adversary !== existing.adversary.name) return false
-    if (parseInt(row.adversary_level, 10) !== existing.adversary.level) return false
+  if (rowHasAdversary) {
+    if (row.adversary !== existingAdversaryName) return false
+    if (parseInt(row.adversary_level, 10) !== existingAdversaryLevel) return false
   }
 
   // Compare secondary adversary
+  const existingSecondaryAdversaryName = existing.secondaryAdversaryRef
+    ? selectAdversaryById(snapshot, existing.secondaryAdversaryRef.adversaryId)?.name
+    : undefined
+  const existingSecondaryAdversaryLevel = existing.secondaryAdversaryRef?.level
   const rowHasSecondary = !!row.secondary_adversary
-  const existingHasSecondary = !!existing.secondaryAdversary
+  const existingHasSecondary = !!existingSecondaryAdversaryName
   if (rowHasSecondary !== existingHasSecondary) return false
-  if (rowHasSecondary && existing.secondaryAdversary) {
-    if (row.secondary_adversary !== existing.secondaryAdversary.name) return false
-    if (parseInt(row.secondary_adversary_level, 10) !== existing.secondaryAdversary.level)
+  if (rowHasSecondary) {
+    if (row.secondary_adversary !== existingSecondaryAdversaryName) return false
+    if (parseInt(row.secondary_adversary_level, 10) !== existingSecondaryAdversaryLevel)
       return false
   }
 
@@ -138,7 +151,8 @@ export function parseGamesCSV(file: File): Promise<ParsedGameRow[]> {
  */
 export function validateParsedGame(
   row: ParsedGameRow,
-  existingGames: ExistingGame[],
+  existingGames: GameListItem[],
+  snapshot: PublicSnapshot,
 ): ValidatedGame {
   const errors: string[] = []
 
@@ -189,12 +203,32 @@ export function validateParsedGame(
     }
   }
 
+  // Validate secondary adversary level if secondary adversary provided
+  if (row.secondary_adversary && row.secondary_adversary_level) {
+    const level = parseInt(row.secondary_adversary_level, 10)
+    if (Number.isNaN(level) || level < 0 || level > 6) {
+      errors.push('Secondary adversary level must be 0-6')
+    }
+  }
+
+  if (row.adversary) {
+    if (!selectAdversaryByName(snapshot, row.adversary)) {
+      errors.push(`Unknown adversary: ${row.adversary}`)
+    }
+  }
+
+  if (row.secondary_adversary) {
+    if (!selectAdversaryByName(snapshot, row.secondary_adversary)) {
+      errors.push(`Unknown secondary adversary: ${row.secondary_adversary}`)
+    }
+  }
+
   // Check if this is a new game or update
-  const existingGame = row.id ? existingGames.find((g) => g._id === row.id) : undefined
+  const existingGame = row.id ? existingGames.find((g) => String(g._id) === row.id) : undefined
   const isNew = !existingGame
 
   // Check if game is unchanged (only for updates)
-  const isUnchanged = existingGame ? areGamesEqual(row, existingGame) : false
+  const isUnchanged = existingGame ? areGamesEqual(row, existingGame, snapshot) : false
 
   return {
     row,
@@ -208,7 +242,7 @@ export function validateParsedGame(
 /**
  * Convert validated row to game data for import
  */
-export function rowToGameData(row: ParsedGameRow) {
+export function rowToGameData(row: ParsedGameRow, snapshot: PublicSnapshot): GameImportInput {
   // Extract spirits using shared utility and convert to API format
   const spirits = extractSpiritsFromRow(row).map((s) => ({
     name: s.name,
@@ -219,19 +253,13 @@ export function rowToGameData(row: ParsedGameRow) {
   return {
     existingId: row.id || undefined,
     date: row.date,
-    result: row.result as 'win' | 'loss',
+    result: row.result as GameImportInput['result'],
     spirits,
-    adversary: row.adversary
-      ? {
-          name: row.adversary,
-          level: parseInt(row.adversary_level, 10) || 0,
-        }
+    adversaryRef: row.adversary
+      ? buildAdversaryRef(snapshot, row.adversary, row.adversary_level)
       : undefined,
-    secondaryAdversary: row.secondary_adversary
-      ? {
-          name: row.secondary_adversary,
-          level: parseInt(row.secondary_adversary_level, 10) || 0,
-        }
+    secondaryAdversaryRef: row.secondary_adversary
+      ? buildAdversaryRef(snapshot, row.secondary_adversary, row.secondary_adversary_level)
       : undefined,
     scenario: row.scenario
       ? {
