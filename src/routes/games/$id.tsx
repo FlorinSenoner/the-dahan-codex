@@ -184,18 +184,18 @@ function GameDetailPage() {
   const resolveAdversaryDetails = (ref?: {
     adversaryId: string
     level: number
-  }): { name: string; difficulty: number } => {
+  }): { name: string; difficulty?: number } => {
     if (!ref || !snapshot) {
-      return { name: '', difficulty: ref?.level ?? 0 }
+      return { name: '' }
     }
     const adversary = selectAdversaryById(snapshot, ref.adversaryId)
     if (!adversary) {
-      return { name: '', difficulty: ref.level }
+      return { name: '' }
     }
     const difficulty =
       ref.level === 0
         ? adversary.baseDifficulty
-        : (selectAdversaryLevelDifficulty(adversary, ref.level) ?? ref.level)
+        : (selectAdversaryLevelDifficulty(adversary, ref.level) ?? undefined)
 
     return {
       name: adversary.name,

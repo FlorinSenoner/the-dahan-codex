@@ -263,21 +263,35 @@ async function seedOpenings(ctx: MutationCtx, spiritIdsBySlug: Map<string, Id<'s
   return count
 }
 
-async function seedAdversariesUpsert(ctx: MutationCtx) {
+async function seedAdversariesUpsert(
+  ctx: MutationCtx,
+  options?: {
+    deleteRemoved?: boolean
+  },
+) {
+  const existingAdversaries = await ctx.db.query('adversaries').collect()
+  const existingBySlug = new Map(
+    existingAdversaries.map((adversary) => [adversary.slug, adversary]),
+  )
+
   let count = 0
   for (const adversary of ADVERSARIES) {
-    const existing = await ctx.db
-      .query('adversaries')
-      .withIndex('by_slug', (q) => q.eq('slug', adversary.slug))
-      .first()
-
+    const existing = existingBySlug.get(adversary.slug)
     if (existing) {
       await ctx.db.patch(existing._id, adversary)
+      existingBySlug.delete(adversary.slug)
     } else {
       await ctx.db.insert('adversaries', adversary)
     }
     count++
   }
+
+  if (options?.deleteRemoved) {
+    for (const stale of existingBySlug.values()) {
+      await ctx.db.delete(stale._id)
+    }
+  }
+
   return count
 }
 
@@ -286,7 +300,7 @@ async function insertSeedData(ctx: MutationCtx): Promise<InsertSeedResult> {
   const spiritIdsBySlug = await seedBaseSpirits(ctx, expansionIds)
   const aspectCount = await seedAspects(ctx, expansionIds, spiritIdsBySlug)
   const openingsCount = await seedOpenings(ctx, spiritIdsBySlug)
-  const adversariesCount = await seedAdversariesUpsert(ctx)
+  const adversariesCount = await seedAdversariesUpsert(ctx, { deleteRemoved: true })
 
   return {
     spiritIdsBySlug,
@@ -306,10 +320,10 @@ export const seedSpirits = internalMutation({
   handler: async (ctx) => {
     const existingSpirits = await ctx.db.query('spirits').first()
     if (existingSpirits) {
-      const adversariesCount = await seedAdversariesUpsert(ctx)
+      const adversariesCount = await seedAdversariesUpsert(ctx, { deleteRemoved: true })
       return {
         status: 'seeded' as const,
-        message: `Spirits already seeded. Upserted ${adversariesCount} adversaries.`,
+        message: `Spirits already seeded. Synced ${adversariesCount} adversaries.`,
       }
     }
 
@@ -340,7 +354,7 @@ export const reseedSpirits = internalMutation({
       message:
         `Created ${stats.expansions} expansions, ${stats.spirits} base spirits, ${stats.aspects} aspects. ` +
         `Openings: ${restored} restored, ${skipped} skipped (duplicates), ${orphaned} orphaned (missing spirit). ` +
-        `Adversaries upserted: ${stats.adversaries}.`,
+        `Adversaries synced: ${stats.adversaries}.`,
     }
   },
 })

@@ -1,4 +1,5 @@
 import { X } from 'lucide-react'
+import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -48,6 +49,22 @@ export function AdversaryPicker({
         : null
   const selectedName = selectedAdversary?.name ?? value?.name ?? ''
 
+  const resolveDifficulty = React.useCallback(
+    (
+      level: number,
+      fallbackDifficulty: number | undefined,
+      adversary?: (typeof adversaries)[number] | null,
+    ) => {
+      if (!adversary) return fallbackDifficulty
+      return (
+        (level === 0
+          ? adversary.baseDifficulty
+          : selectAdversaryLevelDifficulty(adversary, level)) ?? fallbackDifficulty
+      )
+    },
+    [],
+  )
+
   const buildSelection = (
     name: string,
     level: number,
@@ -55,11 +72,7 @@ export function AdversaryPicker({
     currentDifficulty?: number,
   ): AdversarySelection => {
     const selected = snapshot ? selectAdversaryByName(snapshot, name) : null
-    const difficulty = selected
-      ? level === 0
-        ? selected.baseDifficulty
-        : (selectAdversaryLevelDifficulty(selected, level) ?? currentDifficulty ?? level)
-      : (currentDifficulty ?? level)
+    const difficulty = resolveDifficulty(level, currentDifficulty, selected)
 
     return {
       adversaryId: selected?._id ?? currentId ?? null,
@@ -68,6 +81,32 @@ export function AdversaryPicker({
       difficulty,
     }
   }
+
+  React.useEffect(() => {
+    if (!snapshot || !value?.adversaryId) return
+    const canonical = selectAdversaryById(snapshot, value.adversaryId)
+    if (!canonical) return
+
+    const nextDifficulty = resolveDifficulty(value.level, value.difficulty, canonical)
+    const nextName = canonical.name
+
+    if (nextName === value.name && nextDifficulty === value.difficulty) return
+
+    onChange({
+      adversaryId: canonical._id,
+      name: nextName,
+      level: value.level,
+      difficulty: nextDifficulty,
+    })
+  }, [
+    onChange,
+    resolveDifficulty,
+    snapshot,
+    value?.adversaryId,
+    value?.difficulty,
+    value?.level,
+    value?.name,
+  ])
 
   const handleNameChange = (name: string) => {
     onChange(buildSelection(name, value?.level ?? 0, value?.adversaryId, value?.difficulty))
