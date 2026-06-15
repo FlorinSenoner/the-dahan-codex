@@ -70,13 +70,13 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
+    "@biomejs/biome": "^2.5.0",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
-    "@playwright/test": "^1.60.0",
-    "@tailwindcss/vite": "^4.3.0",
+    "@playwright/test": "^1.61.0",
+    "@tailwindcss/vite": "^4.3.1",
     "@tanstack/router-plugin": "^1.168.18",
-    "@types/node": "^25.9.2",
+    "@types/node": "^25.9.3",
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
@@ -84,12 +84,12 @@
     "jscpd": "^4.2.4",
     "knip": "^5.86.0",
     "lefthook": "^2.1.9",
-    "prettier": "^3.8.3",
-    "tailwindcss": "^4.3.0",
+    "prettier": "^3.8.4",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.3.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }
