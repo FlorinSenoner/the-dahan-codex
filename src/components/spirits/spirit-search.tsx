@@ -1,5 +1,4 @@
 import { Search } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
 
 interface SpiritSearchProps {
   value: string
@@ -7,27 +6,7 @@ interface SpiritSearchProps {
 }
 
 export function SpiritSearch({ value, onChange }: SpiritSearchProps) {
-  const [localValue, setLocalValue] = useState(value)
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null)
   const inputId = 'spirit-search-input'
-
-  // Sync prop → local state (initial load, back navigation, external clear)
-  useEffect(() => {
-    setLocalValue(value)
-  }, [value])
-
-  const handleChange = (newValue: string) => {
-    setLocalValue(newValue)
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => onChange(newValue), 300)
-  }
-
-  // Clean up timer on unmount
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current)
-    }
-  }, [])
 
   return (
     <div className="relative">
@@ -41,10 +20,10 @@ export function SpiritSearch({ value, onChange }: SpiritSearchProps) {
         className="w-full h-10 pl-10 pr-4 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
         id={inputId}
         name="spirit-search"
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder="Search spirits..."
         type="search"
-        value={localValue}
+        value={value}
       />
     </div>
   )

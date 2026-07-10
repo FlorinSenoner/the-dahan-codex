@@ -57,7 +57,7 @@ test.describe('Spirit Search', () => {
 
     await searchInput.fill('Lightning')
 
-    // URL should contain search param (debounced input)
+    // URL should contain the search param.
     await expect(page).toHaveURL(/search=Lightning/i, { timeout: 10000 })
   })
 

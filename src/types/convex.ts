@@ -6,7 +6,7 @@ export type SpiritListItem = PublicSnapshot['spirits'][number]
 
 export type GameDoc = NonNullable<FunctionReturnType<typeof api.games.getGame>>
 export type GameId = FunctionArgs<typeof api.games.getGame>['id']
-export type GameList = FunctionReturnType<typeof api.games.listGames>
+type GameList = FunctionReturnType<typeof api.games.listGames>
 export type GameListItem = GameList[number]
 export type GameCreateInput = FunctionArgs<typeof api.games.createGame>
 export type GameUpdateInput = Omit<FunctionArgs<typeof api.games.updateGame>, 'id'>

@@ -23,7 +23,7 @@ import { SpiritPicker } from './spirit-picker'
 type GameSpiritInput = GameCreateInput['spirits'][number]
 type GameScenarioInput = NonNullable<GameCreateInput['scenario']>
 
-export interface SpiritEntry {
+interface SpiritEntry {
   spiritId: NonNullable<GameSpiritInput['spiritId']> | null
   name: GameSpiritInput['name']
   variant?: GameSpiritInput['variant']

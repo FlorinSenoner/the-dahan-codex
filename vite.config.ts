@@ -7,7 +7,6 @@ import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import tsConfigPaths from 'vite-tsconfig-paths'
 
 /** Stamps today's date into sitemap.xml `__BUILD_DATE__` placeholders after build. */
 function sitemapDate(): Plugin {
@@ -33,6 +32,9 @@ export default defineConfig({
   preview: {
     port: 4227,
   },
+  resolve: {
+    tsconfigPaths: true,
+  },
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -52,9 +54,6 @@ export default defineConfig({
       generatedRouteTree: 'src/routeTree.gen.ts',
     }),
     tailwindcss(),
-    tsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
     viteReact(),
     VitePWA({
       strategies: 'injectManifest',

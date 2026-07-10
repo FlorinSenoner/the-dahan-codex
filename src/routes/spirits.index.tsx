@@ -98,6 +98,7 @@ function SpiritsPage() {
 
   const handleSearchChange = (value: string) => {
     navigate({
+      to: '/spirits',
       search: (prev) => ({ ...prev, search: value || undefined }),
       replace: true,
     })

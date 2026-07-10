@@ -1,4 +1,4 @@
-import { useClerk, useUser } from '@clerk/clerk-react'
+import { useClerk, useUser } from '@clerk/react'
 import { createFileRoute, getRouteApi, Link, useNavigate } from '@tanstack/react-router'
 import { LogIn, LogOut, Monitor, Moon, RefreshCw, Sun, Trash2 } from 'lucide-react'
 import { useState } from 'react'

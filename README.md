@@ -28,8 +28,8 @@ A Spirit Island companion app with an offline-first reference library and game t
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v22+
-- [pnpm](https://pnpm.io/) v10+
+- [Node.js](https://nodejs.org/) v26+
+- [pnpm](https://pnpm.io/) v11+
 - [mise](https://mise.jdx.dev/) (optional — manages Node/pnpm versions)
 
 ### Installation

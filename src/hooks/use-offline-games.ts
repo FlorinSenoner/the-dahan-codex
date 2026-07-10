@@ -1,4 +1,4 @@
-import { useAuth } from '@clerk/clerk-react'
+import { useAuth } from '@clerk/react'
 import { useCallback, useEffect, useState } from 'react'
 import type { GameFormData } from '@/components/games/game-form'
 import type { OfflineOperation, PendingGame } from '@/lib/offline-games'
