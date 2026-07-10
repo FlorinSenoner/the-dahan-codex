@@ -1,4 +1,4 @@
-import { ClerkProvider, useAuth } from '@clerk/clerk-react'
+import { ClerkProvider, useAuth } from '@clerk/react'
 import type { ConvexQueryClient } from '@convex-dev/react-query'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet, useRouter } from '@tanstack/react-router'
@@ -81,9 +81,9 @@ function RootComponent() {
           variables: {
             colorPrimary: 'var(--primary)',
             colorBackground: 'var(--card)',
-            colorText: 'var(--foreground)',
-            colorInputBackground: 'var(--input)',
-            colorInputText: 'var(--foreground)',
+            colorForeground: 'var(--foreground)',
+            colorInput: 'var(--input)',
+            colorInputForeground: 'var(--foreground)',
             colorDanger: 'var(--destructive)',
             colorNeutral: 'var(--muted-foreground)',
             fontFamily: '"Lora", serif',
